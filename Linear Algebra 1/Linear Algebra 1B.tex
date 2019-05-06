@@ -1,0 +1,215 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Spa}{span}
+
+\begin{document}
+
+\title{Linear Algebra 1 (TB2) Notes}
+\date{}
+\author{\textit{paraphrased by} Tyler Wright}
+\maketitle
+
+\vfill
+
+\textit{An important note, these notes are absolutely \textbf{NOT}
+  guaranteed to be correct, representative of the course, or rigorous.
+  Any result of this is not the author's fault.}
+
+\newpage
+
+\section{Vector Spaces, Fields, and Maps}
+
+\subsection{Groups}
+
+A group is a \textit{non-empty} set ($G$) paired with a
+\textit{binary group operation} ($*$) denoted by $(G, *)$.
+The following properties hold for all groups (let $(G, *)$
+be a group with elements $f, g, h$):
+
+\begin{itemize}
+  \item \textbf{Associativity}: $f * (g * h) = (f * g) * h$
+  \item \textbf{Identity}: $\exists e \in G : e * f = f * e = f$
+  \item \textbf{Inverse}: $\exists x \in G : x * f = f * x = e$.
+\end{itemize}
+
+\textit{A note, for a group $(G, *)$ with $g * h = h * g$ for all $g, h \in G$,
+  this group is called \textbf{commutative} or \textbf{abelian}. However, it
+  should be textitasised that this is \textbf{not} a necessary condition for
+  a group.}
+
+\subsection{The Invertibility of Matrices}
+
+For a matrix $A \in M_{m, n}( \mathbb{F} )$, the following are all
+\textbf{equivalent} statements:
+
+\begin{itemize}
+  \item $A$ is \textbf{invertible}
+  \item $\det{A} = 0$
+  \item The \textbf{rows} of $A$ are \textbf{linearly independent}
+  \item The \textbf{columns} of $A$ are \textbf{linearly independent}
+  \item The \textbf{reduced row echelon form} of $A$ is the \textbf{identity}
+  \item For all $\textbf{b} \in \mathbb{F}^n, A\textbf{x} = \textbf{b}$ has
+        a \textbf{unique solution}.
+\end{itemize}
+
+\subsection{Fields}
+
+A field is a set ($F$) defined under multiplication and division with the
+following properties:
+
+\begin{itemize}
+  \item \textbf{Associativity} under multiplication and division
+  \item \textbf{Commutativity} under multiplication and division
+  \item $F$ contains an \textbf{identity} under multiplication and division
+  \item All elements in $F$ contain an \textbf{inverse} under addition and
+        multiplication (except $0$ under multiplication)
+  \item The defined multiplication is \textbf{distributive} across
+        the defined addition.
+\end{itemize}
+
+\subsection{Vector Spaces}
+
+A group $(V, +_{V})$ ($+_{V}$ denotes addition defined with respect to the
+set $V$ as it can be ambigious in some cases) is a vector space over the field
+($\mathbb{F}$) if the following holds (let $v, w \in V$, $\lambda, \mu \in
+  \mathbb{F}$):
+
+\begin{itemize}
+  \item $(V, +_{V})$ is \textbf{abelian}
+  \item $V$ is \textbf{closed under multiplication} with elements in
+        $\mathbb{F}$
+  \item $\lambda(v +_{V} w) = \lambda v + \lambda w$
+  \item $(\lambda + \mu)v = \lambda v +_{V} \mu v$
+  \item $(\lambda \mu)v = \lambda (\mu v)$
+  \item $fv = v$ where $f$ is the \textbf{multiplicative identity} of
+        $\mathbb{F}$.
+\end{itemize}
+
+\subsection{Subspaces}
+
+Let $V$ be a vector space over $\mathbb{F}$, $U \subseteq V$ is a subspace if
+the following properties hold:
+
+\begin{itemize}
+  \item $U$ is \textbf{non-empty}
+  \item $U$ is \textbf{closed} under the \textbf{addition} defined by $V$
+  \item $U$ is \textbf{closed} under the \textbf{multiplication} defined by $V$.
+\end{itemize}
+
+\textit{Some notes on subspaces:}
+
+\begin{itemize}
+  \item Subspaces are vector spaces
+  \item The intersection of subspaces is a subspace
+  \item The span of any non-empty subset of a given vector space is a subspace.
+\end{itemize}
+
+\subsection{Linear Maps}
+
+For $V, W$ vector spaces over $\mathbb{F}$, the map $T: V \to W$ is called linear
+if the following properties hold (let $u, w \in V$, $\lambda \in \mathbb{F}$):
+
+\begin{itemize}
+  \item $T(u + v) = T(u) + T(v)$
+  \item $T(\lambda u) = \lambda T(u)$.
+\end{itemize}
+
+\textit{A note, for a linear map ($T: V \to W$), if $V = W$, $T$ is sometimes
+  referred to as a linear \textbf{operator}. Also, composed linear maps are also linear maps.}
+
+\subsection{The Kernel and Image}
+
+For a linear map ($T: V \to W$), the kernel is defined as follows:
+\begin{align*}
+  \Ker{T} = \{v \in V : T(v) = 0\}.
+\end{align*}
+The image is defined as follows:
+\begin{align*}
+  \Ima{T} = \{w \in W : \exists v \in V \text{ with } T(v) = w\}.
+\end{align*}
+
+\textit{Some notes on linear maps (let $T: V \to W$ be a linear map):}
+
+\begin{itemize}
+  \item The kernel and image of $T$ are subspaces of $V$ and $W$ respectively
+  \item For $U \subseteq V$, $T(U)$ is also a subspace (but of $W$ instead of $V$).
+\end{itemize}
+
+\subsection{Bases and Dimension}
+
+\subsubsection{Definition of linear independence}
+
+For $V$ a vector space, with $S \subseteq V$, let $s_1, s_2, ... \in S$,
+
+\begin{itemize}
+  \item $S$ is linearly independent if $\sum_{n = 1}^{|S|} \lambda_n s_n = 0
+          \Longleftrightarrow \lambda_i = 0 \, \, \forall i$
+  \item S is linearly dependent if it's not linearly independent.
+\end{itemize}
+
+A result of linear dependence is that for a linear dependent set $S$, there
+exists $s \in S$ such that $\Spa(S) = \Spa(S\backslash\{s\})$.
+
+\vspace{\baselineskip}
+
+\textit{A note, if $S$ is linearly dependent, there's a vector in $S$ such
+  that it can be written as the sum of other vectors in $S$.}
+
+\subsubsection{Definition of a basis}
+
+For a vector space $V$, we say $S \subseteq V$ is a basis of $V$ if:
+\begin{itemize}
+  \item $S$ spans $V$
+  \item $S$ is linearly independent.
+\end{itemize}
+
+\newpage
+
+\subsubsection{Properties of bases}
+
+Let $V$ be a vector space:
+
+\begin{itemize}
+  \item For $v \in V$, $B$ a basis for $V$, $v$ can be written uniquely
+        as a linear combination of vectors in $B$
+  \item $V$ is finitely dimensional if $|B| < \infty$
+  \item If $V$ is finitely dimensional, there must exists a basis of $V$.
+\end{itemize}
+
+For $V$ a vector space with $S \subseteq V$ a linearly independent set.
+$S$ can be 'extended' to a basis of $V$. If $S$ spans $V$, it's
+already a basis. If not, we add a vector from $V\backslash\Spa{S}$.
+We can do this iteratively until we have a basis.
+
+\subsubsection{Definition of dimension}
+
+For a vector space $V$ with a basis $B$, the order of $B$ is the dimension
+of $V$, all bases of $V$ share the same order. This is denoted by
+$\dim{V} := |B|$.
+
+\subsubsection{Properties of dimension}
+
+Let $V$ be a finite dimensional vector space with $U, S \subseteq V$
+where $U$ is a subspace:
+
+\begin{itemize}
+  \item $S$ is linearly independent $\Rightarrow |S| < \dim{V}$
+  \item $\Spa{S} = V \Rightarrow |S| \geq dim{V}$
+  \item $(\Spa{S} = V) \land (|S| = \dim{V})
+          \Rightarrow S$ is a basis of $V$.
+  \item $\dim{U} \leq \dim{V}$
+  \item $\dim{U} = \dim{V} \Rightarrow U = V$
+\end{itemize}
+
+\subsection{Direct Sums}
+
+
+
+\end{document}

@@ -1,0 +1,597 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\def\lc{\left\lceil}   
+\def\rc{\right\rceil}
+\def\lf{\left\lfloor}   
+\def\rf{\right\rfloor}
+
+\DeclareMathOperator{\Mse}{mse}
+\DeclareMathOperator{\Bias}{bias}
+\DeclareMathOperator{\Var}{Var}
+
+\begin{document}
+
+\title{Statistics 1 Notes}
+\date{}
+\author{\textit{paraphrased by} Tyler Wright}
+\maketitle
+
+\vfill
+
+\textit{An important note, these notes are absolutely \textbf{NOT}
+    guaranteed to be correct, representative of the course, or rigorous.
+    Any result of this is not the author's fault.}
+
+\newpage
+
+\section{The Basics of Data Analysis}
+
+\subsection{Samples}
+
+A sample is a set of values observed from a simple random sample of
+some size $n$ from a population where each sample member is chosen
+\textbf{independently} of each other and each population member is
+\textbf{equally likely} to be selected.
+
+\vspace{\baselineskip}
+
+Samples are usually written as $\{x_1, x_2, \ldots, x_n\}$ where
+each $x_i$ represents an observed value. If the data is ordered,
+the data is written as $\{x_{(1)}, x_{(2)}, \ldots, x_{(n)}\}$
+(for numerical values, this is ascending order). So, in this
+case, $x_{(1)}$ is always the minimum, $x_{(n)}$ is always
+the maximum.
+
+\subsection{Probability Density Functions}
+
+For a sample $\{x_1, x_2, \ldots, x_n\}$, we can imagine each
+datum as being distributed with some population distribution
+$X$. As each datum is independent of all other observed values, we
+can write the probability density of this sample as follows:
+\begin{align*}
+    f_X(x_1, x_2, \ldots, x_n) = \prod_{i = 1}^n f_X(x_i).
+\end{align*}
+
+\subsection{Measures of Central Tendency}
+
+\subsubsection{Sample Median}
+
+For a sample $X = \{x_1, x_2, \ldots, x_n\}$, we define the sample
+median $M$ as follows:
+\begin{align*}
+    M(X) = \begin{cases}
+        x_{(m + 1)}                     & \text{ for } n = 2m + 1 \\
+        \frac{x_{(m)} + x_{(m + 1)}}{2} & \text{ for } n = 2m.
+    \end{cases}
+\end{align*}
+
+\textit{Essentially, it equals the middle value or the average of the
+    middle values. Also, it's important to note that the median is not
+    sensitive to extreme values.}
+
+\subsubsection{Sample Mean}
+
+For a sample $X = \{x_1, x_2, \ldots, x_n\}$, we define the sample
+mean $\overline{X}$ as follows:
+\begin{align*}
+    \overline{X} = \frac{1}{n}\left(\sum_{i = 1}^{n} x_i \right).
+\end{align*}
+This is easy to calculate even when combining samples. However, it is
+sensitive to extreme values.
+
+\subsubsection{Trimmed Sample Mean}
+
+For a sample $X = \{x_1, x_2, \ldots, x_n\}$, we define the trimmed
+sample mean $\overline{X_\Delta}$ for some percentage $\Delta\%$ as follows:
+\begin{align*}
+    \text{Let } k         & = \lf n \frac{\Delta}{100} \rf \\
+    \text{Let } \tilde{X} & = \{x_{(k + 1)}, x_{(k + 2)},
+    \ldots, x_{(n - k)}\}                                  \\
+    \overline{X_\Delta}   & = \overline{\tilde{X}} \;
+    (\text{the sample mean of } \tilde{X}).
+\end{align*}
+
+\textit{Basically, you remove the first and last $\Delta\%$
+    of values and take the sample mean of the remaining values.}
+
+\subsection{Measures of Spread}
+
+\subsubsection{Sample Variance}
+
+For a sample $X = \{x_1, x_2, \ldots, x_n\}$, we define the sample
+variance $s^2$ as follows:
+\begin{align*}
+    s^2 & = \frac{\sum_{i = 1}^n (x_i - \bar{x}^2)}{n - 1}                  \\
+        & = \frac{1}{n-1}\left(\sum_{i = 1}^{n}(x_i^2) - n\bar{x}^2\right).
+\end{align*}
+This measures how much the data varies.
+
+\subsubsection{Hinges}
+
+There are two hinge measures, lower ($H_1$) and upper ($H_3$):
+\begin{align*}
+    H_1 & = \text{ median of \{data values } \leq \text{ the median\}}  \\
+    H_3 & = \text{ median of \{data values } \geq \text{ the median\}}.
+\end{align*}
+
+\subsubsection{Quartiles}
+
+For a sample $X = \{x_1, x_2, \ldots, x_n\}$, there are two quartile
+measures, lower ($Q_1$) and upper ($Q_3$). The formulas are long and
+overly complicated so for $Q_1$:
+
+\begin{itemize}
+    \item Calculate $k = \frac{n + 1}{4}$
+    \item If $k \in \mathbb{Z}$, $Q_1 = x_{(k)}$
+    \item Otherwise, do linear interpolation between $x_{(\lf k\rf)}$
+          and $x_{(\lf k+1\rf)}$
+\end{itemize}
+
+And similarly for $Q_3$:
+
+\begin{itemize}
+    \item Calculate $k = 3\left(\frac{n + 1}{4}\right)$
+    \item If $k \in \mathbb{Z}$, $Q_3 = x_{(k)}$
+    \item Otherwise, do linear interpolation between $x_{(\lf k\rf)}$
+          and $x_{(\lf k+1\rf)}$
+\end{itemize}
+
+For large samples, the quartiles and hinges tend to be close to each
+other.
+
+\subsubsection{Interquartile Range (IQR)}
+
+The IQR is the difference between $Q_3$ and $Q_1$ $(Q_3 - Q_1)$.
+
+In this course, outliers are defined as more than
+$\frac{3}{2}(\text{IQR})$ (or approx. $\frac{3}{2}(H_3 - H_1)$) from the median.
+
+\subsubsection{Skewness}
+
+We measure skewness by the distance of the hinges from the median.
+If $H_3$ is further from the median than $H_1$, we have a longer
+right tail. If the converse is true, we have a longer left tail.
+
+\section{Assessing Fit}
+
+\subsection{Quantiles of a Distribution}
+
+For a distribution $X$ with cumulative distribution function
+$F_X$, the quantiles of the distribution are defined as the set
+of values:
+\begin{align*}
+    F_X^{-1} \left\{ \frac{1}{n+1}, \ldots, \frac{n}{n+1} \right\}.
+\end{align*}
+
+\textit{We use $n + 1$ on the denominator as $F_X^{-1}(1)$ can be
+$\infty$.}
+
+\vspace{\baselineskip}
+
+The ordered sample is called the set of sample quantiles.
+
+\newpage
+
+\subsection{Quantile-Quantile (Q-Q) Plots}
+
+These are the steps for constructing a Q-Q plot of a sample
+$\{x_1, x_2, \ldots, x_n\}$ with cumulative distribution function
+$F_X$:
+
+\begin{itemize}
+    \item Generate an estimate for the parameter(s)
+          ($\hat\theta_1, \hat\theta_2, \ldots$)
+    \item Compute the quantiles (the expected quantiles if the
+          hypothesised model is correct)
+    \item Plot each expected quantile against the sample quantile
+          $(F_X^{-1}(\frac{k}{n + 1}; \hat\theta), x_{(k)})$.
+\end{itemize}
+
+What we would expect, if our hypothesis is correct, is that the
+plotted points lie close to the line $y = x$. This is saying our
+sample and expected quantiles are close together.
+
+\subsection{Probability Plots}
+
+These are similar to the Q-Q plots but plot the sample cumulative
+probability against expected probability $(F_X(x_{(k)}), \frac{k}{n + 1})$.
+
+
+\section{Estimation}
+
+We have that a population is distributed with some distribution $X$
+with a probability density function (PDF) $f_X$, cumulative
+distribution function (CDF) $F_X$, and some parameters
+$\{\theta_1, \ldots\}$. We can make guesses at the distribution of a sample and use tests to
+verify that. But, to do these tests we need a valu for the parameters.
+It's not practical to guess these, so we need to estimate them.
+
+\subsection{Parameters}
+
+We say $\hat{\theta}$ is an estimator for $\theta$ and define it as
+a function of a sample $\{x_1, x_2, \ldots, x_n\}$:
+\begin{align*}
+    \hat{\theta}(x_1, x_2, \ldots, x_n).
+\end{align*}
+
+\subsection{Distribution Quantities}
+
+From our estimated value of the distribution parameters, we can
+calculate estimated values for distribution quantities like the
+mean and variance. We consider $\tau$ a function of the parameter
+that gives a distribution quantity:
+
+\begin{itemize}
+    \item \textbf{True quantity}: $\tau(\theta)$ where $\theta$
+          is the true distribution parameter
+    \item \textbf{Estimated quantity}:
+          $\hat{\tau} = \tau(\hat{\theta})$ where $\hat{\theta}$ is our
+          estimated parameter.
+\end{itemize}
+
+\section{Method of Moments Estimation}
+
+\subsection{Definition of a Moment}
+
+The $k$th moment of a probability distribution $X$ is defined as
+follows:
+\begin{align*}
+    \mathbb{E}(X^k) := \int_{-\infty}^{\infty} x^k f_X(x) dx.
+\end{align*}
+Setting $k = 1$ gives us the familiar expectation of $X$:
+\begin{align*}
+    \mathbb{E}(X) = \int_{-\infty}^{\infty} x f(x) dx.
+\end{align*}
+
+\textit{In the discrete case, the integral is a sum.}
+
+\vspace{\baselineskip}
+
+We define the $k$th sample moment $m_k$ as follows:
+\begin{align*}
+    m_k = \frac{\sum_{i = 1}^{n} x_i^k}{n}.
+\end{align*}
+
+\textit{Or rather, the $k$th moment is the average value of $x^k$
+    in the sample.}
+
+\subsection{The Process}
+
+By considering the a probability distribution $X$ with parameter $\theta$,
+we can find functions for the moments of $X$ in terms of $\theta$. These
+can be rearranged to give functions for $\theta$ in terms of the
+moments. We can then use the sample moments to generate an estimate
+for $\theta$ ($\hat\theta_{mom}$).
+
+\subsection{Method of Moments on the Exponential}
+
+Assume we have some population $X$ distributed according to the
+Exponential with some parameter $\theta$. We say
+$X \sim \text{Exp}(\theta)$.
+\begin{align*}
+                   & f_X(x) = \theta e^{-\theta x} \tag{x $>$ 0} \\
+    \Rightarrow \; & \mathbb{E}(X) = \frac{1}{\theta}            \\
+    \Rightarrow \; & \theta = \frac{1}{\mathbb{E}(X)}            \\
+    \Rightarrow \; & \hat{\theta}_{mom} = \frac{1}{m_1}.
+\end{align*}
+
+\textit{If there were more parameters, we would have to consider
+    greater moments of $X$.}
+
+\section{Maximum Likelihood Estimation}
+
+\subsection{The Process}
+
+By considering the a probability distribution $X$ with parameter $\theta$,
+we can find functions for the probability of events occuring in terms
+of $\theta$. If we find where this function is maximised, it will give us
+the value of $\theta$ that makes this sample most likely. This is the
+maximum likelihood estimate ($\hat\theta_{mle}$).
+
+\subsection{Optimisation of the Method}
+
+Consider a sample $\{x_1, x_2, \ldots, x_n\}$ with distributions
+$\{X_1, X_2, \ldots, X_n\}$, we call the likelihood function the
+joint PDF of $\{X_1, X_2, \ldots, X_n\}$. We input our sample values
+($L = f_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n)$) which gives us
+a function in terms of our unknown parameters $\theta_1, \theta_2, \ldots$.
+
+\vspace{\baselineskip}
+
+For $X_1, X_2, \ldots, X_n$ independent and identically distributed
+sharing some distribution $X$, the joint PDF can be written as a
+product of marginals:
+\begin{align*}
+    L & = f_{X_1, X_2, \ldots, X_n}(x_1, x_2, \ldots, x_n) \\
+      & = f_X(x_1)f_X(x_2)\cdots f_X(x_n)                  \\
+      & = \prod_{i = 1}^n f_X(x_i).
+\end{align*}
+
+We can take the natural logarithm of this likelihood function (the value
+where it's maximised is preserved as the natural logarithm is increasing)
+($\ell = ln(L)$). If, again, $X_1, X_2, \ldots, X_n$ are independent
+and identically distributed sharing some distribution $X$:
+\begin{align*}
+    \ell & = \ln{\left(\prod_{i = 1}^n f_X(x_i)\right)} \\
+         & = \sum_{i = 1}^n\left[\ln{(f_X(x_i))}\right]
+\end{align*}
+We know $\hat\theta_{mle}$ is the solution to:
+\begin{align*}
+    \frac{\partial}{\partial\theta}\ell(\theta) = 0.
+\end{align*}
+So, in the independent and identically distributed case:
+\begin{equation*}
+    \frac{\partial}{\partial\theta}\ell(\theta) = 0
+    \Longleftrightarrow
+    \sum_{i = 1}^n\left[\frac{\partial}{\partial\theta}\ln{(f_X(x_i))}\right]
+    = 0.
+\end{equation*}
+
+\subsection{Multiple Parameters}
+
+When finding the maximum likelihood estimate for multiple parameters, we
+obtain multiple equations by partially differentiating $\ell$ by our
+different parameters, giving an equation for each.
+
+\subsection{Non-regular density}
+
+If our function $L$ is piecewise, we may find that our maximum isn't where
+the derivative is zero, but as the endpoints of the parts of the function.
+
+\vspace{\baselineskip}
+
+\textit{Consider the maximum of $f:\mathbb{R} \to \mathbb{R}$ where:}
+\begin{align*}
+    f(x) = \begin{cases}
+        \theta^{-x} & \text{ for } x \geq 1 \\
+        0           & \text{ otherwise.}
+    \end{cases}
+\end{align*}
+
+\section{The Performance of Estimators}
+
+\subsection{Variation of Estimators}
+
+We can consider the distribution of an estimator to compare them. We
+consider these main quantities:
+
+\begin{itemize}
+    \item $\Bias(\hat\theta) = \mathbb{E}(\hat\theta) - \theta$
+    \item $\Mse(\hat\theta) = \mathbb{E}((\hat\theta - \theta)^2)$.
+\end{itemize}
+
+\textit{Bias is the quantity we expect our estimator to vary by from
+    the true value. The MSE (mean squared error) is how much is varies.}
+
+\vspace{\baselineskip}
+
+We can rewrite the formula for the mean squared error as follows:
+\begin{align*}
+    \Mse(\hat\theta) = \Var(\hat\theta) - \Bias(\hat\theta).
+\end{align*}
+
+\subsection{Method of Simulation}
+
+If we have a distribution with known parameters $\theta_1, \theta_2,
+    \ldots$, we can sample $N$ samples of size $n$ and use our estimators
+to calculate estimates for these known parameters for each sample.
+
+\vspace{\baselineskip}
+
+From this, we can calculate the average error, sample variance, and
+average squared error of each estimator. These quantities estimate
+bias, variance, and mean squared error respectively.
+
+\vspace{\baselineskip}
+
+If we repeat this process for multiple estimators, we can compare
+our estimators with these quantities.
+
+\section{Central Limit Theorem}
+
+\subsection{Definition of the Central Limit Theorem}
+
+For $X_1, X_2, \ldots, X_n$ a random sample from a population with
+mean $\mu = \mathbb{E}(X)$ and variance $\sigma^2 = \Var(X)$. Let
+$\overline{X_n}$ be the sample mean. For $n$ large we have:
+\begin{align*}
+    \mathbb{P}\left( \sqrt{n}
+    \left[\frac{\overline{X_n} - \mu}{\sigma}\right]
+    \leq x \right) \simeq \mathbb{P}(\mathcal{N}(0, 1) \leq x) = \Phi(x).
+\end{align*}
+Or similarly:
+\begin{align*}
+    \overline{X_n} \simeq \mathcal{N}(\mu, \sigma^2/n).
+\end{align*}
+
+\subsection{Continuity Correction}
+
+When using the Central Limit Theorem to approximate discrete random
+variables, it is important to make a continuity correction. Let
+$X_1, X_2, \ldots, X_n$ be samples from a discrete random variable
+with sample mean $\overline{X_n}$, population mean $\mu$, and
+population variance $\sigma^2$:
+\begin{align*}
+    \mathbb{P}\left( \sqrt{n}
+    \left[\frac{\overline{X_n} - \mu}{\sigma}\right]
+    \leq x \right) \simeq \mathbb{P}(\mathcal{N}(0, 1)
+    < x + \frac{1}{2}) \\
+    \mathbb{P}\left( \sqrt{n}
+    \left[\frac{\overline{X_n} - \mu}{\sigma}\right]
+    < x \right) \simeq \mathbb{P}(\mathcal{N}(0, 1)
+    < x - \frac{1}{2})
+\end{align*}
+
+\section{A Reminder on Moment Generating Functions}
+
+\subsection{Definition of a Moment Generating Function (MGF)}
+
+For a random variable $X$, we define the moment generating function by:
+\begin{align*}
+    \mathcal{M}_X(t) := \mathbb{E}(e^{tX}) = \begin{cases}
+        \int_{-\infty}^\infty e^{tX} f_X(x) \, dx & \text{for } X \text{ continuous} \\
+        \sum_{x \in S} e^{tX} \mathbb{P}(X = x)   & \text{for } X \text{ discrete.}
+    \end{cases}
+\end{align*}
+
+\subsection{Properties of a Moment Generating Function}
+
+\subsubsection{Standard examples of moment generating functions}
+
+For a random variable $X$:
+
+\begin{itemize}
+    \item $X \sim \mathcal{N}(\mu, \sigma^2) \Leftrightarrow
+              \mathcal{M}_X(t) = \exp{(\mu t + \frac{(\sigma t)^2}{2})}$
+    \item $X \sim \text{Exp}(\theta) \Leftrightarrow
+              \mathcal{M}_X(t) = \frac{\theta}{\theta - t}$
+    \item $X \sim \text{Gamma}(\alpha, \beta) \Leftrightarrow
+              \mathcal{M}_X(t) = \frac{\beta^\alpha}{(\beta - t)^\alpha}$.
+\end{itemize}
+
+\subsubsection{Joint moment generating functions}
+
+The joint MGF of $X$ and $Y$ is:
+\begin{align*}
+    \mathcal{M}_{X, Y}(s, t) := \mathbb{E}(e^{sX + tY}).
+\end{align*}
+They are such that:
+\begin{align*}
+    \mathcal{M}_X(s) & = \mathcal{M}_{X, Y}(s, 0)  \\
+    \mathcal{M}_Y(t) & = \mathcal{M}_{X, Y}(0, t). \\
+\end{align*}
+We also have that $X$ and $Y$ are independent if and only if:
+\begin{align*}
+    \mathcal{M}_{X, Y}(s, t) = \mathcal{M}_X(s)\mathcal{M}_Y(t).
+\end{align*}
+
+\subsubsection{Independence of moment generating functions}
+
+If $X_1, X_2, \ldots, X_n$ are independent and $Y = \sum_{i = 1}^n X_i$:
+\begin{align*}
+    \mathcal{M}_Y(t) = \prod_{i = 1}^n \mathcal{M}_{X_i}(t)
+\end{align*}
+
+\subsubsection{Uniqueness of moment generating functions}
+
+The MGF uniquely defines a distribution, for two random variables $X, Y$:
+\begin{align*}
+    \mathcal{M}_X = \mathcal{M}_Y \Leftrightarrow X = Y.
+\end{align*}
+
+\newpage
+
+\section{The Normal Distribution}
+
+\subsection{Transformation and Addition of the Normal}
+
+For $X \sim \mathcal{N}(\mu, \sigma^2)$ and $X_i \sim
+    \mathcal{N}(\mu_i, \sigma_i^2)$ for $i \in \{1, 2, \ldots, n\}$, 
+    let $\overline{X} = \frac{1}{n}(\sum_{i = 1}^n X_i)$ be the sample mean:
+
+\begin{align*}
+    aX + b                                                 & \sim \mathcal{N}(a\mu + b, a^2\sigma^2) \tag{Linear Transformation} \\
+    \sum_{i = 1}^n X_i                                     & \sim
+    \mathcal{N}(\sum_{i = 1}^n\mu_i, \sum_{i = 1}^n\sigma_i^2) \tag{Summed}                                                      \\
+    \frac{(X - \mu)}{\sigma}                               & \sim \mathcal{N}(0, 1) \tag{Standardised}                           \\    
+    \overline{X}                                           & \sim \mathcal{N}(\mu, \frac{\sigma^2}{n}) \tag{Sample Mean}         \\
+    \sqrt{n}\left(\frac{\overline{X} - \mu}{\sigma}\right) & \sim \mathcal{N}(0, 1). \tag{Standardised Sample Mean}
+\end{align*}
+
+\textit{It's very important to remember that multiplication and summing differ
+when dealing with the Normal (when it comes to the variance). So, if you have
+a Normal random variable $X \sim \mathcal{N}(\mu, \sigma^2)$, $2X \neq X + X$
+as $\Var(2X) = 4\sigma^2$ and $\Var(X + X) = 2\sigma^2$. This is because when
+you're multiplying, you're amplifying variation in your sample, but when you 
+sum you're combining variance.}
+
+\subsection{Independence of the Sample Mean and the Sum of Squared Difference}
+
+For $X_i \sim \mathcal{N}(\mu_i, \sigma_i^2)$ for $i \in \{1, 2, \ldots, n\}$, 
+let $\overline{X} = \frac{1}{n}(\sum_{i = 1}^n X_i)$ be the sample mean. 
+We have that $\overline{X}$ and $\sum_{i = 1}^n(X_i - \overline{X})^2$ 
+are independent.
+
+\section{Sampling Distributions related to the Normal}
+
+\subsection{The $\chi^2$ Distribution}
+
+\subsubsection{Definition of the $\chi^2$ distribution}
+
+We say that a random variable $X \sim \chi^2_r$ ($r$ degrees of freedom)
+if:
+\begin{align*}
+    \mathcal{M}_X(t) = (1 - 2t)^{-r / 2}.
+\end{align*}
+
+\subsubsection{Properties of the $\chi^2$ distribution}
+
+Let $X \sim \chi^2_r$, $Y \sim \chi^2_s$:
+
+\begin{itemize}
+    \item $X \sim \Gamma(\frac{r}{2}, \frac{1}{2})$
+    \item $\mathbb{E}(X) = r$
+    \item $\Var(X) = 2r$
+    \item $X + Y \sim \chi^2_{r + s}$
+\end{itemize}
+
+We also have some results relating to the Normal, let $Z$ be the standard
+Normal, $X_i$ for $i \in \{1, 2, \ldots, n\}$ be samples from 
+$\mathcal{N}(\mu, \sigma^2)$, let $\overline{X} = \frac{1}{n}
+(\sum_{i = 1}^n X_i)$ be the sample mean:
+
+\begin{itemize}
+    \item $Z^2 \sim \chi^2_1$   
+    \item $\sum_{i = 1}^n (\frac{X_i - \mu}{\sigma})^2 \sim \chi^2_n$
+    \item $\sum_{i = 1}^n (\frac{X_i - \overline{X}}{\sigma})^2 \sim \chi^2_{n-1}$.
+\end{itemize}
+
+Finally, we also have some results relating to the Exponential and Gamma
+distributions, let $X_i$ for $i \in \{1, 2, \ldots, n\}$ be samples
+from $\text{Exp}(\theta)$:
+
+\begin{itemize}
+    \item $\sum_{i = 1}^n X_i \sim \Gamma(n, \theta)$
+    \item $\overline{X} = \frac{1}{n} \sum_{i = 1}^n X_i \sim \Gamma(n, n\theta)$
+    \item $2\theta \sum_{i = 1}^n X_i \sim \Gamma(n, 1/2) = \chi^2_{2n}$
+\end{itemize}
+
+\subsection{The $t$ Distribution}
+
+\subsubsection{Definition of the $t$ distribution}
+
+For $Z \sim \mathcal{N}(0, 1)$, $X \sim \chi^2_r$ \textbf{independent} we have:
+\begin{align*}
+    T = \frac{Z}{\sqrt{X / r}},
+\end{align*}
+is distributed with a $t$ distribution with $r$ degrees of freedom ($t_r$).
+
+\subsubsection{Properties of the $t$ distribution}
+
+For $T \sim t_r$:
+
+\begin{itemize}
+    \item $\mathbb{E}(T) = 0$
+    \item $\Var(T) = \frac{r}{r - 2}$
+    \item The density of $T$ approaches $\mathcal{N}(0, 1)$ as $r\to\infty$.
+\end{itemize}
+
+\subsubsection{Samples from the Normal with $\sigma$ unknown}
+
+For $X_i$ for $i \in \{1, 2, \ldots, n\}$ be samples from 
+$\mathcal{N}(\mu, \sigma^2)$, let $\overline{X} = \frac{1}{n}
+(\sum_{i = 1}^n X_i)$ be the sample mean and $S^2 = \frac{1}{n - 1}
+\sum_{i = 1}^n(X_i - \overline{X})^2$ be the sample variance. We have that:
+\begin{align*}
+    \sqrt{n}\left(\frac{\overline{X} - \mu}{S}\right) \sim t_{n - 1}
+\end{align*}
+
+\textit{This is \textbf{extremely} key as this allows us to perform hypothesis
+test on any Normal sample without knowing the population variance.}
+
+\end{document}

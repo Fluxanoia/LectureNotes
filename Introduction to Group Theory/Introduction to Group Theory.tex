@@ -1,0 +1,428 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+
+\DeclareMathOperator{\Ord}{ord}
+\DeclareMathOperator{\Mod}{mod}
+\DeclareMathOperator{\Gcd}{gcd}
+\DeclareMathOperator{\Lcm}{lcm}
+
+\begin{document}
+
+\title{Introduction to Group Theory Notes}
+\date{}
+\author{\textit{paraphrased by} Tyler Wright}
+\maketitle
+
+\vfill
+
+\textit{An important note, these notes are absolutely \textbf{NOT}
+      guaranteed to be correct, representative of the course, or rigorous.
+      Any result of this is not the author's fault.}
+
+\newpage
+
+\section{The Basics of Groups}
+
+\subsection{Binary operations}
+
+A binary operation on a set $G$ is a function:
+\begin{align*}
+      * : G \times G \to G.
+\end{align*}
+
+\textit{It's just a function that takes two values and gives a single
+      output. Examples are addition, multiplication, and composition.}
+
+\vspace{\baselineskip}
+
+Such an operation is called \textbf{commutative} if:
+\begin{align*}
+      x * y = y * x. \tag{$\forall x, y \in G$}
+\end{align*}
+
+\subsection{Definition of a Group}
+
+A group is a set $G$ paired with a binary operation $*$ such that they satisfy
+the following:
+
+\begin{itemize}
+      \item \textbf{Associativity}: For $x, y, z \in G$,
+            $(x * y) * z = x * (y * z)$
+      \item \textbf{Identity}: $\exists \, e \in G$ such that
+            $\forall g \in G$, $e * g = g * e = g$
+      \item \textbf{Inverses}: $\forall g \in G$, $\exists \, g^{-1} \in G$
+            such that $g * g^{-1} = g^{-1} * g = e$.
+\end{itemize}
+
+A group is called commutative or Abelian if all its elements commute with
+the given operation.
+
+\subsection{Consequences of the Definition}
+
+\subsubsection{Left and right cancellation}
+
+We can left and right cancel with inverses:
+\begin{align*}
+      (ax = bx) & \Rightarrow (a = b) \tag{$\forall a, b, x \in G$}  \\
+      (xa = xb) & \Rightarrow (a = b). \tag{$\forall a, b, x \in G$}
+\end{align*}
+
+\textit{However, $ax = xb$ does not imply $a = b$ unless the group is Abelian.}
+
+\subsubsection{Uniqueness of the identity and inverses}
+
+We have uniqueness of certain elements:
+
+\begin{itemize}
+      \item The identity of a group is unique
+      \item The inverse of an element is unique.
+\end{itemize}
+
+\subsubsection{Inverse properties}
+
+For a group $G$ with elements $x, y$:
+
+\begin{itemize}
+      \item $(x^{-1})^{-1} = x$
+      \item $(xy)^{-1} = y^{-1}x^{-1}$.
+\end{itemize}
+
+\subsubsection{Exponent properties}
+
+For a group $G$ with an element $x$ and $m, n \in \mathbb{Z}$:
+
+\begin{itemize}
+      \item $x^{-n} = (x^{-1})^n$
+      \item $(x^n)(x^m) = x^{n + m}$.
+\end{itemize}
+
+\textit{However, $(xy)^n$ may not equal $x^ny^n$ unless $G$ is Abelian.}
+
+\section{Dihedral Groups}
+
+\subsection{Definition of a Dihedral Group}
+
+The dihedral group $D_{2n}$ is the group of symmetries of an $n$-sided polygon.
+This group has order $2n$ as is defined as:
+\begin{align*}
+      D_{2n} & = \langle a \rangle \cap b\langle a \rangle                        \\
+             & = {e, a, a^2, \ldots, a^{n - 1}, b, ba, ba^2, \ldots, ba^{n - 1}}.
+\end{align*}
+Where $a$ is a rotation of $\frac{2\pi}{n}$ radians around the centre of the
+polygon and $b$ is a reflection in the line through vertex $1$ and the centre
+of the polygon.
+
+\subsection{Properties of a Dihedral Group}
+
+For the dihedral group $D_{2n}$:
+
+\begin{itemize}
+      \item $a^n = e$
+      \item $b^2 = e$
+      \item $a^nb = ba^{-n}$
+\end{itemize}
+
+\section{Subgroups}
+
+\subsection{Definition of a Subgroup}
+
+A subgroup is a subset $H$ of a group $G$ such that $H$ is also a
+group under the binary operation defined by $G$ ($H \leq G$). If we have a subset
+$H$ of a group $G$, we can show it is a subgroup by showing the
+following properties hold for $H$:
+
+\begin{itemize}
+      \item \textbf{Closure}: For $x, y \in H$, $xy \in H$
+      \item \textbf{Identity}: $\exists \, e \in H$ such that
+            for $x \in H$, $e * x = x * e = x$
+      \item \textbf{Inverses}: For $x \in H$, $\exists \, x^{-1} \in
+                  H$ such that $x * x^{-1} = x^{-1} * x = e$.
+\end{itemize}
+
+A consequence of this definition is that the intersection of subgroups
+is a subgroup.
+
+\section{The Order of Elements}
+
+\subsection{The Definition of Order for Elements}
+
+For $x$ an element in some group $G$, we have that the order of $x$
+is defined by:
+\begin{align*}
+      \Ord{(x)} = \begin{cases}
+            n \text{ such that } x^n = e & \text{if such $n$ exists} \\
+            \infty                       & \text{otherwise.}
+      \end{cases}
+\end{align*}
+
+\textit{The order is the \textbf{least} possible integer such that
+      $x^n = e$. To show the order of $x$ is $n$, you need to show
+      $x^n = e$ and $x^k \neq e$ for all $k \in \{1, 2, \ldots, n - 1\}$.}
+
+\subsection{Properties of the Order of Elements}
+
+Let $G$ be a group with element $x$:
+
+\begin{itemize}
+      \item $\Ord(x) = \infty \Rightarrow$
+            all $x^i$ are distinct $(i \in \mathbb{Z})$
+      \item $|G| < \infty \Rightarrow \Ord(x) < \infty$
+      \item If $\Ord(x) = n \in \mathbb{N}$, for $i \in \mathbb{N}$,
+            $\Ord(x^i) = \frac{n}{\gcd{(n, i)}}$.
+\end{itemize}
+
+\newpage
+
+\section{Cyclic Groups}
+
+\subsection{Definition of a Cyclic Group}
+
+For a group $G$, the cyclic group generated by $x \in G$ is defined by:
+\begin{align*}
+      \langle x \rangle = \{x^i : i \in \mathbb{N}\}.
+\end{align*}
+
+\subsection{Properties of Cyclic Groups}
+
+For a group $G$ with element $x$:
+
+\begin{itemize}
+      \item $\langle x \rangle$ is a subgroup of $G$
+      \item $|\langle x \rangle| = \Ord(x)$
+      \item Cyclic groups are Abelian
+      \item Subgroups of cyclic groups are cyclic
+      \item $G$ is cyclic $\Leftrightarrow \exists \, x \in G$ such
+            that $\Ord(x) = |G|$.
+\end{itemize}
+
+\section{Groups from Modular Arithmetic}
+
+\subsection{Congruence Classes}
+
+A congruence class $[a]$ of the set $\mathbb{Z}/n\mathbb{Z}$ is a set
+of integers congruent to $a$ $(\Mod n)$. We define the following
+operations:
+
+\begin{itemize}
+      \item \textbf{Addition}: $[a] + [b] = [a + b]$
+      \item \textbf{Multiplication}: $[a][b] = [ab]$.
+\end{itemize}
+
+\textit{For example:}
+\begin{align*}
+      \mathbb{Z}/7\mathbb{Z} & = \bigcup_{i = 0}^{6} \, [i],
+\end{align*}
+\textit{with distinct elements $0, 1, 2, 3, 4, 5, 6$.}
+
+\newpage
+
+\subsection{The Set of Congruence Classes under Addition}
+
+We have that the set $\mathbb{Z}/n\mathbb{Z}$ with the operation
+of addition $(\mathbb{Z}/n\mathbb{Z}, +)$ is a cyclic group
+generated by $1$.
+
+\vspace{\baselineskip}
+
+\textit{This means it's also an Abelian group.}
+
+\subsection{The Set of Congruence Classes under Multiplication}
+
+The trouble with multiplication is that certain congruence classes
+never have inverses and as a result, the set under multiplication
+can never be a group. We have that an element $[a]$ of
+$(\mathbb{Z}/n\mathbb{Z}, \times)$ has an inverse if:
+\begin{align*}
+      \gcd{(a, n)} = 1.
+\end{align*}
+We define the set $U_n$ as follows:
+\begin{align*}
+      U_n = \{a : a \in \mathbb{Z} \text{ with } \gcd{(a, n) = 1}\}.
+\end{align*}
+Thus, we have $(U_n, \times)$ is an Abelian group.
+
+\subsection{The Set of Congruence Classes under the Direct Product}
+
+For $m, n$ positive integers with $\Gcd(m, n) = 1$, we have:
+\begin{align*}
+      U_m \times U_n \cong U_{mn}.
+\end{align*}
+
+\section{Isomorphisms}
+
+\subsection{Definition of an Isomorphisms}
+
+For $(G, *)$, $(H, \circ)$ groups, an isomorphism $\phi : G \to H$
+is a bijective function such that:
+\begin{align*}
+      \phi(x * y) = \phi(x) \circ \phi(y). \tag{$\forall x, y \in G$}
+\end{align*}
+
+\newpage
+
+\subsection{Properties of an Isomorphism}
+
+For the groups $G, H, K$ and an isomorphism $\phi : G \to H$:
+
+\begin{multicols}{2}
+      \begin{itemize}
+            \item $\phi^{-1}$ is an isomorphism
+            \item $G$ and $H$ are isomorphic ($G \cong H$)
+            \item If there exists an isomorphism $\psi:H \to K$
+                  then $G \cong K$ (transitive)
+            \item $\phi(e_G) = e_H$
+            \item $\phi(x^{-1}) = \phi(x)^{-1}$
+      \end{itemize}
+      \columnbreak
+      \begin{itemize}
+            \item $\phi(x^i) = \phi(x)^i$ ($i \in \mathbb{Z}$)
+            \item $\Ord_G(x) = \Ord_H(\phi(x))$
+            \item $|G| = |H|$
+            \item $G$ is Abelian $\Leftrightarrow$ $H$ is Abelian
+            \item $G$ is cyclic $\Leftrightarrow$ $H$ is cyclic
+      \end{itemize}
+\end{multicols}
+
+\section{Direct Products}
+
+\subsection{Definition of the Direct Product}
+
+For $G, H$ groups, $G \times H$ is the Cartesian product of $G$ and
+$H$ with the binary operation:
+\begin{align*}
+      (x, y)(a, b) = (x * a, y * b). \tag{$\forall x, a \in G, y, b \in H$}
+\end{align*}
+This is itself a group.
+
+\subsection{Properties of the Direct Product}
+
+For $H, K$ groups, $G = H \times K$:
+
+\begin{itemize}
+      \item $G$ is finite $\Leftrightarrow$ $H$ and $K$ are finite 
+            (in this case $|G| = |H||K|$)
+      \item $G$ is Abelian $\Leftrightarrow$ $H$ and $K$ are Abelian
+      \item $G$ is cyclic $\Rightarrow$ $H$ and $K$ are cyclic.
+\end{itemize}
+
+\subsection{The Direct Product and Cyclic Groups}
+
+\subsubsection{Order of elements}
+
+For $H, K$ groups, $G = H \times K$, $(x, y) \in G$:
+\begin{align*}
+      \Ord(x, y) = \Lcm(\Ord_H(x), \Ord_K(y)).
+\end{align*}
+
+\subsubsection{Condition for a cyclic direct product}
+
+For $H, K$ groups, $G = H \times K$, $G$ is cyclic if and only if
+$\Gcd(|H|, |K|) = 1$.
+
+\subsubsection{The direct product of cyclic groups}
+
+We denote the cyclic group of order $n$ as $C_n$. We have that
+for $C_n$, $C_m$ cyclic groups:
+\begin{align*}
+      C_n \times C_m \cong C_{mn} \Leftrightarrow \Gcd(m, n) = 1.
+\end{align*}
+
+\section{Lagrange's Theorem}
+
+\subsection{Definition of Lagrange's Theorem}
+
+For a finite group $G$ with $H \leq G$ a subgroup. We have that 
+$|H|$ divides $|G|$.
+
+\subsection{Cyclic Subgroups}
+
+For $G$ a finite group with order $n$, for $x \in G$, $\Ord(x)$ divides
+$n$ (this is because $\langle x \rangle \leq G$).
+
+\subsection{Cosets}
+
+\subsubsection{Definition of a coset}
+
+For a group $G$ with $H \leq G$ and $x \in G$, the left coset $xH$ is
+and right coset $Hx$ are the sets:
+\begin{align*}
+      xH = \{xh : h \in H\}, \, Hx = \{hx : h \in H\}.
+\end{align*}
+\textit{While this is a sub\textbf{set} of $G$, it is not necessarily
+a sub\textbf{group}.}
+
+\subsubsection{A bijection from a subgroup to its left coset}
+
+For a group $G$ with $H \leq G$, $x \in G$, and left coset $xH$,
+there exist a bijection from $H$ to $xH$. This implies that their
+order is the same.
+
+\subsubsection{The intersection of cosets}
+
+For a group $G$ with $H \leq G$, $x, y \in G$:
+\begin{align*}
+      xH \cap yH \neq \emptyset \Leftrightarrow xH = yH.
+\end{align*}
+\textit{Cosets are distinct unless they are equal.}
+ 
+\subsubsection{Index of a subgroup}
+
+For a group $G$ with $H \leq G$ and $x \in G$, the index of $H$ in $G$
+$|G : H|$ is the number of left cosets of $H$ in $G$. So, since
+all cosets of $H$ are distinct, we have:
+\begin{align*}
+      |G| = |H||G : H|.
+\end{align*}
+
+\subsection{Consequences of Lagrange's Theorem}
+
+\subsubsection{Intersection of subgroups}
+
+For a group $G$ with $H, K \leq G$, $\Gcd(|H|, |K|) = 1$ implies
+$H \cap K = \{e\}$.
+
+\subsubsection{Prime order groups}
+
+For $G$ a group with $|G| = p \in \mathbb{P}$ (prime):
+
+\begin{itemize}
+      \item $G$ is cyclic
+      \item Every element of $G$ except the identity has order $p$ 
+            (and generates $G$)
+      \item The only subgroups of $G$ are $G$ and $\{e\}$.
+\end{itemize}
+
+\section{Fermat-Euler Theorem}
+ 
+\subsection{Euler's $\phi$ Function}
+
+We define the Euler $\phi$ function over the naturals by:
+\begin{align*}
+      \phi(n) = \left|\{a : a \in \mathbb{N}, \, \Gcd(a, n) = 1\}\right|.
+\end{align*}
+We have that $\phi(n)$ is the order of $U_n$ (the group of congruence
+classes under multiplication). Also, for $p \in \mathbb{P}$ (prime),
+$\phi{p} = p - 1$.
+
+\vspace{\baselineskip}
+
+\textit{This is the number of values less than or equal to an integer
+that don't divide it.}
+
+\subsection{Fermat-Euler Theorem}
+
+For $a, n \in \mathbb{N}$ with $\Gcd(a, n) = 1$, we have that:
+\begin{align*}
+      a^{\phi(n)} \equiv 1 \, (\Mod n).
+\end{align*}
+So, for $p \in \mathbb{P}$ (prime):
+\begin{align*}
+      a^{p - 1} \equiv 1 \, (\Mod p).
+\end{align*}
+
+\end{document}

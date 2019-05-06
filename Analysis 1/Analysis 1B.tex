@@ -1,0 +1,1004 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+
+\begin{document}
+
+\title{Analysis 1 (TB2) Notes}
+\date{}
+\author{\textit{paraphrased by} Tyler Wright}
+\maketitle
+
+\vfill
+
+\textit{An important note, these notes are absolutely \textbf{NOT}
+      guaranteed to be correct, representative of the course, or rigorous.
+      Any result of this is not the author's fault.}
+
+\newpage
+
+\section{Continuity}
+
+\subsection{Continuous Functions}
+
+From Analysis 1A, we have that a function $f: A \to \mathbb{R}$
+is continuous on $A$ if:
+\begin{align*}
+      \forall x \in A, \forall \epsilon > 0, \exists\,\delta > 0
+      \text{ such that } \forall y \in A,
+      (|y - x| < \delta) \Rightarrow (|f(y) - f(x)| < \epsilon).
+\end{align*}
+It's important to note that $x$ is chosen given before we choose a
+$\delta$. Thus, our choice for $\delta$ can depend on $x$ as well as
+$\epsilon$.
+
+\vspace{\baselineskip}
+
+\textbf{Uniform} continuity requires that $\delta$ is independent of
+$x$.
+
+\vspace{\baselineskip}
+
+\textit{A note, a function being continuous at a value (or set
+      of values for that matter), it equivalent to saying that
+      there exists a limit for the function at that value and that limit
+      is the value of the function applied to that value.}
+
+\subsection{Uniformly Continuous Functions}
+
+Uniform continuity is similar to continuity as we knew it in Analysis
+1A. For a function $f : A \to \mathbb{R}$, $f$ is uniformly continuous
+on $A$ if:
+\begin{align*}
+      \forall \epsilon > 0, \exists\,\delta > 0
+      \text{ such that } \forall x, y \in A,
+      (|y - x| < \delta) \Rightarrow (|f(y) - f(x)| < \epsilon).
+\end{align*}
+We can see that uniform continuity \textbf{implies} continuity but
+\textbf{not} vice versa.
+
+\vspace{\baselineskip}
+
+\textit{A note, for uniform continuity, we are saying that given a value
+      $\epsilon$, we can always pick a distance ($\delta$) such that
+      if two values are within that distance of each other, the distance
+      between the values after the function is applied to them
+      will be less than $\epsilon$. This is essentially testing for
+      divergence to infinity at a value ($\frac{1}{x}$ is continuous
+      but not uniformly continuous on $\mathbb{R}_{>0}$).}
+
+\newpage
+
+\section{Convergence}
+
+We have the notion of convergence for sequences of real numbers
+from Analysis 1A, convergence in this section is similar but
+specifically for functions.
+
+\subsection{Pointwise Convergence}
+
+A sequence of functions $(f_n)_{n \in \mathbb{N}}$ from
+$A \to \mathbb{R}$ converges \textbf{pointwise} to the function
+$f$ on $A$ if:
+\begin{align*}
+      \lim_{n \to \infty}(f_n(x)) = f(x). \tag{$\forall x \in A$}
+\end{align*}
+$f$ is called the \textbf{pointwise limit} of $(f_n)_{n \in \mathbb{N}}$.
+
+\vspace{\baselineskip}
+
+\textit{A note, for $f_n:[0, 1]\to[0, 1]; x \to x^n$,
+$f:[0, 1] \to [0, 1]; x \to \delta_1(x)$, $f_n$ converges pointwise
+to $f$.}
+
+\subsection{Uniform Convergence}
+
+A sequence of functions $(f_n)_{n \in \mathbb{N}}$ from
+$A \to \mathbb{R}$ converges \textbf{uniformly} to the
+function $f$ on $A$ if:
+\begin{align*}
+      \forall \epsilon > 0, \exists\,N \in \mathbb{N} \text{ such that }
+      \forall x \in A, \forall n \in \mathbb{N},
+      (n \geq N) \Rightarrow (|f(x) - f_n(x)| < \epsilon).
+\end{align*}
+
+\textit{For the same functions outlined in the note under pointwise
+convergence, we have that $f_n$ does not converge uniformly to $f$.
+Let $\epsilon \in (0, 1)$, $x \in [0, 1)$ and suppose $f_n$ is
+uniformly convergent to $f$,}
+\begin{align*}
+       & |f_n(x)-f(x)| = |x^n| < \epsilon                   \\
+       & \Rightarrow 0 \leq x^n < \epsilon < 1              \\
+       & \Rightarrow 0 \leq x < \epsilon^{\frac{1}{n}} < 1  \\
+       & \Rightarrow \epsilon = 1 \text{ as } x \in [0, 1).
+\end{align*}
+
+\textit{This is a contradiction by the definition of $\epsilon$.
+      Thus, we have the result.}
+
+\subsection{Weierstrass' Theorem}
+
+For $a, b \in \mathbb{R}$ with $a < b$, if a sequence of continuous
+functions on $[a, b]$, $(f_n)_{n \in \mathbb{N}}$ converges
+uniformly to $f$ on $[a, b]$, $f$ is continuous on $[a, b]$.
+
+\vspace{\baselineskip}
+
+\textit{Basically, uniform convergence preserves continuity (it also
+      preserves regulation).}
+
+\subsection{Supremum Norm}
+
+\subsubsection{Definition of the Supremum Norm}
+
+For $a, b \in \mathbb{R}$ with $a < b$, let $f:[a, b]\to\mathbb{R}$
+be a bounded function. The supremum norm of $f$ on $[a,b]$ is
+denoted by $\|f\|_{[a,b]}$ and is defined by:
+\begin{align*}
+      \|f\|_{[a,b]} := \sup{\{\|f(x)| : x \in [a,b]\}}.
+\end{align*}
+
+\textit{The supremum norm is simply just the furthest distance from
+      zero reached by a function over a closed interval. By definition,
+      it is a real number and $\exists\,x \in [a, b]$ such that $f(x)$ is
+      the supremum norm.}
+
+\subsubsection{Properties of the Supremum Norm}
+
+There are a few key properties of the supremum norm, let $a$ and $b$
+be as above and let $\lambda \in \mathbb{R}$, $f, g:[a, b]\to\mathbb{R}$
+be bounded functions:
+
+\begin{itemize}
+      \item $\|f\|_{[a,b]} > 0$
+      \item $\|f\|_{[a,b]} = 0 \Leftrightarrow f = 0 \text{ on } [a, b]$
+      \item $\|\lambda f\|_{[a,b]} = |\lambda|\|f\|_{[a,b]}$
+      \item $\|f+g\|_{[a,b]} = \|f\|_{[a,b]} + \|g\|_{[a,b]}.$
+\end{itemize}
+
+\subsection{Cauchy Sequences of Functions}
+
+For $a, b \in \mathbb{R}$ with $a < b$, denote the set of continuous functions
+on $[a,b]$ by $C([a,b])$. Let $(f_n)_{n\in \mathbb{N}}$ be a sequence of
+functions in $C([a,b])$. We say $(f_n)_{n\in \mathbb{N}}$ is Cauchy if:
+\begin{align*}
+      \forall \epsilon > 0, \exists\,N \in \mathbb{N} \text{ such that }
+      \forall m, n \in \mathbb{N}, (m, n \geq N) \Rightarrow (\|f_n - f_m\|_{[a,b]} <
+      \epsilon).
+\end{align*}
+
+\textit{This obviously bears an extreme resemblance to the Cauchy sequences of
+      Analysis 1A. Just replacing the sequences of reals with sequences of functions
+      and the modulus with the supremum norm.}
+
+\vspace{\baselineskip}
+
+For each continuous function, there exists a Cauchy sequence such that the
+sequence converges uniformly to said function.
+
+\newpage
+
+\section{Integration}
+
+\subsection{Step Functions}
+
+For $a, b \in \mathbb{R}$ with $a < b$, a partition of the interval
+$[a,b]$ is a set $P$ of the form:
+\begin{align*}
+       & P = \{x_0, x_1, \ldots, x_n\} \, (\text{for some } n \in \mathbb{N}) \\
+       & \text{where } a = x_0 < x_1 < \ldots < x_n = b.
+\end{align*}
+
+We say a function $\psi:[a,b]\to\mathbb{R}$ is a step function if
+there exists a partition $P = \{x_0, \ldots, x_n\}$ and a set of constants in
+$\mathbb{R}$ ($\{c_0, c_1, \ldots, c_n\}$) such that:
+\begin{align*}
+      \psi(x) = c_i \, (\forall x \in (x_{i-1}, x_i)).
+\end{align*}
+In this case, $P$ and $\psi$ are adapted to each other.
+
+\vspace{\baselineskip}
+
+\textit{$S[a, b]$ is the set of step functions over $[a, b]$.}
+
+\subsection{Integration of Step Functions}
+
+\subsubsection{Definition of integration on step functions}
+
+The integral of the step function is simple:
+\begin{align*}
+      \int_a^b \psi(x) \, dx := \sum_{i = 1}^n c_i(x_i - x_{i-1}).
+\end{align*}
+As long as the partition is adapted to $\psi$, the integral doesn't
+change.
+
+\subsubsection{Properties of integration on step functions}
+
+Here are some properties of the integration of step functions, let
+$\phi, \psi$ be step functions over $[a, b]$, $y \in \mathbb{R}$
+with $a < y < b$, $\alpha, \beta \in \mathbb{R}$:
+
+\begin{itemize}
+      \item \textbf{Linearity}: $\int_a^b \alpha \psi(x) + \beta \phi(x)
+                  \, dx = \alpha \int_a^b \psi(x) \, dx + \beta \int_a^b
+                  \phi(x) \, dx$
+      \item \textbf{Monotonicity}: $(\psi(x) \leq \phi(x) (\forall
+                  x \in [a, b])) \Rightarrow (\int_a^b \psi(x) \, dx
+                  \leq \int_a^b \phi(x) \, dx)$
+      \item \textbf{Continuity}: $|\int_a^b \psi(x) \, dx| \leq (b-a)
+                  \|\psi(x)\|_{[a, b]}$
+      \item \textbf{Additivity}: $\int_a^b \psi(x) \, dx = \int_a^y
+                  \psi(x) \, dx + \int_y^b \psi(x) \, dx$
+\end{itemize}
+
+\newpage
+
+\subsection{Regulated Functions}
+
+\subsubsection{Definition of left and right limits}
+
+Let $A \subseteq \mathbb{R}$ and $f:A\to\mathbb{R}$. For some $\epsilon > 0$,
+$a \in A$, and  $\alpha \in \mathbb{R}$:
+
+\begin{enumerate}
+      \item f has a \textbf{right limit} of $\alpha$ at $a$ if: \\
+            $\exists\,\delta > 0 \text{ such that } (0 < x - a < \delta)
+                  \Rightarrow (|f(x) - \alpha| < \epsilon)$
+      \item f has a \textbf{left limit} of $\alpha$ at $a$ if: \\
+            $\exists\,\delta > 0 \text{ such that } (0 < a - x < \delta)
+                  \Rightarrow (|f(x) - \alpha| < \epsilon).$
+\end{enumerate}
+
+We can denote right limits by: $\lim_{x\downarrow a}f(x) = \alpha$.
+Similarly for left limits: $\lim_{x\uparrow a}f(x) = \alpha$.
+
+\vspace{\baselineskip}
+
+\textit{There is a sequential definition too, for any sequence
+      $(x_n)_{n \in \mathbb{N}}$ that satisfies $x_n > a$ for all $n \in \mathbb{N}$
+      and $\lim_{n\to\infty} x_n = a$, if $f$ has a right limit,
+      $\lim_{n\to\infty}f(x_n) = \alpha$. There is a similar definition for left
+      limits.}
+
+\subsubsection{Definition of a regulated function}
+
+A function $f:[a,b]\to\mathbb{R}$ is regulated if:
+
+\begin{itemize}
+      \item $f$ has a left limit on all values in $(a, b]$
+      \item $f$ has a right limit on all values in $[a, b)$.
+\end{itemize}
+
+\textit{All continuous functions are regulated. All increasing and
+      decreasing functions are regulated.}
+
+\subsubsection{Properties of regulated functions}
+
+Let $R([a, b])$ be the set of functions regulated over $[a, b]$. We have that
+$R([a, b])$ is closed under:
+
+\begin{itemize}
+      \item Scalar multiplication (over $\mathbb{R}$)
+      \item Addition
+      \item Multiplication
+      \item Division (if the divisor is greater than zero over $[a, b]$)
+      \item Composition
+      \item The modulus.
+\end{itemize}
+
+\textit{Uniform convergence preserves regulation. Also, all step functions are
+      regulated.}
+
+\newpage
+
+For $f$ a regulated function over $[a,b]$, we have that:
+\begin{align*}
+      \forall \epsilon > 0,\exists\,\psi\in S([a, b]) \text{ such that }
+      \|\psi - f\| < \epsilon.
+\end{align*}
+
+\textit{Basically, for any regulated function we can always choose an
+      arbitrarily accurate approximation that is a step function.}
+
+\subsection{Integeration of Regulated Functions}
+
+\subsubsection{Definition of integration on regulated functions}
+
+For a function $f \in R([a, b])$, say we have two sequences of step
+functions, $(\psi_n)_{n\in\mathbb{N}}$ and $(\phi_n)_{n\in\mathbb{N}}$:
+
+\begin{itemize}
+      \item $(\psi_n)_{n\in\mathbb{N}}$ is uniformly convergent to $f
+                  \Rightarrow (\int_a^b\psi_n(x)\,dx)_{n\in\mathbb{N}}$ is
+            convergent
+      \item $(\psi_n)_{n\in\mathbb{N}}$ and $(\phi_n)_{n\in\mathbb{N}}$
+            are uniformly convergent to $f \Rightarrow$ \\
+            $\lim_{n\to\infty}(\int_a^b\psi_n(x)\,dx)
+                  = \lim_{n\to\infty}(\int_a^b\phi_n(x)\,dx)$.
+\end{itemize}
+
+\textit{Basically, we have that no matter what step function we choose to
+      approximate our function, the value of the integral will tend to the same
+      value.}
+
+\vspace{\baselineskip}
+
+We define the integral of a regulated function $f \in R([a, b])$ by choosing
+a sequence of step functions $(\psi_n)_{n\in\mathbb{N}}$ such that they
+converge uniformly to $f$:
+\begin{align*}
+      \int_a^b f(x) \, dx := \lim_{n\to\infty} \int_a^b \psi_n(x) \, dx.
+\end{align*}
+
+\subsubsection{Properties of integration on regulated functions}
+
+The \textbf{linearity}, \textbf{continuity}, and \textbf{additivity} properties
+hold similarly to the properties of step functions. The \textbf{monotonicity}
+property holds also but the stated definition varies slightly:
+
+\begin{itemize}
+      \item \textbf{Monotonicity}: For $f \in R([a,b])$ with $f(x) \geq 0$
+            for $x \in [a, b]$, we have that $\int_a^b f(x)\,dx \geq 0$.
+\end{itemize}
+
+Some small notes on regulated functions, let $f \in R([a, b])$:
+
+\begin{itemize}
+      \item $|\int_a^b f(x) \, dx| \leq \int_a^b |f(x)| \, dx$
+      \item For $(f_n)_{n\in\mathbb{N}}$ uniformly convergent to $f$,
+            $\lim_{n\to\infty}\int_a^b f_n(x) \, dx = \int_a^b f(x) \, dx$.
+\end{itemize}
+
+\textit{The first point is similar to the triangle inequality applied to
+      summations. The second was covered similarly but strictly for step functions,
+      not all regulated functions.}
+
+\newpage
+
+\subsection{The Mean-Value Theorem of Integeration}
+
+For $f \in C([a,b])$, let $g \in R([a, b])$ and satisfy the following:
+
+\begin{itemize}
+      \item $g(x) \geq 0$ for $x \in [a, b]$
+      \item $\int_a^b g(x) \, dx > 0$
+\end{itemize}
+
+With these assumptions, we have that $\exists\, x \in (a, b)$ with:
+\begin{align*}
+      f(x) \int_a^b g(t) \, dt = \int_a^b f(t)g(t) \, dt
+\end{align*}
+
+\textit{Note that the function $f$ is continuous. This is a stronger
+      statement than just saying it's regulated. Also, consider $g = 1$:}
+\begin{align*}
+      f(x) \int_a^b g(t) \, dt & = f(x) \int_a^b 1 \, dt \tag{1} \\
+                               & = f(x) (b-a)                    \\
+      \\
+      \int_a^b f(t)g(t) \, dt  & = \int_a^b f(t) \, dt \tag{2}   \\
+      \\
+      \text{(1) and (2) }      & \Rightarrow                     \\
+      \int_a^b f(t) \, dt      & = f(x)(b - a)
+\end{align*}
+
+\section{Differentiation}
+
+\subsection{Definition of Differentiation}
+
+For a function $f$ defined on a $\delta$-neighbourhood of some
+$a \in \mathbb{R}$, we have that $f$ is differentiable at $a$ if
+the following exists in $\mathbb{R}$:
+\begin{align*}
+      \lim_{h\to 0}\left(\frac{f(a + h) - f(a)}{h}\right).
+\end{align*}
+
+\textit{Differentiability at a value $a$ implies continuity at $a$.}
+
+\subsection{Properties of Differentiation}
+
+\subsubsection{Closure of the set of differentiable functions}
+
+Let $f$, $g$ be differentiable functions. The set of differentiable
+functions is closed under:
+
+\begin{itemize}
+      \item \textbf{Addition}: $(f + g)' = f' + g'$
+      \item \textbf{Multiplication}: $(fg)' = f'g + fg'$
+      \item \textbf{Division}: $\frac{f}{g} =
+                  \frac{f'g - fg'}{g^2} \, (\text{for $g$ non-zero})$
+      \item \textbf{Composition}: $(f \circ g)' = g'(f' \circ g)$.
+\end{itemize}
+
+\subsubsection{The implications of zero derivatives}
+
+For a differentiable function $f$:
+
+\begin{itemize}
+      \item $f(x_0)$ is a maximum or minimum $\Rightarrow
+                  f'(x_0) = 0$
+      \item $f'(x_0) = 0$, $f''(x_0) > 0 \Rightarrow f(x_0)$ is
+            a minimum
+      \item $f'(x_0) = 0$, $f''(x_0) < 0 \Rightarrow f(x_0)$ is
+            a maximum
+      \item $f'(x) = 0 \, (\forall x \in [a, b]) \Rightarrow
+                  f$ is constant on $[a, b]$.
+\end{itemize}
+
+\subsubsection{Rolle's Theorem and the Mean Value Theorem}
+
+For $f$ continuous on $[a, b]$ and differentiable on $(a, b)$,
+\begin{align*}
+      (f(a) = f(b)) \Rightarrow (\exists \, x_0 \in (a, b)
+      \text{ such that } f'(x_0) = 0) \tag{Rolle's Theorem} \\
+      \exists \, x_0 \in (a, b) \text{ such that } f'(x_0)
+      = \frac{f(b) - f(a)}{b - a}. \tag{Mean Value Theorem}
+\end{align*}
+
+\textit{Rolle's Theorem is a special case of the Mean Value Theorem.
+      The Mean Value Theorem says that over an interval, the derivative is
+      equal to the average derivative across the interval at some value.}
+
+\subsubsection{Cauchy's Mean Value Theorem}
+
+For $f, g$ continuous on $[a, b]$ and differentiable on $(a, b)$,
+\begin{align*}
+      \exists \, x_0 \in (a, b) \text{ such that }
+      \left[(f(b) - f(a))g'(x_0) = (g(b) - g(a))f'(x_0)\right].
+\end{align*}
+
+\subsubsection{Other properties of the derivative}
+
+For $f, g$ differentiable functions,
+
+\begin{itemize}
+      \item $(f'(x) = g'(x) \, (\forall x \in [a, b])) \Rightarrow
+                  (f(x) = g(x) + c \, (c \in \mathbb{R}))$
+      \item $f'(x) > 0 \, (\forall x \in [a, b]) \Rightarrow f$ is
+            strictly increasing (similarly for strictly decreasing).
+\end{itemize}
+
+\subsection{L'Hôpital's Rule}
+
+For $f, g$ differentiable functions defined on a $\delta$-neighbourhood
+of $a \in \mathbb{R}$, if:
+
+\begin{itemize}
+      \item $g'(x) \neq 0 \, (\forall x \in
+                  (a - \delta, a + \delta)\backslash\{a\})$
+      \item $f(a) = g(a) = 0$
+      \item $\lim_{x\to a}\frac{f'(x)}{g'(x)}$ exists in $\mathbb{R}$.
+\end{itemize}
+
+Then,
+\begin{align*}
+      \lim_{x\to a}\frac{f(x)}{g(x)} = \lim_{x\to a}\frac{f'(x)}{g'(x)}.
+\end{align*}
+
+\textit{So, if we have two functions that equal zero at a value, this
+      rule helps us find the derivative of the their quotient as long
+      as the denominator isn't zero nearby.}
+
+\section{Calculus}
+
+\subsection{Differentiability on a Closed Interval}
+
+We say that a function $f:[a, b] \to \mathbb{R}$ is differentiable on $[a, b]$
+if it's differentiable on $(a, b)$ and the left and right derivatives at $a$
+and $b$ exist in $\mathbb{R}$.
+
+\subsection{The Fundamental Theorem of Calculus}
+
+Let $f:[a, b] \to \mathbb{R}$ be a continuous function, we have the following
+is differentiable on $[a, b]$ and $F' = f$ on $[a, b]$:
+\begin{align*}
+      F(x) := \int_a^x f(t) \, dt.
+\end{align*}
+A result is that, for $G$ differentiable on $[a, b]$ with $G' = f$:
+\begin{align*}
+      \int_a^b f(x) \, dx = G(b) - G(a).
+\end{align*}
+
+\subsection{Integration by Parts}
+
+For $f, g : [a, b] \to \mathbb{R}$ continuously differentiable (differentiable
+with their derivatives being continuous):
+\begin{align*}
+      \int_a^b f'(x)g(x) \, dx = [f(x)g(x)]_a^b - \int_a^b f(x)g'(x) \, dx.
+\end{align*}
+
+\subsection{Integration by Substitution}
+
+Let $f:[a, b] \to \mathbb{R}$ be a continuous function, suppose $\phi:
+      [c, d] \to [a, b]$ is continuously differentiable (differentiable
+with their derivatives being continuous) and bijective. Then we
+have:
+\begin{align*}
+      \int_a^b f(x) \, dx = \int_c^d f(\phi(t))\phi'(t) \, dt
+\end{align*}
+
+\subsection{Taylor's Theorem}
+
+\subsubsection{Polynomial coefficients}
+
+If for $p : \mathbb{R} \to \mathbb{R}$ a polynomial function with degree $n$
+and coefficients $a_0, a_1, \ldots, a_n$ we have:
+\begin{align*}
+      p(x) = \sum_{i = 0}^n a_ix^i,
+\end{align*}
+and we have that:
+\begin{align*}
+      a_k = \frac{1}{k!}f^{(k)}(0). \tag{$k \in \{0, 1, \ldots, n\}$}
+\end{align*}
+
+\subsubsection{Taylor Polynomials}
+
+For $a \in \mathbb{R}$, suppose the function $f$ is $n$ times differentiable
+on a $\delta$-neighbourhood of $a$, the Taylor polynomial for $f$ degree $n$
+around $a$ is defined by:
+\begin{align*}
+      T_n(a, x) & := f(a) + f'(a)(x - a) + \cdots
+      + \frac{f^{(n)}(a)}{n!}(x - a)^n \tag{$x \in \mathbb{R}$}     \\
+                & := \sum_{i = 0}^n \frac{f^{(i)}(a)}{i!}(x - a)^i.
+\end{align*}
+
+\subsubsection{Taylor's Theorem}
+
+For $a \in \mathbb{R}$, suppose the function $f$ is $n$ times differentiable
+on a $\delta$-neighbourhood of $a$. For some $c$ between $a$ and $x$:
+\begin{align*}
+       & f(x) = f(a) + f'(a)(x - a) + \cdots + \frac{f^{(n-1)}(a)}{(n - 1)!}(x-a)^{n-1}
+      + R_n                                                                             \\
+       & R_n = \frac{f^{(n)}(c)}{n!}(x - a)^n. \tag{Lagrange Form}
+\end{align*}
+
+\section{Series}
+
+\subsection{The Limit Superior and Limit Inferior}
+
+\subsubsection{Definition of the limit superior and limit inferior}
+
+The limit inferior and superior gives bounds on the limit of a
+subsequence. This can be used in conjunction with the
+Bolzano-Weierstrass Theorem (bounded sequences have convergent
+subsequences). For a sequence $(a_n)_{n \in \mathbb{N}}$, we
+have the following definitions:
+
+\begin{itemize}
+      \item \textbf{Limit superior}: $\limsup_{n \to \infty}(a_n)
+                  := \lim_{n \to \infty}(\sup\{a_k : k \geq n\})$
+      \item \textbf{Limit inferior}: $\liminf_{n \to \infty}(a_n)
+                  := \lim_{n \to \infty}(\inf\{a_k : k \geq n\})$.
+\end{itemize}
+
+\subsubsection{Properties of the $\limsup$ and $\liminf$}
+
+For some sequence $(a_n)_{n \in \mathbb{N}}$, some direct consequences
+of the definition are:
+
+\begin{itemize}
+      \item $a_n$ bounded above $\Rightarrow \limsup_{n\to\infty}(a_n)
+                  \in \mathbb{R}$
+      \item $a_n$ bounded below $\Rightarrow \liminf_{n\to\infty}(a_n)
+                  \in \mathbb{R}$
+      \item $a_n$ not bounded above $\Rightarrow \limsup_{n\to\infty}(a_n)
+                  = \infty$
+      \item $a_n$ not bounded below $\Rightarrow \liminf_{n\to\infty}(a_n)
+                  = -\infty$
+      \item If the $\limsup$ or $\liminf$ exists in $\mathbb{R}$, then there
+            exists a subsequence such that the limit of the sequence is
+            the $\limsup$ or $\liminf$ respectively
+      \item A sequence is convergent if and only if it's $\limsup$ and $\liminf$
+            exist in $\mathbb{R}$ and are equal.
+\end{itemize}
+
+\newpage
+
+\subsubsection{Alternate definition of the $\limsup$ and $\liminf$}
+
+We have that for some sequence $(a_n)_{n \in \mathbb{N}}$, let
+$a \in \mathbb{R}$, $\epsilon > 0$:
+
+\begin{itemize}
+      \item $\limsup_{n\to\infty}(a_n) = a \Leftrightarrow$ \begin{itemize}
+                  \item $\exists \, N \in \mathbb{N}$ such that
+                        $a_n < a + \epsilon$ for $n \geq N$
+                  \item $a_m > a - \epsilon$ for infinitely many $m \in \mathbb{N}$
+            \end{itemize}
+      \item $\liminf_{n\to\infty}(a_n) = a \Leftrightarrow$ \begin{itemize}
+                  \item $\exists \, N \in \mathbb{N}$ such that
+                        $a_n > a - \epsilon$ for $n \geq N$
+                  \item $a_m < a + \epsilon$ for infinitely many $m \in \mathbb{N}$.
+            \end{itemize}
+\end{itemize}
+
+\subsection{Subsequential Limits}
+
+A subsequential limit of a sequence $(a_n)_{n \in \mathbb{N}}$ is a value
+$a \in \mathbb{R}$ such that there exists a subsequence
+$(a_{n_k})_{k\in\mathbb{N}}$ where:
+\begin{align*}
+      \lim_{k\to\infty}(a_{n_k}) = a.
+\end{align*}
+If we consider the set of all subsequential limits $S$, if the $\limsup$ or
+$\liminf$ of $a_n$ exist in $\mathbb{R}$ we have:
+
+\begin{itemize}
+      \item $\limsup_{n\to\infty}(a_n) = \max(S)$
+      \item $\liminf_{n\to\infty}(a_n) = \min(S)$,
+\end{itemize}
+
+respectively.
+
+\subsection{Types of Convergence}
+
+\subsubsection{Absolute Convergence}
+
+For a series $\sum_{n = 1}^\infty(a_n)$, we have that it is absolutely
+convergent if $\sum_{n = 1}^\infty(|a_n|)$ is convergent.
+
+\vspace{\baselineskip}
+
+We have that all absolutely convergent series are convergent.
+
+\subsubsection{Conditional Convergence}
+
+For a series $\sum_{n = 1}^\infty(a_n)$, we have that it is conditionally
+convergent if it's convergent but not absolutely convergent.
+
+\subsection{Limit Theorems for Sequences of Functions}
+
+\subsubsection{Uniform convergence under integration}
+
+For $(f_n)_{n\in\mathbb{N}}$ a sequence of regulated functions on $[a, b]$,
+assume $f_n$ converges uniformly on $[a, b]$ to some function $f$. Let:
+\begin{align*}
+      F_n(x) & := \int_a^x f_n(t) \, dt \\
+      F(x)   & := \int_a^x f(t) \, dt.
+\end{align*}
+We have that $(F_n)_{n\in\mathbb{N}}$ converges uniformly to $F$ on $[a,b]$.
+
+\vspace{\baselineskip}
+
+\textit{So, we have that uniform convergence is preserved under integration.}
+
+\subsubsection{Uniform convergence under differentiation}
+
+Let $(f_n)_{n\in\mathbb{N}}$ be a sequence of continuously differentiable
+(differentiable with their derivatives being continuous) functions on $[a, b]$.
+Assume:
+
+\begin{itemize}
+      \item $(f'_n)_{n\in\mathbb{N}}$ converges uniformly to a function $g$
+      \item $(f_n(a))_{n\in\mathbb{N}}$ converges in $\mathbb{R}$.
+\end{itemize}
+
+Then we have that $(f_n)_{n\in\mathbb{N}}$ converges uniformly to a function
+$f$ such that $f' = g$ on $[a, b]$.
+
+\subsubsection{Uniform convergence of series}
+
+For $(g_n)_{n\in\mathbb{n}}$ a sequence of real valued functions defined on
+$[a, b]$, define:
+\begin{align}
+      f := \sum_{k = 1}^\infty g_k \\
+      f_n := \sum_{k = 1}^n g_k.
+\end{align}
+We say $f$ converges uniformly if $f_n$ converges pointwise and uniformly to
+$f$ on $[a, b]$.
+
+\subsection{Tests for Series Convergence}
+
+\subsubsection{Root Test}
+
+For a series $\sum_{n = 1}^\infty(a_n)$, where each $a_k$ $(k\in\mathbb{N})$
+is non-negative, set:
+\begin{align*}
+      \lambda := \limsup_{n\to\infty}(a_n^{\frac{1}{n}}).
+\end{align*}
+We have that:
+
+\begin{itemize}
+      \item $\lambda < 1 \Rightarrow$ convergence
+      \item $\lambda > 1 \Rightarrow$ divergence
+      \item $\lambda = 1 \Rightarrow$ may be convergent or divergent
+\end{itemize}
+
+\subsubsection{Alternating Series Test}
+
+For a series $\sum_{n = 1}^\infty(a_n)$, where each $a_k$ $(k\in\mathbb{N})$
+is positive and $a_n$ is decreasing with limit $0$, we have that the following
+is convergent:
+\begin{align*}
+      \sum_{n=1}^\infty(-1)^na_n.
+\end{align*}
+
+\subsubsection{Weierstrass M-Test}
+
+For $(g_n)_{n\in\mathbb{N}}$ a sequence of continuous functions on $[a, b]$,
+assume that for each $k\in\mathbb{N}$ there exists $M_k$ such that
+$\|g_k\| \leq M_k$ and $\sum_{k = 1}^\infty M_k < \infty$. Then the following
+converges uniformly on $[a, b]$:
+\begin{align*}
+      \sum_{k = 1}^\infty g_k.
+\end{align*}
+
+\textit{This is saying if we can find a sequence that is convergent as a series
+      and bounds our sequence of functions then the series of our functions is
+      uniformly convergent. Note that $M_k$ can never be negative as the
+      supremum norm of any function is non-negative.}
+
+\newpage
+
+\subsubsection{Simpler Forms of the M-Test}
+
+For $(g_n)_{n\in\mathbb{N}}$ a sequence of continuously differentiable (differentiable
+with their derivatives being continuous) functions on $[a, b]$. For:
+\begin{align*}
+      f := \sum_{n = 1}^\infty g_n \Rightarrow f' := \sum_{n = 1}^\infty g',
+\end{align*}
+we have that the sequence of partial sums converges uniformly on $[a, b]$
+to $f$ and $f$ is continuously differentiable on $[a, b]$ if:
+\begin{align*}
+      \sum_{n = 1}^\infty \left[\|g_n\| + \|g'_n\|\right] < \infty.
+\end{align*}
+Additionally, for $(g_n)_{n\in\mathbb{N}}$ a sequence of regulated functions,
+we define:
+\begin{align*}
+      f := \sum_{n = 1}^\infty g_n.
+\end{align*}
+So, if:
+\begin{align*}
+      \sum_{n = 1}^\infty \|g_n\| < \infty,
+\end{align*}
+then $f$ converges uniformly on $[a, b]$ and is regulated.
+
+\section{Power Series}
+
+\subsection{Definition of Radius of Convergence}
+
+The radius of convergence $R$ for a power series:
+\begin{align*}
+      \mathcal{P} = \sum_{n = 0}^\infty a_nx^n,
+\end{align*}
+is defined as:
+\begin{align*}
+      R := \begin{cases}
+            \infty & \text{if $\mathcal{P}$ converges for all } x \in \mathbb{R}                \\
+            r      & \text{if $\mathcal{P}$ converges if and only if } |x| < r \in \mathbb{R}   \\
+            0      & \text{if $\mathcal{P}$ diverges for all } x \in \mathbb{R}\backslash\{0\}.
+      \end{cases}
+\end{align*}
+
+\newpage
+
+\subsection{Tests for the Radius of Convergence}
+
+\subsubsection{Cauchy-Hadamard Theorem}
+
+Let $(a_n)_{n\in\mathbb{N}\cup\{0\}}$ be a sequence of real numbers and define:
+\begin{align*}
+      \alpha & := \limsup_{n\to\infty}(a_n^{\frac{1}{n}}) \\
+      R      & := \begin{cases}
+            \infty           & \text{for } \alpha = 0      \\
+            0                & \text{for } \alpha = \infty \\
+            \frac{1}{\alpha} & \text{otherwise}.
+      \end{cases}
+\end{align*}
+We have that the series $\sum_{n = 0}^\infty a_nx^n$ has radius of convergence $R$.
+
+\subsubsection{Ratio Test}
+
+Let $(a_n)_{n\in\mathbb{N}\cup\{0\}}$ be a sequence of real numbers such that for:
+\begin{align*}
+      \beta := \lim_{n\to\infty}\left|\frac{a_{n + 1}}{a_n}\right|,
+\end{align*}
+if we have that $\beta$ exists in $\mathbb{R}$, $\sum_{n = 0}^\infty a_nx^n$
+has radius of convergence $R$ defined by:
+
+\begin{align*}
+      R & := \begin{cases}
+            \infty           & \text{for } \beta = 0      \\
+            0                & \text{for } \beta = \infty \\
+            \frac{1}{\beta} & \text{otherwise}.
+      \end{cases}
+\end{align*}
+
+\subsection{Consequences of the Radius of Convergence}
+
+\subsubsection{Preservation of the Radius of Convergence}
+
+For a power series $\sum_{n = 0}^\infty a_nx^n$ with radius of convergence $R$,
+the following have the same radius of convergence:
+\begin{align*}
+      \sum_{n = 1}^\infty & \, na_nx^{n-1} \\
+      \sum_{n = 0}^\infty & \, \frac{a_n}{n + 1}x^{n + 1}.
+\end{align*}
+
+\textit{The radius of convergence is preserved by integration and
+differentiation.}
+
+Furthermore, if we have the power series $\sum_{n = 0}^\infty a_nx^n$ with 
+radius of convergence $R$, then we can define:
+\begin{align*}
+      f : (-R, R) \to \mathbb{R}; f(x) = \sum_{n = 0}^\infty a_nx^n.
+\end{align*}
+We have that $f$ is continuously differentiable on $(-R, R)$ with:
+\begin{align*}
+      f'(x) &= \sum_{n = 1}^\infty \, na_nx^{n-1} \\
+      \int_0^x f(t) \, dt &= \sum_{n = 0}^\infty \, \frac{a_n}{n + 1}x^{n + 1},
+\end{align*}
+defined on $(-R, R)$.
+
+\section{Elementary Functions}
+
+\subsection{The Exponential and Logarithm}
+
+\subsubsection{Definition of the Exponential}
+
+We define the exponential function $\exp : \mathbb{R} \to \mathbb{R}$ by:
+\begin{align*}
+      \exp(x) := \sum_{n = 0}^\infty \frac{x^n}{n!}.
+\end{align*}
+
+\subsubsection{Properties of the exponential}
+
+Let $f$ be the exponential function:
+
+\begin{multicols}{2}
+      \begin{itemize}
+            \item $f$ is differentiable
+            \item $f = f'$
+            \item $f(0) = 1$
+            \item $f(x)f(y) = f(x + y)$
+            \item $f > 0$
+      \end{itemize}
+      \columnbreak
+      \begin{itemize}
+            \item $f$ is strictly increasing
+            \item $f \to \infty$ as $x \to \infty$
+            \item $f \to 0$ as $x \to -\infty$
+            \item The range of $f$ is $(0, \infty)$
+            \item $\frac{f(x)}{x^k} \to \infty$ as 
+                  $x \to \infty$ $\forall k \in \mathbb{N}$
+      \end{itemize}
+\end{multicols}
+
+\subsubsection{Euler's number}
+
+We call Euler's number $e := \exp(1)$. We have that for $x \in \mathbb{R}$:
+\begin{align*}
+      \exp(x) = e^x.
+\end{align*}
+
+\subsubsection{Definition of the natural logarithm}
+
+We define the natural logarithm as the inverse of the exponential.
+
+\subsubsection{Properties of the natural logarithm}
+
+Let $f$ be the natural logarithm:
+
+\begin{multicols}{2}
+      \begin{itemize}
+            \item $f$ is differentiable
+            \item $f$ is increasing
+            \item $f(xy) = f(x) + f(y)$
+            \item $f(x / y) = f(x) - f(y)$
+            \item $f(1/x) = -f(x)$
+      \end{itemize}
+      \columnbreak
+      \begin{itemize}
+            \item $f(1) = 0$
+            \item $f'(x) = 1/x$
+            \item $f \to \infty$ as $x \to \infty$
+            \item $f \to -\infty$ as $x \downarrow 0$
+            \item $\frac{f(x)}{x^k} \to 0$ as 
+                  $x \to \infty$ $\forall k \in \mathbb{N}$.
+      \end{itemize}
+\end{multicols}
+
+\subsubsection{The natural logarithm as a power series}
+
+For $x \in (-1, 1)$:
+\begin{align*}
+      \ln(1 + x) = \sum_{n = 1}^\infty(-1)^{n + 1} \frac{x^n}{n}.
+\end{align*}
+
+\subsubsection{Exponentials}
+
+For $a > 0$, $x \in \mathbb{R}$ we can write:
+\begin{align*}
+      a^x := e^{xln(a)}.
+\end{align*}
+
+\subsection{Trigonometric Functions}
+
+\subsubsection{Definition of $\sin$ amd $\cos$}
+
+We can define the $\sin$ and $\cos$ functions as follows:
+\begin{align*}
+      \sin(x) &:= x - \frac{x^3}{3!} + \frac{x^5}{5!} - \ldots \\
+      \cos(x) &:= 1 - \frac{x^2}{2} + \frac{x^4}{4!} - \ldots. \\      
+\end{align*}
+
+\subsubsection{Differentiability of $\sin$ amd $\cos$}
+
+These are both differentiable with:
+\begin{align*}
+      (\sin)' &= \cos \\
+      (\cos)' &= -\sin.
+\end{align*}
+
+\subsubsection{The Pythagorean Identity}
+
+We have that $\sin^2(x) + \cos^2(x) = 1$.
+
+\section{Improper Integrals}
+
+\subsection{Improper Integrals of the First Kind}
+
+For $a \in \mathbb{R}$, $f:[a, \infty) \to \mathbb{R}$ regulated
+on $[a, b]$ for all $b \geq a$. We define the improper integral 
+of the first kind as:
+\begin{align*}
+      \int_a^\infty f(x) \, dx := \lim_{b\to\infty}\int_a^b f(x) \, dx.
+\end{align*}
+Similarly, we define:
+\begin{align*}
+      \int_{-\infty}^b f(x) \, dx &:= \lim_{a\to-\infty}\int_a^b f(x) \, dx \\
+      \int_{-\infty}^{\infty} f(x) \, dx &:=
+            \lim_{a\to-\infty}\int_a^0 f(x) \, dx
+            + \lim_{b\to\infty}\int_0^b f(x) \, dx.
+\end{align*}
+
+\subsection{Convergence of Functions}
+
+For $f:[a, \infty) \to \mathbb{R}$ continuous:
+\begin{gather*}
+      \lim_{x\to\infty}f(x) \in \mathbb{R} \\
+      \Leftrightarrow \\
+      \forall \epsilon > 0, \exists \, R > a \text{ such that }
+      \forall x, y > R, [|f(x) - f(y)| < \epsilon].
+\end{gather*}
+
+\newpage
+
+\subsection{Sandwiched Improper Integrals}
+
+For $a \in \mathbb{R}$ with $g: [a, \infty) \to \mathbb{R}$ 
+non-negative with $\int_a^\infty g(x) \, dx$ convergent. So, for
+$f: [a, \infty) \to \mathbb{R}$ with $|f(x)| < g(x)$ for each $x$ in
+$[a, \infty)$:
+\begin{align*}
+      \int_a^\infty f(x) \, dx \in \mathbb{R}.
+\end{align*}
+
+\subsection{Integral Test}
+
+For $f : [1, \infty) \to (0, \infty)$ a positive decreasing function,
+for any $N \in \mathbb{N}$:
+\begin{align*}
+      \sum_{n = 2}^N f(n) \leq \int_1^N f(x) \, dx 
+      \leq \sum_{n = 1}^{N - 1} f(n).
+\end{align*}
+
+\textit{This link may help  with understanding:
+\textbf{desmos.com/calculator/me8mtv1slr}}.
+
+\subsection{Improper Integrals of the Second Kind}
+
+For $f:(a, b] \to \mathbb{R}$ regulated on $[a + \delta, b]$ 
+for each $\delta \geq 0$. We define the improper integral 
+of the second kind as:
+\begin{align*}
+      \int_a^b f(x) \, dx := 
+      \lim_{\delta\downarrow 0} \int_{a + \delta}^b f(x) \, dx
+\end{align*}
+Like the integral of the first kind, this has similar definitions
+for the upper and both endpoints being unbounded.
+
+\end{document}
