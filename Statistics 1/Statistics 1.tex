@@ -594,4 +594,105 @@ $\mathcal{N}(\mu, \sigma^2)$, let $\overline{X} = \frac{1}{n}
 \textit{This is \textbf{extremely} key as this allows us to perform hypothesis
 test on any Normal sample without knowing the population variance.}
 
+\section{Confidence Intervals}
+
+\subsection{Definition of a Confidence Interval}
+
+For $X_1, \ldots, X_n \sim f_{X_1, \ldots, X_n}$ with some unknown
+parameter $\theta$, we have the $\alpha\%$ confidence interval 
+for $\theta$ is $(c_L, c_U)$ where:
+\begin{align*}
+    \mathbb{P}(c_L \leq \theta \leq c_U) \geq \alpha.
+\end{align*}
+So, $\alpha\%$ of intervals constructed in this way contain the
+true value of $\theta$.
+
+\subsection{Examples of Confidence Intervals}
+
+\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence 
+interval for $\mu$ with $\sigma^2$ known}
+
+The $\alpha\%$ confidence interval for $\mu$ from a sample 
+$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $\Phi$ is the
+Normal CDF and:
+\begin{align*}
+    c_L &= \overline{x} - \Phi\left(\frac{1 + \alpha}{2}\right)
+    \left(\frac{\sigma}{\sqrt{n}}\right) \\
+    c_U &= \overline{x} - \Phi\left(\frac{1 - \alpha}{2}\right)
+    \left(\frac{\sigma}{\sqrt{n}}\right).
+\end{align*}
+
+\textit{So, for a $95\%$ confidence interval:}
+\begin{align*}
+    c_L &= \overline{x} - \Phi\left(0.975\right)
+    \left(\frac{\sigma}{\sqrt{n}}\right) \\
+    c_U &= \overline{x} + \Phi\left(0.025\right)
+    \left(\frac{\sigma}{\sqrt{n}}\right).
+\end{align*}
+
+\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence 
+interval for $\mu$ with $\sigma^2$ unknown}
+
+The $\alpha\%$ confidence interval for $\mu$ from a sample 
+$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $\hat\sigma^2$ is
+the sample variance, $T_{n}$ is the $t_{n}$ CDF, and:
+\begin{align*}
+    c_L &= \overline{x} - T_{n-1}\left(\frac{1 + \alpha}{2}\right)
+    \left(\frac{\hat\sigma}{\sqrt{n}}\right) \\
+    c_U &= \overline{x} + T_{n-1}\left(\frac{1 - \alpha}{2}\right)
+    \left(\frac{\hat\sigma}{\sqrt{n}}\right).
+\end{align*}
+
+\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence 
+interval for $\sigma^2$ with $\mu$ unknown}
+
+The $\alpha\%$ confidence interval for $\sigma^2$ from a sample 
+$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n$ is the
+$\chi^2_n$ CDF:
+\begin{align*}
+    c_L &= \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
+    {X_{n-1}\left(\frac{1 - \alpha}{2}\right)} \\
+    c_U &= \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
+    {X_{n-1}\left(\frac{1 + \alpha}{2}\right)}.
+\end{align*}
+
+\subsubsection{$U(0, \theta)$ : Confidence interval for $\theta$}
+
+The $\alpha\%$ confidence interval for $\theta$ from a sample 
+$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where:
+\begin{align*}
+    c_L &= x_{(n)}\left(\frac{1 + \alpha}{2}\right)^{-\frac{1}{n}} \\
+    c_U &= x_{(n)}\left(\frac{1 - \alpha}{2}\right)^{-\frac{1}{n}}.
+\end{align*}
+
+\subsubsection{Exp$(\theta)$ : Confidence interval for $\theta$}
+
+The $\alpha\%$ confidence interval for $\theta$ from a sample 
+$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n$ is the
+$\chi^2_n$ CDF:
+\begin{align*}
+    c_L &= \frac{X_{2n}\left(\frac{1 + \alpha}{2}\right)}
+    {2\sum_{i = 1}^n x_i} \\
+    c_U &= \frac{X_{2n}\left(\frac{1 - \alpha}{2}\right)}
+    {2\sum_{i = 1}^n x_i}.
+\end{align*}
+
+\subsubsection{Confidence Intervals by Simulation}
+
+For a distribution $X$ with unknown parameter $\theta$, we can
+find a $\alpha\%$ confidence interval $(c_L, c_U)$ by simulation from 
+a sample $\{x_1, x_2, \ldots, x_n\}$:
+
+\begin{itemize}
+    \item Calculate an estimate for $\theta$ ($\hat\theta$) by using the
+    sample
+    \item Use the estimate as a parameter and generate $N$ samples of 
+    some size
+    \item Calculate the estimates for $\theta$ these samples
+    \item Find the values $c_L$ and $c_U$ such that $\alpha\%$ of
+    the estimates are in $(c_L, c_U)$.
+\end{itemize}
+
+
+
 \end{document}

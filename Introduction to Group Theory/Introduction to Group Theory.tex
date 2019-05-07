@@ -425,4 +425,53 @@ So, for $p \in \mathbb{P}$ (prime):
       a^{p - 1} \equiv 1 \, (\Mod p).
 \end{align*}
 
+\section{Symmetric Groups}
+
+\subsection{Definition of a Symmetric Group}
+
+For a set $X$, $S(X)$ is the group of all symmetries of $X$.
+For $n \in \mathbb{N}$, $S_n$ is the group of all symmetries of
+$\{1, \ldots, n\}$. We have that $|S_n| = n!$.
+
+\subsection{$k$-cycles in $S_n$}
+
+\subsubsection{Definition of a $k$-cycle}
+
+For $k, n \in \mathbb{N}$ with $k \leq n$. A $k$-cycle $f$ in $S_n$
+is a permutation of the $k$ distinct elements $\{i_1, i_2, \ldots,
+i_k\} \in \{1, \ldots, n\}$ of the form:
+\begin{gather*}
+      f(i_1) = i_2, f(i_2) = i_3, \ldots, f(i_k) = f(i_1) \\
+      f = (i_1, i_2, i_3, \ldots, i_k).
+\end{gather*}
+
+\subsubsection{Properties of $k$-cycles}
+
+For $f \in S_n$:
+
+\begin{itemize}
+      \item $f$ has order $k$
+      \item We call $2$-cycles 'transpositions'.
+\end{itemize}
+
+\subsection{Disjoint Cycles}
+
+\subsubsection{Definition of a disjoint cycle}
+
+We call a set of cycles disjoint if no element of ${1, \ldots, n}$ is
+moved by more than one of the cycles.
+
+\subsubsection{Elements of $S_n$ as a product of disjoint cycles}
+
+We have that for all $f \in S_n$, $f$ can be written as a product 
+of disjoint cycles.
+
+\subsubsection{Order of elements of $S_n$}
+
+For $f \in S_n$ with $f = (f_1)(f_2)\cdots(f_k)$ a product of
+disjoint cycles:
+\begin{align*}
+      \Ord(f) = \Lcm(\Ord(f_1), \Ord(f_2), \ldots, \Ord(f_k)).
+\end{align*}
+
 \end{document}
