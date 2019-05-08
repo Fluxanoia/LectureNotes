@@ -491,30 +491,30 @@ The MGF uniquely defines a distribution, for two random variables $X, Y$:
 \subsection{Transformation and Addition of the Normal}
 
 For $X \sim \mathcal{N}(\mu, \sigma^2)$ and $X_i \sim
-    \mathcal{N}(\mu_i, \sigma_i^2)$ for $i \in \{1, 2, \ldots, n\}$, 
-    let $\overline{X} = \frac{1}{n}(\sum_{i = 1}^n X_i)$ be the sample mean:
+    \mathcal{N}(\mu_i, \sigma_i^2)$ for $i \in \{1, 2, \ldots, n\}$,
+let $\overline{X} = \frac{1}{n}(\sum_{i = 1}^n X_i)$ be the sample mean:
 
 \begin{align*}
     aX + b                                                 & \sim \mathcal{N}(a\mu + b, a^2\sigma^2) \tag{Linear Transformation} \\
     \sum_{i = 1}^n X_i                                     & \sim
     \mathcal{N}(\sum_{i = 1}^n\mu_i, \sum_{i = 1}^n\sigma_i^2) \tag{Summed}                                                      \\
-    \frac{(X - \mu)}{\sigma}                               & \sim \mathcal{N}(0, 1) \tag{Standardised}                           \\    
+    \frac{(X - \mu)}{\sigma}                               & \sim \mathcal{N}(0, 1) \tag{Standardised}                           \\
     \overline{X}                                           & \sim \mathcal{N}(\mu, \frac{\sigma^2}{n}) \tag{Sample Mean}         \\
     \sqrt{n}\left(\frac{\overline{X} - \mu}{\sigma}\right) & \sim \mathcal{N}(0, 1). \tag{Standardised Sample Mean}
 \end{align*}
 
 \textit{It's very important to remember that multiplication and summing differ
-when dealing with the Normal (when it comes to the variance). So, if you have
-a Normal random variable $X \sim \mathcal{N}(\mu, \sigma^2)$, $2X \neq X + X$
-as $\Var(2X) = 4\sigma^2$ and $\Var(X + X) = 2\sigma^2$. This is because when
-you're multiplying, you're amplifying variation in your sample, but when you 
-sum you're combining variance.}
+    when dealing with the Normal (when it comes to the variance). So, if you have
+    a Normal random variable $X \sim \mathcal{N}(\mu, \sigma^2)$, $2X \neq X + X$
+    as $\Var(2X) = 4\sigma^2$ and $\Var(X + X) = 2\sigma^2$. This is because when
+    you're multiplying, you're amplifying variation in your sample, but when you
+    sum you're combining variance.}
 
 \subsection{Independence of the Sample Mean and the Sum of Squared Difference}
 
-For $X_i \sim \mathcal{N}(\mu_i, \sigma_i^2)$ for $i \in \{1, 2, \ldots, n\}$, 
-let $\overline{X} = \frac{1}{n}(\sum_{i = 1}^n X_i)$ be the sample mean. 
-We have that $\overline{X}$ and $\sum_{i = 1}^n(X_i - \overline{X})^2$ 
+For $X_i \sim \mathcal{N}(\mu_i, \sigma_i^2)$ for $i \in \{1, 2, \ldots, n\}$,
+let $\overline{X} = \frac{1}{n}(\sum_{i = 1}^n X_i)$ be the sample mean.
+We have that $\overline{X}$ and $\sum_{i = 1}^n(X_i - \overline{X})^2$
 are independent.
 
 \section{Sampling Distributions related to the Normal}
@@ -541,12 +541,12 @@ Let $X \sim \chi^2_r$, $Y \sim \chi^2_s$:
 \end{itemize}
 
 We also have some results relating to the Normal, let $Z$ be the standard
-Normal, $X_i$ for $i \in \{1, 2, \ldots, n\}$ be samples from 
+Normal, $X_i$ for $i \in \{1, 2, \ldots, n\}$ be samples from
 $\mathcal{N}(\mu, \sigma^2)$, let $\overline{X} = \frac{1}{n}
-(\sum_{i = 1}^n X_i)$ be the sample mean:
+    (\sum_{i = 1}^n X_i)$ be the sample mean:
 
 \begin{itemize}
-    \item $Z^2 \sim \chi^2_1$   
+    \item $Z^2 \sim \chi^2_1$
     \item $\sum_{i = 1}^n (\frac{X_i - \mu}{\sigma})^2 \sim \chi^2_n$
     \item $\sum_{i = 1}^n (\frac{X_i - \overline{X}}{\sigma})^2 \sim \chi^2_{n-1}$.
 \end{itemize}
@@ -560,6 +560,8 @@ from $\text{Exp}(\theta)$:
     \item $\overline{X} = \frac{1}{n} \sum_{i = 1}^n X_i \sim \Gamma(n, n\theta)$
     \item $2\theta \sum_{i = 1}^n X_i \sim \Gamma(n, 1/2) = \chi^2_{2n}$
 \end{itemize}
+
+\newpage
 
 \subsection{The $t$ Distribution}
 
@@ -583,23 +585,25 @@ For $T \sim t_r$:
 
 \subsubsection{Samples from the Normal with $\sigma$ unknown}
 
-For $X_i$ for $i \in \{1, 2, \ldots, n\}$ be samples from 
+For $X_i$ for $i \in \{1, 2, \ldots, n\}$ be samples from
 $\mathcal{N}(\mu, \sigma^2)$, let $\overline{X} = \frac{1}{n}
-(\sum_{i = 1}^n X_i)$ be the sample mean and $S^2 = \frac{1}{n - 1}
-\sum_{i = 1}^n(X_i - \overline{X})^2$ be the sample variance. We have that:
+    (\sum_{i = 1}^n X_i)$ be the sample mean and $S^2 = \frac{1}{n - 1}
+    \sum_{i = 1}^n(X_i - \overline{X})^2$ be the sample variance. We have that:
 \begin{align*}
     \sqrt{n}\left(\frac{\overline{X} - \mu}{S}\right) \sim t_{n - 1}
 \end{align*}
 
 \textit{This is \textbf{extremely} key as this allows us to perform hypothesis
-test on any Normal sample without knowing the population variance.}
+    test on any Normal sample without knowing the population variance.}
+
+\newpage
 
 \section{Confidence Intervals}
 
 \subsection{Definition of a Confidence Interval}
 
 For $X_1, \ldots, X_n \sim f_{X_1, \ldots, X_n}$ with some unknown
-parameter $\theta$, we have the $\alpha\%$ confidence interval 
+parameter $\theta$, we have the $\alpha\%$ confidence interval
 for $\theta$ is $(c_L, c_U)$ where:
 \begin{align*}
     \mathbb{P}(c_L \leq \theta \leq c_U) \geq \alpha.
@@ -609,90 +613,383 @@ true value of $\theta$.
 
 \subsection{Examples of Confidence Intervals}
 
-\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence 
-interval for $\mu$ with $\sigma^2$ known}
+\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence
+    interval for $\mu$ with $\sigma^2$ known}
 
-The $\alpha\%$ confidence interval for $\mu$ from a sample 
+The $\alpha\%$ confidence interval for $\mu$ from a sample
 $\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $\Phi$ is the
 Normal CDF and:
 \begin{align*}
-    c_L &= \overline{x} - \Phi\left(\frac{1 + \alpha}{2}\right)
-    \left(\frac{\sigma}{\sqrt{n}}\right) \\
-    c_U &= \overline{x} - \Phi\left(\frac{1 - \alpha}{2}\right)
+    c_L & = \overline{x} - \Phi\left(\frac{1 + \alpha}{2}\right)
+    \left(\frac{\sigma}{\sqrt{n}}\right)                         \\
+    c_U & = \overline{x} - \Phi\left(\frac{1 - \alpha}{2}\right)
     \left(\frac{\sigma}{\sqrt{n}}\right).
 \end{align*}
 
 \textit{So, for a $95\%$ confidence interval:}
 \begin{align*}
-    c_L &= \overline{x} - \Phi\left(0.975\right)
-    \left(\frac{\sigma}{\sqrt{n}}\right) \\
-    c_U &= \overline{x} + \Phi\left(0.025\right)
+    c_L & = \overline{x} - \Phi\left(0.975\right)
+    \left(\frac{\sigma}{\sqrt{n}}\right)          \\
+    c_U & = \overline{x} + \Phi\left(0.025\right)
     \left(\frac{\sigma}{\sqrt{n}}\right).
 \end{align*}
 
-\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence 
-interval for $\mu$ with $\sigma^2$ unknown}
+\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence
+    interval for $\mu$ with $\sigma^2$ unknown}
 
-The $\alpha\%$ confidence interval for $\mu$ from a sample 
+The $\alpha\%$ confidence interval for $\mu$ from a sample
 $\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $\hat\sigma^2$ is
 the sample variance, $T_{n}$ is the $t_{n}$ CDF, and:
 \begin{align*}
-    c_L &= \overline{x} - T_{n-1}\left(\frac{1 + \alpha}{2}\right)
-    \left(\frac{\hat\sigma}{\sqrt{n}}\right) \\
-    c_U &= \overline{x} + T_{n-1}\left(\frac{1 - \alpha}{2}\right)
+    c_L & = \overline{x} - T_{n-1}\left(\frac{1 + \alpha}{2}\right)
+    \left(\frac{\hat\sigma}{\sqrt{n}}\right)                        \\
+    c_U & = \overline{x} + T_{n-1}\left(\frac{1 - \alpha}{2}\right)
     \left(\frac{\hat\sigma}{\sqrt{n}}\right).
 \end{align*}
 
-\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence 
-interval for $\sigma^2$ with $\mu$ unknown}
+\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence
+    interval for $\sigma^2$ with $\mu$ unknown}
 
-The $\alpha\%$ confidence interval for $\sigma^2$ from a sample 
+The $\alpha\%$ confidence interval for $\sigma^2$ from a sample
 $\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n$ is the
 $\chi^2_n$ CDF:
 \begin{align*}
-    c_L &= \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
-    {X_{n-1}\left(\frac{1 - \alpha}{2}\right)} \\
-    c_U &= \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
+    c_L & = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
+    {X_{n-1}\left(\frac{1 - \alpha}{2}\right)}          \\
+    c_U & = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
     {X_{n-1}\left(\frac{1 + \alpha}{2}\right)}.
 \end{align*}
 
 \subsubsection{$U(0, \theta)$ : Confidence interval for $\theta$}
 
-The $\alpha\%$ confidence interval for $\theta$ from a sample 
+The $\alpha\%$ confidence interval for $\theta$ from a sample
 $\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where:
 \begin{align*}
-    c_L &= x_{(n)}\left(\frac{1 + \alpha}{2}\right)^{-\frac{1}{n}} \\
-    c_U &= x_{(n)}\left(\frac{1 - \alpha}{2}\right)^{-\frac{1}{n}}.
+    c_L & = x_{(n)}\left(\frac{1 + \alpha}{2}\right)^{-\frac{1}{n}}  \\
+    c_U & = x_{(n)}\left(\frac{1 - \alpha}{2}\right)^{-\frac{1}{n}}.
 \end{align*}
 
 \subsubsection{Exp$(\theta)$ : Confidence interval for $\theta$}
 
-The $\alpha\%$ confidence interval for $\theta$ from a sample 
+The $\alpha\%$ confidence interval for $\theta$ from a sample
 $\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n$ is the
 $\chi^2_n$ CDF:
 \begin{align*}
-    c_L &= \frac{X_{2n}\left(\frac{1 + \alpha}{2}\right)}
-    {2\sum_{i = 1}^n x_i} \\
-    c_U &= \frac{X_{2n}\left(\frac{1 - \alpha}{2}\right)}
+    c_L & = \frac{X_{2n}\left(\frac{1 + \alpha}{2}\right)}
+    {2\sum_{i = 1}^n x_i}                                  \\
+    c_U & = \frac{X_{2n}\left(\frac{1 - \alpha}{2}\right)}
     {2\sum_{i = 1}^n x_i}.
 \end{align*}
 
 \subsubsection{Confidence Intervals by Simulation}
 
 For a distribution $X$ with unknown parameter $\theta$, we can
-find a $\alpha\%$ confidence interval $(c_L, c_U)$ by simulation from 
+find a $\alpha\%$ confidence interval $(c_L, c_U)$ by simulation from
 a sample $\{x_1, x_2, \ldots, x_n\}$:
 
 \begin{itemize}
     \item Calculate an estimate for $\theta$ ($\hat\theta$) by using the
-    sample
-    \item Use the estimate as a parameter and generate $N$ samples of 
-    some size
+          sample
+    \item Use the estimate as a parameter and generate $N$ samples of
+          some size
     \item Calculate the estimates for $\theta$ these samples
     \item Find the values $c_L$ and $c_U$ such that $\alpha\%$ of
-    the estimates are in $(c_L, c_U)$.
+          the estimates are in $(c_L, c_U)$.
 \end{itemize}
 
+\section{Notes on Hypothesis Testing}
 
+\subsection{Test Statistics}
+
+Test statistics are generated with the assumption of $H_0$ being true.
+This means if it's unlikely the observed value is distributed as
+expected, we can reject our $H_0$ in favour of an alternative
+hypothesis. This is the basis of our hypothesis tests.
+
+\subsection{$p$-values}
+
+$p$-values are calculated from an observed test statistic $t_{obs}$
+by considering the probability that the distribution of our
+test statistic $T$ is further from what is expected than our observed
+value:
+\begin{align*}
+    p\text{-value } = \begin{cases}
+        \mathbb{P}(|T| \geq |t_{obs}|) & (H_1 : \, \neq) \\
+        \mathbb{P}(T \geq t_{obs})     & (H_1 : \, >)    \\
+        \mathbb{P}(T \leq t_{obs})     & (H_1 : \, <).
+    \end{cases}
+\end{align*}
+Small $p$-values indicate that it's unlikely that our
+test statistic would be further from what is expected than
+$t_{obs}$. This means our assumption of $H_0$ may not be
+accurate.
+
+\subsection{Error}
+
+There's two main types of error in hypothesis testing:
+\begin{itemize}
+    \item \textbf{Type I error}: The probability that we
+    conclude $H_0$ is false when it is in fact true
+    \item \textbf{Type II error}: The probability that we
+    conclude $H_0$ is true when $H_1$ is in fact true.
+\end{itemize}
+We can fix our Type I error to a value $\alpha$ before conducting
+our test by using a critical region with a $\alpha\%$ 
+significance level.
+
+\vspace{\baselineskip}
+
+We call the power of a test $P$ where:
+\begin{align*}
+    P = 1 - (\text{Type II error}).
+\end{align*}
+
+\newpage
+
+\section{Hypothesis Tests: Comparision of Population Means}
+
+\subsection{Normal Hypothesis Test}
+
+\subsubsection{Assumptions}
+
+For a sample $\{x_1, \ldots, x_n\}$ randomly sampled from
+$\mathcal{N}(\mu, \sigma^2)$ with $\sigma^2$ known and an
+expected mean $\mu_0$.
+
+\subsubsection{Hypotheses}
+
+We choose the hypotheses:
+\begin{align*}
+    H_0 : \mu & = \mu_0                                   \\
+    H_1 : \mu & \, \neq \text{or} > \text{or} < \, \mu_0.
+\end{align*}
+
+\subsubsection{Test Statistic}
+
+We have the test statistic defined by:
+\begin{align*}
+    T = \frac{\sqrt{n}(\overline{x} - \mu_0)}{\sigma}
+    \sim \mathcal{N}(0, 1).
+\end{align*}
+
+\subsubsection{Critical Region}
+
+For our observed test statistic $t_{obs}$, we want to generate a
+critical region of values. This region $C$ changes based on our
+$H_1$, let $\Phi$ be the $\mathcal{N}(0, 1)$ CDF, $\alpha$ be
+our significance level:
+\begin{align*}
+    H_1 : \mu \neq \mu_0 & \Rightarrow
+    C = (-\infty, -c^*] \cup [c^*, \infty)
+    \tag{$ c^* = \Phi(1 - \frac{\alpha}{2}) $}              \\
+    H_1 : \mu > \mu_0    & \Rightarrow
+    C = [c^*, \infty) 
+    \tag{$ c^* = \Phi(1 - \alpha) $}      \\
+    H_1 : \mu < \mu_0    & \Rightarrow 
+    C = (-\infty, -c^*].
+    \tag{$ c^* = \Phi(1 - \alpha) $}
+\end{align*}
+
+\newpage
+
+\subsection{One Sample $t$-test}
+
+\subsubsection{Assumptions}
+
+For a sample $\{x_1, \ldots, x_n\}$ randomly sampled from
+$\mathcal{N}(\mu, \sigma^2)$ with $\sigma^2$ unknown and an
+expected mean $\mu_0$.
+
+\subsubsection{Hypotheses}
+
+We choose the hypotheses:
+\begin{align*}
+    H_0 : \mu & = \mu_0                                   \\
+    H_1 : \mu & \, \neq \text{or} > \text{or} < \, \mu_0.
+\end{align*}
+
+\subsubsection{Test Statistic}
+
+For $S^2$ defined as the sample variance of our sample, we have
+the test statistic defined by:
+\begin{align*}
+    T = \frac{\sqrt{n}(\overline{x} - \mu_0)}{S} \sim t_{n-1}.
+\end{align*}
+
+\subsubsection{Critical Region}
+
+For our observed test statistic $t_{obs}$, we want to generate a
+critical region of values. This region $C$ changes based on our
+$H_1$, let $T_k$ be the $t_k$ CDF, $\alpha$ be our significance level:
+\begin{align*}
+    H_1 : \mu \neq \mu_0 & \Rightarrow
+    C = (-\infty, -c^*] \cup [c^*, \infty)
+    \tag{$ c^* = T_{n-1}(1 - \frac{\alpha}{2}) $}              \\
+    H_1 : \mu > \mu_0    & \Rightarrow
+    C = [c^*, \infty) 
+    \tag{$ c^* = T_{n-1}(1 - \alpha) $}      \\
+    H_1 : \mu < \mu_0    & \Rightarrow 
+    C = (-\infty, -c^*].
+    \tag{$ c^* = T_{n-1}(1 - \alpha) $}
+\end{align*}
+
+\newpage
+
+\subsection{Pooled Two Sample $t$-test}
+
+\subsubsection{Assumptions}
+
+For two \textbf{independent} samples with the \textbf{same variance}:
+\begin{itemize}
+    \item $\{x_1, \ldots, x_n\}$ randomly sampled from
+          $\mathcal{N}(\mu_X, \sigma^2)$
+    \item $\{y_1, \ldots, y_m\}$
+          randomly sampled from $\mathcal{N}(\mu_Y, \sigma^2)$.
+\end{itemize}
+
+\subsubsection{Hypotheses}
+
+We choose the hypotheses:
+\begin{align*}
+    H_0 : \mu_X - \mu_Y & = 0 \, \text{(the values are the same)}        \\
+    H_1 : \mu_X - \mu_Y & \neq 0 \, \text{(the values are not the same)} \\
+                        & > 0 \, \text{($\mu_X$ is greater)}             \\
+                        & < 0 \, \text{($\mu_Y$ is greater)}.
+\end{align*}
+
+\subsubsection{Test Statistic}
+
+Where $S_X^2, S_Y^2$ are the sample variances of $X$ and $Y$
+respectively, we define the pooled variance $S_p$:
+\begin{align*}
+    S_p = \frac{\sum_{i = 1}^n (x_i - \overline{x})^2
+        + \sum_{i = 1}^m (y_i - \overline{y})^2}{n + m - 2},
+\end{align*}
+and we have the test statistic $T$ defined by:
+\begin{align*}
+    T = \frac{\overline{x} - \overline{y}}
+    {S_p\sqrt{\frac{1}{n} + \frac{1}{m}}} \sim t_{n + m - 2}.
+\end{align*}
+
+\subsubsection{Critical Region}
+
+For our observed test statistic $t_{obs}$, we want to generate a
+critical region of values. This region $C$ changes based on our
+$H_1$, let $T_k$ be the $t_k$ CDF, $\alpha$ be our significance
+level:
+\begin{align*}
+    H_1 : \mu_X - \mu_Y \neq 0 & \Rightarrow
+    C = (-\infty, -c^*] \cup [c^*, \infty)
+    \tag{$ c^* = T_{n + m - 2}(1 - \frac{\alpha}{2}) $}           \\
+    H_1 : \mu_X - \mu_Y > 0    & \Rightarrow
+    C = [c^*, \infty) \tag{$ c^* = T_{n + m - 2}(1 - \alpha) $}   \\
+    H_1 : \mu_X - \mu_Y < 0    & \Rightarrow C = (-\infty, -c^*].
+    \tag{$ c^* = T_{n + m - 2}(1 - \alpha) $}
+\end{align*}
+
+\newpage
+
+\subsection{Welch Two Sample $t$-test}
+
+\subsubsection{Assumptions}
+
+For two \textbf{independent} samples (if the variances are the
+same, use the pooled test):
+\begin{itemize}
+    \item $\{x_1, \ldots, x_n\}$ randomly sampled from
+          $\mathcal{N}(\mu_X, \sigma^2)$
+    \item $\{y_1, \ldots, y_m\}$
+          randomly sampled from $\mathcal{N}(\mu_Y, \sigma^2)$.
+\end{itemize}
+
+\subsubsection{Hypotheses}
+
+We choose the hypotheses:
+\begin{align*}
+    H_0 : \mu_X - \mu_Y & = 0 \, \text{(the values are the same)}        \\
+    H_1 : \mu_X - \mu_Y & \neq 0 \, \text{(the values are not the same)} \\
+                        & > 0 \, \text{($\mu_X$ is greater)}             \\
+                        & < 0 \, \text{($\mu_Y$ is greater)}.
+\end{align*}
+
+\subsubsection{Test Statistic}
+
+Where $S_X^2, S_Y^2$ are the sample variances of $X$ and $Y$
+respectively, we have the test statistic $T$ defined by:
+\begin{align*}
+    T = \frac{\overline{x} - \overline{y}}
+    {\sqrt{\frac{S_X^2}{n} + \frac{S_Y^2}{m}}} \simeq t_\nu,
+\end{align*}
+where $\nu$ is defined as follows:
+\begin{align*}
+    \nu = \frac{(\frac{S_X^2}{n} + \frac{S_Y^2}{m})^2}
+    {\frac{1}{n - 1}(\frac{S_X^2}{n})^2
+        + \frac{1}{m - 1}(\frac{S_Y^2}{m})^2}
+\end{align*}
+
+\subsubsection{Critical Region}
+
+For our observed test statistic $t_{obs}$, we want to generate a
+critical region of values. This region $C$ changes based on our
+$H_1$, let $T_k$ be the $t_k$ CDF, $\alpha$ be our significance
+level:
+\begin{align*}
+    H_1 : \mu_X - \mu_Y \neq 0 & \Rightarrow
+    C = (-\infty, -c^*] \cup [c^*, \infty)
+    \tag{$ c^* = T_{\nu}(1 - \frac{\alpha}{2}) $}                 \\
+    H_1 : \mu_X - \mu_Y > 0    & \Rightarrow
+    C = [c^*, \infty) \tag{$ c^* = T_{\nu}(1 - \alpha) $}         \\
+    H_1 : \mu_X - \mu_Y < 0    & \Rightarrow C = (-\infty, -c^*].
+    \tag{$ c^* = T_{\nu}(1 - \alpha) $}
+\end{align*}
+
+\newpage
+
+\subsection{Paired $t$-test}
+
+\subsubsection{Assumptions}
+
+For two samples, $\{x_1, \ldots, x_n\}$ and $\{y_1, \ldots, y_n\}$, both
+randomly sampled, we create the sample:
+\begin{align*}
+    \{w_1, \ldots, w_n\} \text{ where } w_i = x_i - y_i. \tag{$i \in \{1, \ldots, n\}$}
+\end{align*}
+
+We assume each $w_i$ is drawn from a $\mathcal{N}(\delta, \sigma^2)$
+distribution where $\delta$ and $\sigma$ are unknown.
+
+\subsubsection{Hypotheses}
+
+We choose the hypotheses:
+\begin{align*}
+    H_0 : \delta & = 0 \, \text{(there's no underlying difference)}      \\
+    H_1 : \delta & \neq 0 \, \text{(there's some underlying difference)} \\
+                 & > 0 \, \text{($X$ tends to be greater than $Y$)}      \\
+                 & < 0 \, \text{($Y$ tends to be greater than $X$)}.
+\end{align*}
+
+\subsubsection{Test Statistic}
+
+Where $S_W^2$, is the sample variances of $W$, we have the
+test statistic $T$ defined by:
+\begin{align*}
+    T = \frac{\sqrt{n} \, \overline{w}}{S_W} \sim t_{n - 1}.
+\end{align*}
+
+\subsubsection{Critical Region}
+
+For our observed test statistic $t_{obs}$, we want to generate a
+critical region of values. This region $C$ changes based on our
+$H_1$, let $T_k$ be the $t_k$ CDF, $\alpha$ be our significance
+level:
+\begin{align*}
+    H_1 : \delta \neq 0 & \Rightarrow
+    C = (-\infty, -c^*] \cup [c^*, \infty)
+    \tag{$ c^* = T_{n - 1}(1 - \frac{\alpha}{2}) $}         \\
+    H_1 : \delta > 0    & \Rightarrow
+    C = [c^*, \infty) \tag{$ c^* = T_{n - 1}(1 - \alpha) $} \\
+    H_1 : \delta < 0    & \Rightarrow C = (-\infty, -c^*].
+    \tag{$ c^* = T_{n - 1}(1 - \alpha) $}
+\end{align*}
 
 \end{document}
