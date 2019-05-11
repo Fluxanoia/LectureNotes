@@ -13,6 +13,7 @@
 \DeclareMathOperator{\Mse}{mse}
 \DeclareMathOperator{\Bias}{bias}
 \DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
 
 \begin{document}
 
@@ -617,20 +618,20 @@ true value of $\theta$.
     interval for $\mu$ with $\sigma^2$ known}
 
 The $\alpha\%$ confidence interval for $\mu$ from a sample
-$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $\Phi$ is the
-Normal CDF and:
+$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $\Phi^{-1}$ is the
+Normal quantile function (inverse CDF) and:
 \begin{align*}
-    c_L & = \overline{x} - \Phi\left(\frac{1 + \alpha}{2}\right)
-    \left(\frac{\sigma}{\sqrt{n}}\right)                         \\
-    c_U & = \overline{x} - \Phi\left(\frac{1 - \alpha}{2}\right)
+    c_L & = \overline{x} - \Phi^{-1}\left(\frac{1 + \alpha}{2}\right)
+    \left(\frac{\sigma}{\sqrt{n}}\right)                              \\
+    c_U & = \overline{x} + \Phi^{-1}\left(\frac{1 + \alpha}{2}\right)
     \left(\frac{\sigma}{\sqrt{n}}\right).
 \end{align*}
 
 \textit{So, for a $95\%$ confidence interval:}
 \begin{align*}
-    c_L & = \overline{x} - \Phi\left(0.975\right)
-    \left(\frac{\sigma}{\sqrt{n}}\right)          \\
-    c_U & = \overline{x} + \Phi\left(0.025\right)
+    c_L & = \overline{x} - \Phi^{-1}\left(0.975\right)
+    \left(\frac{\sigma}{\sqrt{n}}\right)               \\
+    c_U & = \overline{x} + \Phi^{-1}\left(0.975\right)
     \left(\frac{\sigma}{\sqrt{n}}\right).
 \end{align*}
 
@@ -639,11 +640,12 @@ Normal CDF and:
 
 The $\alpha\%$ confidence interval for $\mu$ from a sample
 $\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $\hat\sigma^2$ is
-the sample variance, $T_{n}$ is the $t_{n}$ CDF, and:
+the sample variance, $T^{-1}_{n}$ is the $t_{n}$ quantile function
+(inverse CDF), and:
 \begin{align*}
-    c_L & = \overline{x} - T_{n-1}\left(\frac{1 + \alpha}{2}\right)
-    \left(\frac{\hat\sigma}{\sqrt{n}}\right)                        \\
-    c_U & = \overline{x} + T_{n-1}\left(\frac{1 - \alpha}{2}\right)
+    c_L & = \overline{x} - T^{-1}_{n-1}\left(\frac{1 + \alpha}{2}\right)
+    \left(\frac{\hat\sigma}{\sqrt{n}}\right)                             \\
+    c_U & = \overline{x} + T^{-1}_{n-1}\left(\frac{1 + \alpha}{2}\right)
     \left(\frac{\hat\sigma}{\sqrt{n}}\right).
 \end{align*}
 
@@ -651,13 +653,13 @@ the sample variance, $T_{n}$ is the $t_{n}$ CDF, and:
     interval for $\sigma^2$ with $\mu$ unknown}
 
 The $\alpha\%$ confidence interval for $\sigma^2$ from a sample
-$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n$ is the
-$\chi^2_n$ CDF:
+$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n^{-1}$ is the
+$\chi^2_n$ quantile function (inverse CDF):
 \begin{align*}
     c_L & = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
-    {X_{n-1}\left(\frac{1 - \alpha}{2}\right)}          \\
+    {X_{n-1}^{-1}\left(\frac{1 - \alpha}{2}\right)}     \\
     c_U & = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
-    {X_{n-1}\left(\frac{1 + \alpha}{2}\right)}.
+    {X_{n-1}^{-1}\left(\frac{1 + \alpha}{2}\right)}.
 \end{align*}
 
 \subsubsection{$U(0, \theta)$ : Confidence interval for $\theta$}
@@ -672,12 +674,12 @@ $\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where:
 \subsubsection{Exp$(\theta)$ : Confidence interval for $\theta$}
 
 The $\alpha\%$ confidence interval for $\theta$ from a sample
-$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n$ is the
-$\chi^2_n$ CDF:
+$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n^{-1}$ is the
+$\chi^2_n$ quantile function (inverse CDF):
 \begin{align*}
-    c_L & = \frac{X_{2n}\left(\frac{1 + \alpha}{2}\right)}
-    {2\sum_{i = 1}^n x_i}                                  \\
-    c_U & = \frac{X_{2n}\left(\frac{1 - \alpha}{2}\right)}
+    c_L & = \frac{X_{2n}^{-1}\left(\frac{1 + \alpha}{2}\right)}
+    {2\sum_{i = 1}^n x_i}                                       \\
+    c_U & = \frac{X_{2n}^{-1}\left(\frac{1 - \alpha}{2}\right)}
     {2\sum_{i = 1}^n x_i}.
 \end{align*}
 
@@ -697,7 +699,7 @@ a sample $\{x_1, x_2, \ldots, x_n\}$:
           the estimates are in $(c_L, c_U)$.
 \end{itemize}
 
-\section{Notes on Hypothesis Testing}
+\section{Notes on Hypothesis Testing: Population Means}
 
 \subsection{Test Statistics}
 
@@ -729,12 +731,12 @@ accurate.
 There's two main types of error in hypothesis testing:
 \begin{itemize}
     \item \textbf{Type I error}: The probability that we
-    conclude $H_0$ is false when it is in fact true
+          conclude $H_0$ is false when it is in fact true
     \item \textbf{Type II error}: The probability that we
-    conclude $H_0$ is true when $H_1$ is in fact true.
+          conclude $H_0$ is true when $H_1$ is in fact true.
 \end{itemize}
 We can fix our Type I error to a value $\alpha$ before conducting
-our test by using a critical region with a $\alpha\%$ 
+our test by using a critical region with a $\alpha\%$
 significance level.
 
 \vspace{\baselineskip}
@@ -776,18 +778,18 @@ We have the test statistic defined by:
 
 For our observed test statistic $t_{obs}$, we want to generate a
 critical region of values. This region $C$ changes based on our
-$H_1$, let $\Phi$ be the $\mathcal{N}(0, 1)$ CDF, $\alpha$ be
-our significance level:
+$H_1$, let $\Phi^{-1}$ be the $\mathcal{N}(0, 1)$ quantile function
+(inverse CDF), $\alpha$ be our significance level:
 \begin{align*}
     H_1 : \mu \neq \mu_0 & \Rightarrow
     C = (-\infty, -c^*] \cup [c^*, \infty)
-    \tag{$ c^* = \Phi(1 - \frac{\alpha}{2}) $}              \\
+    \tag{$ c^* = \Phi^{-1}(1 - \frac{\alpha}{2}) $} \\
     H_1 : \mu > \mu_0    & \Rightarrow
-    C = [c^*, \infty) 
-    \tag{$ c^* = \Phi(1 - \alpha) $}      \\
-    H_1 : \mu < \mu_0    & \Rightarrow 
+    C = [c^*, \infty)
+    \tag{$ c^* = \Phi^{-1}(1 - \alpha) $}           \\
+    H_1 : \mu < \mu_0    & \Rightarrow
     C = (-\infty, -c^*].
-    \tag{$ c^* = \Phi(1 - \alpha) $}
+    \tag{$ c^* = \Phi^{-1}(1 - \alpha) $}
 \end{align*}
 
 \newpage
@@ -820,17 +822,18 @@ the test statistic defined by:
 
 For our observed test statistic $t_{obs}$, we want to generate a
 critical region of values. This region $C$ changes based on our
-$H_1$, let $T_k$ be the $t_k$ CDF, $\alpha$ be our significance level:
+$H_1$, let $T_k^{-1}$ be the $t_k$ quantile function (inverse CDF),
+$\alpha$ be our significance level:
 \begin{align*}
     H_1 : \mu \neq \mu_0 & \Rightarrow
     C = (-\infty, -c^*] \cup [c^*, \infty)
-    \tag{$ c^* = T_{n-1}(1 - \frac{\alpha}{2}) $}              \\
+    \tag{$ c^* = T^{-1}_{n-1}(1 - \frac{\alpha}{2}) $} \\
     H_1 : \mu > \mu_0    & \Rightarrow
-    C = [c^*, \infty) 
-    \tag{$ c^* = T_{n-1}(1 - \alpha) $}      \\
-    H_1 : \mu < \mu_0    & \Rightarrow 
+    C = [c^*, \infty)
+    \tag{$ c^* = T^{-1}_{n-1}(1 - \alpha) $}           \\
+    H_1 : \mu < \mu_0    & \Rightarrow
     C = (-\infty, -c^*].
-    \tag{$ c^* = T_{n-1}(1 - \alpha) $}
+    \tag{$ c^* = T^{-1}_{n-1}(1 - \alpha) $}
 \end{align*}
 
 \newpage
@@ -875,16 +878,16 @@ and we have the test statistic $T$ defined by:
 
 For our observed test statistic $t_{obs}$, we want to generate a
 critical region of values. This region $C$ changes based on our
-$H_1$, let $T_k$ be the $t_k$ CDF, $\alpha$ be our significance
-level:
+$H_1$, let $T^{-1}_k$ be the $t_k$ quantile function (inverse CDF),
+$\alpha$ be our significance level:
 \begin{align*}
     H_1 : \mu_X - \mu_Y \neq 0 & \Rightarrow
     C = (-\infty, -c^*] \cup [c^*, \infty)
-    \tag{$ c^* = T_{n + m - 2}(1 - \frac{\alpha}{2}) $}           \\
+    \tag{$ c^* = T^{-1}_{n + m - 2}(1 - \frac{\alpha}{2}) $}         \\
     H_1 : \mu_X - \mu_Y > 0    & \Rightarrow
-    C = [c^*, \infty) \tag{$ c^* = T_{n + m - 2}(1 - \alpha) $}   \\
+    C = [c^*, \infty) \tag{$ c^* = T^{-1}_{n + m - 2}(1 - \alpha) $} \\
     H_1 : \mu_X - \mu_Y < 0    & \Rightarrow C = (-\infty, -c^*].
-    \tag{$ c^* = T_{n + m - 2}(1 - \alpha) $}
+    \tag{$ c^* = T^{-1}_{n + m - 2}(1 - \alpha) $}
 \end{align*}
 
 \newpage
@@ -931,16 +934,16 @@ where $\nu$ is defined as follows:
 
 For our observed test statistic $t_{obs}$, we want to generate a
 critical region of values. This region $C$ changes based on our
-$H_1$, let $T_k$ be the $t_k$ CDF, $\alpha$ be our significance
-level:
+$H_1$, let $T_k^{-1}$ be the $t_k$ quantile function (inverse CDF),
+$\alpha$ be our significance level:
 \begin{align*}
     H_1 : \mu_X - \mu_Y \neq 0 & \Rightarrow
     C = (-\infty, -c^*] \cup [c^*, \infty)
-    \tag{$ c^* = T_{\nu}(1 - \frac{\alpha}{2}) $}                 \\
+    \tag{$ c^* = T^{-1}_{\nu}(1 - \frac{\alpha}{2}) $}            \\
     H_1 : \mu_X - \mu_Y > 0    & \Rightarrow
-    C = [c^*, \infty) \tag{$ c^* = T_{\nu}(1 - \alpha) $}         \\
+    C = [c^*, \infty) \tag{$ c^* = T^{-1}_{\nu}(1 - \alpha) $}    \\
     H_1 : \mu_X - \mu_Y < 0    & \Rightarrow C = (-\infty, -c^*].
-    \tag{$ c^* = T_{\nu}(1 - \alpha) $}
+    \tag{$ c^* = T^{-1}_{\nu}(1 - \alpha) $}
 \end{align*}
 
 \newpage
@@ -980,16 +983,247 @@ test statistic $T$ defined by:
 
 For our observed test statistic $t_{obs}$, we want to generate a
 critical region of values. This region $C$ changes based on our
-$H_1$, let $T_k$ be the $t_k$ CDF, $\alpha$ be our significance
-level:
+$H_1$, let $T^{-1}_k$ be the $t_k$ quantile function (inverse CDF),
+$\alpha$ be our significance level:
 \begin{align*}
     H_1 : \delta \neq 0 & \Rightarrow
     C = (-\infty, -c^*] \cup [c^*, \infty)
-    \tag{$ c^* = T_{n - 1}(1 - \frac{\alpha}{2}) $}         \\
+    \tag{$ c^* = T^{-1}_{n - 1}(1 - \frac{\alpha}{2}) $}         \\
     H_1 : \delta > 0    & \Rightarrow
-    C = [c^*, \infty) \tag{$ c^* = T_{n - 1}(1 - \alpha) $} \\
+    C = [c^*, \infty) \tag{$ c^* = T^{-1}_{n - 1}(1 - \alpha) $} \\
     H_1 : \delta < 0    & \Rightarrow C = (-\infty, -c^*].
-    \tag{$ c^* = T_{n - 1}(1 - \alpha) $}
+    \tag{$ c^* = T^{-1}_{n - 1}(1 - \alpha) $}
+\end{align*}
+
+\newpage
+
+\section{Linear Regression}
+
+\subsection{Model Assumptions}
+
+For $\{x_1, \ldots, x_n\}$ values of observed of a predictor
+variable $X$ with $y_i (i \in \{1, \ldots, n\})$ the values
+of the response variable $Y$:
+\begin{align*}
+    y_i = \alpha + \beta x_i + e_i,
+\end{align*}
+where $\alpha$ and $\beta$ are unknown and each $e_i$ represents the
+error.
+
+\subsection{Errors}
+
+For the error values $\{e_1, \ldots, e_n\}$, we assume that:
+\begin{itemize}
+    \item $\mathbb{E}(e_i) = 0$
+    \item $\Var(e_i) = \sigma^2$ (unknown)
+    \item $\Cov(e_i, e_j) = 0$ for $i \neq j$ (uncorrelated error).
+\end{itemize}
+As a consequence, we have that:
+\begin{itemize}
+    \item $\mathbb{E}(y_i) = \alpha + \beta x_i$
+    \item $\Var(y_i) = \sigma^2$
+    \item $\Cov(y_i, y_j) = 0$ for $i \neq j$ (uncorrelated responses).
+\end{itemize}
+
+\subsection{Summary Statistics}
+
+We define a few summary statistics used in our calculations:
+\begin{itemize}
+    \item $\overline{x} = \frac{1}{n}\sum_{i = 1}^n x_i$
+    \item $\overline{y} = \frac{1}{n}\sum_{i = 1}^n y_i$
+    \item $S_{xx} = \sum_{i=i}^n (x_i)^2 - n\overline{x}^2$
+    \item $S_{xy} = \sum_{i=1}^n (x_i y_i) - n\overline{x}\overline{y}$
+    \item $S_{yy} = \sum_{i=i}^n (y_i)^2 - n\overline{y}^2.$
+\end{itemize}
+
+\newpage
+
+\subsection{Finding $\hat\alpha$ and $\hat\beta$}
+
+By minimising the squared error between our estimated and observed
+values, we develop least squares estimates for $\alpha$ and $\beta$:
+\begin{itemize}
+    \item $\hat\beta = \frac{S_{xy}}{S_{xx}}$
+    \item $\hat\alpha = \overline{y} - \hat\beta\overline{x}$
+\end{itemize}
+
+\subsection{Residual Sum of Squares and $\hat\sigma^2$}
+
+We defines the residual sum of squares $RSS$ as the sum of
+all the errors squared, an alternate formula for this is:
+\begin{align*}
+    RSS = S_{yy} - \frac{S_{xy}^2}{S_{xx}}.
+\end{align*}
+Then, we can estimate $\sigma^2$ by:
+\begin{align*}
+    \hat\sigma^2 = \frac{RSS}{n - 2}
+    = \frac{S_{yy} - \frac{S_{xy}^2}{S_{xx}}}{n - 2}.
+\end{align*}
+
+\section{Notes on Hypothesis Testing: Regression}
+
+\subsection{Assumption of Normality}
+
+To perform linear regression hypothesis tests, we use an assumption
+of normality. We assume the errors $e_i$ are independent and
+identically distributed $\mathcal{N}(0, \sigma^2)$.
+
+\subsection{The Distribution of $\hat\alpha$,
+    $\hat\beta$, and $\hat\sigma^2$}
+
+We have the distribution of $\hat\alpha$ and
+$\hat\beta$:
+\begin{align*}
+    \hat\beta  & \sim \mathcal{N}\left(\beta,
+    \frac{\sigma^2}{S_{xx}}\right)             \\
+    \hat\alpha & \sim \mathcal{N}\left(\alpha,
+    \frac{\Var(\hat\beta) \sum_{i = 1}^n x_i^2}{n}\right).
+\end{align*}
+
+\newpage
+
+We write the following for the sample variance of $\alpha$ and $\beta$:
+\begin{align*}
+    s_{\hat\beta}^2  & = \frac{\hat\sigma^2}{S_{xx}}                   \\
+    s_{\hat\alpha}^2 & = \frac{s_{\hat\beta}^2 \sum_{i=1}^n x_i^2}{n}.
+\end{align*}
+In terms of $t$ and $\chi^2$ distributions:
+\begin{align*}
+    \frac{(n - 2)\hat\sigma^2}{\sigma^2}       & = \frac{RSS}{\sigma^2}
+    \sim \chi^2_{n - 2}                                                 \\
+    \frac{\hat\alpha - \alpha}{s_{\hat\alpha}} & \sim t_{n - 2}         \\
+    \frac{\hat\beta - \beta}{s_{\hat\beta}}    & \sim t_{n - 2}.
+\end{align*}
+In practice, we substitute $\alpha$, $\beta$, and $\sigma^2$ for
+some hypothesised value. For example:
+\begin{align*}
+    H_0 : \beta = 0 \Rightarrow
+    \frac{\hat\beta}{s_{\hat\beta}} \sim t_{n - 2}.
+\end{align*}
+
+\section{Confidence Intervals for $\alpha$ and $\beta$}
+
+\subsection{Confidence Interval for $\alpha$}
+
+The $\gamma\%$ confidence interval for $\alpha$ from a sample
+$\{x_1, x_2, \ldots, x_n\}$ with response set
+$\{y_1, y_2, \ldots, y_n\}$ is $(c_L, c_U)$ where $T^{-1}_n$ is the
+$t_n$ quantile function (inverse CDF) and:
+\begin{align*}
+    c_L & = \hat\alpha - s_{\hat\alpha}
+    T^{-1}_{n - 2}\left(\frac{1 + \gamma}{2}\right) \\
+    c_U & = \hat\alpha + s_{\hat\alpha}
+    T^{-1}_{n - 2}\left(\frac{1 + \gamma}{2}\right).
+\end{align*}
+
+\subsection{Confidence Interval for $\beta$}
+
+The $\gamma\%$ confidence interval for $\beta$ from a sample
+$\{x_1, x_2, \ldots, x_n\}$ with response set
+$\{y_1, y_2, \ldots, y_n\}$ is $(c_L, c_U)$ where $T^{-1}_n$ is the
+$t_n$ quantile function (inverse CDF) and:
+\begin{align*}
+    c_L & = \hat\beta - s_{\hat\beta}
+    T^{-1}_{n - 2}\left(\frac{1 + \gamma}{2}\right) \\
+    c_U & = \hat\beta + s_{\hat\beta}
+    T^{-1}_{n - 2}\left(\frac{1 + \gamma}{2}\right).
+\end{align*}
+
+\section{Hypothesis Tests: Linear Regression}
+
+\subsection{Hypothesis Test for $\beta$}
+
+\subsubsection{Assumptions}
+
+For a sample $\{x_1, \ldots, x_n\}$ randomly sampled with response
+set $\{y_1, \ldots, y_n\}$ with Normal errors following a
+$\mathcal{N}(0, \sigma^2)$ and an expected value $\beta_0$.
+
+\subsubsection{Hypotheses}
+
+We choose the hypotheses:
+\begin{align*}
+    H_0 : \beta & = \beta_0                                   \\
+    H_1 : \beta & \, \neq \text{or} > \text{or} < \, \beta_0.
+\end{align*}
+
+\subsubsection{Test Statistic}
+
+For $s_{\hat\beta}^2$ defined as follows:
+\begin{align}
+    s_{\hat\beta}^2  & = \frac{\hat\sigma^2}{S_{xx}},
+\end{align}
+we have the test statistic defined by:
+\begin{align*}
+    T = \frac{(\hat\beta - \beta_0)}{s_{\hat\beta}}
+    \sim t_{n - 2}.
+\end{align*}
+
+\subsubsection{Critical Region}
+
+For our observed test statistic $t_{obs}$, we want to generate a
+critical region of values. This region $C$ changes based on our
+$H_1$, let $T^{-1}_n$ be the $t_n$ quantile function
+(inverse CDF), $\gamma$ be our significance level:
+\begin{align*}
+    H_1 : \beta \neq \beta_0 & \Rightarrow
+    C = (-\infty, -c^*] \cup [c^*, \infty)
+    \tag{$ c^* = T_{n-2}^{-1}(1 - \frac{\gamma}{2}) $} \\
+    H_1 : \beta > \beta_0    & \Rightarrow
+    C = [c^*, \infty)
+    \tag{$ c^* = T_{n-2}^{-1}(1 - \gamma) $}           \\
+    H_1 : \beta < \beta_0    & \Rightarrow
+    C = (-\infty, -c^*].
+    \tag{$ c^* = T_{n-2}^{-1}(1 - \gamma) $}
+\end{align*}
+
+\newpage
+
+\subsection{Hypothesis Test for $\alpha$}
+
+\subsubsection{Assumptions}
+
+For a sample $\{x_1, \ldots, x_n\}$ randomly sampled with response
+set $\{y_1, \ldots, y_n\}$ with Normal errors following a
+$\mathcal{N}(0, \sigma^2)$ and an expected value $\alpha_0$.
+
+\subsubsection{Hypotheses}
+
+We choose the hypotheses:
+\begin{align*}
+    H_0 : \alpha & = \alpha_0                                   \\
+    H_1 : \alpha & \, \neq \text{or} > \text{or} < \, \alpha_0.
+\end{align*}
+
+\subsubsection{Test Statistic}
+
+For $s_{\hat\alpha}^2$ defined as follows:
+\begin{align}
+    s_{\hat\alpha}^2 & = s_{\hat\beta}^2 
+        \left(\frac{\sum_{i = 1}^n x_i^2}{n}\right),
+\end{align}
+we have the test statistic defined by:
+\begin{align*}
+    T = \frac{(\hat\alpha - \alpha_0)}{s_{\hat\alpha}}
+    \sim t_{n - 2}.
+\end{align*}
+
+\subsubsection{Critical Region}
+
+For our observed test statistic $t_{obs}$, we want to generate a
+critical region of values. This region $C$ changes based on our
+$H_1$, let $T^{-1}_n$ be the $t_n$ quantile function
+(inverse CDF), $\gamma$ be our significance level:
+\begin{align*}
+    H_1 : \alpha \neq \alpha_0 & \Rightarrow
+    C = (-\infty, -c^*] \cup [c^*, \infty)
+    \tag{$ c^* = T_{n-2}^{-1}(1 - \frac{\gamma}{2}) $} \\
+    H_1 : \alpha > \alpha_0    & \Rightarrow
+    C = [c^*, \infty)
+    \tag{$ c^* = T_{n-2}^{-1}(1 - \gamma) $}           \\
+    H_1 : \alpha < \alpha_0    & \Rightarrow
+    C = (-\infty, -c^*].
+    \tag{$ c^* = T_{n-2}^{-1}(1 - \gamma) $}
 \end{align*}
 
 \end{document}
