@@ -2,12 +2,38 @@
 \usepackage[left = 3cm, right = 3cm]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{multicol}
+
+\makeatletter
+\newcommand{\Spvek}[2][r]{%
+  \gdef\@VORNE{1}
+  \left(\hskip-\arraycolsep%
+    \begin{array}{#1}\vekSp@lten{#2}\end{array}%
+  \hskip-\arraycolsep\right)}
+
+\def\vekSp@lten#1{\xvekSp@lten#1;vekL@stLine;}
+\def\vekL@stLine{vekL@stLine}
+\def\xvekSp@lten#1;{\def\temp{#1}%
+  \ifx\temp\vekL@stLine
+  \else
+    \ifnum\@VORNE=1\gdef\@VORNE{0}
+    \else\@arraycr\fi%
+    #1%
+    \expandafter\xvekSp@lten
+  \fi}
+\makeatother
 
 \DeclareMathOperator{\Ker}{Ker}
 \DeclareMathOperator{\Ima}{Im}
 \DeclareMathOperator{\Spa}{span}
+
+\DeclareMathOperator{\Rank}{rank}
+\DeclareMathOperator{\Null}{nullity}
+
+\DeclareMathOperator{\Diag}{diag}
 
 \begin{document}
 
@@ -170,8 +196,6 @@ For a vector space $V$, we say $S \subseteq V$ is a basis of $V$ if:
   \item $S$ is linearly independent.
 \end{itemize}
 
-\newpage
-
 \subsubsection{Properties of bases}
 
 Let $V$ be a vector space:
@@ -210,6 +234,308 @@ where $U$ is a subspace:
 
 \subsection{Direct Sums}
 
+\subsubsection{Definition of a sum}
 
+For $V$ a vector space over $\mathbb{F}$ with $U, W \subseteq V$
+subspaces, we define their addition as follows:
+\begin{align*}
+  U + W = \{u + w : u \in U, w \in W\}.
+\end{align*}
+
+\subsubsection{Definition of a direct sum}
+
+For $V$ a vector space over $\mathbb{F}$ with $U, W \subseteq V$
+subspaces satisfying $U \cap W = \{0\}$, the addition of 
+$U$ and $W$ ($U + W$) is called a direct sum denoted by:
+\begin{align*}
+  U \oplus W.
+\end{align*}
+
+\textit{So, when subspaces don't intersect, their addition is
+called a direct sum as they are disjoint.}
+
+\subsubsection{Decomposition of vector spaces}
+
+For $V$ a vector space over $\mathbb{F}$ with $U, W \subseteq V$
+subspaces satisfying $U \cap W = \{0\}$, we have that:
+\begin{align*}
+  \forall v \in U \oplus W, v = u + w (\text{for some } u \in U, w \in W).
+\end{align*}
+
+\subsubsection{Dimension of direct summed subspaces}
+
+For $V$ a vector space over $\mathbb{F}$ with $U, W \subseteq V$
+finite dimensional subspaces satisfying $U \cap W = \{0\}$:
+\begin{align*}
+  \dim(U \oplus W) = \dim(U) + \dim(W)
+\end{align*}
+
+\subsubsection{Complements of subspaces}
+
+For $V$ a finite dimensional vector space over $\mathbb{F}$ 
+with $U \subseteq V$ a subspace, we have that there exists
+$W \subseteq V$ a subspaces such that:
+\begin{itemize}
+  \item $U \cap W = \{0\}$
+  \item $U \oplus W = V$,
+\end{itemize}
+this is the complement of $U$ in $V$.
+
+\subsection{The Rank-Nullity Theorem}
+
+\subsubsection{Definition of rank and nullity}
+
+For $V, W$ vector spaces over $\mathbb{F}$ and $T : V \to W$ a 
+linear map, we define:
+\begin{itemize}
+  \item \textbf{Rank}: $\Rank(T) = \dim(\Ima(T))$
+  \item \textbf{Nullity}: $\Null(T) = \dim(\Ker(T))$.
+\end{itemize}
+
+\subsubsection{The rank-nullity theorem}
+
+For $V, W$ finite dimensional vector spaces over $\mathbb{F}$ 
+and $T : V \to W$ a linear map, we can say:
+\begin{align*}
+  \Rank(T) + \Null(T) = \dim(V).
+\end{align*}
+
+\subsection{Injectivity and Surjectivity}
+
+For $V, W$ vector spaces over $\mathbb{F}$ and $T : V \to W$ a 
+linear map, we can say:
+\begin{itemize}
+  \item $T$ injective $\Leftrightarrow \Null(T) = 0$
+  \item $T$ surjective $\Leftrightarrow \Rank(T) = \dim(W)$
+  \item $T$ injective and $S \subseteq V$ linearly independent
+  $\Rightarrow$ $T(S) \subseteq W$ is linealy independent
+  \item $T$ surjective and $S \subseteq V$ spans $V$ 
+  $\Rightarrow$ $T(S)$ spans $W$
+  \item $\dim(W) > \dim(V) \Rightarrow T$ is not surjective 
+  (you can't have surjective maps from 2D to 3D)
+  \item $\dim(W) < \dim(V) \Rightarrow T$ is not injective
+  \item $\dim(W) = \dim(V) \Rightarrow$ means injectivity and
+  surjectivity imply each other (you can't have one without
+  the other).
+\end{itemize}
+
+\subsection{Projections}
+
+\subsubsection{Definition of a projection}
+
+For a vector space $V$, $P : V \to V$ a linear map, we say $P$
+is a projection if $P^2 = P$.
+
+\subsubsection{Relation to the rank-nullity theorem}
+
+For a finite dimensional vector space $V$, $P : V \to V$ a projection,
+we have:
+\begin{align*}
+  V = \Ker(P) \oplus \Ima(P)
+\end{align*}
+
+\subsubsection{The decomposition projection}
+
+For $V$ a vector space over $\mathbb{F}$ with $U, W \subseteq V$
+subspaces satisfying $U \cap W = \{0\}$, we can define a projection
+as follows:
+\begin{align*}
+  P(v) = u \text{ where } v = u + w \text{ for some } u \in U, w \in W.
+\end{align*}
+
+\subsection{Isomorphisms}
+
+\subsubsection{Definition of an isomorphism}
+
+An isomorphism is a bijective linear map. It's domain and codomain
+are called isomorphic.
+
+\subsubsection{Dimension of the domain and codomain}
+
+For two finite dimensional vector spaces $V, W$:
+\begin{gather*}
+  \exists \, T : V \to W \text{ an isomorphism } \Leftrightarrow
+  \dim(V) = \dim(W)
+\end{gather*}
+
+\subsection{Change of Bases}
+
+\subsubsection{Method of changing basis}
+
+For $V$ a vector space over $\mathbb{F}$, with $A, B \subseteq V$
+bases, we can define a matrix to convert between these bases 
+$C_{AB} = (c_{ij})$:
+\begin{gather*}
+  C_{AB} \text{ converts from $B$ to $A$ so we write $A$ in terms of $B$:} \\
+  \text{Let } A = \{a_1, a_2, \ldots, a_n\} \\
+  \text{Let } B = \{b_1, b_2, \ldots, b_n\} \\ \\
+  \text{We have:} \\
+  a_1 = c_{11}b_1 + c_{21}b_2 + \cdots + c_{n1}b_n \\
+  a_2 = c_{12}b_1 + c_{22}b_2 + \cdots + c_{n2}b_n \\
+  \cdots \\
+  a_n = c_{1n}b_1 + c_{2n}b_2 + \cdots + c_{nn}b_n \\ \\
+  \text{Leading to the matrix (note the transpose):} \\
+  C_{AB} = \begin{pmatrix}
+    c_{11} & c_{12} & \cdots & c_{1n} \\
+    c_{21} & c_{22} & \cdots & c_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    c_{n1} & c_{n2} & \cdots & c_{nn} \\
+  \end{pmatrix}
+\end{gather*}
+
+\newpage
+
+\subsubsection{Properties of the change of basis matrix}
+
+For $A, B, X$ bases of a vector space $V$:
+\begin{itemize}
+  \item $C_{AA} = I$ (the identity)
+  \item $C_{AB} = C_{BA}^{-1}$
+  \item $C_{AX}C_{XB} = C_{AB}$
+\end{itemize}
+
+\subsubsection{Example of change of basis}
+
+\begin{gather*}
+  \text{Take } V = \mathbb{R}^2 \\
+  \text{Let } A = \left\{ \Spvek{1;0}, \Spvek{0;1} \right\} \\
+  \text{Let } B = \left\{ \Spvek{1;1}, \Spvek{-1;1} \right\}
+\end{gather*}
+\begin{multicols}{2}
+  \begin{gather*}
+    \text{For } C_{AB} \text{ we write $A$ in terms of $B$}: \\
+    \Spvek{1;0} = (1/2)\Spvek{1;1} + (-1/2)\Spvek{-1;1} \\
+    \Spvek{0;1} = (1/2)\Spvek{1;1} + (1/2)\Spvek{-1;1} \\ \\
+    \text{So, after transposing, we get:} \\
+    C_{AB} = \begin{pmatrix}
+      1/2 & 1/2 \\
+      -1/2 & 1/2 \\
+    \end{pmatrix} \\
+    \text{You can check for yourself that:} \\
+    C_{AB}(b_1) = a_1 \\
+    C_{AB}(b_2) = a_2 \\ \\
+    \text{Or rather:} \\
+    C_{AB}\Spvek{1;1} = \Spvek{1;0} \\
+    C_{AB}\Spvek{-1;1} = \Spvek{0;1}   
+  \end{gather*}
+  
+  \columnbreak
+  
+  \begin{gather*}
+    \text{For } C_{BA} \text{ we write $B$ in terms of $A$}: \\
+    \Spvek{1;1} = (1)\Spvek{1;0} + (1)\Spvek{0;1} \\
+    \Spvek{-1;1} = (-1)\Spvek{1;0} + (1)\Spvek{0;1} \\ \\
+    \text{So, after transposing, we get:} \\
+    C_{BA} = \begin{pmatrix}
+      1 & -1 \\
+      1 & 1 \\
+    \end{pmatrix} \\
+    \text{You can check for yourself that:} \\
+    C_{BA}(a_1) = b_1 \\
+    C_{BA}(a_2) = b_2 \\ \\
+    \text{Or rather:} \\
+    C_{BA}\Spvek{1;0} = \Spvek{1;1} \\
+    C_{BA}\Spvek{0;1} = \Spvek{-1;1}
+  \end{gather*}
+\end{multicols}
+
+\newpage
+
+\subsection{Linear Maps and Matrices}
+
+\subsubsection{Definition of matrices of linear maps}
+
+For $V, W$ vector spaces over $\mathbb{F}$ with $\dim(V) = n$ and
+$\dim(W) = m$ and $T: V \to W$ a linear map. For each choice
+of basis:
+\begin{itemize}
+  \item $A = \{a_1, a_2, \ldots, a_n\} \subseteq V$
+  \item $B = \{b_1, b_2, \ldots, b_m\} \subseteq W$,
+\end{itemize}
+we can associate a matrix to $T$:
+\begin{align*}
+  M_{BA}(T) = (t_{ij}) \in M_{m, n}(\mathbb{F}),
+\end{align*}
+with each $t_{ij}$ defined as:
+\begin{gather*}
+  T(a_1) = t_{11}b_1 + t_{21}b_2 + \cdots + t_{m1}b_m \\
+  T(a_2) = t_{12}b_1 + t_{22}b_2 + \cdots + t_{m2}b_m \\
+  \cdots \\
+  T(a_n) = t_{1n}b_1 + t_{2n}b_2 + \cdots + t_{mn}b_m.
+\end{gather*}
+Similarly to the change of basis matrices, note the transpose of
+the values.
+
+\subsubsection{Example of matrices of linear maps}
+
+Define the following:
+\begin{align*}
+  A &= \left\{ \Spvek{1;0}, \Spvek{0;1} \right\} 
+    \subseteq \mathbb{R}^2 \\
+  B &= \left\{ 1 \right\} \subseteq \mathbb{R} \\
+  T &: \mathbb{R}^2 \to \mathbb{R}; \; \Spvek{x; y} \mapsto 2x
+\end{align*}
+Since we are mapping from $\mathbb{R}^2$ to $\mathbb{R}$, our 
+matrix will map from the basis $A$ to the basis $B$:
+\begin{gather*}
+M_{BA}(T) = (t_{ij}) \in M_{1, 2}(\mathbb{R}).
+\end{gather*}
+So, we write $T(A)$ in terms of $B$:
+\begin{align*}
+  \begin{rcases*}
+    T \Spvek{1;0} = 2 = 2(1) \\
+    T \Spvek{0;1} = 0 = 0(1)
+  \end{rcases*} M_{BA}(T) = \begin{pmatrix}
+    2 & 0 \\
+  \end{pmatrix}
+\end{align*}
+
+\newpage
+
+\subsubsection{Composition of matrices of linear maps}
+
+For $U, V, W$ vector spaces over $\mathbb{F}$, $S : U \to V$, 
+$T : V \to W$ linear maps, let $A \subseteq U$, $B \subseteq V$,
+and $C \subseteq W$ be bases. We have:
+\begin{align*}
+  M_{CA}(T \circ S) = M_{CB}(T)M_{BA}(S).
+\end{align*}
+
+\subsubsection{Change of basis for matrices of linear maps}
+
+For $V, W$ vector spaces over $\mathbb{F}$, $T : V \to W$ a linear 
+map, let $A, A' \subseteq V$ and $B, B' \subseteq W$ be bases. 
+We have:
+\begin{align*}
+  M_{B'A'}(T) = C_{B'B}M_{BA}(T)C_{AA'}.
+\end{align*}
+
+\subsubsection{Matrices of linear maps and the determinant}
+
+For $V$ a vector space with $T : V \to V$ a linear map:
+\begin{itemize}
+  \item For any choice of basis $B$, $\det(M_{BB}(T))$ doesn't change
+  so we define $\det(T) = \det(M_{BB}(T))$
+  \item If $V$ is finite dimensional, $T$ is an isomorphism if
+  $\det(T) \neq 0$.
+\end{itemize}
+
+\section{Eigenvalues and Eigenvectors}
+
+\subsection{Definition of an Eigenvalue and Eigenvector}
+
+For a vector space $V$ over $\mathbb{F}$ and $T : V \to V$ a linear
+map, if we have $v$ in $V$ such that $v \neq 0$ and $T(v) = \lambda v$
+we say $v$ is an eigenvector with eigenvalue $\lambda$.
+
+\subsection{Eigenvector Bases and Matrices of Linear Maps}
+
+For a vector space $V$ over $\mathbb{F}$ with dimension $n$ and 
+$T : V \to V$ a linear map, if there exists 
+$B = \{v_1, \ldots, v_n\}$ a basis for $V$ of eigenvectors of $T$
+with eigenvalues $\{\lambda_1, \ldots, \lambda_n\}$ then:
+\begin{align*}
+  M_{BB}(T) = \Diag(\lambda_1, \ldots, \lambda_n).
+\end{align*}
 
 \end{document}
