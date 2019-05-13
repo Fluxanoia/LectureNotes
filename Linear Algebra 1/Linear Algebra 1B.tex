@@ -33,7 +33,11 @@
 \DeclareMathOperator{\Rank}{rank}
 \DeclareMathOperator{\Null}{nullity}
 
+\DeclareMathOperator{\Tr}{trace}
+
 \DeclareMathOperator{\Diag}{diag}
+
+\DeclareMathOperator{\Spec}{spec}
 
 \begin{document}
 
@@ -537,5 +541,280 @@ with eigenvalues $\{\lambda_1, \ldots, \lambda_n\}$ then:
 \begin{align*}
   M_{BB}(T) = \Diag(\lambda_1, \ldots, \lambda_n).
 \end{align*}
+
+\subsection{Linear Independence of Eigenvectors}
+
+If we have two eigenvectors with different eigenvalues, they are
+linearly independent.
+
+\subsection{Characteristic Polynomials}
+
+\subsubsection{Definition of a characteristic polynomial}
+
+For a vector space $V$ with $T:V \to V$ a linear map, we define
+the characteristic polynomial $P$ as a polynomial such that:
+\begin{align*}
+  P(\lambda) = 0 \Rightarrow \lambda \text{ is an eigenvalue of } T.
+\end{align*}
+The set of eigenvalues of $T$ (and, equivalently, the set of roots 
+of $P$) is called the spectrum of $T$ ($\Spec(T)$).
+
+\subsubsection{Derivation of the characteristic polynomial}
+
+For a finite dimensional vector space $V$ over $\mathbb{F}$ 
+with $T:V \to V$ a linear map, let $\lambda$ be in $\mathbb{F}$:
+\begin{gather*}
+  \lambda \text{ is an eigenvalue of } T \\
+  \Longleftrightarrow \\
+  \det(T - \lambda I) = 0.
+\end{gather*}
+So, we can define the characteristic polynomial $P$ as follows:
+\begin{gather*}
+  P(\lambda) := \det(T - \lambda I).
+\end{gather*}
+
+\subsubsection{Eigenspaces}
+
+For $V$ a vector space over $\mathbb{F}$, an eigenspace for an 
+eigenvalue $\lambda$ in $\mathbb{F}$ of a linear map $T:V \to V$
+is defined as:
+\begin{align*}
+  V_{\lambda} := \Ker(T - \lambda I).
+\end{align*}
+For $\Spec(T) = \{\lambda_1, \ldots, \lambda_n\}$, we have that:
+\begin{gather*}
+  V = V_{\lambda_1} \oplus \cdots \oplus V_{\lambda_n} \\
+  \Longleftrightarrow \\
+  T \text{ has a basis of eigenvectors}.
+\end{gather*}
+
+\newpage
+
+\subsubsection{Calculating characteristic polynomials}
+
+In general, with a $n$-dimensional vector space $V$ over 
+$\mathbb{F}$, $T:V \to V$ a linear map, the characteristic
+polynomial $P$ can be written as:
+\begin{align*}
+  P(\lambda) = (-1)^n\lambda^n + (-1)^{n-1}\Tr(T)\lambda^{n-1}
+  + \cdots + \det(T).
+\end{align*}
+This is very simple in the $2 \times 2$ case:
+\begin{align*}
+  P(\lambda) = \lambda^2 - \Tr(T)\lambda + \det(T).
+\end{align*}
+It gets more complicated in the $3 \times 3$ case, consider $M$:
+\begin{gather*}
+  M = \begin{pmatrix}
+    a & b & c \\
+    d & e & f \\
+    g & h & i \\
+  \end{pmatrix}.
+\end{gather*}
+We calculate a value $\mu$:
+\begin{gather*}
+  \mu = \begin{pmatrix}
+    a & b \\
+    d & e \\
+  \end{pmatrix} +
+  \begin{pmatrix}
+    e & f \\
+    h & i \\
+  \end{pmatrix} +
+  \begin{pmatrix}
+    a & c \\
+    g & i \\
+  \end{pmatrix}.
+\end{gather*}
+And we get the result:
+\begin{align*}
+  P(\lambda) = -\lambda^3 + \Tr(T)\lambda^2 - \mu\lambda + \det(T).
+\end{align*}
+Similar calculation for $4 \times 4$ matrices and upwards become
+increasingly more complex.
+
+\vspace{\baselineskip}
+
+\textit{The calculation of $\mu$ may seem daunting at first but
+it can be easily remembered as the $2 \times 2$ determinants of
+the top left, bottom right, and corners.}
+
+\subsubsection{Roots of characteristic polynomials}
+
+We have that for a map $T$ with spectrum $\Spec(T) = \{\lambda_1,
+\ldots, \lambda_k\}$, we can write the characteristic polynomial
+as follows:
+\begin{align*}
+  P(\lambda) &= a_n\lambda^n + a_{n - 1}\lambda^{n-1} + \cdots + a_0 \\
+  &= (\lambda - \lambda_1)^{m_1}(\lambda - \lambda_2)^{m_2}
+    \cdots (\lambda - \lambda_k)^{m_k}
+\end{align*}
+The $m_i$ values are called the multiplicity of the roots. If we
+are taking complex roots the sum of the $m_i$ values is
+equal to $n$. This is because there's always $n$ complex roots (up
+to multiplicity) but not always a similar amount of real roots.
+This also means that there can never be more eigenvalues than the
+dimension of the vector space.
+
+\subsubsection{The characteristic polynomial and matrix properties}
+
+In general, with a $n$-dimensional vector space $V$ over 
+$\mathbb{F}$, $T:V \to V$ a linear map, the characteristic
+polynomial $P$ can be written as:
+\begin{align*}
+  P(\lambda) = (-1)^n\lambda^n + (-1)^{n-1}\Tr(T)\lambda^{n-1}
+  + \cdots + \det(T).
+\end{align*}
+So, by the properties of polynomials, we know that:
+\begin{align*}
+  \det(T) &= \text{ product of the roots of } P \\
+  \Tr(T) &= \text{ sum of the roots of } P.
+\end{align*}
+As it's the characteristic polynomial, the roots are just the
+eigenvalues. Let $\Spec(T) = \{\lambda_1, \ldots, \lambda_n\}$
+(not necessarily distinct):
+\begin{align*}
+  \det(T) &= \prod_{i = 1}^k \lambda_k \\
+  \Tr(T) &= \sum_{i = 1}^k \lambda_k
+\end{align*}
+
+\section{Inner Products}
+
+\subsection{Definition of an Inner Product}
+
+For $V$ a vector space over $\mathbb{C}$, an inner product on
+$V$ is a map $\langle,\rangle : V \times V \to \mathbb{C}$ with
+the following properties:
+\begin{itemize}
+  \item $\langle v, v \rangle \geq 0$
+  \item $\langle v, v \rangle = 0 \Leftrightarrow v = 0$
+  \item $\langle v, w \rangle = \overline{\langle w, v \rangle}$
+  \item $\langle v, u + w \rangle 
+    = \langle v, u \rangle + \langle v, w \rangle$
+  \item $\langle v, \lambda w \rangle = \lambda \langle v, w \rangle
+    \Rightarrow \langle \lambda v, w \rangle = \overline{\lambda}\langle v, w \rangle$.
+\end{itemize}
+
+\textit{When our values are real, we can just remove the conjugate
+bar.}
+
+\subsection{Inner Product Spaces}
+
+A vector space paired with an inner product is called an inner
+product space. If it's over the real/complex numbers we call
+it a real/complex inner product space (respectively).
+
+\subsection{The Norm}
+
+For an inner product space $(V, \langle , \rangle)$, we define the
+norm by:
+\begin{align*}
+  \|v\| := \sqrt{\langle v,v \rangle}
+\end{align*}
+
+\subsection{Properties of the Norm}
+
+For an inner product space $(V, \langle , \rangle)$:
+
+\begin{itemize}
+  \item $|\langle v, w \rangle| \leq \|v\|\|w\|$
+  \item $\|v\| = 0 \Leftrightarrow v = 0$
+  \item $\|\lambda v\| = |\lambda|\|v\|$
+  \item $\|v + w\| \leq \|v\| + \|w\|$.
+\end{itemize}
+
+\section{Orthogonality}
+
+\subsection{Definition of Orthogonal Vectors and Subspaces}
+
+For an inner product space $(V, \langle , \rangle)$:
+\begin{itemize}
+  \item $v, w$ in $V$ are orthogonal $\Leftrightarrow \langle v,w \rangle = 0$ 
+  \item $U, W$ subspaces of $V$ are orthogonal $\Leftrightarrow$ 
+    $u$ and $w$ are orthogonal for all $u$ in $U$, $w$ in $W$.
+\end{itemize}
+
+\subsection{Orthogonal Complements}
+
+For an inner product space $(V, \langle , \rangle)$ with
+$U \subseteq V$ a subspace, we define the orthogonal complement
+$U^{\perp}$ as follows:
+\begin{gather*}
+  U^{\perp} := \{v \in V : \langle v,u \rangle = 0, \forall u \in U\}.
+\end{gather*}
+A consequence of the definition is that $V = U \oplus U^{\perp}$.
+
+\subsection{Pythagoras' Theorem}
+
+For an inner product space $(V, \langle , \rangle)$ with $v, u$ in
+$V$ such that $\langle v,u \rangle = 0$:
+\begin{gather*}
+  \|v + u\|^2 = \|v\|^2 + \|u\|^2 \\
+  \text{or} \\
+  \langle v+u,v+u \rangle = \langle v,v \rangle + \langle u,u \rangle
+\end{gather*}
+
+\subsection{Orthonormal Bases}
+
+\subsubsection{Definition of an orthonormal basis}
+
+For an inner product space $(V, \langle , \rangle)$ with a basis
+$B = \{v_1, v_2, \ldots, v_n\}$. $B$ is an orthonormal basis
+if:
+\begin{align*}
+  \langle v_i,v_j \rangle = \delta_{ij}.
+\end{align*}
+
+\subsubsection{Existence of an orthonormal basis}
+
+All finite dimensional inner product spaces have an orthonormal
+basis.
+
+\subsubsection{Properties of orthonormal bases}
+
+For an inner product space $(V, \langle , \rangle)$ with an
+orthonormal basis $B = \{v_1, v_2, \ldots, v_n\}$ and
+$v, w$ in $V$:
+\begin{itemize}
+  \item $v = \sum_{i = 1}^n \langle v_i,v \rangle v_i$
+  \item $\langle v, w \rangle = \sum_{i = 1}^n 
+    \overline{\langle v_i,v \rangle}\langle v_i,w \rangle$
+  \item $\langle v, v \rangle = \sum_{i = 1}^n |\langle v_i, v \rangle|^2$.
+\end{itemize}
+
+\subsubsection{Orthogonal projections}
+
+For an inner product space $(V, \langle , \rangle)$ a linear map
+$P: V \to V$ is called an orthogonal projection if:
+\begin{itemize}
+  \item $P^2 = P$
+  \item $\langle Pv,w \rangle = \langle v,Pw \rangle$.
+\end{itemize}
+
+\subsubsection{Constructing an orthogonal projection}
+
+For an inner product space $(V, \langle , \rangle)$ with a
+subspace $U \subseteq V$ with an orthonormal basis
+$B = \{u_1, u_2, \ldots, u_k\}$, we have an orthogonal projection:
+\begin{gather*}
+  P : V \to V \\
+  P(v) := \sum_{i = 1}^k \langle u_i, v \rangle u_i
+\end{gather*}
+
+\textit{So, we can write vectors as a linear combination of basis
+vectors, if we do that and then remove some of those terms
+we get this projection. We are writing vectors in terms of a
+subset of basis vectors.}
+
+\subsubsection{Properties of orthogonal projections}
+
+For an inner product space $(V, \langle , \rangle)$ with an
+orthogonal projection $P$, we have:
+\begin{itemize}
+  \item $(I - P)$ is also an orthogonal projection
+  \item $V = \Ker(P) \oplus \Ima(P)$
+  \item $\Ker(P) = \Ima(P)^\perp$
+  \item $\|v - w\| \geq \|v - Pv\| \ (w \in \Ima(P))$
+\end{itemize}
 
 \end{document}
