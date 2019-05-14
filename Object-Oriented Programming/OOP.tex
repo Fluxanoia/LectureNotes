@@ -1,0 +1,357 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+
+\begin{document}
+
+\title{Object-Oriented Programming Notes}
+\date{}
+\author{written by Tyler Wright}
+\maketitle
+
+\vfill
+
+\textit{An important note, these notes are absolutely \textbf{NOT}
+      guaranteed to be correct, representative of the course, or rigorous.
+      Any result of this is not the author's fault.}
+
+\newpage
+
+\section{Classes, Objects, and the Basics of Java}
+
+\subsection{Definition of a Class}
+
+A class is a type for variables and objects, encapsulating many key
+ideas, it is:
+\begin{itemize}
+    \item A structure with fields
+    \item A closed system
+    \item A module
+    \item A namespace (to avoid clashes)
+    \item A unit (for testing).
+\end{itemize}
+
+\subsection{Definition of an Object}
+
+An object is an entity that combines both data (attributes) and
+methods uniquely, objects...
+\begin{itemize}
+    \item ...can have a state and/or act
+    \item ...can have a unique identity
+    \item ...are responsible for their own data
+    \item ...can communicate with other objects via methods
+    \item ...can expose its own information.
+\end{itemize}
+Object-oriented programming is (quite obviously) based around this
+concept.
+
+\subsection{Instances}
+
+Every object is an \textbf{instance} of a class, or rather, an object
+is an instantiation of a class. In this way, classes are like a
+blueprint for objects.
+
+\vspace{\baselineskip}
+
+Objects are \textbf{constructed} by using the constructor for a class
+to instantiate the class. In Java, the constructor always has the
+same name as the class.
+
+\newpage
+
+\subsection{The Difference between Classes and Objects}
+
+\begin{multicols}{2}
+    Classes are:
+    \begin{itemize}
+        \item Catergorised
+        \item Compile time
+        \item Blueprints
+        \item Static
+        \item Immutable
+    \end{itemize}
+    \columnbreak
+    Objects are:
+    \begin{itemize}
+        \item Instances
+        \item Runtime
+        \item Entities
+        \item Dynamic
+        \item Mutable
+    \end{itemize}
+\end{multicols}
+
+\subsection{The Java Toolchain}
+
+In Java, the written \texttt{.java} files are compiled into 
+\texttt{.class} files which are run by the \textbf{JVM} (Java
+Virtual Machine).
+
+\subsection{The Java Entry Point}
+
+Java programs start in a \texttt{main} function which takes in
+an array of strings (command line arguments).
+
+\subsection{Exception Handling}
+
+In Java, a \texttt{try-catch} block is used to catch exceptions
+at runtime.
+
+\subsection{Exit Codes}
+
+In Java, we can use \texttt{System.exit(i)} to close the program at
+anytime. The meaning of the \texttt{int i} passed to the function
+is defined by the programmer, but in general 0 is good, anything
+non-zero is an error.
+
+\subsection{Immutable Objects}
+
+Immutable objects cannot have their value change after declaration
+and their value must be assigned on declaration. The \texttt{final}
+keyword is used for this in Java. Final methods cannot be overriden
+and final classes cannot be extended.
+
+\section{Memory}
+
+\subsection{The Stack}
+
+The stack is the memory given to a thread of execution.
+When a function is called, a block is reserved on the stack for
+local variables and bookkeeping data. This memory is freed once
+the function ends.
+
+\subsection{The Heap}
+
+The heap is the memory given to dynamic allocation. There's no
+pattern to the management of blocks on the heap, it can be
+allocated and freed at any time. This memory is used for large
+data to avoid overflowing the stack.
+
+\subsection{The Lifecycle of Objects}
+
+Once objects no longer have any references to them, they are
+eligible for garbage collection by the Java garbage collector.
+This is a system that deallocated unused memory in Java. So,
+at the end of function calls, all variables local to that function
+become unused and are collected.
+
+\subsection{Pass by value}
+
+Primitive types such as \texttt{int}, \texttt{double} and, 
+\texttt{boolean} are passed by value.
+
+\vspace{\baselineskip}
+
+Objects in Java are also passed by value but a \textit{reference}
+to the object is passed. This means we can call the methods of the
+object and have its values change, but we cannot reassign the
+variable inside a function.
+
+\subsection{Equality}
+
+It is important to note that \texttt{==} is reference equality
+in Java so two strings with the same underlying data may not
+be equal. This is why we have \texttt{String.equals} to test
+string equality.
+
+\newpage
+
+\section{Scope}
+
+\subsection{The \texttt{this} Keyword}
+
+\texttt{this} references to the current object whose method
+is begin executed. So, the use of this keyword will throw
+errors in places where there is no object such as static methods.
+
+\subsection{The Private Modifier}
+
+Private elements are class-scope. Only the class can directly
+change or use the element, this underpins encapsulation.
+
+\subsection{The Default (or no) Modifier}
+
+Default elements are package-scope.
+
+\subsection{The Static Modifier}
+
+Static elements are associated to a class rather than an object.
+This means they are processed at compile time and can be accessed
+\textbf{without} instantiation.
+
+\vspace{\baselineskip}
+
+Static functions cannot use other non-static members unless given
+to the function or instantiated inside the function.
+
+\vspace{\baselineskip}
+
+One key use of static is the \texttt{main} function, the entry point
+of the program.
+
+\section{Inheritance}
+
+If we need multiple classes with similar attributes, it makes sense
+for them all to inherit core functionality from a super (parent) class.
+This can be achieved with the \texttt{extends} keyword.
+
+\vspace{\baselineskip}
+
+Additionally, inheriting classes can override the super classes methods
+to implement their own functionality (overriding the super classes
+base functionality). This can be similarly done by adding the
+\texttt{abstract} modifer to your attributes or methods but this will
+mean there is no default implementation and the inheriting subclass
+must implement the method.
+
+\vspace{\baselineskip}
+
+The abstract modifier can also be applied to classes where it means
+it can only be instantiated as a super class.
+
+\subsection{Polymorphism}
+
+When we have classes (say \texttt{ClassTest}) inheriting other Classes
+(say \texttt{Test}) we can refer to the subclass as an instance
+of the super class (all \texttt{ClassTest} objects are also
+\texttt{Test} objects). This doesn't change the object, it just changes
+how the object is viewed, so to speak.
+
+\subsection{Interfaces}
+
+We can only extend a single class in Java, but it would be nice to
+be able to implement multiple classes in one place, this is where
+interfaces come in. They are similar to abstract classes with
+only final abstract methods and no attributes - they are essentially
+a set of methods your subclass must implement.
+
+\subsection{Encapsulation}
+
+Encapsulation is all about keeping a classes functionality identical
+or adding more features without changing the implementation of the
+class. 
+
+\vspace{\baselineskip}
+
+This is accomplished by only having class data accessed by
+specified 'getter' and 'setter' methods, thus we can change the
+attributes and methods of the class at will as long as the
+getters and setters function as they did before.
+
+\subsection{Single Dispatch}
+
+Single dispatch is when we call a method of an object but the call is
+overridden by a method in the subclass of the referenced object.
+Such a decision is made at runtime.
+
+\subsection{Double Dispatch}
+
+Double dispatch is used to resolve interactions between two objects
+of known super class but unknown subclass. By making each subclass
+implement a set of overloaded methods (\texttt{visit} for example)
+with a definition for each subclass and one generic implementation.
+
+\vspace{\baselineskip}
+
+The generic implementation will call the specific implementation of
+the other object as it knows its own type (of course). Thus,
+the other object then knows what is calling it and its own type
+so can produce the corresponding reaction.
+
+\subsection{Downcasting}
+
+Downcasting is a last resort programming technique where classes
+are casted to their subclasses. This can lead to complications if
+done incorrectly as there's no guarantee that it is in fact
+an instance of the subclass. We can use generics to avoid this
+technique most of the time.
+
+\subsection{Generics}
+
+We can define classes of a generic type to make them more versatile.
+For example, we can have a \texttt{Collection} of any instantiable
+object in Java.
+
+\section{Patterns}
+
+\subsection{The Visitor Pattern}
+
+The visitor pattern allows a specific method within a visitor class
+to be called by a specific visiting class. So, in a Java board game, 
+if we had a game class that processed different types of moves
+with a generic move super class we could declare the game class
+as a \textbf{visitor}.
+
+\vspace{\baselineskip}
+
+Then, the moves would be the \textbf{visiting} classes. In our
+visitor, we would define an accepting move for each move subclass
+and then use a method call on the visiting classes to have them
+'visit' the visitor. As the visiting class knows its type, it will
+call the specific method.
+
+\subsection{The Iterator Pattern}
+
+The iterator pattern is used to sequentially access the
+elements of an object without exposing it's underlying structure.
+This uses encapsulation as it doesn't rely on how the class
+stores or handles its values, it just requires that it be
+iterable.
+
+\vspace{\baselineskip}
+
+In this pattern, we have an iterable class and an iterator class.
+The iterator will use the iterable interface to extract values
+from the class and handle the indexing.
+
+\newpage
+
+\subsection{The Strategy Pattern}
+
+The strategy pattern is used to define a set of algorithms that
+can be specifically chosen to carry out specific behaviour.
+
+\vspace{\baselineskip}
+
+We have a context where we require that we can use multiple different
+algorithms (strategies) at will. So, we define specific strategy
+subclasses and these can be passed to the context who can
+use the implementation of the strategy super class to carry
+out the strategy on itself.
+
+\subsection{The Observer Pattern}
+
+In this pattern, we have a main subject class and
+many observer classes. The subject class registers and
+unregisters observers and can announce to update observer classes.
+There are two main types of observer, push and pull:
+\begin{itemize}
+    \item Push observer subjects send their state to the observer when
+    it updates
+    \item Pull observer observers must request the state from the 
+    observer    
+\end{itemize}
+
+\subsection{The Composite Pattern}
+
+The composite pattern is used to store multiple components in a
+tree-like structure. Each component can store a simple component
+with no children or composite classes that can contain a set of
+more components.
+
+\subsection{The Model-View-Controller}
+
+This is a pattern of patterns and has no specific correct definition.
+It consists of a model and a view and the essence of the idea is 
+regulating their communication thorough specific classes.
+
+\vspace{\baselineskip}
+
+If we allow interaction between these intermediary classes, we get
+a Model-View-Presenter pattern. 
+
+\end{document}
