@@ -723,6 +723,15 @@ For an inner product space $(V, \langle , \rangle)$:
   \item $\|v + w\| \leq \|v\| + \|w\|$.
 \end{itemize}
 
+\subsection{Matrix Derivation from the Inner Product}
+
+For an inner product space $(V, \langle , \rangle)$, where
+$\dim(V) = n$ with $T : V \to V$ a linear map. If we have
+an orthonormal basis $B = \{v_1, \ldots, v_n\}$ we have:
+\begin{align*}
+  M_{BB}(T) = (a_{ij}) = (\langle v_i, T(v_j) \rangle)
+\end{align*}
+
 \section{Orthogonality}
 
 \subsection{Definition of Orthogonal Vectors and Subspaces}
@@ -816,5 +825,158 @@ orthogonal projection $P$, we have:
   \item $\Ker(P) = \Ima(P)^\perp$
   \item $\|v - w\| \geq \|v - Pv\| \ (w \in \Ima(P))$
 \end{itemize}
+
+\section{Adjoint Operators}
+
+\subsection{Definition of an Adjoint Operator}
+
+For an inner product space $(V, \langle , \rangle)$ with 
+$T : V \to V$ a linear map. We define the adjoint operator $T^*$ 
+by the relation:
+\begin{align*}
+  \langle T^*v, w \rangle = \langle v, Tw \rangle.
+\end{align*}
+
+\subsection{Adjoint Matrices}
+
+For an inner product space $(V, \langle , \rangle)$ with 
+$T : V \to V$ a linear map with associated matrix 
+$M_{BB}(T) = (a_{ij})$, the adjoint has associated adjoint matrix:
+\begin{align*}
+  M_{BB}(T^*) = (\overline{a_{ji}}).
+\end{align*}
+
+\textit{Take care to notice the transposition.}
+
+\subsection{Properties of Adjoint Operators}
+
+For an inner product space $(V, \langle , \rangle)$ with 
+$S, T : V \to V$ linear maps:
+\begin{itemize}
+  \item $(S + T)^* = S^* + T^*$
+  \item $(ST)^* = T^*S^*$
+  \item $(T^*)^* = T$
+  \item For $T$ invertible, $(T^*)^{-1} = (T^{-1})^*$.
+\end{itemize}
+
+\subsection{Types of Operators}
+
+\subsubsection{Normal, unitary, and self-adjoint}
+
+For an inner product space $(V, \langle , \rangle)$ with 
+$T : V \to V$ a linear map. We say $T$ has:
+\begin{itemize}
+  \item The \textbf{Normal} property if $T^*T = TT^*$
+  \item The \textbf{Unitary} property if $T^*T = I$
+  \item The \textbf{Self-adjoint} (hermitian) property if $T* = T$
+\end{itemize}
+
+\textit{All unitary operators are normal. All self-adjoint operators
+are normal.}
+
+\subsubsection{Real associated matrices}
+
+For an inner product space $(V, \langle , \rangle)$ with 
+$T : V \to V$ a linear map with associated matrix $M$.
+If $M$ is real $M^* = M^t$ (as it's the transpose and conjugate)
+this leads to the following results:
+\begin{itemize}
+  \item Self-adjoint $\Leftrightarrow$ $M = M^t$ (symmetric)
+  \item Unitary $\Leftrightarrow$ $M^{-1} = M^t$ (orthogonal)
+\end{itemize}
+
+\subsubsection{Eigenvalues of self-adjoint operators}
+
+For an inner product space with a linear, self-adjoint map $T$, we
+have that the eigenvalues of $T$ are all real.  
+
+\subsubsection{Column vectors of unitary matrices}
+
+For $M$ in $M_n(\mathbb{C})$, $M$ is unitary if and only if
+the columns vectors of $M$ form an orthonormal basis.
+
+\subsubsection{Properties of unitary operators}
+
+For an inner product space $(V, \langle , \rangle)$ with 
+$S, T : V \to V$ linear, unitary maps. We have:
+\begin{itemize}
+  \item $T^{-1}$, $T^*$, $ST$ unitary
+  \item $\|Tv\| = \|v\|$
+  \item All eigenvalues of $T$ have modulus $1$
+\end{itemize}
+
+\subsubsection{Eigenvalues of normal operators}
+
+For an inner product space $(V, \langle , \rangle)$ with 
+$T : V \to V$ a linear, normal map. If we have $v$ an eigenvector
+of $T$ with eigenvalue $\lambda$ then $v$ is an eigenvector of $T^*$
+with eigenvalue $\overline{\lambda}$.
+
+\subsubsection{Eigenvectors of normal operators}
+
+We had a result previously that stated that eigenvectors with
+different eigenvalues were linearly independent. We now say for 
+an inner product space with a linear, normal map $T$, we
+have that for two eigenvectors of $T$, they are orthogonal if
+their eigenvalues differ.
+
+\subsubsection{Decomposition via normal operators}
+
+For a finite dimensional, complex inner product space 
+$(V, \langle , \rangle)$ with $T : V \to V$ a linear, normal map with
+$\Spec(T) = \{\lambda_1, \ldots, \lambda_k\}$:
+\begin{align*}
+  V = V_{\lambda_1} \oplus \cdots \oplus V_{\lambda_k}
+\end{align*}
+So, if we have a finite dimensional, complex inner product 
+space with a normal operator, we can write the space as a direct
+sum of eigenspaces. Thus, the space has a basis of eigenvectors.
+Thus, the associated matrix to the operator is diagonalisable.
+
+\subsubsection{Diagonalisation via normal operators}
+
+For $M$ in $M_n(\mathbb{C})$ a normal matrix, we have that there
+exists a unitary matrix $D$ in $M_n(\mathbb{C})$ such that the
+columns of $D$ are the eigenvectors of $M$ and:
+\begin{align*}
+  D^*MD = \Diag(\lambda_1, \ldots, \lambda_n),
+\end{align*}
+where the diagonal matrix is formed by 
+$\Spec(M) = \{\lambda_1, \ldots, \lambda_n\}$.
+
+\textit{So, all normal matrices are diagonalisable: 
+self-adjoint (hermitian), unitary, real symmetric.}
+
+\section{Real Matrices}
+
+\subsection{Motivation}
+
+We have worked with complex matrices of size $n$ as they always have
+$n$ eigenvalues. If matrix is self-adjoint however, then all the
+eigenvalues are real. So, it would make sense to consider real,
+self-adjoint matrices (also known as real symmetric matrices).
+
+\subsection{Orthogonal Matrices}
+
+\subsubsection{Definition of an orthogonal matrix}
+
+Unitary and real matrices are called orthogonal. Additionally,
+we have $O$ in $M_n(\mathbb{R})$ orthogonal if the columns form
+an orthonormal basis.
+
+\subsubsection{Closure of orthogonal matrices}
+
+For $O_1, O_2$ in $M_n(\mathbb{R})$ orthogonal matrices, $O_1O_2$ and
+$O_1^{-1} = O_1^t$ are orthogonal.
+
+\subsection{Diagonalisation of Real Symmetric Matrices}
+
+For $M$ in $M_n(\mathbb{R})$ a symmetric, real matrix, we have that 
+there exists a matrix $O$ in $M_n(\mathbb{R})$ orthogonal and:
+\begin{align*}
+  O^tMO = \Diag(\lambda_1, \ldots, \lambda_n),
+\end{align*}
+where the diagonal matrix is formed by 
+$\Spec(M) = \{\lambda_1, \ldots, \lambda_n\}$.
 
 \end{document}
