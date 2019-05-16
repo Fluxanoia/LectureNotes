@@ -862,11 +862,11 @@ We choose the hypotheses:
 
 \subsubsection{Test Statistic}
 
-Where $S_X^2, S_Y^2$ are the sample variances of $X$ and $Y$
-respectively, we define the pooled variance $S_p$:
+We define the pooled variance $S_p$:
 \begin{align*}
     S_p = \frac{\sum_{i = 1}^n (x_i - \overline{x})^2
-        + \sum_{i = 1}^m (y_i - \overline{y})^2}{n + m - 2},
+        + \sum_{i = 1}^m (y_i - \overline{y})^2}{n + m - 2}
+        = \frac{S_{xx} + S_{yy}}{n + m - 2},
 \end{align*}
 and we have the test statistic $T$ defined by:
 \begin{align*}
