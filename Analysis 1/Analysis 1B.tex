@@ -139,7 +139,7 @@ For $a, b \in \mathbb{R}$ with $a < b$, let $f:[a, b]\to\mathbb{R}$
 be a bounded function. The supremum norm of $f$ on $[a,b]$ is
 denoted by $\|f\|_{[a,b]}$ and is defined by:
 \begin{align*}
-      \|f\|_{[a,b]} := \sup{\{\|f(x)| : x \in [a,b]\}}.
+      \|f\|_{[a,b]} := \sup{\{|f(x)| : x \in [a,b]\}}.
 \end{align*}
 
 \textit{The supremum norm is simply just the furthest distance from
@@ -203,7 +203,7 @@ In this case, $P$ and $\psi$ are adapted to each other.
 
 \vspace{\baselineskip}
 
-\textit{$S[a, b]$ is the set of step functions over $[a, b]$.}
+\textit{$S([a, b])$ is the set of step functions over $[a, b]$.}
 
 \subsection{Integration of Step Functions}
 
@@ -681,12 +681,12 @@ $f$ such that $f' = g$ on $[a, b]$.
 
 \subsubsection{Uniform convergence of series}
 
-For $(g_n)_{n\in\mathbb{n}}$ a sequence of real valued functions defined on
+For $(g_n)_{n\in\mathbb{N}}$ a sequence of real valued functions defined on
 $[a, b]$, define:
-\begin{align}
+\begin{align*}
       f := \sum_{k = 1}^\infty g_k \\
       f_n := \sum_{k = 1}^n g_k.
-\end{align}
+\end{align*}
 We say $f$ converges uniformly if $f_n$ converges pointwise and uniformly to
 $f$ on $[a, b]$.
 
