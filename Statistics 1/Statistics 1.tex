@@ -657,9 +657,9 @@ $\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n^{-1}$ is the
 $\chi^2_n$ quantile function (inverse CDF):
 \begin{align*}
     c_L & = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
-    {X_{n-1}^{-1}\left(\frac{1 - \alpha}{2}\right)}     \\
+    {X_{n-1}^{-1}\left(\frac{1 + \alpha}{2}\right)}     \\
     c_U & = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
-    {X_{n-1}^{-1}\left(\frac{1 + \alpha}{2}\right)}.
+    {X_{n-1}^{-1}\left(\frac{1 - \alpha}{2}\right)}.
 \end{align*}
 
 \subsubsection{$U(0, \theta)$ : Confidence interval for $\theta$}
@@ -677,9 +677,9 @@ The $\alpha\%$ confidence interval for $\theta$ from a sample
 $\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n^{-1}$ is the
 $\chi^2_n$ quantile function (inverse CDF):
 \begin{align*}
-    c_L & = \frac{X_{2n}^{-1}\left(\frac{1 + \alpha}{2}\right)}
+    c_L & = \frac{X_{2n}^{-1}\left(\frac{1 - \alpha}{2}\right)}
     {2\sum_{i = 1}^n x_i}                                       \\
-    c_U & = \frac{X_{2n}^{-1}\left(\frac{1 - \alpha}{2}\right)}
+    c_U & = \frac{X_{2n}^{-1}\left(\frac{1 + \alpha}{2}\right)}
     {2\sum_{i = 1}^n x_i}.
 \end{align*}
 
