@@ -123,7 +123,7 @@ There are two hinge measures, lower ($H_1$) and upper ($H_3$):
 \subsubsection{Quartiles}
 
 For a sample $X = \{x_1, x_2, \ldots, x_n\}$, there are two quartile
-measures, lower ($Q_1$) and upper ($Q_3$). The formulas are long and
+measures, lower ($Q_1$) and upper ($Q_3$). The formulae are long and
 overly complicated so for $Q_1$:
 
 \begin{itemize}
@@ -866,7 +866,7 @@ We define the pooled variance $S_p$:
 \begin{align*}
     S_p = \frac{\sum_{i = 1}^n (x_i - \overline{x})^2
         + \sum_{i = 1}^m (y_i - \overline{y})^2}{n + m - 2}
-        = \frac{S_{xx} + S_{yy}}{n + m - 2},
+    = \frac{S_{xx} + S_{yy}}{n + m - 2},
 \end{align*}
 and we have the test statistic $T$ defined by:
 \begin{align*}
@@ -1150,9 +1150,9 @@ We choose the hypotheses:
 \subsubsection{Test Statistic}
 
 For $s_{\hat\beta}^2$ defined as follows:
-\begin{align}
-    s_{\hat\beta}^2  & = \frac{\hat\sigma^2}{S_{xx}},
-\end{align}
+\begin{align*}
+    s_{\hat\beta}^2 & = \frac{\hat\sigma^2}{S_{xx}},
+\end{align*}
 we have the test statistic defined by:
 \begin{align*}
     T = \frac{(\hat\beta - \beta_0)}{s_{\hat\beta}}
@@ -1198,10 +1198,10 @@ We choose the hypotheses:
 \subsubsection{Test Statistic}
 
 For $s_{\hat\alpha}^2$ defined as follows:
-\begin{align}
-    s_{\hat\alpha}^2 & = s_{\hat\beta}^2 
-        \left(\frac{\sum_{i = 1}^n x_i^2}{n}\right),
-\end{align}
+\begin{align*}
+    s_{\hat\alpha}^2 & = s_{\hat\beta}^2
+    \left(\frac{\sum_{i = 1}^n x_i^2}{n}\right),
+\end{align*}
 we have the test statistic defined by:
 \begin{align*}
     T = \frac{(\hat\alpha - \alpha_0)}{s_{\hat\alpha}}
@@ -1225,5 +1225,233 @@ $H_1$, let $T^{-1}_n$ be the $t_n$ quantile function
     C = (-\infty, -c^*].
     \tag{$ c^* = T_{n-2}^{-1}(1 - \gamma) $}
 \end{align*}
+
+\newpage
+\section{A List of Important Formulae}
+Let $X = \{x_1, \ldots, x_n\}$ be a random sample:
+
+\subsection{Measures of Central Tendency}
+
+\subsubsection{Sample Mean}
+\begin{gather*}
+    \overline{X} = \frac{1}{n}\sum_{i = 1}^n x_i.
+\end{gather*}
+
+\subsubsection{Sample Median}
+\begin{gather*}
+    m_X = \begin{cases}
+        \frac{x_{(m)} + x_{(m + 1)}}{2} & \text{for } n = 2m      \\
+        x_{(m + 1)}                     & \text{for } n = 2m + 1.
+    \end{cases}
+\end{gather*}
+
+\subsection{Measures of Spread}
+
+\subsubsection{Sample Variance}
+\begin{gather*}
+    s_X^2 = \frac{\sum_{i = 1}^n (x_i - \overline{x})^2}{n - 1}.
+\end{gather*}
+
+\subsubsection{Hinges}
+\begin{align*}
+    H_1 & = \text{ median of \{data values } \leq \text{ the median\}}  \\
+    H_3 & = \text{ median of \{data values } \geq \text{ the median\}}.
+\end{align*}
+
+\subsubsection{Quartiles}
+\begin{align*}
+    Q_1 & = x_{(k_1)}, \, k_1 = \frac{ (n + 1)}{4} \tag{interpolated} \\
+    Q_3 & = x_{(k_3)}, \, k_3 = \frac{3(n + 1)}{4} \tag{interpolated}
+\end{align*}
+
+\subsubsection{Outliers}
+\begin{gather*}
+    O(X) = \left\{x \in X \text{ such that }
+    |x - \overline{X}| > \frac{3}{2}(H_3 - H_1)\right\}
+\end{gather*}
+
+\subsection{Estimators}
+
+\subsubsection{Maximum Likelihood}
+For each $x$ in $X$ independent and identically distributed:
+\begin{gather*}
+    \frac{\partial}{\partial\theta}\ell(\theta) =
+    \sum_{i = 1}^n\left[\frac{\partial}{\partial\theta}\ln{(f_X(x_i))}\right].
+\end{gather*}
+
+\subsubsection{Performance of Estimators}
+\begin{align*}
+    \Bias(\hat\theta) & = \mathbb{E}(\hat\theta) - \theta         \\
+    \Mse(\hat\theta)  & = \mathbb{E}((\hat\theta - \theta)^2)     \\
+                      & = \Var(\hat\theta) + \Bias(\hat\theta)^2.
+\end{align*}
+
+\subsection{Distributions}
+
+\subsubsection{Distributions related to the normal}
+If for $X_i$ in $X$ we have $X_i \sim \mathcal{N}(\mu, \sigma^2)$:
+\begin{gather*}
+    \overline{X} = \frac{1}{n} \sum_{i = 1}^n X_i
+    \sim \mathcal{N}(\mu, \sigma^2 / n) \\
+    S_X^2 = \frac{\sum_{i = 1}^n (X_i - \overline{X})^2}{n - 1}
+    \sim \frac{\sigma^2}{n - 1} \chi^2_{n - 1}
+\end{gather*}
+
+\subsubsection{$\chi^2$ distribution}
+\begin{gather*}
+    \mathcal{M}_X(t) = (1 - 2t)^{-r / 2} \Longleftrightarrow
+    X \sim \chi^2_r.
+\end{gather*}
+
+\subsubsection{$t$-distribution}
+Let $Z \sim \mathcal{N}(0, 1)$, $X \sim \chi_r^2$ be independent, for:
+\begin{gather*}
+    T = \frac{Z}{\sqrt{X / r}} \sim t_r.
+\end{gather*}
+
+\subsection{Sum of Squared Difference}
+\begin{align*}
+    S_{xx} & = \sum_{i=i}^n (x_i)^2 - n\overline{x}^2                     \\
+    S_{xy} & = \sum_{i=1}^n (x_{(i)} y_{(i)}) - n\overline{x}\overline{y} \\
+    S_{yy} & = \sum_{i=i}^n (y_i)^2 - n\overline{y}^2.
+\end{align*}
+
+\subsection{Linear Regression}
+For $\{y_1, \ldots, y_n\}$ a random sample predicted by $X$:
+
+\subsubsection{$\hat\alpha$ and $\hat\beta$}
+\begin{gather*}
+    \hat\beta = \frac{S_{xy}}{S_{xx}} \\
+    \hat\alpha = \overline{y} - \hat\beta\overline{x}.
+\end{gather*}
+
+\subsubsection{Sum of squared errors}
+\begin{gather*}
+    RSS = S_{yy} - \frac{S_{xy}^2}{S_{xx}}.
+\end{gather*}
+
+\subsubsection{Estimated variance of the errors}
+\begin{gather*}
+    \hat\sigma^2 = \frac{RSS}{n - 2}.
+\end{gather*}
+
+\subsubsection{The distribution of $\hat\alpha$, $\hat\beta$
+    and, $\hat\sigma^2$}
+\begin{align*}
+    \hat\beta    & \sim \mathcal{N}\left(\beta,
+    \frac{\sigma^2}{S_{xx}}\right)                            \\
+    \hat\alpha   & \sim \mathcal{N}\left(\alpha,
+    \frac{\Var(\hat\beta) \sum_{i = 1}^n x_i^2}{n}\right)     \\
+    \hat\sigma^2 & \sim \frac{\sigma^2}{n - 2}\chi^2_{n - 2}.
+\end{align*}
+
+\subsubsection{Sample variance of $\hat\alpha$ and $\hat\beta$}
+\begin{align*}
+    s_{\hat\beta}^2  & = \frac{\hat\sigma^2}{S_{xx}}                   \\
+    s_{\hat\alpha}^2 & = \frac{s_{\hat\beta}^2 \sum_{i=1}^n x_i^2}{n}.
+\end{align*}
+
+\subsection{Confidence Intervals}
+For an $\alpha\%$ confidence interval:
+
+\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence
+    interval for $\mu$ with $\sigma^2$ known}
+Let $\Phi^{-1}$ be the Normal quantile function (inverse CDF):
+\begin{align*}
+    C = \overline{x} \pm \Phi^{-1}\left(\frac{1 + \alpha}{2}\right)
+    \left(\frac{\sigma}{\sqrt{n}}\right).
+\end{align*}
+
+\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence
+    interval for $\mu$ with $\sigma^2$ unknown}
+Let $T^{-1}_{n}$ be the $t_{n}$ quantile function (inverse CDF),
+$\hat\sigma^2$ be the sample variance:
+\begin{align*}
+    C = \overline{x} \pm T^{-1}_{n-1}\left(\frac{1 + \alpha}{2}\right)
+    \left(\frac{\hat\sigma}{\sqrt{n}}\right).
+\end{align*}
+
+\subsubsection{$\mathcal{N}(\mu, \sigma^2)$ : Confidence
+    interval for $\sigma^2$ with $\mu$ unknown}
+Let $X_n^{-1}$ be the $\chi^2_n$ quantile function (inverse CDF):
+\begin{align*}
+    C = \frac{\sum_{i = 1}^n(x_i - \overline{x})^2}
+    {X_{n-1}^{-1}\left(\frac{1 \pm \alpha}{2}\right)}.
+\end{align*}
+
+\subsubsection{$U(0, \theta)$ : Confidence interval for $\theta$}
+\begin{align*}
+    C = x_{(n)}\left(\frac{1 \pm \alpha}{2}\right)^{-\frac{1}{n}}.
+\end{align*}
+
+\subsubsection{Exp$(\theta)$ : Confidence interval for $\theta$}
+Let $X_n^{-1}$ be the $\chi^2_n$ quantile function (inverse CDF):
+\begin{align*}
+    C & = \frac{X_{2n}^{-1}\left(\frac{1 \pm \alpha}{2}\right)}
+    {2\sum_{i = 1}^n x_i}.
+\end{align*}
+
+\subsubsection{Confidence interval for $\alpha$}
+Let $T^{-1}_n$ be the $t_n$ quantile function (inverse CDF),
+the $\gamma\%$ confidence interval is:
+\begin{align*}
+    C = \hat\alpha \pm s_{\hat\alpha}
+    T^{-1}_{n - 2}\left(\frac{1 + \gamma}{2}\right).
+\end{align*}
+
+\subsubsection{Confidence interval for $\beta$}
+Let $T^{-1}_n$ be the $t_n$ quantile function (inverse CDF):
+\begin{align*}
+    C = \hat\beta \pm s_{\hat\beta}
+    T^{-1}_{n - 2}\left(\frac{1 + \gamma}{2}\right).
+\end{align*}
+
+\subsection{Test Statistics}
+
+\subsubsection{Normal Hypothesis Test}
+\begin{gather*}
+    T = \frac{\sqrt{n}(\overline{x} - \mu_0)}{\sigma}
+    \sim \mathcal{N}(0, 1).
+\end{gather*}
+
+\subsubsection{One Sample $t$-test}
+\begin{gather*}
+    T = \frac{\sqrt{n}(\overline{x} - \mu_0)}{S} \sim t_{n-1}.
+\end{gather*}
+
+\subsubsection{Pooled Two Sample $t$-test}
+\begin{gather*}
+    S_p = \frac{\sum_{i = 1}^n (x_i - \overline{x})^2
+        + \sum_{i = 1}^m (y_i - \overline{y})^2}{n + m - 2}
+    = \frac{S_{xx} + S_{yy}}{n + m - 2} \\ \\
+    T = \frac{\overline{x} - \overline{y}}
+    {S_p\sqrt{\frac{1}{n} + \frac{1}{m}}} \sim t_{n + m - 2}.
+\end{gather*}
+
+\subsubsection{Welch Two Sample $t$-test}
+\begin{gather*}
+    \nu = \frac{(\frac{S_X^2}{n} + \frac{S_Y^2}{m})^2}
+    {\frac{1}{n - 1}(\frac{S_X^2}{n})^2
+        + \frac{1}{m - 1}(\frac{S_Y^2}{m})^2} \\ \\
+    T = \frac{\overline{x} - \overline{y}}
+    {\sqrt{\frac{S_X^2}{n} + \frac{S_Y^2}{m}}} \simeq t_\nu.
+\end{gather*}
+
+\subsubsection{Paired $t$-test}
+\begin{gather*}
+    T = \frac{\sqrt{n} \, \overline{w}}{S_W} \sim t_{n - 1}.
+\end{gather*}
+
+\subsubsection{Test for $\alpha$}
+\begin{gather*}
+    T = \frac{(\hat\alpha - \alpha)}{s_{\hat\alpha}}
+    \sim t_{n - 2}.
+\end{gather*}
+
+\subsubsection{Test for $\beta$}
+\begin{gather*}
+    T = \frac{(\hat\beta - \beta)}{s_{\hat\beta}}
+    \sim t_{n - 2}.
+\end{gather*}
 
 \end{document}
