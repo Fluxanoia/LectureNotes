@@ -852,9 +852,9 @@ We choose the hypotheses:
 
 \subsubsection{Test Statistic}
 
-We define the pooled variance $S_p$:
+We define the pooled variance $S_p^2$:
 \begin{align*}
-    S_p = \frac{\sum_{i = 1}^n (x_i - \overline{x})^2
+    S_p^2 = \frac{\sum_{i = 1}^n (x_i - \overline{x})^2
         + \sum_{i = 1}^m (y_i - \overline{y})^2}{n + m - 2}
     = \frac{S_{xx} + S_{yy}}{n + m - 2},
 \end{align*}
@@ -1404,7 +1404,7 @@ Let $T^{-1}_n$ be the $t_n$ quantile function (inverse CDF):
 
 \subsubsection{Pooled Two Sample $t$-test}
 \begin{gather*}
-    S_p = \frac{\sum_{i = 1}^n (x_i - \overline{x})^2
+    S_p^2 = \frac{\sum_{i = 1}^n (x_i - \overline{x})^2
         + \sum_{i = 1}^m (y_i - \overline{y})^2}{n + m - 2}
     = \frac{S_{xx} + S_{yy}}{n + m - 2} \\ \\
     T = \frac{\overline{x} - \overline{y}}
