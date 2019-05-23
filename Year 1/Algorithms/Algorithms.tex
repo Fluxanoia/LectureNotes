@@ -2,8 +2,10 @@
 \usepackage[left = 3cm, right = 3cm]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{amsmath}
+\usepackage{multicol}
 
 \begin{document}
 
@@ -19,5 +21,105 @@
       Any result of this is not the author's fault.}
 
 \newpage
+
+\section{Bounding}
+
+\subsection{Racetrack Principle}
+
+For $f, g : \mathbb{N} \to \mathbb{N}$ functions, $n, k$ in $\mathbb{N}$
+we have that:
+\begin{align*}
+      \begin{rcases*}
+            f(k) \geq g(k) \\
+            f'(n) \geq g'(n) \quad (\forall n \geq k)
+      \end{rcases*} \Rightarrow
+      f(n) \geq g(n) \quad (\forall n \geq k)
+\end{align*}
+\textit{If a function $f$ is greater than another function $g$ 
+at a value $k$ and has a greater gradient for all values after
+and including $k$, $f$ is greater than $g$ for all values 
+after and including $k$.}
+
+\subsection{Big $O$ Notation}
+
+\subsubsection{Definition of the big $O$ notation}
+
+For $g : \mathbb{N} \to \mathbb{N}$ a function, $0(g)$ is a set of
+functions $f : \mathbb{N} \to \mathbb{N}$ such that each for
+$f$ in $O(g)$:
+\begin{gather*}
+      \exists \, c \in \mathbb{R}, n_0 \in \mathbb{N}
+      \text{ such that } \forall n \in N, \\
+      (n \geq n_0) \Rightarrow (0 \leq f(n) \leq cg(n)).
+\end{gather*}
+
+\subsubsection{The big $O$ notation under multiplication}
+
+For $f_1, f_2, g_1, g_2 : \mathbb{N} \to \mathbb{N}$ functions where:
+\begin{itemize}
+      \item $f_1 \in O(g_1)$
+      \item $f_2 \in O(g_2)$,
+\end{itemize}
+we have that:
+\begin{itemize}
+      \item $f_1 + f_2$ is in $O(g_1 + g_2)$
+      \item $f_1 \cdot f_2$ is in $O(g_1 \cdot g_2)$.
+\end{itemize}
+
+\subsubsection{Closure of the big $O$ notation}
+
+For $g : \mathbb{N} \to \mathbb{N}$ a function, $O(g)$ is closed
+under addition (this follows from the above).
+
+\subsubsection{Polynomials and the big $O$ notation}
+
+For $p : \mathbb{N} \to \mathbb{N}$ a polynomial of degree $k$,
+$p$ is in $O(n^k)$.
+
+\subsection{$\Theta$ Notation}
+
+\subsubsection{Definition of the $\Theta$ notation}
+
+For $g : \mathbb{N} \to \mathbb{N}$ a function, $\Theta(g)$ is a set of
+functions $f : \mathbb{N} \to \mathbb{N}$ such that each for
+$f$ in $\Theta(g)$:
+\begin{gather*}
+      \exists \, c_0, c_1 \in \mathbb{R}, n_0 \in \mathbb{N}
+      \text{ such that } \forall n \in N, \\
+      (n \geq n_0) \Rightarrow (0 \leq c_1g(n) \leq f(n) \leq c_2g(n)).
+\end{gather*}
+\textit{$f$ is sandwiched by multiples of $g$.}
+
+\subsubsection{Equivalency of the $\Theta$ notation}
+
+For $f, g : \mathbb{N} \to \mathbb{N}$ functions:
+\begin{gather*}
+      f \in \Theta(g) \Longleftrightarrow g \in \Theta(f).
+\end{gather*}
+
+\subsubsection{$\Theta$ and $O$ notation}
+For $f, g : \mathbb{N} \to \mathbb{N}$ functions:
+\begin{gather*}
+      f \in \Theta(g) \Longleftrightarrow f \in O(g).
+\end{gather*}
+\textit{Which also means $g \in O(f)$ by the above equivalency.}
+
+\subsubsection{Definition of the $\Omega$ notation}
+
+For $g : \mathbb{N} \to \mathbb{N}$ a function, $\Omega(g)$ is a set of
+functions $f : \mathbb{N} \to \mathbb{N}$ such that each for
+$f$ in $\Omega(g)$:
+\begin{gather*}
+      \exists \, c \in \mathbb{R}, n_0 \in \mathbb{N}
+      \text{ such that } \forall n \in N, \\
+      (n \geq n_0) \Rightarrow (0 \leq cg(n) \leq f(n)).
+\end{gather*}
+
+\subsubsection{Equivalency of the $\Omega$ notation}
+
+For $f, g : \mathbb{N} \to \mathbb{N}$ functions:
+\begin{gather*}
+      f \in \Omega(g) \Longleftrightarrow g \in O(f).
+\end{gather*}
 
 \end{document}
