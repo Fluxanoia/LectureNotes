@@ -671,18 +671,6 @@ $\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where:
     c_U & = x_{(n)}\left(\frac{1 - \alpha}{2}\right)^{-\frac{1}{n}}.
 \end{align*}
 
-\subsubsection{Exp$(\theta)$ : Confidence interval for $\theta$}
-
-The $\alpha\%$ confidence interval for $\theta$ from a sample
-$\{x_1, x_2, \ldots, x_n\}$ is $(c_L, c_U)$ where $X_n^{-1}$ is the
-$\chi^2_n$ quantile function (inverse CDF):
-\begin{align*}
-    c_L & = \frac{X_{2n}^{-1}\left(\frac{1 - \alpha}{2}\right)}
-    {2\sum_{i = 1}^n x_i}                                       \\
-    c_U & = \frac{X_{2n}^{-1}\left(\frac{1 + \alpha}{2}\right)}
-    {2\sum_{i = 1}^n x_i}.
-\end{align*}
-
 \subsubsection{Confidence Intervals by Simulation}
 
 For a distribution $X$ with unknown parameter $\theta$, we can
@@ -698,6 +686,8 @@ a sample $\{x_1, x_2, \ldots, x_n\}$:
     \item Find the values $c_L$ and $c_U$ such that $\alpha\%$ of
           the estimates are in $(c_L, c_U)$.
 \end{itemize}
+
+\newpage
 
 \section{Notes on Hypothesis Testing: Population Means}
 
@@ -1382,13 +1372,6 @@ Let $X_n^{-1}$ be the $\chi^2_n$ quantile function (inverse CDF):
 \subsubsection{$U(0, \theta)$ : Confidence interval for $\theta$}
 \begin{align*}
     C = x_{(n)}\left(\frac{1 \pm \alpha}{2}\right)^{-\frac{1}{n}}.
-\end{align*}
-
-\subsubsection{Exp$(\theta)$ : Confidence interval for $\theta$}
-Let $X_n^{-1}$ be the $\chi^2_n$ quantile function (inverse CDF):
-\begin{align*}
-    C & = \frac{X_{2n}^{-1}\left(\frac{1 \pm \alpha}{2}\right)}
-    {2\sum_{i = 1}^n x_i}.
 \end{align*}
 
 \subsubsection{Confidence interval for $\alpha$}
