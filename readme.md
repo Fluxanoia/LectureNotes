@@ -10,3 +10,4 @@ The following notes are unsupported and are likely to be out of date:
 
 * Year 1 / Analysis 1
 * Year 1 / Object-Oriented Programming
+* Year 1 / Statistics 1
