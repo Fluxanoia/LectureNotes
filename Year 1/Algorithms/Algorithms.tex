@@ -122,4 +122,185 @@ For $f, g : \mathbb{N} \to \mathbb{N}$ functions:
       f \in \Omega(g) \Longleftrightarrow g \in O(f).
 \end{gather*}
 
+\newpage
+
+\section{Runtime}
+
+\subsection{Best-case Runtime}
+
+Considering all the inputs for a given algorithm, the best-case
+runtime is the runtime of the input that the algorithm takes 
+the least amount of time to process.
+
+\subsection{Worst-case Runtime}
+
+Considering all the inputs for a given algorithm, the worst-case
+runtime is the runtime of the input that the algorithm takes 
+the most amount of time to process.
+
+\subsection{Average Runtime}
+
+Considering all the inputs for a given algorithm, the average
+runtime is the average of the runtimes of all the inputs.
+
+\section{Data Structures}
+
+\subsection{Trees}
+
+\subsubsection{Definition of a tree}
+
+A tree $T$ of size $n$ is defined as $T = (V, E)$ where:
+\begin{gather*}
+      V = \{v_1, \ldots, v_n\} \text{ is a set of nodes} \\
+      E = \{e_1, \ldots, e_{n - 1}\} \text{ is a set of edges},
+\end{gather*} 
+with the properties that for $i$ in $\{1, \ldots, n - 1\}$, 
+$j, k$ in $\{1, \ldots, n\}$ with $j \neq k$ we have 
+$e_i = \{v_j, v_k\}$, and for all $i$ in $\{1, \ldots, n\}$, 
+there exists $j$ in $\{1, \ldots, n - 1\}$ such that $v_i$ 
+is in $e_j$.
+
+\vspace{\baselineskip}
+
+\textit{Basically, we have $n$ nodes and $n - 1$ edges where each
+node has least one edge and the edges can't branch between 
+identical nodes.}
+
+\subsubsection{Rooted trees}
+
+A rooted tree is defined as $T = (v, V, E)$ where $T = (V, E)$ is a
+tree and $v$ in $V$ is the root of $T$.
+
+\subsubsection{Leaves and internal nodes}
+
+A leaf in a tree is a node with exactly one incident edge. If a node
+isn't a leaf, it's an internal node.
+
+\section{Searching}
+
+\subsection{Linear Search}
+
+\subsubsection{Information on Linear Search}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & An array of integers and an integer
+                        $x$ both in $[0, n)$ for some $n$ in $\mathbb{N}$ \\
+                  \textbf{Output} & $1$ if $x$ is in the array, $0$
+                        otherwise \\
+            \hline\hline
+                  \textbf{Best-case Runtime} & $O(1)$ \\
+                  \textbf{Average Runtime} & $O(n)$ \\
+                  \textbf{Worst-case Runtime} & $O(n)$ \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\subsubsection{Process of Linear Search}
+
+Iterate through the array comparing the input value with the current
+array value. If it's equal, return $1$. If we reach the end of the
+array, return $0$.
+
+\subsection{Binary Search}
+
+\subsubsection{Information on Binary Search}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & A sorted array of integers and 
+                        an integer $x$ both in $[0, n)$ for some $n$
+                        in $\mathbb{N}$ \\
+                  \textbf{Output} & $1$ if $x$ is in the array, $0$
+                        otherwise \\
+            \hline\hline
+                  \textbf{Best-case Runtime} & $O(1)$ \\
+                  \textbf{Average Runtime} & $O(\log_2(n))$ \\
+                  \textbf{Worst-case Runtime} & $O(\log_2(n))$ \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\subsubsection{Process of Binary Search}
+
+Look at the middle value of the array, if equal to the input value
+then return $1$. If the value is greater than our input value, repeat
+the process with the lesser half of the array. Otherwise, repeat with
+the greater half of the array.
+
+\vspace{\baselineskip}
+
+\textit{This works because the array is sorted.}
+
+\section{Sorting}
+
+\subsection{Properties of Sorting Algorithms}
+
+\subsubsection{In place}
+
+A sorting algorithm is in place if at any moment at most $O(1)$
+array elements are stored outside the array.
+
+\subsubsection{Stable}
+
+A sorting algorithm is stable if any pair of equal values appear
+in the same order in the sorted array (this may be important
+if this value is tied to some overarching data structure).
+
+\subsection{Insertion Sort}
+
+\subsubsection{Information on Insertion Sort}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & An array of integers
+                        in $[0, n)$ for some $n$ in $\mathbb{N}$ \\
+                  \textbf{Output} & An ascending, sorted array \\
+            \hline\hline
+                  \textbf{Best-case Runtime} & $O(n)$ \\
+                  \textbf{Average Runtime} & $\Theta(n^2)$ \\
+                  \textbf{Worst-case Runtime} & $O(n^2)$ \\
+            \hline\hline
+                  \textbf{In place} & \checkmark \\
+                  \textbf{Stable} & \checkmark \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\subsubsection{Process of Insertion Sort}
+
+Iterate through the array $A$, when at position $i$, place $A[i]$
+into the array at some index in $\{0, \ldots, i\}$ such that
+$A[0, i]$ is sorted.
+
+\subsection{Merge Sort}
+
+\subsubsection{Information on Merge Sort}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & An array of integers
+                        in $[0, n)$ for some $n$ in $\mathbb{N}$ \\
+                  \textbf{Output} & An ascending, sorted array \\
+            \hline\hline
+                  \textbf{Best-case Runtime} & $O(n\log_2(n))$ \\
+                  \textbf{Average Runtime} & $O(n\log_2(n))$ \\
+                  \textbf{Worst-case Runtime} & $O(n\log_2(n))$ \\
+            \hline\hline
+                  \textbf{In place} & $\times$ \\
+                  \textbf{Stable} & \checkmark \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\subsubsection{Process of Merge Sort}
+
+If the array size is less than 3, reorder the elements and return.
+Otherwise, split the array into two, perform merge sort on the two 
+halves and combine them.
+
 \end{document}
