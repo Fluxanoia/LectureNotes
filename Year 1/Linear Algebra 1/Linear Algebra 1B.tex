@@ -65,8 +65,8 @@ be a group with elements $f, g, h$):
 
 \begin{itemize}
   \item \textbf{Associativity}: $f * (g * h) = (f * g) * h$
-  \item \textbf{Identity}: $\exists e \in G : e * f = f * e = f$
-  \item \textbf{Inverse}: $\exists x \in G : x * f = f * x = e$.
+  \item \textbf{Identity}: $\exists \, e \in G : e * f = f * e = f$
+  \item \textbf{Inverse}: $\exists \, x \in G : x * f = f * x = e$.
 \end{itemize}
 
 \textit{A note, for a group $(G, *)$ with $g * h = h * g$ for all $g, h \in G$,
@@ -91,14 +91,14 @@ For a matrix $A \in M_{m, n}( \mathbb{F} )$, the following are all
 
 \subsection{Fields}
 
-A field is a set ($F$) defined under multiplication and division with the
+A field is a set $\mathbb{F}$ defined under multiplication and division with the
 following properties:
 
 \begin{itemize}
   \item \textbf{Associativity} under multiplication and division
   \item \textbf{Commutativity} under multiplication and division
-  \item $F$ contains an \textbf{identity} under multiplication and division
-  \item All elements in $F$ contain an \textbf{inverse} under addition and
+  \item $\mathbb{F}$ contains an \textbf{identity} under multiplication and division
+  \item All elements in $\mathbb{F}$ contain an \textbf{inverse} under addition and
         multiplication (except $0$ under multiplication)
   \item The defined multiplication is \textbf{distributive} across
         the defined addition.
@@ -108,7 +108,7 @@ following properties:
 
 A group $(V, +_{V})$ ($+_{V}$ denotes addition defined with respect to the
 set $V$ as it can be ambigious in some cases) is a vector space over the field
-($\mathbb{F}$) if the following holds (let $v, w \in V$, $\lambda, \mu \in
+$\mathbb{F}$ if the following holds (let $v, w \in V$, $\lambda, \mu \in
   \mathbb{F}$):
 
 \begin{itemize}
@@ -180,7 +180,7 @@ For $V$ a vector space, with $S \subseteq V$, let $s_1, s_2, ... \in S$,
 
 \begin{itemize}
   \item $S$ is linearly independent if $\sum_{n = 1}^{|S|} \lambda_n s_n = 0
-          \Longleftrightarrow \lambda_i = 0 \, \, \forall i$
+          \Longleftrightarrow \lambda_1 = \lambda_2 = \cdots = \lambda_{|S|} = 0$
   \item S is linearly dependent if it's not linearly independent.
 \end{itemize}
 
@@ -208,7 +208,7 @@ Let $V$ be a vector space:
   \item For $v \in V$, $B$ a basis for $V$, $v$ can be written uniquely
         as a linear combination of vectors in $B$
   \item $V$ is finitely dimensional if $|B| < \infty$
-  \item If $V$ is finitely dimensional, there must exists a basis of $V$.
+  \item If $V$ is finitely dimensional, there must exist a basis of $V$.
 \end{itemize}
 
 For $V$ a vector space with $S \subseteq V$ a linearly independent set.
@@ -230,7 +230,7 @@ where $U$ is a subspace:
 \begin{itemize}
   \item $S$ is linearly independent $\Rightarrow |S| < \dim{V}$
   \item $\Spa{S} = V \Rightarrow |S| \geq dim{V}$
-  \item $(\Spa{S} = V) \land (|S| = \dim{V})
+  \item $\Spa{S} = V$ and $|S| = \dim{V}
           \Rightarrow S$ is a basis of $V$.
   \item $\dim{U} \leq \dim{V}$
   \item $\dim{U} = \dim{V} \Rightarrow U = V$
@@ -261,9 +261,10 @@ called a direct sum as they are disjoint.}
 \subsubsection{Decomposition of vector spaces}
 
 For $V$ a vector space over $\mathbb{F}$ with $U, W \subseteq V$
-subspaces satisfying $U \cap W = \{0\}$, we have that:
+subspaces satisfying $U \cap W = \{0\}$, we have that for all $v$
+in $U \oplus W$:
 \begin{align*}
-  \forall v \in U \oplus W, v = u + w (\text{for some } u \in U, w \in W).
+  v = u + w \, (\text{for some } u \in U, \, w \in W).
 \end{align*}
 
 \subsubsection{Dimension of direct summed subspaces}
@@ -318,7 +319,7 @@ linear map, we can say:
   \item $\dim(W) > \dim(V) \Rightarrow T$ is not surjective 
   (you can't have surjective maps from 2D to 3D)
   \item $\dim(W) < \dim(V) \Rightarrow T$ is not injective
-  \item $\dim(W) = \dim(V) \Rightarrow$ means injectivity and
+  \item $\dim(W) = \dim(V)$ means injectivity and
   surjectivity imply each other (you can't have one without
   the other).
 \end{itemize}
@@ -352,7 +353,7 @@ as follows:
 \subsubsection{Definition of an isomorphism}
 
 An isomorphism is a bijective linear map. It's domain and codomain
-are called isomorphic.
+are isomorphic.
 
 \subsubsection{Dimension of the domain and codomain}
 
@@ -499,8 +500,8 @@ So, we write $T(B)$ in terms of $A$:
 \subsubsection{Composition of matrices of linear maps}
 
 For $U, V, W$ vector spaces over $\mathbb{F}$, $S : U \to V$, 
-$T : V \to W$ linear maps, let $A \subseteq U$, $B \subseteq V$,
-and $C \subseteq W$ be bases. We have:
+$T : V \to W$ linear maps, let $A \subseteq U$, $B \subseteq V$
+and, $C \subseteq W$ be bases. We have:
 \begin{align*}
   M_{CA}(T \circ S) = M_{CB}(T)M_{BA}(S).
 \end{align*}
@@ -866,9 +867,9 @@ $S, T : V \to V$ linear maps:
 For an inner product space $(V, \langle , \rangle)$ with 
 $T : V \to V$ a linear map. We say $T$ has:
 \begin{itemize}
-  \item The \textbf{Normal} property if $T^*T = TT^*$
-  \item The \textbf{Unitary} property if $T^*T = I$
-  \item The \textbf{Self-adjoint} (hermitian) property if $T* = T$
+  \item The \textbf{normal} property if $T^*T = TT^*$
+  \item The \textbf{unitary} property if $T^*T = I$
+  \item The \textbf{self-adjoint} (hermitian) property if $T^* = T$
 \end{itemize}
 
 \textit{All unitary operators are normal. All self-adjoint operators
@@ -930,7 +931,7 @@ $\Spec(T) = \{\lambda_1, \ldots, \lambda_k\}$:
 \end{align*}
 So, if we have a finite dimensional, complex inner product 
 space with a normal operator, we can write the space as a direct
-sum of eigenspaces. Thus, the space has a basis of eigenvectors.
+sum of eigenspaces. Thus, the space has an orthonomal basis of eigenvectors.
 Thus, the associated matrix to the operator is diagonalisable.
 
 \subsubsection{Diagonalisation via normal operators}
@@ -943,6 +944,8 @@ columns of $D$ are the eigenvectors of $M$ and:
 \end{align*}
 where the diagonal matrix is formed by 
 $\Spec(M) = \{\lambda_1, \ldots, \lambda_n\}$.
+
+\vspace{\baselineskip}
 
 \textit{So, all normal matrices are diagonalisable: 
 self-adjoint (hermitian), unitary, real symmetric.}
