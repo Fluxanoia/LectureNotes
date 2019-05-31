@@ -12,3 +12,4 @@ The following notes are unsupported and are likely to be out of date:
 * Year 1 / Object-Oriented Programming
 * Year 1 / Statistics 1
 * Year 1 / Introduction to Group Theory
+* Year 1 / Linear Algebra 1
