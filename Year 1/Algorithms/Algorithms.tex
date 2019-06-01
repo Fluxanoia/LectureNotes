@@ -176,6 +176,98 @@ tree and $v$ in $V$ is the root of $T$.
 A leaf in a tree is a node with exactly one incident edge. If a node
 isn't a leaf, it's an internal node.
 
+\subsubsection{Other definitions}
+
+\begin{itemize}
+      \item The \textbf{parent} of a node is the closest node on
+      the path from the node to the root (the root has no parent)
+      \item The \textbf{children} of a node are all its neighbours
+      barring its parent
+      \item The \textbf{height} of a tree is the length of the
+      longest path connecting the root with a leaf
+      \item The \textbf{degree} of a node is the number edges
+      incident on the node
+      \item The level of a node is the length of the unique path
+      from the root to it plus one.
+\end{itemize}
+
+\subsubsection{$k$-ary trees}
+
+A $k$-ary tree is a rooted tree where each node has at most $k$
+children. A $k$-ary tree is:
+\begin{itemize}
+      \item \textbf{Full} if all internal nodes have exactly 
+      $k$ children
+      \item \textbf{Complete} if all levels except the last are full.
+      \item \textbf{Perfect} if all levels are full.
+\end{itemize}
+Complete and perfect $k$-ary trees have heights of $O(\log_k(n))$.
+
+\subsection{Priority Queues}
+
+\subsubsection{Definition of a priority queue}
+
+Priority queues are data structures that allow for the creation
+of a data structure from an array of values and the extraction 
+of said data structure's maximum.
+
+\subsubsection{A tree-oriented priority queue}
+
+An array could be interpreted by a priority queue as a complete 
+binary tree with the indices from top to bottom, left to right. 
+So, where applicable, for a node index $i$, the parent of the 
+node has index $\lfloor i / 2 \rfloor$ and the children have 
+indices $2i$ and $2i + 1$.
+
+\subsubsection{Heaps}
+
+If we have a tree-oriented priority queue and we add the condition
+(heap property) that the values of nodes must be greater than
+their children we get a tree with the maximum at the root. We
+call this tree a heap.
+
+\subsubsection{Producing a heap}
+
+Given a binary tree, we can transform it into a heap using a
+\texttt{heapify} function. This function takes a node and its children
+and ensures the maximum value of these nodes lies in the parent node.
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & A binary tree and an index \\
+                  \textbf{Output} & A binary tree such that the value 
+                        at the given index is greater than or equal 
+                        to the values of its children \\
+            \hline\hline
+                  \textbf{Runtime} & $O(\log_2(n))$ \\
+            \hline
+      \end{tabular}
+\end{center}
+
+Using this, we traverse through the internal nodes, performing
+\texttt{heapify}. If the function makes a change, we perform
+\texttt{heapify} on the child node that was swapped with.
+This produces a heap.
+
+\vspace{\baselineskip}
+
+So, we can see that the heap building function has the following
+properties:
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & A binary tree \\
+                  \textbf{Output} & A heap \\
+            \hline\hline
+                  \textbf{Runtime} & $O(n\log_2(n))$ \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\newpage
+
 \section{Searching}
 
 \subsection{Linear Search}
@@ -249,6 +341,11 @@ A sorting algorithm is stable if any pair of equal values appear
 in the same order in the sorted array (this may be important
 if this value is tied to some overarching data structure).
 
+\subsection{Lower Bound for Comparison-Based Sorting}
+
+When sorting comparatively, we can only sort an array length
+$n$ at best in $O(n\log(n))$ time.
+
 \subsection{Insertion Sort}
 
 \subsubsection{Information on Insertion Sort}
@@ -256,8 +353,8 @@ if this value is tied to some overarching data structure).
 \begin{center}
       \begin{tabular}{ || c | p{8.5cm} || }
             \hline
-                  \textbf{Input} & An array of integers
-                        in $[0, n)$ for some $n$ in $\mathbb{N}$ \\
+                  \textbf{Input} & An array of integers length $n$
+                        in $\mathbb{N}$ \\
                   \textbf{Output} & An ascending, sorted array \\
             \hline\hline
                   \textbf{Best-case Runtime} & $O(n)$ \\
@@ -283,8 +380,8 @@ $A[0, i]$ is sorted.
 \begin{center}
       \begin{tabular}{ || c | p{8.5cm} || }
             \hline
-                  \textbf{Input} & An array of integers
-                        in $[0, n)$ for some $n$ in $\mathbb{N}$ \\
+                  \textbf{Input} & An array of integers length $n$
+                        in $\mathbb{N}$ \\
                   \textbf{Output} & An ascending, sorted array \\
             \hline\hline
                   \textbf{Best-case Runtime} & $O(n\log_2(n))$ \\
@@ -302,5 +399,176 @@ $A[0, i]$ is sorted.
 If the array size is less than 3, reorder the elements and return.
 Otherwise, split the array into two, perform merge sort on the two 
 halves and combine them.
+
+\subsection{Heap Sort}
+
+\subsubsection{Information on Heap Sort}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & An array of integers length $n$
+                        in $\mathbb{N}$ \\
+                  \textbf{Output} & An ascending, sorted array \\
+            \hline\hline
+                  \textbf{Runtime} & $O(n\log_2(n))$ \\
+            \hline\hline
+                  \textbf{In place} & \checkmark \\
+                  \textbf{Stable} & $\times$ \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\subsubsection{Process of Heap Sort}
+
+Produce a heap from the array and extract the maximum from it
+until it is empty (ensuring that it remains a heap between
+extractions).
+
+\newpage
+
+\subsection{Quick Sort}
+
+\subsubsection{Information on Quick Sort}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & An array of integers length $n$
+                        in $\mathbb{N}$ \\
+                  \textbf{Output} & An ascending, sorted array \\
+            \hline\hline
+                  \textbf{Best-case Runtime} & $O(n\log_2(n))$ \\
+                  \textbf{Average Runtime} & $O(n\log_2(n))$ \\
+                  \textbf{Worst-case Runtime} & $O(n^2)$ \\
+            \hline\hline
+                  \textbf{In place} & \checkmark \\
+                  \textbf{Stable} & $\times$ \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\textbf{(Based on a random pivot selection procedure)}
+
+\subsubsection{Process of Quick Sort}
+
+Choose a pivot, move all values greater than the pivot into indices
+greater than the pivot's and move all values less than the pivot
+into indices less than the pivot. 
+
+\vspace{\baselineskip}
+
+This can be done by storing
+the smallest index $i$ such that it's value has not been swapped
+then iterating through the array (excluding the pivot) and 
+checking if the value is less or equal to the pivot. If so, move it to 
+position $i$ and increment $i$. Once at the end of the array,
+the pivot can be moved into position $i$.
+
+\vspace{\baselineskip}
+
+Then, we perform quick sort on all values less than the pivot and
+on all values greater than the pivot.
+
+\subsection{Counting Sort}
+
+\subsubsection{Information on Counting Sort}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & An array of non-negative 
+                        integers length $n$ in $\mathbb{N}$ \\
+                  \textbf{Output} & An ascending, sorted array \\
+            \hline\hline
+                  \textbf{Runtime} & $O(n))$ \\
+            \hline\hline
+                  \textbf{In place} & $\times$ \\
+                  \textbf{Stable} & \checkmark \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\subsubsection{Process of Counting Sort}
+
+Create an array $A$ with its length equal to the maximum of the input 
+array. At each index, set the value equal to the amount of values 
+less than the index in the input array. Then, we can fill our input array with the correct amount of
+each integer in increasing order.
+
+\subsection{Radix Sort}
+
+\subsubsection{Information on Radix Sort}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & An array of non-negative 
+                        integers length $n$ in $\mathbb{N}$ \\
+                  \textbf{Output} & An ascending, sorted array \\
+            \hline\hline
+                  \textbf{Runtime} & $O(n))$ \\
+            \hline\hline
+                  \textbf{In place} & \checkmark \\
+                  \textbf{Stable} & \checkmark \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\subsubsection{Process of Radix Sort}
+
+Using a stable sorting algorithm, sort the least to the most
+significant digits.
+
+\section{Recurrences}
+
+\subsection{Motivation}
+
+For an increasing function $T: \mathbb{N} \to \mathbb{N}$ that
+produces the worst-case runtime for an algorithm for an input
+$n$. If we have that $T$ is defined in terms of itself:
+\begin{align*}
+      T(1) &= c_1 \\
+      T(n) &= c_2T(f(n)) + c_3g(n),
+\end{align*}
+where $c_1, c_2, c_3$ are in $\mathbb{N}$ and 
+$f, g: \mathbb{N} \to \mathbb{N}$. We would like to bound
+this function.
+
+\subsection{Substitution}
+
+We can guess what bounds the function. Consider the following:
+\begin{align*}
+      T(1) &= c_1 \\
+      T(n) &= 2T(\lfloor n / 2 \rfloor) + c_2n.
+\end{align*}
+Suppose we guess that $T(n) \leq C[n\log_2(n)]$, we will use induction
+to prove our claim (as we are looking for an asymptotic comparison
+we can take any $n$ in $\mathbb{N}$ as our base case):
+\begin{center}
+      Base case $(n = 2)$:
+      \begin{align*}
+            T(2) & = 2T(1) + 2c_2 = 2(c_1 + c_2) \\
+            C[2\log_2(2)] & = 2C
+      \end{align*} 
+      So, for $C \geq (c_1 + c_2)$, $T(2) \leq C[2\log_2(2)]$.    
+\end{center}
+\begin{center}
+      Inductive step, suppose the claim holds for all $n < k$:
+      \begin{align*}
+            T(k) & = 2T(\lfloor k / 2 \rfloor) + c_2(k) \\
+            & \leq 2(C[k / 2]\log_2(k / 2)) + c_2(k) \\
+            & = C[k\log_2(k / 2)] + c_2(k) \\
+            & = Ck[\log_2(k) - 1] + c_2(k) \\
+            & = Ck\log_2(k) + k(c_2 - C)
+      \end{align*}
+      So, for $C \geq c_2$, we have:
+      \begin{align*}
+            T(k) \leq C[k\log_2(k)].
+      \end{align*}
+      So, for $C \geq (c_1 + c_2)$, the claim holds for all $n \geq$ 2
+      by induction.
+\end{center}
+
 
 \end{document}
