@@ -84,7 +84,7 @@ For $g : \mathbb{N} \to \mathbb{N}$ a function, $\Theta(g)$ is a set of
 functions $f : \mathbb{N} \to \mathbb{N}$ such that each for
 $f$ in $\Theta(g)$:
 \begin{gather*}
-      \exists \, c_0, c_1 \in \mathbb{R}, n_0 \in \mathbb{N}
+      \exists \, c_1, c_2 \in \mathbb{R}, n_0 \in \mathbb{N}
       \text{ such that } \forall n \in N, \\
       (n \geq n_0) \Rightarrow (0 \leq c_1g(n) \leq f(n) \leq c_2g(n)).
 \end{gather*}
@@ -100,9 +100,9 @@ For $f, g : \mathbb{N} \to \mathbb{N}$ functions:
 \subsubsection{$\Theta$ and $O$ notation}
 For $f, g : \mathbb{N} \to \mathbb{N}$ functions:
 \begin{gather*}
-      f \in \Theta(g) \Longleftrightarrow f \in O(g).
+      f \in \Theta(g) \Longleftrightarrow f \in O(g) \text{ and }
+      g \in O(f).
 \end{gather*}
-\textit{Which also means $g \in O(f)$ by the above equivalency.}
 
 \subsubsection{Definition of the $\Omega$ notation}
 
@@ -647,7 +647,7 @@ be the maximum of the set of values:
       [\text{optimal solution for } n - 2] + f(2), \\
       \cdots \\
       [\text{optimal solution for } 1] + f(n - 1), \\
-      p(n)
+      f(n)
 \end{gather*}
 As the optimal solution for $n = 1$ is trivial we can construct 
 optimal solutions for greater values of $n$ recursively
