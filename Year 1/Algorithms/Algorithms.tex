@@ -122,6 +122,8 @@ For $f, g : \mathbb{N} \to \mathbb{N}$ functions:
       f \in \Omega(g) \Longleftrightarrow g \in O(f).
 \end{gather*}
 
+\newpage
+
 \section{Runtime}
 
 \subsection{Best-case Runtime}
@@ -200,6 +202,8 @@ children. A $k$-ary tree is:
       \item \textbf{Perfect} if all levels are full.
 \end{itemize}
 Complete and perfect $k$-ary trees have heights of $O(\log_k(n))$.
+
+\newpage
 
 \subsection{Priority Queues}
 
@@ -473,6 +477,8 @@ Produce a heap from the array and extract the maximum from it
 until it is empty (ensuring that it remains a heap between
 extractions).
 
+\newpage
+
 \subsection{Quick Sort}
 
 \subsubsection{Information on Quick Sort}
@@ -566,9 +572,132 @@ each integer in increasing order.
 Using a stable sorting algorithm, sort the least to the most
 significant digits.
 
+\section{Dynamic Programming}
+
+\subsection{Calculating Fibonacci Numbers}
+
+\subsubsection{A simple algorithm}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & An index \\
+                  \textbf{Output} & The related Fibonacci number
+                        to the index \\
+            \hline\hline
+                  \textbf{Runtime} & $O(\phi^n)$ \\
+            \hline
+      \end{tabular}
+\end{center}
+
+If the index is less than 2, we return the index. Otherwise,
+for indices $i \geq 2$, we sum this algorithm applied to $i - 1$
+and $i - 2$.
+
+\subsubsection{An improved algorithm}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & An index \\
+                  \textbf{Output} & The related Fibonacci number
+                        to the index \\
+            \hline\hline
+                  \textbf{Runtime} & $O(n)$ \\
+            \hline
+      \end{tabular}
+\end{center}
+
+We start at the beginning of the sequence (with 0 and 1). The next 
+Fibonacci number can be calculated with the last two calculated
+Fibonacci terms. We repeat this until we get the Fibonacci number
+associated to our index.
+
+\newpage
+
+\subsection{Pole Cutting}
+
+\subsubsection{Motivation}
+
+Supposed we have a pole of length $n$ (in $\mathbb{N}$) that we 
+can split into pieces of integral length and a function
+than produces a value for each pole length. How can we find out
+the best way to split the pole such that we maximise the value?
+
+\subsubsection{Information on Pole Cutting}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & A pole length and a valuation
+                        function \\
+                  \textbf{Output} & The best value possible \\
+            \hline\hline
+                  \textbf{Runtime} & $O(n^2)$ \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\subsubsection{Process of Pole Cutting}
+
+For a valuation function $f$, the solution for a length $n$ will 
+be the maximum of the set of values:
+\begin{gather*}
+      [\text{optimal solution for } n - 1] + f(1), \\
+      [\text{optimal solution for } n - 2] + f(2), \\
+      \cdots \\
+      [\text{optimal solution for } 1] + f(n - 1), \\
+      p(n)
+\end{gather*}
+As the optimal solution for $n = 1$ is trivial we can construct 
+optimal solutions for greater values of $n$ recursively
+until we have our desired optimal solution.
+
+\newpage
+
+\subsection{Matrix Chain Parenthesisation}
+
+\subsubsection{Motivation}
+
+If we have a sequence of matrices to multiply, we would like to
+do this as fast as possible. By exploiting the associativity of
+matrix multiplication we reduce the number of necessary calculations.
+
+\subsubsection{Information on Matrix Chain Parenthesisation}
+
+\begin{center}
+      \begin{tabular}{ || c | p{8.5cm} || }
+            \hline
+                  \textbf{Input} & A sequence of matrices \\
+                  \textbf{Output} & The optimal parenthesisation \\
+            \hline\hline
+                  \textbf{Runtime} & $O(n^3)$ \\
+            \hline
+      \end{tabular}
+\end{center}
+
+\subsubsection{Process of Matrix Chain Parenthesisation}
+
+For a sequence of matrices $\{A_1, A_2, \ldots, A_n\}$, 
+we can split the sequence in two sequences of matrices
+$\{A_1, \ldots, A_k\}, \{A_{k + 1}, \ldots, A_n\}$. Define:
+\begin{gather*}
+      A_{i \to j} = A_iA_{i + 1} \cdots A_{j} \\
+      i, j \text{ in } \{1, \ldots, n\} \text{ with } i < j.
+\end{gather*}
+If we split the sequence at $k$ in $\{1, \ldots, n\}$, the cost
+of this parenthesisation would be the cost of multiplying 
+$A_{1 \to k}$ and $A_{k + 1 \to n}$ plus the optimal parenthesisation 
+cost of $A_{1 \to k}$ and $A_{k + 1 \to n}$. 
+So, if we produce optimal parenthesisation for
+each $A_{i \to j}$ with $i, j$ in $\{1, \ldots, n\}$ and $i < j$
+we can calculate the optimal solution for $A_{1 \to n}$.
+
+\newpage
+
 \section{Miscellaneous Algorithms}
 
-\subsection{\textbf{Divide and Conquer}: Peak Finding}
+\subsection{Peak Finding}
 
 \subsubsection{Definition of a peak}
 
@@ -624,120 +753,5 @@ value is at index $\lfloor k / 2 \rfloor + 1$, we perform this
 algorithm on the subarray $[\lfloor k / 2 \rfloor + 1, k)$,
 if the greater value is at $\lfloor k / 2 \rfloor - 1$, we perform
 this algorithm on the subarray $[0, \lfloor k / 2 \rfloor)$.
-
-\subsection{\textbf{Dynamic Programming}: Calculating Fibonacci Numbers}
-
-\subsubsection{A simple algorithm}
-
-\begin{center}
-      \begin{tabular}{ || c | p{8.5cm} || }
-            \hline
-                  \textbf{Input} & An index \\
-                  \textbf{Output} & The related Fibonacci number
-                        to the index \\
-            \hline\hline
-                  \textbf{Runtime} & $O(\phi^n)$ \\
-            \hline
-      \end{tabular}
-\end{center}
-
-If the index is less than 2, we return the index. Otherwise,
-for indices $i \geq 2$, we sum this algorithm applied to $i - 1$
-and $i - 2$.
-
-\subsubsection{An improved algorithm}
-
-\begin{center}
-      \begin{tabular}{ || c | p{8.5cm} || }
-            \hline
-                  \textbf{Input} & An index \\
-                  \textbf{Output} & The related Fibonacci number
-                        to the index \\
-            \hline\hline
-                  \textbf{Runtime} & $O(n)$ \\
-            \hline
-      \end{tabular}
-\end{center}
-
-We start at the beginning of the sequence (with 0 and 1). The next 
-Fibonacci number can be calculated with the last two calculated
-Fibonacci terms. We repeat this until we get the Fibonacci number
-associated to our index.
-
-\subsection{\textbf{Dynamic Programming}: Pole Cutting}
-
-\subsubsection{Motivation}
-
-Supposed we have a pole of length $n$ (in $\mathbb{N}$) that we 
-can split into pieces of integral length and a function
-than produces a value for each pole length. How can we find out
-the best way to split the pole such that we maximise the value?
-
-\subsubsection{Information on Pole Cutting}
-
-\begin{center}
-      \begin{tabular}{ || c | p{8.5cm} || }
-            \hline
-                  \textbf{Input} & A pole length and a valuation
-                        function \\
-                  \textbf{Output} & The best value possible \\
-            \hline\hline
-                  \textbf{Runtime} & $O(n^2)$ \\
-            \hline
-      \end{tabular}
-\end{center}
-
-\subsubsection{Process of Pole Cutting}
-
-For a valuation function $f$, the solution for a length $n$ will 
-be the maximum of the set of values:
-\begin{gather*}
-      [\text{optimal solution for } n - 1] + f(1), \\
-      [\text{optimal solution for } n - 2] + f(2), \\
-      \cdots \\
-      [\text{optimal solution for } 1] + f(n - 1), \\
-      p(n)
-\end{gather*}
-As the optimal solution for $n = 1$ is trivial we can construct 
-optimal solutions for greater values of $n$ recursively
-until we have our desired optimal solution.
-
-\subsection{\textbf{Dynamic Programming}: Matrix Chain Parenthesisation}
-
-\subsubsection{Motivation}
-
-If we have a sequence of matrices to multiply, we would like to
-do this as fast as possible. By exploiting the associativity of
-matrix multiplication we reduce the number of necessary calculations.
-
-\subsubsection{Information on Matrix Chain Parenthesisation}
-
-\begin{center}
-      \begin{tabular}{ || c | p{8.5cm} || }
-            \hline
-                  \textbf{Input} & A sequence of matrices \\
-                  \textbf{Output} & The optimal parenthesisation \\
-            \hline\hline
-                  \textbf{Runtime} & $O(n^3)$ \\
-            \hline
-      \end{tabular}
-\end{center}
-
-\subsubsection{Process of Matrix Chain Parenthesisation}
-
-For a sequence of matrices $\{A_1, A_2, \ldots, A_n\}$, 
-we can split the sequence in two sequences of matrices
-$\{A_1, \ldots, A_k\}, \{A_{k + 1}, \ldots, A_n\}$. Define:
-\begin{gather*}
-      A_{i \to j} = A_iA_{i + 1} \cdots A_{j} \\
-      i, j \text{ in } \{1, \ldots, n\} \text{ with } i < j.
-\end{gather*}
-If we split the sequence at $k$ in $\{1, \ldots, n\}$, the cost
-of this parenthesisation would be the cost of multiplying 
-$A_{1 \to k}$ and $A_{k + 1 \to n}$ plus the optimal parenthesisation 
-cost of $A_{1 \to k}$ and $A_{k + 1 \to n}$. 
-So, if we produce optimal parenthesisation for
-each $A_{i \to j}$ with $i, j$ in $\{1, \ldots, n\}$ and $i < j$
-we can calculate the optimal solution for $A_{1 \to n}$.
 
 \end{document}
