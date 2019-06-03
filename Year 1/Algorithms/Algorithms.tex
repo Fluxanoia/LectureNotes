@@ -48,7 +48,7 @@ For $g : \mathbb{N} \to \mathbb{N}$ a function, $0(g)$ is a set of
 functions $f : \mathbb{N} \to \mathbb{N}$ such that each for
 $f$ in $O(g)$:
 \begin{gather*}
-      \exists \, c \in \mathbb{R}, n_0 \in \mathbb{N}
+      \exists \, c \in \mathbb{R}_{>0}, n_0 \in \mathbb{N}
       \text{ such that } \forall n \in N, \\
       (n \geq n_0) \Rightarrow (0 \leq f(n) \leq cg(n)).
 \end{gather*}
@@ -84,7 +84,7 @@ For $g : \mathbb{N} \to \mathbb{N}$ a function, $\Theta(g)$ is a set of
 functions $f : \mathbb{N} \to \mathbb{N}$ such that each for
 $f$ in $\Theta(g)$:
 \begin{gather*}
-      \exists \, c_1, c_2 \in \mathbb{R}, n_0 \in \mathbb{N}
+      \exists \, c_1, c_2 \in \mathbb{R}_{> 0}, n_0 \in \mathbb{N}
       \text{ such that } \forall n \in N, \\
       (n \geq n_0) \Rightarrow (0 \leq c_1g(n) \leq f(n) \leq c_2g(n)).
 \end{gather*}
@@ -110,7 +110,7 @@ For $g : \mathbb{N} \to \mathbb{N}$ a function, $\Omega(g)$ is a set of
 functions $f : \mathbb{N} \to \mathbb{N}$ such that each for
 $f$ in $\Omega(g)$:
 \begin{gather*}
-      \exists \, c \in \mathbb{R}, n_0 \in \mathbb{N}
+      \exists \, c \in \mathbb{R}_{> 0}, n_0 \in \mathbb{N}
       \text{ such that } \forall n \in N, \\
       (n \geq n_0) \Rightarrow (0 \leq cg(n) \leq f(n)).
 \end{gather*}
@@ -685,7 +685,8 @@ $\{A_1, \ldots, A_k\}, \{A_{k + 1}, \ldots, A_n\}$. Define:
       A_{i \to j} = A_iA_{i + 1} \cdots A_{j} \\
       i, j \text{ in } \{1, \ldots, n\} \text{ with } i < j.
 \end{gather*}
-If we split the sequence at $k$ in $\{1, \ldots, n\}$, the cost
+If we split the sequence at $k$ in $\{0, \ldots, n\}$ 
+($A_0 = A_{n + 1} = I$), the cost
 of this parenthesisation would be the cost of multiplying 
 $A_{1 \to k}$ and $A_{k + 1 \to n}$ plus the optimal parenthesisation 
 cost of $A_{1 \to k}$ and $A_{k + 1 \to n}$. 
