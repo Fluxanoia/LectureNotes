@@ -44,7 +44,7 @@ after and including $k$.}
 
 \subsubsection{Definition of the big $O$ notation}
 
-For $g : \mathbb{N} \to \mathbb{N}$ a function, $0(g)$ is a set of
+For $g : \mathbb{N} \to \mathbb{N}$ a function, $O(g)$ is a set of
 functions $f : \mathbb{N} \to \mathbb{N}$ such that each for
 $f$ in $O(g)$:
 \begin{gather*}
@@ -187,7 +187,7 @@ isn't a leaf, it's an internal node.
       longest path connecting the root with a leaf
       \item The \textbf{degree} of a node is the number edges
       incident on the node
-      \item The level of a node is the length of the unique path
+      \item The \textbf{level} of a node is the length of the unique path
       from the root to it plus one.
 \end{itemize}
 
@@ -202,8 +202,6 @@ children. A $k$-ary tree is:
       \item \textbf{Perfect} if all levels are full.
 \end{itemize}
 Complete and perfect $k$-ary trees have heights of $O(\log_k(n))$.
-
-\newpage
 
 \subsection{Priority Queues}
 
@@ -236,16 +234,25 @@ and ensures the maximum value of these nodes lies in the parent node.
 
 \begin{center}
       \begin{tabular}{ || c | p{8.5cm} || }
+                  \multicolumn{2}{c}{\texttt{heapify}} \\
             \hline
-                  \textbf{Input} & A binary tree and an index \\
-                  \textbf{Output} & A binary tree such that the value 
-                        at the given index is greater than or equal 
-                        to the values of its children \\
+                  \textbf{Input} & A binary tree and an index
+                  such that the subtrees with the index's children
+                  as the roots are heaps \\
+                  \textbf{Output} & A binary tree such that
+                  the subtree with the given index as the root
+                  is a heap \\
             \hline\hline
                   \textbf{Runtime} & $O(\log_2(n))$ \\
             \hline
       \end{tabular}
 \end{center}
+
+We have that the runtime is $O(\log_2(n))$ as this is the order
+of the height of the tree (because when we swap, we call
+the function again on the swapped child).
+
+\vspace{\baselineskip}
 
 Using this, we traverse through the internal nodes, performing
 \texttt{heapify}. If the function makes a change, we perform
@@ -259,6 +266,7 @@ properties:
 
 \begin{center}
       \begin{tabular}{ || c | p{8.5cm} || }
+                  \multicolumn{2}{c}{Heap Building Function} \\
             \hline
                   \textbf{Input} & A binary tree \\
                   \textbf{Output} & A heap \\
@@ -267,6 +275,9 @@ properties:
             \hline
       \end{tabular}
 \end{center}
+
+\textit{Note that this is \textbf{not} the Heap Sort function! This is purely
+a data structure construction function.}
 
 \section{Recurrences}
 
@@ -279,7 +290,7 @@ $n$. If we have that $T$ is defined in terms of itself:
       T(1) &= c_1 \\
       T(n) &= c_2T(f(n)) + c_3g(n),
 \end{align*}
-where $c_1, c_2, c_3$ are in $\mathbb{N}$ and 
+where $c_1, c_2, c_3$ are in $\mathbb{R}_{>0}$ and 
 $f, g: \mathbb{N} \to \mathbb{N}$. We would like to bound
 this function.
 
@@ -474,8 +485,8 @@ halves and combine them.
 \subsubsection{Process of Heap Sort}
 
 Produce a heap from the array and extract the maximum from it
-until it is empty (ensuring that it remains a heap between
-extractions).
+until it is empty. After each extraction, we swap the last element
+into the root and \texttt{heapify}.
 
 \newpage
 
@@ -533,7 +544,7 @@ on all values greater than the pivot.
                         integers length $n$ in $\mathbb{N}$ \\
                   \textbf{Output} & An ascending, sorted array \\
             \hline\hline
-                  \textbf{Runtime} & $O(n))$ \\
+                  \textbf{Runtime} & $O(n)$ \\
             \hline\hline
                   \textbf{In place} & $\times$ \\
                   \textbf{Stable} & \checkmark \\
@@ -559,7 +570,7 @@ each integer in increasing order.
                         integers length $n$ in $\mathbb{N}$ \\
                   \textbf{Output} & An ascending, sorted array \\
             \hline\hline
-                  \textbf{Runtime} & $O(n))$ \\
+                  \textbf{Runtime} & $O(n)$ \\
             \hline\hline
                   \textbf{In place} & \checkmark \\
                   \textbf{Stable} & \checkmark \\
