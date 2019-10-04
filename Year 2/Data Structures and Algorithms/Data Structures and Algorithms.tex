@@ -1,0 +1,216 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{multicol}
+
+\begin{document}
+
+\title{Data Structures and Algorithms Notes}
+\date{}
+\author{\textit{paraphrased by} Tyler Wright}
+\maketitle
+
+\vfill
+
+\textit{An important note, these notes are absolutely \textbf{NOT}
+  guaranteed to be correct, representative of the course, or rigorous.
+  Any result of this is not the author's fault.}
+
+\newpage
+
+\section{Graph Theory}
+
+\subsection{Definition of a Graph}
+
+A graph is a pair of sets $G = (V, E)$, where $V$ is a set of 
+vertices (or nodes) and $E$ is a set of edges (or arcs).
+
+\subsection{Definition of an Edge}
+
+An edge of a graph $G = (V, E)$ is $e = \{u, v\}$ in $E$ where $u$,
+$v$ are vertices in $V$.
+
+\subsection{Definition of a Neighbourhood}
+
+For a graph $G = (V, E)$ with $v$ in $V$, the neighbourhood
+of $v$ is the set $V' \subseteq V$ of vertices connected to
+$v$ by an edge in $E$.
+\\[\baselineskip]
+The neighbourhood of $v$ is denoted by $N(v)$.
+\\[\baselineskip]
+The neighbourhood of a set of vertices is the union of
+the neighbourhoods of each vertex.
+
+\subsection{Definition of Degree}
+
+For a graph $G = (V, E)$ with $v$ in $V$, the degree of $v$
+is the size of its neighbourhood.
+\\[\baselineskip]
+The degree of $v$ is denoted by $d(v)$.
+
+\subsection{Isomorphic Graphs}
+
+Graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are called 
+isomorphic if there exists a bijection $f : V_1 \to V_2$ such
+that: \begin{gather*}
+  \{u, v\} \in E_1 \Longleftrightarrow \{f(u), f(v)\} \in E_2.
+\end{gather*} This relationship is denoted by $G_1 \cong G_2$.
+
+\subsection{Definition of a Subgraph}
+
+A graph $G' = (V', E')$ is a subgraph of $G = (V, E)$ if
+$V' \subseteq V$ and $E' \subseteq E$.
+
+\newpage
+
+\subsection{Definition of an Induced Subgraph}
+
+An induced subgraph generated from $G = (V, E)$ by $V' \subseteq V$
+is the graph $G' = (V', E')$ where: \begin{gather*} 
+  E' = \{\{u, v\} \in E \text{ such that } u, v \in V'\}.
+\end{gather*} \textit{Essentially, you generate an induced
+subgraph from a subset of the vertices of a graph by selecting
+edges that join vertices in the subset.}
+
+\subsection{Walks}
+
+\subsubsection{Definition of a walk}
+
+A walk in a graph $G = (V, E)$ is a set of vertices in $V$ connected
+by edges in $E$. The length of the walk is the number of edges
+traversed in the walk.
+
+\subsubsection{Definition of a path}
+
+A path is a walk where no vertices are repeated.
+
+\subsubsection{Definition of an Euler walk}
+
+An Euler walk is a walk such that every edge is traversed exactly
+once. Thus, for a graph $G = (V, E)$, the length is $|E|$.
+
+\subsubsection{Conditions for an Euler walk}
+
+For an Euler walk to be possible on a given graph,
+all vertices must have an even degree \textbf{or} exactly
+two vertices have odd degree. 
+\\[\baselineskip]
+If all vertices have even degree we 
+have that the Euler walk is a cycle, if exactly two vertices have
+odd degree then we have that these vertices are the start and end
+points of our Euler walk. 
+
+\subsection{Definition of a Connected Graph}
+
+A connected graph is a graph where for each pair of vertices,
+there is a path connecting them.
+
+\subsection{Definition of a Component}
+
+A component of a graph $G = (V, E)$ is a maximal connected 
+induced subgraph of $G$. This means an induced subgraph of $G$
+that is connected but is not longer connected if a vertex is
+removed.
+\\[\baselineskip]
+Connected graphs have a single component, the entire graph.
+
+\subsection{Digraphs}
+
+\subsubsection{Definition of a digraph}
+
+A digraph (or directed graph) is a graph where each of the edges
+has a direction. This direction means the edge can only be traversed
+in a single direction.
+
+\subsubsection{Definition of a strongly connected digraph}
+
+A digraph $G = (V, E)$ is strongly connected if for each $u, v$
+in $E$, there exists a path from $u$ to $v$ \textbf{and} 
+from $v$ to $u$.
+
+\subsubsection{Definition of a weakly connected digraph}
+
+A digraph $G = (V, E)$ is weakly connected if for each $u, v$
+in $E$, there exists a path from $u$ to $v$ \textbf{or} 
+from $v$ to $u$.
+
+\subsubsection{Definition of components of digraphs}
+
+A strong component of a digraph is the maximal \textit{strongly}
+connected induced subgraph.
+\\[\baselineskip]
+A weak component of a digraph is the maximal \textit{weakly}
+connected induced subgraph.
+\\[\baselineskip]
+\textit{So, these are induced subgraphs that are strongly/weakly
+connected but are no longer strongly/weakly connected once a
+vertex is removed.}
+
+\newpage
+
+\subsubsection{Definition of neighbourhoods in digraphs}
+
+The neighbourhood of a vertex in a digraph can be considered by
+looking at the edges \textit{from} the vertex and the edges
+\textit{to} the vertex.
+\\[\baselineskip]
+The in-neighbourhood of a vertex $v$ are the edges that enter $v$.
+The out-neighbourhood of a vertex $v$ are the edges that exit $v$.
+These are denoted by $N^-(v)$ and $N^+(v)$ respectively.
+
+\subsubsection{Definition of degrees in digraphs}
+
+For a vertex $v$, the in-degree of the vertex $d^-(v)$ is the size of
+the in-neighbourhood and the out-degree of the vertex $d^+(v)$
+is the size of the out-neighbourhood.
+\\[\baselineskip]
+It can be seen that the degree of a given vertex is the sum of
+its in and out degree (in a digraph).
+
+\subsubsection{Conditions for an Euler walk in a digraph}
+
+For an Euler walk to be possible on a given digraph, we have
+two cases, either:\begin{itemize}
+  \item the digraph is strongly connected and every vertex
+  has equal in and out degrees, or
+  \item one vertex has an in-degree one greater than its out-degree,
+  another has an out-degree one greater than its in-degree, and all
+  remaining vertices have equal in and out degrees.
+\end{itemize}
+In the first case we have that the Euler walk is a cycle, 
+in the second we have that the special vertices are the start and end
+points of our Euler walk. 
+
+\subsubsection{Cycles}
+
+\subsubsection{Definition of a cycle}
+
+A cycle is a walk where the first and last vertices are the same
+and each vertex appears at most once (barring the first and last
+vertex).
+
+\subsubsection{Definition of a Hamiltonian cycle}
+
+A Hamiltonian cycle is a cycle where each vertex is visited.
+
+\subsubsection{Conditions for a Hamiltonian cycle}
+
+Whilst the conditions necessary for a Hamiltonian cycle in general
+are unknown, by Dirac's theorem, we know that for a graph with
+$n$ vertices, if every vertex has degree $\frac{n}{2}$ or greater
+then a Hamiltonian cycle exists.
+
+\section{Types of Algorithms}
+
+\subsection{Greedy Algorithms}
+
+These types of algorithms start with a trivial solution and
+iteratively optimise their solution based on the information
+available at the time. They do not retroactively change the solution
+based on new data, only add to it.
+
+\end{document}
