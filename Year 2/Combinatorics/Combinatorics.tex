@@ -22,8 +22,163 @@
 
 \newpage
 
-\section{Section One}
+\section{Counting Techniques}
 
-\subsection{Subsection One}
+\subsection{The Bijection Rule}
+
+For $n$ in $\mathbb{N}$, we define $[n] := \{1, 2, \ldots, n\}$.
+\\[\baselineskip]
+For a given set $X$, if there exists a bijective function 
+$f : [n] \to X$ for some $n$ in $\mathbb{N}$, $X$ has $n$ elements
+(or rather $|X| = n$).
+\\[\baselineskip]
+This can also be achieved by listing out the elements of 
+$X = \{x_1, x_2, \ldots, x_n\}$ as we can use $f : [n] \to X$
+where $i$ maps to $x_i$.
+
+\subsection{The Addition Rule}
+
+We can count the amount of elements in a given set $X$ by
+splitting $X$ into disjoint sets, counting them, and adding the
+results.
+\\[\baselineskip]
+For $n$ in $\mathbb{N}$, and $X_1, \ldots, X_n$ pairwise disjoint
+sets: \begin{gather*}
+  \left|\bigcup_{i = 1}^n X_i\right| = \sum_{i = 1}^n |X_i|.
+\end{gather*} \textit{For a set of sets $A$, pairwise disjoint means 
+for two given sets in $A$, they are either disjoint or equal.}
+
+\subsection{The Multiplication Rule}
+
+If a counting problem can be split into a number of stages, we can
+use the product of the number of choices at each stage to find
+the total number of outcomes.
+\\[\baselineskip]
+\textit{For example, if we want to find how many three digit numbers 
+there are, we can consider it as choosing three digits. We can choose
+$1, 2, \ldots, 9$ for the first digit and $0, 1, \ldots, 9$ for 
+the rest so we get $9 \cdot 10^2$ possibilities.}
+
+\subsection{Inclusion-Exclusion Principle}
+
+For $n$ in $\mathbb{N}$, and $X_1, \ldots, X_n$ sets: \begin{align*}
+  \left|\bigcup_{i = 1}^n X_i\right| &= \sum_{i = 1}^n |X_i| \\
+  &-\sum_{i_1 \neq i_2} |X_{i_1} \cap X_{i_2}| \\
+  &+\sum_{i_1 \neq i_2 \neq i_3} |X_{i_1} \cap X_{i_2} \cap X{i_3}| \\
+  &\ldots
+\end{align*} \textit{Essentially, this says that the size of the
+union of some finite number of sets is the sum of their sizes,
+minus the sum of their \textbf{paired} intersections,
+plus the sum of the intersections of \textbf{trios}, etc.}
+
+\subsection{The Factorial}
+
+For $n$ in $\mathbb{N}$ we can define the factorial $n!$: \begin{align*}
+  n! = \begin{cases*}
+    1 & n = 0 \\
+    \prod_{i = 1}^n(i) & \text{otherwise.}
+  \end{cases*}
+\end{align*} For $k$ in $\mathbb{N}$ we can further define $(n)_k$: \begin{gather*}
+  (n)_k = \frac{n!}{(n-k)!} = n(n-1)(n-2)\cdots(n-k+1).
+\end{gather*} \textit{This can be though of as the factorial with $k$
+elements (starting at $n$). So, $(n)_n = n!$, $(n)_1 = n$, etc.}
+
+\newpage
+
+\subsection{The Binomial Coefficient}
+
+For $n, k$ in $\mathbb{N}$, we can define the binomial coefficient: \begin{gather*}
+ {n \choose k} = \frac{n!}{k!(n-k)!} = \frac{(n)_k}{k!}.
+\end{gather*} 
+This is the number of ways of choosing $k$-element subsets
+from an $n$-element set. Furthermore, we have: \begin{gather*}
+  {n \choose k} = {n \choose n - k},
+\end{gather*} as choosing $k$ elements is equivalent to choosing
+$n - k$ elements to remove.
+\\[\baselineskip]
+There are some notes to be made on the definition: \begin{itemize}
+  \item ${n \choose k} = 0$ if $k > n$
+  \item ${n \choose 0} = {n \choose n} = 1$
+  \item ${n \choose k} \geq 0$
+\end{itemize}
+
+\subsection{Pascal's Identity}
+
+Say we are selecting $k$ elements from an $n$-element set (unordered, 
+without repeats). We will see that there are ${n \choose k}$ possibilities.
+If we fix an element in the set, we can either include said element in
+our selection or exclude it giving ${n - 1 \choose k - 1}$ and 
+${n - 1 \choose k}$ possibilities respectively. Thus: \begin{gather*}
+  {n \choose k} = {n - 1 \choose k - 1} + {n - 1 \choose k}.
+\end{gather*}
+
+\subsection{The Binomial Theorem}
+
+By performing induction on Pascal's identity, we can see that for 
+$a, b$ in $\mathbb{C}$ and $n$ in $\mathbb{N}$: \begin{gather*}
+  (a + b)^n = \sum_{i = 0}^n {n \choose i}a^ib^{n - i}.
+\end{gather*} Setting $a = b = 1$, we get $2^n = \sum_{i = 0}^n 
+{n \choose i}$.
+
+\subsection{The Pigeonhole Principle}
+
+For $m, n, k$ in $\mathbb{N}$, if we have $k$ objects being 
+distributed into $n$ boxes and $n > mk$ then one box must contain
+at least $k + 1$ objects.
+
+\section{Selection}
+
+For this section, we will consider $n, k$ in $\mathbb{N}$.
+
+\subsection{Ordered Selection with Repeats}
+
+As we select, we have $n$ choices, and we select $k$ times. Thus,
+by the Multiplication Rule, we get $n^k$ outcomes.
+
+\subsection{Ordered Selection without Repeats}
+
+As we select, the amount of choices we have decreases by one each time.
+We start with $n$ choices and select $k$ times. Thus, by the Multiplication
+Rule, we get \newline $n(n-1)\cdots(n-k+1) = (n)_k$ outcomes.
+
+\subsection{Unordered Selection with Repeats}
+
+Let the set we are selecting from be $\{x_1, \ldots, x_n\}$. In this case, 
+any solution can be aggregated into a list indicating how
+many times the $i^{\text{th}}$ element was selected (for some $i$ in $[n]$).
+For example, if we select $x_1$ three times and $x_2$ five times, 
+the outcome would be of the form $\{3, 5, \ldots\}$.
+\\[\baselineskip]
+It can be seen that for each of these solutions, the sum of the elements in
+the set must equal $k$. We can construct a solution by starting with a set
+of all zeroes $\{0, 0, 0, \ldots\}$ and distributing $k$ into the set. For
+example, for $n = 4$ and $k = 3$ the following are solutions: \begin{gather*}
+  \{1, 1, 1, 0\} \text{ as } 1 + 1 + 1 + 0 = 3 = k, \\
+  \{0, 2, 0, 1\} \text{ as } 0 + 2 + 0 + 1 = 3 = k, \\
+  \{3, 0, 0, 0\} \text{ as } 3 + 0 + 0 + 0 = 3 = k.
+\end{gather*} These solutions correspond to $\{x_1, x_2, x_3\}, 
+\{x_2, x_2, x_4\}, \{x_1, x_1, x_1\}$ respectively.
+\\[\baselineskip]
+This distribution of $k$ can be thought of as seperating $k$ into $n$
+groups. For example, the solution $\{1, 1, 0, 1\}$ corresponds to: \begin{gather*}
+  \bullet | \bullet | | \bullet.
+\end{gather*} An easy mistake to make is to assume that this means there are 
+${k + 1 \choose n - 1}$ choices. But as you can see above, we need to be able to place
+multiple dividers between two dots. So, for each placement, we need to add
+two extra divider spots either side of our placed divider (however, for our
+last divider we don't add two spots as there are no more selections to be made).
+This means for each divider placed, the choices goes up by one overall (one
+space used, two added) this leads to $(k + 1) + (n - 2) = (n + k - 1)$ choices.
+Thus, we have: \begin{gather*}
+  {n + k - 1 \choose n - 1}
+\end{gather*} choices.
+
+\subsection{Unordered Selection without Repeats}
+
+This is identical to to the ordered case but we divide by the number
+of permutations of the solutions as order does not matter. Thus, we get:
+\begin{gather*}
+  \frac{(n)_k}{k!} = {n \choose k}.
+\end{gather*}
 
 \end{document}
