@@ -22,8 +22,148 @@
 
 \newpage
 
-\section{Section One}
+\section{Groups, Rings, and Fields}
 
-\subsection{Subsection One}
+\subsection{Definition of a Group}
+
+A group is a set $G$ combined with a group operation 
+$\circ : G \times G \to G$ such that: \begin{itemize}
+  \item For all $g, h, j$ in $G$, $g(hj) = (gh)j$ (associativity)
+  \item There exists $e$ in $G$ such that $eg = ge = g$ for all
+  $g$ in $G$
+  \item For all $g$ in $G$, there exists $g^{-1}$ in $G$ such that
+  $gg^{-1} = g^{-1}g = e$ where $e$ is the identity of $G$.
+\end{itemize}
+
+\subsection{Definition of a Homomorphism}
+
+A homomorphism between two groups $G, H$ is a function $f : G \to H$
+such that $f(gh) = f(g)f(h)$ for all $g, h$ in $G$.
+
+\subsection{Properties of Homomorphisms}
+
+We can derive some properties of homomorphisms, for
+$G, H$ groups, and $f : G \to H$ a homomorphism: \begin{itemize}
+  \item The image of the identity in $G$ is the identity in $H$
+  \item The kernel of $f$ is a subgroup of $G$
+  \item The image of $f$ is a subgroup of $H$
+  \item Bijective homomorphisms are isomorphisms.
+\end{itemize}
+
+\subsection{Definition of a Ring}
+
+A ring with unity is a set $R$ along with an addition map $+$, and
+a multiplication map $\circ$ where $+, \circ : R \times R \to R$
+such that: \begin{itemize}
+  \item $(R, +)$ is an abelian group (of which the identity is called zero)
+  \item The multiplication operation is associative
+  \item The multiplication operation has a two-sided identity not equal
+  to the zero identity (called one)
+  \item For all $a, b, c$ in $R$, $a(b+c) = ab + ac$ and $(a+b)c = ac + bc$.
+\end{itemize} A ring is commutative if the multiplication operation is commutative.
+
+\subsection{Definition of a Subring}
+
+For the ring $R = (R', +, \circ)$ and $S$ a set, $S$ is a subring
+of $R$ if $S \subseteq R'$ and $(S, +, \circ)$ is a ring.
+
+\subsection{Definition of a Ring Homomorphism}
+
+For rings with unity $R$ and $S$, $f : R \to S$ is a ring homomorphism if for all
+$a, b$ in $R$: \begin{align*}
+  f(a + b) &= f(a) + f(b) \\
+  f(ab) &= f(a)f(b) \\
+  f(1) &= 1
+\end{align*} \textit{Essentially, this says that $f$ is a homomorphism for the
+groups formed by $R$ and $S$ under addition and multiplication. It is also
+important to note that \newline $R \ni f(1) = 1 \in S.$}
+
+\subsection{Definition of a Field}
+
+A field $\mathbb{F}$ is a ring with unity with the following properties: \begin{itemize}
+  \item $(\mathbb{F}\setminus\{0\}, \circ)$ is an abelian group.
+\end{itemize}
+
+\subsection{Definition of the Field Characteristic}
+
+For a field $\mathbb{F}$, the field characteristic  char($\mathbb{F}$) is the 
+smallest positive integer $n$ such that: \begin{gather*}
+  \sum_{i = 1}^{n} 1 = 1 + 1 + \ldots + 1 = 0,
+\end{gather*} or zero if no such value $n$ exists.
+
+\subsection{Definition of the Algebraic Closure of Fields}
+
+A field $\mathbb{F}$ is called algebraically closed if all non-constant polynomials 
+with coefficients in $\mathbb{F}$ also has a root in $\mathbb{F}$.
+
+\section{Vector Spaces}
+
+\subsection{Definition of a Vector Space}
+
+A vector space over a field $\mathbb{F}$ is a set $V$ with an addition
+operation $+ : V \times V \to V$ and a scalar multiplication operations
+$\circ : \mathbb{F} \times V \to V$ such that for all $a, b$ in $\mathbb{F}$
+and $v, w$ in $V$: \begin{itemize}
+  \item $(V, +)$ is an abelian group
+  \item $1 \circ v = v$ where $1$ is the multiplicative identity of $\mathbb{F}$
+  \item $(ab) \circ v = a \circ (b \circ v)$
+  \item $(a + b) \circ v = a \circ v + b \circ v$
+  \item $a \circ (v + w) = a \circ v + a \circ w$.
+\end{itemize}
+
+\subsection{Definition of a Subspace}
+
+For $V$ a vector space over the field $\mathbb{F}$ and $W$ a set, $W$ is a 
+subspace of $V$ if it is a subset of $V$ and is a vector space with respect 
+to the addition and scalar multiplication defined by $V$.
+\\[\baselineskip]
+It is sufficient to verify that for any $a$ in $\mathbb{F}$ and $v, w$ in $W$ we
+have that $a(v + w)$ is in $W$.
+
+\subsection{Definition of a Linear Combination}
+
+For a set $V$ with addition operation $+$, a field $\mathbb{F}$ and $n$ in 
+$\mathbb{N}$, a linear combination of $v_1, \ldots, v_n$ in $V$ is: \begin{gather*}
+  \sum_{i = 1}^n a_iv_i,
+\end{gather*} for $a_1, \ldots, a_n$ in $\mathbb{F}$.
+
+\subsection{Definition of the Span}
+
+For a set $V$ with addition operation $+$ and a field $\mathbb{F}$, the span 
+of $W \subseteq V$ is the set of all the linear combinations of the values
+in $W$. Denoted by span($W$).
+
+\subsection{Definition of Linear Independence}
+
+For a vector space $V$ and $W \subseteq V$, we say $W$ is linearly dependent if
+there exists a non-trivial linear combination of all the vectors in $W$ 
+equal to zero (and linearly independent otherwise).
+
+\subsection{Properties of Linear Independence}
+
+For a vector space $V$ with $W \subseteq V$: \begin{itemize}
+  \item $0 \in W \Rightarrow W$ is linearly independent
+  \item $W$ linearly independent $\Rightarrow$ any $X \subseteq W$ 
+  is linearly independent
+  \item If there's a linearly dependent subset of $W$, then $W$
+  is linearly dependent.
+\end{itemize}
+
+\subsection{Definition of a Basis}
+
+For a vector space $V$ with $W \subseteq V$, if $W$ is linearly independent
+and span($W$) = $V$, we say that $W$ is a basis of $V$.
+\\[\baselineskip]
+Saying $W$ is a basis is equivalent to saying that each vector in $V$ can
+be \textbf{uniquely} written as a linear combination of vectors in $W$.
+\\[\baselineskip]
+Additionally, for finite vector spaces, we have that all bases have the same
+amount of elements.
+
+\subsection{Definition of Dimension}
+
+For non-infinite bases, we say that the value of the basis is the dimension
+of the vector space it is a member of. Vector spaces with such bases are called
+finite-dimensional and all other vector spaces are infinite-dimensional.
 
 \end{document}
