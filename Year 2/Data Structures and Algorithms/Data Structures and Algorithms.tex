@@ -52,6 +52,24 @@ is the size of its neighbourhood.
 \\[\baselineskip]
 The degree of $v$ is denoted by $d(v)$.
 
+\subsection{The Handshake Lemma}
+
+For a graph $G = (V, E)$, we have that: \begin{gather*}
+  |E| = \frac{\sum_{v \in V} d(v)}{2}.
+\end{gather*} \textit{This is because each edge visits two vertices,
+so by counting the degree of each vertex we count each edge exactly
+twice.}
+
+\newpage
+
+\subsection{$k$-regular Graphs}
+
+For a graph $G = (V, E)$, we have that $G$ is $k$-regular for some
+$k$ in $\mathbb{Z}_{>0}$ if for all $v$ in $V$, we have: \begin{gather*}
+  d(v) = k.
+\end{gather*} We cannot have a $k$-regular graph where $k$ is odd
+and $|V|$ is odd by the Handshake Lemma.
+
 \subsection{Isomorphic Graphs}
 
 Graphs $G_1 = (V_1, E_1)$ and $G_2 = (V_2, E_2)$ are called 
@@ -64,8 +82,6 @@ that: \begin{gather*}
 
 A graph $G' = (V', E')$ is a subgraph of $G = (V, E)$ if
 $V' \subseteq V$ and $E' \subseteq E$.
-
-\newpage
 
 \subsection{Definition of an Induced Subgraph}
 
@@ -126,6 +142,13 @@ A digraph (or directed graph) is a graph where each of the edges
 has a direction. This direction means the edge can only be traversed
 in a single direction.
 
+\subsubsection{The Directed Handshake Lemma}
+
+For a digraph $G = (V, E)$, we have that: \begin{gather*}
+  \sum_{v \in V} d^-(v) = \sum_{v \in V} d^+(v) = |E|.
+\end{gather*} \textit{This is because if we consider the 'tail' of an
+edge (the vertex it leaves), each edge has exactly one tail.}
+
 \subsubsection{Definition of a strongly connected digraph}
 
 A digraph $G = (V, E)$ is strongly connected if for each $u, v$
@@ -150,8 +173,6 @@ connected induced subgraph.
 connected but are no longer strongly/weakly connected once a
 vertex is removed.}
 
-\newpage
-
 \subsubsection{Definition of neighbourhoods in digraphs}
 
 The neighbourhood of a vertex in a digraph can be considered by
@@ -170,6 +191,8 @@ is the size of the out-neighbourhood.
 \\[\baselineskip]
 It can be seen that the degree of a given vertex is the sum of
 its in and out degree (in a digraph).
+
+\newpage
 
 \subsubsection{Conditions for an Euler walk in a digraph}
 
@@ -203,6 +226,62 @@ Whilst the conditions necessary for a Hamiltonian cycle in general
 are unknown, by Dirac's theorem, we know that for a graph with
 $n$ vertices, if every vertex has degree $\frac{n}{2}$ or greater
 then a Hamiltonian cycle exists.
+
+\subsection{Trees}
+
+\subsubsection{Definition of a forest}
+
+A forest is a graph with no cycles.
+
+\subsubsection{Definition of a tree}
+
+A tree is a connected forest (or a connected graph with no cycles).
+
+\subsubsection{Path uniqueness of trees}
+
+For a tree $T = (V, E)$, we have that for any $u, v$ in $V$, there
+exists a unique path from $u$ to $v$.
+\\[\baselineskip]
+\textit{To prove this, suppose there are two unique paths between
+$u$ and $v$. These paths must diverge and if we connect them, they
+form a cycle which contradicts the definition of a tree.}
+
+\subsubsection{The magnitude of edges in trees}
+
+For a tree $T = (V, E)$, we have that $|E| = |V| - 1$.
+
+\subsubsection{Rooted trees}
+
+For a tree $T = (V, E)$, we can root $T$ with some $r$ in $V$.
+For $v$ in $V\setminus{r}$, we define $P_v$ to be the path from 
+$r$ to $v$, we then direct the edges from $r$ to $v$ for each $P_v$.
+\\[\baselineskip]
+For $u, v$ in $V\setminus\{r\}$, we say that: \begin{itemize}
+  \item $u$ is an \textbf{ancestor} of $v$ if $u$ lies on $P_v$
+  \item $u$ is the \textbf{parent} of $v$ if $u$ is in the
+  in-neighbourhood of $v$
+  \item $v$ is a \textbf{leaf} if it has degree $1$
+  \item $L_0 = \{r\}$ and $L_n = \{v : |P_v| = n\}$ are the 
+  \textbf{levels} of $T$
+  \item The \textbf{depth} of a tree is the greatest $n$ where
+  $L_n$ is non-empty.
+\end{itemize} 
+
+\subsubsection{Lower bound on the amount of leaves in a tree}
+
+For a tree with $T = (V, E)$, if $V > 1$, there must be at least
+$2$ leaves.
+
+\subsubsection{Equivalent statements to the tree definition}
+
+For a graph $T = (V, E)$, we have that the following are
+equivalent: \begin{itemize}
+  \item $T$ is a tree
+  \item $T$ is connected and has no cycles
+  \item $|E| = n - 1$ and T is connected
+  \item $|E| = n - 1$ and T has no cycles
+  \item T has a unique path between any two vertices
+\end{itemize}
 
 \section{Types of Algorithms}
 
