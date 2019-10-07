@@ -27,7 +27,37 @@
 \subsection{What is Syntax?}
 
 Syntax is the grammatical structure of a program. For example,
-for the program $x:=y;y:=z,z:=x$, syntactic analysis of this 
-program would conclude that we have three statements  
+for the program $x:=y;y:=z;z:=x;$, syntactic analysis of this 
+program would conclude that we have three statements concluded
+with ';'. Each of said statements are variables followed by
+the composite symbol ':=' and another variable.
+
+\subsection{What are Semantics?}
+
+The semantics of a program are what the program evaluates
+to or rather, the meaning of a syntactically correct program.
+For example, $x:=y;$ evaluates to setting the value of $x$ to the 
+value of $y$.
+
+\section{Operational Semantics}
+
+\subsection{Overview of Operational Semantics}
+
+An operational explanation of the meaning of a construct will explain
+how to execute said construct. For example, in C, the semicolons provide
+chronology and the $=$ symbol demonstrates assignment. These statements
+are abstractions as they do not concern themselves with the specific
+memory addresses or registers. Thus, these semantics are independent
+of machine architecture.
+
+\subsection{Derivation Trees and Natural Semantics}
+
+A program's execution can be modelled by a 'derivation tree'
+where the higher parts of the tree are breakdowns of the statements below.
+For example, the program $x:=y;y:=z;z:=x;$ can be written as:
+\begin{gather*}
+  \frac{}
+  {\langle x:=y;y:=z;z:=x;, s_0\rangle \to s_3}
+\end{gather*}
 
 \end{document}

@@ -73,10 +73,9 @@ For rings with unity $R$ and $S$, $f : R \to S$ is a ring homomorphism if for al
 $a, b$ in $R$: \begin{align*}
   f(a + b) &= f(a) + f(b) \\
   f(ab) &= f(a)f(b) \\
-  f(1) &= 1
+  f(1_R) &= 1_S
 \end{align*} \textit{Essentially, this says that $f$ is a homomorphism for the
-groups formed by $R$ and $S$ under addition and multiplication. It is also
-important to note that \newline $R \ni f(1) = 1 \in S.$}
+groups formed by $R$ and $S$ under addition and multiplication.}
 
 \subsection{Definition of a Field}
 
@@ -165,5 +164,67 @@ amount of elements.
 For non-infinite bases, we say that the value of the basis is the dimension
 of the vector space it is a member of. Vector spaces with such bases are called
 finite-dimensional and all other vector spaces are infinite-dimensional.
+\\[\baselineskip]
+By convention, for a vector space $V$, dim($\{0_V\}$) $= 0$.
+
+\newpage
+
+\subsection{Isomorphisms from Dimension}
+
+For $V, W$ finite-dimensional vector spaces over $\mathbb{F}$
+with dim$(V)$ = dim$(W)$, then $V \cong W$.
+\\[\baselineskip]
+If we set $n = \text{dim}(V)$, we have that $V \cong \mathbb{F}^{n}$.
+\\[\baselineskip]
+\textit{Such an isomorphism can be found by mapping a vector in
+terms of some chosen basis vectors 
+($v = a_1v_1 + a_2v_2 + \cdots + a_nv_n$) to the coefficients
+$(a_1, a_2, \ldots, a_n)$.}
+
+\section{Linear Maps}
+
+\subsection{Definition of a Linear Map}
+
+Let $V, W$ be vector spaces over a field $\mathbb{F}$, we have that
+$f:V \to W$ is a linear map if for all $a, b$ in $\mathbb{F}$ and
+$u, v$ in $V$: \begin{gather*}
+  f(au+bv) = af(u) + bf(v).
+\end{gather*} A bijective linear map is called an isomorphism.
+If $f: V \to W$ is an isomorphism, we say that $V$ and $W$ are 
+isomorphic, denoted by $V \cong W$. 
+
+\subsection{The Kernel of Linear Maps}
+
+Let $V, W$ be vector spaces over a field $\mathbb{F}$, and
+$f : V \to W$ be a linear map. We define the kernel of $f$ as: \begin{gather*}
+  \text{Ker}(f) = \{v \in V : f(v) = 0_{\mathbb{F}}\}.
+\end{gather*} Saying Ker($f)$ is $\{0_\mathbb{F}\}$ is equivalent
+to saying $f$ is injective.
+
+\subsection{The Image of Linear Maps}
+
+Let $V, W$ be vector spaces over a field $\mathbb{F}$, and
+$f : V \to W$ be a linear map. We define the image of $f$ as: \begin{gather*}
+  \text{Im}(f) = \{w \in W : \exists \, v \in V \text{ with } f(v) = w\}.
+\end{gather*} Saying Im($f)$ is $W$ is equivalent
+to saying $f$ is surjective.
+
+\subsection{The Inverse of Linear Maps}
+
+For a bijective linear map $f$, the inverse of $f$ is also linear.
+
+\subsection{Properties of the Set of Linear Maps}
+
+For $V, W$ vector spaces over a field $\mathbb{F}$, we define
+$\mathcal{L}(V, W)$ to be the set of all linear maps from $V$
+to $W$.
+
+\subsection{The Rank-Nullity Theorem}
+
+For $V, W$ finite-dimensional vector spaces and 
+$f : V \to W$ a linear map, we have that: \begin{gather*}
+  \text{dim}(V) = \text{dim(Ker(}f)) + \text{dim(Im(}f)).
+\end{gather*} Thus, for a linear map $f : V \to V$, if $f$ is
+injective or surjective then it's an isomorphism.
 
 \end{document}
