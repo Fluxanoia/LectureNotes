@@ -162,15 +162,11 @@ example, for $n = 4$ and $k = 3$ the following are solutions: \begin{gather*}
 This distribution of $k$ can be thought of as seperating $k$ into $n$
 groups. For example, the solution $\{1, 1, 0, 1\}$ corresponds to: \begin{gather*}
   \bullet | \bullet | | \bullet.
-\end{gather*} An easy mistake to make is to assume that this means there are 
-${k + 1 \choose n - 1}$ choices. But as you can see above, we need to be able to place
-multiple dividers between two dots. So, for each placement, we need to add
-two extra divider spots either side of our placed divider (however, for our
-last divider we don't add two spots as there are no more selections to be made).
-This means for each divider placed, the choices goes up by one overall (one
-space used, two added) this leads to $(k + 1) + (n - 2) = (n + k - 1)$ choices.
-Thus, we have: \begin{gather*}
-  {n + k - 1 \choose n - 1}
+\end{gather*} The dots and dividers are identical respectively, and we
+have a total of $k$ dots plus $n - 1$ dividers equalling $k + n - 1$
+elements. We can choose where to place the dividers beforehand and
+then fill in the dots, thus we have: \begin{gather*}
+  {k + n - 1 \choose n - 1}
 \end{gather*} choices.
 
 \subsection{Unordered Selection without Repeats}
@@ -179,6 +175,47 @@ This is identical to to the ordered case but we divide by the number
 of permutations of the solutions as order does not matter. Thus, we get:
 \begin{gather*}
   \frac{(n)_k}{k!} = {n \choose k}.
+\end{gather*}
+
+\section{Generating Functions}
+
+\subsection{Definition of a Generating Function}
+
+For a sequence $(a_n)_{n \geq 0}$, we
+can associate a \textbf{formal power series}: \begin{gather*}
+  f(x) = \sum_{k = 0}^\infty a_nx^n = a_0 + a_1x + a_2x^2 + \cdots.
+\end{gather*} We say $f(x)$ is the generating function of $(a_n)$,
+or write: \begin{align*}
+  a_0, a_1, a_2, \ldots &\leftrightarrows a_0 + a_1x + a_2x^2 + \cdots \\
+  (a_n)_{n \geq 0} &\leftrightarrows f(x).
+\end{align*} Note, however, that this doesn't imply that the series is convergent.
+
+\subsection{Generating Functions of Finite Sequences}
+
+For finite sequences (or rather, sequences with finitely many
+non-zero terms), we have that their generating functions
+can be written as polynomials.
+
+\subsection{The Scaling Rule}
+
+For a sequence $(a_n)_{n \geq 0}$ with an
+associated generating function $f(x)$ and $c$ in $\mathbb{R}$: \begin{gather*}
+  (ca_n)_{n \geq 0} \leftrightarrows cf(x).
+\end{gather*}
+
+\subsection{The Addition Rule}
+
+For the sequences $(a_n)_{n \geq 0}$, $(b_m)_{m \geq 0}$ 
+with the associated generating functions $f(x), g(x)$ respectively: \begin{gather*}
+  (a + b)_{n \geq 0} \leftrightarrows f(x) + g(x).
+\end{gather*}
+
+\subsection{The Right-Shift Rule}
+
+For a sequence $(a_n)_{n \geq 0}$ with an associated generating 
+function $f(x)$, we can add $k$ in $\mathbb{N}$ leading zeroes by
+multiplying the sequence by $x_k$: \begin{gather*}
+  0, \ldots, 0, a_0, a_1, \ldots \leftrightarrows x^kf(x).
 \end{gather*}
 
 \end{document}
