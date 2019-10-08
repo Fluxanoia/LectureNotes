@@ -227,4 +227,84 @@ $f : V \to W$ a linear map, we have that: \begin{gather*}
 \end{gather*} Thus, for a linear map $f : V \to V$, if $f$ is
 injective or surjective then it's an isomorphism.
 
+\section{Matrices}
+
+\subsection{Definition of a Matrix}
+
+For $m, n$ in $\mathbb{Z}_{>0}$ and $\mathbb{F}$ a field. An
+$m \times n$ matrix with entries in $\mathbb{F}$ is a map
+$M : [m] \times [n] \to \mathbb{F}$, more commonly written as 
+$M = (a_{ij})$ representing the rectangular array of values held
+by $M$.
+\\[\baselineskip]
+The set of all $m \times n$ matrices over $\mathbb{F}$ is denoted by 
+$M_{m \times n}(\mathbb{F})$.
+
+\subsection{Types of Matrix}
+
+For $m, n$ in $\mathbb{Z}_{>0}$ and $\mathbb{F}$ a field, let $M$
+be in $M_{m \times n}(\mathbb{F})$. We have the following types of
+matrix: \begin{itemize}
+  \item \textbf{Square}: where $m = n$
+  \item \textbf{Upper Triangular}: if $a_{ij} = 0$ for $i > j$
+  \item \textbf{Lower Triangular}: if $a_{ij} = 0$ for $i < j$
+  \item \textbf{Diagonal}: if $a_{ij} = 0$ for $i \neq j$
+  \item \textbf{Symmetric}: if $a_{ij} = a_{ji}$
+  \item \textbf{Anti-symmetric}: if $a_{ij} = -a_{ji}$.
+\end{itemize}
+
+\subsection{Properties of the Space of Matrices}
+
+For $m, n$ in $\mathbb{Z}_{>0}$ and $\mathbb{F}$ a field, we have
+that $M_{m \times n}(\mathbb{F})$ is a vector space over $\mathbb{F}$
+where matrices are added and multiplied by scalars component-wise.
+So, for \newline $M_1 = (a_{ij}), M_2 = (b_{ij})$ in $M_{m\times n}$
+and $c$ in $\mathbb{F}$ we have:
+\begin{align*}
+  cM_1 &= (ca_{ij}) \\
+  M_1 + M_2 &= (a_{ij} + b_{ij}).
+\end{align*} Additionally, the zero vector is $M_0 = (0)$ and the vector
+space has a basis consisting of $M_{ij}$ where all entries are zero
+except the $(i, j)^{\text{th}}$ entry. This leads to the conclusion
+that the dimension is $mn$ and thus that 
+$M_{m \times n} \cong \mathbb{F}^{mn}$.
+
+\subsection{Matrix Multiplication}
+
+For $a, b, c$ in $\mathbb{Z}_{>0}$ and a field $\mathbb{F}$, 
+we can define the multiplication of the two matrices $X = (x_{ij})$ in
+$M_{a \times b}$ and $Y = (y_{ij})$ in $M_{b \times c}$ as follows: 
+\begin{gather*}
+  XY = (\sum_{k = 1}^b x_{ik}y_{kj}).
+\end{gather*} This operation is not commutative in general but is
+associative.
+\\[\baselineskip]
+For $A, B$ in $M_n$, we have that $AB$ is also in $M_n$. This,
+along with matrix addition, makes $M_n$ a ring with unity with
+multiplicative identity $I_n = (\delta_{ij})$. However, there exists
+$A, B$ in $M_n$ such that $AB=0$ so, $M_n$ is not a field.
+
+\subsection{Matrices of Linear Maps}
+
+For $V, W$ vector spaces over a field $\mathbb{F}$, for some
+$m, n$ in $\mathbb{Z}_{>0}$ we have $A = \{v_1, \ldots, v_n\}$,
+$B = \{w_1, \ldots, w_n\}$ bases for $V$ and $W$ respectively.
+Given $f$ in $\mathcal{L}(V, W)$, the matrix associated to $f$
+(with respect to the bases $A$ and $B$) is the $m \times n$ matrix:
+\begin{gather*}
+  M_{BA}(f) = (a_{ij}),
+\end{gather*} where we define $a_{ij}$ by: \begin{gather*}
+  f(v_j) = \sum_{i = 1}^m a_{ij}w_i,
+\end{gather*} for each $j$ in $[n]$.
+
+\subsection{Matrices of Composed Linear Maps}
+
+For $U, V, W$ vector spaces over a field $\mathbb{F}$, for some
+$l, m, n$ in $\mathbb{Z}_{>0}$ we have $A = \{u_1, \ldots, u_n\}$,
+$B = \{v_1, \ldots, v_n\}$, $C = \{w_1, \ldots, w_n\}$ bases for 
+$U, V, W$ respectively. Given $g, f$ in $\mathcal{L}(V, W)$, we have:
+\begin{gather*}
+  M_{CA}(g \circ f) = M_{CB}(g)M_{BA}(f).
+\end{gather*}
+
 \end{document}
