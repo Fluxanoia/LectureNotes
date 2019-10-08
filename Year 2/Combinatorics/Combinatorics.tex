@@ -218,4 +218,24 @@ multiplying the sequence by $x_k$: \begin{gather*}
   0, \ldots, 0, a_0, a_1, \ldots \leftrightarrows x^kf(x).
 \end{gather*}
 
+\subsection{The Differentiation Rule}
+
+For a sequence $(a_n)_{n \geq 0}$ with an associated generating 
+function $f(x)$, we have that: \begin{gather*}
+  a_1, 2a_2, 3a_3, \ldots \leftrightarrows \frac{d}{dx}f(x).
+\end{gather*} \textit{So, each element in the sequence
+is multiplied by its index and left-shifted by one, with
+the farthest left term (the constant) removed.}
+
+\subsection{The Convolution Rule}
+
+For the sequences $(a_n)_{n \geq 0}, (b_m)_{m \geq 0}$ with 
+associated generating functions $f(x), g(x)$ respectively.
+We have that: \begin{gather*}
+  c_0, c_1, c_2, \ldots \leftrightarrows f(x) \cdot g(x),
+\end{gather*} where: \begin{gather*}
+  c_n := \sum_{i = 0}^{n} a_ib_{n - i} = a_0b_n + a_1b_{n-1} 
+  + \cdots + a_{n-1}b_1 + a_nb_0.
+\end{gather*}
+
 \end{document}

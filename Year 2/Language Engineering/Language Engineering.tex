@@ -252,6 +252,12 @@ simply $s$ to represent a terminal state.
 
 \subsection{Rules and Derivation Trees}
 
+\subsubsection{Transitions}
+
+A transition is a construct representing the transition of
+a state $s$ to a state $s'$ via some statement $S$, denoted
+by $\langle S, s \rangle \to s'$.
+
 \subsubsection{Rules}
 
 We can define 'rules' which are of the form: \begin{gather*}
@@ -263,7 +269,15 @@ We can define 'rules' which are of the form: \begin{gather*}
 \end{gather*} Where the premises consisting of immediate constituents 
 of a statement $S$ or compositions of said immediate constituents, 
 are written above the conclusion. Conditions may be written to the right
-of the rule.
+of the rule which are necessary for when the rule is applied.
+
+\subsubsection{Axioms}
+
+For a rule where the set of premises is empty, we call 
+such a rule an \textit{axiom}. Axioms with meta-variables
+are called \textit{axiom schema} where we can obtain an
+\textit{instance} of an axiom by defining particular
+variables.
 
 \subsubsection{Derivation Trees}
 
