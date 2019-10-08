@@ -283,6 +283,37 @@ equivalent: \begin{itemize}
   \item T has a unique path between any two vertices
 \end{itemize}
 
+\subsection{Bipartitions}
+
+\subsubsection{Definition of a bipartite graph}
+
+For $G = (V, E)$, we have that $G$ is bipartite if there exists
+$A \subset V$, $B \subset V$ such that $A$ and $B$ are disjoint
+and the induced subgraphs of $A$ and $B$ have no edges. $A$
+and $B$ are bipartitions of $G$.
+\\[\baselineskip]
+Saying $G$ is bipartite is equivalent to saying $G$ has no
+cycles of odd length.
+ 
+\subsubsection{Definition of a matching}
+
+A matching in a graph is a set of disjoint edges.
+\\[\baselineskip]
+A matching is \textbf{perfect} if each vertex is contained in
+some matching edge.
+
+\subsubsection{Definition of an augmenting path}
+
+Given a matching $M$ in a bipartite graph $G = (V, E)$, 
+an augmenting path is a set of vertices in $V$ connected
+by edges $e_i$ in $E$ such that: \begin{align*}
+  e_i \text{ is } \begin{cases}
+    \text{in } M & \text{for } i \text{ odd} \\
+    \text{not in } M & \text{for } i \text{ even}. \\
+  \end{cases}
+\end{align*} With the condition that the first and last vertices
+in the path are not in the matching.
+
 \section{Types of Algorithms}
 
 \subsection{Greedy Algorithms}
