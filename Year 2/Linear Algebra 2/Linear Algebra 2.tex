@@ -307,4 +307,53 @@ $U, V, W$ respectively. Given $g, f$ in $\mathcal{L}(V, W)$, we have:
   M_{CA}(g \circ f) = M_{CB}(g)M_{BA}(f).
 \end{gather*}
 
+\subsection{Transition Matrices}
+
+For a finite-dimensional vector space $V$, with an identity $I$ 
+and bases $A, A'$, we call $M_{A'A}(I) = C_{A'A}$ a transition
+matrix.
+\\[\baselineskip]
+We have that $C_{A'A}$ is invertible and $C_{A'A}^{-1} = C_{AA'}$.
+\\[\baselineskip]
+\textit{Essentially, the transition matrix transforms between bases.}
+
+\subsection{Matrix Transitions}
+
+For a finite-dimensional vector space $V$, with $f:V \to V$ a linear
+operator, and bases $A, B$: \begin{align*}
+  M_{BB}(f) &= C_{AB}^{-1}M_{AA}(f)C_{AB} \\
+  &= C_{BA}M_{AA}(f)C_{AB}.
+\end{align*}
+
+\subsection{Similar Matrices}
+
+For matrices $A', A$, we say that $A'$ and $A$ are similar if there
+exists an invertible matrix $C$ such that: \begin{gather*}
+  A' = C^{-1}AC.
+\end{gather*} This is denoted by $A' \sim A$. Similarity forms
+an equivalence relation on the space of square matrices.
+\\[\baselineskip]
+If we have $A \sim A'$ and $A$ represents some linear operator $f$
+for some basis $B$, then we have that for some basis $B'$, $f$ has
+matrix $A'$.
+
+\section{Eigenvectors and Eigenvalues}
+
+\subsection{Definition of an Eigenvectors and Eigenvalues}
+
+For a vector space $V$ over $\mathbb{F}$ with $f: V \to V$ a 
+linear operator, a non-zero vector $v$ in $V$ is an eigenvector
+if $f(v) = \lambda v$ for some $\lambda$ in $\mathbb{F}$ which is
+called the eigenvalue corresponding to $v$.
+
+\subsection{Definition of an Eigenspace}
+
+For a vector space $V$ over $\mathbb{F}$ with $f: V \to V$ a 
+linear operator and some eigenvalue $\lambda$, we define the
+eigenspace of $\lambda$ as the set of eigenvectors with eigenvalue
+$\lambda$.
+\\[\baselineskip]
+This is denoted by $E(\lambda)$ and $E(\lambda)\cup\{0_{V}\}$ forms
+a subspace of $V$. The dimension of $E(\lambda)$ is the geometric
+multiplicity of $\lambda$.
 \end{document}
