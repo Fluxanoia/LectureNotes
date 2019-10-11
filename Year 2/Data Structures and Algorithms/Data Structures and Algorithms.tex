@@ -302,6 +302,13 @@ A matching in a graph is a set of disjoint edges.
 A matching is \textbf{perfect} if each vertex is contained in
 some matching edge.
 
+\subsubsection{Definition of a semi-matching}
+
+For $k$ in $\mathbb{Z}_{>0}$, a $k$ to 1 semi-matching in a
+bipartite graph $G$ with a bipartition $\{A, B\}$ is a subgraph
+of $G$ where each vertex in $A$ has degree at most $k$ and
+each vertex in $B$ has degree at most $1$.
+
 \subsubsection{Definition of an augmenting path}
 
 Given a matching $M$ in a bipartite graph $G = (V, E)$, 
@@ -313,6 +320,12 @@ by edges $e_i$ in $E$ such that: \begin{align*}
   \end{cases}
 \end{align*} With the condition that the first and last vertices
 in the path are not in the matching.
+
+\subsubsection{Hall's Theorem}
+
+For a bipartite graph $G = (V, E)$ with the bipartition $(A, B)$ has
+a perfect matching if and only if $|A| = |B|$ and for all 
+$X \subseteq A$, $|N(X)| \geq |X|$. 
 
 \section{Types of Algorithms}
 
