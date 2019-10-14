@@ -244,4 +244,37 @@ For all $n$ in $\mathbb{N}$, we have that: \begin{gather*}
   (1 + x)^{-n} = \sum_{k = 0}^\infty (-1)^k{n + k - 1 \choose n - 1}x^k.
 \end{gather*}
 
+\section{Combinatorial Designs}
+
+\subsection{Definition of a Set System}
+
+For $V$ a finite set, we let $B$ be a collection of subsets of $V$.
+We call the pair $(V, B)$ a set system with \textbf{ground set} $V$.
+\\[\baselineskip]
+If for all elements in $B$, each element has the same cardinality $k$,
+we have that $(V, B)$ is \textbf{$k$-uniform}.  
+\\[\baselineskip]
+\textit{We have that $B \subseteq \mathcal{P}(V)$ (that is, the 
+powerset of $V$).}
+ 
+\subsection{Definition of Block Design} For $v, k, t, \lambda$ integers,
+we suppose: \begin{gather*}
+  v > k \geq t \geq 1, \qquad \lambda \geq 1.
+\end{gather*} A block design of type: \begin{gather*}
+  t-(v, k, \lambda),
+\end{gather*} is a set system $(V, B)$ with the following properties:
+\begin{itemize}
+  \item $V$ has size $v$
+  \item $(V, B)$ is $k$-uniform
+  \item Each $t$-element subset of $V$ is contained in exactly
+  $\lambda$ 'blocks' (elements of $B$).
+\end{itemize}
+
+\subsection{The Quantity of Blocks in a Block Design}
+
+For a block design of type $t-(v,k,\lambda)$, we have that the number
+of blocks $b$ can be defined as follows: \begin{gather*}
+  b = \frac{\lambda{v \choose t}}{{k \choose t}}.
+\end{gather*}
+
 \end{document}
