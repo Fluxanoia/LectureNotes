@@ -336,4 +336,114 @@ iteratively optimise their solution based on the information
 available at the time. They do not retroactively change the solution
 based on new data, only add to it.
 
+\section{Data Structures}
+
+\subsection{Stacks}
+
+A stack is a list of variables. It supports three operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create()} & Creates a new stack & $O(1)$ \\
+    \hline
+    \texttt{push(x)} & Adds \texttt{x} to the end of the stack & $O(1)$ \\
+    \hline
+    \texttt{pop()} & Removes and returns the last element of the stack & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Queues}
+
+A queue is a list of variables. It supports three operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create()} & Creates a new queue & $O(1)$ \\
+    \hline
+    \texttt{add(x)} & Adds \texttt{x} to the end of the queue & $O(1)$ \\
+    \hline
+    \texttt{serve()} & Removes and returns the first element of the queue & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Linked List}
+
+A linked list is a list of variables represented by nodes which
+point to the next and previous element in the list (null if one does
+not exist). 
+It supports four operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create()} & Creates a new linked list & $O(1)$ \\
+    \hline
+    \texttt{insert(x, i)} & Inserts \texttt{x} after node \texttt{i} & $O(1)$ \\
+    \hline
+    \texttt{delete(i)} & Removes node \texttt{i} & $O(1)$ \\
+    \hline
+    \texttt{lookup(i)} & Returns node \texttt{i} & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Arrays}
+
+An array is a list of variables of fixed length. 
+It supports three operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create(n)} & Creates a new array of size \texttt{n} & $O(1)$ \\
+    \hline
+    \texttt{update(x, i)} & Overwrites the data at position \texttt{i} with \texttt{x} & $O(1)$ \\
+    \hline
+    \texttt{lookup(i)} & Returns the value at \texttt{i} & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Hash Tables}
+
+A hash table is a relation between keys and values.
+It supports four operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{7.5cm} | c || }
+    \hline
+    Name & Description & Average runtime \\
+    \hline
+    \texttt{create()} & Creates a new hash table & $O(1)$ \\
+    \hline
+    \texttt{insert(k, v)} & Inserts the pair (\texttt{k, v}) overwriting if
+    necessary & $O(1)$ \\
+    \hline
+    \texttt{delete(k)} & Deletes the pair corresponding to the key \texttt{k} & $O(1)$ \\
+    \hline
+    \texttt{lookup(k)} & Returns the pair corresponding to the key \texttt{k} & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsubsection{The implementation of hash tables}
+
+We can generate a hash table by creating an array of some size $n$ where
+each element in the array is a linked list. We use a \textbf{hash function}
+to map data to a linked list. As we are using linked lists, if multiple 
+keys map to the same index, we can just add them to the list - and when
+looking up data, we can find the right list with the hash function and
+then match our key.
 \end{document}

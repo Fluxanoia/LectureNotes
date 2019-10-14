@@ -356,4 +356,50 @@ $\lambda$.
 This is denoted by $E(\lambda)$ and $E(\lambda)\cup\{0_{V}\}$ forms
 a subspace of $V$. The dimension of $E(\lambda)$ is the geometric
 multiplicity of $\lambda$.
+
+\section{Direct Sums and Projections}
+
+\subsection{Definition of a Direct Sum}
+
+For $V, W$ vector spaces, we define the direct product of $V$ and
+$W$ as: \begin{gather*}
+  V \oplus W = \{(v, w) : v \in V, w \in W\},
+\end{gather*} with addition and scalar multiplication defined
+coordinate-wise and zero vector $(0_V, 0_W)$.
+
+\subsection{The Equivalence of Direct Sums}
+For $V, W \subseteq U$, we have that the following are equivalent:
+\begin{itemize}
+  \item $U = V \oplus W$
+  \item Each element in $U$ can be written uniquely as the sum
+  of elements in $V$ and $W$
+  \item The map $f : V \oplus W \to U; (v, w) \mapsto v + w$ is
+  isomorphism.
+\end{itemize}
+
+\newpage
+
+\subsection{The Addition Map for Direct Sums}
+
+For $V, W$ subspaces of a vector space $U$, and $f : V \oplus W \to U$
+defined by: \begin{gather*}
+  f((v, w)) = v + w,
+\end{gather*} we have that: \begin{itemize}
+  \item $f$ is linear
+  \item $f$ is injective if and only if $V \cap W = \{0\}$
+  \item $f$ is surjective if and only if $V \cup W$ spans $U$.
+\end{itemize}
+
+\subsection{Projections}
+
+For $V, W$ subspaces of $U$ with $U = V \oplus W$, the projection
+\textbf{onto} $V$ along $W$ is the linear operator $P_{V, W} : U \to U$
+where: \begin{gather*}
+  P_{V, W}(u) = v,
+\end{gather*} where $u = v + w$ for some unique $v$ in $V$ and
+$w$ in $W$.
+\\[\baselineskip]
+We have that for a linear operator $P$, $P$ is a projection if
+and only if $P \circ P = P$.
+ 
 \end{document}
