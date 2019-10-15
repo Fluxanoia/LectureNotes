@@ -418,7 +418,12 @@ It supports three operations:
 
 \subsection{Hash Tables}
 
-A hash table is a relation between keys and values.
+A hash table is an array of linked lists storing key-value pairs. 
+We use a \textbf{hash function} to map data to a linked list. As we 
+are using linked lists, if multiple keys map to the same index, 
+we can just add them to the list - and when looking up data, we 
+can find the right list with the hash function and then match our key.
+\\[\baselineskip]
 It supports four operations:
 
 \begin{center}
@@ -426,10 +431,12 @@ It supports four operations:
     \hline
     Name & Description & Average runtime \\
     \hline
-    \texttt{create()} & Creates a new hash table & $O(1)$ \\
+    \texttt{create(n)} & Creates a \texttt{n} sized array
+    of linked lists and chooses a hash function \texttt{h} & $O(1)$ \\
     \hline
-    \texttt{insert(k, v)} & Inserts the pair (\texttt{k, v}) overwriting if
-    necessary & $O(1)$ \\
+    \texttt{insert(k, v)} & Inserts the pair (\texttt{k, v}),
+    if $\frac{\texttt{n}}{2}$ pairs are stored, we create a hash
+    table of double the size and copy the contents into it & $O(1)$ \\
     \hline
     \texttt{delete(k)} & Deletes the pair corresponding to the key \texttt{k} & $O(1)$ \\
     \hline
@@ -438,12 +445,13 @@ It supports four operations:
   \end{tabular}
 \end{center}
 
-\subsubsection{The implementation of hash tables}
+\subsubsection{Markov's Inequality}
 
-We can generate a hash table by creating an array of some size $n$ where
-each element in the array is a linked list. We use a \textbf{hash function}
-to map data to a linked list. As we are using linked lists, if multiple 
-keys map to the same index, we can just add them to the list - and when
-looking up data, we can find the right list with the hash function and
-then match our key.
+For $X \geq 0$ a random variable with mean $\mu$, for all
+$t$ in $\mathbb{R}_{\geq 0}$: \begin{gather*}
+  \mathbb{P}(X \geq t) \leq \frac{\mu}{t}.
+\end{gather*} So, if $X$ is the expected time it takes for an 
+algorithm to terminate, we can say how likely it is for an algorithm
+to terminate based on our prediction.
+
 \end{document}
