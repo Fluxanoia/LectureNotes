@@ -277,4 +277,34 @@ of blocks $b$ can be defined as follows: \begin{gather*}
   b = \frac{\lambda{v \choose t}}{{k \choose t}}.
 \end{gather*}
 
+\subsection{Definition of the Replication Number}
+
+In a block design of type $2-(v,k\lambda)$, every element lies in
+exactly $r$ blocks where: \begin{gather*}
+  r(k - 1) = \lambda(v - 1), \qquad bk = vr.
+\end{gather*} $r$ is the replication number.
+
+\subsection{Fisher's Inequality}
+
+For $(V, B)$ a block design of type $2 - (v, k, \lambda)$ with $v > k$,
+we have that: \begin{gather*}
+  |B| \geq |V|.
+\end{gather*}
+
+\subsection{Definition of an Incidence Matrix}
+
+For a set system $(V, B)$ with $|V| = v$ and $|B| = b$ we define the
+incidence matrix $A$ as a matrix in $M_{v, b}$ where $A = (a_{ij})$ 
+and: \begin{gather*}
+  a_{ij} = \begin{cases}
+    1 & \text{if element } i \text{ is in block } j \\
+    0 & \text{otherwise}.
+  \end{cases}
+\end{gather*} There are some important notes to be made: \begin{itemize}
+  \item Each column contains $k$ many '$1$'s
+  \item Each row contains $r$ (the replication number) many '$1$'s
+  \item Each pair of rows contains $\lambda$ many '$1$'s in the same
+  column
+\end{itemize}
+
 \end{document}
