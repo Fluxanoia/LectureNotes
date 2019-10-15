@@ -401,5 +401,38 @@ $w$ in $W$.
 \\[\baselineskip]
 We have that for a linear operator $P$, $P$ is a projection if
 and only if $P \circ P = P$.
+
+\subsection{$f$-invariance}
+
+For a vector space $V$ with $U \subseteq V$ a subspace and 
+$f : U \to U$ a linear operator, we have that $U$ is $f$-invariant
+if for all $u$ in $U$ we have $f(u)$ in $U$.
+\\[\baselineskip]
+The eigenspaces of $f$ are examples of $f$-invariant spaces.
+
+\subsection{Matrices of Linear Maps (using $f$-invariance)}
+
+For $U, W \subseteq V$ subspaces of the vector space $V$ such that
+$V = U \oplus W$, let $B_U, B_W$ be finite bases of $U$ and $V$
+respectively. If we have a linear operator $f : V \to V$ such that
+$U$ and $W$ are $f$-invariant, we have that the matrix with respect
+to the basis $B = B_U \cup B_W$ of $f$ has the following block form:
+\begin{gather*}
+  M_{BB}(f) = \begin{pmatrix}
+    M_{B_VB_V}(f) & 0 \\
+    0 & M_{B_WB_W}(f)
+  \end{pmatrix}.
+\end{gather*}
  
+\section{Quotient Spaces}
+
+\subsection{Definition of a Quotient Space}
+
+For a vector space $V$ with $W \subseteq V$ a subspace. We define an equivalence
+relation on $V$ by declaring: \begin{gather*}
+  v_1 \sim v_2 \text{ if } v_1 - v_2 \in W.
+\end{gather*} The set of equivalence classes is called the quotient of $V$
+by $W$ and is denoted by $V/W$. For some $v$ in $V$, we denote the class containing
+$v$ by $v + W$ (similarly to cosets in Introduction to Group Theory).
+
 \end{document}
