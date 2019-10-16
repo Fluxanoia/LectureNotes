@@ -433,6 +433,49 @@ relation on $V$ by declaring: \begin{gather*}
   v_1 \sim v_2 \text{ if } v_1 - v_2 \in W.
 \end{gather*} The set of equivalence classes is called the quotient of $V$
 by $W$ and is denoted by $V/W$. For some $v$ in $V$, we denote the class containing
-$v$ by $v + W$ (similarly to cosets in Introduction to Group Theory).
+$v$ by $v + W$ (similarly to cosets in Introduction to Group Theory). So, we have:
+\begin{gather*}
+  V/W = \{v + W : v \in V\},
+\end{gather*} with addition and multiplication defined for 
+$v_1, v_2$ in $V$ and $a$ in the field: \begin{align*}
+  (v_1 + W) + (v_2 + W) &= (v_1 + v_2) + W \\
+  a(v_1 + W) &= av_1 + W.
+\end{align*}
+
+\subsection{Linear Map to the Quotient Space}
+
+For a vector space $V$ with $W \subseteq V$ a subspace, we can
+define $\pi : V \to V/W$ for some $v$ in $V$ by $f(v) = v + W$.
+We have that $\pi$ is linear and its kernel is $W$.
+
+\subsection{Isomorphisms formed by Linear Maps}
+
+For $V, W$ vector spaces and $f : V \to W$ a linear map, we have
+an isomorphism $\text{Im}(f) \cong V/\text{Ker}(f)$.
+
+\subsection{Existence of a Linear Operator on the Quotient Space}
+
+For a vector space $V$ with $W \subseteq V$ a subspace and a linear
+operator $f : V \to V$, there exists a well-defined operator
+$\bar{f} : V/W \to V/W$ if and only if $W$ if $f$-invariant.
+We call this the induced operator on $V/W$.
+
+\newpage
+
+\subsection{Matrices formed using Quotient Spaces}
+
+Consider a finite-dimension vector space $V$ and $f : V \to V$ a linear
+operator with $W$ an $f$-invariant subspace of $V$. 
+If we have $B_W$ a basis for $W$, that we extend to a basis $B$ of 
+$V$ and set $A$: \begin{gather*}
+  A = \{v + W : v \in B \setminus B_W \},
+\end{gather*} a basis of $V/W$ and we can form
+a matrix in block form: \begin{gather*}
+  M_{BB}(f) = \begin{pmatrix}
+    M_{B_WB_W}(f) & * \\
+    0 & M_{AA}(\bar{f})
+  \end{pmatrix},
+\end{gather*} where $\bar{f}$ is the induced operator on $V/W$ and $*$
+marks the area of the matrix which we cannot determine.
 
 \end{document}
