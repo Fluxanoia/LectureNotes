@@ -279,7 +279,7 @@ of blocks $b$ can be defined as follows: \begin{gather*}
 
 \subsection{Definition of the Replication Number}
 
-In a block design of type $2-(v,k\lambda)$, every element lies in
+In a block design of type $2-(v,k,\lambda)$, every element lies in
 exactly $r$ blocks where: \begin{gather*}
   r(k - 1) = \lambda(v - 1), \qquad bk = vr.
 \end{gather*} $r$ is the replication number.
@@ -306,5 +306,34 @@ and: \begin{gather*}
   \item Each pair of rows contains $\lambda$ many '$1$'s in the same
   column
 \end{itemize}
+
+\section{Graph Theory}
+
+\subsection{Definition of a Graph}
+
+A graph $G$ is a set system $(V, E)$ where the elements of $E$ have
+size $2$. Some definitions and facts follow from the definition:
+\begin{itemize}
+  \item The elements of $V$ are \textbf{vertices}
+  \item The elements of $E$ are called \textbf{edges}
+  \item The size of $V$ is often called the \textbf{order} of $G$
+  \item $G$ is a $2$-uniform set with ground set $V$
+  \item $u, v$ in $V$ are adjacent if ${u, v}$ is in $E$.
+\end{itemize}  
+
+\subsection{Definition of Neighbourhood and Degree}
+
+For a graph $G = (V, E)$ the \textbf{neighbourhood} of $v$ in $V$ 
+is the set of all adjacent vertices (denoted by $N_G(v)$). 
+The \textbf{degree} is simply the size of $N_G(v)$.
+
+\subsection{Graph Isomorphisms}
+
+For two graphs $G_1 = (V_1, E_1)$, $G_2 = (V_2, E_2)$, we say that
+$G_1$ and $G_2$ are isomorphic ($G_1 \cong G_2$) if there exists a
+bijection $\phi : V_1 \to V_2$ such that for each pair of vertices
+$u, v$ in $V$ we have that: \begin{gather*}
+  \{u, v\} \in E_1 \Longleftrightarrow \{\phi(u), \phi(v)\} \in E_2.
+\end{gather*}
 
 \end{document}
