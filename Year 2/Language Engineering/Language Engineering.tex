@@ -318,7 +318,7 @@ the state $s_{570}$ to $s_{575}$ and $x=y$ transforms the state
 $s_{575}$ to $s_{775}$, we know that the composite statement
 $z=x;x=y$ transforms $s_{570}$ to $s_{775}$.
 
-\subsubsection{Natural Semantics}
+\subsection{Natural Semantics}
 
 We can define some natural semantics for the While language as follows:
 \begin{align*}
@@ -350,5 +350,24 @@ We can define some natural semantics for the While language as follows:
     & \text{if } \mathcal{B}(b)(s) = \text{ff}
   \end{cases}
 \end{align*}
+
+We have that the semantics detailed above are deterministic, that is,
+for identical inputs, we get identical outputs.
+
+\subsection{The Semantic Function}
+
+We can now condense the meaning of statements into a partial
+function from \textbf{State} to \textbf{State}. We define the semantic
+function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to (\textbf{State} \hookrightarrow \textbf{State}).
+\end{gather*} Thus for a given statement $S$, we have that: \begin{align*}
+  &\mathcal{S}(S) : \textbf{State} \hookrightarrow \textbf{State} \\
+  s &\mapsto \begin{cases}
+    s' & \text{if } \langle S, s \rangle \to s' \\
+    \text{undefined} & \text{otherwise}.
+  \end{cases}
+\end{align*} We that this function is partial because some statements
+may never terminate. Thus giving an indeterminate answer.
+
 
 \end{document}
