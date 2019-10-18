@@ -57,6 +57,8 @@ A partial function from $X$ to $Y$ is a function
 $f : X \hookrightarrow Y$ where for some $X' \subseteq X$ we have
 that $f : X' \to Y$ is total.
 
+\newpage
+
 \section{The While Language}
 
 \subsection{Syntactic Categories}
@@ -200,8 +202,6 @@ $b$: \begin{gather*}
   [\mathcal{B}(b)(s_1) = \mathcal{B}(b)(s_2)].
 \end{gather*}
 
-\newpage
-
 \subsection{Substitutions}
 
 Within expressions, we will be interested in swapping the occurances
@@ -246,8 +246,6 @@ $x, v$: \begin{gather*}
   \end{cases}
 \end{gather*}
 
-\newpage
-
 \section{Operational Semantics}
 
 \subsection{Overview of Operational Semantics}
@@ -264,9 +262,7 @@ program changes. To this end, there are two approaches we shall consider:
   results of executions are obtained
   \item \textbf{Structural Operational Semantics}: to describe how
   the individual steps of computation take place.
-\end{itemize} During this section, we will use $\langle S, s\rangle$
-representing the statement $S$ being executed from the state $s$ and
-simply $s$ to represent a terminal state.
+\end{itemize}
 
 \subsection{Rules and Derivation Trees}
 
@@ -318,8 +314,14 @@ the state $s_{570}$ to $s_{575}$ and $x=y$ transforms the state
 $s_{575}$ to $s_{775}$, we know that the composite statement
 $z=x;x=y$ transforms $s_{570}$ to $s_{775}$.
 
+\newpage
+
 \subsection{Natural Semantics}
 
+During this section, we will use $\langle S, s\rangle$
+representing the statement $S$ being executed from the state $s$ and
+simply $s$ to represent a terminal state.
+\\[\baselineskip]
 We can define some natural semantics for the While language as follows:
 \begin{align*}
   [\text{assignment}]& \qquad \langle x=a, s \rangle \to s[x\mapsto \mathcal{A}(a)(s)] \\ \\
@@ -353,8 +355,13 @@ We can define some natural semantics for the While language as follows:
 
 We have that the semantics detailed above are deterministic, that is,
 for identical inputs, we get identical outputs.
+\\[\baselineskip]
+As there will be more than one definition of these semantics
+we will subscript these defintions with $ns$ where appropriate.
 
-\subsection{The Semantic Function}
+\newpage
+
+\subsubsection{The Semantic Function}
 
 We can now condense the meaning of statements into a partial
 function from \textbf{State} to \textbf{State}. We define the semantic
@@ -368,6 +375,95 @@ function as follows: \begin{gather*}
   \end{cases}
 \end{align*} We that this function is partial because some statements
 may never terminate. Thus giving an indeterminate answer.
+\\[\baselineskip]
+As there will be more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{ns}$.
 
+\subsection{Structural Operational Semantics}
+
+In structural operation semantics, there is a particular emphasis
+on the individual steps of execution. The transition relation in
+these semantics is of the form: \begin{gather*}
+  \langle S, s \rangle \Rightarrow \gamma,
+\end{gather*} where $\gamma$ is of the form:
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{ | c || p{8.5cm} | }
+  \hline
+  $\langle S', s' \rangle$ & denoting that $S$ and $s$
+  have transformed in some way and that the execution is not
+  yet complete, \\
+  $s'$ & denoting that the execution has completed with some 
+  terminal state $s'$. \\
+  \hline
+\end{tabular}
+\end{center}
+
+\noindent
+We shall say that $\langle S, s \rangle$ is \textbf{stuck} if there
+does not exist a $\gamma$ such that $\langle S, s \rangle
+\Rightarrow \gamma$ and \textbf{unstuck} otherwise. 
+
+\newpage
+
+We can define some structural operational semantics for the While 
+language as follows:
+\begin{align*}
+  [\text{assignment}]& \qquad \langle x=a, s \rangle \Rightarrow s[x\mapsto \mathcal{A}(a)(s)] \\ \\
+  [\text{skip}]& \qquad \langle \texttt{skip}, s \rangle \Rightarrow s \\ \\
+  [\text{composition}]& \qquad \frac{
+    \langle S_1, s \rangle \Rightarrow \langle S'_1, s' \rangle
+  }{\langle S_1;S_2, s \rangle \Rightarrow \langle S'_1;S_2, s' \rangle} 
+  \qquad \text{or} \qquad \frac{
+    \langle S_1, s \rangle \Rightarrow s'
+  }{\langle S_1;S_2, s \rangle \Rightarrow \langle S_2, s' \rangle} \\ \\
+  [\text{if}]& \qquad \begin{cases}
+    \langle \texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2, s \rangle \Rightarrow 
+    \langle S_1, s \rangle
+    & \text{if } \mathcal{B}(b)(s) = \text{tt} \\ \\
+    \langle \texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2, s \rangle \Rightarrow
+    \langle S_2, s \rangle
+    & \text{if } \mathcal{B}(b)(s) = \text{ff}
+  \end{cases} \\ \\
+  [\text{while}]& \qquad \langle \texttt{while } b \texttt{ do } S, s \rangle \Rightarrow
+    \langle \texttt{if } b \texttt{ then } (S; \texttt{ while } b \texttt{ do } S)
+    \texttt{ else skip}, s \rangle
+\end{align*}
+
+We can see by the definition of composition that with these 
+semantics we have to fully decompose and execution $S_1$ before
+we can begin execution of $S_2$.
+\\[\baselineskip]
+As there will be more than one definition of these semantics
+we will subscript these defintions with $sos$ where appropriate.
+
+\subsection{Derivation Sequences}
+
+For a statement $S$ and state $s$, we can consider the sequence of
+configurations of $S$ in $s$. The length of such a sequence is either:
+\begin{itemize}
+  \item \textbf{Finite}: $\gamma_0, \gamma_1, \gamma_2, \ldots, \gamma_k$
+  for some $k$ in $\mathbb{Z}_{\geq 0}$ where each $i$ in $\{0, 1, \ldots, k - 1\}$ satisfies
+  $\gamma_0 = \langle S, s \rangle$, $\gamma_i \Rightarrow \gamma_{i + 1}$ where
+  $\gamma_k$ is terminal or stuck
+  \item \textbf{Infinite}: $(\gamma_k)_{k \geq 0}$ where 
+  for each $i$ in $\mathbb{Z}_{\geq 0}$ satisfies 
+  $\gamma_0 = \langle S, s \rangle$, $\gamma_i \Rightarrow \gamma_{i + 1}$.
+\end{itemize} For two configurations $\gamma_i, \gamma_k$, we write
+$\gamma_i \Rightarrow^k \gamma_j$ to denote that there are $k$ steps 
+in execution between the configurations or $\gamma_i \Rightarrow^* \gamma_j$
+to denote that there's some finite number of steps between the two
+configurations.
+
+\newpage
+
+We say for a statement $S$ and state $s$, the execution of $S$ on $s$:
+\begin{itemize}
+  \item \textbf{Terminates}: if and only if there's a finite derivation
+  sequence starting with $\langle S, s, \rangle$
+  \item \textbf{Loops}: if and only if there's a infinite derivation
+  sequence starting with $\langle S, s \rangle$.
+\end{itemize} Thus, statements can loop on some states and terminate on
+others. Similarly, some states always terminate and always loop.
 
 \end{document}
