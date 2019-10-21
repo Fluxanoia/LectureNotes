@@ -325,7 +325,8 @@ size $2$. Some definitions and facts follow from the definition:
 
 For a graph $G = (V, E)$ the \textbf{neighbourhood} of $v$ in $V$ 
 is the set of all adjacent vertices (denoted by $N_G(v)$). 
-The \textbf{degree} is simply the size of $N_G(v)$.
+The \textbf{degree} is simply the size of $N_G(v)$ denoted 
+by $\text{deg}(v)$.
 
 \subsection{Graph Isomorphisms}
 
@@ -335,5 +336,14 @@ bijection $\phi : V_1 \to V_2$ such that for each pair of vertices
 $u, v$ in $V$ we have that: \begin{gather*}
   \{u, v\} \in E_1 \Longleftrightarrow \{\phi(u), \phi(v)\} \in E_2.
 \end{gather*}
+
+\subsection{Definition of Degree Sequence}
+
+For a graph $G = (V, E)$ a graph with $V = \{x_1, \ldots, x_n\}$,
+where $V$ is ordered such that $i \geq j$ implies $\text{deg}(x_i)
+\geq \text{deg}(x_j)$. The sequence $(d_k)_{k \in [n]}$ is defined
+as follows: \begin{gather*}
+  d_i = \text{deg}(x_i).
+\end{gather*} 
 
 \end{document}
