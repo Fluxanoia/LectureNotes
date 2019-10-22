@@ -6,6 +6,9 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{multicol}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.5.1}
 
 \begin{document}
 
@@ -453,5 +456,98 @@ $t$ in $\mathbb{R}_{\geq 0}$: \begin{gather*}
 \end{gather*} So, if $X$ is the expected time it takes for an 
 algorithm to terminate, we can say how likely it is for an algorithm
 to terminate based on our prediction.
+
+\section{Fast Fourier Transforms}
+
+\subsection{Polynomials}
+
+\subsubsection{Definition of a Polynomial}
+
+A polynomial of degree $n$ in $\mathbb{Z}_{\geq 0}$ is a function $A$: 
+\begin{gather*}
+  A(x) = \sum_{i = 0}^n a_ix^i,
+\end{gather*} where $a_i$ are the coefficients of $A$. We say for 
+$k > n$, $k$ is a degree-bound of $A$. We can represent this by listing
+the coefficients, called the \textbf{coefficient representation}.
+
+\subsubsection{Fast Polynomial Evaluation}
+
+We can evaluate polynomials quickly using \textit{Horner's Rule},
+for a polynomial $A$ degree $n$: \begin{gather*}
+  A(x) = a_0 + x(a_1 + x(a_2 + \cdots + x(a_n)))).
+\end{gather*} This can be simplified in the following code:
+\begin{verbatim}
+int polynomial(int[] coeffs, int x) {
+  int output = 0;
+  for (i = n; i >= 0; i--) {
+    output = (output * x) + coeffs[i]
+  }
+  return output;
+}
+\end{verbatim} We have that this is $O(n)$.
+
+\subsubsection{Point Intersection with Polynomials}
+
+For a given set of points of size $n$, we have that there exists a 
+unique polynomial with degree-bound $n$ such that the polynomial
+intersects all the given points.
+
+\subsubsection{Point-Value Representation}
+
+We can represent a polynomial by a set of points it intersects like so:
+\begin{gather*}
+  \{(x_0, y_0), \ldots, (x_n, y_n)\},
+\end{gather*} for a polynomial degree $n + 1$.
+
+\subsubsection{Polynomial Addition}
+
+For two polynomials $A, B$ with coefficients $a_i, b_i$ and degrees $n, m$ 
+respectively, we have that: \begin{gather*}
+  (A + B)(x) =  \sum_{i = 0}^{\text{max}(n, m)}(a_i + b_i)x^i.
+\end{gather*} If $m > n$ or vice versa, we pad out the shorter
+polynomial with zeroes. We can do this with the point-value representation
+by adding the '$y$-values'. We have that addition as it's defined here
+is $O(n)$.
+
+\subsubsection{Polynomial Multiplication}
+
+For two polynomials $A, B$ with coefficients $a_i, b_i$ and degrees $n, m$ 
+respectively, we have that: \begin{gather*}
+  C(x) = (A \cdot B)(x) = \sum_{i = 0}^{k} c_ix_i,
+\end{gather*} where $k = 2 \cdot \text{max}(n, m)$ and: \begin{gather*}
+  c_i = \sum_{j = 0}^ia_jb_{j - 1}.
+\end{gather*} We can do this with the point-value representation,
+for: \begin{gather*}
+  A = \{(x_0, y_0), \ldots, (x_n, y_n)\}, \\
+  B = \{(x_{n + 1}, z_0), \ldots, (x_{n + m}, z_m)\},
+\end{gather*} We have that: \begin{gather*}
+  C = A \cdot B = \{(x_0, y_0 \cdot z_0), \ldots, (x_k, y_k \cdot z_k)\}
+\end{gather*} This is much easier, yielding
+an $O(n)$ algorithm rather than an $O(n^2)$ algorithm.
+
+\subsubsection{Fast Fourier Transform}
+
+The idea is that we evaluate a polynomial to perform pointwise
+multiplication and then interpolate back into a polynomial.
+We need to evaluate a polynomial of degree $n$ at $n + 1$ points to
+convert it to point-value form. We use the $n + 1$ roots of unity:
+\begin{gather*}
+  \omega_{n+1}^k = e^{\frac{2\pi i}{n + 1}k},
+\end{gather*} for $k$ in $\{0, 1, \ldots n\}$. Therefore considering:
+\begin{gather*}
+  y_k = A(\omega_{n + 1}^k),
+\end{gather*} for $A$ a polynomial, $k$ as above, and the vector of 
+all ordered $y_k$ being the \textbf{Discrete Fourier Transform (DFT)} 
+of the coefficient vector of $A$.
+
+\paragraph{Cancellation Lemma:} we have that 
+$\omega_{dn}^{dk} = \omega_{n}^{k}$.
+
+\paragraph{Halving Lemma:} we have that if $n$ is even, the set of all
+the squared roots of unity is just the set of roots of unity for $\frac{n}{2}$.
+\\[\baselineskip]
+\textit{Due to the Cancellation Lemma, we have:} \begin{gather*}
+  (\omega_{2k}^j)^2 = \omega_{2k}^{2j} = \omega_{k}^j.
+\end{gather*}
 
 \end{document}

@@ -478,4 +478,69 @@ a matrix in block form: \begin{gather*}
 \end{gather*} where $\bar{f}$ is the induced operator on $V/W$ and $*$
 marks the area of the matrix which we cannot determine.
 
+\section{Dual Spaces}
+
+\subsection{Definition of a Dual Space}
+
+For $V$ a vector space over $\mathbb{F}$, we have that the dual space
+$V^*$ is $\mathcal{L}(V, \mathbb{F})$, the set of linear maps from 
+$V$ to $\mathbb{F}$. We have that addition and scalar multiplication
+are defined for some $v$ in $V$, $f, g$ in $V^*$, and $a$ in 
+$\mathbb{F}$: \begin{align*}
+  (f + g)(v) &= f(v) + g(v), \\
+  (af)(v) &= af(v).
+\end{align*}
+
+\subsection{Definition of a Dual Basis}
+
+For $V$ a finite-dimensional vector space over $\mathbb{F}$, with 
+dim$(v) = n$ and a basis $B = \{v_1, \ldots, v_n\}$. 
+We define the dual basis $B^* = \{v_1^*, \ldots, v_n^*\}$
+by defining $v_i^* : V \to \mathbb{F}$ as the unique linear map
+such that: \begin{gather*}
+  v_i^*(v_j) = \begin{cases}
+    0 & \text{if } i \neq j \\
+    1 & \text{if } i = j.
+  \end{cases}
+\end{gather*} 
+\newpage
+Equivalently, for $v$ in $V$, we have that there's 
+unique $(a_1, \ldots, a_n)$ in $\mathbb{F}$ such that: \begin{gather*}
+  v = \sum_{i = 1}^n a_iv_i,
+\end{gather*} so we let $v_i$ be such that: \begin{gather*}
+  v_i^*(v) = v_i^*\left(\sum_{j = 1}^n a_jv_j\right) 
+  = \sum_{j = 1}^n a_jv_i^*(v_j).
+\end{gather*} We have that $B^*$ is a basis for $V^*$. Additionally,
+we have that $V$ and $V^*$ are isomorphic by the isomorphism mapping
+$v_i$ to $v_i^*$.
+
+\subsection{Definition of the Annihilator}
+
+For $V$ a vector space over $\mathbb{F}$ with $S \subseteq V$,
+the annihilator of $S$ is the subspace $S^0$ of $V^*$ where
+for $f$ in $S^0$, $S \subseteq \text{Ker}(f)$ (or rather, 
+for all $s$ in $S$, $f(s) = 0$).
+
+\subsection{Properties of the Annihilator}
+
+For $V$ a vector space with $U, W \subseteq V$
+subspaces, we have that: \begin{itemize}
+  \item $(U + W)^0 = U^0 \cap W^0$
+  \item $U \subseteq W \Rightarrow W^0 \subseteq U^0,$
+\end{itemize} and for $V$ finite-dimensional, \begin{itemize}
+  \item $(U \cap W)^0 = W^0 + U^0$
+  \item $\text{dim}(W) + \text{dim}(W^0) = \text{dim}(V).$
+\end{itemize}
+
+\subsubsection{Isomorphism to the Double Dual Space}
+
+For $V$ a finite-dimensional vector space over $\mathbb{F}$, 
+we have $F: V \to V^{**}$. For some $v$ in $V$ we have: 
+\begin{gather*}
+  F(v) : V^* \to \mathbb{F}.
+\end{gather*} So, we define $F$ for some $f$ in $V^*$ as follows: 
+\begin{gather*}
+  F(v)(f) = f(v).
+\end{gather*} We have that $F$ is an isomorphism.
+
 \end{document}

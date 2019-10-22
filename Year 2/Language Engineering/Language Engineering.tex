@@ -437,7 +437,7 @@ we can begin execution of $S_2$.
 As there will be more than one definition of these semantics
 we will subscript these defintions with $sos$ where appropriate.
 
-\subsection{Derivation Sequences}
+\subsubsection{Derivation Sequences}
 
 For a statement $S$ and state $s$, we can consider the sequence of
 configurations of $S$ in $s$. The length of such a sequence is either:
@@ -465,5 +465,72 @@ We say for a statement $S$ and state $s$, the execution of $S$ on $s$:
   sequence starting with $\langle S, s \rangle$.
 \end{itemize} Thus, statements can loop on some states and terminate on
 others. Similarly, some states always terminate and always loop.
+
+\subsubsection{Partial Execution}
+
+If for some statement $S$, $k$ in $\mathbb{Z}_{\geq 0}$, and states 
+$s, s''$, we have that $\langle S, s\rangle \Rightarrow^k s''$,
+then there exists $k_1, k_2$ in $\mathbb{Z}_{\geq 0}$ such that 
+$k_1 + k_2 = k$, $\langle S, s \rangle \Rightarrow^{k_1} s'$,
+and $\langle S, s' \rangle \Rightarrow^{k_2} s''$ for some
+intermediate state $s'$.
+
+\subsubsection{The Semantic Function}
+
+We can now condense the meaning of statements into a partial
+function from \textbf{State} to \textbf{State}. We define the semantic
+function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to (\textbf{State} \hookrightarrow \textbf{State}).
+\end{gather*} Thus for a given statement $S$, we have that: \begin{align*}
+  &\mathcal{S}(S) : \textbf{State} \hookrightarrow \textbf{State} \\
+  s &\mapsto \begin{cases}
+    s' & \text{if } \langle S, s \rangle \Rightarrow^* s' \\
+    \text{undefined} & \text{otherwise}.
+  \end{cases}
+\end{align*} We that this function is partial because some statements
+may never terminate. Thus giving an indeterminate answer.
+\\[\baselineskip]
+As there will be more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{sos}$.
+
+\subsection{Semantic Equivalence}
+
+For every statement $S$ of \textbf{While}, we have that: \begin{gather*}
+  \mathcal{S}_{ns}(S) = \mathcal{S}_{sos}(S).
+\end{gather*} Similarly, we have that if a statement terminates to a state
+for one type of semantics, it will terminate in the same state for the other.
+
+\section{The Abstract Machine}
+
+\subsubsection{Configurations of the Abstract Machine}
+
+We have that the configurations of the abstract machine are of the 
+form: \begin{gather*}
+  \langle c, e, s \rangle,
+\end{gather*} where $c$ is the code being executed, $e$ is the
+evaluation stack, and $s$ is the storage.
+
+\subsubsection{Code}
+
+The code being executed is simply an instruction defined as follows:
+\begin{align*}
+  c :&= \text{empty} \, | \, \text{inst};c \\
+  \text{inst} :&= \text{PUSH}-n \, | \, \text{ADD} \, | \, \text{MULT} \, | \, \text{SUB} \\
+  &| \, \text{TRUE} \, | \, \text{FALSE} \, | \, \text{EQ} \, | \, \text{LE} \, | \, \text{AND} \, | \, \text{NEG} \\
+  &| \, \text{FETCH}-x \, | \, \text{STORE}-x \, | \, \text{NOOP} \\
+  &| \, \text{BRANCH}(c, c) \, | \, \text{LOOP}(c, c). \\
+\end{align*}
+
+\subsubsection{Evaluation Stack}
+
+The evaluation stack is an stack of elements in $\mathbb{Z}$ or $T$.
+
+\subsubsection{Storage}
+
+For the sake of simplicity, the storage is essentially a state.
+
+\subsubsection{Terminal States}
+
+A configuration is terminal if the code is empty.
 
 \end{document}
