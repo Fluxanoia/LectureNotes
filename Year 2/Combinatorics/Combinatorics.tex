@@ -346,4 +346,59 @@ as follows: \begin{gather*}
   d_i = \text{deg}(x_i).
 \end{gather*} 
 
+\subsection{The Handshake Lemma}
+
+For a graph $G = (V, E)$, we have that: \begin{gather*}
+  |E| = \frac{\sum_{v \in V} \text{deg}(v)}{2}.
+\end{gather*} \textit{This is because each edge visits two vertices,
+so by counting the degree of each vertex we count each edge exactly
+twice.}
+
+\subsection{Definition of a Subgraph}
+
+A graph $G' = (V', E')$ is a subgraph of $G = (V, E)$ if
+$V' \subseteq V$ and $E' \subseteq E$ such that for all $e$
+in $E'$ we have that $e \subseteq V'$.
+
+\subsection{Definition of an Induced Subgraph}
+
+An induced subgraph generated of $G = (V, E)$
+is a subgraph $G' = (V', E')$ where: \begin{gather*} 
+  E' = \{\{u, v\} \in E \text{ such that } u, v \in V'\}.
+\end{gather*} \textit{Essentially, you generate an induced
+subgraph from a subset of the vertices of a graph by selecting
+edges that join vertices in the subset.}
+
+\newpage
+
+\subsection{Definition of a Walk}
+
+We have that a walk of length $n$, is a set of
+$n + 1$ vertices connected by $n$ edges.
+
+\subsection{Definition of a Trail}
+
+A trail is a walk where no edges are repeated.
+
+\subsection{Definition of a Path}
+
+A path is a walk where no vertices are repeated (barring the 
+last one).
+
+\subsection{Definition of a Cycle}
+
+A cycle is a path whose last and first vertices are identical.
+
+\subsection{Definition of Connected Graph}
+
+A graph is connected if there exists a path between any two vertices
+in the graph.
+
+\subsection{Definition of a Component}
+
+A component of a graph $G$ is a maximal connected 
+induced subgraph of $G$. This means an induced subgraph of $G$
+that is connected but is not longer connected if a vertex is
+removed.
+
 \end{document}
