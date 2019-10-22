@@ -525,7 +525,9 @@ for: \begin{gather*}
 \end{gather*} This is much easier, yielding
 an $O(n)$ algorithm rather than an $O(n^2)$ algorithm.
 
-\subsubsection{Fast Fourier Transform}
+\subsection{Fast Fourier Transform}
+
+\subsubsection{Roots of Unity}
 
 The idea is that we evaluate a polynomial to perform pointwise
 multiplication and then interpolate back into a polynomial.
@@ -546,8 +548,29 @@ $\omega_{dn}^{dk} = \omega_{n}^{k}$.
 \paragraph{Halving Lemma:} we have that if $n$ is even, the set of all
 the squared roots of unity is just the set of roots of unity for $\frac{n}{2}$.
 \\[\baselineskip]
-\textit{Due to the Cancellation Lemma, we have:} \begin{gather*}
+\textit{This is true due to the Cancellation Lemma, we have:} \begin{gather*}
   (\omega_{2k}^j)^2 = \omega_{2k}^{2j} = \omega_{k}^j.
 \end{gather*}
+
+\subsubsection{Method of the Fast Fourier Transform}
+
+For a polynomial $A$ degree $n$, 
+we define $A^{[0]}$ and $A^{[1]}$ as: \begin{align*}
+  A^{[0]} &= a_0 + a_2x + \cdots + a_{n - 2}x^{(n / 2) - 1} \\
+  A^{[1]} &= a_1 + a_3x + \cdots + a_{n - 1}x^{(n / 2) - 1},
+\end{align*} so we have that: \begin{gather*}
+  A(x) = A^{[0]}(x^2) + xA^{[1]}(x^2).
+\end{gather*} So, we can split a DFT computation into two
+equally sized parts, compute them, and then combine them in linear time.
+
+\subsection{Polynomial Multiplication}
+
+So, the steps are laid out, for polynomials $A, B$ with degree bound 
+$n$, as follows: \begin{itemize}
+  \item Set the degree of $A$ and $B$ to $2n$, padding with zeroes
+  \item Perform the fast Fourier transform
+  \item Form our point-value representation and multiply pointwise
+  \item Interpolate with the inverse fast Fourier transform.
+\end{itemize} This process is $O(n \log(n))$.
 
 \end{document}
