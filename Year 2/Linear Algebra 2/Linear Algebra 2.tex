@@ -532,15 +532,38 @@ subspaces, we have that: \begin{itemize}
   \item $\text{dim}(W) + \text{dim}(W^0) = \text{dim}(V).$
 \end{itemize}
 
-\subsubsection{Isomorphism to the Double Dual Space}
+\subsection{Isomorphism to the Double Dual Space}
 
 For $V$ a finite-dimensional vector space over $\mathbb{F}$, 
-we have $F: V \to V^{**}$. For some $v$ in $V$ we have: 
+we have $F: V \to V^{**}$. That is: \begin{gather*}
+  V^{**} = \mathcal{L}(V^*, \mathbb{F}) = \mathcal{L}(\mathcal{L}(V, \mathbb{F}), \mathbb{F}),
+\end{gather*} so for some $v$ in $V$ we have: 
 \begin{gather*}
   F(v) : V^* \to \mathbb{F}.
-\end{gather*} So, we define $F$ for some $f$ in $V^*$ as follows: 
+\end{gather*} We define $F$ for some $f$ in $V^*$ as follows: 
 \begin{gather*}
   F(v)(f) = f(v).
 \end{gather*} We have that $F$ is an isomorphism.
+
+\subsection{Definition of the Transpose}
+
+For $V, W$ vector spaces with $f : V \to W$ a linear map. We define
+the transpose as $f^t : W^* \to V^*$ where for $g$ in $W^*$, $v$ in
+$V$: \begin{gather*}
+  f^t(g) = (g \circ f).
+\end{gather*} So, for some $v$ in $V$: \begin{gather*}
+  f^t(g)(v) = (g \circ f)(v) = g(f(v)).
+\end{gather*}
+
+\subsection{The Transpose and Matrices}
+
+If we have $V, W$ finite-dimensional vector spaces over $\mathbb{F}$ with bases 
+$A = \{v_1, \ldots, v_n\}$, $B = \{w_1, \ldots, w_m\}$ and corresponding
+dual bases $A^* = \{v_1^*, \ldots, v_n^*\}$, $B^* = \{w_1^*, \ldots, w_m^*\}$
+respectively, we have that for some linear map $f : V \to W$, and
+$f^t : W^* \to V^*$ the transpose map: \begin{gather*}
+  M_{BA}(f) = \left( M_{A^*B^*}(f^t) \right)^t.
+\end{gather*} \textit{That is, for a given map, the matrix of 
+transpose map is itself the matrix transpose of the matrix of the map.}
 
 \end{document}
