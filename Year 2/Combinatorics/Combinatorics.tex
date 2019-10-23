@@ -354,13 +354,15 @@ For a graph $G = (V, E)$, we have that: \begin{gather*}
 so by counting the degree of each vertex we count each edge exactly
 twice.}
 
-\subsection{Definition of a Subgraph}
+\subsection{Subgraphs}
+
+\subsubsection{Definition of a subgraph}
 
 A graph $G' = (V', E')$ is a subgraph of $G = (V, E)$ if
 $V' \subseteq V$ and $E' \subseteq E$ such that for all $e$
 in $E'$ we have that $e \subseteq V'$.
 
-\subsection{Definition of an Induced Subgraph}
+\subsubsection{Definition of an induced subgraph}
 
 An induced subgraph generated of $G = (V, E)$
 is a subgraph $G' = (V', E')$ where: \begin{gather*} 
@@ -371,28 +373,46 @@ edges that join vertices in the subset.}
 
 \newpage
 
-\subsection{Definition of a Walk}
+\subsection{Walks}
+
+\subsubsection{Definition of a walk}
 
 We have that a walk of length $n$, is a set of
 $n + 1$ vertices connected by $n$ edges.
 
-\subsection{Definition of a Trail}
+\subsubsection{Definition of a trail}
 
 A trail is a walk where no edges are repeated.
 
-\subsection{Definition of a Path}
+\subsubsection{Definition of a path}
 
 A path is a walk where no vertices are repeated (barring the 
 last one).
 
-\subsection{Definition of a Cycle}
+\subsubsection{Definition of a circuit}
 
-A cycle is a path whose last and first vertices are identical.
+A circuit is a walk where the first and last vertices are identical.
 
-\subsection{Definition of Connected Graph}
+\subsubsection{Definition of a cycle}
 
-A graph is connected if there exists a path between any two vertices
-in the graph.
+A cycle is a path where the first and last vertices are identical.
+
+\subsubsection{Equivalence of walks and paths}
+
+If for some graph $G = (V, E)$ with $u, v$ in $V$, we have that:
+\begin{gather*}
+  \text{There's a walk between } u \text{ and } v
+  \Longleftrightarrow
+  \text{There's a path between } u \text{ and } v.
+\end{gather*} Thus, where there's a cycle, there's a circuit.
+\\[\baselineskip]
+If we have that a graph $G$ has an odd circuit, there's also
+an odd cycle (and the converse holds too).
+
+\subsubsection{Definition of connected graph}
+
+A graph is connected if there exists a path (or walk) 
+between any two vertices in the graph.
 
 \subsection{Definition of a Component}
 
@@ -400,5 +420,19 @@ A component of a graph $G$ is a maximal connected
 induced subgraph of $G$. This means an induced subgraph of $G$
 that is connected but is not longer connected if a vertex is
 removed.
+
+\subsection{Euler Circuits}
+
+\subsubsection{Definition of an Euler Circuit}
+
+An Euler circuit is a circuit in which each edge in a graph is
+traversed exactly once (or a trail which traverses every edge).
+\\[\baselineskip]
+Graphs with Euler circuits are said to be \textbf{Eulerian}.
+
+\subsubsection{Conditions for an Euler Circuit}
+
+An Euler circuit in a graph $G$ exists if and only if $G$ is 
+connected and each vertex in $G$ has even degree.
 
 \end{document}
