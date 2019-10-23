@@ -566,4 +566,84 @@ $f^t : W^* \to V^*$ the transpose map: \begin{gather*}
 \end{gather*} \textit{That is, for a given map, the matrix of 
 transpose map is itself the matrix transpose of the matrix of the map.}
 
+\section{Rank and Determinants}
+
+\subsection{Elementary Row Operations}
+
+For a field $\mathbb{F}$, take $A$ in $M_{m,n}(\mathbb{F})$. The elementary
+row operations are: \begin{itemize}
+  \item Swapping
+  \item Multiplying by scalars in $\mathbb{F}\setminus\{0_\mathbb{F}\}$
+  \item Adding a multiple of a row to another
+\end{itemize}
+
+\subsection{Elementary Matrices}
+
+The $n \times n$ elementary matrices are: \begin{itemize}
+  \item $E_1(i, j)$ : obtained by swapping the $i^{th}$ and $j^{th}$ rows
+  of the identity
+  \item $E_2(c, i)$ : obtained by scaling the $i^{th}$ row of the identity
+  by $c$ non-zero
+  \item $E_3(c, i, j)$ : obtained by adding $c$ times row $i$ to row $j$
+  where $i \neq j$.
+\end{itemize} We have that any elementary row operation can be realised as
+left-multiplication by a corresponding elementary matrix. As a consequence
+of the definition, we have that elementary matrices are invertible and
+have elementary inverses.
+
+\subsection{Echelon Form}
+
+A matrix $A$ is in echelon form if each row has the form: \begin{gather*}
+  (0, \ldots, 0, 1, *, \ldots, *),
+\end{gather*} where each row has more leading zeroes than the one above and
+the first row has any amount of leading zeroes. Every matrix can be put in
+this form via Gaussian elimination.
+
+\subsection{Decomposition via Elementary Matrices}
+
+For an $n \times n$ matrix $A$, there exists elementary matrices
+$E_1, \ldots, E_k$ such that $E_1\cdots E_kA = B$ where:
+\begin{gather*}
+  B = \begin{cases}
+    \text{the identity} & \text{if $A$ is invertible} \\
+    \text{a matrix with a final row consisting of all zeroes} & \text{otherwise.}
+  \end{cases}
+\end{gather*}
+
+\subsection{Rank}
+
+For $A = (a_{ij})$ a matrix in $M_{m,n}(\mathbb{F})$, we denote its rows by
+$A_{(1)}, \ldots, A_{(m)}$ and columns by $A^{(1)}, \ldots, A^{(n)}$. We
+say: \begin{itemize}
+  \item The row rank of $A$ is the dimension of the subspace of spanned by 
+  $A_{(1)}^t, \ldots, A_{(m)}^t$ in $\mathbb{F}^m$
+  \item The column rank of $A$ is the dimension of the subspace of spanned by 
+  \newline $A^{(1)}, \ldots, A^{(n)}$ in $\mathbb{F}^n$.
+\end{itemize} We have these are equal, so can generally refer to the rank 
+of a matrix.
+\\[\baselineskip]
+If $E_1, \ldots, E_k$ are elementary matrices, we have that the rank of $A$
+is equal to the rank of $E_1\cdots E_kA$. Similarly, similar matrices have
+the same rank.
+
+\subsection{Rank of Matrices from Linear Maps}
+
+For $A$ an $m \times n$ matrix on $\mathbb{F}$, we can define a map 
+$f : \mathbb{F}^n \to \mathbb{F}^m$ by $v \mapsto Av$. We have that
+the rank of $A$ is the dimension of the image of $f$.
+Thus, invertible $n \times n$ matrices have rank $n$.
+
+\subsection{Permutations}
+
+\subsubsection{Definition of a Permutation}
+
+Let $[n]$ be $\{1, 2, \ldots, n\}$. A permutation of $[n]$ is a bijection
+$\sigma : [n] \to [n]$. We define the set of all permutations on $[n]$ as
+$S_n$.
+
+\subsubsection{Decomposition of Permutations}
+
+All permutations can be written as a product of disjoint cycles. Thus,
+all permutations can be written as a product of transpositions.
+
 \end{document}
