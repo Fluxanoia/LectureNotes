@@ -6,6 +6,8 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{multicol}
+\usepackage{multirow}
+\usepackage{arydshln}
 
 \begin{document}
 
@@ -502,7 +504,7 @@ for one type of semantics, it will terminate in the same state for the other.
 
 \section{The Abstract Machine}
 
-\subsubsection{Configurations of the Abstract Machine}
+\subsection{Configurations of the Abstract Machine}
 
 We have that the configurations of the abstract machine are of the 
 form: \begin{gather*}
@@ -532,5 +534,79 @@ For the sake of simplicity, the storage is essentially a state.
 \subsubsection{Terminal States}
 
 A configuration is terminal if the code is empty.
+
+\newpage
+
+\subsection{Operational Semantics for the Abstract Machine}
+
+The table below lays out the operational semantics for the abstract machine.
+
+\begin{center}
+  \renewcommand{\arraystretch}{1.6}
+  \begin{tabular}{ l c l l }
+    \hline \multicolumn{4}{c}{Memory Management} \\ \hline
+    $\langle$ PUSH-$n:c, e, s$             $\rangle$ & $\triangleright$ & $\langle c, \mathcal{N}(n):e, s \rangle$ & \\
+    $\langle$ FETCH-$x:c, e, s$            $\rangle$ & $\triangleright$ & $\langle c, s(x):e, s \rangle$ & \\
+    $\langle$ STORE-$x:c, z:e, s$          $\rangle$ & $\triangleright$ & $\langle c, e, s[x \mapsto z] \rangle$ & if $z$ is in $\mathbb{Z}$ \\
+    \hline \multicolumn{4}{c}{Arithmetic Operators} \\ \hline
+    $\langle$ ADD$:c, z_1:z_2:e, s$        $\rangle$ & $\triangleright$ & $\langle c, (z_1 + z_2):e, s \rangle$ & if $z_1, z_2$ are in $\mathbb{Z}$ \\
+    $\langle$ MULT$:c, z_1:z_2:e, s$       $\rangle$ & $\triangleright$ & $\langle c, (z_1 \star z_2):e, s \rangle$ & if $z_1, z_2$ are in $\mathbb{Z}$ \\
+    $\langle$ SUB$:c, z_1:z_2:e, s$        $\rangle$ & $\triangleright$ & $\langle c, (z_1 - z_2):e, s \rangle$ & if $z_1, z_2$ are in $\mathbb{Z}$ \\
+    \hline \multicolumn{4}{c}{Boolean Operators} \\ \hline
+    $\langle$ TRUE$:c, e, s$               $\rangle$ & $\triangleright$ & $\langle c, \text{tt}:e, s \rangle$ & \\
+    $\langle$ FALSE$:c, e, s$              $\rangle$ & $\triangleright$ & $\langle c, \text{ff}:e, s \rangle$ & \\
+    $\langle$ EQ$:c, z_1:z_2:e, s$         $\rangle$ & $\triangleright$ & $\langle c, (z_1 == z_2):e, s \rangle$ & if $z_1, z_2$ are in $\mathbb{Z}$ \\
+    $\langle$ LEQ$:c, z_1:z_2:e, s$        $\rangle$ & $\triangleright$ & $\langle c, (z_1 \leq z_2):e, s \rangle$ & if $z_1, z_2$ are in $\mathbb{Z}$ \\
+   
+    \hdashline
+
+    \multirow{2}{*}{
+    $\langle$ AND$:c, t_1:t_2:e, s$ $\rangle$
+    } & $\triangleright$ & $\langle c, \text{tt}:e, s \rangle$ & if $t_1 == $ tt, $t_2 == $ tt \\
+    & $\triangleright$ & $\langle c, \text{ff}:e, s \rangle$ & otherwise \\
+    
+    \hdashline
+
+    \multirow{2}{*}{
+    $\langle$ NEG$:c, t:e, s$ $\rangle$ 
+    } & $\triangleright$ & $\langle c, \text{tt}:e, s \rangle$ & if $t$ == ff \\
+    & $\triangleright$ & $\langle c, \text{ff}:e, s \rangle$ & if $t$ == tt \\
+
+    \hline \multicolumn{4}{c}{Control Flow} \\ \hline
+    $\langle$ NOOP$:c, e, s$ $\rangle$ & $\triangleright$ & $\langle c, e, s \rangle$ & \\
+    
+    \hdashline
+
+    \multirow{2}{*}{
+    $\langle$ BRANCH$(c_1, c_2):c, t:e, s$ $\rangle$ 
+    } & $\triangleright$ & $\langle c_1, e, s \rangle$ & if $t ==$ tt \\
+    & $\triangleright$ & $\langle c_2, e, s \rangle$ & otherwise \\
+    
+    \hdashline
+
+    $\langle$ LOOP$(c_1, c_2):c, e, s$ $\rangle$ & $\triangleright$ & 
+    \multicolumn{2}{l}{
+    $\langle c_1:$BRANCH($c_2:$LOOP($c_1, c_2$), NOOP)$:c, e, s \rangle$
+    } \\
+  \end{tabular}
+\end{center}
+
+\subsubsection{Computation Sequences}
+
+Corresponding to the derivation sequences of structural operational semantics,
+we can also define a computation sequence of the abstract machine. For a 
+sequence of instructions $c$ and some storage $s$, the length of such a sequence 
+is either: \begin{itemize}
+  \item \textbf{Finite}: $\gamma_0, \gamma_1, \gamma_2, \ldots, \gamma_k$
+  for some $k$ in $\mathbb{Z}_{\geq 0}$ where each $i$ in $\{0, 1, \ldots, k - 1\}$ satisfies
+  $\gamma_0 = \langle c, e, s \rangle$, $\gamma_i \triangleright \gamma_{i + 1}$ where
+  there is no $\gamma$ such that $\gamma_k \triangleright \gamma$
+  \item \textbf{Infinite}: $(\gamma_k)_{k \geq 0}$ where 
+  for each $i$ in $\mathbb{Z}_{\geq 0}$ satisfies 
+  $\gamma_0 = \langle c, e, s \rangle$, $\gamma_i \triangleright \gamma_{i + 1}$.
+\end{itemize} We have that the evaluation stack $e$ is always empty
+initially. We say the computation sequence is terminating if it's finite
+and looping if it's infinite. Terminating sequences lead to terminal or stuck
+configurations.
 
 \end{document}
