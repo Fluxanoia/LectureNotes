@@ -25,6 +25,124 @@
 
 \newpage
 
+\section{Data Structures}
+
+\subsection{Stacks}
+
+A stack is a list of variables. It supports three operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create()} & Creates a new stack & $O(1)$ \\
+    \hline
+    \texttt{push(x)} & Adds \texttt{x} to the end of the stack & $O(1)$ \\
+    \hline
+    \texttt{pop()} & Removes and returns the last element of the stack & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Queues}
+
+A queue is a list of variables. It supports three operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create()} & Creates a new queue & $O(1)$ \\
+    \hline
+    \texttt{add(x)} & Adds \texttt{x} to the end of the queue & $O(1)$ \\
+    \hline
+    \texttt{serve()} & Removes and returns the first element of the queue & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Linked List}
+
+A linked list is a list of variables represented by nodes which
+point to the next and previous element in the list (null if one does
+not exist). 
+It supports four operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create()} & Creates a new linked list & $O(1)$ \\
+    \hline
+    \texttt{insert(x, i)} & Inserts \texttt{x} after node \texttt{i} & $O(1)$ \\
+    \hline
+    \texttt{delete(i)} & Removes node \texttt{i} & $O(1)$ \\
+    \hline
+    \texttt{lookup(i)} & Returns node \texttt{i} & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Arrays}
+
+An array is a list of variables of fixed length. 
+It supports three operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create(n)} & Creates a new array of size \texttt{n} & $O(1)$ \\
+    \hline
+    \texttt{update(x, i)} & Overwrites the data at position \texttt{i} with \texttt{x} & $O(1)$ \\
+    \hline
+    \texttt{lookup(i)} & Returns the value at \texttt{i} & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Hash Tables}
+
+A hash table is an array of linked lists storing key-value pairs. 
+We use a \textbf{hash function} to map data to a linked list. As we 
+are using linked lists, if multiple keys map to the same index, 
+we can just add them to the list - and when looking up data, we 
+can find the right list with the hash function and then match our key.
+\\[\baselineskip]
+It supports four operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{7.5cm} | c || }
+    \hline
+    Name & Description & Average runtime \\
+    \hline
+    \texttt{create(n)} & Creates a \texttt{n} sized array
+    of linked lists and chooses a hash function \texttt{h} & $O(1)$ \\
+    \hline
+    \texttt{insert(k, v)} & Inserts the pair (\texttt{k, v}),
+    if $\frac{\texttt{n}}{2}$ pairs are stored, we create a hash
+    table of double the size and copy the contents into it & $O(1)$ \\
+    \hline
+    \texttt{delete(k)} & Deletes the pair corresponding to the key \texttt{k} & $O(1)$ \\
+    \hline
+    \texttt{lookup(k)} & Returns the pair corresponding to the key \texttt{k} & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsubsection{Markov's Inequality}
+
+For $X \geq 0$ a random variable with mean $\mu$, for all
+$t$ in $\mathbb{R}_{\geq 0}$: \begin{gather*}
+  \mathbb{P}(X \geq t) \leq \frac{\mu}{t}.
+\end{gather*} So, if $X$ is the expected time it takes for an 
+algorithm to terminate, we can say how likely it is for an algorithm
+to terminate based on our prediction.
+
 \section{Graph Theory}
 
 \subsection{Definition of a Graph}
@@ -62,8 +180,6 @@ For a graph $G = (V, E)$, we have that: \begin{gather*}
 \end{gather*} \textit{This is because each edge visits two vertices,
 so by counting the degree of each vertex we count each edge exactly
 twice.}
-
-\newpage
 
 \subsection{$k$-regular Graphs}
 
@@ -192,8 +308,6 @@ is the size of the out-neighbourhood.
 \\[\baselineskip]
 It can be seen that the degree of a given vertex is the sum of
 its in and out degree (in a digraph).
-
-\newpage
 
 \subsubsection{Conditions for an Euler walk in a digraph}
 
@@ -328,132 +442,72 @@ For a bipartite graph $G = (V, E)$ with the bipartition $(A, B)$ has
 a perfect matching if and only if $|A| = |B|$ and for all 
 $X \subseteq A$, $|N(X)| \geq |X|$. 
 
-\section{Types of Algorithms}
+\section{Working on Graphs}
 
-\subsection{Greedy Algorithms}
+\subsection{Data Representations of Graphs}
 
-These types of algorithms start with a trivial solution and
-iteratively optimise their solution based on the information
-available at the time. They do not retroactively change the solution
-based on new data, only add to it.
+\subsubsection{Adjacency matrix}
 
-\section{Data Structures}
+We have for a graph $G = (V, E)$, the adjacency matrix is a
+$|V|$ by $|V|$ matrix $A = (a_{ij})$ where: \begin{gather*}
+  a_{ij} = \begin{cases}
+    1 & \text{if there's an edge from vertex $i$ to $j$} \\
+    0 & \text{otherwise} \\
+  \end{cases}
+\end{gather*}
 
-\subsection{Stacks}
+\subsubsection{Adjacency list}
 
-A stack is a list of variables. It supports three operations:
+We can represent a graph also by an array of linked lists or 
+hash tables where
+each element in the array represents a vertex and the corresponding
+list represents the vertices in the neighbourhood of the vertex.
 
+\newpage
+
+\subsubsection{Comparision of representations}
+
+We can compare some basic properties of the representations:
 \begin{center}
-  \begin{tabular}{ || c | p{6.5cm} | c || }
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{ | r || c | c | c |}
     \hline
-    Name & Description & Worst case runtime \\
-    \hline
-    \texttt{create()} & Creates a new stack & $O(1)$ \\
-    \hline
-    \texttt{push(x)} & Adds \texttt{x} to the end of the stack & $O(1)$ \\
-    \hline
-    \texttt{pop()} & Removes and returns the last element of the stack & $O(1)$ \\
+    & Matrix & Linked Lists & Hash Tables \\ 
+    \hline\hline
+    Space & $\Theta(|V|^2)$ & $\Theta(|V| + |E|)$ & $\Theta(|V| + |E|)$ \\
+    Finding an edge from $u$ & $O(1)$ & $O(\text{deg}(u))$ & $O(1)$ \\
+    Finding the neighbourhood of $u$ & $O(|V|)$ & $O(\text{deg}(u))$ & $O(\text{deg}(u))$ \\
     \hline
   \end{tabular}
-\end{center}
+\end{center} This raises the question, why don't we always use
+hash tables? Due to the probability of collisions in hash tables,
+we opt for the linked list as it's more reliable for large graphs
+(additionally, we are almost always are looking for a neighbourhood
+not a specific edge).
 
-\subsection{Queues}
+\subsection{Search}
 
-A queue is a list of variables. It supports three operations:
+Generally with a graph searching algorithm, we have a data structure 
+which is left undefined here (besides the fact we can add vertices to 
+it and take vertices out). Starting with a vertex \texttt{u}, naming 
+our data structure \texttt{data}, we perform the following:
+\begin{verbatim}
+add u to data
+while data is non-empty
+> take x from data
+> if x isn't marked
+> > mark x
+> > for each edge (x, y)
+> > > put y in data
+\end{verbatim} We have that this process always terminates, visits
+every vertex in connected graphs, and has time complexity $O(|E|)$
+where $E$ is the edge set.
 
-\begin{center}
-  \begin{tabular}{ || c | p{6.5cm} | c || }
-    \hline
-    Name & Description & Worst case runtime \\
-    \hline
-    \texttt{create()} & Creates a new queue & $O(1)$ \\
-    \hline
-    \texttt{add(x)} & Adds \texttt{x} to the end of the queue & $O(1)$ \\
-    \hline
-    \texttt{serve()} & Removes and returns the first element of the queue & $O(1)$ \\
-    \hline
-  \end{tabular}
-\end{center}
+\subsubsection{Breadth-first search}
 
-\subsection{Linked List}
-
-A linked list is a list of variables represented by nodes which
-point to the next and previous element in the list (null if one does
-not exist). 
-It supports four operations:
-
-\begin{center}
-  \begin{tabular}{ || c | p{6.5cm} | c || }
-    \hline
-    Name & Description & Worst case runtime \\
-    \hline
-    \texttt{create()} & Creates a new linked list & $O(1)$ \\
-    \hline
-    \texttt{insert(x, i)} & Inserts \texttt{x} after node \texttt{i} & $O(1)$ \\
-    \hline
-    \texttt{delete(i)} & Removes node \texttt{i} & $O(1)$ \\
-    \hline
-    \texttt{lookup(i)} & Returns node \texttt{i} & $O(1)$ \\
-    \hline
-  \end{tabular}
-\end{center}
-
-\subsection{Arrays}
-
-An array is a list of variables of fixed length. 
-It supports three operations:
-
-\begin{center}
-  \begin{tabular}{ || c | p{6.5cm} | c || }
-    \hline
-    Name & Description & Worst case runtime \\
-    \hline
-    \texttt{create(n)} & Creates a new array of size \texttt{n} & $O(1)$ \\
-    \hline
-    \texttt{update(x, i)} & Overwrites the data at position \texttt{i} with \texttt{x} & $O(1)$ \\
-    \hline
-    \texttt{lookup(i)} & Returns the value at \texttt{i} & $O(1)$ \\
-    \hline
-  \end{tabular}
-\end{center}
-
-\subsection{Hash Tables}
-
-A hash table is an array of linked lists storing key-value pairs. 
-We use a \textbf{hash function} to map data to a linked list. As we 
-are using linked lists, if multiple keys map to the same index, 
-we can just add them to the list - and when looking up data, we 
-can find the right list with the hash function and then match our key.
-\\[\baselineskip]
-It supports four operations:
-
-\begin{center}
-  \begin{tabular}{ || c | p{7.5cm} | c || }
-    \hline
-    Name & Description & Average runtime \\
-    \hline
-    \texttt{create(n)} & Creates a \texttt{n} sized array
-    of linked lists and chooses a hash function \texttt{h} & $O(1)$ \\
-    \hline
-    \texttt{insert(k, v)} & Inserts the pair (\texttt{k, v}),
-    if $\frac{\texttt{n}}{2}$ pairs are stored, we create a hash
-    table of double the size and copy the contents into it & $O(1)$ \\
-    \hline
-    \texttt{delete(k)} & Deletes the pair corresponding to the key \texttt{k} & $O(1)$ \\
-    \hline
-    \texttt{lookup(k)} & Returns the pair corresponding to the key \texttt{k} & $O(1)$ \\
-    \hline
-  \end{tabular}
-\end{center}
-
-\subsubsection{Markov's Inequality}
-
-For $X \geq 0$ a random variable with mean $\mu$, for all
-$t$ in $\mathbb{R}_{\geq 0}$: \begin{gather*}
-  \mathbb{P}(X \geq t) \leq \frac{\mu}{t}.
-\end{gather*} So, if $X$ is the expected time it takes for an 
-algorithm to terminate, we can say how likely it is for an algorithm
-to terminate based on our prediction.
+If our data structure is a queue, we get breadth-first searching.
+This causes vertices to be marked in distance order from the starting
+point.
 
 \section{Fast Fourier Transforms}
 
