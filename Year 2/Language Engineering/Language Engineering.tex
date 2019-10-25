@@ -510,7 +510,8 @@ We have that the configurations of the abstract machine are of the
 form: \begin{gather*}
   \langle c, e, s \rangle,
 \end{gather*} where $c$ is the code being executed, $e$ is the
-evaluation stack, and $s$ is the storage.
+evaluation stack, and $s$ is the storage. We use $\varepsilon$ to 
+denote an empty stack or code.
 
 \subsubsection{Code}
 
@@ -540,7 +541,6 @@ A configuration is terminal if the code is empty.
 \subsection{Operational Semantics for the Abstract Machine}
 
 The table below lays out the operational semantics for the abstract machine.
-
 \begin{center}
   \renewcommand{\arraystretch}{1.6}
   \begin{tabular}{ l c l l }
@@ -599,14 +599,127 @@ sequence of instructions $c$ and some storage $s$, the length of such a sequence
 is either: \begin{itemize}
   \item \textbf{Finite}: $\gamma_0, \gamma_1, \gamma_2, \ldots, \gamma_k$
   for some $k$ in $\mathbb{Z}_{\geq 0}$ where each $i$ in $\{0, 1, \ldots, k - 1\}$ satisfies
-  $\gamma_0 = \langle c, e, s \rangle$, $\gamma_i \triangleright \gamma_{i + 1}$ where
+  $\gamma_0 = \langle c, \varepsilon, s \rangle$, $\gamma_i \triangleright \gamma_{i + 1}$ where
   there is no $\gamma$ such that $\gamma_k \triangleright \gamma$
   \item \textbf{Infinite}: $(\gamma_k)_{k \geq 0}$ where 
   for each $i$ in $\mathbb{Z}_{\geq 0}$ satisfies 
-  $\gamma_0 = \langle c, e, s \rangle$, $\gamma_i \triangleright \gamma_{i + 1}$.
+  $\gamma_0 = \langle c, \varepsilon, s \rangle$, $\gamma_i \triangleright \gamma_{i + 1}$.
 \end{itemize} We have that the evaluation stack $e$ is always empty
 initially. We say the computation sequence is terminating if it's finite
 and looping if it's infinite. Terminating sequences lead to terminal or stuck
 configurations.
+\\[\baselineskip]
+The semantics of the abstract machine are deterministic as defined
+in the table above, meaning for all
+computation sequences $\gamma, \gamma_1, \gamma_2$: \begin{gather*}
+  \begin{rcases*}
+    \gamma_1 \triangleright \gamma \, \\
+    \gamma_2 \triangleright \gamma \,
+  \end{rcases*} \Rightarrow \gamma_1 = \gamma_2.
+\end{gather*}
+
+\subsection{The Execution Function}
+
+Similarly to the semantic function for our types of semantics,
+we define a function for the execution of abstract machine code, 
+$\mathcal{M}$: \begin{align*}
+  \mathcal{M} &: \textbf{Code} \to (\textbf{State} \hookrightarrow \textbf{State}) \\
+  \mathcal{M}(c)(s) &= \begin{cases}
+    s' & \text{if } \langle c, \varepsilon, s \rangle \triangleright^* \langle \varepsilon, e, s' \rangle\\
+    \text{undefined} & \text{otherwise.}
+  \end{cases}
+\end{align*}
+
+\newpage
+
+\subsection{Code Generation}
+
+We define functions for generating code for the abstract machine from
+expressions and statements.
+
+\subsubsection{Arithmetic expressions}
+
+This code generation function has the form: \begin{gather*}
+  \mathcal{CA} : \textbf{Aexp} \to \textbf{Code}.
+\end{gather*} The function is defined as follows: \begin{align*}
+  \mathcal{CA}(n) &= \text{PUSH-}n\\
+  \mathcal{CA}(x) &= \text{FETCH-}x\\
+  \mathcal{CA}(a_1 + a_2) &= \mathcal{CA}(a_2):\mathcal{CA}(a_1):\text{ADD}\\
+  \mathcal{CA}(a_1 - a_2) &= \mathcal{CA}(a_2):\mathcal{CA}(a_1):\text{SUB}\\
+  \mathcal{CA}(a_1 \star a_2) &= \mathcal{CA}(a_2):\mathcal{CA}(a_1):\text{MULT}.\\
+\end{align*}
+
+\subsubsection{Boolean expressions}
+
+This code generation function has the form: \begin{gather*}
+  \mathcal{CB} : \textbf{Bexp} \to \textbf{Code}.
+\end{gather*} The function is defined as follows: \begin{align*}
+  \mathcal{CB}(\texttt{true}) &= \text{TRUE}\\
+  \mathcal{CB}(\texttt{false}) &= \text{FALSE}\\
+  \mathcal{CB}(a_1 == a_2) &= \mathcal{CA}(a_2):\mathcal{CA}(a_1):\text{EQ}\\
+  \mathcal{CB}(a_1 \leq a_2) &= \mathcal{CA}(a_2):\mathcal{CA}(a_1):\text{LEQ}\\
+  \mathcal{CB}(\neg b) &= \mathcal{CB}(b):\text{NEG}\\
+  \mathcal{CB}(b_1 \land b_2) &= \mathcal{CB}(b_2):\mathcal{CB}(b_1):\text{AND}.\\
+\end{align*}
+
+\subsubsection{Statements}
+
+This code generation function has the form: \begin{gather*}
+  \mathcal{CS} : \textbf{Stm} \to \textbf{Code}.
+\end{gather*} The function is defined as follows: \begin{align*}
+  \mathcal{CS}(x = a) &= \mathcal{CA}(a):\text{STORE-}x \\
+  \mathcal{CS}(\texttt{skip}) &= \text{NOOP} \\
+  \mathcal{CS}(S_1:S_2) &= \mathcal{CS}(S_1):\mathcal{CS}(S_2) \\
+  \mathcal{CS}(
+    \texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2
+  ) &= \mathcal{CB}(b):\text{BRANCH}(\mathcal{CS}(S_1), \mathcal{CS}(S_2)) \\
+  \mathcal{CS}(
+    \texttt{while } b \texttt{ do } S
+  ) &= \text{LOOP}(\mathcal{CB}(b), \mathcal{CS}(s)).
+\end{align*}
+
+\subsection{The Semantic Function}
+
+We define the semantic function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to (\textbf{State} \hookrightarrow \textbf{State}).
+\end{gather*} Thus for a given statement $S$, we have that: \begin{gather*}
+  \mathcal{S}(S) = (\mathcal{M} \circ \mathcal{CS})(S).
+\end{gather*} We that this function is partial because some statements
+may never terminate. Thus giving an indeterminate answer.
+\\[\baselineskip]
+As there will be more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{am}$.
+
+\subsection{Correctness}
+
+\subsubsection{Arithmetic expressions}
+
+We have that for all arithmetic expressions $a$: \begin{gather*}
+  \langle \mathcal{CA}(a), \varepsilon, s \rangle 
+  \triangleright^*
+  \langle \varepsilon, \mathcal{A}(a)(s), s \rangle,
+\end{gather*} and all intermediary states have non-empty stacks.
+
+\subsubsection{Boolean expressions}
+
+We have that for all boolean expressions $b$: \begin{gather*}
+  \langle \mathcal{CB}(b), \varepsilon, s \rangle 
+  \triangleright^*
+  \langle \varepsilon, \mathcal{B}(b)(s), s \rangle,
+\end{gather*} and all intermediary states have non-empty stacks.
+
+\subsubsection{Statements}
+
+We have that for all statements $S$: \begin{gather*}
+  S_{ns}(S) = S_{sos}(S) = S_{am}(S).
+\end{gather*} Also, for all states $s$, we have that: \begin{gather*}
+  \begin{rcases*}
+    \langle S, s \rangle \to s' \\
+    \qquad \text{or} \\
+    \langle S, s \rangle \Rightarrow^* s'
+  \end{rcases*} \Rightarrow
+  \langle \mathcal{CS}(S), \varepsilon, s \rangle \triangleright^* 
+  \langle \varepsilon, \varepsilon, s' \rangle 
+\end{gather*}
 
 \end{document}
