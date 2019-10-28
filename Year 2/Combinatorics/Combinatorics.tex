@@ -74,12 +74,12 @@ plus the sum of the intersections of \textbf{trios}, etc.}
 \subsection{The Factorial}
 
 For $n$ in $\mathbb{N}$ we can define the factorial $n!$: \begin{align*}
-  n! = \begin{cases*}
+  n! := \begin{cases*}
     1 & n = 0 \\
     \prod_{i = 1}^n(i) & \text{otherwise.}
   \end{cases*}
 \end{align*} For $k$ in $\mathbb{N}$ we can further define $(n)_k$: \begin{gather*}
-  (n)_k = \frac{n!}{(n-k)!} = n(n-1)(n-2)\cdots(n-k+1).
+  (n)_k := \frac{n!}{(n-k)!} = n(n-1)(n-2)\cdots(n-k+1).
 \end{gather*} \textit{This can be though of as the factorial with $k$
 elements (starting at $n$). So, $(n)_n = n!$, $(n)_1 = n$, etc.}
 
@@ -88,7 +88,7 @@ elements (starting at $n$). So, $(n)_n = n!$, $(n)_1 = n$, etc.}
 \subsection{The Binomial Coefficient}
 
 For $n, k$ in $\mathbb{N}$, we can define the binomial coefficient:  \begin{align*}
- {n \choose k} = \frac{n!}{k!(n-k)!} = \frac{(n)_k}{k!}.
+ {n \choose k} := \frac{n!}{k!(n-k)!} = \frac{(n)_k}{k!}.
 \end{align*}
 This is the number of ways of choosing $k$-element subsets
 from an $n$-element set. Furthermore, we have: \begin{gather*}
@@ -273,7 +273,7 @@ we suppose: \begin{gather*}
 \subsection{The Quantity of Blocks in a Block Design}
 
 For a block design of type $t-(v,k,\lambda)$, we have that the number
-of blocks $b$ can be defined as follows: \begin{gather*}
+of blocks $b$ can be derived as follows: \begin{gather*}
   b = \frac{\lambda{v \choose t}}{{k \choose t}}.
 \end{gather*}
 
@@ -321,13 +321,6 @@ size $2$. Some definitions and facts follow from the definition:
   \item $u, v$ in $V$ are adjacent if ${u, v}$ is in $E$.
 \end{itemize}  
 
-\subsection{Definition of Neighbourhood and Degree}
-
-For a graph $G = (V, E)$ the \textbf{neighbourhood} of $v$ in $V$ 
-is the set of all adjacent vertices (denoted by $N_G(v)$). 
-The \textbf{degree} is simply the size of $N_G(v)$ denoted 
-by $\text{deg}(v)$.
-
 \subsection{Graph Isomorphisms}
 
 For two graphs $G_1 = (V_1, E_1)$, $G_2 = (V_2, E_2)$, we say that
@@ -336,6 +329,21 @@ bijection $\phi : V_1 \to V_2$ such that for each pair of vertices
 $u, v$ in $V$ we have that: \begin{gather*}
   \{u, v\} \in E_1 \Longleftrightarrow \{\phi(u), \phi(v)\} \in E_2.
 \end{gather*}
+
+\subsection{Definition of Neighbourhood and Degree}
+
+For a graph $G = (V, E)$ the \textbf{neighbourhood} of $v$ in $V$ 
+is the set of all adjacent vertices (denoted by $N_G(v)$). 
+The \textbf{degree} is simply the size of $N_G(v)$ denoted 
+by $\text{deg}(v)$.
+
+\subsection{Notation for Minimum and Maximum Degree}
+
+For a graph $G = (V, E)$ we have that the following to represent
+minimum and maximum degree: \begin{align*}
+  \delta(G) &:= \text{min}\{\text{deg}(v) : v \in V\} \\
+  \Delta(G) &:= \text{max}\{\text{deg}(v) : v \in V\}
+\end{align*}
 
 \subsection{Definition of Degree Sequence}
 
@@ -423,16 +431,37 @@ removed.
 
 \subsection{Euler Circuits}
 
-\subsubsection{Definition of an Euler Circuit}
+\subsubsection{Definition of an Euler circuit}
 
 An Euler circuit is a circuit in which each edge in a graph is
 traversed exactly once (or a trail which traverses every edge).
+As a consequence, each vertex is travelled at least once.
 \\[\baselineskip]
 Graphs with Euler circuits are said to be \textbf{Eulerian}.
 
-\subsubsection{Conditions for an Euler Circuit}
+\subsubsection{Conditions for an Euler circuit}
 
 An Euler circuit in a graph $G$ exists if and only if $G$ is 
 connected and each vertex in $G$ has even degree.
+
+\subsection{Hamiltonian Cycles}
+
+\subsubsection{Definition of a Hamiltonian cycle}
+
+For a graph $G = (V, E)$ where $|V| = n$, a Hamiltonian cycle in $G$ is
+a cycle of length $n$, meaning it visits each vertex exactly once.
+\\[\baselineskip]
+Graphs with Hamiltonian cycles are said to be \textbf{Hamiltonian}.
+
+\subsubsection{Definition of a Hamiltonian path}
+
+For a graph $G = (V, E)$ where $|V| = n$, a Hamiltonian path is a path of
+length $n - 1$, meaning it visits each vertex at least once.
+
+\subsubsection{Dirac's Theorem}
+
+For a graph $G = (V, E)$ where $|V| \geq 3$: \begin{gather*}
+  \delta(G) \geq \frac{n}{2} \Rightarrow G \text{ is Hamiltonian.}
+\end{gather*}
 
 \end{document}
