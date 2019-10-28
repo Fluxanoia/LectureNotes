@@ -358,7 +358,7 @@ We can define some natural semantics for the While language as follows:
 We have that the semantics detailed above are deterministic, that is,
 for identical inputs, we get identical outputs.
 \\[\baselineskip]
-As there will be more than one definition of these semantics
+As there is more than one definition of these semantics
 we will subscript these defintions with $ns$ where appropriate.
 
 \newpage
@@ -436,7 +436,7 @@ We can see by the definition of composition that with these
 semantics we have to fully decompose and execution $S_1$ before
 we can begin execution of $S_2$.
 \\[\baselineskip]
-As there will be more than one definition of these semantics
+As there is more than one definition of these semantics
 we will subscript these defintions with $sos$ where appropriate.
 
 \subsubsection{Derivation Sequences}
@@ -492,7 +492,7 @@ function as follows: \begin{gather*}
 \end{align*} We that this function is partial because some statements
 may never terminate. Thus giving an indeterminate answer.
 \\[\baselineskip]
-As there will be more than one semantic function (for our different types
+As there is more than one semantic function (for our different types
 of semantics) we denote this function as $\mathcal{S}_{sos}$.
 
 \subsection{Semantic Equivalence}
@@ -687,7 +687,7 @@ We define the semantic function as follows: \begin{gather*}
 \end{gather*} We that this function is partial because some statements
 may never terminate. Thus giving an indeterminate answer.
 \\[\baselineskip]
-As there will be more than one semantic function (for our different types
+As there is more than one semantic function (for our different types
 of semantics) we denote this function as $\mathcal{S}_{am}$.
 
 \subsection{Correctness}
@@ -721,5 +721,54 @@ We have that for all statements $S$: \begin{gather*}
   \langle \mathcal{CS}(S), \varepsilon, s \rangle \triangleright^* 
   \langle \varepsilon, \varepsilon, s' \rangle 
 \end{gather*}
+
+\section{Denotational (Direct Style) Semantics}
+
+\subsection{The Semantic Function} 
+
+We define the semantic function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to (\textbf{State} \hookrightarrow \textbf{State}).
+\end{gather*} We that this function is partial because some statements
+may never terminate. We have the following: \begin{align*}
+  \mathcal{S}(x = a)(s) &= s[x \mapsto \mathcal{A}(a)(s)] \\
+  \mathcal{S}(\texttt{skip}) &= \texttt{id} \\
+  \mathcal{S}(S_1 ; S_2) &= \mathcal{S}(S_2) \circ \mathcal{S}(S_1) \\
+  \mathcal{S}(\texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2)
+  &= \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S_1), \mathcal{S}(S_2)) \\
+  \mathcal{S}(\texttt{while } b \texttt{ do } S)
+  &= \texttt{FIX } F \text{ (where } F(g) 
+  := \texttt{cond}(\mathcal{B}(b), g \circ \mathcal{S}(S), \texttt{id})).
+\end{align*} 
+As there is more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{ds}$.
+\\[\baselineskip]
+The definitions depend on the definition of the functions in the 
+following sections.
+
+\subsubsection{The Conditional Function}
+
+We define the type of \texttt{cond} as follows: \begin{gather*}
+  \texttt{cond} : 
+  (\textbf{State} \to \textbf{T}) \times
+  (\textbf{State} \hookrightarrow \textbf{State}) \times
+  (\textbf{State} \hookrightarrow \textbf{State}) \to
+  (\textbf{State} \hookrightarrow \textbf{State}),
+\end{gather*} with definition: \begin{gather*}
+  \texttt{cond}(p, f_1, f_2)s = \begin{cases}
+    f_1(s) & \text{if } p(s) == \textbf{tt} \\
+    f_2(s) & \text{otherwise.} \\
+  \end{cases}
+\end{gather*}
+
+\subsubsection{The Fixed Point Function}
+
+We define the type of \texttt{FIX} as follows: \begin{gather*}
+  \texttt{FIX} : 
+  (\textbf{State} \hookrightarrow \textbf{State}) \to
+  (\textbf{State} \hookrightarrow \textbf{State}) \to
+  (\textbf{State} \hookrightarrow \textbf{State}),
+\end{gather*} where \texttt{FIX}$(F)$ returns the smallest fixed 'point'
+(or rather function) of $F$ ($f$ in Im($F$) such that $F(f) = f$). 
+Smallest in this case is the 'most undefined' function.
 
 \end{document}
