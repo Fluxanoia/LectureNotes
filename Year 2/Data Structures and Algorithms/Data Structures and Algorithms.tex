@@ -143,6 +143,45 @@ $t$ in $\mathbb{R}_{\geq 0}$: \begin{gather*}
 algorithm to terminate, we can say how likely it is for an algorithm
 to terminate based on our prediction.
 
+\subsection{Binary Heaps}
+
+Binary heaps are rooted binary trees where each level is full except
+possibly the last (which is filled from left to right). The
+elements of the tree are ordered according to a 
+\textbf{heap property}. These have the following properties: \begin{itemize}
+  \item For a heap of size $n$, the height of the heap is $\log_2(n)$
+  \item For an index $i$: \begin{itemize}
+    \item The parent has index $\left\lfloor \dfrac{i}{2} \right\rfloor$
+    \item The left child has index $2i$
+    \item The right child has index $2i + 1$
+  \end{itemize}
+\end{itemize}
+
+\newpage
+
+\subsection{Priority Queues}
+
+A priority queue is a set of distinct elements with associated value
+called the key. We can use a binary heap as a priority queue with the
+elements as the keys and the heap property that the parents are
+less than or equal to the children. This supports the following:
+\begin{center}
+  \begin{tabular}{ || c | p{7.5cm} | c || }
+    \hline
+    Name & Description & Runtime \\
+    \hline
+    \texttt{insert(x, k)} & Inserts \texttt{x} with key \texttt{k}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{decreaseKey(x, d)} & Decreases the key of \texttt{x} to \texttt{d}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{extractMin()} & Removes and returns the \texttt{x} in the queue
+    with the smallest key & $O(\log_2(n))$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
 \section{Graph Theory}
 
 \subsection{Definition of a Graph}
@@ -501,13 +540,22 @@ while data is non-empty
 > > > put y in data
 \end{verbatim} We have that this process always terminates, visits
 every vertex in connected graphs, and has time complexity $O(|E|)$
-where $E$ is the edge set.
+(assuming the data operations are $O(1)$) where $E$ is the edge set.
 
 \subsubsection{Breadth-first search}
 
 If our data structure is a queue, we get breadth-first searching.
 This causes vertices to be marked in distance order from the starting
 point.
+\paragraph{Shortest paths} By tracking distances, we can find shortest
+paths using this searching style.
+This is $O(|V| + |E|)$ in a graph $G = (V, E)$.
+
+\subsubsection{Depth-first search}
+
+If our data structure is a stack, we get depth-first searching.
+This causes vertices to be marked the further they are from
+the starting vertex.
 
 \section{Fast Fourier Transforms}
 
