@@ -197,7 +197,7 @@ isomorphic, denoted by $V \cong W$.
 
 Let $V, W$ be vector spaces over a field $\mathbb{F}$, and
 $f : V \to W$ be a linear map. We define the kernel of $f$ as: \begin{gather*}
-  \text{Ker}(f) = \{v \in V : f(v) = 0_{\mathbb{F}}\}.
+  \text{Ker}(f) := \{v \in V : f(v) = 0_{\mathbb{F}}\}.
 \end{gather*} Saying Ker($f)$ is $\{0_\mathbb{F}\}$ is equivalent
 to saying $f$ is injective.
 
@@ -205,7 +205,7 @@ to saying $f$ is injective.
 
 Let $V, W$ be vector spaces over a field $\mathbb{F}$, and
 $f : V \to W$ be a linear map. We define the image of $f$ as: \begin{gather*}
-  \text{Im}(f) = \{w \in W : \exists \, v \in V \text{ with } f(v) = w\}.
+  \text{Im}(f) := \{w \in W : \exists \, v \in V \text{ with } f(v) = w\}.
 \end{gather*} Saying Im($f)$ is $W$ is equivalent
 to saying $f$ is surjective.
 
@@ -275,13 +275,13 @@ For $a, b, c$ in $\mathbb{Z}_{>0}$ and a field $\mathbb{F}$,
 we can define the multiplication of the two matrices $X = (x_{ij})$ in
 $M_{a \times b}$ and $Y = (y_{ij})$ in $M_{b \times c}$ as follows: 
 \begin{gather*}
-  XY = (\sum_{k = 1}^b x_{ik}y_{kj}).
+  XY := (\sum_{k = 1}^b x_{ik}y_{kj}).
 \end{gather*} This operation is not commutative in general but is
 associative.
 \\[\baselineskip]
 For $A, B$ in $M_n$, we have that $AB$ is also in $M_n$. This,
 along with matrix addition, makes $M_n$ a ring with unity with
-multiplicative identity $I_n = (\delta_{ij})$. However, there exists
+multiplicative identity $I_n := (\delta_{ij})$. However, there exists
 $A, B$ in $M_n$ such that $AB=0$ so, $M_n$ is not a field.
 
 \subsection{Matrices of Linear Maps}
@@ -363,7 +363,7 @@ multiplicity of $\lambda$.
 
 For $V, W$ vector spaces, we define the direct product of $V$ and
 $W$ as: \begin{gather*}
-  V \oplus W = \{(v, w) : v \in V, w \in W\},
+  V \oplus W := \{(v, w) : v \in V, w \in W\},
 \end{gather*} with addition and scalar multiplication defined
 coordinate-wise and zero vector $(0_V, 0_W)$.
 
@@ -487,8 +487,8 @@ $V^*$ is $\mathcal{L}(V, \mathbb{F})$, the set of linear maps from
 $V$ to $\mathbb{F}$. We have that addition and scalar multiplication
 are defined for some $v$ in $V$, $f, g$ in $V^*$, and $a$ in 
 $\mathbb{F}$: \begin{align*}
-  (f + g)(v) &= f(v) + g(v), \\
-  (af)(v) &= af(v).
+  (f + g)(v) &:= f(v) + g(v), \\
+  (af)(v) &:= af(v).
 \end{align*}
 
 \subsection{Definition of a Dual Basis}
@@ -498,7 +498,7 @@ dim$(v) = n$ and a basis $B = \{v_1, \ldots, v_n\}$.
 We define the dual basis $B^* = \{v_1^*, \ldots, v_n^*\}$
 by defining $v_i^* : V \to \mathbb{F}$ as the unique linear map
 such that: \begin{gather*}
-  v_i^*(v_j) = \begin{cases}
+  v_i^*(v_j) := \begin{cases}
     0 & \text{if } i \neq j \\
     1 & \text{if } i = j.
   \end{cases}
@@ -550,7 +550,7 @@ we have $F: V \to V^{**}$. That is: \begin{gather*}
 For $V, W$ vector spaces with $f : V \to W$ a linear map. We define
 the transpose as $f^t : W^* \to V^*$ where for $g$ in $W^*$, $v$ in
 $V$: \begin{gather*}
-  f^t(g) = (g \circ f).
+  f^t(g) := (g \circ f).
 \end{gather*} So, for some $v$ in $V$: \begin{gather*}
   f^t(g)(v) = (g \circ f)(v) = g(f(v)).
 \end{gather*}
@@ -635,15 +635,91 @@ Thus, invertible $n \times n$ matrices have rank $n$.
 
 \subsection{Permutations}
 
-\subsubsection{Definition of a Permutation}
+\subsubsection{Definition of a permutation}
 
 Let $[n]$ be $\{1, 2, \ldots, n\}$. A permutation of $[n]$ is a bijection
 $\sigma : [n] \to [n]$. We define the set of all permutations on $[n]$ as
 $S_n$.
 
-\subsubsection{Decomposition of Permutations}
+\subsubsection{Decomposition of permutations}
 
 All permutations can be written as a product of disjoint cycles. Thus,
 all permutations can be written as a product of transpositions.
+
+\subsubsection{Definition of the parity of permutations}
+
+Even permutations are permutations that can be expressed as the
+product of an even number of transpositions. Otherwise, a
+permutation is odd. 
+
+\subsubsection{The sgn function}
+
+We define the sgn function for a given
+permutation $\sigma$: \begin{gather*}
+  \text{sgn}(\sigma) = \begin{cases}
+    1 & \text{if } \sigma \text{ is even} \\
+    -1 & \text{otherwise.}
+  \end{cases}
+\end{gather*} We have that for another permutation $\tau$: \begin{gather*}
+  \text{sgn}(\sigma\tau) = \text{sgn}(\sigma)\text{sgn}(\tau).
+\end{gather*} \textit{In other words,} sgn \textit{is a 
+homomorphism from $S_n$ to $\{1, -1\}$.}
+
+\subsubsection{The alternating group}
+
+We have that $A_n$ the set of even permutations in $S_n$ is a
+subgroup as it is the kernel of sgn.
+
+\subsection{Determinants}
+
+\subsubsection{Definition of a determinant}
+
+For $A = (a_{ij})$ a $n \times n$ matrix over $\mathbb{F}$, we have
+the determinant is a scalar defined by: \begin{gather*}
+  \text{det}(A) := \sum_{\sigma \in S_n} \text{sgn}(\sigma)a_{\sigma(1)1} \cdots a_{\sigma(n)n}.
+\end{gather*} We may represent the $k^{th}$ column vector of $A$ by 
+$A^{(k)}$ and then write: \begin{gather*}
+  \text{det}(A) = \text{det}(A^{(1)}, \ldots, A^{(n)}).
+\end{gather*}
+
+\subsubsection{Multi-linearity of the determinant}
+
+For $A = (a_{ij})$ a $n \times n$ matrix over $\mathbb{F}$ with
+$A_{(k)} = c_1v_1 + c_2v_2$ with $c_1, c_2$ in $\mathbb{F}$ and
+$v_1, v_2$ in $\mathbb{F}^n$, we have that: \begin{align*}
+  \text{det}(A) &= \text{det}(A^{(1)}, \ldots, A^{(n)}) \\
+  &= c_1 \cdot \text{det}(A^{(1)}, \ldots, v_1, \ldots, A^{(n)}) \\
+  & \qquad + c_2 \cdot \text{det}(A^{(1)}, \ldots, v_2, \ldots, A^{(n)}).
+\end{align*} From this we can show that any square matrix with a column
+of all zeroes has determinant zero.
+
+\subsubsection{Alternativity of the determinant}
+
+For $A = (a_{ij})$ a $n \times n$ matrix over $\mathbb{F}$ with
+$i \neq j$, we have that: \begin{gather*}
+  \text{det}(A^{(1)}, \ldots, A^{(i)}, \ldots, A^{(j)} \ldots, A^{(n)}) \\
+  =\\
+  -\text{det}(A^{(1)}, \ldots, A^{(j)}, \ldots, A^{(i)} \ldots, A^{(n)}).
+\end{gather*} From this we can show that a matrix with all identical columns
+must have zero determinant.
+
+\subsubsection{Normalisation of the determinant}
+
+For $A$ a square upper (or lower) triangular matrix, we have that
+the determinant is the product of the diagonal entries.
+Thus, the determinant of the identity is $1$.
+
+\subsubsection{Determinants of the elementary matrices}
+
+We have the following: \begin{align*}
+  \text{det}\left[E_1(i, j)\right] &= -1 \\
+  \text{det}\left[E_2(c, i)\right] &= c \\
+  \text{det}\left[E_3(c, i, j)\right] &= 1.
+\end{align*}
+
+\subsubsection{Determinants of transposes}
+
+We have that for a matrix $A$, the determinant of the transpose of $A$
+is the same as $A$.
 
 \end{document}
