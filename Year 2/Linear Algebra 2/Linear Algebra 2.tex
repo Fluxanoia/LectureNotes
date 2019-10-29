@@ -677,7 +677,12 @@ subgroup as it is the kernel of sgn.
 For $A = (a_{ij})$ a $n \times n$ matrix over $\mathbb{F}$, we have
 the determinant is a scalar defined by: \begin{gather*}
   \text{det}(A) := \sum_{\sigma \in S_n} \text{sgn}(\sigma)a_{\sigma(1)1} \cdots a_{\sigma(n)n}.
-\end{gather*} We may represent the $k^{th}$ column vector of $A$ by 
+\end{gather*} A more efficient but equivalent definition would be: \begin{gather*}
+  \text{det}(A) = \sum_{j = 1}^n (-1)^{i + j}a_{ij}\text{det}(\tilde{A}^{ij}),
+\end{gather*} where $i$ is in $\{1, \ldots, n\}$ and $\tilde{A}^{ij}$ is $A$
+with the $i^{th}$ row and $j^{th}$ column removed. 
+\\[\baselineskip]
+We may represent the $k^{th}$ column vector of $A$ by 
 $A^{(k)}$ and then write: \begin{gather*}
   \text{det}(A) = \text{det}(A^{(1)}, \ldots, A^{(n)}).
 \end{gather*}
@@ -700,16 +705,17 @@ $i \neq j$, we have that: \begin{gather*}
   \text{det}(A^{(1)}, \ldots, A^{(i)}, \ldots, A^{(j)} \ldots, A^{(n)}) \\
   =\\
   -\text{det}(A^{(1)}, \ldots, A^{(j)}, \ldots, A^{(i)} \ldots, A^{(n)}).
-\end{gather*} From this we can show that a matrix with all identical columns
-must have zero determinant.
+\end{gather*} From this we can show that a matrix with a pair of
+identical columns must have zero determinant.
 
-\subsubsection{Normalisation of the determinant}
+\subsubsection{Normality of the determinant}
 
-For $A$ a square upper (or lower) triangular matrix, we have that
+For a square upper (or lower) triangular matrix $A$, we have that
 the determinant is the product of the diagonal entries.
-Thus, the determinant of the identity is $1$.
+\\[\baselineskip]
+From this we can show that the determinant of the identity is $1$.
 
-\subsubsection{Determinants of the elementary matrices}
+\subsubsection{The determinants of elementary matrices}
 
 We have the following: \begin{align*}
   \text{det}\left[E_1(i, j)\right] &= -1 \\
@@ -717,9 +723,17 @@ We have the following: \begin{align*}
   \text{det}\left[E_3(c, i, j)\right] &= 1.
 \end{align*}
 
-\subsubsection{Determinants of transposes}
+\subsubsection{The determinant of the transpose}
 
-We have that for a matrix $A$, the determinant of the transpose of $A$
-is the same as $A$.
+For a matrix $A$, we have that: $\text{det}(A) = \text{det}(A^t).$
+
+\subsubsection{The determinant under matrix multiplication}
+
+For $A, B$ two $n \times n$ matrices, we have that:
+$\text{det}(AB) = \text{det}(A)\cdot\text{det}(B).$
+
+\subsubsection{The determinant and invertibility}
+
+A square matrix is invertible if and only if it has non-zero determinant.
 
 \end{document}
