@@ -339,6 +339,8 @@ The in-neighbourhood of a vertex $v$ are the edges that enter $v$.
 The out-neighbourhood of a vertex $v$ are the edges that exit $v$.
 These are denoted by $N^-(v)$ and $N^+(v)$ respectively.
 
+\newpage
+
 \subsubsection{Definition of degrees in digraphs}
 
 For a vertex $v$, the in-degree of the vertex $d^-(v)$ is the size of
@@ -426,6 +428,8 @@ For $u, v$ in $V\setminus\{r\}$, we say that: \begin{itemize}
 For a tree with $T = (V, E)$, if $V > 1$, there must be at least
 $2$ leaves.
 
+\newpage
+
 \subsubsection{Equivalent statements to the tree definition}
 
 For a graph $T = (V, E)$, we have that the following are
@@ -502,8 +506,6 @@ hash tables where
 each element in the array represents a vertex and the corresponding
 list represents the vertices in the neighbourhood of the vertex.
 
-\newpage
-
 \subsubsection{Comparision of representations}
 
 We can compare some basic properties of the representations:
@@ -524,6 +526,8 @@ we opt for the linked list as it's more reliable for large graphs
 (additionally, we are almost always are looking for a neighbourhood
 not a specific edge).
 
+\newpage
+
 \subsection{Search}
 
 Generally with a graph searching algorithm, we have a data structure 
@@ -531,13 +535,14 @@ which is left undefined here (besides the fact we can add vertices to
 it and take vertices out). Starting with a vertex \texttt{u}, naming 
 our data structure \texttt{data}, we perform the following:
 \begin{verbatim}
-add u to data
-while data is non-empty
-> take x from data
-> if x isn't marked
-> > mark x
-> > for each edge (x, y)
-> > > put y in data
+Search(u)
+> add u to data
+> while data is non-empty
+> > take x from data
+> > if x isn't marked
+> > > mark x
+> > > for each edge (x, y)
+> > > > put y in data
 \end{verbatim} We have that this process always terminates, visits
 every vertex in connected graphs, and has time complexity $O(|E|)$
 (assuming the data operations are $O(1)$) where $E$ is the edge set.
@@ -556,6 +561,45 @@ This is $O(|V| + |E|)$ in a graph $G = (V, E)$.
 If our data structure is a stack, we get depth-first searching.
 This causes vertices to be marked the further they are from
 the starting vertex.
+
+\newpage
+
+\subsection{Djikstra's Algorithm}
+
+For a weighted (non-negatively), directed graph (stored as a
+adjacency list) we have that Djikstra's algorithm (given a)
+starting vertex returns the fastest path to all other vertices 
+(or a particular one if required). It is structured as follows:
+\begin{verbatim}
+Djikstra(s)
+> let pq be our priority queue
+> let dist be our array of distances
+> for each v
+> > dist[v] = infinity
+> set dist[s] = 0
+> for each v
+> > pq->insert(v, dist(v))
+> while pq is non-empty
+> > u = pq->extractMin()
+> > for each edge (u, v)
+> > > if (dist[v] > dist[u] + weight(u, v))
+> > > > dist[v] = dist[u] + weight(u, v)
+> > > > pq->decreaseKey(v, dist(v))
+\end{verbatim} We have that the time complexity of the algorithm
+varies across queues: \begin{center}
+  \begin{tabular} {| r || c |}
+    \hline
+    & Runtime \\
+    \hline \hline
+    Linked List & $O(|V|^2 + |V||E|)$ \\
+    \hline
+    Binary Heap & $O((|V| + |E|)\log{(|V|)})$ \\
+    \hline
+    Fibonacci Heap & $O(|E| + |V|\log{(|V|)})$ \\
+    \hline
+  \end{tabular}
+\end{center}
+and has $O(|V| + |E|)$ space complexity across all queues.
 
 \section{Fast Fourier Transforms}
 
