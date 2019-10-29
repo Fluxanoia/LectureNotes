@@ -464,4 +464,23 @@ For a graph $G = (V, E)$ where $|V| \geq 3$: \begin{gather*}
   \delta(G) \geq \frac{n}{2} \Rightarrow G \text{ is Hamiltonian.}
 \end{gather*}
 
+\subsection{Bipartite Graphs}
+
+\subsubsection{Definition of a bipartite graph}
+
+A graph $G = (V, E)$ is bipartite if $V$ can be partitioned into
+two vertex sets $V_1, V_2$ such that each edge connects a vertex
+from $V_1$ to a vertex in $V_2$.
+
+\subsubsection{Characterisation of bipartite graphs}
+
+A graph is bipartite if and only if it contains no odd cycle.
+
+\subsubsection{The handshake lemma for bipartite graphs}
+
+We have that for $G = (V, E)$ a bipartite graph with bipartition
+$V_1, V_2$: \begin{gather*}
+  \sum_{v \in V_1} \text{deg}(v) = \sum_{v \in V_2} \text{deg}(v). \\
+\end{gather*}
+
 \end{document}
