@@ -755,4 +755,33 @@ the zero polynomial. The degree is denoted as $\text{deg}(p)$.
 \\[\baselineskip]
 The leading coefficient is $a_{deg(p)}$.
 
+\subsection{Degree and Composition in $R[x]$}
+
+For $p, q$ non-zero elements of $R[x]$, we have that: \begin{itemize}
+  \item deg$(p + q) \leq $ max(deg($p$), deg($q$)) 
+  \item deg$(pq) \leq $ deg($p$) $+$ deg($q$) 
+  \item deg$(pq) = $ deg($p$) $+$ deg($q$) if the leading coefficient of
+  $p$ or $q$ is an invertible element of $R$ (or $R$ is a field).
+\end{itemize}
+
+\subsection{Multiplication in $R[x]$}
+
+We have that $R[x]$ is commutative if and only if $R$ is commutative.
+Also, we have that $R[x]$ has a multiplicative identity if and only
+if $R$ has one.
+
+\subsection{Evalutation of Polynomials}
+
+For $p(x) = a_0 + a_1x + \cdots + a_nx^n$ in $R[x]$ and $c$ in $R$, we have
+the value of $p$ at $c$ is: \begin{gather*}
+  p(c) = a_0 + a_1c + \cdots + a_nc^n.
+\end{gather*} If $p(c) = 0$, then we call $c$ a root of $p$.
+
+\subsection{The Division Algorithm of Polynomials}
+
+For $f, g$ in $R[x]$ with the leading coefficient of $g$ being a unit (invertible
+element) in $R$, we have that there exists $q, r$ in $R[x]$ such that: \begin{gather*}
+  f(x) = q(x)g(x) + r(x),
+\end{gather*} where $r$ is the zero polynomial or deg($r$) $<$ deg($g$).
+
 \end{document}
