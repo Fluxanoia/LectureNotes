@@ -307,7 +307,7 @@ and: \begin{gather*}
   column
 \end{itemize}
 
-\section{Graph Theory}
+\section{The Basics of Graph Theory}
 
 \subsection{Definition of a Graph}
 
@@ -333,7 +333,9 @@ $u, v$ in $V$ we have that: \begin{gather*}
 \subsection{Definition of Neighbourhood and Degree}
 
 For a graph $G = (V, E)$ the \textbf{neighbourhood} of $v$ in $V$ 
-is the set of all adjacent vertices (denoted by $N_G(v)$). 
+is the set of all adjacent vertices (denoted by $N_G(v)$). The
+neighbourhood of a set $S$ is simply the union of the neighbourhoods
+of the elements of $S$.
 The \textbf{degree} is simply the size of $N_G(v)$ denoted 
 by $\text{deg}(v)$.
 
@@ -429,9 +431,9 @@ induced subgraph of $G$. This means an induced subgraph of $G$
 that is connected but is not longer connected if a vertex is
 removed.
 
-\subsection{Euler Circuits}
+\section{Euler Circuits}
 
-\subsubsection{Definition of an Euler circuit}
+\subsection{Definition of an Euler Circuit}
 
 An Euler circuit is a circuit in which each edge in a graph is
 traversed exactly once (or a trail which traverses every edge).
@@ -439,48 +441,73 @@ As a consequence, each vertex is travelled at least once.
 \\[\baselineskip]
 Graphs with Euler circuits are said to be \textbf{Eulerian}.
 
-\subsubsection{Conditions for an Euler circuit}
+\subsection{Conditions for an Euler Circuit}
 
 An Euler circuit in a graph $G$ exists if and only if $G$ is 
 connected and each vertex in $G$ has even degree.
 
-\subsection{Hamiltonian Cycles}
+\section{Hamiltonian Cycles}
 
-\subsubsection{Definition of a Hamiltonian cycle}
+\subsection{Definition of a Hamiltonian Cycle}
 
 For a graph $G = (V, E)$ where $|V| = n$, a Hamiltonian cycle in $G$ is
 a cycle of length $n$, meaning it visits each vertex exactly once.
 \\[\baselineskip]
 Graphs with Hamiltonian cycles are said to be \textbf{Hamiltonian}.
 
-\subsubsection{Definition of a Hamiltonian path}
+\subsection{Definition of a Hamiltonian Path}
 
 For a graph $G = (V, E)$ where $|V| = n$, a Hamiltonian path is a path of
 length $n - 1$, meaning it visits each vertex at least once.
 
-\subsubsection{Dirac's Theorem}
+\subsection{Dirac's Theorem}
 
 For a graph $G = (V, E)$ where $|V| \geq 3$: \begin{gather*}
   \delta(G) \geq \frac{n}{2} \Rightarrow G \text{ is Hamiltonian.}
 \end{gather*}
 
-\subsection{Bipartite Graphs}
+\section{Bipartite Graphs}
 
-\subsubsection{Definition of a bipartite graph}
+\subsection{Definition of a Bipartite Graph}
 
 A graph $G = (V, E)$ is bipartite if $V$ can be partitioned into
 two vertex sets $V_1, V_2$ such that each edge connects a vertex
 from $V_1$ to a vertex in $V_2$.
 
-\subsubsection{Characterisation of bipartite graphs}
+\subsection{Characterisation of Bipartite Graphs}
 
 A graph is bipartite if and only if it contains no odd cycle.
 
-\subsubsection{The handshake lemma for bipartite graphs}
+\subsection{The Handshake Lemma for Bipartite Graphs}
 
 We have that for $G = (V, E)$ a bipartite graph with bipartition
 $V_1, V_2$: \begin{gather*}
   \sum_{v \in V_1} \text{deg}(v) = \sum_{v \in V_2} \text{deg}(v). \\
 \end{gather*}
+
+\subsection{Hall's Marriage Problem}
+
+\subsubsection{Definition of a Matching}
+
+For $G = (V, E)$ a bipartite graph with bipartition $X, Y$,
+a matching from $X$ to $Y$ is a set of edges: \begin{gather*}
+  M = \{(x, y) : x \in X, y \in Y\},
+\end{gather*} such that $f : X \to Y$ defined by: \begin{gather*}
+  f(x) := y \qquad \text{ where } (x, y) \in M,
+\end{gather*} is injective.
+\\[\baselineskip]
+\textit{In other words, $|M| = |X|$ and each $y$ in $Y$ appears 
+in at most one edge in $M$.}
+
+\subsubsection{Hall's Marriage Theorem}
+
+For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: \begin{gather*}
+  G \text{ has a matching from } X \text{ to } Y \\
+  \Longleftrightarrow \\
+  \text{For all } S \subseteq X, |N(S)| \geq |S|.
+\end{gather*} We also have that if: \begin{gather*}
+  \text{min}_{x \in X}\big[\text{deg}(x)\big] \geq
+  \text{min}_{y \in Y}\big[\text{deg}(y)\big],
+\end{gather*} then $G$ has a matching from $X$ to $Y$.
 
 \end{document}
