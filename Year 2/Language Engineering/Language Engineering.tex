@@ -722,9 +722,41 @@ We have that for all statements $S$: \begin{gather*}
   \langle \varepsilon, \varepsilon, s' \rangle 
 \end{gather*}
 
-\section{Denotational (Direct Style) Semantics}
+\section{Denotational Semantics}
 
-\subsection{The Semantic Function} 
+\subsection{Partial Order}
+
+\subsubsection{Weak partial order}
+
+A weak partial order on $X$ with $a, b, c$ in $X$ 
+has the following properties: \begin{itemize}
+  \item reflexive ($a \leq a$)
+  \item transitive ($a \leq b$, $b \leq c \Rightarrow a \leq c$)
+  \item antisymmetric ($a \leq b, b \leq a \Rightarrow a = b$)
+\end{itemize}
+
+\subsubsection{Strong partial order}
+
+A strong partial order on $X$ with $a, b, c$ in $X$ 
+has the following properties: \begin{itemize}
+  \item irreflexive ($a \leq a$ for no $a$)
+  \item transitive ($a \leq b$, $b \leq c \Rightarrow a \leq c$)
+  \item antisymmetric ($a \leq b, b \leq a \Rightarrow a = b$)
+\end{itemize}
+
+\subsubsection{Total partial order}
+
+A total partial order on $X$ with $a, b, c$ in $X$ 
+has the following properties: \begin{itemize}
+  \item connex ($a \leq b$ or $b \leq a$)
+  \item reflexive ($a \leq a$)
+  \item transitive ($a \leq b$, $b \leq c \Rightarrow a \leq c$)
+  \item antisymmetric ($a \leq b, b \leq a \Rightarrow a = b$)
+\end{itemize}
+
+\subsection{Direct Style}
+
+\subsubsection{The Semantic Function} 
 
 We define the semantic function as follows: \begin{gather*}
   \mathcal{S}: \textbf{Stm} \to (\textbf{State} \hookrightarrow \textbf{State}).
@@ -767,8 +799,9 @@ We define the type of \texttt{FIX} as follows: \begin{gather*}
   (\textbf{State} \hookrightarrow \textbf{State}) \to
   (\textbf{State} \hookrightarrow \textbf{State}) \to
   (\textbf{State} \hookrightarrow \textbf{State}),
-\end{gather*} where \texttt{FIX}$(F)$ returns the smallest fixed 'point'
+\end{gather*} where \texttt{FIX}$(F)$ returns the least fixed 'point'
 (or rather function) of $F$ ($f$ in Im($F$) such that $F(f) = f$). 
 Smallest in this case is the 'most undefined' function.
+
 
 \end{document}
