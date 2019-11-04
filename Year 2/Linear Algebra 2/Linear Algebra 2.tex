@@ -784,4 +784,61 @@ element) in $R$, we have that there exists $q, r$ in $R[x]$ such that: \begin{ga
   f(x) = q(x)g(x) + r(x),
 \end{gather*} where $r$ is the zero polynomial or deg($r$) $<$ deg($g$).
 
+\subsection{Factorisation by Roots}
+
+For $p$ a polynomial in $R[x]$ where deg$(p) > 0$ and $c$ in $R$: \begin{gather*}
+  p(c) = 0 \\ 
+  \Longleftrightarrow \\
+  \exists \, q \in R[x] \text{ such that } p(x) = q(x) \cdot (x - c).
+\end{gather*}  
+
+\subsection{Division of Polynomials}
+
+For a field $K$, we have that for $p, q$ in $K[x]$, if $q$ divides $p$ (written as $q | p$)
+then there exists $r$ in $K[x]$ such that: \begin{gather*}
+  p(x) = q(x)r(x).
+\end{gather*}
+
+\subsection{Highest Common Factors of Polynomials}
+
+For a field $K$, we have that for $p, q$ in $K[x]$, the highest common factor of $p$ and $q$
+is a polynomial $h$ with \textbf{maximal} degree such that $h$ divides both $p$ and $q$.
+\\[\baselineskip]
+We also have that there exists $a, b$ in $K[x]$ such that $h = ap + bq$.
+
+\subsection{Irreducible Polynomials}
+
+An irreducible polynomial over a field $K$ is a non-constant polynomial in $K[x]$ such that
+it cannot be written as the product of two polynomials (both with smaller degree).
+
+\subsection{Decomposition into Irreducible Polynomials}
+
+For a field $K$, we have that for every $f$ in $K[x]$, where deg$(f) \geq 1$ we have that 
+$f$ can be written as the product of irreducible polynomials unique up to order and
+multiplication by constants. If $f$ is monic (leading coefficient equal to one), 
+it is a product of monic irreducible polynomials, unique up to order.
+
+\subsection{Definition of the Minimal Polynomial}
+
+For a field $K$, $V$ a finite dimensional vector space with dim$(V) = n$, let $f$ be in
+End$(V) = \mathcal{L}(V, V)$. The minimal polynomial $m_f(x)$ in $K[x]$ is the polynomial
+such that: \begin{itemize}
+  \item $m_f(f) = 0$ in End($V$)
+  \item deg($m_f$) is minimal
+  \item $m_f$ is monic (leading coefficient equal to one).
+\end{itemize} We have that this polynomial always exists and is unique.
+\\[\baselineskip]
+\textit{For each $p$ in $K[x]$, it's important to see that
+$p(f)$ is in End$(V)$.}
+
+\subsection{Properties of the Minimal Polynomial}
+
+For a field $K$, $V$ a finite dimensional vector space with dim$(V) = n$, let $f$ be in
+End$(V) = \mathcal{L}(V, V)$ and $m_f$ be the corresponding minimal polynomial in $K[x]$.
+We have that: \begin{itemize}
+  \item If $p$ in $K[x]$ satisfies $p(f) = 0$ then $m_f | p$
+  \item For $\lambda$ in $K$, $m_f(\lambda) = 0$ if and only if 
+  $\lambda$ is an eigenvalue of $f$
+\end{itemize}
+
 \end{document}
