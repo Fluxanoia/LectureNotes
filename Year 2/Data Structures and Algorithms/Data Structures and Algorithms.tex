@@ -182,6 +182,35 @@ less than or equal to the children. This supports the following:
   \end{tabular}
 \end{center}
 
+\subsection{Disjoint Set}
+
+Stores a collection of disjoint sets where each set has elements
+$1, 2, \ldots n$ for some natural $n$. This supports the following:
+\begin{center}
+  \begin{tabular}{ || c | p{7.5cm} | c || }
+    \hline
+    Name & Description & Runtime \\
+    \hline
+    \texttt{makeSet(x)} & Creates a new set containing only \texttt{x}
+    this fails if \texttt{x} is already in a set
+    & $O(1)$ \\
+    \hline
+    \texttt{union(x, y)} & Merges the sets containing 
+    \texttt{x} and \texttt{y}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{findSet(x)} & Finds the identifier of the set containing
+    \texttt{x} (the identifier is an element of the set)
+    & $O(\log_2(n))$ \\
+    \hline
+  \end{tabular}
+\end{center} This is stored as an array size $n$ where each cell
+is empty or points to the identifier of the set it was originally
+added to.
+\\[\baselineskip]
+\textit{So, adding $3$ to $\{7\}$ would make $3$ always point to 
+$7$. But creating a set with $3$, will make it point to itself.}
+
 \section{Graph Theory}
 
 \subsection{Definition of a Graph}
@@ -339,8 +368,6 @@ The in-neighbourhood of a vertex $v$ are the edges that enter $v$.
 The out-neighbourhood of a vertex $v$ are the edges that exit $v$.
 These are denoted by $N^-(v)$ and $N^+(v)$ respectively.
 
-\newpage
-
 \subsubsection{Definition of degrees in digraphs}
 
 For a vertex $v$, the in-degree of the vertex $d^-(v)$ is the size of
@@ -428,8 +455,6 @@ For $u, v$ in $V\setminus\{r\}$, we say that: \begin{itemize}
 For a tree with $T = (V, E)$, if $V > 1$, there must be at least
 $2$ leaves.
 
-\newpage
-
 \subsubsection{Equivalent statements to the tree definition}
 
 For a graph $T = (V, E)$, we have that the following are
@@ -506,6 +531,8 @@ hash tables where
 each element in the array represents a vertex and the corresponding
 list represents the vertices in the neighbourhood of the vertex.
 
+\newpage
+
 \subsubsection{Comparision of representations}
 
 We can compare some basic properties of the representations:
@@ -525,8 +552,6 @@ hash tables? Due to the probability of collisions in hash tables,
 we opt for the linked list as it's more reliable for large graphs
 (additionally, we are almost always are looking for a neighbourhood
 not a specific edge).
-
-\newpage
 
 \subsection{Search}
 
@@ -561,8 +586,6 @@ This is $O(|V| + |E|)$ in a graph $G = (V, E)$.
 If our data structure is a stack, we get depth-first searching.
 This causes vertices to be marked the further they are from
 the starting vertex.
-
-\newpage
 
 \subsection{Djikstra's Algorithm}
 
@@ -600,6 +623,32 @@ varies across queues: \begin{center}
   \end{tabular}
 \end{center}
 and has $O(|V| + |E|)$ space complexity across all queues.
+
+\subsection{Minimum Spanning Trees}
+
+\subsubsection{Definition of a spanning tree}
+
+In a connected, undirected graph $G = (V, E)$, we have that a
+spanning tree $T = (V', E')$ of $G$ is a subgraph of $G$ where
+$T$ is a tree and $V = V'$.
+\\[\baselineskip]
+A spanning tree on $G$ is minimal if there is no other spanning tree
+on $G$ with a lower weight.
+
+\subsubsection{Kruskal's Algorithm}
+
+For a weighted, connected, and undirected graph $G = (V, E)$, we have 
+the following steps to the algorithm: \begin{enumerate}
+  \item Generate a graph $T = (V, \emptyset)$
+  \item Generate a disjoint set data structure $X$ of size $|V|$
+  \item For each $v$ in $V$, perform \texttt{makeSet(v)} (where
+  each vertex is defined by some unique integer in $\{1, \ldots, |V|\}$)
+  \item Sort the edges by weight
+  \item For each edge $(u, v)$ (in increasing order): \begin{itemize}
+    \item If \texttt{findSet}$(u) \neq$ \texttt{findSet}$(v)$,
+    perform \texttt{union}$(u, v)$ and add $(u, v)$ to $T$
+  \end{itemize}
+\end{enumerate} Overall, this runs in $O(|E| \log_2(|V|))$ time.
 
 \section{Fast Fourier Transforms}
 
