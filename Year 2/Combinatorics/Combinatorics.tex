@@ -344,7 +344,7 @@ by $\text{deg}(v)$.
 For a graph $G = (V, E)$ we have that the following to represent
 minimum and maximum degree: \begin{align*}
   \delta(G) &:= \text{min}\{\text{deg}(v) : v \in V\} \\
-  \Delta(G) &:= \text{max}\{\text{deg}(v) : v \in V\}
+  \Delta(G) &:= \text{max}\{\text{deg}(v) : v \in V\}.
 \end{align*}
 
 \subsection{Definition of Degree Sequence}
@@ -352,9 +352,7 @@ minimum and maximum degree: \begin{align*}
 For a graph $G = (V, E)$ a graph with $V = \{x_1, \ldots, x_n\}$,
 where $V$ is ordered such that $i \geq j$ implies $\text{deg}(x_i)
 \geq \text{deg}(x_j)$. The sequence $(d_k)_{k \in [n]}$ is defined
-as follows: \begin{gather*}
-  d_i = \text{deg}(x_i).
-\end{gather*} 
+as follows: $d_i = \text{deg}(x_i).$
 
 \subsection{The Handshake Lemma}
 
@@ -380,8 +378,6 @@ is a subgraph $G' = (V', E')$ where: \begin{gather*}
 \end{gather*} \textit{Essentially, you generate an induced
 subgraph from a subset of the vertices of a graph by selecting
 edges that join vertices in the subset.}
-
-\newpage
 
 \subsection{Walks}
 
@@ -466,6 +462,8 @@ For a graph $G = (V, E)$ where $|V| \geq 3$: \begin{gather*}
   \delta(G) \geq \frac{n}{2} \Rightarrow G \text{ is Hamiltonian.}
 \end{gather*}
 
+\newpage
+
 \section{Bipartite Graphs}
 
 \subsection{Definition of a Bipartite Graph}
@@ -499,6 +497,8 @@ a matching from $X$ to $Y$ is a set of edges: \begin{gather*}
 \textit{In other words, $|M| = |X|$ and each $y$ in $Y$ appears 
 in at most one edge in $M$.}
 
+\newpage
+
 \subsubsection{Hall's Marriage Theorem}
 
 For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: \begin{gather*}
@@ -507,7 +507,28 @@ For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: \begin{gather*}
   \text{For all } S \subseteq X, |N(S)| \geq |S|.
 \end{gather*} We also have that if: \begin{gather*}
   \text{min}_{x \in X}\big[\text{deg}(x)\big] \geq
-  \text{min}_{y \in Y}\big[\text{deg}(y)\big],
+  \text{max}_{y \in Y}\big[\text{deg}(y)\big],
 \end{gather*} then $G$ has a matching from $X$ to $Y$.
+
+\section{Trees and Forests}
+
+\subsection{Definition of a Forest}
+
+A graph $F = (V, E)$ is a forest if it has no cycles
+(is \textbf{acyclic}).
+
+\subsection{Definition of a Tree}
+
+A graph is a tree if it is a forest and is connected.
+
+\subsection{Definition of a Leaf}
+
+For a vertex $v$ in a tree, $v$ is a leaf if it has degree one.
+
+\subsection{Existence of Leaves}
+
+For a tree $T$ of order $2$ or more, we have that $T$ has a leaf.
+
+
 
 \end{document}
