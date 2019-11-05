@@ -83,15 +83,17 @@ For $n$ in $\mathbb{N}$ we can define the factorial $n!$: \begin{align*}
 \end{gather*} \textit{This can be though of as the factorial with $k$
 elements (starting at $n$). So, $(n)_n = n!$, $(n)_1 = n$, etc.}
 
-\newpage
-
 \subsection{The Binomial Coefficient}
 
 For $n, k$ in $\mathbb{N}$, we can define the binomial coefficient:  \begin{align*}
  {n \choose k} := \frac{n!}{k!(n-k)!} = \frac{(n)_k}{k!}.
 \end{align*}
 This is the number of ways of choosing $k$-element subsets
-from an $n$-element set. Furthermore, we have: \begin{gather*}
+from an $n$-element set. 
+
+\newpage
+
+Furthermore, we have: \begin{gather*}
   {n \choose k} = {n \choose n - k},
 \end{gather*} as choosing $k$ elements is equivalent to choosing
 $n - k$ elements to remove.
@@ -125,6 +127,8 @@ $a, b$ in $\mathbb{C}$ and $n$ in $\mathbb{N}$: \begin{gather*}
 For $m, n, k$ in $\mathbb{N}$, if we have $k$ objects being 
 distributed into $n$ boxes and $n > mk$ then one box must contain
 at least $k + 1$ objects.
+
+\newpage
 
 \section{Selection}
 
@@ -162,7 +166,11 @@ example, for $n = 4$ and $k = 3$ the following are solutions: \begin{gather*}
 This distribution of $k$ can be thought of as seperating $k$ into $n$
 groups. For example, the solution $\{1, 1, 0, 1\}$ corresponds to: \begin{gather*}
   \bullet | \bullet | | \bullet.
-\end{gather*} The dots and dividers are identical respectively, and we
+\end{gather*} 
+
+\newpage
+
+The dots and dividers are identical respectively, and we
 have a total of $k$ dots plus $n - 1$ dividers equalling $k + n - 1$
 elements. We can choose where to place the dividers beforehand and
 then fill in the dots, thus we have: \begin{gather*}
@@ -176,6 +184,8 @@ of permutations of the solutions as order does not matter. Thus, we get:
 \begin{gather*}
   \frac{(n)_k}{k!} = {n \choose k}.
 \end{gather*}
+
+\vfill
 
 \section{Generating Functions}
 
@@ -244,6 +254,8 @@ For all $n$ in $\mathbb{N}$, we have that: \begin{gather*}
   (1 + x)^{-n} = \sum_{k = 0}^\infty (-1)^k{n + k - 1 \choose n - 1}x^k.
 \end{gather*}
 
+\vfill
+
 \section{Combinatorial Designs}
 
 \subsection{Definition of a Set System}
@@ -306,6 +318,8 @@ and: \begin{gather*}
   \item Each pair of rows contains $\lambda$ many '$1$'s in the same
   column
 \end{itemize}
+
+\vfill
 
 \section{The Basics of Graph Theory}
 
@@ -462,7 +476,7 @@ For a graph $G = (V, E)$ where $|V| \geq 3$: \begin{gather*}
   \delta(G) \geq \frac{n}{2} \Rightarrow G \text{ is Hamiltonian.}
 \end{gather*}
 
-\newpage
+\vfill
 
 \section{Bipartite Graphs}
 
@@ -497,8 +511,6 @@ a matching from $X$ to $Y$ is a set of edges: \begin{gather*}
 \textit{In other words, $|M| = |X|$ and each $y$ in $Y$ appears 
 in at most one edge in $M$.}
 
-\newpage
-
 \subsubsection{Hall's Marriage Theorem}
 
 For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: \begin{gather*}
@@ -509,6 +521,8 @@ For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: \begin{gather*}
   \text{min}_{x \in X}\big[\text{deg}(x)\big] \geq
   \text{max}_{y \in Y}\big[\text{deg}(y)\big],
 \end{gather*} then $G$ has a matching from $X$ to $Y$.
+
+\vfill
 
 \section{Trees and Forests}
 
@@ -529,6 +543,18 @@ For a vertex $v$ in a tree, $v$ is a leaf if it has degree one.
 
 For a tree $T$ of order $2$ or more, we have that $T$ has a leaf.
 
+\subsection{Characterisation of Trees}
 
+We have that for a graph $G = (V, E)$, the following is equivalent:
+\begin{itemize}
+  \item $G$ is a tree
+  \item $G$ is maximally acyclic ($G$ is acyclic and the addition
+  of any edge forms a cycle)
+  \item $G$ is minimally connected ($G$ is connected and the removal
+  of any edge disconnects it)
+  \item $G$ is connected and $|E| = |V| - 1$
+  \item $G$ is acyclic and $|E| = |V| - 1$
+  \item Any two vertices in $G$ are connected by a unique path.
+\end{itemize}
 
 \end{document}
