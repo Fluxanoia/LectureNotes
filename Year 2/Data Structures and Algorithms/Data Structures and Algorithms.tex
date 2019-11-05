@@ -211,6 +211,8 @@ added to.
 \textit{So, adding $3$ to $\{7\}$ would make $3$ always point to 
 $7$. But creating a set with $3$, will make it point to itself.}
 
+\vfill
+
 \section{Graph Theory}
 
 \subsection{Definition of a Graph}
@@ -510,6 +512,8 @@ For a bipartite graph $G = (V, E)$ with the bipartition $(A, B)$ has
 a perfect matching if and only if $|A| = |B|$ and for all 
 $X \subseteq A$, $|N(X)| \geq |X|$. 
 
+\vfill
+
 \section{Working on Graphs}
 
 \subsection{Data Representations of Graphs}
@@ -650,6 +654,8 @@ the following steps to the algorithm: \begin{enumerate}
   \end{itemize}
 \end{enumerate} Overall, this runs in $O(|E| \log_2(|V|))$ time.
 
+\vfill
+
 \section{Fast Fourier Transforms}
 
 \subsection{Polynomials}
@@ -662,6 +668,8 @@ A polynomial of degree $n$ in $\mathbb{Z}_{\geq 0}$ is a function $A$:
 \end{gather*} where $a_i$ are the coefficients of $A$. We say for 
 $k > n$, $k$ is a degree-bound of $A$. We can represent this by listing
 the coefficients, called the \textbf{coefficient representation}.
+
+\newpage
 
 \subsubsection{Fast Polynomial Evaluation}
 
@@ -765,5 +773,72 @@ $n$, as follows: \begin{itemize}
   \item Form our point-value representation and multiply pointwise
   \item Interpolate with the inverse fast Fourier transform.
 \end{itemize} This process is $O(n \log(n))$.
+
+\vfill
+
+\section{Dynamic Programming}
+
+Dynamic programming is the process of solving programming problems
+by breaking them down into \textbf{overlapping} subproblems,
+computing the base cases and storing the solutions to be later
+composed into a solution.
+
+\newpage
+
+\subsection{Largest Empty Square}
+
+This problem is about finding the largest square in a $n \times n$
+black and white image such that the square does not contain a black
+pixel.
+
+\subsubsection{A recursive algorithm}
+
+To find the largest square at the position $(x, y)$ 
+(bottom-right corner at $(x, y)$), we use the
+following algorithm: \begin{verbatim}
+  LargestSquare(x, y)
+  > if (x, y) is black, return 0
+  > if (x == 1) or (y == 1) return 1
+  > return min(
+  >   LargestSquare(x - 1, y - 1),
+  >   LargestSquare(x - 1, y),
+  >   LargestSquare(x, y - 1)
+  > )
+\end{verbatim} The time complexity of this algorithm, however,
+is exponential.
+\\[\baselineskip]
+We get this as each cell barring the first and last columns and rows 
+have cells where \texttt{LargestSquare} is computed three times 
+(as they  are checked from below, to the right, and below and to 
+the right).
+
+\subsubsection{Storing the solutions to subproblems}
+
+We now consider storing our solutions to cells so we do not repeat
+ourselves, take \texttt{A} to be an $n \times n$ array
+where each cell is undefined as first: \begin{verbatim}
+  LargestSquare_Stored(x, y)
+  > if (x, y) is black, A[x, y] = 0
+  > if (x == 1) or (y == 1) A[x, y] = 1
+  > if A[x, y] is undefined, A[x, y] = min(
+  >   LargestSquare_Stored(x - 1, y - 1),
+  >   LargestSquare_Stored(x - 1, y),
+  >   LargestSquare_Stored(x, y - 1)
+  > )
+  > return A[x, y]
+\end{verbatim} This can be adapted to work iteratively from
+$(1, 1)$ down to $(x, y)$ with a complexity of $O(n^2)$.
+
+\newpage
+
+\subsection{Weighted Interval Scheduling}
+
+We have a set of $n$ intervals, a triple containing a
+start time $s_i$, finishing time $f_i$, and a weight $w_i$.
+A schedule is a set of intervals such that they do not overlap
+(with respect to their starting and finishing times).
+\\[\baselineskip]
+The intervals are provided as an array $A$, sorted ascending by
+finishing times.
 
 \end{document}
