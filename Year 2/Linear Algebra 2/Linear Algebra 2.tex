@@ -850,12 +850,16 @@ The characteristic polynomial of an operator $f : V \to V$ is the polynomial: \b
 \end{gather*} where $A$ is the matrix of $f$ relative to some basis.
 \\[\baselineskip]
 This doesn't change based on the choice of basis and similar matrices have the same determinant.
+\\[\baselineskip]
+Also, this is divisible by $m_f$ by the Cayley-Hamilton theorem.
 
 \subsection{The Cayley-Hamilton Theorem}
 
 For $V$ a finite dimensional vector space over a field $\mathbb{F}$ where 
 $p_f$ the characteristic polynomial of an operator $f : V \to V$, we have that: \begin{gather*}
   p_f(f) = 0_V.
-\end{gather*} 
+\end{gather*} We also have that: \begin{gather*}
+  p_f(M_{BB}(f)) = 0_V,
+\end{gather*} for some basis $B$ of $V$.
 
 \end{document}

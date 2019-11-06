@@ -9,6 +9,26 @@
 \usepackage{multirow}
 \usepackage{arydshln}
 
+\usepackage{listings}
+\usepackage{color}
+
+\lstset{frame=none,
+  language=Haskell,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2
+}
+
 \begin{document}
 
 \title{Language Engineering Notes}
@@ -754,6 +774,42 @@ has the following properties: \begin{itemize}
   \item antisymmetric ($a \leq b, b \leq a \Rightarrow a = b$)
 \end{itemize}
 
+\subsection{Partial-Order Sets}
+
+For a partial order $\sqsubseteq$ on a set $D$, we have that
+$(\sqsubseteq, D)$ is a partial order set (PO-set).
+
+\subsubsection{Chains}
+
+For a PO-set $(\sqsubseteq, D)$, for $X \subseteq D$, we say that
+$X$ is a chain if and only if for all $x_1, x_2$ in $X$: \begin{gather*}
+  x_1 \sqsubseteq x_2 \text{ or } x_2 \sqsubseteq x_1,
+\end{gather*} meaning $X$ is totally ordered. 
+
+\subsubsection{Least upper bounds}
+
+For a PO-set $(\sqsubseteq, D)$, the least upper bound 
+$x$ of $X \subseteq D$ is denoted by $x = \sqcup \, X$. 
+\\[\baselineskip]
+If such a bound exists for all subsets $X$ that are chains, 
+$(\sqsubseteq, D)$ is a \textit{chain complete} PO-set.
+\\[\baselineskip]
+If such a bound exists for all subsets $X$, $(\sqsubseteq, D)$ 
+is a \textit{complete lattice}.
+
+\subsubsection{A partial order on state transformers}
+
+We have the following PO-set $(\sqsubseteq, T)$ where: \begin{gather*}
+  T = \{f \text{ where } f : \textbf{State} \hookrightarrow \textbf{State}\},
+\end{gather*} and for $f, g$ in $T$: \begin{gather*}
+  f \sqsubseteq g  \\ 
+  \Longleftrightarrow \\
+  f s = s' \Rightarrow g s = s' \text{ for all states } s. 
+\end{gather*} This is a \textbf{weak} partial order on $T$, with
+the least element being $0$ in $T$ undefined for all inputs.
+
+\newpage
+
 \subsection{Direct Style}
 
 \subsubsection{The Semantic Function} 
@@ -802,5 +858,57 @@ We define the type of \texttt{FIX} as follows: \begin{gather*}
 \end{gather*} where \texttt{FIX}$(F)$ returns the least fixed 'point'
 (or rather function) of $F$ ($f$ in Im($F$) such that $F(f) = f$). 
 Smallest in this case is the 'most undefined' function.
+
+\subsubsection{Breaking down a Fibonacci definition using \texttt{FIX}}
+
+Consider the following definition:
+
+\begin{lstlisting}
+fib :: Int -> Int
+fib = fix F where
+  F :: (Int -> Int) -> (Int -> Int)
+  F f n
+    | (n == 0) || (n == 1) = 1
+    | otherwise            = (f (n - 1)) + (f (n - 2))
+\end{lstlisting}
+So, if we want to calculate \texttt{fib 4} we get: \begin{center}
+  \begin{tabular}{ l l }
+    \begin{lstlisting}
+      fib 4    = fix F 4
+               = F (fix F) 4
+               = (fix F 3) + (fix F 2)
+      
+      fix F 3 = F (fix F) 3
+               = (fix F 2) + (fix F 1)
+      
+      fix F 2 = F (fix F) 2
+               = (fix F 1) + (fix F 0)
+      
+      fix F 1 = F (fix F) 1
+               = 1
+      
+      fix F 0 = F (fix F) 0
+               = 1
+      \end{lstlisting}
+      &
+      \begin{lstlisting}
+        fix F 2 = F (fix F) 2
+                 = (fix F 1) + (fix F 0)
+                 = 1 + 1
+                 = 2
+        
+        fix F 3 = F (fix F) 3
+                 = (fix F 2) + (fix F 1)
+                 = 2 + 1
+                 = 3
+        
+        fib 4    = fix F 4
+                 = F (fix F) 4
+                 = (fix F 3) + (fix F 2)
+                 = 3 + 2
+                 = 5
+      \end{lstlisting}
+  \end{tabular}
+\end{center}
 
 \end{document}
