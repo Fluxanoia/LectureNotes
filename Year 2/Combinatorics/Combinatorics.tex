@@ -557,4 +557,35 @@ We have that for a graph $G = (V, E)$, the following is equivalent:
   \item Any two vertices in $G$ are connected by a unique path.
 \end{itemize}
 
+\subsection{Minimum Spanning Trees}
+
+In a connected, undirected graph $G = (V, E)$, we have that a
+spanning tree $T = (V, E')$ of $G$ is a subgraph of $G$ where
+$T$ is a tree and $E' \subseteq E$.
+\\[\baselineskip]
+A spanning tree on $G$ is minimal if there is no other spanning tree
+on $G$ with a lower weight.
+
+\subsubsection{Existence of spanning trees}
+
+We have that there is a spanning tree in a graph $G$ if and only if
+$G$ is connected.
+
+\newpage
+
+\subsubsection{Kruskal's algorithm}
+
+For a graph $G = (V, E)$, we have 
+the following steps to the algorithm: \begin{enumerate}
+  \item Generate a graph $T = (V, \emptyset)$
+  \item Sort the edges by weight
+  \item For each edge $(u, v)$ (in increasing order): \begin{itemize}
+    \item If $u$ or $v$ are not connected in $T$, add $(u, v)$ to $T$
+    \item Stop if there are $|V| - 1$ edges in $T$ or if we have run
+    out of edges.
+  \end{itemize}
+\end{enumerate} When this terminates, if the order of $T$ is $|V| - 1$
+then $T$ is a minimum spanning tree. Otherwise, $T$ is an acyclic
+graph with $n - k$ components.
+
 \end{document}
