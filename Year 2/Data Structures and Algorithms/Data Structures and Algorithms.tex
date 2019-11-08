@@ -8,7 +8,28 @@
 \usepackage{multicol}
 \usepackage{pgfplots}
 \usepackage{pgfplotstable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{color}
+
 \pgfplotsset{compat=1.5.1}
+
+\lstset{frame=none,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{orange},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2
+}
 
 \begin{document}
 
@@ -563,16 +584,20 @@ Generally with a graph searching algorithm, we have a data structure
 which is left undefined here (besides the fact we can add vertices to 
 it and take vertices out). Starting with a vertex \texttt{u}, naming 
 our data structure \texttt{data}, we perform the following:
-\begin{verbatim}
-Search(u)
-> add u to data
-> while data is non-empty
-> > take x from data
-> > if x isn't marked
-> > > mark x
-> > > for each edge (x, y)
-> > > > put y in data
-\end{verbatim} We have that this process always terminates, visits
+\begin{lstlisting}
+data Search(u) {
+  add u to data;
+  while (data is non-empty) {
+    take x from data;
+    if (x is not marked) {
+      mark x;
+      for (each edge (x, y)) {
+        put y in data;
+      }
+    }
+  }
+}
+\end{lstlisting} We have that this process always terminates, visits
 every vertex in connected graphs, and has time complexity $O(|E|)$
 (assuming the data operations are $O(1)$) where $E$ is the edge set.
 
@@ -597,22 +622,29 @@ For a weighted (non-negatively), directed graph (stored as a
 adjacency list) we have that Djikstra's algorithm (given a)
 starting vertex returns the fastest path to all other vertices 
 (or a particular one if required). It is structured as follows:
-\begin{verbatim}
-Djikstra(s)
-> let pq be our priority queue
-> let dist be our array of distances
-> for each v
-> > dist[v] = infinity
-> set dist[s] = 0
-> for each v
-> > pq->insert(v, dist(v))
-> while pq is non-empty
-> > u = pq->extractMin()
-> > for each edge (u, v)
-> > > if (dist[v] > dist[u] + weight(u, v))
-> > > > dist[v] = dist[u] + weight(u, v)
-> > > > pq->decreaseKey(v, dist(v))
-\end{verbatim} We have that the time complexity of the algorithm
+\begin{lstlisting}
+distances Djikstra(s) {
+  let pq be our priority queue;
+  let dist be our array of distances;
+  for (each v) {
+    dist[v] = infinity;
+  }
+  dist[s] = 0;
+  for (each v) {
+    pq->insert(v, dist(v));
+  }
+  while (pq is non-empty) {
+    u = pq->extractMin();
+    for (each edge (u, v)) {
+      if (dist[v] > dist[u] + weight(u, v)) {
+        dist[v] = dist[u] + weight(u, v);
+        pq->decreaseKey(v, dist(v));
+      }
+    }
+  }
+  return dist;
+}
+\end{lstlisting} We have that the time complexity of the algorithm
 varies across queues: \begin{center}
   \begin{tabular} {| r || c |}
     \hline
@@ -677,15 +709,15 @@ We can evaluate polynomials quickly using \textit{Horner's Rule},
 for a polynomial $A$ degree $n$: \begin{gather*}
   A(x) = a_0 + x(a_1 + x(a_2 + \cdots + x(a_n)))).
 \end{gather*} This can be simplified in the following code:
-\begin{verbatim}
-int polynomial(int[] coeffs, int x) {
-  int output = 0;
+\begin{lstlisting}
+int polynomial(coeffs, x) {
+  output = 0;
   for (i = n; i >= 0; i--) {
-    output = (output * x) + coeffs[i]
+    output = (output * x) + coeffs[i];
   }
   return output;
 }
-\end{verbatim} We have that this is $O(n)$.
+\end{lstlisting} We have that this is $O(n)$.
 
 \subsubsection{Point Intersection with Polynomials}
 
@@ -795,16 +827,16 @@ pixel.
 
 To find the largest square at the position $(x, y)$ 
 (bottom-right corner at $(x, y)$), we use the
-following algorithm: \begin{verbatim}
-  LargestSquare(x, y)
-  > if (x, y) is black, return 0
-  > if (x == 1) or (y == 1) return 1
-  > return min(
-  >   LargestSquare(x - 1, y - 1),
-  >   LargestSquare(x - 1, y),
-  >   LargestSquare(x, y - 1)
-  > )
-\end{verbatim} The time complexity of this algorithm, however,
+following algorithm: \begin{lstlisting}
+size LargestSquare(x, y) {
+  if ((x, y) is black) return 0;
+  if ((x == 1) or (y == 1)) return 1;
+  return min(
+    LargestSquare(x - 1, y - 1),
+    LargestSquare(x - 1, y),
+    LargestSquare(x, y - 1));
+}
+\end{lstlisting} The time complexity of this algorithm, however,
 is exponential.
 \\[\baselineskip]
 We get this as each cell barring the first and last columns and rows 
@@ -816,17 +848,17 @@ the right).
 
 We now consider storing our solutions to cells so we do not repeat
 ourselves, take \texttt{A} to be an $n \times n$ array
-where each cell is undefined as first: \begin{verbatim}
-  LargestSquare_Stored(x, y)
-  > if (x, y) is black, A[x, y] = 0
-  > if (x == 1) or (y == 1) A[x, y] = 1
-  > if A[x, y] is undefined, A[x, y] = min(
-  >   LargestSquare_Stored(x - 1, y - 1),
-  >   LargestSquare_Stored(x - 1, y),
-  >   LargestSquare_Stored(x, y - 1)
-  > )
-  > return A[x, y]
-\end{verbatim} This can be adapted to work iteratively from
+where each cell is undefined as first: \begin{lstlisting}
+  size LargestSquare_Stored(x, y) {
+    if ((x, y) is black) A[x, y] = 0;
+    if ((x == 1) or (y == 1)) A[x, y] = 1;
+    if (A[x, y] is undefined) A[x, y] = min(
+      LargestSquare_Stored(x - 1, y - 1),
+      LargestSquare_Stored(x - 1, y),
+      LargestSquare_Stored(x, y - 1));
+    return A[x, y];
+  }
+\end{lstlisting} This can be adapted to work iteratively from
 $(1, 1)$ down to $(x, y)$ with a complexity of $O(n^2)$.
 
 \newpage
@@ -841,4 +873,51 @@ A schedule is a set of intervals such that they do not overlap
 The intervals are provided as an array $A$, sorted ascending by
 finishing times.
 
-\end{document}
+\subsubsection{The rightmost compatible interval $p$}
+
+We define $p$ as a function from $\textbf{Interval} \to \textbf{Interval}$,
+which takes an interval $i$ and returns the \textbf{latest} interval that 
+finishes \textbf{before} $i$.
+\\[\baselineskip]
+This can be precomputed beforehand in $O(n\log_2(n))$ time by using 
+binary search ($O(\log_2(n))$).
+
+\subsubsection{A recursive algorithm}
+
+For $n$ intervals indexed by $\{1, \ldots, n\}$ in $A$: \begin{lstlisting}
+weight WIS(i) {
+  if (i == 0) return 0;
+  return max(WIS(i - 1), WIS(p(i)) + w_i);
+}
+\end{lstlisting} However, this leads to WIS(i) being calculated more than once
+for some $i$.
+
+\subsubsection{Storing the solutions to subproblems}
+
+Now, we consider a global array of schedules $S$ where
+$S[i]$ contains \texttt{WIS}($i$) or is undefined: \begin{lstlisting}
+weight WIS_Stored(n) {
+  if (n == 0) return 0;
+  for (int i = 1; i <= n; i++) {
+    S[i] = max(S[i - 1], S[p(i)] + w_i);
+  }
+  return S[n];
+}
+\end{lstlisting} This takes $O(n)$ time.
+
+\newpage
+
+\subsubsection{Returning the schedule}
+
+We can find the schedule using our
+stored $S$ from the previous section: \begin{lstlisting}
+schedule FindSchedule(i) {
+  if (i == 0) return [];
+  if (S(i - 1) <= S(p(i)) + w_i) {
+    return FindSchedule(p(i)) ++ [i]; 
+  }
+  return FindSchedule(i - 1);
+}
+\end{lstlisting} This takes $O(n)$ time.
+
+\end{document} 
