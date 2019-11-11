@@ -232,6 +232,38 @@ added to.
 \textit{So, adding $3$ to $\{7\}$ would make $3$ always point to 
 $7$. But creating a set with $3$, will make it point to itself.}
 
+\subsection{Dynamic Search Structures}
+
+This structure stores a set of elements, each with a unique key.
+This supports the following:
+\begin{center}
+  \begin{tabular}{ || c | p{7.5cm} | c || }
+    \hline
+    Name & Description & Runtime \\
+    \hline
+    \texttt{insert(x, k)} & Inserts \texttt{x}
+    with key \texttt{k}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{find(k)} & Returns the element with 
+    unique key \texttt{k}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{delete(k)} & Deletes the element with unique key
+    \texttt{k}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{predecessor(k)} & Returns the element with unique key
+    \texttt{n} such that \texttt{n} $<$ \texttt{k}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{rangeFind(a, b)} & Returns the elements with unique key
+    \texttt{k} such that \texttt{a} $\leq$ \texttt{k} $\leq$ \texttt{b}
+    & $O(\log_2(n))$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
 \vfill
 
 \section{Graph Theory}
@@ -919,5 +951,76 @@ schedule FindSchedule(i) {
   return FindSchedule(i - 1);
 }
 \end{lstlisting} This takes $O(n)$ time.
+
+\subsection{Self-balancing Trees}
+
+\paragraph{Perfect balance} a tree where each path from the root to a leaf has the
+same length is perfectly balanced.
+\\[\baselineskip]
+Consider a tree where each node can have between $2$ and $4$ (inclusive) children 
+(where a child can be empty) called a $2-3-4$ tree. Take note of the following: 
+
+  \paragraph{2-node} a node with value $v$, $2$ children, and $1$ key
+  where the left child is less than or equal to $v$ and 
+  the right child is greater than or equal to $v$.
+  \paragraph{3-node} a node with values $v_1, v_2$, $3$ children, and $2$ keys
+  where the left child is less than or equal to $v_1$, 
+  the middle child is between $v_1$ and $v_2$ (inclusive),
+  and the right child is greater than or equal to $v_2$.
+  \paragraph{4-node} a node with values $v_1, v_2, v_3$, $4$ children, and $3$ keys
+  where the left child is less than or equal to $v_1$, 
+  the left-middle child is between $v_1$ and $v_2$ (inclusive),
+  the right-middle child is between $v_2$ and $v_3$ (inclusive),
+  and the right child is greater than or equal to $v_3$.
+
+\subsubsection{The height of $2-3-4$ trees}
+
+If we suppose all the nodes in the tree are $2$/$4$ nodes we get the
+worst/best case heights for a $2-3-4$ tree with $n$ elements: \begin{center}
+  \begin{tabular}{| c | c |}
+    \hline
+    Node Type & Height \\
+    \hline 
+    \hline 
+    2 & $O(\log_2(n))$ \\
+    \hline 
+    4 & $O(\log_4(n))$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsubsection{Insertion on $2-3-4$ trees}
+
+\paragraph{Splitting} this operation works on a $4$-node. The middle value of the node
+is added to the parent and two 2-nodes are formed from the remains.
+\\[\baselineskip]
+When inserting an element $k$ we search for where the element belongs whilst
+splitting any $4$-nodes into $2$-nodes as we recurse. We convert the bottom node from
+type $t$ to $t + 1$ ($t \neq 3$ by our algorithm structure) and insert our value.
+
+\subsubsection{Deletion on $2-3-4$ trees}
+
+\paragraph{Fusion} this operation works on two $2$-nodes with a shared parent. A relevant key
+is taken from the parent and used to form a $4$-node. Fusing the root decreases the height of 
+tree and is the only operation with this property.
+
+\paragraph{Transferring} this operation works on a $2$-node and a $3$-node with a shared parent.
+A key from the parent is added to the 2-node whilst a key from the 3-node is added to the parent
+\\[\baselineskip]
+We will consider the cases when deleting a value $k$. For leaves, we search for the value,
+transferring and fusing to convert 2-nodes on the path, we delete the value, converting the
+node from a node type $t$ to a type $t - 1$ ($t \neq 2$ by our algorithm structure). For
+non-leaves, we delete the predecessor of $k$, $k'$ (always a leaf) and replace $k$ with $k'$.
+
+\subsection{Search}
+
+\subsubsection{Binary Search Trees}
+
+For an element $k$ in a binary search tree (acting as our dynamic search structure), 
+the left child of an element is less than or equal to $k$ and the right child is 
+greater than or equal to $k$.
+\\[\baselineskip]
+However, this results in $O(\log_2(n))$ time for \texttt{insert}, \texttt{find}, 
+and \texttt{delete} for balanced trees but becomes $O(n)$ for unbalanced trees.
 
 \end{document} 
