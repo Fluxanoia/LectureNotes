@@ -862,4 +862,32 @@ $p_f$ the characteristic polynomial of an operator $f : V \to V$, we have that: 
   p_f(M_{BB}(f)) = 0_V,
 \end{gather*} for some basis $B$ of $V$.
 
+\subsection{Definition of a Root Vector}
+
+For a finite dimensional vector space $V$ over $\mathbb{F}$, with $f : V \to V$, 
+and $\lambda$ in $\mathbb{F}$,
+we have that $v$ in $V$ is a $\lambda$-root vector of $v$ if
+there exists $n$ in $\mathbb{N}$ such that: \begin{gather*}
+  (f - \lambda(\text{id}))^n v = 0.
+\end{gather*} The smallest such $n$ is the height of $v$ denoted by $h(v)$.
+\\[\baselineskip]
+The set $V(\lambda)$ of all root vectors corresponding to $\lambda$ 
+is the root space of $\lambda$.
+
+\subsubsection{Properties of the Root Space}
+
+We have the following properties: \begin{itemize}
+  \item $V(\lambda)$ is a subspace
+  \item $V(\lambda) \neq \{0\}$ if and only if $\lambda$ is an eigenvalue of $f$
+  \item $V(\lambda)$ is $f$-invariant.
+\end{itemize}
+
+\subsection{Primary Decomposition Theorem}
+
+For a finite dimensional vector space $V$ over $\mathbb{F}$ (algebraically closed) we have
+that: \begin{gather*}
+  V = \bigoplus_{i \in [n]} V(\lambda_i),
+\end{gather*} where $\{\lambda_1, \ldots, \lambda_n\}$ is the set of eigenvalues of a
+linear operator.
+
 \end{document}
