@@ -797,6 +797,11 @@ $(\sqsubseteq, D)$ is a \textit{chain complete} PO-set.
 If such a bound exists for all subsets $X$, $(\sqsubseteq, D)$ 
 is a \textit{complete lattice}.
 
+\subsubsection{Lifted Partial-Order sets}
+
+A PO-set is 'lifted' if an artificial bottom element $\bot$
+is added to the set.
+
 \subsubsection{A partial order on state transformers}
 
 We have the following PO-set $(\sqsubseteq, T)$ where: \begin{gather*}
@@ -808,7 +813,15 @@ We have the following PO-set $(\sqsubseteq, T)$ where: \begin{gather*}
 \end{gather*} This is a \textbf{weak} partial order on $T$, with
 the least element being $0$ in $T$ undefined for all inputs.
 
-\newpage
+\subsubsection{Fixed point theorem}
+
+For $f : X \to X$ a continuous function on a chain-complete partial order
+$(\sqsubseteq, X)$ with a least element $\bot$, we have that: \begin{gather*}
+  \texttt{FIX } f = \sqcup \, \{f^n(\bot) : n \in \mathbb{Z}_{\geq 0}\},
+\end{gather*} exists and is the least fixed point of $f$. For clarity: 
+\begin{gather*}
+  f^0 = \texttt{id} \qquad f^n = f \circ f^{n - 1},
+\end{gather*} where $n$ is in $\mathbb{Z}_{\geq 0}$.
 
 \subsection{Direct Style}
 
