@@ -890,4 +890,22 @@ that: \begin{gather*}
 \end{gather*} where $\{\lambda_1, \ldots, \lambda_n\}$ is the set of eigenvalues of a
 linear operator.
 
+\subsection{Definition of a Jordan Cell (Block)}
+
+A Jordan cell of size $h \times h$ is the matrix of the form: \begin{gather*}
+  J_h(\lambda) = \begin{pmatrix}
+    \lambda & 1       & 0      & \cdots  & 0       \\
+    0       & \lambda & 1      & \ddots  & \vdots  \\
+    \vdots  & \ddots  & \ddots & \ddots  & 0       \\
+    \vdots  & \ddots  & \ddots & \lambda & 1       \\
+    0       & \cdots  & \cdots & 0       & \lambda
+  \end{pmatrix},
+\end{gather*} or alternatively: \begin{gather*}
+  J_h(\lambda) = (a_{ij}), \, a_{ij} = \begin{cases}
+    \lambda & i = j \\
+    1       & j = i + 1 \\
+    0       & \text{otherwise.}
+  \end{cases}
+\end{gather*}
+
 \end{document}
