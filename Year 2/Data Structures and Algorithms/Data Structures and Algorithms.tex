@@ -957,6 +957,8 @@ schedule FindSchedule(i) {
 \paragraph{Perfect balance} a tree where each path from the root to a leaf has the
 same length is perfectly balanced.
 \\[\baselineskip]
+We want to use self-balancing trees as an optimisation over linked lists in a
+dynamic search structure.
 Consider a tree where each node can have between $2$ and $4$ (inclusive) children 
 (where a child can be empty) called a $2-3-4$ tree. Take note of the following: 
 
@@ -972,6 +974,8 @@ Consider a tree where each node can have between $2$ and $4$ (inclusive) childre
   the left-middle child is between $v_1$ and $v_2$ (inclusive),
   the right-middle child is between $v_2$ and $v_3$ (inclusive),
   and the right child is greater than or equal to $v_3$.
+
+\newpage
 
 \subsubsection{The height of $2-3-4$ trees}
 
@@ -1011,6 +1015,54 @@ We will consider the cases when deleting a value $k$. For leaves, we search for 
 transferring and fusing to convert 2-nodes on the path, we delete the value, converting the
 node from a node type $t$ to a type $t - 1$ ($t \neq 2$ by our algorithm structure). For
 non-leaves, we delete the predecessor of $k$, $k'$ (always a leaf) and replace $k$ with $k'$.
+
+\subsection{Skip Lists}
+
+We want to use skip lists as an optimisation over linked lists in a
+dynamic search structure. Building on a linked list, we require it is sorted and then 
+we can add 'shortcut' levels. Each level is a subset of the linked list in 
+the level below with the bottom level being the full list and each level containing
+the minimum and maximum.
+
+\subsubsection{Insertion in skip lists}
+
+When inserting an entry, we choose randomly whether it appears in the level above.
+We insert it into the lowest level and flip a coin to see if we should insert it 
+into the level above. We repeat these coin flips until it fails to be inserted again
+(note that each level must contain the minimum and maximum of the list and the top
+level should be exactly the minimum and maximum).
+\\[\baselineskip]
+If there is a level which isn't the bottom layer that contains all entries, we can
+delete all levels below it.
+
+\subsubsection{Deletion in skip lists}
+
+When deleting an entry, we simply delete all occurances of the entry. If this is the minimum
+or maximum, we ensure that each level contains the minimum or maximum unless the
+whole list is empty.
+\\[\baselineskip]
+If there is a level which isn't the top layer that contains only the minimum and maximum 
+entries, we can delete it.
+
+\subsubsection{Finding in skip lists}
+
+We start at the minimum of the top layer, iterating across it until we find it or we find
+a greater value. If the next value is greater, we move to the layer below and repeat the
+process: \begin{lstlisting}
+value find(int key) {
+  while (entry.key != max_key) {
+    if (entry.key == key) return entry.value;
+    else if (entry.key >  key) move down;
+    else move right;
+  }
+  return undefined;
+}
+\end{lstlisting}
+
+\subsubsection{Runtime of skip lists}
+
+All processes take $O(\log_2(n))$ time on average with randomised levels. Also,
+for large $n$, the amount of levels is also $O(\log_2(n))$ on average.
 
 \subsection{Search}
 
