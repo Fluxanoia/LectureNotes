@@ -588,4 +588,21 @@ the following steps to the algorithm: \begin{enumerate}
 then $T$ is a minimum spanning tree. Otherwise, $T$ is an acyclic
 graph with $n - k$ components.
 
+\section{Cliques and Independent Sets}
+
+\subsection{Definition of a Triangle}
+
+We often call $K_3$ (the complete graph on three vertices) a triangle. A graph $G$
+contains a triangle if a subgraph of $G$ is isomorphic to $K_3$.
+
+\subsection{Mantel's Theorem}
+
+For $G = (V, E)$ a graph of order $n$ that contains no triangles, we have that: \begin{gather*}
+  |E| \leq \left\lfloor \frac{n^2}{4} \right\rfloor = \left\lfloor \left(\frac{n}{2}\right)^2 \right\rfloor.
+\end{gather*} We also have that: \begin{gather*}
+  \left[ |E| = \left\lfloor \frac{n^2}{4} \right\rfloor \right]
+  \Rightarrow
+  \left[ G \cong K_{k, n - k} \text{ where } k = \left\lfloor \frac{n}{2} \right\rfloor \right],
+\end{gather*} there always exists a graph where the equality above holds.
+
 \end{document}
