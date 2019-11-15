@@ -1016,6 +1016,16 @@ transferring and fusing to convert 2-nodes on the path, we delete the value, con
 node from a node type $t$ to a type $t - 1$ ($t \neq 2$ by our algorithm structure). For
 non-leaves, we delete the predecessor of $k$, $k'$ (always a leaf) and replace $k$ with $k'$.
 
+\subsubsection{Binary Search Trees}
+
+For an element $k$ in a binary search tree (acting as our dynamic search structure), 
+the left child of an element is less than or equal to $k$ and the right child is 
+greater than or equal to $k$.
+\\[\baselineskip]
+However, this results in $O(\log_2(n))$ time for \texttt{insert}, \texttt{find}, 
+and \texttt{delete} for balanced trees like the $2-3-4$ tree above 
+but becomes $O(n)$ for unbalanced trees.
+
 \subsection{Skip Lists}
 
 We want to use skip lists as an optimisation over linked lists in a
@@ -1064,15 +1074,88 @@ value find(int key) {
 All processes take $O(\log_2(n))$ time on average with randomised levels. Also,
 for large $n$, the amount of levels is also $O(\log_2(n))$ on average.
 
-\subsection{Search}
+\section{Line Intersections}
 
-\subsubsection{Binary Search Trees}
+Suppose we are given a set of line segments (as two coordinates), we would
+like to find all the coordinates of the Intersections between these line
+segements.
 
-For an element $k$ in a binary search tree (acting as our dynamic search structure), 
-the left child of an element is less than or equal to $k$ and the right child is 
-greater than or equal to $k$.
+\subsection{A Simple Algorithm}
+
+We iterate through all the pairs and output the intersections:
+\begin{lstlisting}
+points intersections_simple(lines) {
+  points ps;
+  for (int i = 0; i < lines.size(); i++) {
+    for (int j = i + 1; j < lines.size(); j++) {
+      if (lines[i] intersects lines[j]) {
+        ps.push(intersection);
+      }
+    }    
+  }
+  return ps;
+}
+\end{lstlisting} this algorithm takes $O(n^2)$.
+
+\subsection{Output Sensitivity}
+
+It can be seen that certain inputs could potentially have $O(n^2)$ output
+but this would make it seem like the simple algorithm is optimal but we
+will see that if consider $k$ to be the number of outputs, we can find
+an algorithm with $O(n\log_2(n) + k\log_2(n))$ time complexity. However,
+if we consider bounds for $k$:
+\begin{center}
+  \begin{tabular}{ c c c }
+    $k \leq 2n$     & $\qquad$ & $k \geq n^2$ \\
+    $\Rightarrow$   & $\qquad$ & $\Rightarrow$ \\
+    $O(n\log_2(n))$ & $\qquad$ & $O(n^2\log_2(n))$,
+  \end{tabular}
+\end{center} so for certain inputs this algorithm will be \textbf{worse}
+than the simple algorithm.
+
+\subsection{An Outline for Finding Intersections}
+
+It can be seen that for two line segments, they can only have an intersection
+if the spans of the segments in the $y$ direction intersect also. Thus,
+we could consider sweeping a horizontal line through all our line segments
+picking up intersections as we go.
+
+\subsubsection{Adjacency} 
+We say two line segments are adjacent if there is a
+contiguous horizontal line from one segment to the other (not interrupted
+by another line segment). It can be
+seen that two segments that are never adjacent can't intersect.
+
+\subsubsection{Event points} 
+We can't possibly iterate through all possible $y$
+points, thus we only consider 'event points' which are the end points of 
+segments and line intersections but this requires that we calculate 
+intersections as we go. If we have $k$ intersections,
+this gives $O(n + k)$ event points.
 \\[\baselineskip]
-However, this results in $O(\log_2(n))$ time for \texttt{insert}, \texttt{find}, 
-and \texttt{delete} for balanced trees but becomes $O(n)$ for unbalanced trees.
+We consider the set of event points as a priority queue with keys 
+equal to their $y$ value, allowing us to \texttt{extractMin} to get
+our next event point. However, our process could give rise to duplicate
+event points, but these can be dealt with by checking the queue beforehand.
+
+\subsubsection{Status} 
+We consider the status of the sweep line to be the
+ordered set of line segments currently being interesected by the sweep line
+with respect to their $x$ coordinates. The status can clearly only change
+at event points, so at each event point we query line segments that have
+newly become adjacent.
+\\[\baselineskip]
+We consider status as a $2-3-4$ tree where: \begin{itemize}
+  \item At the top of a line segment, we insert it
+  \item At the bottom of a line segment, we delete it
+  \item At an intersection, we swap the intersecting lines,
+\end{itemize} checking for new intersections as these changes occur.
+
+\subsubsection{The full process}
+
+We add all line segment start and end points to our priority queue, and
+iterate through them, updating the status and querying for intersections as
+we progress, adding intersections to our output and the queue as necessary.
+This takes \newline $O((n + k)\log_2(n))$ time.
 
 \end{document} 
