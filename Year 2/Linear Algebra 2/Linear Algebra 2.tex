@@ -890,9 +890,10 @@ that: \begin{gather*}
 \end{gather*} where $\{\lambda_1, \ldots, \lambda_n\}$ is the set of eigenvalues of a
 linear operator.
 
-\subsection{Definition of a Jordan Cell (Block)}
+\subsection{Definition of a Jordan Block}
 
-A Jordan cell of size $h \times h$ is the matrix of the form: \begin{gather*}
+For a field $\mathbb{F}$, $h$ in $\mathbb{N}$, a Jordan block of size $h \times h$
+on $\lambda$ in $\mathbb{F}$ is the matrix of the form: \begin{gather*}
   J_h(\lambda) = \begin{pmatrix}
     \lambda & 1       & 0      & \cdots  & 0       \\
     0       & \lambda & 1      & \ddots  & \vdots  \\
@@ -907,5 +908,65 @@ A Jordan cell of size $h \times h$ is the matrix of the form: \begin{gather*}
     0       & \text{otherwise.}
   \end{cases}
 \end{gather*}
+
+\subsection{Definition of a Jordan Matrix}
+
+For a field $\mathbb{F}$, a Jordan matrix consisting of Jordan blocks of sizes 
+$\{h_1, \ldots, h_n\}$ in $\mathbb{N}$ and values 
+$\{\lambda_1, \ldots, \lambda_n\}$ in $\mathbb{F}$ has the form: \begin{gather*}
+  J = \begin{pmatrix}
+    J_{h_1}(\lambda_1) & 0                  & \cdots & 0      \\
+    0                  & J_{h_2}(\lambda_2) & \ddots & \vdots \\
+    \vdots             & \ddots             & \ddots & 0      \\
+    0                  & \cdots             & 0      & J_{h_n}(\lambda_n)
+  \end{pmatrix}
+\end{gather*}
+
+\subsubsection{Definition of Jordan Normal Form}
+
+A Jordan normal form of a matrix $A$ is a Jordan matrix that is similar to $A$.
+
+\subsection{Definition of a Jordan Basis}
+
+For an algebraically closed field $\mathbb{F}$, a finite dimensional vector space $V$ over
+$\mathbb{F}$, with $f$ in End$(V)$, we have that a basis $B$ of $V$ is a Jordan basis for
+$f$ if: \begin{gather*}
+  M_{BB}(f) \text{ is Jordan}.
+\end{gather*}
+
+\subsection{Existence and Uniqueness of Jordan Bases and Matrices}
+
+For an algebraically closed field $\mathbb{F}$, a finite dimensional vector space $V$ over
+$\mathbb{F}$, with $f$ in $\mathcal{L}(V, V)$, we have that: \begin{itemize}
+  \item There exists a Jordan basis for $V$,
+  \item The Jordan form of the matrix of $f$ is uniquely determined up to
+  permuting the Jordan blocks.
+\end{itemize}
+
+\subsection{Definition of Nilpotence}
+
+For a field $\mathbb{F}$, a finite dimensional vector space $V$ over $\mathbb{F}$, 
+with $f$ in End$(V)$, we have that $f$ is nilpotent if there exists $r$ in $\mathbb{Z}_{>0}$ 
+such that $f^r = 0$ in End$(V)$.
+\\[\baselineskip]
+We have that $0$ is the only eigenvalue of nilpotent maps, thus for some
+$m, m'$ in $\mathbb{Z}_{>0}$ with $m' \leq m$: \begin{itemize}
+  \item $p_f(x) = x^m$
+  \item $m_f(x) = x^{m'}$
+  \item $V = V(0)$, the zero eigenspace.
+\end{itemize}
+
+\subsection{Nilpotent Maps on Eigenspaces}
+
+Let $\mathbb{F}$ be a field, $V$ be a finite dimensional vector space over $\mathbb{F}$, 
+$f$ be in End$(V)$, $\lambda$ be an eigenvalue of $f$. Let $g: V(\lambda) \to V(\lambda)$
+be $g(v) = f(v)$ for $v$ in $V(\lambda)$. So, we have that $(g - \lambda\text{id})$ is
+nilpotent.
+
+\subsection{Existence of Jordan Bases}
+
+Let $\mathbb{F}$ be an algebraically closed field, $V$ be a finite dimensional 
+vector space over $\mathbb{F}$, $f$ be nilpotent in End$(V)$, thus there exists a Jordan
+basis for $f$.
 
 \end{document}
