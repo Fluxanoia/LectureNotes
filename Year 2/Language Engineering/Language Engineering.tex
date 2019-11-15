@@ -104,6 +104,20 @@ structures are detailed below: \begin{align*}
 \end{align*} We define representations of each structure in terms of itself
 as composite elements and the rest are basis elements.
 
+\subsubsection{Extensions of the categories}
+
+We define a language \textbf{Exc} identical to \textbf{While} except we
+extend the \textbf{Statements} to: \begin{align*}
+  S &:= x = a \, | \, \texttt{skip} \, | \, S_1 ; S_2 \, | \, \texttt{if }
+  b \texttt{ then } S_1 \texttt{ else } S_2 \, | \, \texttt{while } 
+  b \texttt{ do } S \\
+  & \qquad \texttt{begin } S_1 \texttt{ handle } e : S_2 \texttt{ end} \, |
+  \, \texttt{raise } e,
+\end{align*} and we define the \textbf{Exception} of which $e$ is a member of.
+\\[\baselineskip]
+The \texttt{raise} instruction, when called, breaks the execution of
+the current statement and gives control to the handling statement.
+
 \subsection{State}
 
 When considering a statement, it is almost always important to consider the
@@ -224,6 +238,8 @@ $b$: \begin{gather*}
   [\mathcal{B}(b)(s_1) = \mathcal{B}(b)(s_2)].
 \end{gather*}
 
+\newpage
+
 \subsection{Substitutions}
 
 Within expressions, we will be interested in swapping the occurances
@@ -267,6 +283,8 @@ $x, v$: \begin{gather*}
     s(x) & \text{otherwise}.
   \end{cases}
 \end{gather*}
+
+\newpage
 
 \section{Operational Semantics}
 
@@ -336,8 +354,6 @@ the state $s_{570}$ to $s_{575}$ and $x=y$ transforms the state
 $s_{575}$ to $s_{775}$, we know that the composite statement
 $z=x;x=y$ transforms $s_{570}$ to $s_{775}$.
 
-\newpage
-
 \subsection{Natural Semantics}
 
 During this section, we will use $\langle S, s\rangle$
@@ -380,8 +396,6 @@ for identical inputs, we get identical outputs.
 \\[\baselineskip]
 As there is more than one definition of these semantics
 we will subscript these defintions with $ns$ where appropriate.
-
-\newpage
 
 \subsubsection{The Semantic Function}
 
@@ -650,7 +664,7 @@ $\mathcal{M}$: \begin{align*}
   \end{cases}
 \end{align*}
 
-\newpage
+\vfill
 
 \subsection{Code Generation}
 
@@ -813,6 +827,8 @@ We have the following PO-set $(\sqsubseteq, T)$ where: \begin{gather*}
 \end{gather*} This is a \textbf{weak} partial order on $T$, with
 the least element being $0$ in $T$ undefined for all inputs.
 
+\newpage
+
 \subsubsection{Fixed point theorem}
 
 For $f : X \to X$ a continuous function on a chain-complete partial order
@@ -823,30 +839,7 @@ $(\sqsubseteq, X)$ with a least element $\bot$, we have that: \begin{gather*}
   f^0 = \texttt{id} \qquad f^n = f \circ f^{n - 1},
 \end{gather*} where $n$ is in $\mathbb{Z}_{\geq 0}$.
 
-\subsection{Direct Style}
-
-\subsubsection{The Semantic Function} 
-
-We define the semantic function as follows: \begin{gather*}
-  \mathcal{S}: \textbf{Stm} \to (\textbf{State} \hookrightarrow \textbf{State}).
-\end{gather*} We that this function is partial because some statements
-may never terminate. We have the following: \begin{align*}
-  \mathcal{S}(x = a)(s) &= s[x \mapsto \mathcal{A}(a)(s)] \\
-  \mathcal{S}(\texttt{skip}) &= \texttt{id} \\
-  \mathcal{S}(S_1 ; S_2) &= \mathcal{S}(S_2) \circ \mathcal{S}(S_1) \\
-  \mathcal{S}(\texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2)
-  &= \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S_1), \mathcal{S}(S_2)) \\
-  \mathcal{S}(\texttt{while } b \texttt{ do } S)
-  &= \texttt{FIX } F \text{ (where } F(g) 
-  := \texttt{cond}(\mathcal{B}(b), g \circ \mathcal{S}(S), \texttt{id})).
-\end{align*} 
-As there is more than one semantic function (for our different types
-of semantics) we denote this function as $\mathcal{S}_{ds}$.
-\\[\baselineskip]
-The definitions depend on the definition of the functions in the 
-following sections.
-
-\subsubsection{The Conditional Function}
+\subsubsection{The conditional function}
 
 We define the type of \texttt{cond} as follows: \begin{gather*}
   \texttt{cond} : 
@@ -861,7 +854,7 @@ We define the type of \texttt{cond} as follows: \begin{gather*}
   \end{cases}
 \end{gather*}
 
-\subsubsection{The Fixed Point Function}
+\subsubsection{The fixed point function}
 
 We define the type of \texttt{FIX} as follows: \begin{gather*}
   \texttt{FIX} : 
@@ -871,6 +864,8 @@ We define the type of \texttt{FIX} as follows: \begin{gather*}
 \end{gather*} where \texttt{FIX}$(F)$ returns the least fixed 'point'
 (or rather function) of $F$ ($f$ in Im($F$) such that $F(f) = f$). 
 Smallest in this case is the 'most undefined' function.
+
+\vfill
 
 \subsubsection{Breaking down a Fibonacci definition using \texttt{FIX}}
 
@@ -884,6 +879,9 @@ fib = fix F where
     | (n == 0) || (n == 1) = 1
     | otherwise            = (f (n - 1)) + (f (n - 2))
 \end{lstlisting}
+
+\newpage
+
 So, if we want to calculate \texttt{fib 4} we get: \begin{center}
   \begin{tabular}{ l l }
     \begin{lstlisting}
@@ -923,5 +921,83 @@ So, if we want to calculate \texttt{fib 4} we get: \begin{center}
       \end{lstlisting}
   \end{tabular}
 \end{center}
+
+\subsection{Direct Style}
+
+\subsubsection{The Semantic Function} 
+
+We define the semantic function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to (\textbf{State} \hookrightarrow \textbf{State}).
+\end{gather*} We that this function is partial because some statements
+may never terminate. We have the following: \begin{align*}
+  \mathcal{S}(x = a)(s) &= s[x \mapsto \mathcal{A}(a)(s)] \\
+  \mathcal{S}(\texttt{skip}) &= \texttt{id} \\
+  \mathcal{S}(S_1 ; S_2) &= \mathcal{S}(S_2) \circ \mathcal{S}(S_1) \\
+  \mathcal{S}(\texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2)
+  &= \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S_1), \mathcal{S}(S_2)) \\
+  \mathcal{S}(\texttt{while } b \texttt{ do } S)
+  &= \texttt{FIX } F \text{ (where } F(g) 
+  := \texttt{cond}(\mathcal{B}(b), g \circ \mathcal{S}(S), \texttt{id})).
+\end{align*} 
+As there is more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{ds}$.
+
+\subsection{Continuation Style}
+
+A continuation describes the effect of executing the remainder of the
+program denoted as \textbf{Cont} and typed as follows: \begin{gather*}
+  \textbf{Cont} = \textbf{State} \hookrightarrow \textbf{State}.
+\end{gather*} For a sequence of statements
+$\{S_1, S_2, \ldots, S_k, \ldots, S_{n - 1}, S_n\}$
+we have that the continuation $c$ from $n$ to $k$ can be extended
+to $c'$ the continuation from $n$ to $k - 1$ illustrated here: \begin{gather*}
+  S_1, S_2, \ldots, 
+  \underbrace{S_{k - 1}, \overbrace{S_k, \ldots, S_{n - 1}, S_n}^c}_{c'}.
+\end{gather*}
+
+\subsubsection{The Semantic Function on \textbf{While}} 
+
+We define the semantic function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to (\textbf{Cont} \hookrightarrow \textbf{Cont}).
+\end{gather*} We that this function is partial because some statements
+may never terminate. We have the following: \begin{align*}
+  \mathcal{S}(x = a)(c)(s) &= c(s[x \mapsto \mathcal{A}(a)(s)]) \\
+  \mathcal{S}(\texttt{skip})(c)(s) &= c(s) \\
+  \mathcal{S}(S_1 ; S_2) &= \mathcal{S}(S_1) \circ \mathcal{S}(S_2) \\
+  \mathcal{S}(\texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2)(c)
+  &= \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S_1)(c), \mathcal{S}(S_2)(c)) \\
+  \mathcal{S}(\texttt{while } b \texttt{ do } S)
+  &= \texttt{FIX } F \text{ (where } F(g)(c) 
+  := \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S)(g(c)), c)).
+\end{align*} 
+As there is more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{cs}^{\textbf{While}}$.
+
+\subsubsection{The Semantic Function on \textbf{Exc}} 
+
+\paragraph{Exception environments} we define exeception environments
+$env_E$ of type \newline 
+$\textbf{Env}_E : \textbf{Exception} \to \textbf{Cont}$.
+\\[\baselineskip]
+We define the semantic function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to \textbf{Env}_E 
+  \to (\textbf{Cont} \hookrightarrow \textbf{Cont}).
+\end{gather*} We that this function is partial because some statements
+may never terminate. We have the following: \begin{align*}
+  \mathcal{S}(x = a)(env_E)(c)(s) &= c(s[x \mapsto \mathcal{A}(a)(s)]) \\
+  \mathcal{S}(\texttt{skip})(env_E)(c)(s) &= c(s) \\
+  \mathcal{S}(S_1 ; S_2)(env_E) &= \mathcal{S}(S_1)(env_E) \circ \mathcal{S}(S_2)(env_E) \\
+  \mathcal{S}(\texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2)(env_E)(c)
+  &= \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S_1)(env_E)(c), \mathcal{S}(S_2)(env_E)(c)) \\
+  \mathcal{S}(\texttt{while } b \texttt{ do } S)(env_E)
+  &= \texttt{FIX } F \\
+  \text{ (where } F(g)(c) &
+  := \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S)(env_E)(g(c)), c)) \\
+  \mathcal{S}(\texttt{begin } S_1 \texttt{ handle } e: S_2 \texttt{ end}) \\
+  (env_E)(c) &= \mathcal{S}(S_1)(env_E[e \mapsto \mathcal{S}(S_2)(env_E)(c)]) c \\
+  \mathcal{S}(\texttt{raise } e)(env_E)(c) &= env_E e.
+\end{align*} 
+As there is more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{cs}^{\textbf{Exc}}$.
 
 \end{document}
