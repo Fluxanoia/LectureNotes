@@ -607,6 +607,38 @@ For $G = (V, E)$ a graph of order $n$ that contains no triangles, we have that: 
 
 \section{Planar Graphs}
 
+The motivator for understanding planar graphs is the problem of drawing graphs in
+the plane without intersecting edges.
 
+\subsection{Definition of an Arc}
+
+An arc is a subset of $\mathbb{R}^2$ of the type $\sigma : [0, 1] \to \mathbb{R}^2$ 
+where $\sigma$ is an injective, continuous map and $\sigma(0), \sigma(1)$
+are the endpoints of the arc. Injectivity here ensures the arc does not cross itself.
+
+\subsection{Definition of a Drawing}
+
+For a graph $G = (V, E)$, drawing it is equivalent to assigning: \begin{itemize}
+  \item A point $p$ in $\mathbb{R}^2$ for each $v$ in $V$ (such that the map
+  from vertices to points is injective)
+  \item An arc $\sigma$ for each $e = (x, y)$ in $E$ (such that $\sigma$ intersects
+  exactly two points, the points corresponding to $x$ and $y$).
+\end{itemize}
+
+\subsection{Definition of a Planar Drawings and Graphs}
+
+A drawing with a set of arcs $A$ is planar if for each $\sigma_1, \sigma_2$ in $A$, 
+we have that $\sigma_1, \sigma_2$ either intersect at their endpoints or not at all.
+\\[\baselineskip]
+A graph is planar if it admits at least one planar drawing.
+
+\subsection{Definition of a Jordan Curve}
+
+An arc in the plane whose endpoints conincide is called a Jordan curve.
+
+\subsection{Jordan Curve Theorem}
+
+For any Jordan curve $C$, $C$ divides the plane into exactly two connected regions
+called the 'interior' and 'exterior'. The curve is the boundary of these regions. 
 
 \end{document}
