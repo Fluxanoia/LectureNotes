@@ -630,7 +630,13 @@ For a graph $G = (V, E)$, drawing it is equivalent to assigning: \begin{itemize}
 A drawing with a set of arcs $A$ is planar if for each $\sigma_1, \sigma_2$ in $A$, 
 we have that $\sigma_1, \sigma_2$ either intersect at their endpoints or not at all.
 \\[\baselineskip]
-A graph is planar if it admits at least one planar drawing.
+A graph is planar if it admits at least one planar drawing. We have that $K_5$ 
+and $K_{3, 3}$ are not planar.
+
+\subsubsection{Non-Planar Subgraphs}
+
+For a graph $G$ with $G'$ a subgraph of $G$ that is not planar, we have that
+$G$ is not planar.
 
 \subsection{Definition of a Jordan Curve}
 
@@ -640,5 +646,18 @@ An arc in the plane whose endpoints conincide is called a Jordan curve.
 
 For any Jordan curve $C$, $C$ divides the plane into exactly two connected regions
 called the 'interior' and 'exterior'. The curve is the boundary of these regions. 
+
+\subsection{Definition of a Face}
+
+For a planar graph $G$, a face of a drawing of $G$ is a connected region
+bound by the drawing. The region going off to infinity is the outer face and
+the rest are inner faces.
+
+\subsection{Euler's Formula}
+
+For a connected graph $G = (V, E)$ where $F$ is the set of faces of a given 
+drawing of $G$, we have that: \begin{gather*}
+  |V| - |E| + |F| = 2.
+\end{gather*}
 
 \end{document}
