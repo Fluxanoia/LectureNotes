@@ -24,7 +24,7 @@
   numbers=none,
   numberstyle=\tiny\color{gray},
   keywordstyle=\color{blue},
-  commentstyle=\color{dkgreen},
+  commentstyle=\color{gray},
   stringstyle=\color{orange},
   breaklines=true,
   breakatwhitespace=true,
@@ -691,6 +691,42 @@ varies across queues: \begin{center}
   \end{tabular}
 \end{center}
 and has $O(|V| + |E|)$ space complexity across all queues.
+
+\subsection{Bellman-Ford's Algorithm}
+
+This algorithm solves the shortest path problem for weighted directed graphs.
+Note that there's no constraint on the parity of the weights. We assume
+that there are no negative weight cycles. \begin{lstlisting}
+distances BellmanFord(s) {
+  let dist be our array of distances;
+  for (each v) {
+    dist[v] = infinity;
+  }
+  dist[s] = 0;
+  do (|V| times) {
+    for (each edge (u, v)) {
+      // Relaxing (u, v)
+      if (dist[v] > dist[u] + weight(u, v)) {
+        dist[v] = dist[u] + weight(u, v);
+      }
+    }
+  }
+}
+\end{lstlisting} This runs in $O(|V||E|)$ time.
+
+\subsubsection{Negative weight cycles}
+
+Suppose our graph has a cycle which has a negative weight. 
+This must mean that we can choose an arbitrarily small/negative 
+path in the graph by traversing the cycle multiple times.
+This is why we require that there are no negative weight cycles.
+\\[\baselineskip]
+We can run the algorithm on graphs with negatives cycles and
+simply run a final check at the end to see if we have a negative weight cycle.
+If we relax each edge again and decrease a path, there must be a negative cycle
+as we should already have all the shortest paths.
+
+\newpage
 
 \subsection{Minimum Spanning Trees}
 
