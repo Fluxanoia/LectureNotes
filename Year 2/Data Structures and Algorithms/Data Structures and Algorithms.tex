@@ -650,11 +650,9 @@ the starting vertex.
 
 \subsection{Djikstra's Algorithm}
 
-For a weighted (non-negatively), directed graph (stored as a
-adjacency list) we have that Djikstra's algorithm (given a)
-starting vertex returns the fastest path to all other vertices 
-(or a particular one if required). It is structured as follows:
-\begin{lstlisting}
+For a weighted (non-negatively), directed graph we have that Djikstra's algorithm 
+returns the fastest path to all vertices from some starting vertex. 
+It is structured as follows: \begin{lstlisting}
 distances Djikstra(s) {
   let pq be our priority queue;
   let dist be our array of distances;
@@ -693,10 +691,9 @@ varies across queues: \begin{center}
 and has $O(|V| + |E|)$ space complexity across all queues.
 
 \subsection{Bellman-Ford's Algorithm}
-
-This algorithm solves the shortest path problem for weighted directed graphs.
-Note that there's no constraint on the parity of the weights. We assume
-that there are no negative weight cycles. \begin{lstlisting}
+For a weighted, directed graph we have that Bellman-Ford's algorithm 
+returns the fastest path to all vertices from some starting vertex. 
+It is structured as follows: \begin{lstlisting}
 distances BellmanFord(s) {
   let dist be our array of distances;
   for (each v) {
@@ -727,6 +724,37 @@ If we relax each edge again and decrease a path, there must be a negative cycle
 as we should already have all the shortest paths.
 
 \newpage
+
+\subsection{Johnson's Algorithm}
+
+For a weighted, directed graph we have that Johnson's algorithm 
+returns the fastest path between all vertex pairs. It does this 
+by \textbf{re-weighting} the graph and performing Djikstra's
+repeatedly.
+
+\subsubsection{Reweighting based on vertex potential}
+
+For a graph $G = (V, E)$ with a weighting function $w : E \to \mathbb{Z}$, 
+we define a potential function $h : V \to \mathbb{Z}$ to associate vertices with 
+potentials. We define a re-weighting function $w' : E \to \mathbb{Z}$: \begin{gather*}
+  w'((u, v)) = w((u, v)) + h(u) - h(v).
+\end{gather*} We find the vertex potentials by adding a vertex $s$ to the graph with
+an edge $(s, v)$ for each $v$ in $V$ of weight zero forming a new graph $G'$. 
+We then run Bellman-Ford on $G'$ and define $h$ as follows: \begin{gather*}
+  h(v) = \text{ the shortest path length from $s$ to $v$ in } G'.
+\end{gather*} Note that $G'$ has the same number of negative weight cycles as $G$
+as all our edges are directed away from $s$.
+
+\subsubsection{The algorithm}
+
+Starting with a graph $G = (V, E)$ with a weighting function $w : E \to \mathbb{Z}$,
+form $G' = (V \cup \{s\}, E \cup S)$ where: \begin{gather*}
+  S = \{(s, v) : v \in V\} \qquad \text{and} \qquad w(e) = 0 \text{ for all } e \text{ in } S.
+\end{gather*} Run Bellman-Ford on $G'$ starting at $s$ (detecting any negative weight cycles)
+to define our vertex potentials. Using the potentials, re-weight each edge as above
+in $G$. Run Djikstra's on every vertex in $G$ to create our set of paired shortest paths.
+We can then convert our path weights back into their weights as inputted and retrieve the
+values if necessary. This takes $O(|V||E|\log_2(|V|))$ time.
 
 \subsection{Minimum Spanning Trees}
 
@@ -768,8 +796,6 @@ A polynomial of degree $n$ in $\mathbb{Z}_{\geq 0}$ is a function $A$:
 \end{gather*} where $a_i$ are the coefficients of $A$. We say for 
 $k > n$, $k$ is a degree-bound of $A$. We can represent this by listing
 the coefficients, called the \textbf{coefficient representation}.
-
-\newpage
 
 \subsubsection{Fast Polynomial Evaluation}
 
