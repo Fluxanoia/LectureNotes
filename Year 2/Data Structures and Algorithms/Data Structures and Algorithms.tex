@@ -1220,4 +1220,35 @@ iterate through them, updating the status and querying for intersections as
 we progress, adding intersections to our output and the queue as necessary.
 This takes \newline $O((n + k)\log_2(n))$ time.
 
+\section{Linear Programming}
+
+\subsection{Vector Comparison}
+
+We have that for $v, w$ in $\mathbb{R}^n$ for some $n$ in $\mathbb{Z}_{>0}$ such that: 
+\begin{gather*}
+  v = \begin{pmatrix}
+    v_1 \\ v_2 \\ \vdots \\ v_n
+  \end{pmatrix} \qquad
+  w = \begin{pmatrix}
+    w_1 \\ w_2 \\ \vdots \\ w_n
+  \end{pmatrix},
+\end{gather*} we have that $v \leq w$ if and only if for all $i$ in $[n]$, $v_i \leq w_i$.
+\\[\baselineskip]
+A result of this definition is that some vectors are incomparable.
+
+\subsection{Standard Form}
+
+The standard form of a linear programming problem is that we have an objective function
+$f : \mathbb{R}^n \to \mathbb{R}$, an $m \times n$ matrix $A$, and an $m$-dimensional
+vector $b$ in $\mathbb{R}^m$. The desired output is a vector $x$ in $\mathbb{R}^n$ that 
+maximises $f(x)$ subject to $Ax \leq b$ and $x \geq 0$.
+\\[\baselineskip]
+We can accomodate for minimisation and lower bounds by multiplying by negative one, and
+we can write negative variables as the subtraction of positive variables.
+
+\subsection{Integer Linear Programming}
+
+In a linear programming problem where we add the constraint that solutions must be
+integers, we can relax our constraints to form approximate solutions.
+
 \end{document} 
