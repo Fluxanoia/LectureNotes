@@ -1251,4 +1251,61 @@ we can write negative variables as the subtraction of positive variables.
 In a linear programming problem where we add the constraint that solutions must be
 integers, we can relax our constraints to form approximate solutions.
 
+\section{Flow Algorithms}
+
+\subsection{Flow Networks}
+
+A flow network $F = (G, c, s, t)$ consists of a directed graph $G = (V, E)$, a capacity function
+$c : E \to \mathbb{R}$, a source vertex $s$ in $V$ (with empty in-neighbourhood), and a sink
+vertex $t$ in $V$ (with empty out-neighbourhood).
+
+\subsubsection{Flows}
+
+A flow in $F$ is a function $f : E \to \mathbb{R}$ with the following properties: \begin{itemize}
+  \item No edge has more 'flow' than capacity, for $e$ in $E$: \begin{gather*}
+    0 \leq f(e) \leq c(e).
+  \end{gather*}
+  \item Flow is conserved, for $v$ in $V \setminus \{s, t\}$: \begin{gather*}
+    f^-(v) = \sum_{u \in N^-(v)} f((u, v)) = \sum_{w \in N^+(v)} f((v, w)) = f^+(v).
+  \end{gather*}
+\end{itemize} We denote the value of a flow as $v(f) = f^+(s)$. We can also define $f^+$ and $f^-$
+for sets by considering the flow entering and exiting the sets. Similarly, in and out flow
+of sets are identical.
+
+\subsubsection{Cuts}
+
+A cut is a partition $A, B$ of $V$ such that the source is in $A$ and the sink is in $B$.
+We have that the flow in $A$ minus the flow out is equal to the flow out to $B$ minus the flow in:
+\begin{gather*}
+  (f^+ - f^-)(A) = (f^- - f^+)(B) = v(f).
+\end{gather*}
+
+\subsection{Maximising Flow Value}
+
+We choose a greedy algorithm that works on a modified graph $G_F$, where we add backwards edges
+(edges corresponding to edges with non-zero flow) 
+and forwards edges 
+(edges corresponding to edges with non-capacity flow) 
+that allows flow to be pushed back down the edge. So, edges are no longer considered when 
+at capacity (except after we choose to push their flow backwards and re-route it).
+
+\subsubsection{Augmenting paths}
+
+An augmenting path is a directed path from $s$ to $t$ in $G_F$.
+
+\subsubsection{Residual capacity}
+
+The residual capacity of an edge is the amount of flow you can add to the forward edge or
+the amount of flow you can remove from the backward edge (whichever is greater).
+
+\subsubsection{Pushing}
+
+Considering an augmenting path, pushing the path involves adding as much flow as possible to
+all the edges.
+
+\subsubsection{The Ford-Fulkerson algorithm}
+
+We consider all augmenting paths and push each one, updating $G_F$ as we go. 
+The resulting flow is maximal. This takes $O(v(f^*)|E|)$ time where $f^*$ is our maximal flow.
+
 \end{document} 
