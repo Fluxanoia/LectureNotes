@@ -666,4 +666,23 @@ For $G = (V, E)$ a planar graph on at least three vertices: \begin{gather*}
   |E| \leq 3(|V| - 2).
 \end{gather*}
 
+\section{Graph Colouring}
+
+\subsection{$k$-colouring}
+
+A $k$-colouring of a graph $G = (V, E)$ is an assignment of $[k]$ to $V$ 
+performed by $c : V \to [k]$ such that for $u, v$ adjacent vertices in $V$, 
+$c(u) \neq c(v)$. A graph is $k$ colourable if a $k$-colouring exists for it.
+
+\subsection{Chromatic Number}
+
+The chromatic number of a graph $G$ denoted by $\chi(G)$ is the smallest 
+$k$ such that $G$ is $k$ colourable.
+
+\subsection{Bound on Chromatic Number}
+
+For a graph $G$, we have that for some $k$ in $\mathbb{Z}$: \begin{gather*}
+  \Delta(G) \leq k \qquad \Rightarrow \qquad \chi(G) \leq k + 1.
+\end{gather*}
+
 \end{document}
