@@ -29,6 +29,8 @@
   tabsize=2
 }
 
+\newcommand*{\bfrac}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+
 \begin{document}
 
 \title{Language Engineering Notes}
@@ -1050,7 +1052,37 @@ $a_1, \ldots, a_n$. A rule with no premises is an axiom.
     \textbf{\{P'\} } S \textbf{ \{Q'\}}
   }{
     \textbf{\{P\} } S \textbf{ \{Q\}}
-  } \qquad \text{if \textbf{P} entails \textbf{P'} and \textbf{Q} entails \textbf{Q'}} 
+  } \qquad \text{if \textbf{P} entails \textbf{P'} and \textbf{Q'} entails \textbf{Q}} 
+\end{align*}
+
+\subsection{Total Correctness Schemata}
+
+\begin{align*}
+  [\text{skip}]& \qquad \textbf{[P]} \text{ skip } \textbf{[P]} \\ \\
+  [\text{assignment}]& \qquad \textbf{[P(a)] } x = a \textbf{ [P(x)]} \\ \\
+  [\text{composition}]& \qquad \frac{
+    \textbf{[P] } S_1 \textbf{ [R]} \qquad
+    \textbf{[R] } S_2 \textbf{ [Q]}
+  }{
+    \textbf{[P] } S_1; S_2 \textbf{ [Q]}
+  } \\ \\
+  [\text{conditional}]& \qquad \frac{
+    \textbf{[P$\, \land \, b$] } S_1 \textbf{ [Q]} \qquad
+    \textbf{[P$\, \land \neg b$] } S_2 \textbf{ [Q]}
+  }{
+    \textbf{[P] } \text{if } b \text{ then } S_1 \text{ else } S_2 \textbf{ [Q]}
+  } \\ \\
+  [\text{while}]& \qquad \frac{
+    \textbf{[P($z + 1$)] } S \textbf{ [P($z$)]}
+  }{
+    \textbf{[$z \in \mathbb{N}, \, $P($z$)] } \text{while } b \text{ do } S \textbf{ [P($0$)]}
+  } \qquad \bfrac{\text{if \textbf{P($z + 1$)} entails $b$}}{
+    \text{and \textbf{P($0$)} entails $\neg b$}} \\ \\
+  [\text{consequence}]& \qquad \frac{
+    \textbf{[P'] } S \textbf{ [Q']}
+  }{
+    \textbf{[P] } S \textbf{ [Q]}
+  } \qquad \text{if \textbf{P} entails \textbf{P'} and \textbf{Q'} entails \textbf{Q}} 
 \end{align*}
 
 \end{document}
