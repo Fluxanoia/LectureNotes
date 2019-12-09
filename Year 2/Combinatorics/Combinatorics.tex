@@ -685,9 +685,28 @@ For a graph $G$, we have that for some $k$ in $\mathbb{Z}$: \begin{gather*}
   \Delta(G) \leq k \qquad \Rightarrow \qquad \chi(G) \leq k + 1.
 \end{gather*}
 
+\subsection{Definition of a Map}
+
+A map is a graph derived from some traditional map where regions correspond to faces,
+points where at least three regions border each other are vertices and, the border between
+exactly two regions are edges. We assume these regions are connected and they do not touch
+solely at a point (or several points)
+
 \subsection{Five Colour Theorem}
 
-Every map can be coloured with five colours, assuming they are formed by connected
-regions and these regions do not touch solely at a point (or several points).
+Every map with corresponding graph $G$ can be coloured with five colours, 
+that is $\chi(G) \leq 5$.
+
+\subsection{Dual Graphs}
+
+Given a planar graph $G = (V, E)$ and a fixed planar drawing of $G$, the dual graph
+$G^* = (V^*, E^*)$ relative to this drawing is a planar graph obtained by assigning
+a vertex to each face and connecting these vertices by and edge if their corresponding
+faces border.
+
+\subsubsection{$k$-colourability of the dual graph}
+
+We have that for a graph $G$, $G$ is $k$-colourable if and only if $G^*$ is 
+$k$-colourable.
 
 \end{document}
