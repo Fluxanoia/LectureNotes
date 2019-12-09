@@ -1349,4 +1349,64 @@ to the (negative) demand of the sources and similarly adding a sink vertex to al
 sinks in $C$ with edges equal to the demand. This forms a flow network we can run our 
 algorithms on.
 
+\vfill
+
+\section{Complexity Theory}
+
+\subsection{Cook Reductions}
+
+Suppose we have algorithms $A_X, A_Y$ which solve the 'problems' $X$ and $Y$
+respectively. If whilst performing $A_X$ we call $A_Y$ as a subroutine a
+$O(x^n)$ number of times (for some finite $n$), we say
+we have a Cook reduction from $X$ to $Y$ denoted by $X \leq_c Y$.
+\\[\baselineskip]
+This essentially says, 
+
+\subsubsection{Properties of Cook reductions}
+
+We have that for problems $X, Y, Z$: \begin{itemize}
+  \item $X \leq_c Y$, $Y \leq_c Z$ implies that $X \leq_c Z$ (transitivity)
+  \item $X \leq_c Y$ implies that if we have a polynomial time algorithm for $Y$, 
+  we have one for $X$
+  \item $X \leq_c Y$ and there is no polynomial-time algorithm for $X$ implies 
+  that there is no polynomial-time algorithm for $Y$.
+\end{itemize}
+
+\subsection{Decision Problems}
+
+A decision problem is a problem such that the answer is in the set $\{\texttt{Yes},
+\texttt{ No}\}$.
+
+\subsection{The Class, \textbf{NP}}
+
+We have that \textbf{NP} is the class of all decision problems $X$ such that there is some
+polynomial-time verification algorithm $A_X$ such that for some input $x$, 
+if $x$ is a \texttt{Yes} instance of our problem, there is a witness bit string $w$
+such that $A_X(x, w) = \texttt{Yes}$.
+
+\subsubsection{\textbf{NP}-completeness}
+
+We say a problem is \textbf{NP}-complete if it is in \textbf{NP}.
+
+\subsection{The Class, \textbf{P}}
+
+We have that \textbf{P} is the class of all decision problems which have a polynomial-time
+algorithm. We have that $\textbf{P} \subseteq \textbf{NP}$ as we can just process the solution
+(ignoring the witness).
+
+\subsection{The SAT Problem}
+
+The SAT problem is the problem that asks if when given some formula in conjuctive-normal form
+(consisting of AND and OR clauses) we can assign the variables such that the formula is 
+satisfied (true).
+
+\subsubsection{Cook-Levin theorem}
+
+We have that all problems in \textbf{NP} is Cook-reducible to the SAT. So, if there's
+a polynomial-time algorithm for SAT, $\textbf{P} = \textbf{NP}$.
+
+\subsubsection{\textbf{NP}-hardness}
+
+We say a problem is \textbf{NP}-hard if it is Cook-reducible to SAT.
+
 \end{document} 
