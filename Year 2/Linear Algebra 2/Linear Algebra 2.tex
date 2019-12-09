@@ -967,4 +967,61 @@ For an algebraically closed field $\mathbb{F}$, a finite dimensional vector spac
 $\mathbb{F}$, with $f$ in $\mathcal{L}(V, V)$, we have that the Jordan form of the 
 matrix of $f$ is uniquely determined up to the permutations of the Jordan blocks.
 
+\section{Bilinear and Quadratic Forms}
+
+\subsection{Definition of a Bilinear Form}
+
+For $V$ a vector space over a field $K$, a bilinear form on $V$ is a map $\langle\,,\rangle : V \times V \to K$
+such that: \begin{align*}
+  \langle au + bv, w \rangle &= a \cdot \langle u, w \rangle + b \cdot \langle v, w \rangle \\
+  \langle u, av + bw \rangle &= a \cdot \langle u, v \rangle + b \cdot \langle u, w \rangle,
+\end{align*} for all $a, b$ in $K$, $u, v, w$ in $V$. Additionally, $\langle\,,\rangle$ is symmetric if 
+$\langle u, v \rangle = \langle v, u \rangle$.
+
+\subsection{Definition of a Quadratic Form}
+
+For $V$ a vector space over a field $K$ with $\langle \, , \rangle$ a symmetric bilinear form on
+$V$. The quadratic form $Q : V \to K$ associated to $\langle \, , \rangle$ is 
+$Q(v) := \langle v, v \rangle$.
+
+\subsubsection{Determining bilinear forms from quadratic forms}
+
+We have that if char$(K) \neq 2$, then $\langle \, , \rangle$ is uniquely defined by $Q$ as:
+\begin{gather*}
+  \langle v, w \rangle = 2^{-1}\left[Q(v + w) - Q(v) - Q(w) \right]. 
+\end{gather*} 
+
+\subsection{Definition of Orthogonality}
+
+Let $\langle \, , \rangle$ be a bilinear form on $V$ with $v$ in $V$. We say that $u$ in $V$ is 
+orthogonal to $v$ if $\langle v, u \rangle = 0$. Note, be very careful as the bilinear is not
+necessarily symmetric.
+
+\subsubsection{Definition of orthogonal spaces}
+
+For $W \subseteq V$, we have that $W^\perp$ is defined as: \begin{gather*}
+  W^\perp = \{v \in V : w \in W, \langle w, v \rangle = 0\},
+\end{gather*} the set of vectors such that for all $v$ in $W^\perp$, $v$ is orthogonal
+to all of $W$. This is a subspace of $V$.
+
+\subsubsection{Definition of the kernel for bilinear maps}
+
+The kernel of $\langle \, , \rangle$ is $V^\perp$. If the kernel is $\{0_V\}$,
+then the form is called non-degenerate and is called degenerate otherwise.
+
+\subsubsection{Dimension and orthogonal spaces}
+
+We have that if $V$ is finite dimensional and $\langle \, , \rangle$ is non-degenerate
+then: \begin{gather*}
+  \text{dim}(W^\perp) + \text{dim}(W) = \text{dim}(V).
+\end{gather*}
+
+\subsection{Linear Maps from Bilinear Forms}
+
+We can form a linear map $f : V \to V^*$ from a bilinear form $\langle \, , \rangle$ 
+as follows: \begin{gather*}
+  f(v)(u) = \langle u, v \rangle.
+\end{gather*} We have that a bilinear form is non-degenerate if and only if its corresponding
+linear map is an isomorphism.
+
 \end{document}
