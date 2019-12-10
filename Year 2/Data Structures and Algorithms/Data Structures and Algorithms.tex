@@ -1396,7 +1396,7 @@ algorithm. We have that $\textbf{P} \subseteq \textbf{NP}$ as we can just proces
 
 \subsection{The SAT Problem}
 
-The SAT problem is the problem that asks if when given some formula in conjuctive-normal form
+The SAT problem is the problem that asks if when given some formula in conjunctive-normal form
 (consisting of AND and OR clauses) we can assign the variables such that the formula is 
 satisfied (true).
 
@@ -1408,5 +1408,11 @@ a polynomial-time algorithm for SAT, $\textbf{P} = \textbf{NP}$.
 \subsubsection{\textbf{NP}-hardness}
 
 We say a problem is \textbf{NP}-hard if it is Cook-reducible to SAT.
+
+\subsection{The 3-SAT Problem}
+
+We have that the width of a conjunctive-normal form is the number of literals
+of all the OR clauses. The 3-SAT problems asks if a width-3 conjunctive-normal 
+form is satisfiable. We have that this is \textbf{NP}-complete.
 
 \end{document} 
