@@ -1024,4 +1024,35 @@ as follows: \begin{gather*}
 \end{gather*} We have that a bilinear form is non-degenerate if and only if its corresponding
 linear map is an isomorphism.
 
+\subsubsection{Isomorphismic Bilinear Maps}
+
+If $V$ is finite dimensional, we have that $f$ is an isomorphism if and only if 
+$\langle \, , \rangle$ is non-degenerate. That is, $\text{Ker}(f) 
+= \text{Ker}(\langle \, , \rangle) = V^\perp$.
+
+\subsection{Matrices from Bilinear Forms}
+
+For $V$ a finite $n$-dimensional vector space over $K$ with $S = \{v_1, \ldots, v_n\}$
+an ordered basis for $V$. Let $B = \langle \, , \rangle$ be a bilinear form. The matrix corresponding
+to $B$ with respect to $S$ is $M_{SS}(B) = (b_{ij})$ where: \begin{gather*}
+  b_{ij} = \langle v_i, v_j \rangle.
+\end{gather*} Similarly, taking $S^* = \{v^*_1, \ldots, v^*_n\}$ to be a dual basis for
+$S^*$, we have a matrix $M_{SS^*}(f) = M_{SS}(B)$ for the linear map corresponding to $B$.
+
+\subsubsection{Determining bilinear forms from matrices}
+
+Take $u, v$ in $V$ decomposed into vectors in $S$ with coefficients $x_1, \ldots, x_n$
+and $y_1, \ldots, y_n$ respectively. Thus: \begin{gather*}
+  \langle u, v \rangle = (x_1, \ldots, x_n) \cdot M_{SS}(B) \cdot \begin{pmatrix}
+    y_1 \\ \vdots \\ y_n
+  \end{pmatrix}.
+\end{gather*}
+
+\subsubsection{Properties of the matrix corresponding to a bilinear form}
+
+We have that: \begin{itemize}
+  \item If $M_{SS}(B)$ is symmetric, so is $B$
+  \item $B$ is non-degenerate if and only if $M_{SS}(B)$ is invertible.
+\end{itemize}
+
 \end{document}
