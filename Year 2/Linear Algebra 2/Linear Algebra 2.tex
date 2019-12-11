@@ -1048,11 +1048,34 @@ and $y_1, \ldots, y_n$ respectively. Thus: \begin{gather*}
   \end{pmatrix}.
 \end{gather*}
 
-\subsubsection{Properties of the matrix corresponding to a bilinear form}
+\subsubsection{Properties of matrices of bilinear forms}
 
 We have that: \begin{itemize}
   \item If $M_{SS}(B)$ is symmetric, so is $B$
   \item $B$ is non-degenerate if and only if $M_{SS}(B)$ is invertible.
 \end{itemize}
+
+\subsection{Similarity of Matrices of Bilinear Forms}
+
+For $V$ a finite $n$-dimensional vector space over the field $K$ with char$(K) \neq 2$, 
+let $S = \{v_1, \ldots, v_n\}$, $S' = \{v_1', \ldots, v_n'\}$ be
+ordered bases for $V$. Let $B = \langle \, , \rangle$ be a symmetric bilinear form.
+Let $C = C_{SS'}$ be the transition matrix. We have that: \begin{gather*}
+  M_{S'S'}(B) = C^tM_{SS}(B)C.
+\end{gather*}
+
+\subsection{Diagonal Matrices of Bilinear Forms}
+
+For $V$ a finite $n$-dimensional vector space over the field $K$ with char$(K) \neq 2$, 
+let $B = \langle \, , \rangle$ be a symmetric bilinear form.
+There exists a basis $S = \{v_1, \ldots, v_n\}$ for $V$ consisting of pairwise orthogonal
+vectors and thus, the matrix $M_{SS}(B)$ is diagonal.
+
+\subsection{Definition of an Inner Product}
+
+For a vector space $V$ over $K$ with symmetric bilinear form $B : V \times V \to K$, we
+have that $B$ is an inner product if for all $v$ in $V$: \begin{gather*}
+  B(v, v) \geq 0,
+\end{gather*} and $B(v, v) = 0$ if and only if $v = 0_V$.
 
 \end{document}
