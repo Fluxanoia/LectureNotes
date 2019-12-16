@@ -720,6 +720,7 @@ $k$-colourable.
 
 For some $s$ in $\mathbb{Z}_{> 1}$, we let $r(s)$ be the smallest $n$ in $\mathbb{N}$ 
 such that whenever the edges of $K_n$ are $2$-coloured, there exists a monochromatic $K_s$.
+We have that this exists for all $s$ as chosen above.
 \\[\baselineskip]
 Equivalently, $r(s)$ is the smallest $n$ such that for any graph $G$ on $n$
 vertices satisfies either: \begin{align*}
@@ -733,6 +734,7 @@ vertices satisfies either: \begin{align*}
 For some $s, t$ in $\mathbb{Z}_{> 1}$, we let $r(s, t)$ be the least $n$ in $\mathbb{N}$
 such that whenever the edges of $K_n$ are $2$-coloured with colour set $\{A, B\}$, 
 there exists an $A$-monochromatic $K_s$ or a $B$-monochromatic $K_t$.
+We have that this exists for all $s, t$ as chosen above.
 
 \subsubsection{Properties of the Off-diagonal Ramsey Number}
 
@@ -747,5 +749,35 @@ We have for all $s, t$ in $\mathbb{Z}_{> 1}$: \begin{itemize}
 We have that for all $s, t$ in $\mathbb{Z}_{> 2}$: \begin{gather*}
   r(s, t) \leq r(s - 1, t) + r(s, t - 1).
 \end{gather*}
+
+\subsection{An Upper Bound on Ramsey Numbers}
+
+For all $s, t$ in $\mathbb{Z}_{> 1}$, we have that: \begin{gather*}
+  r(s, t) \leq 2^{s + t},
+\end{gather*} an consequence of this is that: \begin{gather*}
+  r(s) \leq 4^{s}.
+\end{gather*}
+
+\subsection{A Lower Bound on Ramsey Numbers}
+
+For all $s$ in $\mathbb{Z}_{> 1}$, we have that: \begin{gather*}
+  r(s) \geq 2^{\frac{s}{2}}.
+\end{gather*}
+
+\subsection{The $k$-colour Ramsey Number}
+
+For some $k$ in $\mathbb{Z}_{> 0}$, $s$ in $\mathbb{Z}_{> 1}$, we let $r_k(s)$ 
+be the smallest $n$ in $\mathbb{N}$ such that whenever the edges of $K_n$ are
+$k$-coloured, there exists a monochromatic $K_s$.
+We have that this exists for all $k, s$ as chosen above.
+
+\subsection{Infinite Ramsey}
+
+For a set $A$ and $k$ in $\mathbb{Z}_{> 0}$,  we have that: \begin{gather*}
+  A^{(k)} = \{\{a, b\} : a, b \in A, a \neq b\},
+\end{gather*} the set of subsets of $A$ of size two not containing duplicates.
+\\[\baselineskip]
+Let $\mathbb{N}^{(2)}$ be $2$-coloured, we have that there exists an infinite set 
+$M \subseteq \mathbb{N}$ such that $M^{(2)}$ in $\mathbb{N}^{(2)}$ is monochromatic.
 
 \end{document}

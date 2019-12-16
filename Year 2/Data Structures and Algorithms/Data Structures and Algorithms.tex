@@ -1355,12 +1355,10 @@ algorithms on.
 
 \subsection{Cook Reductions}
 
-Suppose we have algorithms $A_X, A_Y$ which solve the 'problems' $X$ and $Y$
-respectively. If whilst performing $A_X$ we call $A_Y$ as a subroutine a
-$O(x^n)$ number of times (for some finite $n$), we say
+Suppose we have algorithms $A_X, A_Y$ which solve the decision problems 
+$X$ and $Y$ respectively. If whilst performing $A_X$ we call $A_Y$ as a 
+subroutine a $O(x^n)$ number of times (for some finite $n$), we say
 we have a Cook reduction from $X$ to $Y$ denoted by $X \leq_c Y$.
-\\[\baselineskip]
-This essentially says, 
 
 \subsubsection{Properties of Cook reductions}
 
@@ -1372,10 +1370,25 @@ We have that for problems $X, Y, Z$: \begin{itemize}
   that there is no polynomial-time algorithm for $Y$.
 \end{itemize}
 
+\subsection{Karp Reductions}
+
+For the decision problems $X$ and $Y$, a Karp reduction from $X$ to $Y$
+is a map $f$ from the instances of $X$ to the instances of $Y$ such that:
+\begin{itemize}
+  \item $f(x)$ can be computed in polynomial time (in $|x|$)
+  \item $f(x)$ is a \texttt{Yes} instance of $X$ if and only if it's a \texttt{Yes} instance
+  of $Y$.
+\end{itemize} This is denoted by $X \leq_k Y$.
+
 \subsection{Decision Problems}
 
 A decision problem is a problem such that the answer is in the set $\{\texttt{Yes},
 \texttt{ No}\}$.
+
+\subsection{Oracles}
+
+An oracle is a construct that given its corresponding problem, solves it in
+$O(1)$ time.
 
 \subsection{The Class, \textbf{NP}}
 
@@ -1407,7 +1420,9 @@ a polynomial-time algorithm for SAT, $\textbf{P} = \textbf{NP}$.
 
 \subsubsection{\textbf{NP}-hardness}
 
-We say a problem is \textbf{NP}-hard if it is Cook-reducible to SAT.
+We say a problem is \textbf{NP}-hard (under Cook reductions) if it is Cook-reducible to SAT.
+Similarly, we say a problem is \textbf{NP}-hard (under Karp reductions) if it is Karp-reducible
+to all members of \textbf{NP}.
 
 \subsection{The 3-SAT Problem}
 
