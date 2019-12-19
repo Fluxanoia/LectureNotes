@@ -1,0 +1,81 @@
+\section{Vector Spaces}
+
+A vector space over a field $K$ is a set $V$ with an addition
+operation $+ : V \times V \to V$ and a scalar multiplication operation
+$\circ : K \times V \to V$ such that for all $a, b$ in $K$
+and $v, w$ in $V$: \begin{itemize}
+  \item $(V, +)$ is an abelian group,
+  \item $1_K \circ v = v$,
+  \item $(ab) \circ v = a \circ (b \circ v)$
+  \item $(a + b) \circ v = a \circ v + b \circ v$
+  \item $a \circ (v + w) = a \circ v + a \circ w$.
+\end{itemize}
+
+\subsection{Subspaces}
+
+For $V$ a vector space over the field $K$ and $W$ a set, $W$ is a 
+subspace of $V$ if and only if it is a subset of $V$ and is a vector 
+space with respect to the addition and scalar multiplication defined by $V$.
+It is sufficient to verify that $W$ is closed under addition and multiplication.
+
+\subsection{Linear Combinations of Vectors}
+
+For a set $V$ with addition operation $+$, a field $K$ and $n$ in 
+$\mathbb{N}$, a linear combination of $v_1, \ldots, v_n$ in $V$ is: 
+\begin{gather*}
+  \sum_{i = 1}^n a_i \cdot v_i = a_1 \cdot v_1 + \cdots + a_n \cdot v_n,
+\end{gather*} for some $a_1, \ldots, a_n$ in $K$. Such a combination is
+trivial if each of $a_1, \ldots, a_n$ are zero and non-trivial otherwise.
+
+\subsection{Linear Independence}
+
+For a vector space $V$ and $W \subseteq V$, we say $W$ is linearly independent 
+if there does not exists a non-trivial linear combination of all the vectors in 
+$W$ equal to zero (and linearly dependent otherwise).
+
+\subsubsection{Properties of Linear Independence}
+
+For a vector space $V$ with $W \subseteq V$: \begin{itemize}
+  \item $W$ is linearly dependent if it contains $0_V$,
+  \item If $W$ linearly independent, any subset of it is also
+  linearly independent,
+  \item If there's a linearly dependent subset of $W$, then $W$
+  is linearly dependent.
+\end{itemize}
+
+\subsection{The Span of a Set}
+
+For a set $V$ with addition operation $+$ and a field $K$, the span 
+of $W \subseteq V$ is the set of all the linear combinations of the values
+in $W$ denoted by $\Span(W)$.
+
+\subsection{Bases}
+
+For a vector space $V$ with $W \subseteq V$, if $W$ is linearly independent
+and $\Span(W) = V$, we say that $W$ is a basis of $V$. It is a minimal
+spanning set.
+
+\subsubsection{Properties of Bases}
+
+We have that if a basis is finite, all other bases have the same size.
+Additionally, saying $W$ is a basis is equivalent to saying that each vector 
+in $V$ can be \textbf{uniquely} written as a linear combination of vectors 
+in $W$.
+
+\subsection{Dimension}
+
+For a vector space $V$ with a finite basis, we say that the size of the 
+basis is the dimension of $V$ denoted by $\Dim(V)$.
+By convention, $\Dim(\{0_V\}) = 0$. Vector spaces with identical
+dimension are isomorphic.
+
+\subsubsection{Dimension and Subsets}
+
+For $V \neq \{0\}$ a vector space, if there is a
+finite spanning set $S$ of $V$ then: \begin{itemize}
+  \item $V$ is finite dimensional, particularly, there is a basis $B$ of $V$
+  where $B \subseteq S$,
+  \item For $X \subseteq V$ such that $X$ is linearly independent, $X$ can
+  be extended to a basis of $V$,
+  \item All subspaces of $V$ are finite-dimensional.
+\end{itemize}

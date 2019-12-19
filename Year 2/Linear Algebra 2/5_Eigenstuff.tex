@@ -1,0 +1,150 @@
+\section{Eigenspaces and Root Spaces}
+
+\subsection{Root Vectors}
+
+For a finite dimensional vector space $V$ over $K$, with $f : V \to V$, 
+and $\lambda$ in $K$, we have that $v$ in $V$ is a $\lambda$-root vector 
+of $f$ if there exists $n$ in $\mathbb{N}$ such that: \begin{gather*}
+  (f - \lambda(\ID))^n(v) = 0_V.
+\end{gather*} The smallest such $n$ is the height of $v$ denoted by $h(v)$.
+
+\subsubsection{Root Spaces}
+
+The set $V(\lambda)$ is the set of all root vectors corresponding to 
+$\lambda$ called the root space of $\lambda$ under $f$ in $V$.
+
+\subsubsection{Properties of the Root Space}
+
+We have the following properties: \begin{enumerate}
+  \item $V(\lambda)$ is a subspace,
+  \item $V(\lambda) \neq \{0_V\}$ if and only if $\lambda$ is an eigenvalue 
+  of $f$,
+  \item $V(\lambda)$ is $f$-invariant.
+\end{enumerate}
+
+\begin{proof}
+    (1) By the linearity of $f$, a multiple of a vector in $V(\lambda)$
+    is also in $V(\lambda)$. If we have the two vectors $v_1, v_2$ in
+    $V(\lambda)$ with heights $n_1, n_2$ respectively, set
+    $n = \text{max}(n_1, n_2)$: \begin{gather*}
+        (f - \lambda(\ID))^n(v_1 + v_2) = 0_V.
+    \end{gather*} Thus, $V(\lambda)$ is a subspace.
+\end{proof} \begin{proof}
+    (2) Suppose $\lambda$ is an eigenvalue of $f$ then $V(\lambda)$ contains
+    the corresponding eigenvector(s) and thus, is non-zero. Supposing
+    $V(\lambda)$ is non-zero, we choose $v \neq 0_V$ in $V(\lambda)$,
+    it has some height $n$, $(f - \lambda(\ID))^{n - 1}(v)$
+    is an eigenvector.
+\end{proof} \begin{proof}
+    (3) For some vector $v$ in $V(\lambda)$ with height $n$,
+    $(f - \lambda(\ID))^{n}(v) = 0_V$ so: \begin{align*}
+        (f - \lambda(\ID))^{n}(f(v)) 
+        &= (f - \lambda(\ID))^{n}(f(v) - \lambda v + \lambda v) \\
+        &= (f - \lambda(\ID))^{n + 1}(v) + \lambda (f - \lambda(\ID))^{n}(v) \\
+        &= 0_V.
+    \end{align*} Thus, $V(\lambda)$ is $f$-invariant.
+\end{proof} 
+
+\subsubsection{Primary Decomposition Theorem}
+
+For a finite dimensional vector space $V$ over $K$ (algebraically closed) we have
+that: \begin{gather*}
+  V = \bigoplus_{i \in [k]} V(\lambda_i),
+\end{gather*} the internal direct sum where $\{\lambda_1, \ldots, \lambda_k\}$ 
+is the set of distinct eigenvalues of a linear operator $f$ in 
+$L = \mathcal{L}(V, V)$.
+\begin{proof}
+    Let $p_f = \prod_{i = 1}^k (\lambda_i - x)^{m_i}$ where $m_i$ is
+    the algebraic multiplicity of $\lambda_i$. Take $F_i, f_i, V_i$ defined as follows:
+    \begin{align*}
+        F_i(x) &= p_f(x)(x - \lambda_i)^{-m_i} \\
+        f_i(x) &= F_i(f)(x) \\
+        V_i    &= \Ima(f_i).
+    \end{align*} We show that $V_i \subseteq \Ker(f - \lambda_i(\ID))^{m_i}$ 
+    by the Cayley-Hamilton theorem: \begin{gather*}
+        0_L = p_f(f) = (f - \lambda_i(\ID))^{m_i}F_i(f) = (f - \lambda_i(\ID))^{m_i}f_i,
+    \end{gather*} so $(f - \lambda_i(\ID))^{m_i}$ applied to anything in the image
+    of $f_i$ must be zero, so $V_i \subseteq \Ker(f - \lambda_i(\ID))^{m_i}$.
+    Consequently, $V_i \subseteq V(\lambda_i)$.
+    \\[\baselineskip]
+    Then, we show that $V = V_1 + \cdots + V_k$. The highest common factor
+    of $F_1, \ldots, F_k$ must be $1_{K[x]}$ so we have there are polynomials
+    $X_1, \ldots, X_k$ in $K[x]$ such that for any $v$ in $V$: \begin{align*}
+        &\sum_{i = 1}^k F_i(x)X_i(x) = 1_{K[x]} \\
+        \Rightarrow &\sum_{i = 1}^k F_i(f)X_i(f) = \ID \\
+        \Rightarrow &\sum_{i = 1}^k [F_i(f)X_i(f)](v) 
+        = \sum_{i = 1}^k f_i(X_i(f)(v)) = v,
+    \end{align*} writing $v$ as the sum of elements in $\Ima(f_i) = V_i$ for
+    each $i$ in $[k]$. Thus, $V = V_1 + \cdots + V_k$.
+    \\[\baselineskip]
+    Now, we show that $V = V_1 \oplus \cdots \oplus V_k$ by showing that
+    for each $i$ in $[k]$: \begin{gather*}
+        I_i = V_i \, \, \bigcap \left[ \sum_{i \neq j \in [k]} V_j \right] = \{0_V\}.
+    \end{gather*} We consider $v$ in $I_i$. We have that
+    $v$ is in $V_i$ so $(f - \lambda_i(\ID))^{m_i}(v) = 0_V$ and: \begin{gather} \label{pdp1}
+        F_i(f)(v) = \pm \prod_{i \neq j \in [k]}(f - \lambda_j(\ID))^{m_j}(v) = 0_V,
+    \end{gather} as $v$ is in $\sum_{i \neq j \in [k]} V_j$. We can see that
+    $(x - \lambda_i)^{m_i}$ and $F_i(x)$ are relatively prime by definition
+    so there are polynomials $X$ and $Y$ in $K[x]$ such that: \begin{gather} \label{pdp2}
+        X(x)(x - \lambda_i)^{m_i} + Y(x)F_i(x) = 1_{K[x]}.
+    \end{gather} Putting this all together, we apply $f$ and $v$ to the above
+    we get: \begin{align*}
+        v &= [X(f)(f - \lambda_i(\ID))^{m_i} + Y(f)F_i(f)](v) \tag{by (\ref{pdp2})}\\
+          &= X(f)(0_V) + Y(f)(0_V) \tag{by (\ref{pdp1})}\\
+          &= 0_V.
+    \end{align*} So, $V = V_1 \oplus \cdots \oplus V_k$.
+    \\[\baselineskip]
+    Finally, we show $V_i = V(\lambda_i)$. We already know that 
+    $V_i \subseteq V(\lambda_i)$, so we just have to show that 
+    $V(\lambda_i) \subseteq V_i$. Take $v$ in $V(\lambda_i)$ and
+    write it as $v = v_1 + v_2$ where $v_1$ is in $V_1$ and $v_2$ is in
+    $V \setminus V_1$. There is some $m$ such that $(f - \lambda_i)^mv_2 = 0_V$
+    as: \begin{align*}
+        v = v_1 + v_2 &\in V(\lambda_i) \\
+        \Rightarrow v_2 = v - v_1 &\in V(\lambda_i)
+    \end{align*} as $v$ is in $V(\lambda_i)$ and $v_1$ is in 
+    $V_i \subseteq V(\lambda_i)$. We also have that $F_i(f)(v_2) = 0_V$ as
+    $v_2$ is in $V(\lambda_i)$. Since $(x - \lambda_i)^m$ and $F_i(x)$
+    are relatively prime, there are polynomials $p$ and $q$ such that: \begin{align*}
+        &p(x)(x - \lambda_i)^m + q(x)F_i(x) = 1_{K[x]}
+        \Rightarrow & p(f)(f - \lambda_i(\ID))^m + q(x)F_i(f) = \ID,
+    \end{align*} so, applying this to $v_2$ gives: \begin{align*}
+        v_2 &= [p(f)(f - \lambda_i(\ID))^m + q(x)F_i(f)](v_2) \\
+        &= p(f)(0_V) + q(x)(0_V) \\
+        &= 0_V,
+    \end{align*} so $v = v_1$ (in $V_i \subseteq V(\lambda_i)$). Thus, 
+    $V_i = V(\lambda_i)$ as required.
+\end{proof}
+
+\subsection{Eigenvectors}
+
+For a vector space $V$ over $K$ with $f: V \to V$ a 
+linear operator, a non-zero vector $v$ in $V$ is an eigenvector
+if $f(v) = \lambda v$ for some $\lambda$ in $K$ which is
+called the eigenvalue corresponding to $v$.
+\\[\baselineskip]
+In particular, $v$ is a root vector of height $1$.
+
+\subsubsection{Eigenspaces}
+
+For a vector space $V$ over $K$ with $f: V \to V$ a 
+linear operator and some eigenvalue $\lambda$, we define the
+eigenspace of $\lambda$ as the set of eigenvectors with eigenvalue
+$\lambda$.
+\\[\baselineskip]
+This is denoted by $E(\lambda)$ and $E(\lambda)\cup\{0_{V}\}$ forms
+a subspace of $V$. The dimension of $E(\lambda)$ is the geometric
+multiplicity of $\lambda$.
+
+\subsubsection{Multiplicity}
+
+For $V$ a vector space over $K$ with $f : V \to V$ and $\lambda$ an 
+eigenvalue in $K$ of $f$. We have that the algebraic multiplicity of
+$\lambda$ is the multiplicity of $\lambda$ in $p_f$. The geometric
+multiplicity of $\lambda$ is $\Dim(E(\lambda))$.
+\\[\baselineskip]
+The geometric multiplicity is the number of Jordan blocks with eigenvalue $\lambda$.
+The algebraic multiplicity is the sum of the sizes of all the Jordan blocks
+corresponding to $\lambda$.
+The algebraic multiplicity of $\lambda$ in $m_f$ is the maximum size of a
+Jordan block corresponding to $\lambda$.

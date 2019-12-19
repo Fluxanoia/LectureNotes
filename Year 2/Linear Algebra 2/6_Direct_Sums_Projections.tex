@@ -1,0 +1,101 @@
+\section{Direct Sums and Projections}
+
+\subsection{Direct Sums}
+
+For $V, W$ vector spaces, we define the external direct sum of $V$ and
+$W$ as: \begin{gather*}
+    V \oplus W := \{(v, w) : v \in V, w \in W\},
+\end{gather*} with zero vector $(0_V, 0_W)$. We define addition and scalar multiplication
+coordinate-wise.
+\\[\baselineskip]
+For $S, T$ subspaces of $V$, $V$ is the internal direct sum of $S$ and $T$
+if $S + T = V$ and $S \cap T = \{0_V\}$. 
+
+\subsubsection{Bases of Direct Sums}
+
+We have that for $B_V = \{v_1, \ldots, v_k\}$, $B_W = \{w_1, \ldots, w_l\}$ 
+bases for $V$ and $W$ respectively: \begin{gather*}
+    B = \{(v_1, 0_W), \ldots, (v_k, 0_W), (0_V, w_1), \ldots, (0_V, w_l)\},
+\end{gather*} is a basis for $V \oplus W$. Thus, $\Dim(V \oplus W) = \Dim(V) + \Dim(W)$.
+
+\subsubsection{The Addition Map for Direct Sums} \label{addmapdirect}
+
+For $V, W$ subspaces of a vector space $U$ over $K$, and $f : V \oplus W \to U$
+defined by: \begin{gather*}
+  f((v, w)) = v + w,
+\end{gather*} we have that: \begin{enumerate}
+  \item $f$ is linear
+  \item $f$ is injective if and only if $V \cap W = \{0_U\}$
+  \item $f$ is surjective if and only if $V \cup W$ spans $U$.
+\end{enumerate}
+\begin{proof}
+    (1) Immediate from the definition.
+\end{proof}
+\begin{proof}
+    (2) For $v$ in $V$, $w$ in $W$ and $u$ in $V \cap W$, suppose $f$ is 
+    injecive: \begin{align*}
+        f((u, -u)) = u + (-u) = 0_U,
+    \end{align*} thus $u = 0_U$ by injectivity. Suppose $V \cap W = \{0_U\}$,
+    if $f((v, w)) = 0_U$: \begin{gather*}
+        0_U = f((v, w)) = v + w,
+    \end{gather*} so $v = -w$ and thus, they are both zero as the
+    intersection of $V$ and $W$ is just $0_U$. So, $\Ker(f) = \{0_U\}$.
+\end{proof}
+\begin{proof}
+    (3) The image of $f$ is just $V + W$, if $V \cup W$ spans $U$ then
+    $V + W$ must equal $U$. If $f$ is surjective, $\Ima(f) = V + W = U$
+    so $V \cup W$ spans $U$.
+\end{proof}
+
+\subsubsection{Consequences of Internal Direct Sums}
+
+For $V, W \subseteq U$, where $V \oplus W$ is an internal direct sum,
+we have that each element in $U$ can be written uniquely as the sum
+of elements in $V$ and $W$ and the addition map in (\ref{addmapdirect})
+is an isomorphism.
+
+\subsection{Projections}
+
+For $V, W \subseteq U$, where $V \oplus W$ is an internal direct sum,
+the projection onto $V$ along $W$ is the linear operator 
+$P_{V, W} : U \to U$ where: \begin{gather*}
+  P_{V, W}(u) = v,
+\end{gather*} where $u = v + w$ for some unique $v$ in $V$ and
+$w$ in $W$. We can see that $P_{V, W}^2 = P_{V, W}$ (it is idempotent).
+
+\subsubsection{Idempotence and Projections}
+
+For a linear operator $E : U \to U$, if $E$ is idempotent $(E^2 = E)$ 
+then $E$ is a projection.
+\begin{proof}
+    Take $u$ in $U$, we have that: \begin{gather*}
+        u = E(u) + (u - E(u)).
+    \end{gather*} We see $E(u)$ is in $\Ima(E)$ and $u - E(u)$ is in 
+    $\Ker(E)$ as: \begin{gather*}
+        E(u - E(u)) = E(u) - E^2(u) = E(u) - E(u) = 0.
+    \end{gather*} Thus, $E = P_{\Ima(E), \Ker(E)}$ because if $u$ is
+    in $\Ker(E)$ then $E(u) = 0$ and if $u$ is in $\Ima(E)$ then: \begin{gather*}
+        E(u) = E^2(v) = E(v) = u.
+    \end{gather*} Thus, $U$ is the internal direct sum of $\Ima(E)$ and
+    $\Ker(E)$.
+\end{proof}
+
+\subsection{$f$-invariance}
+
+For a vector space $V$ with $U \subseteq V$ a subspace and 
+$f : V \to V$ a linear map, we have that $U$ is $f$-invariant
+if for all $u$ in $U$ we have $f(u)$ in $U$.
+
+\subsubsection{Matrices of Linear Maps (using $f$-invariance)}
+
+For $U, W \subseteq V$ subspaces such that $V = U \oplus W$, 
+let $B_U, B_W$ be finite bases of $U$ and $W$ respectively.
+For a linear operator $f : V \to V$ such that $U$ and $W$ are 
+$f$-invariant, we have that the matrix with respect
+to the basis $B = B_U \cup B_W$ of $f$ has the following block form:
+\begin{gather*}
+  M_{BB}(f) = \begin{pmatrix}
+    M_{B_VB_V}(f) & 0 \\
+    0 & M_{B_WB_W}(f)
+  \end{pmatrix}.
+\end{gather*}

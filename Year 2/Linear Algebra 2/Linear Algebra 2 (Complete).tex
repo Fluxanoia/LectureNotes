@@ -1,0 +1,60 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+
+
+\DeclareMathOperator{\ID}{id}
+\DeclareMathOperator{\Max}{max}
+\DeclareMathOperator{\Min}{min}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Deg}{deg}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Dim}{dim}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Rank}{rank}
+\DeclareMathOperator{\Null}{nullity}
+\DeclareMathOperator{\End}{End}
+
+\begin{document}
+
+\title{Linear Algebra 2 Notes}
+\date{}
+\author{\textit{paraphrased by} Tyler Wright}
+\maketitle
+
+\vfill
+
+\textit{An important note, these notes are absolutely \textbf{NOT}
+  guaranteed to be correct, representative of the course, or rigorous.
+  Any result of this is not the author's fault.}
+
+\addtocounter{section}{-1}
+
+\input{0_Notation}
+
+\newpage
+
+\tableofcontents
+
+\include{1_Groups_Rings_Fields}
+\include{2_Vector_Spaces}
+\include{3_Linear_Maps}
+\include{4_Matrices}
+\include{5_Eigenstuff}
+\include{6_Direct_Sums_Projections}
+\include{7_Quotient_Spaces}
+\include{8_Dual_Spaces}
+\include{9_Rank}
+\include{10_Polynomials}
+\include{11_Jordan}
+\include{12_Bilinear}
+
+\end{document}

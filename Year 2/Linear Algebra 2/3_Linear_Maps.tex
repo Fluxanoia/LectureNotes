@@ -1,0 +1,48 @@
+\section{Linear Maps}
+
+Let $V, W$ be vector spaces over a field $K$, we have that
+$f:V \to W$ is a linear map if for all $a, b$ in $K$ and
+$u, v$ in $V$: \begin{gather*}
+  f(au+bv) = af(u) + bf(v).
+\end{gather*} A bijective linear map is called an isomorphism.
+If $f: V \to W$ is an isomorphism, we say that $V$ and $W$ are 
+isomorphic, denoted by $V \cong W$. 
+
+\subsection{Properties of Linear Maps}
+
+For a bijective linear map $f : V \to W$, the inverse of $f$ is also linear
+and if $V = W$, ($f$ is a linear operator) then injectivity or surjectivity 
+imply $f$ is an isomorphism.
+
+\subsection{The Rank-Nullity Theorem}
+
+For $V, W$ finite-dimensional vector spaces and 
+$f : V \to W$ a linear map, we define the rank and nullity: \begin{align*}
+    \Rank(f) &:= \Dim(\Ima(f)) \\
+    \Null(f) &:= \Dim(\Ker(f)),
+\end{align*} and we have that:
+\begin{gather*}
+  \Dim(V) = \Rank(f) + \Null(f).
+\end{gather*}
+
+\begin{proof}
+    We have that $\Ker(f)$ is a subspace of $V$ and
+    by the finite-dimensionality of $V$ we have that $\Ker(f)$ is also
+    finite-dimensional, so we take a basis $B_K = \{v_1, \ldots, v_k\}$ 
+    of $\Ker(f)$ where $k = \Dim(\Ker(f)) = \Null(f)$. We extend $B_K$
+    with the linearly independent set $B_I = \{v_{k + 1}, \ldots, v_{k + i}\}$
+    to a basis of $V$ where $i = \Dim(V) - k$. Thus, $B = B_K \cup B_I$
+    is a basis of $V$ (partitioned by $B_K, B_I$).
+    So, $\Ima(f) = \Span(f(B))$ as $B$ is a basis but: \begin{align*}
+        f(B) 
+        &= \{f(v_1), \ldots, f(v_k), f(v_{k + 1}), \ldots, f(v_{k + i})\} \\
+        &= \{0_W, \ldots, 0_W, f(v_{k + 1}), \ldots, f(v_{k + i})\} \\
+        &= f(B_I),
+    \end{align*} as $B_K \subseteq \Ker(f)$. So, $\Ima(f) = \Span(f(B_I))$.
+    We have that $B_I$ must be linearly independent as it's part of our
+    basis $B$ so $f(B_I)$ must also be linearly independent. Thus, $f(B_I)$
+    is a basis for $\Ima(f)$, so $\Rank(f) = \Dim(\Ima(f)) = |f(B_I)| = |B_I| = i$,
+    thus: \begin{gather*}
+        \Rank(f) + \Null(f) = i + k = |B| = \Dim(V).
+    \end{gather*} 
+\end{proof}

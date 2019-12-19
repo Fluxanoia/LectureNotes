@@ -1,0 +1,126 @@
+\section{Quotient Spaces}
+
+For a vector space $V$ over $K$ with $W \subseteq V$ a subspace,
+we define an equivalence relation on $V$ by declaring: \begin{gather*}
+  v_1 \sim v_2 \text{ if } v_1 - v_2 \in W.
+\end{gather*} The set of equivalence classes is called the quotient of $V$
+by $W$ and is denoted by $V/W$. For some $v$ in $V$, we denote the class containing
+$v$ by $v + W$ (similarly to cosets in Introduction to Group Theory). So, we have:
+\begin{align*}
+  v + W &= \{v' \in V : v \sim v'\} = \{v' \in V : v - v' \in W\} \\
+  V/W &= \{v + W : v \in V\},
+\end{align*} with addition and multiplication defined for 
+$v_1, v_2$ in $V$ and $a$ in the field: \begin{align*}
+  (v_1 + W) + (v_2 + W) &= (v_1 + v_2) + W \\
+  a(v_1 + W) &= av_1 + W.
+\end{align*}
+
+\subsection{Understanding the Quotient Space} \label{UnderstandingQuotients}
+
+For a vector space $V$ over $K$ with $W$ a subspace,
+consider $w$ in $W$: 
+\begin{equation} \label{wplusWiszero}
+  \begin{aligned}
+    w + W &= \{v \in V : w - v \in W\} \\
+    &= W \\
+    &= \{v \in V : 0_V - v \in W\} \\
+    &= 0_V + W.
+  \end{aligned}
+\end{equation} So, $W = w + W$ is $0_{V/W}$.
+Consequently, for some $v$ in $V$, we can see that: \begin{align*}
+  (v + W) + (w + W) &= (v + w) + W \\
+  &= \{v' \in V : (v + w) - v' \in W\} \\
+  &= \{v' \in V : v - v' \in W\} \\
+  &= v + W.
+\end{align*} Finally, we can see that
+$v + W$ is the set of vectors in $V$ such that $v$ and each element
+in $v + W$ differ by some element in $W$. So, we are effectively 
+mapping the span of $W$ with the origin at $v$ to $v$, 'collapsing'
+$W$.
+
+\subsection{Linear Map to the Quotient Space}
+
+For a vector space $V$ over $K$ with $W$ a subspace, we can
+define $\pi : V \to V/W$ for some $v$ in $V$ by $f(v) = v + W$.
+We have that: \begin{enumerate}
+  \item $\pi$ is linear and surjective,
+  \item $\Ker(\pi) = W$.
+\end{enumerate}
+\begin{proof}
+  (1) For each $v, v'$ in $V$ and $k, k'$ in $K$: \begin{align*}
+    \pi(kv + k'v')) &= (kv + k'v') + W \\
+    &= (kv + W) + (k'v' + W) \\
+    &= k(v + W) + k'(v' + W) \\
+    &= k\pi(v) + k'\pi(v'),
+  \end{align*} so $\pi$ is linear. Also, $v + W = \pi(v)$ so $\pi$ 
+  is surjective.
+\end{proof}
+\begin{proof}
+  (2) By (\ref{wplusWiszero}) in (\ref{UnderstandingQuotients}),
+  we can see that for each $w$ in $W$: \begin{gather*}
+    \pi(w) = w + W = 0_V + W = 0_{V/W}.
+  \end{gather*} So, $W \subseteq \Ker(\pi)$. For each $v$ in $\Ker(\pi)$: 
+  \begin{align*}
+    \pi(v) &= 0_{V/W} \\
+    &= \{v' \in V : 0_V - v' \in W\} \\
+    &= W.
+  \end{align*} So, $\Ker(\pi) \subseteq W$. Thus, $\Ker(\pi) = W$.
+\end{proof}
+
+\subsection{Isomorphisms formed by Linear Maps}
+
+For $V, W$ vector spaces and $f : V \to W$ a linear map, we have
+an isomorphism $\Ima(f) \cong V/\Ker(f)$.
+\begin{proof}
+  We define $\tilde{f} : V/\Ker(f) \to \Ima(f)$ by $(v + \Ker(f)) \mapsto f(v)$.
+  We first check that for some $v, v'$ in $V$ such that $v \sim v'$,
+  $\tilde{f}(v + \Ker(f)) = \tilde{f}(v' + \Ker(f))$ as 
+  $v + \Ker(f) = v' + \Ker(f)$: \begin{align*}
+    \tilde{f}(v + \Ker(f)) - \tilde{f}(v' + \Ker(f)) &= f(v) - f(v') \\
+    &= f(v - v') \\
+    &= 0_V,
+  \end{align*} as $v \sim v'$ so $v - v'$ is in $\Ker(f)$.
+  We have for each $v$ in $\Ima(V)$ there is a $w$ in $W$ such that $f(w) = v$,
+  so $\tilde{f}(w + \Ker(f)) = f(w) = v$, thus $\tilde{f}$ is surjective. 
+  Taking $v$ in $V$, suppose $\tilde{f}(v + \Ker(f)) = 0_V$,
+  so $f(v) = 0_V$, thus $v \in \Ker(f)$ and \newline
+  $v + \Ker(f) = 0_{V/\Ker(f)}$
+  so $\tilde{f}$ is injective. Thus, $\tilde{f}$ is an isomorphism.
+\end{proof}
+
+\subsection{Linear Operators on the Quotient Space}
+
+For a vector space $V$ with $W$ a subspace and a linear
+operator $f : V \to V$, there exists a well-defined operator
+$\bar{f} : V/W \to V/W; \, v + W \mapsto f(v) + W$ if and only if 
+$W$ if $f$-invariant. We call this the induced operator on $V/W$.
+\begin{proof}
+  $\bar{f}$ is well defined if and only if for all $v, v'$ in $V$
+  such that $v + W = v' + W$: \begin{gather} \label{linoponquo}
+    f(v) + W = f(v') + W.
+  \end{gather} We have that $v'$ is in $v + W$ as $v + W = v' + W$
+  and $v' - v' = 0_V$ which is in $W$ so $v'$ is in $v' + W$. 
+  Considering (\ref{linoponquo}): \begin{align*}
+    f(v) + W - f(v') + W &= (f(v) - f(v')) + W \\
+    &= f(v - v') + W.
+  \end{align*} We know that $\bar{f}$ is well defined if and only if
+  $f(v - v') + W$ is zero (so $f(v - v')$ is in $W$). We know that
+  $v - v'$ is in $W$ as $v'$ is in $v + W$, thus $\bar{f}$ is well defined 
+  if and only if $W$ is $f$-invariant. Linearity is immediate.
+\end{proof}
+
+\subsection{Matrices formed using Quotient Spaces} \label{quotientmatrix}
+
+For a finite-dimensional vector space $V$ and $f : V \to V$ a linear
+operator with $W$ an $f$-invariant subspace of $V$, suppose we have 
+$B_W$ a basis for $W$, that we extend to a basis $B$ of $V$.
+Take the set $Q$: \begin{gather*}
+  Q = \{v + W : v \in B \setminus B_W \},
+\end{gather*} a basis of $V/W$ and we can form
+a matrix in block form: \begin{gather*}
+  M_{BB}(f) = \begin{pmatrix}
+    M_{B_WB_W}(f) & * \\
+    0 & M_{QQ}(\bar{f})
+  \end{pmatrix},
+\end{gather*} where $\bar{f}$ is the induced operator on $V/W$ and $*$
+marks the area of the matrix which we cannot determine.

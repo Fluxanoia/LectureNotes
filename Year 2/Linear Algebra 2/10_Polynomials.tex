@@ -1,0 +1,242 @@
+\section{Polynomials}
+
+For $R$ a ring with unity, a polynomial over $R$ is of the form: \begin{gather*}
+  p(x) = \sum_{i = 0}^n a_ix^i,
+\end{gather*} for some sequence $(a_i)_{i \in [n]}$ in $R$ called the coefficients
+of the polynomial. In this case, $x$ is the interdeterminate.
+
+\subsection{The Set of Polynomials}
+
+For a ring $R$, $R[x]$ is the set of all polynomials on $R$: 
+\begin{enumerate}
+    \item $R[x]$ is a ring with unity that is commutative if and only if 
+    $R$ is commutative.
+    \item $R[x]$ has a multiplicative identity if and only
+    if $R$ has a multiplicative identity.
+\end{enumerate}
+\begin{proof}
+    (1) Immediate from the definition of polynomial multiplication.
+\end{proof}
+\begin{proof}
+    (2) If $R$ has a multiplicative identity $1_R$, the multiplicative
+    identity in $R[x]$ is $1_R$. If $R[x]$ has multiplicative identity
+    $1_{R[x]}$ then for each $r$ in $R$, $1_{R[x]}(r) = 1_{R[x]} \cdot r = r$
+    so $1_{R[x]} = 1_R$.
+\end{proof}
+
+\subsection{Polynomial Degree}
+
+For a polynomial $p$ with coefficients $(a_i)$ the degree is the greatest 
+$i$ such that $a_i \neq 0$ and if no such $a_i$ exists we call this 
+the zero polynomial and the degree is zero. The degree is denoted as 
+$\Deg(p)$. The leading coefficient is $a_{\Deg(p)}$.
+
+\subsection{Degree and Composition in $R[x]$}
+
+For a ring with unity $R$, $p, q$ non-zero elements of $R[x]$, we have that: 
+\begin{itemize}
+  \item $\Deg(p + q) \leq \Max(\Deg(p), \Deg(q))$ 
+  \item $\Deg(pq) \leq \Deg(p) + \Deg(q)$ 
+  \item $\Deg(pq) = \Deg(p) + \Deg(q)$ if the leading coefficient of
+  $p$ or $q$ is an invertible element of $R$ (or $R$ is a field).
+\end{itemize}
+
+\subsection{Evalutation of Polynomials}
+
+For $p(x) = a_0 + a_1x + \cdots + a_nx^n$ in $R[x]$ and $c$ in $R$, we have
+the value of $p$ at $c$ is: \begin{gather*}
+  p(c) = a_0 + a_1c + \cdots + a_nc^n.
+\end{gather*} If $p(c) = 0$, then we call $c$ a root of $p$.
+
+\subsection{The Division Algorithm of Polynomials} \label{polydiv}
+
+For a ring with unity $R$, $f, g$ in $R[x]$ with the leading coefficient of $g$ being a unit 
+(invertible element) in $R$, we have that there exists $q, r$ in $R[x]$ such that: \begin{gather*}
+  f(x) = q(x)g(x) + r(x),
+\end{gather*} where $r$ is the zero polynomial or $\Deg(r) < \Deg(g)$.
+\begin{proof}
+    If $\Deg(f) < \Deg(g)$, $q$ is the zero polynomial and $r = f$.
+    If $\Deg(f) \geq \Deg(g)$, suppose: \begin{align*}
+        f(x) &= a_0 + \cdots + a_n x^n \\
+        g(x) &= b_0 + \cdots + b_m x^m \\
+        q(x) &= c_0 + \cdots + c_{n - m} x^{n - m},
+    \end{align*} where each set of coefficients is in $R$ and $c_0, \ldots, c_{n - m}$
+    is unknown. We break down $f$ by considering: \begin{align*}
+        f(x) = a_0 + \cdots + a_n x^n &= (c_0 + \cdots + c_{n - m} x^{n - m})
+        (b_0 + \cdots + b_m x^m) + r(x) \\
+        &= q(x)g(x) + r(x),
+    \end{align*} at the greatest power of $x$. This gives us that 
+    $c_{n - m} = a_n b_m^{-1}$. We notice that $f(x) - c_{n - m}x^{n - m}g(x)$
+    is a polynomial of degree strictly less than the degree of $f$. If we
+    repeat this process on  $f(x) - c_{n - m}x^{n - m}g(x)$ until 
+    $\Deg(f) < \Deg(g)$ we have the result.
+\end{proof}
+
+\newpage
+
+\subsubsection{Factorisation by Roots}
+
+For $p$ a polynomial in $R[x]$ where deg$(p) > 0$ and $c$ in $R$, $c$ is a
+root of $p$ if and only if we can write $p(x) = (x - c)q(x)$ for some
+$q$ in $R[x]$.
+\begin{proof}
+    Suppose $c$ is a root of $p$. By (\ref{polydiv}), we have that: \begin{gather*}
+        p(x) = (x - c)q(x) + r(x),
+    \end{gather*} for some $q, r$ in $R[x]$. But, $p(c) = 0_R$ so: \begin{align*}
+        p(c) &= (c - c)q(x) + r(x) = 0_R \\
+        &= 0_R \cdot q(x) + r(x) \\
+        &= r(x),
+    \end{align*} thus, $r$ is the zero polynomial. So, $p(x) = (x - c)q(x)$.
+    Supposing $p(x) = (x - c)q(x)$ for some $q$ in $R[x]$: \begin{align*}
+        p(c) &= (c - c)q(x) \\
+        &= 0_R \cdot q(x) \\
+        &= 0_R,
+    \end{align*} so $c$ is a root of $p$. Thus, we have the result.
+\end{proof}
+
+\subsection{The Divisibility of Polynomials}
+
+For a field $K$, we have that for $p, q$ in $K[x]$, if $q$ divides $p$ (written as $q | p$)
+then there exists $r$ in $K[x]$ such that: \begin{gather*}
+  p(x) = q(x)r(x).
+\end{gather*}
+
+\subsubsection{Highest Common Factors of Polynomials}
+
+For a field $K$, we have that for $p, q$ in $K[x]$, the highest common factor of $p$ and $q$
+is a polynomial $h$ with \textbf{maximal} degree such that $h$ divides both $p$ and $q$.
+\\[\baselineskip]
+We also have that there exists $a, b$ in $K[x]$ such that $h = ap + bq$.
+
+\subsection{Irreducible Polynomials}
+
+An irreducible polynomial over a field $K$ is a non-constant (degree greater than zero)
+polynomial in $K[x]$ such that it cannot be written as the product of two polynomials 
+(both with smaller degree).
+
+\subsubsection{Consequences of Irreducible Divisibility}
+
+For a field $K$, suppose we have $f, p, q$ in $K[x]$ such that $f$ is
+irreducible. If $f | pq$ then either $f | p$ or $f | q$ or both.
+\begin{proof}
+    The highest common factor of $f$ and $p$ is either $\lambda$ or 
+    $\lambda \cdot f$ for some $\lambda$ in $K\setminus\{0_K\}$ as $f$ 
+    is irreducible. If the highest common factor is $\lambda \cdot f$
+    then we have that $f | p$. Otherwise, $f$ and $p$ are relatively
+    prime so there exists polynomials $a, b$ in $K[x]$ such that: \begin{gather*}
+        1_{K[x]} = af + bp,
+    \end{gather*} Thus, multiplying through by $q$: \begin{gather*}
+        q = qaf + qbp. 
+    \end{gather*} Clearly $f | qaf$ and we can see that $f | qbp$ as
+    $f | pq$. Thus, $f | h$.
+\end{proof}
+
+\subsubsection{Decomposition into Irreducible Polynomials}
+
+For a field $K$, we have that for every $f$ in $K[x]$ where deg$(f) \geq 1$ we have that 
+$f$ can be written as the product of irreducible polynomials uniquely up to order and
+multiplication by constants. If $f$ is monic (leading coefficient equal to one), 
+it is a product of monic irreducible polynomials, unique up to order.
+
+\subsection{Definition of the Minimal Polynomial}
+
+For a field $K$ and $V$ a finite $n$-dimensional vector space let $f : V \to V$.
+The minimal polynomial $m_f(x)$ in $K[x]$ is the polynomial such that: \begin{itemize}
+  \item $m_f(f) = 0_L$ where $L = \mathcal{L}(V, V)$,
+  \item $\Deg(m_f)$ is minimal,
+  \item $m_f$ is monic (leading coefficient equal to one).
+\end{itemize} We have that this polynomial always exists and is unique.
+\begin{proof}
+    Suppose $p$ and $m_f$ are two distinct monic polynomials of the same
+    degree so that $p(f) = 0_L = m_f(f)$. As $p$ and $m_f$ are distinct,
+    $(p - m_f)$ is a non-zero polynomial for which $(p - m_f)(f) = 0_L$.
+    Taking $\lambda$ to be the leading coefficient of $(p - m_f)$, we have
+    that $\lambda^{-1}(p - m_f)$ annihilates $f$, is monic but, has degree
+    less than $m_f$ which is impossible. So, the minimal polynomial is distinct.
+    \\[\baselineskip]
+    $L$ is $n^2$ dimensional as it's isomorphic to $M_n(K)$. Thus,
+    $f^0, f, f^2, \ldots, f^{n^2}$ must be linearly dependent on $L$.
+    Thus, there is $a_0, \ldots, a_{n^2}$ not all zero such that: \begin{gather*}
+        a_0f^0 + \cdots + a_{n^2}f^{n^2} = 0_L.
+    \end{gather*} Take $k$ to be maximal such that $a_k \neq 0_K$. Thus:
+    \begin{gather*}
+        p(x) = a_k^{-1}[a_0 + a_1x + \cdots + a_k x^k],
+    \end{gather*} is monic and annihilates $f$. Thus, the minimal polynomial
+    exists.
+\end{proof}
+
+\subsubsection{Properties of the Minimal Polynomial}
+
+For a field $K$ and $V$ a finite $n$-dimensional vector space, let $f$ be in
+$L = \mathcal{L}(V, V)$ and $m_f$ be the corresponding minimal polynomial in $K[x]$.
+We have that: \begin{enumerate}
+  \item If $p$ in $K[x]$ satisfies $p(f) = 0$ then $m_f | p$,
+  \item For $\lambda$ in $K$, $m_f(\lambda) = 0$ if and only if 
+  $\lambda$ is an eigenvalue of $f$.
+\end{enumerate}
+\begin{proof}
+    (1) By (\ref{polydiv}) we can write $p(x) = m_f(x)q(x) + r(x)$. As
+    $p$ annihilates $f$: \begin{align*}
+        p(f) &= m_f(f)q(f) + r(f) = 0_L \\
+        &= 0_L \cdot q(f) + r(f) \\
+        &= r(f),
+    \end{align*} thus, $m_f$ divides $p$.
+\end{proof}
+\begin{proof}
+    (2) Taking $v$ an eigenvalue of $f$ with eigenvalue $\lambda$, 
+    $f(v) = \lambda v$ so for each $p$ in $K[x]$, $p(f)(v) = p(\lambda)(v)$.
+    Taking $p = m_f$: \begin{gather*}
+        0_V = m_f(f)(v) = m_f(\lambda)(v),
+    \end{gather*} so $m_f(\lambda) = 0_K$. Conversely, suppose $\lambda$ is
+    a root of $m_f$ so $m_f(x) = (x - \lambda)p(x)$ for some monic $p$ in $K[x]$.
+    We have that $\Deg(p) < \Deg(m_f)$ so $p(f) \neq 0$ as otherwise this would
+    contradict the minimality of $m_f$. We take $v$ in $V$ such that 
+    $v' = p(f)(v)$ is non-zero. However: \begin{align*}
+        0_K = m_f(f)(v) &= [(x - \lambda)p(x)](f)(v)\\
+        &= (f - \lambda(\text{id}))p(f)(v) \\
+        &= (f - \lambda(\text{id}))(v'),
+    \end{align*} so $v'$ is an eigenvector of $f$ with eigenvalue $\lambda$.
+\end{proof}
+
+\subsection{Characteristic Polynomials}
+
+The characteristic polynomial of an operator $f : V \to V$ is the polynomial: \begin{gather*}
+  p_f(x) = \text{det}(A - xI),
+\end{gather*} where $A$ is the matrix of $f$ relative to some basis.
+This doesn't change based on the choice of basis as similar matrices have the same determinant.
+Additionally, this is divisible by $m_f$ by the Cayley-Hamilton theorem.
+
+\subsubsection{The Cayley-Hamilton Theorem}
+
+For $V$ a finite $n$-dimensional vector space over a field $K$ where 
+$p_f$ the characteristic polynomial of an operator $f$ in $L = \mathcal{L}(V, V)$, 
+we have that: \begin{gather*}
+  p_f(f) = 0_V.
+\end{gather*} We also have that: \begin{gather*}
+  p_f(M_{BB}(f)) = 0_V,
+\end{gather*} for some basis $B$ of $V$.
+\begin{proof}[Proof over an algebraically closed field]
+    If $\Dim(V)= 1$, $f$ simply scales vectors in $V$ by some scalar $c$
+    in $K$. Thus, $p_f(x) = c - x$ so $p_f(f) = 0_L$. Suppose $\Dim(V) > 1$
+    and the theorem holds for all spaces of dimension $\Dim(V) - 1$. As
+    $K$ is algebraically closed and $\Deg(p_f) > 0$, we have that $f$
+    has an eigenvalue $\lambda$ with corresponding eigenvector $v_1$.
+    We expand $\{v_1\}$ to $B = \{v_1, \ldots, v_n\}$ a basis for $V$.
+    We have that: \begin{gather*}
+        p_f(x) = (\lambda - x)p(x),
+    \end{gather*} for some $p$ in $K[x].$
+    Taking $V_1 = \Span(\{v_1\})$ the $f$-invariant subspace of $V$,
+    we consider the induced map $\bar{f} : V/V_1 \to V/V_1$. 
+    We have that $p_{\bar{f}} = p$ by (\ref{quotientmatrix}) 
+    and by assumption $p_{\bar{f}}(\bar{f}) = 0_L$ meaning for any $v$ in $V$:
+    \begin{gather*}
+        p_{\bar{f}}(\bar{f})(v + V_1) = 0_{V/V_1}.
+    \end{gather*} As $p_{\bar{f}}(\bar{f})$ maps elements
+    of $V/V_1$ to $0_{V/V_1}$, $p_{\bar{f}}(f)$ must map elements
+    of $V$ to $V_1$. 
+    Thus, as $p_f(x) = (\lambda - x)p_{\bar{f}}(x)$: \begin{align*}
+        p_f(f)(v) &= (\lambda - f)p_{\bar{f}}(f)(v) \\
+        &= (\lambda - f)(c v_1) \tag{for some $c$ in $K$} \\
+        &= 0_V.
+    \end{align*} Proving the result by induction.
+\end{proof}

@@ -1,0 +1,87 @@
+\section{Groups, Rings, and Fields}
+
+\subsection{Groups}
+
+A group is a set $G$ combined with a group operation 
+$\circ : G \times G \to G$ such that: \begin{itemize}
+  \item \textbf{Associativity}, for all $g, h, j$ in $G$, $g(hj) = (gh)j$,
+  \item \textbf{Identity}, there exists $e$ in $G$ such that $eg = ge = g$ 
+  for all $g$ in $G$
+  \item \textbf{Inverses}, for all $g$ in $G$, there exists $g^{-1}$ in $G$ 
+  such that $gg^{-1} = g^{-1}g = e$ where $e$ is the identity of $G$.
+\end{itemize} Note that here we have implicitly used the group operation $\circ$.
+
+\subsubsection{Subgroups}
+
+For a group $\mathcal{G} = (G, \circ)$, we have that 
+$\mathcal{G}' = (G', \circ)$ is a subgroup of $\mathcal{G}$
+if and only if $G' \subseteq G$
+and $\mathcal{G}'$ is a group.
+
+\subsubsection{Group Homomorphisms}
+
+A homomorphism between two groups $G, H$ is a function $f : G \to H$
+such that $f(gh) = f(g)f(h)$ for all $g, h$ in $G$.
+
+\subsubsection{Properties of Group Homomorphisms}
+
+We can derive some properties of homomorphisms, for
+$G, H$ groups, and $f : G \to H$ a homomorphism: \begin{itemize}
+  \item The image of the identity in $G$ is the identity in $H$,
+  \item $\Ker(f)$ is a subgroup of $G$,
+  \item $\Ima(f)$ is a subgroup of $H$.
+\end{itemize}
+
+\newpage
+
+\subsection{Rings}
+
+A ring with unity is a set $R$ along with an addition map $+$, and
+a multiplication map $\circ$ where $+, \circ : R \times R \to R$
+such that: \begin{itemize}
+  \item $(R, +)$ is an abelian group (of which the identity is called zero),
+  \item The multiplication operation is associative,
+  \item The multiplication operation has a two-sided identity not equal
+  to the zero identity (called one),
+  \item For all $a, b, c$ in $R$, $a(b+c) = ab + ac$ and $(a+b)c = ac + bc$.
+\end{itemize} A ring is commutative if the multiplication operation is commutative.
+
+\subsubsection{Subrings}
+
+For a ring $\mathcal{R} = (R, +, \circ)$, we have that $\mathcal{R}' = (R', +, \circ)$, 
+is a subring of $\mathcal{R}$ if and only if $R' \subseteq R$ and $\mathcal{R}'$ is a ring.
+
+\subsubsection{Ring Homomorphisms}
+
+For rings with unity $R$ and $S$, $f : R \to S$ is a ring homomorphism if for all
+$a, b$ in $R$: \begin{align*}
+  f(a + b) &= f(a) + f(b) \\
+  f(ab) &= f(a)f(b) \\
+  f(1_R) &= 1_S.
+\end{align*}
+
+\newpage
+
+\subsection{Fields}
+
+A field $K$ is a ring with unity where $(K\setminus\{0\}, \circ)$ 
+is an abelian group.
+
+\subsubsection{Characteristic of a Field}
+
+For a field $K$, the field characteristic $\Char(K)$ is the 
+smallest positive integer $n$ such that: \begin{gather*}
+  n \cdot 1 = \sum_{i = 1}^{n} 1 = 1 + 1 + \ldots + 1 = 0,
+\end{gather*} or zero if no such value $n$ exists.
+
+\paragraph{Field Characteristics being Prime}
+The characteristic of a field $K$ must be prime (or zero) 
+because if for some $a, b$ integers $\Char(K) = ab$ then: \begin{gather*}
+  0 = \Char(K) \cdot 1 = (a \cdot 1)(b \cdot 1),
+\end{gather*} which means $a \cdot 1$ or $b \cdot 1$ is zero so $a$ or $b$
+is the characteristic of $K$.
+
+\subsubsection{Algebraic Closure of Fields}
+
+A field $K$ is called algebraically closed if all non-constant polynomials 
+with coefficients in $K$ also has a root in $K$.

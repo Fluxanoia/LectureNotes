@@ -1,0 +1,184 @@
+\section{Rank and Determinants}
+
+\subsection{Elementary Row Operations}
+
+For a field $K$, take $A$ in $M_{m,n}(K)$. For some
+$c$ in $K$, the elementary
+row operations are: \begin{itemize}
+    \item Swapping,
+    \item Multiplying a row by $c \neq 0$,
+    \item Adding $c$ multiples of one row to another.
+\end{itemize}
+
+\subsubsection{Elementary Matrices}
+
+The $n \times n$ elementary matrices are: \begin{itemize}
+  \item $E_1(i, j)$ : obtained by swapping the $i^{th}$ and $j^{th}$ rows
+  of the identity
+  \item $E_2(c, i)$ : obtained by scaling the $i^{th}$ row of the identity
+  by $c$ non-zero
+  \item $E_3(c, i, j)$ : obtained by adding $c$ times row $i$ to row $j$
+  where $i \neq j$.
+\end{itemize} We have that any elementary row operation can be realised as
+left-multiplication by a corresponding elementary matrix. As a consequence
+of the definition, we have that elementary matrices are invertible and
+have elementary inverses.
+
+\subsubsection{Echelon Form}
+
+A matrix $A$ is in echelon form if each row has the form: \begin{gather*}
+  (0, \ldots, 0, 1, *, \ldots, *),
+\end{gather*} where each row has more leading zeroes than the one above and
+the first row has any amount of leading zeroes. Every matrix can be put in
+this form via Gaussian elimination.
+
+\subsubsection{Decomposition via Elementary Matrices}
+
+For an $n \times n$ matrix $A$, there exists elementary matrices
+$E_1, \ldots, E_k$ such that $E_1\cdots E_kA = B$ where:
+\begin{gather*}
+  B = \begin{cases}
+    \text{the identity} & \text{if $A$ is invertible} \\
+    \text{a matrix with a final row consisting of all zeroes} & \text{otherwise.}
+  \end{cases}
+\end{gather*}
+
+\subsection{Rank}
+
+For $A = (a_{ij})$ a matrix in $M_{m,n}(K)$, we denote its rows by
+$A_{(1)}, \ldots, A_{(m)}$ and columns by $A^{(1)}, \ldots, A^{(n)}$. We
+say: \begin{itemize}
+  \item The row rank of $A$ is the dimension of the subspace of spanned by 
+  $A_{(1)}^t, \ldots, A_{(m)}^t$ in $K^m$
+  \item The column rank of $A$ is the dimension of the subspace of spanned by 
+  \newline $A^{(1)}, \ldots, A^{(n)}$ in $K^n$.
+\end{itemize} We have these are equal, so can generally refer to the rank 
+of a matrix.
+\\[\baselineskip]
+If $E_1, \ldots, E_k$ are elementary matrices, we have that the rank of $A$
+is equal to the rank of $E_1\cdots E_kA$. Similarly, matrices that are similar 
+have the same rank.
+
+\subsubsection{Rank of Matrices from Linear Maps}
+
+For $A$ an $m \times n$ matrix on $K$, we can define a map 
+$f : K^n \to K^m$ by $v \mapsto Av$. We have that
+the rank of $A$ is the dimension of the image of $f$.
+Thus, invertible $n \times n$ matrices have rank $n$.
+
+\subsubsection{Partially Diagonalising Matrices}
+
+For an $m \times n$ matrix $A$, there exists some: \begin{itemize}
+    \item $p \times m$ matrix $P$,
+    \item $n \times q$ matrix $Q$,
+\end{itemize} such that $PAQ = D = (d_{ij})$ where: \begin{gather*}
+    d_{ij} = \begin{cases}
+        \delta_{ij} & \text{for } i \leq \Rank(A) \\
+        0           & \text{otherwise,}
+    \end{cases}
+\end{gather*} the matrix with $\Rank(A)$ units on the diagonal.
+
+\subsection{Permutations}
+
+For some $n$ in $\mathbb{Z}_{> 0}$, a permutation of $[n]$ is a bijection
+$\sigma : [n] \to [n]$. We define the set of all permutations on $[n]$ as
+$S_n$.
+
+\subsection{Properties of $S_n$}
+
+For some $n$ in $\mathbb{Z}_{> 0}$, $S_n$ is: \begin{itemize}
+    \item A group under function composition,
+    \item Of order $n!$,
+    \item Non-abelian for $n > 2$.
+\end{itemize}
+
+\subsection{Decomposition of permutations}
+
+All permutations can be written as a product of disjoint cycles. Thus,
+all permutations can be written as a product of transpositions.
+
+\subsection{Parity of Permutations}
+
+Even permutations are permutations that can be expressed as the
+product of an even number of transpositions. Otherwise, a
+permutation is odd. 
+
+\subsubsection{The Signature}
+
+We define the sgn function for a given
+permutation $\sigma$: \begin{gather*}
+  \text{sgn}(\sigma) = \begin{cases}
+    1 & \text{if } \sigma \text{ is even} \\
+    -1 & \text{otherwise.}
+  \end{cases}
+\end{gather*} We have that for another permutation $\tau$: \begin{gather*}
+  \text{sgn}(\sigma\tau) = \text{sgn}(\sigma)\text{sgn}(\tau).
+\end{gather*} In other words, sgn is a homomorphism from $S_n$ to $\{1, -1\}$.
+
+\subsubsection{The Alternating Group}
+
+We have that $A_n$ the set of even permutations in $S_n$ is a
+subgroup as it is the kernel of sgn.
+
+\subsection{Determinants}
+
+For $A = (a_{ij})$ a $n \times n$ matrix over $K$, we have
+the determinant is a scalar defined by: \begin{gather*}
+  \text{det}(A) := \sum_{\sigma \in S_n} \text{sgn}(\sigma)a_{\sigma(1)1} \cdots a_{\sigma(n)n}.
+\end{gather*} A more pratical but equivalent definition would be: \begin{gather*}
+  \text{det}(A) = \sum_{j = 1}^n (-1)^{i + j}a_{ij}\text{det}(\tilde{A}^{ij}),
+\end{gather*} where $i$ is in $[n]$ and $\tilde{A}^{ij}$ is $A$
+with the $i^{th}$ row and $j^{th}$ column removed. 
+We may represent the $k^{th}$ column vector of $A$ by 
+$A^{(k)}$ and then write: \begin{gather*}
+  \text{det}(A) = \text{det}(A^{(1)}, \ldots, A^{(n)}),
+\end{gather*} as a function on the columns of $A$.
+
+\subsubsection{Multi-linearity of the Determinant}
+
+For $A = (a_{ij})$ a $n \times n$ matrix over $K$ with
+$A^{(k)} = c_1v_1 + c_2v_2$ with $c_1, c_2$ in $K$ and
+$v_1, v_2$ in $K^n$ for some $k$ in $[n]$, we have that: \begin{align*}
+  \text{det}(A) &= \text{det}(A^{(1)}, \ldots, A^{(n)}) \\
+  &= c_1 \cdot \text{det}(A^{(1)}, \ldots, v_1, \ldots, A^{(n)}) \\
+  & \qquad + c_2 \cdot \text{det}(A^{(1)}, \ldots, v_2, \ldots, A^{(n)}).
+\end{align*} From this we can show that any square matrix with a column
+of all zeroes has zero determinant.
+
+\subsubsection{Alternativity of the Determinant}
+
+For $A = (a_{ij})$ a $n \times n$ matrix over $K$ with
+$i \neq j$, we have that: \begin{gather*}
+  \text{det}(A^{(1)}, \ldots, A^{(i)}, \ldots, A^{(j)} \ldots, A^{(n)}) \\
+  =\\
+  -\text{det}(A^{(1)}, \ldots, A^{(j)}, \ldots, A^{(i)} \ldots, A^{(n)}).
+\end{gather*} From this we can show that a matrix with a pair of
+identical columns must have zero determinant.
+
+\subsubsection{Normality of the Determinant}
+
+For a square upper (or lower) triangular matrix $A$, we have that
+the determinant is the product of the diagonal entries.
+\\[\baselineskip]
+From this we can show that the determinant of the identity is $1$.
+
+\subsubsection{The Determinants of Elementary Matrices}
+
+We have the following: \begin{align*}
+  \text{det}\left[E_1(i, j)\right] &= -1 \\
+  \text{det}\left[E_2(c, i)\right] &= c \\
+  \text{det}\left[E_3(c, i, j)\right] &= 1.
+\end{align*}
+
+\subsubsection{The Determinant of the Transpose}
+
+For a matrix $A$, we have that: $\text{det}(A) = \text{det}(A^t).$
+
+\subsubsection{The Determinant under Matrix Multiplication}
+
+For $A, B$ two $n \times n$ matrices, we have that:
+$\text{det}(AB) = \text{det}(A)\cdot\text{det}(B).$
+
+\subsubsection{The Determinant and Invertibility}
+
+A square matrix is invertible if and only if it has non-zero determinant.

@@ -1,0 +1,113 @@
+\section{Dual Spaces}
+
+For $V$ a vector space over $K$, we have that the dual space
+$V^*$ is $\mathcal{L}(V, K)$, the set of linear maps from 
+$V$ to $K$. We have that addition and scalar multiplication
+are defined for some $v$ in $V$, $f, g$ in $V^*$, and $a$ in 
+$K$: \begin{align*}
+  (f + g)(v) &:= f(v) + g(v), \\
+  (af)(v) &:= af(v).
+\end{align*}
+
+\subsection{Dual Bases}
+
+For $V$ a finite-dimensional vector space over $K$, with 
+$\Dim(v) = n$ and a basis $B = \{v_1, \ldots, v_n\}$. 
+We define the dual basis $B^* = \{v_1^*, \ldots, v_n^*\}$
+by defining $v_i^* : V \to K$ as the unique linear map
+such that: \begin{gather*}
+  v_i^*(v_j) := \delta_{ij} = \begin{cases}
+    0 & \text{if } i \neq j \\
+    1 & \text{if } i = j.
+  \end{cases}
+\end{gather*}
+Equivalently, where we decompose $v$ in $V$ into the vectors
+in $B$ with unique coefficients $a_1, \ldots, a_n$ in $K$, we have
+that: \begin{gather*}
+  v_i^*(v) = v_i^*\left(\sum_{j = 1}^n a_jv_j\right) 
+  = \sum_{j = 1}^n a_jv_i^*(v_j) = a_i.
+\end{gather*} $B^*$ is a basis for $V^*$ and $V$ and $V^*$ are 
+isomorphic by the map sending $v_i$ to $v_i^*$ for each $i$ in $[n]$.
+\begin{proof}
+    Suppose we have $a_1, \ldots, a_n$ in $K$ such that: \begin{gather*}
+        \sum_{i = 1}^n a_i v_i^* = 0_{V^*},
+    \end{gather*} thus for each $i$ in $[n]$: \begin{gather*}
+        0_K = \left( \sum_{i = 1}^n a_i v_i^* \right)(v_i) = a_i.
+    \end{gather*} So, each $a_i$ is zero and thus $B^*$ is
+    linearly independent. Taking some $f$ in $V^*$ and
+    $v$ in $V$ decompose into vectors in $B$ with coefficients
+    $a_1, \ldots, a_n$: \begin{align*}
+        f(v) &= a_1f(v_1) + \cdots + a_nf(v_n) \\
+        &= v_1^*(v)f(v_1) + \cdots + v_n^*(v)f(v_n) \\
+        &= [f(v_1)v_1^* + \cdots + f(v_n)v_n^*](v),
+    \end{align*} thus $B^*$ spans $V^*$. So, $B^*$ is a basis.
+\end{proof}
+
+\subsection{The Annihilator}
+
+For $V$ a vector space over $K$ with $S \subseteq V$,
+the annihilator of $S$ is the subspace $S^0$ of $V^*$ where
+for $f$ in $S^0$, $S \subseteq \text{Ker}(f)$ (or rather, 
+for all $s$ in $S$, $f(s) = 0$).
+
+\subsubsection{Properties of the Annihilator}
+
+For $V$ a vector space over $K$ with $U, W \subseteq V$
+subspaces, we have that: \begin{itemize}
+  \item $(U + W)^0 = U^0 \cap W^0$
+  \item $U \subseteq W \Rightarrow W^0 \subseteq U^0,$
+\end{itemize} and for $V$ finite-dimensional, \begin{itemize}
+  \item $(U \cap W)^0 = W^0 + U^0$
+  \item $\Dim(W) + \Dim(W^0) = \Dim(V).$
+\end{itemize}
+\begin{proof}[Proof of $\Dim(W) + \Dim(W^0) = \Dim(V)$]
+    \hfill \newline
+    Let $B_W = \{v_1, \ldots, v_m \}$ be a basis for $W$, we extend it with
+    $v_{m + 1}, \ldots, v_n$ to a basis $B$ for $V$ and take the dual
+    basis $B^* = \{v_1^*, \ldots, v_n^*\}$. Each $w$ in $W$ can be decomposed
+    into the vectors in $B_W$ with coefficients $a_1, \ldots, a_m$ in
+    $K$. Thus, for $i$ in $[n]$ with $i > m$ we have that: \begin{gather*}
+        v_i^*(w) = v_i^*(a_1v_1 + \cdots a_mv_m) = 0_V.
+    \end{gather*} So, $v_i^*$ is in $W^0$ for each $i$ as defined
+    above. They are linearly independent, and we want to show they span
+    $W^0$. If $f$ is in $W^0$ then, $f$ can be decomposed into the
+    vectors in $B^*$ with coefficients $b_1, \ldots, b_n$ in $K$.
+    However, for $i \leq m$, $v_i$ is in $W$ so: \begin{gather*}
+        0_K = f(v_i) = b_i,
+    \end{gather*} which means that: \begin{gather*}
+        f = b_{m + 1}v_{m + 1}^* + \cdots + b_nv_n^*.
+    \end{gather*} Thus, $(B \setminus B_W)^*$ is a basis for $W^0$
+    which means: \begin{gather*}
+        \Dim(W^0) = n - m = \Dim(V) - \Dim(W)
+    \end{gather*} as required.
+\end{proof}
+
+\subsection{Isomorphism to the Double Dual}
+
+For $V$ a finite-dimensional vector space over $K$, 
+we have $F: V \to V^{**}$ defined for some $v$ in $V$ and $f$ in $V^*$ 
+as follows: \begin{gather*}
+  F(v)(f) = f(v).
+\end{gather*} We have that $F$ is an isomorphism.
+\begin{proof}
+    Omitted.
+\end{proof}
+
+\subsection{Transposing Linear Maps}
+
+For $V, W$ vector spaces with $f : V \to W$ a linear map. We define
+the transpose as $f^t : W^* \to V^*$ where for $g$ in $W^*$, $v$ in
+$V$: \begin{gather*}
+  f^t(g) := (g \circ f).
+\end{gather*} So, for some $v$ in $V$: \begin{gather*}
+  f^t(g)(v) = (g \circ f)(v) = g(f(v)).
+\end{gather*}
+
+\subsection{Transposed Linear Maps and Matrices}
+
+If we have $V, W$ finite-dimensional vector spaces over $K$ with bases 
+$A = \{v_1, \ldots, v_n\}$, $B = \{w_1, \ldots, w_m\}$ respectively.
+We have that for some linear map $f : V \to W$, and
+$f^t : W^* \to V^*$ the transpose map with respect to $f$: \begin{gather*}
+  M_{BA}(f) = \left( M_{A^*B^*}(f^t) \right)^t.
+\end{gather*}
