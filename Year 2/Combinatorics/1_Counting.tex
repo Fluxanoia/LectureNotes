@@ -1,0 +1,123 @@
+\section{Counting}
+
+\subsection{The Multiplication Rule}
+
+If a counting problem can be split into a number of stages, we can
+use the product of the number of choices at each stage to find
+the total number of outcomes.
+
+\subsection{Inclusion-Exclusion Principle}
+
+For $n$ in $\mathbb{Z}_{> 0}$, and $X_1, \ldots, X_n$ sets: \begin{align*}
+  \left|\bigcup_{i = 1}^n X_i\right| &= \sum_{i = 1}^n |X_i| \\
+  &-\sum_{i_1 \neq i_2} |X_{i_1} \cap X_{i_2}| \\
+  &+\sum_{i_1 \neq i_2 \neq i_3} |X_{i_1} \cap X_{i_2} \cap X{i_3}| \\
+  &\ldots.
+\end{align*}
+
+\subsection{The Factorial}
+
+For $n$ in $\mathbb{Z}_{\geq 0}$ we can define the factorial $n!$: \begin{align*}
+  n! := \begin{cases*}
+    1 & n = 0 \\
+    \prod_{i = 1}^n(i) & \text{otherwise.}
+  \end{cases*}
+\end{align*} For $k$ in $\mathbb{Z}_{> 0}$ we can further define $(n)_k$: \begin{gather*}
+  (n)_k := \frac{n!}{(n-k)!} = n(n-1)(n-2)\cdots(n-k+1).
+\end{gather*} This can be though of as the factorial with $k$
+elements (starting at $n$). So, $(n)_n = n!$, $(n)_1 = n$.
+
+\subsection{The Binomial Coefficient}
+
+For $n, k$ in $\mathbb{Z}_{\geq 0}$, we can define the binomial coefficient:  \begin{align*}
+ \binom{n}{k} := \frac{n!}{k!(n-k)!} = \frac{(n)_k}{k!}.
+\end{align*} Furthermore, we have: \begin{gather*}
+  \binom{n}{k} = \binom{n}{n - k}.
+\end{gather*} There are some notes to be made on the definition: \begin{itemize}
+  \item $\binom{n}{k} = 0$ if $k > n$,
+  \item $\binom{n}{k} \geq 0$.
+\end{itemize}
+
+\subsubsection{Pascal's Identity}
+
+For $n, k$ in $\mathbb{Z}_{\geq 0}$: \begin{gather*}
+  \binom{n}{k} = \binom{n - 1}{k - 1} + \binom{n - 1}{k}.
+\end{gather*}
+\begin{proof}
+  Suppose we are making an unordered selection of $k$ elements
+  from $n$ elements without repeats. This gives $\binom{n}{k}$
+  possibilities. Suppose we take some element in our set of
+  $n$ elements and fix it - there are two cases: \begin{itemize}
+    \item We include it in our set of $k$ elements,
+    giving $\binom{n - 1}{k - 1}$ possibilities,
+    \item We exclude it from our set of $k$ elements,
+    giving $\binom{n - 1}{k}$ possibilities.
+  \end{itemize} By the addition rule, we get the result as required.
+\end{proof}
+
+\subsection{The Binomial Theorem}
+
+By performing induction on Pascal's identity, we can see that for 
+$a, b$ in $\mathbb{C}$ and $n$ in $\mathbb{Z}_{\geq 0}$: \begin{gather*}
+  (a + b)^n = \sum_{i = 0}^n \binom{n}{i}a^ib^{n - i}.
+\end{gather*} Setting $a = b = 1$, we get $2^n = \sum_{i = 0}^n 
+\binom{n}{i}$.
+
+\subsection{The Pigeonhole Principle}
+
+For $m, n, k$ in $\mathbb{Z}_{> 0}$, if we have $k$ objects being 
+distributed into $n$ boxes and $n > mk$ then one box must contain
+at least $k + 1$ objects.
+
+\subsection{Selection}
+
+For this section, we will consider $n, k$ in $\mathbb{Z}_{> 0}$.
+
+\subsubsection{Ordered Selection with Repeats}
+
+As we select, we have $n$ choices, and we select $k$ times. Thus,
+by the Multiplication Rule, we get $n^k$ outcomes.
+
+\subsubsection{Ordered Selection without Repeats}
+
+As we select, the amount of choices we have decreases by one each time.
+We start with $n$ choices and select $k$ times. Thus, by the Multiplication
+Rule, we get \newline $n(n-1)\cdots(n-k+1) = (n)_k$ outcomes.
+
+\subsubsection{Unordered Selection with Repeats}
+
+Let the set we are selecting from be $\{x_1, \ldots, x_n\}$. In this case, 
+any solution can be aggregated into a list indicating how
+many times the $i^{\text{th}}$ element was selected (for some $i$ in $[n]$).
+For example, if we select $x_1$ three times and $x_2$ five times, 
+the outcome would be of the form $\{3, 5, \ldots\}$.
+\\[\baselineskip]
+It can be seen that for each of these solutions, the sum of the elements in
+the set must equal $k$. We can construct a solution by starting with a set
+of all zeroes $\{0, 0, 0, \ldots\}$ and distributing $k$ into the set. For
+example, for $n = 4$ and $k = 3$ the following are solutions: \begin{gather*}
+  \{1, 1, 1, 0\} \text{ as } 1 + 1 + 1 + 0 = 3 = k, \\
+  \{0, 2, 0, 1\} \text{ as } 0 + 2 + 0 + 1 = 3 = k, \\
+  \{3, 0, 0, 0\} \text{ as } 3 + 0 + 0 + 0 = 3 = k.
+\end{gather*} These solutions correspond to $\{x_1, x_2, x_3\}, 
+\{x_2, x_2, x_4\}, \{x_1, x_1, x_1\}$ respectively.
+\\[\baselineskip]
+This distribution of $k$ can be thought of as seperating $k$ into $n$
+groups. For example, the solution $\{1, 1, 0, 1\}$ corresponds to: \begin{gather*}
+  \bullet | \bullet | | \bullet.
+\end{gather*} 
+
+The dots and dividers are identical respectively, and we
+have a total of $k$ dots plus $n - 1$ dividers equalling $k + n - 1$
+elements. We can choose where to place the dividers beforehand and
+then fill in the dots, thus we have: \begin{gather*}
+  \binom{n - 1 + k}{n - 1},
+\end{gather*} choices.
+
+\subsubsection{Unordered Selection without Repeats}
+
+This is identical to to the ordered case but we divide by the number
+of permutations of the solutions as order does not matter. Thus, we get:
+\begin{gather*}
+  \frac{(n)_k}{k!} = \binom{n}{k}.
+\end{gather*}

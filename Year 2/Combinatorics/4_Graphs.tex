@@ -1,0 +1,208 @@
+\section{Graph Theory}
+
+\subsection{Graphs}
+
+A graph $G$ is a set system $(V, E)$ where the elements of $E$ have
+size $2$. Some definitions and facts follow from the definition:
+\begin{itemize}
+  \item The elements of $V$ are \textbf{vertices},
+  \item The elements of $E$ are called \textbf{edges},
+  \item The size of $V$ is often called the \textbf{order} of $G$,
+  \item $G$ is a $2$-uniform set with ground set $V$,
+  \item $u, v$ in $V$ are adjacent if $\{u, v\}$ is in $E$.
+\end{itemize}  
+
+\subsubsection{Graph Isomorphisms}
+
+For two graphs $G_1 = (V_1, E_1)$, $G_2 = (V_2, E_2)$, we say that
+$G_1$ and $G_2$ are isomorphic ($G_1 \cong G_2$) if there exists a
+bijection $\phi : V_1 \to V_2$ such that for each pair of vertices
+$u, v$ in $V$ we have that: \begin{gather*}
+  \{u, v\} \in E_1 \Longleftrightarrow \{\phi(u), \phi(v)\} \in E_2.
+\end{gather*}
+
+\subsection{Neighbourhood and Degree}
+
+For a graph $G = (V, E)$ the neighbourhood of $v$ in $V$ 
+is the set of all adjacent vertices (denoted by $N_G(v)$). The
+neighbourhood of a set $S$ is simply the union of the neighbourhoods
+of the elements of $S$ (minus the vertices in $S$).
+The degree of $v$ is simply the size of $N_G(v)$ denoted 
+by $\Deg(v)$.
+
+\subsubsection{Minimum and Maximum Degree}
+
+For a graph $G = (V, E)$ we have that the following to represent
+minimum and maximum degree: \begin{align*}
+  \delta(G) &:= \Min\{\text{deg}(v) : v \in V\} \\
+  \Delta(G) &:= \Max\{\text{deg}(v) : v \in V\}.
+\end{align*}
+
+\subsection{The Handshake Lemma}
+
+For a graph $G = (V, E)$, we have that: \begin{gather*}
+  |E| = \frac{\sum_{v \in V} \text{deg}(v)}{2},
+\end{gather*} as each edge visits two vertices, contributing
+twice to the sum of the degrees of a graph.
+
+\subsection{Subgraphs}
+
+A graph $G' = (V', E')$ is a subgraph of $G = (V, E)$ if
+$V' \subseteq V$ and $E' \subseteq E$ such that for all $e$
+in $E'$ we have that $e \subseteq V'$.
+
+\subsubsection{Induced Subgraphs}
+
+An induced subgraph generated of $G = (V, E)$
+is a subgraph $G' = (V', E')$ where: \begin{gather*} 
+  E' = \{\{u, v\} \in E \text{ such that } u, v \in V'\}.
+\end{gather*} Induced subgraphs are generated from a subset of 
+the vertices of a graph by selecting all the edges that
+are subsets of our chosen vertex set.
+
+\subsection{Complements of Graphs}
+
+For a graph $G = (V, E)$, we have that $\bar{G} = (V, \bar{E})$ is
+the complement of $G$ where $\bar{E} = \{\{u, v\} : u, v \in V\} \setminus E$.
+
+\subsection{Walks}
+
+A walk of length is a set of vertices connected by edges.
+Its length is the number of edges it traverses.
+\\[\baselineskip]
+A walk is closed if its first and last vertex are identical.
+
+\subsubsection{Types of Walks}
+
+\begin{center}
+    \begin{tabular} {| c | c | c | c | c |}
+        \hline
+        Name & Closed? & Repeats vertices? & Repeats edges? \\
+        \hline \hline
+        Walk        & Not necessarily & Can    & Can    \\ \hline
+        Trail       & Not necessarily & Can    & Cannot \\ \hline
+        Paths       & Not necessarily & Cannot & Cannot \\ \hline
+        Circuit     & Yes             & Can    & Cannot \\ \hline
+        Cycles      & Yes             & Cannot & Cannot \\ \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Walks in Paths and Paths in Walks}
+
+Consider $G = (V, E)$ with $u, v$ in $V$, we have that:
+\begin{gather*}
+  \text{There's a walk between } u \text{ and } v
+  \Longleftrightarrow
+  \text{There's a path between } u \text{ and } v.
+\end{gather*} Thus, where there's a cycle, there's a circuit
+and vice-versa.
+Additionally, if $G$ admits an odd circuit, there's also
+an odd cycle (and the converse holds too).
+
+\subsection{Connected Graphs}
+
+A graph is connected if there exists a path between any two vertices 
+in the graph.
+
+\subsubsection{Connected Components}
+
+A component of a graph $G$ is a maximally connected subgraph of $G$.
+
+\subsection{Euler Circuits}
+
+An Euler circuit is a circuit in which each edge in a graph is
+traversed exactly once. As a consequence, each vertex is travelled 
+at least once. Graphs with Euler circuits are said to be Eulerian.
+
+\subsubsection{Partitioning Even Regular Graphs} \label{eulerpart}
+
+For a graph $G = (V, E)$, if each vertex has even degree, we can
+partition its edge set into disjoint subsets $E_1, \ldots, E_s$
+such that for each $i$ in $[s]$, $E_i$ is the edge set of a cycle.
+\begin{proof}
+    Supposing each $v$ in $V$ has even degree, if $E = \emptyset$ then
+    the statement holds trivially. Suppose $E$ is non-empty and the
+    statement holds for all graphs with strictly fewer edges. We
+    pick $v$ in $V$ and generate a path $P$ (starting at $v$) 
+    by checking if the current end of our path has an edge connecting 
+    to some $v'$ in $P$. If it does, we have cycle. If not, there will 
+    always be an edge to choose as we entered the vertex and it has even degree 
+    (so there must be another edge to leave it). As the edge set is finite,
+    this process must end, giving us a circuit (so a cycle). As we
+    have generated a cycle $C$, we create $G' = (V, E \setminus E(C))$. 
+    But now $|E(G')| < |E|$ so we can split its edge set into
+    disjoint subsets $E_1, \ldots, E_s$ satisfying the statement.
+    Thus, $E_1, \ldots, E_s, E(C)$ satisfies the statement for $G$.
+\end{proof}
+
+\subsubsection{Conditions for an Euler Circuit}
+
+An Euler circuit in a connected graph $G = (V, E)$ exists if and only 
+if each vertex in $V$ has even degree.
+\begin{proof}
+    If $G$ has an Euler circuit, the circuit must enter and exit each $v$
+    in $V$ an even number of times. Thus, the degree of each vertex is even.
+    If each $v$ in $V$ has even degree, consider (\ref{eulerpart}), partitioning
+    $E$ into disjoint subsets $E_1, \ldots, E_s$ all edge sets of cycles.
+    Taking $V(E_i)$ to be the vertex set traversed by $E_i$ for all $i$ in $[s]$,
+    we have that $V(E_1)$ must share a vertex with some $V(E_i)$ for some $i$ in $[s]$
+    as otherwise this would contradict the connectivity of $G$.
+    We stitch the edge sets together to form a circuit starting at some
+    intersection of $V(E_1)$ and $V(E_i)$ and traversing all of
+    $E_1$ then $E_i$. We repeat this until there is only one edge set
+    which must be our Euler circuit as its edge set is the union of a
+    partition of the edge set.
+\end{proof}
+
+\subsection{Hamiltonian Cycles}
+
+A Hamiltonian cycle is a cycle that visits each vertex exactly once.
+Graphs with Hamiltonian cycles are said to be Hamiltonian.
+
+\subsubsection{Hamiltonian Paths}
+
+A Hamiltonian path is a path that visits each vertex exactly once.
+
+\subsubsection{Dirac's Theorem}
+
+For a graph $G = (V, E)$ where $n = |V| \geq 3$: \begin{gather*}
+  \delta(G) \geq \frac{n}{2} \Rightarrow G \text{ is Hamiltonian.}
+\end{gather*}
+\begin{proof}
+    Observe that for some $x, y$ in $V$ if $\{x, y\}$ is not in $E$,
+    then we have that as $|V \setminus \{x, y\}| = n - 2$ and
+    $|N_G(x)| \geq \frac{n}{2}$, and $|N_G(y)| \geq \frac{n}{2}$: 
+    \begin{gather*}
+        N_G(x) \cap N_G(y) \neq \emptyset,
+    \end{gather*} by the Pigeonhole principle. Take $P = (x_1, \ldots, x_k)$
+    to be the longest path in $G$. We have that $k \geq 3$ as $G$ is
+    connected on at least 3 vertices. Also, we can assume $G$ has no
+    $k$-cycle as: \begin{itemize}
+        \item If $k = n$, we have the desired Hamiltonian cycle,
+        \item If $k < n$, we have a $k$-cycle in $G$, but as $G$ is connected
+        we can take some $x$ in $N_G(P)$ and connect it to $P$ to form
+        a path of length $k + 1$ contradicting the maximality of $P$. 
+    \end{itemize} Thus, we have that $\{x_1, x_k\}$ is not in $E$.
+    Also, we have that for any $i$ in $\{2, \ldots, k - 1\}$, we can't
+    have $\{x_1, x_i\}$ and $\{x_{i - 1}, x_k\}$ in $E$ as that would form
+    a $k$-cycle $P_k$: \begin{gather} \label{consecneighbours}
+        P_k = (x_1, x_i, \ldots, x_k, x_{i - 1}, \ldots, x_2).
+    \end{gather} By the maximality of $P$: 
+    \begin{equation*}   
+        \begin{aligned}
+            N_G(x_1) &\subseteq \{x_2, \ldots, x_{k - 1}\} \\
+            N_G(x_k) &\subseteq \{x_2, \ldots, x_{k - 1}\},
+        \end{aligned}
+    \end{equation*}
+    as otherwise we could simply connect the element not in our
+    path to end of $P$, contradicting the maximality of $P$.
+    It follows that: \begin{gather*}
+        N_G(x_1) = \{x \in V : \{x_1, x\} \in E\} \qquad
+        \text{and} \qquad
+        N_G(x_i)^+ = \{x_i : x_{i - 1} \in N_G(x_k)\},
+    \end{gather*} are disjoint subsets of $\{x_2, \ldots, x_k\}$
+    by the statement describing (\ref{consecneighbours}).
+    But, $\{x_2, \ldots, x_k\}$ is of size $k - 1$ and; 
+    $N_G(x_1)$ and $N_G(x_1)^+$ both have size at least $\frac{n}{2}$.
+    Thus, a contradiction - $G$ has a Hamiltonian cycle.
+\end{proof}

@@ -1,0 +1,87 @@
+\section{Combinatorial Designs}
+
+\subsection{Set Systems}
+
+For $V$ a finite set, we let $B$ be a collection of subsets of $V$.
+We call the pair $(V, B)$ a set system with ground set $V$.
+
+\subsubsection{$k$-uniformity of Set Systems}
+
+For a set system $(V, B)$, if for all elements in $B$, 
+each element has the same cardinality $k$,
+we have that $(V, B)$ is $k$-uniform.  
+ 
+\subsection{Block Designs} For $v, k, t, \lambda$ integers,
+we suppose: \begin{gather*}
+  v > k \geq t \geq 1, \qquad \lambda \geq 1.
+\end{gather*} A block design of type: \begin{gather*}
+  t-(v, k, \lambda),
+\end{gather*} is a set system $(V, B)$ with the following properties:
+\begin{itemize}
+  \item $V$ has size $v$,
+  \item $(V, B)$ is $k$-uniform,
+  \item Each $t$-element subset of $V$ is contained in exactly
+  $\lambda$ 'blocks' (elements of $B$).
+\end{itemize}
+
+\subsubsection{The Quantity of Blocks in a Block Design}
+
+For a block design of type $t-(v,k,\lambda)$, we have that the number
+of blocks $b$ can be derived as follows: \begin{gather*}
+  b = \frac{\lambda\binom{v}{t}}{\binom{k}{t}}.
+\end{gather*}
+\begin{proof}
+    We show this by double counting. Take $(V, \mathcal{B})$ to be the
+    associated set system. We consider $N$ the number of pairs
+    $(T, B)$ where $T$ is some $t$-element subset of $V$ and $B$
+    is a block containing all of $T$. 
+    \newpage \noindent
+    If we consider the choices of
+    $T$ first: \begin{gather*}
+        N = \binom{v}{t} \cdot \lambda,
+    \end{gather*} and if we consider $B$ first: \begin{gather*}
+        N = b \cdot \binom{k}{t}.
+    \end{gather*} By some simple rearranging, we get the result.
+\end{proof}
+
+\subsection{The Replication Number}
+
+In a block design of type $2-(v,k,\lambda)$, every element lies in
+exactly $r$ blocks where: \begin{gather*}
+  r(k - 1) = \lambda(v - 1), \qquad bk = vr.
+\end{gather*} $r$ is the replication number.
+\begin{proof}
+    We show this by double counting. Take $(V, \mathcal{B})$ to be the
+    associated set system. We fix $v$ in $V$ and consider $N$ the number 
+    of pairs $(T, B)$ where $T$ is some $2$-element subset (containing $v$) 
+    of $V$ and $B$ is a block containing all of $T$. If we consider the 
+    choices of $T$ first: \begin{gather*}
+        N = (v - 1) \cdot \lambda,
+    \end{gather*} and if we consider $B$ first: \begin{gather*}
+        N = r(k - 1),
+    \end{gather*} as there are $r$ blocks containing $v$ and $k - 1$
+    other elements in each block that can form a 2-element subsets
+    with $v$. If $T$ is instead a $1$-element subsets: \begin{gather*}
+        N = bk,
+    \end{gather*} as there are $b$ blocks each with $k$ elements, or: \begin{gather*}
+        N = vr, 
+    \end{gather*} because each element appears in $r$ blocks.
+\end{proof}
+
+\subsection{Fisher's Inequality}
+
+For $(V, B)$ a block design of type $2 - (v, k, \lambda)$ with $v > k$,
+we have that: \begin{gather*}
+  |B| \geq |V|.
+\end{gather*}
+
+\subsubsection{Incidence Matrices}
+
+For a set system $(V, B)$ with $|V| = v$ and $|B| = b$ we define the
+incidence matrix $A$ as a matrix in $M_{v, b}$ where $A = (a_{ij})$ 
+and: \begin{gather*}
+  a_{ij} = \begin{cases}
+    1 & \text{if element } i \text{ is in block } j \\
+    0 & \text{otherwise}.
+  \end{cases}
+\end{gather*}

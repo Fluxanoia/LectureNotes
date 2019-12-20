@@ -1,0 +1,76 @@
+\section{Generating Functions}
+
+For a sequence $(a_n)_{n \geq 0}$, we can associate a power series: 
+\begin{gather*}
+  f(x) = \sum_{k = 0}^\infty a_nx^n = a_0 + a_1x + a_2x^2 + \cdots.
+\end{gather*} We say $f(x)$ is the generating function of $(a_n)$,
+or write: \begin{align*}
+  a_0, a_1, a_2, \ldots &\leftrightarrows a_0 + a_1x + a_2x^2 + \cdots \\
+  (a_n)_{n \geq 0} &\leftrightarrows f(x).
+\end{align*} Note, however, that this doesn't imply that the series is convergent.
+
+\subsection{Generating Functions of Finite Sequences}
+
+For finite sequences (or rather, sequences with finitely many
+non-zero terms), we have that their generating functions
+can be written as polynomials.
+
+\subsection{Useful Generating Functions}
+
+The following generating functions are useful to know: \begin{align*}
+  1, 1, 1, \ldots &\leftrightarrows 1 + x + x^2 + \cdots = \frac{1}{1 - x} \\
+  1, -1, 1, -1, \ldots &\leftrightarrows 1 - x + x^2 - x^3 + \cdots = \frac{1}{1 + x} \\
+  \left(\binom{n}{k}\right)_{k \geq 0} &\leftrightarrows (1 + x)^n \\
+  \left(\binom{n - 1 + k}{n - 1}\right)_{k \geq 0} &\leftrightarrows \frac{1}{(1 - x)^n} \\
+  1, 2, 3, \ldots &\leftrightarrows 1 + 2x + 3x^2 + \cdots = \frac{1}{(1 - x)^2} \\
+  1, 4, 9, \ldots &\leftrightarrows 1 + 2x + 3x^2 + \cdots = \frac{1 + x}{(1 - x)^3} \\
+  1, 0, 1, 0, 1, \ldots &\leftrightarrows 1 + x^2 + x^4 + \cdots = \frac{1}{1 - x^2} \\
+  1, \underbrace{0, \ldots, 0}_\text{$n$ zeroes}, 1, \ldots 
+  &\leftrightarrows 1 + x^n + x^{2n} + \cdots = \frac{1}{1 - x^{n + 1}}, \\
+\end{align*}
+
+\subsection{The Scaling Rule}
+
+For a sequence $(a_n)_{n \geq 0}$ with an
+associated generating function $f(x)$ and $c$ in $\mathbb{R}$: \begin{gather*}
+  (ca_n)_{n \geq 0} \leftrightarrows cf(x).
+\end{gather*}
+
+\subsection{The Addition Rule}
+
+For the sequences $(a_n)_{n \geq 0}$, $(b_m)_{m \geq 0}$ 
+with the associated generating functions $f(x), g(x)$ respectively: \begin{gather*}
+  (a + b)_{n \geq 0} \leftrightarrows f(x) + g(x).
+\end{gather*}
+
+\subsection{The Right-Shift Rule}
+
+For a sequence $(a_n)_{n \geq 0}$ with an associated generating 
+function $f(x)$, we can add $k$ in $\mathbb{Z}_{\geq 0}$ leading zeroes by
+multiplying the sequence by $x_k$: \begin{gather*}
+  \underbrace{0, \ldots, 0}_\text{$k$ zeroes}, a_0, a_1, \ldots \leftrightarrows x^kf(x).
+\end{gather*}
+
+\subsection{The Differentiation Rule}
+
+For a sequence $(a_n)_{n \geq 0}$ with an associated generating 
+function $f(x)$, we have that: \begin{gather*}
+  a_1, 2a_2, 3a_3, \ldots \leftrightarrows \frac{d}{dx}f(x).
+\end{gather*}
+
+\subsection{The Convolution Rule}
+
+For the sequences $(a_n)_{n \geq 0}, (b_m)_{m \geq 0}$ with 
+associated generating functions $f(x), g(x)$ respectively.
+We have that: \begin{gather*}
+  c_0, c_1, c_2, \ldots \leftrightarrows f(x) \cdot g(x),
+\end{gather*} where: \begin{gather*}
+  c_n := \sum_{i = 0}^{n} a_ib_{n - i} = a_0b_n + a_1b_{n-1} 
+  + \cdots + a_{n-1}b_1 + a_nb_0.
+\end{gather*}
+
+\subsection{The Negative Binomial Theorem}
+
+For all $n$ in $\mathbb{Z}_{> 0}$, we have that: \begin{gather*}
+  (1 + x)^{-n} = \sum_{k = 0}^\infty (-1)^k\binom{n + k - 1}{n - 1}x^k.
+\end{gather*}
