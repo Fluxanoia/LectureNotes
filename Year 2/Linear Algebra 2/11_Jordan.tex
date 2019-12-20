@@ -1,8 +1,9 @@
-\section{Jordan Normal Form}
+\section{Jordan}
 
-\subsection{Definition of a Jordan Block}
+\subsection{Jordan Blocks}
 
-For a field $K$, $h$ in $\mathbb{N}$, a Jordan block of size $h \times h$
+For a field $K$, $h$ in $\mathbb{Z}_{> 0}$, a Jordan block of size 
+$h \times h$
 on $\lambda$ in $K$ is the matrix of the form: \begin{gather*}
   J_h(\lambda) = \begin{pmatrix}
     \lambda & 1       & 0      & \cdots  & 0       \\
@@ -19,59 +20,166 @@ on $\lambda$ in $K$ is the matrix of the form: \begin{gather*}
   \end{cases}
 \end{gather*}
 
-\subsection{Definition of a Jordan Matrix}
+\subsubsection{Jordan Matrices}
 
 For a field $K$, a Jordan matrix consisting of Jordan blocks of sizes 
-$\{h_1, \ldots, h_n\}$ in $\mathbb{N}$ and values 
+$\{h_1, \ldots, h_n\}$ in $\mathbb{Z}_{>0}$ and values 
 $\{\lambda_1, \ldots, \lambda_n\}$ in $K$ has the form: \begin{gather*}
   J = \begin{pmatrix}
-    J_{h_1}(\lambda_1) & 0                  & \cdots & 0      \\
-    0                  & J_{h_2}(\lambda_2) & \ddots & \vdots \\
-    \vdots             & \ddots             & \ddots & 0      \\
-    0                  & \cdots             & 0      & J_{h_n}(\lambda_n)
+    J_{h_1}(\lambda_1) & 0                  & \cdots & \cdots & 0      \\
+    0                  & J_{h_2}(\lambda_2) & \ddots &        & \vdots \\
+    \vdots             & \ddots             & \ddots & \ddots & \vdots \\
+    \vdots             &                    & \ddots & \ddots & 0      \\
+    0                  & \cdots             & \cdots & 0      & J_{h_n}(\lambda_n)
   \end{pmatrix}
 \end{gather*}
 
-\subsubsection{Definition of Jordan Normal Form}
+\subsubsection{Jordan Normal Form}
 
 A Jordan normal form of a matrix $A$ is a Jordan matrix that is similar to $A$.
 
-\subsection{Definition of a Jordan Basis}
+\subsection{Jordan Bases}
 
 For an algebraically closed field $K$, a finite dimensional vector space $V$ over
-$K$, with $f$ in End$(V)$, we have that a basis $B$ of $V$ is a Jordan basis for
-$f$ if: \begin{gather*}
-  M_{BB}(f) \text{ is Jordan}.
-\end{gather*}
+$K$, with $f$ in $\mathcal{L}(V, V)$, we have that a basis $B$ of $V$ is a 
+Jordan basis for $f$ if $M_{BB}(f)$ is a Jordan matrix.
 
-\subsection{Definition of Nilpotence}
-
-For a field $K$, a finite dimensional vector space $V$ over $K$, 
-with $f$ in End$(V)$, we have that $f$ is nilpotent if there exists $r$ in $\mathbb{Z}_{>0}$ 
-such that $f^r = 0$ in End$(V)$.
-\\[\baselineskip]
-We have that $0$ is the only eigenvalue of nilpotent maps, thus for some
-$m, m'$ in $\mathbb{Z}_{>0}$ with $m' \leq m$: \begin{itemize}
-  \item $p_f(x) = x^m$
-  \item $m_f(x) = x^{m'}$
-  \item $V = V(0)$, the zero eigenspace.
-\end{itemize}
-
-\subsection{Nilpotent Maps on Eigenspaces}
-
-Let $K$ be a field, $V$ be a finite dimensional vector space over $K$, 
-$f$ be in End$(V)$, $\lambda$ be an eigenvalue of $f$. Let $g: V(\lambda) \to V(\lambda)$
-be $g(v) = f(v)$ for $v$ in $V(\lambda)$. So, we have that $(g - \lambda\text{id})$ is
-nilpotent.
-
-\subsection{Existence of Jordan Bases}
+\subsubsection{Existence of Jordan Bases}
 
 Let $K$ be an algebraically closed field, $V$ be a finite dimensional 
-vector space over $K$, $f$ be in End$(V)$, thus there exists a Jordan
-basis for $f$. 
+vector space over $K$, $f$ be in $L = \mathcal{L}(V, V)$. There exists a Jordan
+basis for $f$ and the Jordan normal form of $f$ is unique up to permutations
+of the Jordan blocks.
+\begin{proof}
+    We first suppose $f$ is nilpotent, so for some $t$ in 
+    $\mathbb{Z}_{\geq 0}$, $f^t = 0_L$. We know that $V = V(0)$
+    as $f$ has a single eigenvalue, zero. Take $V_0 = E(0)$
+    and $V_i$ for $i$ in $[t]$ to be defined as follows:
+    \begin{gather*}
+        V_i = \Ima(f^i) \cap V_0,
+    \end{gather*} so $V_i$ is the eigenvectors of $f^i$ (specifically
+    the ones in $E(0)$). Take $v$ in $V_i$, 
+    there exists some $v'$ such that $f^i(v') = v$ 
+    as $v$ is in $\Ima(f^i)$. So: \begin{align*}
+        v &= f^i(v') \\
+        &= f^{i - 1}(f(v')),
+    \end{align*} meaning that $v$ is in $\Ima(f^{i - 1})$. But, we also
+    have that $v$ must be in $V_0$ by the definition of $V_i$ so
+    $v$ is in $V_{i - 1}$. Hence, $V_i \subseteq V_{i - 1}$ and we 
+    can say that: \begin{gather*}
+        \{0_V\} \subseteq V_t \subseteq \cdots \subseteq V_1 \subseteq V_0.
+    \end{gather*} Let $h : E(0) \to \mathbb{Z}_{\geq 0}$ be the height
+    function.
+    Consider $B_{t - 1} = \{e_1, \ldots, e_{b_1}\}$ a basis
+    for $V_{t - 1}$. For each $b$ in $[b_1]$, let $h(e_b) = t - 1$ and
+    choose $v_b^{h(e_b)} = v_b^{t - 1}$ in $V$ such that: \begin{gather*}
+        f^{h(e_b)}(v_b^{h(e_b)}) = e_b.
+    \end{gather*} We can choose such a value in $V$ as $V_{t - 1} = V_{h(e_b)}$
+    is in the image of $f^{h(e_b)}$. Now, for $k$ in $[h(e_b)]$, we let: \begin{gather*}
+        v_b^{k - 1} = f(v_b^k).
+    \end{gather*} so that: \begin{align*}
+        v_b^{t - 2} &= f(v_b^{t - 1}) \\
+        v_b^{t - 3} &= f^2(v_b^{t - 1}) \\
+        &\cdots \\
+        v_b^1 &= f^{t - 2}(v_b^{t - 1}) \\
+        e_b = v_b^0 &= f^{t - 1}(v_b^{t - 1}).
+    \end{align*}
+    We extend $B_{t - 1}$ to $B_{t - 2}$
+    (a basis for $V_{t - 2}$) with new basis elements: \begin{gather*}
+        B_{t - 2} = \{e_1, \ldots, e_{b_1}, e_{b_1 + 1}, \ldots, e_{b_2}\}.
+    \end{gather*} 
+    Similarly to the above, take $b$ in $\{b_1 + 1, \ldots, b_2\}$ and
+    let $h(e_b) = t - 2$ and choose $v_b^{t - 2}$ such that
+    $f^{t - 2}(v_b^{t - 2}) = e_b$. We then define for $k$ in $[h(e_b)]$: 
+    \begin{gather*}
+        v_b^{k - 1} = f(v_b^k).
+    \end{gather*} so that: \begin{align*}
+        v_b^{t - 3} &= f(v_b^{t - 2}) \\
+        v_b^{t - 4} &= f^2(v_b^{t - 2}) \\
+        &\cdots \\
+        v_b^1 &= f^{t - 3}(v_b^{t - 2}) \\
+        e_b = v_b^0 &= f^{t - 2}(v_b^{t - 2}).
+    \end{align*} We continue this for all $V_{t - 3}, \ldots, {V_0}$.
+    We take $B_0 = V_0 = \{e_1, \ldots, e_n\}$ to be our basis 
+    extended to $V_0$ noting that $n = b_1 + \cdots + b_t = \Dim(V_0)$. 
+    We have: \begin{gather*}
+        B = \{v_i^j : 
+        \underbrace{1 \leq i \leq n}_\text{stack number}, 
+        \overbrace{0 \leq j \leq h(e_i)}^\text{stack height}
+        \},
+    \end{gather*} our Jordan basis. 
+    \\[\baselineskip]
+    We want to show linear independence
+    of $B$, so we take $\{a_i^j \in K : 1 \leq i \leq n, 0 \leq j \leq h(e_i)\}$
+    such that: \begin{gather} \label{jordanlinindep}
+        \sum_{i = 1}^{n} \sum_{j = 0}^{h(e_i)} a_i^j v_i^j = 0_V.
+    \end{gather} We first notice that for each $v_i^j$, $f^{j}(v_i^j) = e_i$
+    and so $f^{j + 1}(v_i^j) = 0_V$. Thus, applying $f^{t - 1}$ to both
+    sides of (\ref{jordanlinindep}) we get a linear combination
+    of basis vectors (specifically in $B_{t - 1}$) meaning each
+    element of $\{a_i^{t - 1} : 1 \leq i \leq n\}$ must be zero.
+    Thus, taking $0 \leq j_0 < j \leq t - 1$, where all elements
+    of $\{a_i^j : 1 \leq i \leq n\}$ are zero. By applying
+    $f^{j_0}$ to both sides of (\ref{jordanlinindep}) we see 
+    we have a linear combination of vectors in $V_{j_0}$ with 
+    coefficients $\{a_i^{j_0} : 1 \leq i \leq n\}$ necessarily
+    zero. So, by induction, all the coefficients are zero 
+    and $B$ is linearly independent.
+    \\[\baselineskip]
+    We want to show that $B$ spans $V$, remembering that $V = V(0)$,
+    we take $v$ in $V$ (necessarily a root vector), and has some
+    height $h_v \leq t$. Suppose $h_v = 1$, $B$ contains a basis for
+    $V_0$ so $v$ is in the span of $B$. Suppose $h_v = k + 1$ and
+    for each vector $v'$ of height less than or equal to $k$ we have 
+    that $v'$ is in the span of $B$. We have that $f^k(v)$ is in
+    $V_k$ as it's in $\Ima(f^k)$ and $f(f^k(v)) = 0_V$ so is in $V_0$.
+    Thus, considering $V_k \cap B = \{e_1, \ldots, e_j\}$ a basis
+    for $V_k$, we have $a_1, \ldots, a_j$ in $K$ such that: \begin{gather*}
+        f^k(v) = \sum_{i = 1}^j a_i e_i.
+    \end{gather*} Considering that each $e_i = f^k(v_i^k)$: \begin{align*}
+        f^k(v) &= \sum_{i = 1}^j a_i e_i \\
+        &= \sum_{i = 1}^j a_i f^k(v_i^k) \\
+        &= f^k \left( \sum_{i = 1}^j a_i v_i^k \right).
+    \end{align*} So, we can deduce that $v$ is in the span of $B$. Hence,
+    $B$ is a Jordan basis.
+    \\[\baselineskip]
+    To show uniqueness, the number of $m \times m$ Jordan blocks
+    is: \begin{gather*}
+        \Dim(\Ima(f^{m - 1}) \cap \Ker(f))) - \Dim(\Ima(f^m) \cap \Ker(f)),
+    \end{gather*} which is uniquely defined.
+    \\[\baselineskip]
+    Finally, we take $f$ to be any linear map. We consider
+    $\lambda_1, \ldots, \lambda_k$ to be the distinct eigenvalues of $f$.
+    By the Primary Decomposition Theorem, we have that: \begin{gather*}
+        V = \bigoplus_{i = 1}^k V( \lambda_i).
+    \end{gather*} For each $i$ in $[k]$, by the properties of the
+    root space, $V(\lambda_i)$ is $f$-invariant. So, we consider
+    $f_i : V(\lambda_i) \to V(\lambda_i); v \mapsto f(v)$.
+    We have that $(f_i - \lambda_i(\ID))$ has one eigenvalue,
+    zero. By using the Cayley-Hamilton theorem we can see that: \begin{gather*}
+        (f_i - \lambda_i(\ID))^{\Dim(V(\lambda_i))} = 0_{\mathcal{L}(V, V)},
+    \end{gather*} so $(f_i - \lambda_i(\ID))$ is nilpotent. By the above,
+    $(f_i - \lambda_i(\ID))$ has a Jordan basis $B_i$. Putting this together,
+    $B = \bigcup_{i = 1}^k B_i$ is a Jordan basis for $f$.
+\end{proof}
 
-\subsection{Uniqueness of Jordan Matrices}
+\subsubsection{Relation to Eigenvalue Multiplicity}
 
-For an algebraically closed field $K$, a finite dimensional vector space $V$ over
-$K$, with $f$ in $\mathcal{L}(V, V)$, we have that the Jordan form of the 
-matrix of $f$ is uniquely determined up to the permutations of the Jordan blocks.
+For a given eigenvalue: \begin{itemize}
+    \item The geometric multiplicity is the number of 
+    Jordan blocks with the eigenvalue,
+    \item The algebraic multiplicity is the sum of the sizes of all the Jordan blocks
+    corresponding to the eigenvalue,
+    \item The algebraic multiplicity in $m_f$ is the maximum size of a
+    Jordan block corresponding to the eigenvalue.
+\end{itemize}
+
+\subsubsection{Computing Jordan Bases}
+
+The process is as follows: \begin{itemize}
+    \item Compute the characteristic polynomial and factorise it,
+    \item For each eigenvalue, find the eigenspaces,
+    \item If the geometric multiplicity of an eigenvalue is 
+    less than the algebraic multiplicity then the difference
+    is the number of root vectors that need to be found.
+\end{itemize}

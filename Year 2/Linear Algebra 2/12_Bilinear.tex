@@ -1,6 +1,6 @@
 \section{Bilinear and Quadratic Forms}
 
-\subsection{Definition of a Bilinear Form}
+\subsection{Bilinear Forms}
 
 For $V$ a vector space over a field $K$, a bilinear form on $V$ is a map $\langle\,,\rangle : V \times V \to K$
 such that: \begin{align*}
@@ -9,57 +9,67 @@ such that: \begin{align*}
 \end{align*} for all $a, b$ in $K$, $u, v, w$ in $V$. Additionally, $\langle\,,\rangle$ is symmetric if 
 $\langle u, v \rangle = \langle v, u \rangle$.
 
-\subsection{Definition of a Quadratic Form}
+\subsection{Quadratic Forms}
 
 For $V$ a vector space over a field $K$ with $\langle \, , \rangle$ a symmetric bilinear form on
 $V$. The quadratic form $Q : V \to K$ associated to $\langle \, , \rangle$ is 
 $Q(v) := \langle v, v \rangle$.
 
-\subsubsection{Determining bilinear forms from quadratic forms}
+\subsubsection{Determining Bilinear Forms from Quadratic Forms}
 
 We have that if char$(K) \neq 2$, then $\langle \, , \rangle$ is uniquely defined by $Q$ as:
-\begin{gather*}
-  \langle v, w \rangle = 2^{-1}\left[Q(v + w) - Q(v) - Q(w) \right]. 
-\end{gather*} 
+\begin{align*}
+  2^{-1}[Q(v + w) - Q(v) - Q(w)] 
+  &= 2^{-1}[\langle v + w, v + w \rangle - Q(v) - Q(w)] \\
+  &= 2^{-1}[\langle v, v + w \rangle + \langle w, v + w \rangle - Q(v) - Q(w)] \\
+  &= 2^{-1}[2 \cdot \langle v, w \rangle] 
+  \tag{$\langle \, , \rangle$ is symmetric} \\
+  &= \langle v, w \rangle.
+\end{align*} 
 
-\subsection{Definition of Orthogonality}
+\subsection{Orthogonality}
 
-Let $\langle \, , \rangle$ be a bilinear form on $V$ with $v$ in $V$. We say that $u$ in $V$ is 
-orthogonal to $v$ if $\langle v, u \rangle = 0$. Note, be very careful as the bilinear is not
+Let $\langle \, , \rangle$ be a bilinear form on $V$ with $v, u$ in $V$. We say that $v$ in $V$ is 
+orthogonal to $u$ if $\langle u, v \rangle = 0$. Note, be very careful as the bilinear is not
 necessarily symmetric.
 
-\subsubsection{Definition of orthogonal spaces}
+\subsubsection{Orthogonal Spaces}
 
 For $W \subseteq V$, we have that $W^\perp$ is defined as: \begin{gather*}
   W^\perp = \{v \in V : w \in W, \langle w, v \rangle = 0\},
 \end{gather*} the set of vectors such that for all $v$ in $W^\perp$, $v$ is orthogonal
 to all of $W$. This is a subspace of $V$.
 
-\subsubsection{Definition of the kernel for bilinear maps}
+\subsubsection{The Kernel for Bilinear maps}
 
 The kernel of $\langle \, , \rangle$ is $V^\perp$. If the kernel is $\{0_V\}$,
 then the form is called non-degenerate and is called degenerate otherwise.
 
-\subsubsection{Dimension and orthogonal spaces}
+\subsubsection{Dimension and Orthogonal Spaces}
 
 We have that if $V$ is finite dimensional and $\langle \, , \rangle$ is non-degenerate
 then: \begin{gather*}
   \text{dim}(W^\perp) + \text{dim}(W) = \text{dim}(V).
 \end{gather*}
+\begin{proof}
+    We note that $f$, the map corresponding to $\langle \, , \rangle$
+    is an isomorphism. Thus: \begin{gather*}
+        \Dim(W^\perp) = \Dim(f(W^\perp)) = \Dim(W^0) = \Dim(V) - \Dim(W). \qedhere
+    \end{gather*}
+\end{proof}
 
 \subsection{Linear Maps from Bilinear Forms}
 
 We can form a linear map $f : V \to V^*$ from a bilinear form $\langle \, , \rangle$ 
 as follows: \begin{gather*}
   f(v)(u) = \langle u, v \rangle.
-\end{gather*} We have that a bilinear form is non-degenerate if and only if its corresponding
-linear map is an isomorphism.
+\end{gather*}
 
 \subsubsection{Isomorphismic Bilinear Maps}
 
 If $V$ is finite dimensional, we have that $f$ is an isomorphism if and only if 
 $\langle \, , \rangle$ is non-degenerate. That is, $\text{Ker}(f) 
-= \text{Ker}(\langle \, , \rangle) = V^\perp$.
+= \text{Ker}(\langle \, , \rangle) = V^\perp = \{0_V\}$.
 
 \subsection{Matrices from Bilinear Forms}
 
@@ -68,9 +78,9 @@ an ordered basis for $V$. Let $B = \langle \, , \rangle$ be a bilinear form. The
 to $B$ with respect to $S$ is $M_{SS}(B) = (b_{ij})$ where: \begin{gather*}
   b_{ij} = \langle v_i, v_j \rangle.
 \end{gather*} Similarly, taking $S^* = \{v^*_1, \ldots, v^*_n\}$ to be a dual basis for
-$S^*$, we have a matrix $M_{SS^*}(f) = M_{SS}(B)$ for the linear map corresponding to $B$.
+$S^*$, we have a matrix $M_{SS^*}(f) = M_{SS}(B)$ for the linear map $f$ corresponding to $B$.
 
-\subsubsection{Determining bilinear forms from matrices}
+\subsubsection{Determining Bilinear Forms from Matrices}
 
 Take $u, v$ in $V$ decomposed into vectors in $S$ with coefficients $x_1, \ldots, x_n$
 and $y_1, \ldots, y_n$ respectively. Thus: \begin{gather*}
@@ -79,14 +89,14 @@ and $y_1, \ldots, y_n$ respectively. Thus: \begin{gather*}
   \end{pmatrix}.
 \end{gather*}
 
-\subsubsection{Properties of matrices of bilinear forms}
+\subsubsection{Properties of Bilinear Matrices}
 
 We have that: \begin{itemize}
-  \item If $M_{SS}(B)$ is symmetric, so is $B$
+  \item $M_{SS}(B)$ is symmetric if and only if $B$ is symmetric,
   \item $B$ is non-degenerate if and only if $M_{SS}(B)$ is invertible.
 \end{itemize}
 
-\subsection{Similarity of Matrices of Bilinear Forms}
+\subsubsection{Similarity of Matrices of Bilinear Forms}
 
 For $V$ a finite $n$-dimensional vector space over the field $K$ with char$(K) \neq 2$, 
 let $S = \{v_1, \ldots, v_n\}$, $S' = \{v_1', \ldots, v_n'\}$ be
@@ -95,14 +105,14 @@ Let $C = C_{SS'}$ be the transition matrix. We have that: \begin{gather*}
   M_{S'S'}(B) = C^tM_{SS}(B)C.
 \end{gather*}
 
-\subsection{Diagonal Matrices of Bilinear Forms}
+\subsubsection{Diagonal Matrices of Bilinear Forms}
 
 For $V$ a finite $n$-dimensional vector space over the field $K$ with char$(K) \neq 2$, 
 let $B = \langle \, , \rangle$ be a symmetric bilinear form.
 There exists a basis $S = \{v_1, \ldots, v_n\}$ for $V$ consisting of pairwise orthogonal
 vectors and thus, the matrix $M_{SS}(B)$ is diagonal.
 
-\subsection{Definition of an Inner Product}
+\subsection{Inner Products}
 
 For a vector space $V$ over $K$ with symmetric bilinear form $B : V \times V \to K$, we
 have that $B$ is an inner product if for all $v$ in $V$: \begin{gather*}

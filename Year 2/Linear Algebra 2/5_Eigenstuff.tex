@@ -136,15 +136,28 @@ This is denoted by $E(\lambda)$ and $E(\lambda)\cup\{0_{V}\}$ forms
 a subspace of $V$. The dimension of $E(\lambda)$ is the geometric
 multiplicity of $\lambda$.
 
+\subsubsection{Nilpotent Maps on Eigenspaces}
+
+Let $K$ be a field, $V$ be a finite dimensional vector space over $K$, 
+$f$ be in $\mathcal{L}(V, V)$, and $\lambda$ be an eigenvalue of $f$. 
+Let $g: E(\lambda) \to E(\lambda)$ be $g(v) = f(v)$ for $v$ in $V(\lambda)$. 
+We have that $(g - \lambda\text{id})$ is nilpotent.
+
+\subsubsection{Eigenvalues on Nilpotent Maps}
+
+Let $K$ be a field, $V$ be a finite dimensional vector space over $K$, 
+$f$ be in $\mathcal{L}(V, V)$, and $\lambda$ be an eigenvalue of $f$.
+We have that if $f$ is nilpotent, $0_K$ is the only eigenvalue of $f$. 
+Thus, for some $m, m'$ in $\mathbb{Z}_{>0}$ with $m' \leq m$: \begin{itemize}
+  \item $p_f(x) = x^m$,
+  \item $m_f(x) = x^{m'}$,
+  \item $V = V(0)$, the zero root space of $f$.
+\end{itemize}
+
 \subsubsection{Multiplicity}
 
-For $V$ a vector space over $K$ with $f : V \to V$ and $\lambda$ an 
+For $V$ a vector space over $K$ with $f : V \to V$ a linear map 
+and $\lambda$ an 
 eigenvalue in $K$ of $f$. We have that the algebraic multiplicity of
 $\lambda$ is the multiplicity of $\lambda$ in $p_f$. The geometric
 multiplicity of $\lambda$ is $\Dim(E(\lambda))$.
-\\[\baselineskip]
-The geometric multiplicity is the number of Jordan blocks with eigenvalue $\lambda$.
-The algebraic multiplicity is the sum of the sizes of all the Jordan blocks
-corresponding to $\lambda$.
-The algebraic multiplicity of $\lambda$ in $m_f$ is the maximum size of a
-Jordan block corresponding to $\lambda$.
