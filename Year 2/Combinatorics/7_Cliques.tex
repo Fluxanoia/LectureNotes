@@ -1,0 +1,73 @@
+\section{Cliques and Independent Sets}
+
+A clique of size $n$ in a graph $G$ is a subgraph $G'$ of $G$ isomorphic
+to $K_n$.
+We often call the clique on three vertices ($K_3$) a triangle. 
+A graph $G$ contains a triangle if it has a $3$-clique.
+
+\subsection{Mantel's Theorem}
+
+For $G = (V, E)$ a graph of order $n$ that contains no triangles, we have that: \begin{gather*}
+  |E| \leq \left\lfloor \frac{n^2}{4} \right\rfloor = \left\lfloor \left(\frac{n}{2}\right)^2 \right\rfloor.
+\end{gather*}
+\begin{proof}
+    Suppose $n = 1$, $|E| = 0$ so: \begin{gather*}
+        0 = |E| \leq \left\lfloor \frac{n^2}{4} \right\rfloor = 0.
+    \end{gather*}
+    Suppose $n = 2$, $|E| = 1$ so: \begin{gather*}
+        1 = |E| \leq \left\lfloor \frac{n^2}{4} \right\rfloor = 1.
+    \end{gather*}
+    Suppose $n > 2$ and for any graph of strictly smaller order, we have that
+    the statement holds. Let $x, y$ be vertices in $V$ joined by an edge. We
+    observe that: \begin{gather} \label{manteldeg}
+        \Deg(x) + \Deg(y) \leq n,
+    \end{gather} otherwise, the intersection of their neighbourhood is 
+    non-empty giving us a triangle in $G$. Let $G' = (V \setminus \{x, y\}, E')$ 
+    be the induced subgraph on $V \setminus \{x, y\}$. We can see that 
+    $G'$ must not contain a triangle otherwise $G$ would contain said triangle.
+    So, we apply the inductive hypothesis to see that: \begin{gather}
+        |E'| \leq \frac{(n - 2)^2}{4} = \frac{n^2}{4} - n + 1
+    \end{gather} 
+    By applying (\ref{manteldeg}) and the above we see that: \begin{align*}
+        |E| &\leq |E'| +
+        \overbrace{\Deg(x) + \Deg(y) - 1}^\text{edges removed by $G'$} \\
+        &\leq \frac{(n - 2)^2}{4} + n - 1 \\
+        &= \frac{n^2}{4}.
+    \end{align*} As required.
+\end{proof}
+
+\subsubsection{Mantel's Theorem on Equality}
+
+For $G = (V, E)$ a graph of order $n$ that contains no triangles, we have that:
+\begin{gather*}
+    \left[ |E| = \left\lfloor \frac{n^2}{4} \right\rfloor \right]
+    \Rightarrow
+    \left[ G \cong K_{k, n - k} \text{ where } k = \left\lfloor \frac{n}{2} \right\rfloor \right].
+\end{gather*}
+\begin{proof}
+    Suppose $n = 1$, $|E| = 0$ so $G \cong K_{0, 1}$.
+    Suppose $n = 2$, $|E| = 1$ so $G \cong K_{1, 1}$.
+    Suppose $n > 2$ and for any graph of strictly smaller order, we have that
+    the statement holds. Let $x, y$ be vertices in $V$ joined by an edge. We
+    observe that: \begin{gather} \label{manteldegeq}
+        \Deg(x) + \Deg(y) \leq n,
+    \end{gather} otherwise, the intersection of their neighbourhood is 
+    non-empty giving us a triangle in $G$. Let $G' = (V \setminus \{x, y\}, E')$ 
+    be the induced subgraph on $V \setminus \{x, y\}$. We can see that 
+    $G'$ must not contain a triangle otherwise $G$ would contain said triangle.
+    We can see that $G'$ has at most $n - 1$ less edges than $G$ by
+    (\ref{manteldegeq}) but Mantel's Theorem says: 
+    \begin{gather} \label{manteleeq} 
+        |E'| \leq \frac{(n - 2)^2}{4} = \frac{n^2}{4} - n + 1,
+    \end{gather} meaning $G'$ removes at least $n - 1$ edges from $G$.
+    This means that the relations in (\ref{manteldegeq}) and (\ref{manteleeq}) 
+    are actually equality. So, by the inductive hypothesis, $G'$ is isomorphic
+    to $K_{\lfloor(n - 2)/2\rfloor, (n - 2) - \lfloor(n - 2)/2\rfloor}$. Taking 
+    $G'$ to have bipartition $(X, Y)$, we try adding $x$ and $y$ back to $G'$ to 
+    get $G$. We see that because: \begin{gather*}
+        \Deg(x) + \Deg(y) = n,
+    \end{gather*} and any edges from $x$ or $y$ can't connected two vertices
+    in $X$ or $Y$ (or that would form a triangle), the only possibility is 
+    that $x$ is connected to all of $Y$ and $y$ is connected to all of $X$ 
+    (or vice versa) as required.
+\end{proof}

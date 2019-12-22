@@ -1,0 +1,117 @@
+\section{Graph Colouring}
+
+\subsection{$k$-colouring}
+
+A $k$-colouring of a graph $G = (V, E)$ is an assignment of $[k]$ to $V$ 
+performed by $c : V \to [k]$ such that for $u, v$ adjacent vertices in $V$, 
+$c(u) \neq c(v)$. A graph is $k$ colourable if a $k$-colouring exists for it.
+
+\subsection{Chromatic Number}
+
+The chromatic number of a graph $G$ denoted by $\chi(G)$ is the smallest 
+$k$ such that $G$ is $k$ colourable.
+
+\subsubsection{Bound on Chromatic Number}
+
+For a graph $G = (V, E)$, we have that for some $k$ in $\mathbb{Z}$, if $\Delta(G) \leq k$
+then $\chi(G) \leq k + 1$.
+\begin{proof}
+    Suppose $|V| = 1$, then $\Delta(G) = 0$ and we can see that $G$ is 1-colourable.
+    Suppose $|V| > 1$ and the statement holds for all graphs on strictly fewer vertices.
+    Pick some $x$ in $V$, let $G' = (V \setminus \{x\}, E')$ be the induced graph
+    on $V \setminus \{x\}$. We have that $\Delta(G') \leq \Delta(G)$ as we only
+    removed edges to form $G'$ from $G$. 
+    Thus, $G'$ is at least ($k + 1$)-colourable by the inductive hypothesis. 
+    We take some $(k + 1)$-colouring of $G'$ and we apply it to $G$, leaving all but 
+    $x$ coloured.
+    As $\Deg(x) \leq k$, even if each of the vertices connected to $x$ have distinct
+    colours, there will still be the $(k + 1)^\text{th}$ colour for $x$ to use.
+    Thus, $G$ is ($k + 1$)-colourable as required.
+\end{proof}
+
+\subsection{Maps}
+
+A map is a graph derived from some traditional map where regions correspond to faces,
+points where at least three regions border each other are vertices and, the border between
+exactly two regions are edges. We assume these regions are connected and they do not touch
+solely at a point (or several points).
+
+\subsubsection{Dual Graphs}
+
+Given a planar graph $G = (V, E)$ and a fixed planar drawing of $G$, the dual graph
+$G^* = (V^*, E^*)$ relative to this drawing is a planar graph obtained by assigning
+a vertex to each face and connecting these vertices by and edge if their corresponding
+faces border.
+\\[\baselineskip]
+These are key in considering colourings of maps as we can consider the coloring
+of faces of a given graph.
+
+\subsubsection{$k$-colourability of the Dual Graph}
+
+We have that for a graph $G$, $G$ is $k$-colourable if and only if $G^*$ is 
+$k$-colourable. 
+
+\subsubsection{Five Colour Theorem}
+
+Every map with corresponding graph $G = (V, E)$ can be coloured with five colours, 
+that is $\chi(G) \leq 5$.
+\begin{proof}
+    Suppose $|V| \leq 5$, then we just assign each vertex a unique colour and 
+    we are done.
+    Suppose $|V| > 5$ and for all planar graphs on strictly fewer vertices, 
+    we have that said graph is 5-colourable. We know that $G$ has a vertex
+    of degree at most five as if all $v$ in $V$ were such that $\Deg(v) \geq 6$
+    then: \begin{gather*}
+        |E| = \frac{1}{2}\sum_{v \in V} \Deg(v) \geq 3|V|,
+    \end{gather*} but $|E| \leq 3|V| - 6$ so: \begin{gather*}
+        3|V| \leq |E| \leq 3|V| - 6,
+    \end{gather*} which is impossible. So, taking $v$ in $V$ to have degree
+    at most five, we split our argument into two cases.
+
+    \paragraph{Case 1} Suppose $\Deg(v) < 5$. We consider
+    $G' = (V \setminus \{v\}, E')$ the induced graph on $V \setminus \{v\}$.
+    By the inductive hypothesis, we have a 5-colouring of $G'$. Applying this
+    to $G$, we leave $v$ yet to be coloured. As $v$ has four or fewer neighbours,
+    we can choose a remaining colour from our colour set and colour $v$.
+    
+    \paragraph{Case 2} 
+    Suppose $\Deg(v) = 5$. We fix a planar drawing of $G$ and label 
+    the neighbours of $v$ with $t, u, x, y, z$ (clockwise about $v$ with respect to
+    our fixed drawing). By the inductive hypothesis, we have a 5-colouring on the
+    induced subgraph on $V \setminus \{v\}$ (similarly to \textbf{Case 1}). Applying
+    this colouring to $G$, we have yet to colour $v$. If $t, u, x, y, z$ use
+    at most four colours, we can use the remaining colour in our colour set
+    to colour $v$. Otherwise, we consider: \begin{gather*}
+        C : N(v) \to \{c_1, c_2, c_3, c_4, c_5\},
+    \end{gather*} where $\{c_1, \ldots, c_5\}$ is the colour set and
+    for each $v'$ in $N(v)$, $C(v')$ maps to the colour of $v'$ in our
+    colouring.
+
+    \paragraph{Case 2a} 
+    Suppose there is no path connecting $x$ and $z$ in $G$ without traversing $v$.
+    Take $V_{x}$ to be the set of vertices with a path $P$ leading to $x$
+    such that: \begin{itemize}
+        \item For each vertex in $P$, it is either $C(x)$ or $C(z)$ coloured,
+        \item $P$ does not include $v$.
+    \end{itemize} We can see that $z$ is not in $V_x$ as we cannot traverse $v$.
+    We define a new colouring on $G$ where each $v'$ in $V_x$ has its colour changed
+    to $C(x)$ if it was $C(z)$ coloured and vice versa. This must be a valid
+    colouring because if there was a conflict, then that would mean that some
+    $C(x)$ coloured vertex $v_x$ was connected to a $C(z)$ coloured vertex $v_z$
+    but exactly one of $v_x$ and $v_z$ was not in $V_x$. But, this violates the 
+    definition of $V_x$ as they are connected so the path to one of them
+    defines the path to the other. With this new colouring, $C(x) = C(z)$
+    so we have a spare colour for $v$.
+        
+    \paragraph{Case 2b} 
+    Suppose there is a path $P_{xz}$ connecting $x$ and $z$ in $G$ without traversing $v$.
+    This path combined with $\{x, v\}$ and $\{v, z\}$ forms a cycle and hence a Jordan curve
+    enveloping either $y$ or; $t$ and $u$. Suppose there is a path connecting $y$ and $t$, 
+    then it must use a vertex in the cycle formed by $P_{xz}$ as one of $y$ or $t$ are
+    on the interior of the Jordan curve formed by it. Thus, taking $V_{y}$ to be the 
+    set of vertices with a path $P$ leading to $y$ such that: \begin{itemize}
+        \item For each vertex in $P$, it is either $C(y)$ or $C(t)$ coloured,
+        \item $P$ does not include $v$.
+    \end{itemize} We must have an analogous situation to \textbf{Case 2a} as there
+    is no path from $y$ to $t$ solely using vertices in $V_y$. This ends the proof.
+\end{proof}

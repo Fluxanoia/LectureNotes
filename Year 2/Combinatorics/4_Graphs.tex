@@ -96,8 +96,25 @@ Consider $G = (V, E)$ with $u, v$ in $V$, we have that:
   \text{There's a path between } u \text{ and } v.
 \end{gather*} Thus, where there's a cycle, there's a circuit
 and vice-versa.
-Additionally, if $G$ admits an odd circuit, there's also
-an odd cycle (and the converse holds too).
+
+\subsubsection{Odd Cycles in Odd Circuits} \label{oddcycles}
+
+If $G$ a graph admits an odd circuit, there's also
+an odd cycle in $G$.
+\begin{proof}
+  Take $C = (x_1, \ldots, x_n)$ to be an odd circuit in $G$.
+  Take $i, j$ in $[n]$ such that $i < j$ and $x_i = x_j$ (if no
+  such $i, j$ exist then $C$ is an odd cycle). As: \begin{align*}
+    C_1 &= (x_i, x_{i + 1}, \ldots, x_j) \\
+    C_2 &= (x_j, x_{j + 1}, \ldots, x_n, x_1, \ldots, x_i),
+  \end{align*} partition $C$, their lengths must sum to
+  the length of $C$, which is odd. Thus, the length of
+  $C_1$ or $C_2$ must be odd. Supposing without loss of generality
+  that $C_1$ is of odd length, if $C_1$ is a cycle, we are done.
+  If not, we repeat the process on $C_1$. The length of the circuit 
+  we are considering is strictly decreasing by this process, 
+  so this must terminate.
+\end{proof}
 
 \subsection{Connected Graphs}
 
@@ -113,6 +130,8 @@ A component of a graph $G$ is a maximally connected subgraph of $G$.
 An Euler circuit is a circuit in which each edge in a graph is
 traversed exactly once. As a consequence, each vertex is travelled 
 at least once. Graphs with Euler circuits are said to be Eulerian.
+
+\newpage
 
 \subsubsection{Partitioning Even Regular Graphs} \label{eulerpart}
 
@@ -162,6 +181,8 @@ Graphs with Hamiltonian cycles are said to be Hamiltonian.
 \subsubsection{Hamiltonian Paths}
 
 A Hamiltonian path is a path that visits each vertex exactly once.
+
+\newpage
 
 \subsubsection{Dirac's Theorem}
 

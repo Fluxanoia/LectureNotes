@@ -1,0 +1,97 @@
+\section{Planar Graphs}
+
+\subsection{Arcs}
+
+An arc is a subset of $\mathbb{R}^2$ of the type $\sigma : [0, 1] \to \mathbb{R}^2$ 
+where $\sigma$ is an injective, continuous map and $\sigma(0), \sigma(1)$
+are the endpoints of the arc. Injectivity here ensures the arc does not cross itself.
+
+\subsection{Drawings}
+
+For a graph $G = (V, E)$, drawing it is equivalent to assigning: \begin{itemize}
+  \item A point $p$ in $\mathbb{R}^2$ for each $v$ in $V$ (such that the map
+  from vertices to points is injective),
+  \item An arc $\sigma$ for each $e = \{x, y\}$ in $E$ (such that $\sigma$ intersects
+  exactly two points, the points corresponding to $x$ and $y$).
+\end{itemize}
+
+\subsection{Planar Drawings and Graphs}
+
+A drawing with a set of arcs $A$ is planar if for each $\sigma_1, \sigma_2$ in $A$, 
+we have that $\sigma_1, \sigma_2$ either intersect at their endpoints or not at all.
+A graph is planar if it admits at least one planar drawing.
+
+\subsubsection{Examples of Non-planar Subgraphs}
+
+We have that $K_5$ and $K_{3, 3}$ are not planar.
+
+\subsubsection{Consequences of Non-planar Subgraphs}
+
+If a graph has a non-planar subgraph, it can't be planar.
+
+\subsection{Jordan Curves}
+
+An arc in the plane whose endpoints are equal is called a Jordan curve.
+
+\subsubsection{Jordan Curve Theorem}
+
+For any Jordan curve $C$, $C$ divides the plane into exactly two connected regions
+called the 'interior' and 'exterior'. The curve is the boundary of these regions. 
+
+\subsection{Faces}
+
+For a planar graph $G$, a face of a drawing of $G$ is a connected region
+bound by the Jordan curves formed by the arcs of the drawing. 
+The region going off to infinity is the outer face and the rest are inner faces.
+
+\subsubsection{Euler's Formula}
+
+For a connected graph $G = (V, E)$ where $F$ is the set of faces of a given 
+drawing of $G$, we have that: \begin{gather*}
+  |V| - |E| + |F| = 2.
+\end{gather*}
+\begin{proof}
+    Suppose $|E| = 0$, then $|V| = 1$ and the number of faces is clearly one.
+    Thus: \begin{gather*}
+        |V| - |E| + |F| = 1 - 0 + 1 = 2,
+    \end{gather*} as required.
+    Suppose $|E| \geq 1$ and that Euler's formula holds for all graphs
+    on strictly fewer edges. If $G$ contains no cycles, it is a tree so
+    we know that $|V| = |E| - 1$. As there are no cycles, there are no
+    Jordan curves in our drawing. Thus, we know that $|F| = 1$: \begin{gather*}
+        |V| - |E| + |F| = |V| - (|V| - 1) + 1 = 2.
+    \end{gather*} If we now consider the case where $G$ contains at least one cycle,
+    we fix some $e$ in $E$ in the edge set of the cycle and consider 
+    $G' = (V, E \setminus \{e\})$. As $e$ was part of a cycle, $G'$ is connected.
+    So, we apply our inductive hypothesis to see that where $F'$ is the set
+    of faces of the drawing of $G'$ (the drawing for $G$ with the arc
+    corresponding to $e$ removed): \begin{align*}
+        |V| - |E \setminus \{e\}| + |F'| &=
+        |V| - (|E| - 1) + |F'| \\
+        &= 2.
+    \end{align*} We can see that $e$ was adjacent to two distinct faces of the drawing
+    of $G$. Thus, upon its removal, these two faces became one. So, $|F'| = |F| - 1$
+    and thus: \begin{align*}
+        |V| - |E| + |F| &= |V| - |E| + |F'| + 1 \\
+        &= |V| - (|E| - 1) + |F'| \\
+        &= 2.
+    \end{align*} as required.
+\end{proof}
+
+\subsection{Edge Bound on Planar Graphs}
+
+For $G = (V, E)$ a planar graph on at least three vertices: \begin{gather*}
+  |E| \leq 3(|V| - 2).
+\end{gather*}
+\begin{proof}
+    Consider a planar drawing on $G$ with a set of faces $F$. By Euler's formula,
+    we know that: \begin{gather*}
+        |V| - |E| + |F| = 2.
+    \end{gather*} We consider the number $N$ of pairs $(e, f)$ where
+    $e$ is an edge and $f$ is a face bordered by the arc corresponding to $e$.
+    Since each $e$ in $E$ borders on two faces, $N \leq 2|E|$. Since each face is
+    formed by a cycle which has at least 3 edges, $N \geq 3|F|$. Thus, 
+    $2|E| \geq 3|F|$. Combining this with Euler's formula we get that: \begin{gather*}
+        6 = 3|V| - 3|E| + 3|F| \leq 3|V| - |E|.
+    \end{gather*} The result follows.
+\end{proof}

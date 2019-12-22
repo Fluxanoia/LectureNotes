@@ -1,0 +1,100 @@
+\section{Trees and Forests}
+
+A graph is a forest if it is acyclic.
+A tree is a connected forest.
+
+\subsection{Leaves}
+
+For a tree $T = (V, E)$, for a vertex $v$ in $V$, $v$ is a leaf
+if $\Deg(v) = 1$. 
+
+\subsubsection{Existence of Leaves}
+
+If $|V| \geq 2$, we have that $T$ has at least two leaves.
+\begin{proof}
+    Take a maximal path $P = (x_1, \ldots, x_k)$ in $T$.
+    Thus, $N(x_1) \subseteq P$ and $N(x_k) \subseteq P$
+    as otherwise we could add another vertex to our path.
+    But, if $x_1$ connects to any vertex in $\{x_3, \ldots, x_k\}$
+    (and similarly for $x_k$ and $\{x_1, \ldots, x_{k - 2}\}$) then
+    we have a cycle. So, $N(x_1) = \{x_2\}$ (and $N(x_k) = \{x_{k - 1}\}$)
+    so we have two leaves.
+\end{proof}
+
+\subsection{Characterisation of Trees}
+
+We have that for a graph $G = (V, E)$, the following are equivalent:
+\begin{itemize}
+  \item $G$ is a tree,
+  \item $G$ is maximally acyclic ($G$ is acyclic and the addition
+  of any edge forms a cycle),
+  \item $G$ is minimally connected ($G$ is connected and the removal
+  of any edge disconnects it),
+  \item $G$ is connected and $|E| = |V| - 1$,
+  \item $G$ is acyclic and $|E| = |V| - 1$,
+  \item Any two vertices in $G$ are connected by a unique path.
+\end{itemize}
+
+\subsection{Minimum Spanning Trees}
+
+In a graph $G = (V, E)$, a spanning tree $T = (V, E_T)$ is a tree
+with $E_T \subseteq E$.
+\\[\baselineskip]
+A spanning tree on $G$ is minimal if there is no other spanning tree
+on $G$ with a lower weight.
+
+\subsubsection{Existence of Spanning Trees}
+
+We have that there is a spanning tree in a graph $G$ if and only if
+$G$ is connected.
+
+\subsubsection{Kruskal's algorithm}
+
+For a connected graph $G = (V, E)$ and weight function 
+$w : E \to \mathbb{R}$, we have the following steps to the algorithm: 
+\begin{enumerate}
+  \item Generate a graph $T = (V, \emptyset)$,
+  \item Sort the edges in $E$ with respect to $w$,
+  \item For each edge $\{u, v\}$ (in increasing order of weights): \begin{itemize}
+    \item If $u$ or $v$ are not connected in $T$, add $(u, v)$ to $T$,
+    \item Stop if there are $|V| - 1$ edges in $T$ or if we have run
+    out of edges.
+  \end{itemize}
+\end{enumerate} This solves the minimum spanning tree problem.
+If $G$ is not connected, we get that $T$ has $n - k$ components.
+\begin{proof}
+    Take $n$ to be the order of $V$ and $T$ to be the spanning tree
+    output by Kruskal's. Take $T'$ to be any other spanning tree of $G$.
+    Take $E(T) = \{e_1, \ldots, e_{n - 1}\}$ and $E(T') = \{e_1', \ldots, e_{n - 1}'\}$
+    such that: \begin{gather*}
+        w(e_1) \leq \cdots \leq w_{e_{n - 1}} \\
+        w(e_1') \leq \cdots \leq w_{e_{n - 1}'}.
+    \end{gather*} We want to show for each $i$ in $[n - 1]$ that: 
+    \begin{gather} \label{kruskalw}
+        w(e_i) \leq w_(e_i')
+    \end{gather}
+    Suppose that (\ref{kruskalw}) is not true, so there is some $i$ in $[n - 1]$ such
+    that $w(e_i) > w(e_i')$. Take $i$ to be the least such value that $w(e_i) > w(e_i')$
+    and consider $S = \{e_1, \ldots, e_{i - 1}\}$ and $S' = \{e_1', \ldots, e_i'\}$.
+    We have that $(V, S)$ and $(V, S')$ are acyclic as they are subgraphs of trees,
+    so if we can find some $e$ in $S'$ such that $(V, S \cup \{e\})$ is acyclic
+    then we would reach a contradiction as: \begin{align*}
+        w(e) &\leq w(e_i') \tag{as $e$ is already in $S'$} \\
+        &< w(e_i).
+    \end{align*} Meaning that $e$ has already been considered by our algorithm
+    when building $T$ and should have been added if it didn't form a cycle.
+    \newpage
+    We consider $V_1, \ldots, V_k$ the vertex sets of the components of $(V, S)$.
+    Thus, for each $j$ in $[k]$: \begin{gather*}
+        |S \cap \{\{x, y\} : x, y \in V_j\}| = |V_j| - 1,
+    \end{gather*} and summing over all $j$, we get that $|S| = n - k$.
+    However, $(V, S')$ contains no cycles so we have for each $j$ in $[k]$: 
+    \begin{gather*}
+        |S' \cap \{\{x, y\} : x, y \in V_j\}| \leq |V_j| - 1,
+    \end{gather*} and summing over all $j$, we get that $|S| \leq n - k$.
+    But: \begin{gather*}
+        |S'| = i = |S| + 1 = n - k + 1,
+    \end{gather*} which means there must be an edge
+    connecting distinct components of $(V, S)$. This means $(V, S \cup \{e\})$
+    is acyclic ($e$ being the edge connecting the components) as required.
+\end{proof}

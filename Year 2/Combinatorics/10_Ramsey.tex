@@ -1,0 +1,113 @@
+\section{Ramsey Numbers}
+
+For some $s$ in $\mathbb{Z}_{> 1}$, we let $r(s)$ be the smallest $n$ in $\mathbb{N}$ 
+such that whenever the edges of $K_n$ are $2$-coloured, there exists a monochromatic $K_s$.
+We have that this exists for all $s$ as chosen above (proven in (\ref{ramt})).
+
+\subsection{Off-diagonal Ramsey Numbers}
+
+For some $s, t$ in $\mathbb{Z}_{> 1}$, we let $r(s, t)$ be the least $n$ in $\mathbb{N}$
+such that whenever the edges of $K_n$ are $2$-coloured with colour set $\{A, B\}$, 
+there exists an $A$-monochromatic $K_s$ or a $B$-monochromatic $K_t$.
+We have that this exists for all $s, t$ as chosen above (proven in (\ref{ramt})).
+
+\subsubsection{Properties of the Off-diagonal Ramsey Number}
+
+We have for all $s, t$ in $\mathbb{Z}_{> 1}$: \begin{itemize}
+  \item $r(s, s) = r(s)$,
+  \item $r(s, t) = r(t, s)$,
+  \item $r(2, s) = s$.
+\end{itemize}
+
+\subsection{Ramsey's Theorem} \label{ramt}
+
+We have that for all $s, t$ in $\mathbb{Z}_{> 2}$, $r(s, t)$ exists and: 
+\begin{gather} \label{ramtg}
+  r(s, t) \leq r(s - 1, t) + r(s, t - 1).
+\end{gather}
+\begin{proof}
+    It suffices to show that if $r(s - 1, t)$ and $r(s, t - 1)$ exist then
+    (\ref{ramtg}) is true because then we can show the theorem is true by
+    induction on $s + t$. We have $r(2, 2) = 2$ so we 
+    suppose $r(s - 1, t)$ and $r(s, t - 1)$ exist for each $s, t$ in 
+    $\mathbb{Z}_{> 2}$. Set $a = r(s - 1, t)$, $b = r(s, t - 1)$, and
+    consider a 2-colouring on $K_{a + b}$. Pick $v$ in $V(K_{a + b})$,
+    we can see that it has degree $a + b - 1$ so must have at least
+    $a$ 'red' neighbours or at least $b$ 'blue' neighbours. 
+    
+    \paragraph{Case 1} Suppose $v$ has $a$ 'red' neighbours.
+    We consider $K_a$ the induced subgraph on the 'red' neighbourhood of $v$ which
+    must contain a 'red' $K_{s - 1}$ or a 'blue' $K_t$. In the former case,
+    a 'red' $K_s$ is formed in $K_{a + b}$ as each vertex in the 'red' $K_{s - 1}$
+    is attached by a 'red' edge to $v$. In the latter case, the 'blue' $K_t$ is 'blue'
+    in $K_{a + b}$ also.
+
+    \paragraph{Case 2} The working is analogous to \textbf{Case 1}.
+\end{proof}
+
+\subsection{An Upper Bound on Ramsey Numbers}
+
+For all $s, t$ in $\mathbb{Z}_{> 1}$, we have that: \begin{gather*}
+  r(s, t) \leq 2^{s + t},
+\end{gather*} an consequence of this is that: \begin{gather*}
+  r(s) \leq 4^{s}.
+\end{gather*}
+\begin{proof}
+    Suppose $s = 2$, then as $r(2, t) = t$ we can consider the inequality: 
+    \begin{gather*}
+        t \leq 2^{2 + t} = 4 \cdot 2^t,
+    \end{gather*} which holds for each $t$ as defined in the theorem.
+    Suppose $s, t > 2$ and that the theorem holds for each $s', t'$
+    in $\mathbb{Z}_{> 1}$ such that $s' + t' < s + t$. We know that:
+    \begin{gather*}
+        r(s, t) \leq r(s, t - 1) + r(s - 1, t),
+    \end{gather*} and by the inductive hypothesis: \begin{gather*}
+        r(s, t) \leq 2^{s + t - 1} + 2^{s + t - 1} = 2^{s + t}. \qedhere
+    \end{gather*}
+\end{proof} 
+
+\subsection{The $k$-colour Ramsey Number}
+
+For some $k$ in $\mathbb{Z}_{> 0}$, $s$ in $\mathbb{Z}_{> 1}$, we let $r_k(s)$ 
+be the smallest $n$ in $\mathbb{N}$ such that whenever the edges of $K_n$ are
+$k$-coloured, there exists a monochromatic $K_s$.
+We have that this exists for all $k, s$ as chosen above.
+\begin{proof}
+    For $k = 1$, $r_k(s) = s$ as it simply asks which is the smallest $n$ such that
+    $K_s$ is isomorphic to a subgraph of $K_n$. We have already proven the case
+    for $k = 2$ by our work in this chapter. 
+    \\[\baselineskip]
+    Take the colour set to be $\{c_1, \ldots, c_k\}$.
+    For any $k > 2$, we want to show
+    that $r_k(s) \leq r(s, r_{k - 1}(s)) = n$ by considering a two colouring on
+    $K_n$ with $c_1$ and $c_2, \ldots, c_k$. By the definition of $n$, 
+    in a given colouring of $K_n$, we either
+    get a $c_1$ coloured $K_s$ or a $c_2, \ldots, c_k$ coloured $K_{r_{k - 1}(s)}$.
+    In the former case, we are done. In the latter case, we consider just the subgraph
+    isomorphic to $K_{r_{k - 1}(s)}$ and by the definition of $r_{k - 1}$ we see
+    that it must contain a $c_i$ coloured $K_s$ for some $i$ in $\{2, \ldots, k\}$
+    as required.
+\end{proof}
+
+\subsection{Infinite Ramsey}
+
+For a set $A$ and $k$ in $\mathbb{Z}_{> 0}$,  we have that: \begin{gather*}
+  A^{(k)} = \{\{a, b\} : a, b \in A, a \neq b\},
+\end{gather*} the set of subsets of $A$ of size two not containing duplicates.
+\\[\baselineskip]
+Let $\mathbb{N}^{(2)}$ be $2$-coloured, we have that there exists an infinite set 
+$M \subseteq \mathbb{N}$ such that $M^{(2)}$ in $\mathbb{N}^{(2)}$ is monochromatic.
+\begin{proof}
+    Take $a_1$ in $\mathbb{N}$. Since there are infinitely many $a$ in $\mathbb{N}$
+    such that $\{a_1, a\}$ is in $\mathbb{N}^{(2)}$, there exists an infinite
+    $A_1 \subseteq \mathbb{N}\setminus\{a_1\}$ such that for all $b$ in $A_1$, 
+    we have $\{a_1, b\}$ coloured identically with some colour $c_1$. 
+    We choose $a_2$ in $A_1$ and obtain an infinite set 
+    $A_2 \subseteq A_1 \setminus \{a_2\}$ such that for all $b$ in $A_2$, 
+    we have $\{a_2, b\}$ coloured identically with some colour $c_2$.
+    We continue this infinitely obtaining $a_1, a_2, \ldots$ in $\mathbb{N}$
+    together with the colours $c_1, c_2, \ldots$ such that for $i, j$ in 
+    $\mathbb{Z}_{>0}$ with $i < j$, the edge $\{a_i, a_j\}$ has colour $c_i$.
+    However, since there are only two colours, infinitely many of these colours
+    must agree which gives us our set of values.
+\end{proof}

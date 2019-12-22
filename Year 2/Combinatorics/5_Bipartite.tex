@@ -1,0 +1,132 @@
+\section{Bipartite Graphs}
+
+A graph $G = (V, E)$ is bipartite if $V$ can be partitioned into
+two vertex sets $V_1, V_2$ such that each edge connects a vertex
+from $V_1$ to a vertex in $V_2$.
+
+\subsection{Characterisation of Bipartite Graphs}
+
+A graph is bipartite if and only if it contains no odd cycle.
+
+\begin{proof}
+    Suppose we have a graph $G = (V, E)$ bipartite with bipartition
+    $(A, B)$. Consider a path $P$ in $G$ of odd length.
+    Assume, without loss of generality, that the first
+    vertex in $P$ is in $A$. Thus, as there are only edges
+    connecting $A$ and $B$, the second vertex must be in $B$,
+    the third, in $A$, etc. We can see that as $P$ is odd,
+    the first and last vertex must both be in $A$. Thus,
+    $P$ cannot be a cycle as there are no edges connecting
+    two vertices in $A$.
+    \\[\baselineskip]
+    Suppose we have a graph $G = (V, E)$ that admits no odd
+    cycle. If $G$ is not connected, we just consider the
+    connected components of $G$ as we can union bipartitions
+    to of bipartite graphs to form new bipartite graphs.
+    If $G$ is connected, we define 
+    $d : V \times V \to \mathbb{Z}_{\geq 0}$
+    the function returning the length of the shortest path
+    between two vertices in $V$ (well defined by the connectivity
+    of $G$). We take some $x_0$ in $V$ and define: \begin{align*}
+        X &= \{x \in V : d(x_0, x) \text{ is even}\} \\
+        Y &= \{x \in V : d(x_0, x) \text{ is odd}\}. \\
+    \end{align*} Suppose two vertices $x_1, x_2$ in $X$ 
+    (or $Y$) are connected, then the paths connecting
+    $x_0$ to $x_1$ and $x_2$ to $x_0$ can be connected to
+    form an odd circuit. But, odd circuits must contain odd cycles
+    by (\ref{oddcycles}) which means there must be an odd cycle in $G$, a contradiction.
+    Thus, $X$ and $Y$ admit no edges between their respective
+    vertices, so $G$ is bipartite with bipartition $(X, Y)$.
+ 
+\end{proof}
+
+\subsection{The Handshake Lemma for Bipartite Graphs}
+
+We have that for $G = (V, E)$ a bipartite graph with bipartition
+$V_1, V_2$: \begin{gather*}
+  \sum_{v \in V_1} \text{deg}(v) = \sum_{v \in V_2} \text{deg}(v). \\
+\end{gather*}
+\begin{proof}
+    Each edge has a vertex in $V_1$ and $V_2$.
+\end{proof}
+
+\subsection{Matchings}
+
+For $G = (V, E)$ a bipartite graph with bipartition $X, Y$,
+a matching from $X$ to $Y$ is a set of edges $M \subseteq E$
+such that $f : X \to Y$ defined by: \begin{gather*}
+  f(x) := y \qquad \text{ where } \{x, y\} \in M,
+\end{gather*} is well defined and injective.
+
+\subsection{Hall's Marriage Theorem} \label{halls}
+
+For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: \begin{gather*}
+  G \text{ has a matching from } X \text{ to } Y \\
+  \Longleftrightarrow \\
+  \text{For all } S \subseteq X, |N(S)| \geq |S|.
+\end{gather*}
+\begin{proof}
+    Suppose $G$ has a matching from $X$ to $Y$, we have that
+    for each $x$ in $X$, there must be an edge $\{x, y\}$
+    for some $y$ in $Y$. Thus, for each $S \subseteq X$,
+    $|N(S)| \geq |S|$. Suppose for all $S \subseteq X$, 
+    $|N(S)| \geq |S|$. If $|X| = 1$, $S = X = \{x\}$ meaning
+    $|N(x)| \geq 1$, so there is some edge from $x$ to an
+    element in $y$. This edge is our matching.
+    Suppose now that $|X| > 1$ and for all sizes of $X$ in
+    $\{1, \ldots, |X| - 1\}$, the statement holds.
+    \paragraph{Case 1}
+    Suppose for all $S \subseteq X$ we actually have that 
+    $|N(S)| > |S|$ (a stronger condition). Choose some
+    $x$ in $X$ and some $y$ in $Y$ connected to $X$. We
+    form $G'$ by removing $x$, $y$ and, all their incident
+    edges from $G$. The vertex class of $X$ in $G'$
+    is strictly smaller than that of $X$ in $G$. For
+    each vertex in $X$ in $G'$, we have that at most
+    one edge was removed (the one connected to $y$).
+    Thus, we have that $|N_{G'}(S)| \geq |S|$ so by the
+    inductive hypothesis, $G'$ has a matching. By adding
+    $\{x, y\}$ to this matching, we get a matching for $G$.
+    \paragraph{Case 2}
+    Suppose there is some $S \subseteq X$ such that $|N(S)| = |S|$.
+    Consider the graph $G_S = (S \cup N_G(S), E_S)$ the induced
+    subgraph on $S \cup N_G(S)$. By the inductive hypothesis,
+    we have a matching in $G_S$. Consider 
+    $G_S' = (V \setminus V(G_S), E_S')$ the induced subgraph on
+    $V \setminus V(G_S)$. Observe for each $T \subseteq V(G_S')$,
+    $|N_G(T \cup S)| \geq |T| + |S|$, thus: \begin{gather*}
+        |N_{G_S'}(T)| = |N_G(T \cup S) \setminus N_G(S)| \geq |T|.
+    \end{gather*} Thus, by the inductive hypothesis, we have a matching
+    from $S$ to $N_G(S)$ and from $X \setminus S$ to $Y \setminus N_G(S)$.
+    Combining these gives a matching in $G$. 
+\end{proof}
+
+\subsubsection{Degree Constrained Hall's Theorem}
+For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: 
+\begin{gather*}
+  \Min\{\Deg(x) : x \in X\} \geq
+  \Max\{\Deg(y) : y \in Y\}.
+\end{gather*} then $G$ has a matching from $X$ to $Y$
+(but not necessarily the converse).
+\begin{proof}
+    We prove this by double counting. Given $S \subseteq X$, we
+    try to determine the number of edges $|E_S|$ from $S$ to $N(S)$.
+    We know that: \begin{gather*}
+        |E_S| = \sum_{s \in S} \Deg(s) \geq |S| \cdot \Min\{\Deg(s) : s \in S\}.
+    \end{gather*} We can similarly bound it above by: \begin{gather*}
+        |E_S| = \sum_{s \in N(S)} \Deg(s) \leq |N(S)| \cdot \Max\{\Deg(s) : s \in N(S)\}.
+    \end{gather*} Giving us that: \begin{gather} \label{deghalls}
+        |S| \cdot \Min\{\Deg(s) : s \in S\}
+        \leq 
+        |N(S)| \cdot \Max\{\Deg(s) : s \in N(S)\}.
+    \end{gather} But, by the properties of $G$: \begin{gather*}
+        \Max\{\Deg(s) : s \in N(S)\} 
+        \leq \Max\{\Deg(y) : y \in Y\}
+        \leq \Min\{\Deg(x) : x \in X\},
+    \end{gather*} and we can also see that: \begin{gather*}
+        \Min\{\Deg(s) : s \in S\} \geq \Min\{\Deg(x) : x \in X\}
+    \end{gather*} as $S \subseteq X$. So, the following: \begin{gather*}
+        |S| \cdot \Min\{\Deg(x) : x \in X\} \leq |N(S)| \cdot \Min\{\Deg(x) : x \in X\},
+    \end{gather*} from (\ref{deghalls}) implies that $|N(S)| \geq |S|$. 
+    As required by (\ref{halls}).
+\end{proof}
