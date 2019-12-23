@@ -1,0 +1,28 @@
+\section{Bipartite Graphs}
+
+A graph $G = (V, E)$ is bipartite if $V$ can be partitioned into
+two vertex sets $V_1, V_2$ such that each edge connects a vertex
+from $V_1$ to a vertex in $V_2$.
+
+\subsection{Matchings}
+
+For $G = (V, E)$ a bipartite graph with bipartition $X, Y$,
+a matching from $X$ to $Y$ is a set of edges $M \subseteq E$
+such that $f : X \to Y$ defined by: \begin{gather*}
+  f(x) := y \qquad \text{ where } \{x, y\} \in M,
+\end{gather*} is injective on $M$. The matching is called perfect
+if $M = X$.
+
+\subsection{Augmenting Paths}
+
+An augmenting path is a path in a bipartite graph $G$ that alternates between
+edges in a matching $M$ for $G$ and edges in $E(G) \setminus M$ with the first
+and last vertices not being matched in the matching $M$. 
+
+\subsection{Hall's Marriage Theorem}
+
+For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: \begin{gather*}
+  G \text{ has a perfect matching from } X \text{ to } Y \\
+  \Longleftrightarrow \\
+  \text{For all } S \subseteq X, |N(S)| \geq |S|.
+\end{gather*}

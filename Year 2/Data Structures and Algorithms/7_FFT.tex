@@ -1,0 +1,124 @@
+\section{Fast Fourier Transforms}
+
+\subsection{Polynomials}
+
+A polynomial of degree $n$ in $\mathbb{Z}_{\geq 0}$ is a function $A$: 
+\begin{gather*}
+  A(x) = \sum_{i = 0}^n a_ix^i,
+\end{gather*} where $a_1, \ldots, a_n$ are the coefficients of $A$. 
+We can represent $A$ by listing the coefficients $a_1, \ldots, a_n$, 
+called the coefficient representation.
+Additionally, we say for $k > n$, $k$ is a degree-bound of $A$.
+
+\subsubsection{Horner's Rule}
+
+We can evaluate polynomials quickly as follows.
+For a polynomial $A$ degree $n$: \begin{gather*}
+  A(x) = a_0 + x(a_1 + x(a_2 + \cdots + x(a_n)))).
+\end{gather*} This can be simplified in the following code:
+\begin{lstlisting}
+int polynomial(coeffs, x) {
+  output = 0;
+  for (i = n; i >= 0; i--) {
+    output = (output * x) + coeffs[i];
+  }
+  return output;
+}
+\end{lstlisting} Taking $O(n)$ time.
+
+\subsubsection{Point Intersection with Polynomials}
+
+For a given set of points of size $n$, we have that there exists a 
+unique polynomial with degree-bound $n$ such that the polynomial
+intersects all the given points.
+
+\subsubsection{Point-Value Representation}
+
+We can represent a polynomial of degree $n$ in $\mathbb{Z}_{\geq 0}$ 
+by a set of points it intersects like so:
+\begin{gather*}
+  ((x_1, y_1), \ldots, (x_{n + 1}, y_{n + 1})).
+\end{gather*} where for $i, j$ in $[n + 1]$ with $i \neq j$, $x_i \neq x_j$. 
+
+\subsubsection{Polynomial Addition}
+
+For two polynomials $A, B$ with degrees $n, m$ in $\mathbb{Z}_{\geq 0}$
+and $k = \Max\{n, m\}$:
+\\[\baselineskip]
+Under coefficient representation, taking: \begin{align*}
+    A &= (a_1, \ldots, a_n) \\
+    B &= (b_1, \ldots, b_m),
+\end{align*} we have that $(A + B) = (a_1 + b_1, \ldots, a_k + b_k)$
+where we pad the polynomial of lesser degree with zeroes.
+\\[\baselineskip]
+Under point-value representation, taking: \begin{align*}
+    A = ((x_1, a_1), \ldots, (x_{k + 1}, a_{k + 1})) \\
+    B = ((x_1, b_1), \ldots, (x_{k + 1}, b_{k + 1})),
+\end{align*} we have that $(A + B) = ((x_1, a_1 + b_1), 
+\ldots, (x_{k + 1}, a_{k + 1} + b_{k + 1}))$ where we pad the polynomial 
+of lesser degree with zeroes.
+
+\subsubsection{Polynomial Multiplication}
+
+For two polynomials $A, B$ with degrees $n, m$ in $\mathbb{Z}_{\geq 0}$
+and $k = 2 \cdot \Max\{n, m\}$:
+\\[\baselineskip]
+Under coefficient representation, taking: \begin{align*}
+    A &= (a_1, \ldots, a_n) \\
+    B &= (b_1, \ldots, b_m),
+\end{align*} we have that: \begin{gather*}
+  (A \cdot B)(x) = (c_1, \ldots, c_k) \qquad \text{where }
+  c_i = \sum_{j = 0}^ia_jb_{j - 1}.
+\end{gather*} Taking $O(n^2)$ time.
+\\[\baselineskip]
+We can do this with the point-value representation, taking: \begin{align*}
+    A = ((x_1, a_1), \ldots, (x_{k + 1}, a_{k + 1})) \\
+    B = ((x_1, b_1), \ldots, (x_{k + 1}, b_{k + 1})),
+\end{align*} We have that: \begin{gather*}
+  A \cdot B = \{(x_1, a_1 \cdot b_1), \ldots, (x_{k + 1}, a_{k + 1} \cdot b_{k + 1})\}
+\end{gather*} Taking $O(n)$ time.
+
+\subsection{The Fast Fourier Transform}
+
+\subsubsection{Roots of Unity}
+
+The idea is that we evaluate a polynomial to perform pointwise
+multiplication and then interpolate back into the coefficient representation.
+We need to evaluate a polynomial of degree $n$ at $n + 1$ points to
+convert it to point-value form. We use the $n + 1$ roots of unity:
+\begin{center}
+    \scalebox{1.25}{$\omega_{n+1}^k = e^{\frac{2\pi i}{n + 1}k}$},
+\end{center} for $k$ in $\{0, 1, \ldots n\}$. So, we consider:
+\begin{gather*}
+  y_k = A(\omega_{n + 1}^k),
+\end{gather*}
+The ordered vector $(y_0, \ldots, y_n)$ is the 
+Discrete Fourier Transform (DFT) of the coefficient vector of $A$.
+
+\paragraph{Cancellation Lemma:} we have that 
+$\omega_{dn}^{dk} = \omega_{n}^{k}$.
+
+\paragraph{Halving Lemma:} we have that if $n$ is even, the set of all
+the squared roots of unity is just the set of roots of unity for $\frac{n}{2}$.
+
+\subsubsection{Method of the Fast Fourier Transform}
+
+For a polynomial $A$ of even degree $n$,
+we define $A^{[0]}$ and $A^{[1]}$ as: \begin{align*}
+  A^{[0]} &= a_0 + a_2x + \cdots + a_{n}x^{(n / 2)} \\
+  A^{[1]} &= a_1 + a_3x + \cdots + a_{n - 1}x^{(n / 2) - 1},
+\end{align*} so we have that: \begin{gather*}
+  A(x) = A^{[0]}(x^2) + xA^{[1]}(x^2).
+\end{gather*} So, we can split a DFT computation into two
+equally sized parts, compute them, and then combine them in linear time.
+
+\newpage
+
+\subsection{Polynomial Multiplication}
+
+For polynomials $A, B$ both with a degree bound $n$: \begin{itemize}
+  \item Set the degree of $A$ and $B$ to $2n$, padding with zeroes,
+  \item Perform the Fast Fourier transform,
+  \item Form our point-value representation and multiply pointwise,
+  \item Interpolate with the inverse Fast Fourier transform.
+\end{itemize} This process takes $O(n \log(n))$ time.

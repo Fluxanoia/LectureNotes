@@ -1,0 +1,97 @@
+\section{Flow Algorithms}
+
+\subsection{Flow Networks}
+
+A flow network $F = (G, c, s, t)$ consists of a directed graph $G = (V, E)$, a capacity function
+$c : E \to \mathbb{R}$, a source vertex $s$ in $V$ (with empty in-neighbourhood), and a sink
+vertex $t$ in $V$ (with empty out-neighbourhood).
+
+\subsubsection{Flows}
+
+A flow in $F$ is a function $f : E \to \mathbb{R}$ with the following properties: \begin{itemize}
+  \item No edge has more 'flow' than capacity, for $e$ in $E$: \begin{gather*}
+    0 \leq f(e) \leq c(e),
+  \end{gather*}
+  \item Flow is conserved, for $v$ in $V \setminus \{s, t\}$: \begin{gather*}
+    f^-(v) = \sum_{u \in N^-(v)} f((u, v)) = \sum_{w \in N^+(v)} f((v, w)) = f^+(v).
+  \end{gather*}
+\end{itemize} We denote the value of a flow as $v(f) = f^+(s)$. We can also define $f^+$ and $f^-$
+for sets by considering the flow entering and exiting the sets. Similarly, in and out flow
+of sets are identical.
+
+\subsubsection{Cuts}
+
+A cut is a partition $A, B$ of $V$ such that the source is in $A$ and the sink is in $B$.
+We have that the flow in $A$ minus the flow out is equal to the flow out to $B$ minus the flow in:
+\begin{gather*}
+  (f^- - f^+)(A) = (f^+ - f^-)(B) = v(f).
+\end{gather*}
+
+\subsection{Maximising Flow Value}
+
+We choose a greedy algorithm that works on a modified graph $G_F$, where we add backwards edges
+(edges corresponding to edges with non-zero flow) 
+and forwards edges 
+(edges corresponding to edges with non-capacity flow) 
+that allows flow to be pushed back down the edge. So, edges are no longer considered when 
+at capacity (except after we choose to push their flow backwards and re-route it).
+
+\subsubsection{Augmenting Paths in Flow Networks}
+
+An augmenting path is a directed path from $s$ to $t$ in $G_F$.
+
+\subsubsection{Residual Capacity}
+
+The residual capacity of an edge is the amount of flow you can add to the forward edge or
+the amount of flow you can remove from the backward edge (whichever is greater).
+
+\subsubsection{Pushing}
+
+Considering an augmenting path, pushing the path involves adding as much flow as possible to
+all the edges.
+
+\subsubsection{The Ford-Fulkerson Algorithm}
+
+We consider all augmenting paths (depth-first) and push each one, updating $G_F$ as we go. 
+The resulting flow is maximal. This takes $O(v(f^*)|E|)$ time where $f^*$ is our maximal flow.
+
+\subsubsection{Flow Networks and Bipartite Graphs}
+
+Given a bipartite graph $G = (V, E)$ with bipartition $A, B$, we can form a new graph
+$G'$ identical to $G$ except: \begin{itemize}
+  \item All edges are directed from $A$ to $B$,
+  \item All edges have capacity $1$,
+  \item We add a source vertex connected to all vertices in $A$,
+  \item We add a sink vertex connected to all vertices in $B$,
+\end{itemize} in $G'$, maximal flows corresponding to matchings.
+
+\subsubsection{The Edmonds-Karp Algorithm}
+
+If we pick augmenting paths with minimal edges (breadth-first) then we are guaranteed to 
+finish Ford-Fulkerson in $O(|V||E|^2)$ time.
+
+\subsubsection{Vertex Capacities}
+
+We can add capacities to vertices too, forming a vertex flow network 
+$F = (G, c_E, c_V, s, t)$ identical to the flow network except we restrict flow through
+vertices. We can form a regular flow network from this by changing each vertex $v$
+into two vertices $v^+, v^-$ where the capacity of $(v^-, v^+)$ is $c_V(v)$ and
+all the edges going into $v$ go into $v^-$ and all the edges going
+out of $v$ go out of $v^+$.
+
+\subsection{Circulation Networks}
+
+A circulation network $C = (G, c, d)$ is a directed graph $G = (V, E)$ and a
+capacity function $c : E \to \mathbb{N}$ and demand function $d : V \to \mathbb{N}$.
+Vertices with positive demand are sinks, and vertices with negative demand are sources.
+
+\subsubsection{Circulations}
+
+A circulation is a function $f : E \to \mathbb{R}$ with $0 \leq f(e) \leq c(e)$ for each
+$e$ in $E$ and $f^-(v) - f^+(v) = D(v)$ for all $v$ in $V$ (flow is conserved except at
+sources and sinks).
+\\[\baselineskip]
+We find circulations by attaching a source vertex to all sources in $C$ with edges equal
+to the (negative) demand of the sources and similarly adding a sink vertex to all
+sinks in $C$ with edges equal to the demand. This forms a flow network we can run our 
+algorithms on.

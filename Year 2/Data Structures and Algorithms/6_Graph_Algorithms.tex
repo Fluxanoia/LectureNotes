@@ -1,0 +1,222 @@
+\section{Graphs Algorithms}
+
+\subsection{Data Representations of Graphs}
+
+\subsubsection{Adjacency Matrix}
+
+We have for a graph $G = (V, E)$, the adjacency matrix is a
+$|V|$ by $|V|$ matrix $A = (a_{ij})$ where: \begin{gather*}
+  a_{ij} = \begin{cases}
+    1 & \text{if there's an edge from vertex $i$ to $j$} \\
+    0 & \text{otherwise} \\
+  \end{cases}
+\end{gather*}
+
+\subsubsection{Adjacency List}
+
+We can represent a graph also by an array of linked lists or 
+hash tables where
+each element in the array represents a vertex $v$ and the corresponding
+list represents the vertices in the neighbourhood of $v$.
+
+\subsubsection{Comparision of Representations}
+
+We can compare some basic properties of the representations:
+\begin{center}
+  \renewcommand{\arraystretch}{1.4}
+  \begin{tabular}{ | r || c | c | c |}
+    \hline
+    & Matrix & Linked Lists & Hash Tables \\ 
+    \hline\hline
+    Space & $\Theta(|V|^2)$ & $\Theta(|V| + |E|)$ & $\Theta(|V| + |E|)$ \\
+    Finding an edge from $u$ & $O(1)$ & $O(\text{deg}(u))$ & $O(1)$ \\
+    Finding the neighbourhood of $u$ & $O(|V|)$ & $O(\text{deg}(u))$ & $O(\text{deg}(u))$ \\
+    \hline
+  \end{tabular}
+\end{center} This raises the question, why don't we always use
+hash tables? Due to the probability of collisions in hash tables,
+we opt for the linked list as it's more reliable for large graphs
+(additionally, we are almost always are looking for a neighbourhood
+not a specific edge).
+
+\vfill
+
+\subsection{Search}
+
+Generally with a graph searching algorithm, we have a data structure 
+which is (in the general case) a structure that can store a set of 
+vertices and return them one by one in some undefined manner. 
+Starting with a graph $G$ with some \texttt{u} in $V(G)$, naming 
+our data structure \texttt{data}, we perform the following:
+\begin{lstlisting}
+data Search(u) {
+  add u to data;
+  while (data is non-empty) {
+    take x from data;
+    if (x is not marked) {
+      mark x;
+      for (each edge {x, y}) {
+        put y in data;
+      }
+    }
+  }
+}
+\end{lstlisting} We have that this process always terminates, visits
+every vertex in connected graphs, and has time complexity $O(|E(G)|)$
+(assuming the data operations are $O(1)$).
+
+\subsubsection{Breadth-first Search}
+
+If our data structure is a queue, we get breadth-first searching.
+This causes vertices to be marked in distance order from the starting
+point.
+\\[\baselineskip]
+By tracking distances, we can find shortest
+paths from a given vertex using this searching style. In a graph $G = (V, E)$, 
+this takes $O(|V| + |E|)$ time.
+
+\subsubsection{Depth-first Search}
+
+If our data structure is a stack, we get depth-first searching.
+This causes vertices to be marked the further they are from
+the starting vertex.
+
+\newpage
+
+\subsection{Djikstra's Algorithm}
+
+For a non-negatively weighted, directed graph $G$, we have that Djikstra's 
+algorithm returns the shortest path to all vertices from some starting 
+vertex. Taking \texttt{distances} to be a relation between each $v$ in $V(G)$ 
+and the length of the shortest path to $v$, the algorithm is structured as 
+follows: \begin{lstlisting}
+distances Djikstra(s) {
+  let pq be our priority queue;
+  let dist be our array of distances;
+  for (each v) {
+    dist[v] = infinity;
+  }
+  dist[s] = 0;
+  for (each v) {
+    pq->insert(v, dist(v));
+  }
+  while (pq is non-empty) {
+    u = pq->extractMin();
+    for (each edge (u, v)) {
+      if (dist[v] > dist[u] + weight(u, v)) {
+        dist[v] = dist[u] + weight(u, v);
+        pq->decreaseKey(v, dist(v));
+      }
+    }
+  }
+  return dist;
+}
+\end{lstlisting} We have that the time complexity of the algorithm
+varies across different implementations of priority queues: \begin{center}
+  \begin{tabular} {| r || c |}
+    \hline
+    & Runtime \\
+    \hline \hline
+    Linked List & $O(|V|^2 + |V||E|)$ \\
+    \hline
+    Binary Heap & $O((|V| + |E|)\log{(|V|)})$ \\
+    \hline
+    Fibonacci Heap & $O(|E| + |V|\log{(|V|)})$ \\
+    \hline
+  \end{tabular}
+\end{center}
+and has $O(|V| + |E|)$ space complexity across all queues.
+
+\newpage
+
+\subsection{Bellman-Ford's Algorithm}
+
+For a weighted, directed graph $G$, we have that Bellman-Ford's algorithm 
+returns the fastest path to all vertices from some starting vertex. 
+Taking \texttt{distances} to be a relation between each $v$ in $V(G)$ 
+and the length of the shortest path to $v$, the algorithm is structured as 
+follows: \begin{lstlisting}
+distances BellmanFord(s) {
+  let dist be our array of distances;
+  for (each v) {
+    dist[v] = infinity;
+  }
+  dist[s] = 0;
+  do (|V| times) {
+    for (each edge (u, v)) {
+      // Relaxing (u, v)
+      if (dist[v] > dist[u] + weight(u, v)) {
+        dist[v] = dist[u] + weight(u, v);
+      }
+    }
+  }
+}
+\end{lstlisting} This runs in $O(|V||E|)$ time.
+
+\subsubsection{Negative Weight Cycles}
+
+Suppose our graph has a cycle which has a negative weight. 
+This must mean that we can choose an arbitrarily negative 
+path in the graph by traversing the cycle multiple times.
+This is why we require that there are no negative weight cycles.
+\\[\baselineskip]
+We can run the algorithm on graphs with negatives cycles and
+simply run a final check at the end to see if we have a negative weight cycle.
+If we relax each edge again and decrease a path, there must be a negative cycle
+as we should already have all the shortest paths.
+
+\newpage
+
+\subsection{Johnson's Algorithm}
+
+For a weighted, directed graph we have that Johnson's algorithm 
+returns the fastest path between all vertex pairs. It does this 
+by re-weighting the graph and performing Djikstra's
+repeatedly.
+
+\subsubsection{Re-weighting based on Vertex Potential}
+
+For a graph $G = (V, E)$ with a weighting function $w : E \to \mathbb{Z}$, 
+we define a potential function $h : V \to \mathbb{Z}$ to associate vertices with 
+potentials. We define a re-weighting function $w' : E \to \mathbb{Z}$: \begin{gather*}
+  w'((u, v)) = w((u, v)) + h(u) - h(v).
+\end{gather*} We find the vertex potentials by adding a vertex $s$ to the graph with
+an edge $(s, v)$ for each $v$ in $V$ of weight zero forming a new graph $G'$. 
+We then run Bellman-Ford on $G'$ and define $h$ as follows: \begin{gather*}
+  h(v) = \text{ the shortest path length from $s$ to $v$ in } G'.
+\end{gather*} Note that $G'$ has the same number of negative weight cycles as $G$
+as all our edges are directed away from $s$.
+
+\subsubsection{The Algorithm}
+
+Starting with a graph $G = (V, E)$ with a weighting function $w : E \to \mathbb{Z}$,
+form $G' = (V \cup \{s\}, E \cup S)$ where: \begin{gather*}
+  S = \{(s, v) : v \in V\} \qquad \text{and} \qquad w(e) = 0 \text{ for all } e \text{ in } S.
+\end{gather*} Run Bellman-Ford on $G'$ starting at $s$ (detecting any negative weight cycles)
+to define our vertex potentials. Using the potentials, re-weight each edge as above
+in $G$. Run Djikstra's on every vertex in $G$ to create our set of paired shortest paths.
+We can then convert our path weights back into their weights as inputted and retrieve the
+values if necessary. This takes $O(|V||E|\log_2(|V|))$ time.
+
+\subsection{Minimum Spanning Trees}
+
+In a graph $G = (V, E)$, a spanning tree $T = (V, E_T)$ is a tree
+with $E_T \subseteq E$.
+\\[\baselineskip]
+A spanning tree on $G$ is minimal if there is no other spanning tree
+on $G$ with a lower weight.
+
+\subsubsection{Kruskal's Algorithm}
+
+For a weighted, connected, and undirected graph $G = (V, E)$, we have 
+the following steps to the algorithm: \begin{enumerate}
+  \item Generate a graph $T = (V, \emptyset)$
+  \item Generate a disjoint set data structure $X$ of size $|V|$
+  \item For each $v$ in $V$, perform \texttt{makeSet(v)} (where
+  each vertex is defined by some unique integer in $\{1, \ldots, |V|\}$)
+  \item Sort the edges by weight
+  \item For each edge $(u, v)$ (in increasing order): \begin{itemize}
+    \item If \texttt{findSet}$(u) \neq$ \texttt{findSet}$(v)$,
+    perform \texttt{union}$(u, v)$ and add $(u, v)$ to $T$.
+  \end{itemize}
+\end{enumerate} Overall, this runs in $O(|E| \log_2(|V|))$ time.

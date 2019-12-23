@@ -1,0 +1,216 @@
+\section{Data Structures}
+
+\subsection{Stacks}
+
+A stack is a list of variables. It supports three operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create()} & Creates a new stack & $O(1)$ \\
+    \hline
+    \texttt{push(x)} & Adds \texttt{x} to the end of the stack & $O(1)$ \\
+    \hline
+    \texttt{pop()} & Removes and returns the last element of the stack & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Queues}
+
+A queue is a list of variables. It supports three operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create()} & Creates a new queue & $O(1)$ \\
+    \hline
+    \texttt{add(x)} & Adds \texttt{x} to the end of the queue & $O(1)$ \\
+    \hline
+    \texttt{serve()} & Removes and returns the first element of the queue & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Linked List}
+
+A linked list is a list of variables represented by nodes which
+point to the next and previous element in the list (or \texttt{null} 
+if one does not exist). Each node has a unique identifier.
+It supports four operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create()} & Creates a new linked list & $O(1)$ \\
+    \hline
+    \texttt{insert(x, i)} & Inserts \texttt{x} after node \texttt{i} & $O(1)$ \\
+    \hline
+    \texttt{delete(i)} & Removes node \texttt{i} & $O(1)$ \\
+    \hline
+    \texttt{lookup(i)} & Returns node \texttt{i} & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Arrays}
+
+An array is a list of variables of fixed length. 
+It supports three operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{6.5cm} | c || }
+    \hline
+    Name & Description & Worst case runtime \\
+    \hline
+    \texttt{create(n)} & Creates a new array of size \texttt{n} & $O(1)$ \\
+    \hline
+    \texttt{update(x, i)} & Overwrites the data at position \texttt{i} with \texttt{x} & $O(1)$ \\
+    \hline
+    \texttt{lookup(i)} & Returns the value at \texttt{i} & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Hash Tables}
+
+A hash table is an array of linked lists storing key-value pairs. 
+We use a \textbf{hash function} to map data to a linked list. As we 
+are using linked lists, if multiple keys map to the same index, 
+we can just add them to the list - and when looking up data, we 
+can find the right list with the hash function and then match our key.
+\\[\baselineskip]
+It supports four operations:
+
+\begin{center}
+  \begin{tabular}{ || c | p{7.5cm} | c || }
+    \hline
+    Name & Description & Average runtime \\
+    \hline
+    \texttt{create(n)} & Creates a \texttt{n} sized array
+    of linked lists and chooses a hash function \texttt{h} & $O(1)$ \\
+    \hline
+    \texttt{insert(k, v)} & Inserts the pair (\texttt{k, v}),
+    if $\frac{\texttt{n}}{2}$ pairs are stored, we create a hash
+    table of double the size and copy the contents into it & $O(1)$ \\
+    \hline
+    \texttt{delete(k)} & Deletes the pair corresponding to the key \texttt{k} & $O(1)$ \\
+    \hline
+    \texttt{lookup(k)} & Returns the pair corresponding to the key \texttt{k} & $O(1)$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsubsection{Markov's Inequality}
+
+For $X \geq 0$ a random variable with mean $\mu$, for all
+$t$ in $\mathbb{R}_{\geq 0}$: \begin{gather*}
+  \mathbb{P}(X \geq t) \leq \frac{\mu}{t}.
+\end{gather*} So, if $X$ is the expected time it takes for an 
+algorithm to terminate, we can say how likely it is for an algorithm
+to terminate based on our prediction.
+
+\subsection{Binary Heaps}
+
+Binary heaps are rooted binary trees where each level is full except
+possibly the last (which is filled from left to right). The
+elements of the tree are ordered according to a 
+\textbf{heap property}. These have the following properties: \begin{itemize}
+  \item For a heap of size $n$, the height of the heap is $\log_2(n)$
+  \item For an index $i$: \begin{itemize}
+    \item The parent has index $\left\lfloor \dfrac{i}{2} \right\rfloor$,
+    \item The left child has index $2i$,
+    \item The right child has index $2i + 1$.
+  \end{itemize}
+\end{itemize}
+
+\newpage
+
+\subsection{Priority Queues}
+
+A priority queue functions as queue with a notion of priority.
+We associate keys to priority in this case.
+In this course,  we use a binary heap with the heap property 
+that each parent has a value less than or equal to its children.
+This supports the following:
+\begin{center}
+  \begin{tabular}{ || c | p{7.5cm} | c || }
+    \hline
+    Name & Description & Runtime \\
+    \hline
+    \texttt{insert(x, k)} & Inserts \texttt{x} with key \texttt{k}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{decreaseKey(x, d)} & Decreases the key of \texttt{x} to \texttt{d}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{extractMin()} & Removes and returns the \texttt{x} in the queue
+    with the smallest key & $O(\log_2(n))$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsection{Disjoint Set}
+
+This data structure stores a collection of disjoint sets of 
+$\{1, 2, \ldots n\}$ for some $n$ in $\mathbb{Z}_{> 0}$. 
+This supports the following:
+\begin{center}
+  \begin{tabular}{ || c | p{7.5cm} | c || }
+    \hline
+    Name & Description & Runtime \\
+    \hline
+    \texttt{makeSet(x)} & Creates a new set containing only \texttt{x}
+    this fails if \texttt{x} is already in a set
+    & $O(1)$ \\
+    \hline
+    \texttt{union(x, y)} & Merges the sets containing 
+    \texttt{x} and \texttt{y}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{findSet(x)} & Finds the identifier of the set containing
+    \texttt{x} (the identifier is an element of the set)
+    & $O(\log_2(n))$ \\
+    \hline
+  \end{tabular}
+\end{center} This is stored as an array size $n$ where each cell
+is empty or points to the identifier of the set it was originally
+added to.
+
+\subsection{Dynamic Search Structures}
+
+This structure stores a set of elements, each with a unique key.
+This supports the following:
+\begin{center}
+  \begin{tabular}{ || c | p{7.5cm} | c || }
+    \hline
+    Name & Description & Runtime \\
+    \hline
+    \texttt{insert(x, k)} & Inserts \texttt{x}
+    with key \texttt{k}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{find(k)} & Returns the element with 
+    unique key \texttt{k}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{delete(k)} & Deletes the element with unique key
+    \texttt{k}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{predecessor(k)} & Returns the element with unique key
+    \texttt{n} such that \texttt{n} $<$ \texttt{k}
+    & $O(\log_2(n))$ \\
+    \hline
+    \texttt{rangeFind(a, b)} & Returns the elements with unique key
+    \texttt{k} such that \texttt{a} $\leq$ \texttt{k} $\leq$ \texttt{b}
+    & $O(\log_2(n))$ \\
+    \hline
+  \end{tabular}
+\end{center}

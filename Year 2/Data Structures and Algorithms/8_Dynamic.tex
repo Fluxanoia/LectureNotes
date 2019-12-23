@@ -1,0 +1,237 @@
+\section{Dynamic Programming}
+
+Dynamic programming is the process of solving programming problems
+by breaking them down into overlapping subproblems,
+computing the base cases and storing the solutions to be later
+composed into a solution.
+
+\subsection{Largest Empty Square}
+
+This problem is about finding the largest square in a $n \times n$
+black and white image such that the square does not contain a black
+pixel.
+
+\subsubsection{A Recursive Algorithm}
+
+To find the largest square at the position $(x, y)$ 
+(bottom-right corner at $(x, y)$), we use the
+following algorithm: \begin{lstlisting}
+size LargestSquare(x, y) {
+  if ((x, y) is black) return 0;
+  if ((x == 1) or (y == 1)) return 1;
+  return min(
+    LargestSquare(x - 1, y - 1),
+    LargestSquare(x - 1, y),
+    LargestSquare(x, y - 1));
+}
+\end{lstlisting} The time complexity of this algorithm, however,
+is exponential.
+\\[\baselineskip]
+We get this as each cell barring the first and last columns and rows 
+have cells where \texttt{LargestSquare} is computed three times 
+(as they  are checked from below, to the right, and below and to 
+the right).
+
+\newpage
+
+\subsubsection{A Dynamic Algorithm}
+
+We now consider storing our solutions to cells so we do not repeat
+ourselves, take \texttt{A} to be an $n \times n$ array
+where each cell is undefined as first: \begin{lstlisting}
+  size LargestSquareStored(x, y) {
+    if ((x, y) is black) A[x, y] = 0;
+    if ((x == 1) or (y == 1)) A[x, y] = 1;
+    if (A[x, y] is undefined) A[x, y] = min(
+      LargestSquareStored(x - 1, y - 1),
+      LargestSquareStored(x - 1, y),
+      LargestSquareStored(x, y - 1));
+    return A[x, y];
+  }
+\end{lstlisting} Giving \texttt{LargestSquareStored(n, n)} a time 
+complexity of $O(n^2)$.
+
+\subsection{Weighted Interval Scheduling}
+
+We have a set of $n$ intervals, a triple containing a
+start time $s_i$, finishing time $f_i$, and a weight $w_i$.
+A schedule is a set of intervals such that they do not overlap
+(with respect to their starting and finishing times).
+\\[\baselineskip]
+The intervals are provided as an array $A$, sorted ascending by
+finishing times.
+
+\subsubsection{The Latest Compatible Interval}
+
+We define $p$ as a function between intervals, taking an interval $i$ and 
+returning the latest interval that finishes before $i$ starts.
+\\[\baselineskip]
+This can be pre-computed in $O(n\log_2(n))$ time by using binary search.
+
+\subsubsection{A Recursive Algorithm}
+
+For $n$ intervals indexed by $\{1, \ldots, n\}$: \begin{lstlisting}
+weight WIS(i) {
+  if (i == 0) return 0;
+  return max(WIS(i - 1), WIS(p(i)) + w_i);
+}
+\end{lstlisting} However, this leads to WIS(i) being calculated more than once
+for some $i$ when we calculate \texttt{WIS(n)}.
+
+\subsubsection{A Dynamic Algorithm}
+
+For $n$ intervals indexed by $\{1, \ldots, n\}$, we now consider a global array 
+of $n$ schedules $S$ where each is entry is initially undefined: \begin{lstlisting}
+weight WISStored(n) {
+  if (n == 0) return 0;
+  for (int i = 1; i <= n; i++) {
+    S[i] = max(S[i - 1], S[p(i)] + w_i);
+  }
+  return S[n];
+}
+\end{lstlisting} This takes $O(n)$ time.
+
+\subsubsection{Returning the Schedule}
+
+We can find the schedule using our
+stored $S$ from the previous section: \begin{lstlisting}
+schedule FindSchedule(i) {
+  if (i == 0) return [];
+  if (S(i - 1) <= S(p(i)) + w_i) {
+    return FindSchedule(p(i)) ++ [i]; 
+  }
+  return FindSchedule(i - 1);
+}
+\end{lstlisting} Thus, \texttt{FindSchedule(n)} gives us our schedule and 
+takes $O(n)$ time.
+
+\subsection{Self-balancing Trees}
+
+\subsubsection{Perfectly Balanced Trees}
+A tree where each path from the root to a leaf has the
+same length is perfectly balanced.
+
+\subsubsection{Parts of our Self-balancing Tree}
+We want to use self-balancing trees as an optimisation over linked lists in a
+dynamic search structure.
+Consider a tree where each node can have between $2$ and $4$ (inclusive) children 
+(where a child can be empty) called a $2-3-4$ tree. Take note of the following: 
+
+  \paragraph{2-node} a node with value $v$, $2$ children, and $1$ key
+  where the left child is less than or equal to $v$ and 
+  the right child is greater than or equal to $v$.
+  \paragraph{3-node} a node with values $v_1, v_2$, $3$ children, and $2$ keys
+  where the left child is less than or equal to $v_1$, 
+  the middle child is between $v_1$ and $v_2$ (inclusive),
+  and the right child is greater than or equal to $v_2$.
+  \paragraph{4-node} a node with values $v_1, v_2, v_3$, $4$ children, and $3$ keys
+  where the left child is less than or equal to $v_1$, 
+  the left-middle child is between $v_1$ and $v_2$ (inclusive),
+  the right-middle child is between $v_2$ and $v_3$ (inclusive),
+  and the right child is greater than or equal to $v_3$.
+
+\subsubsection{The Height of $2-3-4$ Trees}
+
+If we suppose all the nodes in the tree are $2$/$4$ nodes we get the
+worst/best case heights for a $2-3-4$ tree with $n$ elements: \begin{center}
+  \begin{tabular}{| c | c |}
+    \hline
+    Node Type & Height \\
+    \hline 
+    \hline 
+    2 & $O(\log_2(n))$ \\
+    \hline 
+    4 & $O(\log_4(n))$ \\
+    \hline
+  \end{tabular}
+\end{center}
+
+\subsubsection{Insertion on $2-3-4$ Trees}
+
+\paragraph{Splitting} this operation works on a 4-node and requires its parent isn't
+a 4-node. The middle value of the node is added to the parent and two 2-nodes are formed 
+from the left and right values and the four children. Splitting the root increases
+the height of the tree and is the only operation with this property.
+\\[\baselineskip]
+When inserting an element $k$ we search for where the element belongs whilst
+splitting any $4$-nodes into $2$-nodes as we recurse. We convert the bottom node from
+type $t$ to $t + 1$ ($t \neq 4$ by our algorithm structure) and insert our value.
+
+\subsubsection{Deletion on $2-3-4$ trees}
+
+\paragraph{Fusion} this operation works on two 2-nodes with a shared parent that isn't a
+2-node. A relevant key is taken from the parent and used to form a $4$-node. Fusing the 
+root decreases the height of tree and is the only operation with this property.
+
+\paragraph{Transferring} this operation works on a $2$-node and a $3$-node with a shared parent.
+A key from the parent is added to the 2-node whilst a key from the 3-node is added to the parent
+\newpage
+We will consider the cases when deleting a value $k$. For leaves, we search for the value,
+transferring and fusing to convert 2-nodes on the path, we delete the value, converting the
+node from a node type $t$ to a type $t - 1$ ($t \neq 2$ by our algorithm structure). For
+non-leaves, we delete the predecessor of $k$, $k'$ (always a leaf) and replace $k$ with $k'$.
+
+\subsection{Skip Lists}
+
+We want to use skip lists as an optimisation over linked lists in a
+dynamic search structure. Building on a linked list, we require it is sorted and then 
+we can add 'shortcut' levels. Each level is a subset of the linked list in 
+the level below with the bottom level being the full list and each level containing
+the minimum and maximum.
+
+\subsubsection{Insertion in Skip Lists}
+
+When inserting an entry, we choose randomly whether it should appear in the level above.
+We insert it into the lowest level and essentially flip a coin to see if we should insert it 
+into the level above. We repeat these coin flips until it fails to be inserted again
+(note that each level must contain the minimum and maximum of the list and the top
+level should be exactly the minimum and maximum).
+\\[\baselineskip]
+If there is a level which isn't the bottom layer that contains all entries, we can
+delete all levels below it.
+
+\subsubsection{Deletion in Skip Lists}
+
+When deleting an entry, we simply delete all occurances of the entry. If this is the minimum
+or maximum, we ensure that each level contains the minimum or maximum unless the
+whole list is empty.
+\\[\baselineskip]
+If there is a level which isn't the top layer that contains only the minimum and maximum 
+entries, we can delete it.
+
+\newpage
+
+\subsubsection{Finding in Skip Lists}
+
+We start at the minimum of the top layer, iterating across, moving down layers
+as we encounter values greater than our desired value. We return when we can't
+go down anymore or we find our value: \begin{lstlisting}
+value find(key) {
+  while (true) {
+    if (entry.key == key) {
+        // We found the desired entry
+        return entry.value;
+    } else if (entry.key >  key) {
+        // We need to move down
+        if (layer below) {
+            move down;
+        } else {
+            return undefined;
+        }
+    } else {
+        // We need to move to the right
+        if (entry to the right) {
+            move right;
+        } else {
+            return undefined;
+        }
+    }
+  }
+  return undefined;
+}
+\end{lstlisting}
+
+\subsubsection{Runtime of skip lists}
+
+All processes take $O(\log_2(n))$ time on average with randomised levels. Also,
+for large $n$, the amount of levels is also $O(\log_2(n))$ on average.

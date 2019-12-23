@@ -1,0 +1,89 @@
+\section{Output Sensitivity}
+
+We have that some algorithms are output sensitive. This means that their
+runtime depends on what the answer to the problem is.
+
+\subsection{Line Intersections}
+
+Suppose we are given a set of line segments (as two coordinates), we would
+like to find all the coordinates of the Intersections between these line
+segments.
+
+\subsubsection{A Simple Algorithm}
+
+We iterate through all the pairs and output the intersections:
+\begin{lstlisting}
+points intersections_simple(lines) {
+  points ps;
+  for (int i = 0; i < lines.size(); i++) {
+    for (int j = i + 1; j < lines.size(); j++) {
+      if (lines[i] intersects lines[j]) {
+        ps.push(intersection);
+      }
+    }    
+  }
+  return ps;
+}
+\end{lstlisting} This algorithm takes $O(n^2)$ time.
+
+\subsubsection{Output Sensitivity in Line Intersections}
+
+It can be seen that certain inputs could potentially have $O(n^2)$ output
+but this would make it seem like the simple algorithm is optimal but we
+will see that if consider $k$ to be the number of outputs, we can find
+an algorithm with $O(n\log_2(n) + k\log_2(n))$ time complexity. However,
+if we consider bounds for $k$:
+\begin{center}
+  \begin{tabular}{ c c c }
+    $k \leq 2n$  & $\Rightarrow$ & $O(n\log_2(n))$ \\
+    $k \geq n^2$ & $\Rightarrow$ & $O(n^2\log_2(n))$,
+  \end{tabular}
+\end{center} so for certain inputs this algorithm will be \textbf{worse}
+than the simple algorithm.
+
+\newpage
+
+\subsection{An Outline for Finding Intersections}
+
+It can be seen that for two line segments, they can only have an intersection
+if the spans of the segments in the $y$ direction intersect also. Thus,
+we could consider sweeping a horizontal line through all our line segments
+picking up intersections as we go.
+
+\subsubsection{Adjacency} 
+We say two line segments are adjacent if there is a
+contiguous horizontal line from one segment to the other (not interrupted
+by another line segment). It can be
+seen that two segments that are never adjacent can't intersect.
+
+\subsubsection{Event Points} 
+We can't possibly iterate through all possible $y$
+points, thus we only consider 'event points' which are the end points of 
+segments and line intersections but this requires that we calculate 
+intersections as we go. If we have $k$ intersections,
+this gives $O(n + k)$ event points.
+\\[\baselineskip]
+We consider the set of event points as a priority queue with keys 
+equal to their $y$ value, allowing us to \texttt{extractMin} to get
+our next event point. However, our process could give rise to duplicate
+event points, but these can be dealt with by checking the queue beforehand.
+
+\subsubsection{Status} 
+We consider the status of the sweep line to be the
+ordered set of line segments currently being interesected by the sweep line
+with respect to their $x$ coordinates. The status can clearly only change
+at event points, so at each event point we query line segments that have
+newly become adjacent.
+\\[\baselineskip]
+We consider status as a $2-3-4$ tree where: \begin{itemize}
+  \item At the top of a line segment, we insert it,
+  \item At the bottom of a line segment, we delete it,
+  \item At an intersection, we swap the intersecting lines,
+\end{itemize} checking for new intersections as these changes occur.
+
+\subsubsection{The Full Process}
+
+We add all the start and end points of our line segments to our priority queue, 
+and we iterate through them. We update the status and query for intersections as
+we progress, adding intersections to our output and the queue as necessary.
+This takes $O((n + k)\log_2(n))$ time.

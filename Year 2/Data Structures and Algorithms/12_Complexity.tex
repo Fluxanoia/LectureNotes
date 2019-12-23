@@ -1,0 +1,89 @@
+\section{Complexity Theory}
+
+\subsection{Decision Problems}
+
+A decision problem is a problem such that the answer is in the set $\{\texttt{Yes},
+\texttt{ No}\}$.
+
+\subsection{Oracles}
+
+An oracle is a construct that given its corresponding problem, solves it in
+$O(1)$ time.
+
+\subsection{Cook Reductions}
+
+For the decision problems $X$, $Y$ with $O_Y$ the oracle for $Y$,
+we have that a Cook reduction from $X$ to $Y$ is an algorithm $A_X$
+which given an input of size $n$ runs in $O(x^n)$ time and makes
+$O(x^n)$ calls to $O_Y$ (all with inputs of size $O(x^n)$).
+
+Suppose we have algorithms $A_X, A_Y$ which solve the decision problems 
+$X$ and $Y$ respectively. If whilst performing $A_X$ we call $A_Y$ as a 
+subroutine a $O(x^n)$ number of times (for some finite $n$), we say
+we have a Cook reduction from $X$ to $Y$ denoted by $X \leq_c Y$.
+
+\subsubsection{Properties of Cook Reductions}
+
+We have that for the decision problems $X, Y, Z$: \begin{itemize}
+  \item $X \leq_c Y$, $Y \leq_c Z$ implies that $X \leq_c Z$ (transitivity)
+  \item $X \leq_c Y$ implies that if we have a polynomial time algorithm for $Y$, 
+  we have one for $X$
+  \item $X \leq_c Y$ and there is no polynomial-time algorithm for $X$ implies 
+  that there is no polynomial-time algorithm for $Y$.
+\end{itemize}
+
+\subsection{Karp Reductions}
+
+For the decision problems $X$ and $Y$, a Karp reduction from $X$ to $Y$
+is a map $f$ from the instances of $X$ to the instances of $Y$ such that:
+\begin{itemize}
+  \item $f(x)$ can be computed in polynomial time (in $x$)
+  \item $f(x)$ is a \texttt{Yes} instance of $Y$ if and only if it's a \texttt{Yes} instance
+  of $X$.
+\end{itemize} This is denoted by $X \leq_K Y$.
+
+\subsubsection{Properties of Karp Reductions}
+
+We have that Karp reductions are stronger than Cook reductions so that for any two
+decision problems $X, Y$: \begin{gather*}
+    X \leq_K Y \Rightarrow X \leq_C Y.
+\end{gather*}
+
+\subsection{The Class, \textbf{P}}
+
+We have that \textbf{P} is the class of all decision problems which have a polynomial-time
+algorithm. We have that $\textbf{P} \subseteq \textbf{NP}$ as we can just process the solution
+(ignoring the witness).
+
+\subsection{The Class, \textbf{NP}}
+
+We have that \textbf{NP} is the class of all decision problems $X$ such that there is some
+polynomial-time verification algorithm $A_X$ such that for some input $x$, 
+if $x$ is a \texttt{Yes} instance of our problem, there is a witness bit string $w$
+such that $A_X(x, w) = \texttt{Yes}$.
+
+\subsubsection{\textbf{NP}-hardness}
+
+We say a problem is \textbf{NP}-hard (under Cook reductions) if SAT Cook-reduces to it.
+Similarly, we say a problem is \textbf{NP}-hard (under Karp reductions) if SAT Karp-reduces to it.
+
+\subsubsection{\textbf{NP}-completeness}
+
+We say a problem is \textbf{NP}-complete if it is \textbf{NP}-hard and in \textbf{NP}.
+
+\subsection{The SAT Problem}
+
+The SAT problem is the problem that asks if when given some formula in conjunctive-normal form
+(consisting of AND and OR clauses) we can assign the variables such that the formula is 
+satisfied (true).
+
+\subsubsection{Cook-Levin Theorem}
+
+We have that \textbf{SAT} is \textbf{NP}-hard and thus, \textbf{NP}-complete.
+Thus, every problem which \textbf{SAT} reduces to is \textbf{NP}-hard.
+
+\subsection{The 3-SAT Problem}
+
+We have that the width of a conjunctive-normal form is the number of literals
+of all the OR clauses. The 3-SAT problems asks if a width-3 conjunctive-normal 
+form is satisfiable. We have that this is \textbf{NP}-complete.

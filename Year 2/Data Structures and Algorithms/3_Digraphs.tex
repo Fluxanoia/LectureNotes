@@ -1,0 +1,60 @@
+\section{Digraphs}
+
+A digraph (or directed graph) is a graph where each of the edges
+has a direction. This direction means the edge can only be traversed
+in a single direction.
+
+\subsection{Neighbourhoods in Digraphs}
+
+For a digraph $G = (V, E)$, we consider the edges entering and 
+leaving a vertex (or set of vertices). Take $v$ in $V$:
+\\[\baselineskip]
+The in-neighbourhood of $v$ is the set of edges that enter $v$
+denoted by $N^-(v)$.
+\\[\baselineskip]
+The out-neighbourhood of $v$ is the set of edges that leave $v$
+denoted by $N^+(v)$.
+
+\subsubsection{Degree in Digraphs}
+
+We can consider in-degree and out-degree: \begin{align*}
+    \text{in-degree of } v  &= \Deg^-(v) = |N^-(v)| \\ 
+    \text{out-degree of } v &= \Deg^+(v) = |N^+(v)|. 
+\end{align*}
+
+\subsection{The Directed Handshake Lemma}
+
+For a digraph $G = (V, E)$, we have that: \begin{gather*}
+  \sum_{v \in V} \Deg^-(v) = \sum_{v \in V} \Deg^+(v) = |E|.
+\end{gather*}
+
+\subsection{Connectivity in Digraphs}
+
+\subsubsection{Strong Connectivity}
+
+A digraph $G = (V, E)$ is strongly connected if for each $u, v$
+in $V$, there exists a path from $u$ to $v$ and from $v$ to $u$.
+
+\subsubsection{Weak Connectivity}
+
+A digraph $G = (V, E)$ is weakly connected if for each $u, v$
+in $V$, there exists a path from $u$ to $v$ or from $v$ to $u$.
+
+\subsubsection{Connected Components in Digraphs}
+
+A strong component of a digraph is the maximal strongly
+connected induced subgraph.
+\\[\baselineskip]
+A weak component of a digraph is the maximal weakly
+connected induced subgraph.
+
+\subsection{Euler Circuits and Trails on Digraphs}
+
+For a digraph $G = (V, E)$, $G$ has an Euler circuit if and only 
+if $G$ is strongly connected and every vertex has equal in and out
+degree. We can see from this that an Euler trail exist if and only
+if $G$ is strongly connected and for some $x, y$ in $V$: \begin{itemize}
+    \item Every vertex in $V \setminus \{x, y\}$ has equal in and out degree,
+    \item $\Deg^-(x) = \Deg^+(x) + 1$,
+    \item $\Deg^+(y) = \Deg^-(y) + 1$.
+\end{itemize}

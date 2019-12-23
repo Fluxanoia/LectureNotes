@@ -1,0 +1,45 @@
+\section{Trees and Forests}
+
+A graph is a forest if it is acyclic.
+A tree is a connected forest.
+
+\subsection{Leaves}
+
+For a tree $T = (V, E)$, for a vertex $v$ in $V$, $v$ is a leaf
+if $\Deg(v) = 1$. 
+
+\subsubsection{Existence of Leaves}
+
+If $|V| \geq 2$, we have that $T$ has at least two leaves.
+
+\subsection{Characterisation of Trees}
+
+We have that for a graph $G = (V, E)$, the following are equivalent:
+\begin{itemize}
+  \item $G$ is a tree,
+  \item $G$ is maximally acyclic ($G$ is acyclic and the addition
+  of any edge forms a cycle),
+  \item $G$ is minimally connected ($G$ is connected and the removal
+  of any edge disconnects it),
+  \item $G$ is connected and $|E| = |V| - 1$,
+  \item $G$ is acyclic and $|E| = |V| - 1$,
+  \item Any two vertices in $G$ are connected by a unique path.
+\end{itemize}
+
+\subsection{Rooted Trees}
+
+For a tree $T = (V, E)$, we can root $T$ with some $r$ in $V$.
+
+In the rooting process, we take each $v$ in $V\setminus\{r\}$ and 
+define $P_v$ to be the path from $r$ to $v$. We then direct the edges 
+from $r$ to $v$ for each $P_v$.
+\\[\baselineskip]
+For $u, v$ in $V\setminus\{r\}$, we say that: \begin{itemize}
+  \item $u$ is an ancestor of $v$ if $u$ lies on $P_v$,
+  \item $u$ is the parent of $v$ if $u$ is in the
+  in-neighbourhood of $v$,
+  \item $L_0 = \{r\}$ and $L_n = \{v \in V : |P_v| = n\}$ are the 
+  levels of $T$,
+  \item The depth of a tree is the greatest $n$ where
+  $L_n$ is non-empty.
+\end{itemize} 
