@@ -11,13 +11,70 @@ a matching from $X$ to $Y$ is a set of edges $M \subseteq E$
 such that $f : X \to Y$ defined by: \begin{gather*}
   f(x) := y \qquad \text{ where } \{x, y\} \in M,
 \end{gather*} is injective on $M$. The matching is called perfect
-if $M = X$.
+if $f$ is an isomorphism.
 
 \subsection{Augmenting Paths}
 
 An augmenting path is a path in a bipartite graph $G$ that alternates between
-edges in a matching $M$ for $G$ and edges in $E(G) \setminus M$ with the first
-and last vertices not being matched in the matching $M$. 
+edges in a matching $M$ for $G$ and edges in $E(G) \setminus M$ starting
+and finishing with the latter. Additionally, the first and last vertices 
+must not be matched in the matching $M$.
+
+\subsubsection{Partitioning Augmenting Paths}
+
+Thus, an augmenting path $P$ associated to a matching $M$ can
+have its edge set partitioned into the edges in $M$ and the
+edges not in $M$: \begin{align*}
+  P^- &= \{e \in E(P) : e \in M\}, \\
+  P^+ &= E(P) \setminus P^-.
+\end{align*} Considering the fact that the first and
+last vertices in $P$ are unmatched so $P$ must start and end with
+edges not in the matching (in $P^+$). 
+As the edges alternate between being in and out of the matching, 
+$|P^+| = |P^-| + 1$.
+
+\subsubsection{Switching Augmenting Paths}
+
+We define the operation \texttt{switch} on an augmenting path $P$ 
+associated with a matching $M$ that removes all the matching edges 
+in $P$ from $M$ and adds the remaining edges from $P$.
+So, if $M'$ is our matching after \texttt{switch} then: 
+\begin{gather*}
+  M' = (M \setminus P^-) \cup P^+.
+\end{gather*} We have that $|M'| = |M| + 1$ as $|P^+| = |P^-| + 1$.
+
+\subsubsection{Finding Augmenting Paths}
+
+For a bipartite graph $G = (V, E)$ bipartite with bipartition $A, B$
+and a matching $M$ from $A$ to $B$, we can find an augmenting path in
+$G$ by forming the bipartite digraph $G' = (V, E')$. We form $E'$ by
+taking each $\{a, b\}$ in $E$ where $a$ and $b$ are in $A$ and $B$ 
+respectively and mapping:
+\begin{gather*}
+  \{a, b\} \mapsto \begin{cases}
+    (b, a) \in E' & \text{if } \{a, b\} \in M \\
+    (a, b) \in E' & \text{otherwise},
+  \end{cases}
+\end{gather*} directing matching edges towards $A$ and all other edges
+towards $B$. Finding an augmenting path in $G$ reduces to finding a
+path in $G'$ which can be done using breadth-first search.
+
+\subsection{Berge's Lemma}
+
+For a bipartite graph $G$ and a matching $M$, if $G$ admits no augmenting
+paths under $M$ then $M$ is maximal.
+
+\subsection{$k$-to-1 Semi-matchings}
+
+For $G$ a bipartite graph with bipartition $X, Y$,
+a $k$-to-1 semi-matching from $X$ to $Y$ is a subgraph $G'$ of $G$
+such that: \begin{itemize}
+  \item Each vertex in $X$ in $G'$ has degree at most $k$,
+  \item Each vertex in $Y$ in $G'$ has degree at most $1$.
+\end{itemize} Finding maximum $k$-to-1 semi-matchings reduces to 
+a matching problem if we simply create $k - 1$ copies of each
+vertex in $X$ and find a maximum matching. We can then delete the
+copies and add their edges to the original vertex.
 
 \subsection{Hall's Marriage Theorem}
 

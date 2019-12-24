@@ -97,8 +97,9 @@ It supports four operations:
     of linked lists and chooses a hash function \texttt{h} & $O(1)$ \\
     \hline
     \texttt{insert(k, v)} & Inserts the pair (\texttt{k, v}),
-    if $\frac{\texttt{n}}{2}$ pairs are stored, we create a hash
-    table of double the size and copy the contents into it & $O(1)$ \\
+    if at least $\frac{\texttt{n}}{2}$ pairs are stored, we create a hash
+    table of prime size that is at least double and less than quadruple 
+    $n$ and copy the contents into it & $O(1)$ \\
     \hline
     \texttt{delete(k)} & Deletes the pair corresponding to the key \texttt{k} & $O(1)$ \\
     \hline
@@ -107,14 +108,21 @@ It supports four operations:
   \end{tabular}
 \end{center}
 
-\subsubsection{Markov's Inequality}
+\subsubsection{Hash Functions}
 
-For $X \geq 0$ a random variable with mean $\mu$, for all
-$t$ in $\mathbb{R}_{\geq 0}$: \begin{gather*}
-  \mathbb{P}(X \geq t) \leq \frac{\mu}{t}.
-\end{gather*} So, if $X$ is the expected time it takes for an 
-algorithm to terminate, we can say how likely it is for an algorithm
-to terminate based on our prediction.
+Let $N$ be the number of possible keys.
+We choose our hash function randomly and we choose it to run
+depending on a prime $p$. To generate our hash function based
+on $p$ denoted by $h_p$, we let $t$ be the greatest integer such
+that $p^t \leq N$ ($t = \lfloor \log_p(N) \rfloor$) and choose
+$a_0, \ldots, a_t$ in $[p - 1]$ independently and uniformly at random.
+Then, for some $k$ in $\{0, \ldots, N - 1\}$, we define: \begin{gather*}
+  h_p(k) := \left[ 
+    \sum_{i = 0}^t \left[ (a_i \cdot x_i) \text{ mod } p \right] 
+  \right] \text{mod } N,
+\end{gather*} where $k = x_0 + x_1p + \cdots + x_tp^t$.
+
+\newpage
 
 \subsection{Binary Heaps}
 
@@ -130,15 +138,12 @@ elements of the tree are ordered according to a
   \end{itemize}
 \end{itemize}
 
-\newpage
-
 \subsection{Priority Queues}
 
 A priority queue functions as queue with a notion of priority.
-We associate keys to priority in this case.
-In this course,  we use a binary heap with the heap property 
-that each parent has a value less than or equal to its children.
-This supports the following:
+In this course, we associate smaller keys to priority and use a 
+binary heap with the heap property that each parent has a value 
+less than or equal to its children. This supports the following:
 \begin{center}
   \begin{tabular}{ || c | p{7.5cm} | c || }
     \hline
@@ -159,7 +164,10 @@ This supports the following:
 \subsection{Disjoint Set}
 
 This data structure stores a collection of disjoint sets of 
-$\{1, 2, \ldots n\}$ for some $n$ in $\mathbb{Z}_{> 0}$. 
+$\{1, 2, \ldots n\}$ for some $n$ in $\mathbb{Z}_{> 0}$.
+This can be considered as a reverse forest of reverse
+trees where elements contain pointers to their parents and the
+roots of the trees are the identifiers.
 This supports the following:
 \begin{center}
   \begin{tabular}{ || c | p{7.5cm} | c || }
@@ -171,11 +179,12 @@ This supports the following:
     & $O(1)$ \\
     \hline
     \texttt{union(x, y)} & Merges the sets containing 
-    \texttt{x} and \texttt{y}
+    \texttt{x} and \texttt{y}, setting the identifier
+    of the smaller tree to that of the larger tree
     & $O(\log_2(n))$ \\
     \hline
     \texttt{findSet(x)} & Finds the identifier of the set containing
-    \texttt{x} (the identifier is an element of the set)
+    \texttt{x}
     & $O(\log_2(n))$ \\
     \hline
   \end{tabular}

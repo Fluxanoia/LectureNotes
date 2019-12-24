@@ -21,8 +21,30 @@ $f : \mathbb{R}^n \to \mathbb{R}$, an $m \times n$ matrix $A$, and an $m$-dimens
 vector $b$ in $\mathbb{R}^m$. The desired output is a vector $x$ in $\mathbb{R}^n$ that 
 maximises $f(x)$ subject to $Ax \leq b$ and $x \geq 0$.
 \\[\baselineskip]
-We can accomodate for minimisation and lower bounds by multiplying by negative one, and
-we can write negative variables as the subtraction of positive variables.
+We can put linear programming problems into standard form by doing the following:
+\begin{itemize}
+  \item Minimisation constraints have their signs flipped,
+  \item Equality constraints are turned into two less than or equal to
+  constraints,
+  \item Greater than or equal to constraints have their signs flipped,
+  \item Variables that could potentially be less than zero can be written
+  as the subtraction of positive variables.
+\end{itemize}
+
+\subsection{The Simplex Algorithm}
+
+The simplex algorithm takes a linear programming problem in standard form
+and considers the feasible polytope formed by the constraints in $\mathbb{R}^n$.
+It picks vertex on the polytope and moves greedily to the neighbour of
+greater value until it cannot anymore. This does terminate with the optimal
+solution and in practice only takes $\Theta(n)$ steps despite the large
+number of vertices.
+
+\subsection{Interior Point Algorithms}
+
+Interior Point Algorithms are another type of linear programming
+problem solving algorithm which have a polynomial worst case runtime.
+However, in practice, they tend to be slower than the Simplex algorithm.
 
 \subsection{Integer Linear Programming}
 

@@ -1,5 +1,20 @@
 \section{Complexity Theory}
 
+\subsection{Markov's Inequality}
+
+For $X \geq 0$ a random variable with mean $\mu$, for all
+$t$ in $\mathbb{R}_{\geq 0}$: \begin{gather*}
+  \mathbb{P}(X \geq t) \leq \frac{\mu}{t}.
+\end{gather*} Thus, if we expect our algorithm to run in time $T$,
+then for some $k$ in $\mathbb{R}_{> 0}$, the probability it
+takes more than $kT$ is $\frac{1}{k}$.
+
+\subsubsection{Expected Runtime}
+
+If we have an algorithm $A$ and a fixed input $x$ with expected runtime
+$T$, we run $A(x)$ and if it fails to terminate with $2T$. The probability
+it fails $k$ in $\mathbb{Z}_{>0}$ many times in a row is $2^{-k}$.
+
 \subsection{Decision Problems}
 
 A decision problem is a problem such that the answer is in the set $\{\texttt{Yes},
@@ -21,6 +36,8 @@ Suppose we have algorithms $A_X, A_Y$ which solve the decision problems
 $X$ and $Y$ respectively. If whilst performing $A_X$ we call $A_Y$ as a 
 subroutine a $O(x^n)$ number of times (for some finite $n$), we say
 we have a Cook reduction from $X$ to $Y$ denoted by $X \leq_c Y$.
+
+\newpage
 
 \subsubsection{Properties of Cook Reductions}
 
@@ -87,3 +104,10 @@ Thus, every problem which \textbf{SAT} reduces to is \textbf{NP}-hard.
 We have that the width of a conjunctive-normal form is the number of literals
 of all the OR clauses. The 3-SAT problems asks if a width-3 conjunctive-normal 
 form is satisfiable. We have that this is \textbf{NP}-complete.
+
+\subsection{Further \textbf{NP}-complete Problems}
+
+The following are \textbf{NP}-complete: \begin{itemize}
+  \item Finding an independent set in a graph,
+  \item Finding a vertex cover in a graph.
+\end{itemize}

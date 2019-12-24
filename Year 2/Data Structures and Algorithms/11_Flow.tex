@@ -22,53 +22,105 @@ of sets are identical.
 \subsubsection{Cuts}
 
 A cut is a partition $A, B$ of $V$ such that the source is in $A$ and the sink is in $B$.
-We have that the flow in $A$ minus the flow out is equal to the flow out to $B$ minus the flow in:
+We have that the flow out of $A$ minus the flow in is equal to the flow in 
+to $B$ minus the flow out:
 \begin{gather*}
-  (f^- - f^+)(A) = (f^+ - f^-)(B) = v(f).
-\end{gather*}
+  (f^+ - f^-)(A) = (f^- - f^+)(B) = v(f).
+\end{gather*} The capacity of a cut is the sum of all the capacities of all
+the edges leaving the $A$ ($c^+(A)$).
 
-\subsection{Maximising Flow Value}
+\subsection{Residual Graphs}
 
-We choose a greedy algorithm that works on a modified graph $G_F$, where we add backwards edges
-(edges corresponding to edges with non-zero flow) 
-and forwards edges 
-(edges corresponding to edges with non-capacity flow) 
-that allows flow to be pushed back down the edge. So, edges are no longer considered when 
-at capacity (except after we choose to push their flow backwards and re-route it).
+On a flow network $F = (G, c, s, t)$, we consider the residual graph 
+$G_F = (V, E_F)$, where for each $e$ in $E(G)$ we add: \begin{itemize}
+  \item A forward edge if $f(e) \leq c(e)$,
+  \item A backward edge if $f(e) \geq 0$.
+\end{itemize} to $E_F$. The backward edges allow flow to be pushed back 
+down edges in $G$. The forward edges make it so that edges at capacity in $G$ 
+are no longer considered.
 
-\subsubsection{Augmenting Paths in Flow Networks}
+\subsubsection{Augmenting Paths in Residual Graphs}
 
 An augmenting path is a directed path from $s$ to $t$ in $G_F$.
 
-\subsubsection{Residual Capacity}
+\subsection{Residual Capacity}
 
-The residual capacity of an edge is the amount of flow you can add to the forward edge or
-the amount of flow you can remove from the backward edge (whichever is greater).
+On a flow network $F = (G, c, s, t)$,
+the residual capacity of an edge $\{x, y\}$ in $G$ is the amount of flow 
+you can add to $(x, y)$ in $G_F$ or the amount of flow you can remove from 
+$(y, x)$ in $G_F$ (whichever is greater). For paths, the residual
+capacity of a path $P$ is the minimum of the residual capacities
+of all the edges.
 
 \subsubsection{Pushing}
 
-Considering an augmenting path, pushing the path involves adding as much flow as possible to
-all the edges.
+Considering an augmenting path $P$, pushing $P$ involves adding the
+residual capacity of $P$ to the edges used by the path.
 
-\subsubsection{The Ford-Fulkerson Algorithm}
+\subsection{The Ford-Fulkerson Algorithm}
 
-We consider all augmenting paths (depth-first) and push each one, updating $G_F$ as we go. 
-The resulting flow is maximal. This takes $O(v(f^*)|E|)$ time where $f^*$ is our maximal flow.
+For a weakly connected flow network $F = (G, c, s, t)$, we generate $G_F$ and
+repeatedly push the augmenting paths on $G_F$ onto $G$, updating $G_F$
+as the flow on $G$ changes. 
+The resulting flow is maximal, taking $O(v(f^*)|E|)$ time where 
+$f^*$ is our maximal flow.
+\begin{proof}
+  To show the resulting flow $f$ is maximal, we first consider a random
+  cut $(X, Y)$. We have that: \begin{gather} \label{ffa}
+    v(f) = f^+(A) - f^-(A) \leq c^+(A).
+  \end{gather} So, if $v(f) = c^+(A)$ we have a maximal flow.
+  Now, we consider the cut ($A, B$):
+  \begin{align*}
+    A &= \{v \in V(G) : \text{there is a path from $s$ to $v$ in } G_F\} \\
+    B &= V(G) \setminus A.
+  \end{align*} We can see that $f^+(A)$, the flow out of $A$, is equal to
+  $c^+(A)$, the capacity of the cut:
+  \\[\baselineskip]
+  For each $v$ in $B$, there is no path from $s$ to $v$. Hence, there are
+  no forward edges in $G_F$ from $A$ to $B$. Thus, all the edges from $A$ 
+  to $B$ in $G$ are at capacity. Thus, the flow out of $A$ ($f^+(A)$) 
+  must be the capacity of the cut, $c^+(A)$. 
+  \\[\baselineskip]
+  Similarly, there are no backward edges in $G_F$ from $A$ to $B$. Thus, 
+  all the edges from $B$ to $A$ in $G$ have zero flow, hence the flow into 
+  $A$ ($f^-(A)$) is zero.
+  \\[\baselineskip]
+  By the properties of cuts, $f^+(A) - f^-(A) = v(f)$. Thus,
+  $c^+(A) = v(f)$ as required by (\ref{ffa}).
+\end{proof}
+
+\subsubsection{Max-flow Min-cut Theorem}
+
+The value of a maximum flow is always equal to the minimum capacity of a cut.
+\begin{proof}
+  We let $f$ be the maximum flow and take $(A, B)$ to be our cut of minimum
+  capacity.
+  We know that there are no augmenting paths for $f$ as that would 
+  contradict the maximality of $f$. By the proof of Ford-Fulkerson proof, 
+  (as the output flow of Ford-Fulkerson doesn't have any augmenting paths)
+  we pick a cut $(X, Y)$ such that $c^+(X) = v(f)$. But as $(A, B)$ is a
+  cut of minimum capacity: \begin{gather*}
+    c^+(A) \leq c^+(X) = v(f).
+  \end{gather*} But by (\ref{ffa}), we know that $v(f) \leq c^+(A)$. Thus,
+  $v(f) = c^+(A)$ as required.
+\end{proof}
+
+\subsection{The Edmonds-Karp Algorithm}
+
+If we pick augmenting paths with minimal edges (breadth-first) then we are guaranteed to 
+finish Ford-Fulkerson in $O(|V||E|^2)$ time.
+
+\subsection{Additional Uses of Flows}
 
 \subsubsection{Flow Networks and Bipartite Graphs}
 
 Given a bipartite graph $G = (V, E)$ with bipartition $A, B$, we can form a new graph
 $G'$ identical to $G$ except: \begin{itemize}
-  \item All edges are directed from $A$ to $B$,
-  \item All edges have capacity $1$,
   \item We add a source vertex connected to all vertices in $A$,
   \item We add a sink vertex connected to all vertices in $B$,
+  \item All edges are directed from $s$ to $A$ to $B$ to $t$,
+  \item All edges have capacity $1$,
 \end{itemize} in $G'$, maximal flows corresponding to matchings.
-
-\subsubsection{The Edmonds-Karp Algorithm}
-
-If we pick augmenting paths with minimal edges (breadth-first) then we are guaranteed to 
-finish Ford-Fulkerson in $O(|V||E|^2)$ time.
 
 \subsubsection{Vertex Capacities}
 
@@ -79,14 +131,12 @@ into two vertices $v^+, v^-$ where the capacity of $(v^-, v^+)$ is $c_V(v)$ and
 all the edges going into $v$ go into $v^-$ and all the edges going
 out of $v$ go out of $v^+$.
 
-\subsection{Circulation Networks}
+\subsubsection{Circulation Networks}
 
 A circulation network $C = (G, c, d)$ is a directed graph $G = (V, E)$ and a
 capacity function $c : E \to \mathbb{N}$ and demand function $d : V \to \mathbb{N}$.
 Vertices with positive demand are sinks, and vertices with negative demand are sources.
-
-\subsubsection{Circulations}
-
+\\[\baselineskip]
 A circulation is a function $f : E \to \mathbb{R}$ with $0 \leq f(e) \leq c(e)$ for each
 $e$ in $E$ and $f^-(v) - f^+(v) = D(v)$ for all $v$ in $V$ (flow is conserved except at
 sources and sinks).

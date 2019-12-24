@@ -75,8 +75,8 @@ weight WIS(i) {
   if (i == 0) return 0;
   return max(WIS(i - 1), WIS(p(i)) + w_i);
 }
-\end{lstlisting} However, this leads to WIS(i) being calculated more than once
-for some $i$ when we calculate \texttt{WIS(n)}.
+\end{lstlisting} However, this leads to \texttt{WIS(i)} being calculated more than once
+for some \texttt{i} when we calculate \texttt{WIS(n)}.
 
 \subsubsection{A Dynamic Algorithm}
 

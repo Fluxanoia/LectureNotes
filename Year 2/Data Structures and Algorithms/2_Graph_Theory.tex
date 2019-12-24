@@ -98,12 +98,47 @@ A component of a graph $G$ is a maximally connected subgraph of $G$.
 An Euler trail in a graph $G = (V, E)$ is a trail in $G$ that traverses every edge
 exactly once. An Euler circuit is a closed Euler trail.
 
+\subsubsection{Partitioning Even-regular Graphs} \label{eulerpart}
+
+For a graph $G = (V, E)$, if each vertex has even degree, we can
+partition its edge set into disjoint subsets $E_1, \ldots, E_s$
+such that for each $i$ in $[s]$, $E_i$ is the edge set of a cycle.
+\begin{proof}
+    Supposing each $v$ in $V$ has even degree, if $E = \emptyset$ then
+    the statement holds trivially. Suppose $E$ is non-empty and the
+    statement holds for all graphs with strictly fewer edges. We
+    pick $v$ in $V$ and generate a path $P$ (starting at $v$) 
+    by checking if the current end of our path has an edge connecting 
+    to some $v'$ in $P$. If it does, we have cycle. If not, there will 
+    always be an edge to choose as we entered the vertex and it has even degree 
+    (so there must be another edge to leave it). As the edge set is finite,
+    this process must end, giving us a circuit (so a cycle). As we
+    have generated a cycle $C$, we create $G' = (V, E \setminus E(C))$. 
+    But now $|E(G')| < |E|$ so we can split its edge set into
+    disjoint subsets $E_1, \ldots, E_s$ satisfying the statement.
+    Thus, $E_1, \ldots, E_s, E(C)$ satisfies the statement for $G$.
+\end{proof}
+
 \subsubsection{Conditions for Euler Circuits and Trails}
 
 An Euler circuit in a connected graph $G = (V, E)$ exists if and only 
 if each vertex in $V$ has even degree. We can see from this that
 an Euler trail exists if and only if each vertex in $V$ has even
 degree except exactly two vertices.
+\begin{proof}
+  If $G$ has an Euler circuit, the circuit must enter and exit each $v$
+  in $V$ an even number of times. Thus, the degree of each vertex is even.
+  If each $v$ in $V$ has even degree, consider (\ref{eulerpart}), partitioning
+  $E$ into disjoint subsets $E_1, \ldots, E_s$ all edge sets of cycles.
+  Taking $V(E_i)$ to be the vertex set traversed by $E_i$ for all $i$ in $[s]$,
+  we have that $V(E_1)$ must share a vertex with some $V(E_i)$ for some $i$ in $[s]$
+  as otherwise this would contradict the connectivity of $G$.
+  We stitch the edge sets together to form a circuit starting at some
+  intersection of $V(E_1)$ and $V(E_i)$ and traversing all of
+  $E_1$ then $E_i$. We repeat this until there is only one edge set
+  which must be our Euler circuit as its edge set is the union of a
+  partition of the edge set.
+\end{proof}
 
 \subsection{Hamiltonian Cycles and Paths}
 
@@ -115,3 +150,41 @@ A closed Hamiltonian path is a Hamiltonian cycle.
 For a graph $G = (V, E)$ where $n = |V| \geq 3$: \begin{gather*}
   \delta(G) \geq \frac{n}{2} \Rightarrow G \text{ is Hamiltonian.}
 \end{gather*}
+\begin{proof}
+  Observe that for some $x, y$ in $V$ if $\{x, y\}$ is not in $E$,
+  then we have that as $|V \setminus \{x, y\}| = n - 2$ and
+  $|N_G(x)| \geq \frac{n}{2}$, and $|N_G(y)| \geq \frac{n}{2}$: 
+  \begin{gather*}
+      N_G(x) \cap N_G(y) \neq \emptyset,
+  \end{gather*} by the Pigeonhole principle. Take $P = (x_1, \ldots, x_k)$
+  to be the longest path in $G$. We have that $k \geq 3$ as $G$ is
+  connected on at least 3 vertices. Also, we can assume $G$ has no
+  $k$-cycle as: \begin{itemize}
+      \item If $k = n$, we have the desired Hamiltonian cycle,
+      \item If $k < n$, we have a $k$-cycle in $G$, but as $G$ is connected
+      we can take some $x$ in $N_G(P)$ and connect it to $P$ to form
+      a path of length $k + 1$ contradicting the maximality of $P$. 
+  \end{itemize} Thus, we have that $\{x_1, x_k\}$ is not in $E$.
+  Also, we have that for any $i$ in $\{2, \ldots, k - 1\}$, we can't
+  have $\{x_1, x_i\}$ and $\{x_{i - 1}, x_k\}$ in $E$ as that would form
+  a $k$-cycle $P_k$: \begin{gather} \label{consecneighbours}
+      P_k = (x_1, x_i, \ldots, x_k, x_{i - 1}, \ldots, x_2).
+  \end{gather} By the maximality of $P$: 
+  \begin{equation*}   
+      \begin{aligned}
+          N_G(x_1) &\subseteq \{x_2, \ldots, x_{k - 1}\} \\
+          N_G(x_k) &\subseteq \{x_2, \ldots, x_{k - 1}\},
+      \end{aligned}
+  \end{equation*}
+  as otherwise we could simply connect the element not in our
+  path to end of $P$, contradicting the maximality of $P$.
+  It follows that: \begin{gather*}
+      N_G(x_1) = \{x \in V : \{x_1, x\} \in E\} \qquad
+      \text{and} \qquad
+      N_G(x_i)^+ = \{x_i : x_{i - 1} \in N_G(x_k)\},
+  \end{gather*} are disjoint subsets of $\{x_2, \ldots, x_k\}$
+  by the statement describing (\ref{consecneighbours}).
+  But, $\{x_2, \ldots, x_k\}$ is of size $k - 1$ and; 
+  $N_G(x_1)$ and $N_G(x_1)^+$ both have size at least $\frac{n}{2}$.
+  Thus, a contradiction - $G$ has a Hamiltonian cycle.
+\end{proof}

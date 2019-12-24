@@ -26,12 +26,6 @@ int polynomial(coeffs, x) {
 }
 \end{lstlisting} Taking $O(n)$ time.
 
-\subsubsection{Point Intersection with Polynomials}
-
-For a given set of points of size $n$, we have that there exists a 
-unique polynomial with degree-bound $n$ such that the polynomial
-intersects all the given points.
-
 \subsubsection{Point-Value Representation}
 
 We can represent a polynomial of degree $n$ in $\mathbb{Z}_{\geq 0}$ 
@@ -101,7 +95,14 @@ $\omega_{dn}^{dk} = \omega_{n}^{k}$.
 \paragraph{Halving Lemma:} we have that if $n$ is even, the set of all
 the squared roots of unity is just the set of roots of unity for $\frac{n}{2}$.
 
-\subsubsection{Method of the Fast Fourier Transform}
+\subsubsection{The Discrete Fourier Transform}
+
+For a polynomial $A$ of degree $n$, we call the vector
+of evaulations of $A$ at the $n + 1$ roots of unity the
+Discrete Fourier transform of the coefficient representation
+of $A$.
+
+\subsubsection{The Fast Fourier Transform}
 
 For a polynomial $A$ of even degree $n$,
 we define $A^{[0]}$ and $A^{[1]}$ as: \begin{align*}
@@ -109,16 +110,43 @@ we define $A^{[0]}$ and $A^{[1]}$ as: \begin{align*}
   A^{[1]} &= a_1 + a_3x + \cdots + a_{n - 1}x^{(n / 2) - 1},
 \end{align*} so we have that: \begin{gather*}
   A(x) = A^{[0]}(x^2) + xA^{[1]}(x^2).
-\end{gather*} So, we can split a DFT computation into two
+\end{gather*} So, we can split the computation into two
 equally sized parts, compute them, and then combine them in linear time.
-
-\newpage
+Combined with the Discrete Fourier transform and the Halving Lemma, we
+only have to evaulate $A$ at $\frac{n}{2}$ points.
+\begin{lstlisting}
+  polynomial FFT(polynomial P, degree n) {
+    if (n < 1) {
+      // If the degree is less than 1, we just return P
+      return P;
+    }
+    // The (n + 1)th root of unity
+    complex root = root_of_unity(n + 1);
+    // The cumulative root of unity
+    complex root_sum = 1;
+    // The polynomial split into two
+    polynomial P_0 = (a_0, a_2, a_4, ..., a_n);
+    polynomial P_1 = (a_1, a_3, a_5, ..., a_{n - 1});
+    // The recursive step
+    polynomial y0 = FFT(P_0, n / 2);
+    polynomial y1 = FFT(P_1, n / 2);
+    // Combine step
+    polynomial y;
+    for (int k = 0; k <= n / 2; j++) {
+      y[k] = y0[k] + root_sum * y1[k];
+      y[k + n / 2] = y0[k] - root_sum * y1[k];
+      root_sum *= root;
+    }
+    return y;
+  }
+\end{lstlisting}
 
 \subsection{Polynomial Multiplication}
 
-For polynomials $A, B$ both with a degree bound $n$: \begin{itemize}
+For polynomials $A, B$ with degrees $a, b$, let $n = \Max\{a, b\}$: 
+\begin{itemize}
   \item Set the degree of $A$ and $B$ to $2n$, padding with zeroes,
   \item Perform the Fast Fourier transform,
-  \item Form our point-value representation and multiply pointwise,
+  \item Multiply pointwise,
   \item Interpolate with the inverse Fast Fourier transform.
 \end{itemize} This process takes $O(n \log(n))$ time.

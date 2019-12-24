@@ -184,8 +184,16 @@ potentials. We define a re-weighting function $w' : E \to \mathbb{Z}$: \begin{ga
 an edge $(s, v)$ for each $v$ in $V$ of weight zero forming a new graph $G'$. 
 We then run Bellman-Ford on $G'$ and define $h$ as follows: \begin{gather*}
   h(v) = \text{ the shortest path length from $s$ to $v$ in } G'.
-\end{gather*} Note that $G'$ has the same number of negative weight cycles as $G$
-as all our edges are directed away from $s$.
+\end{gather*} Note that: \begin{itemize}
+  \item Any path is a shortest path in $G$ if and only if it's a shortest path
+  in the re-weighted $G$,
+  \item The length of the shortest path in $G$ can be calculated from its
+  length in the re-weighted $G$,
+  \item A cycle has negative weight in $G$ if and only if it has negative
+  weight in the re-weighted $G$,
+  \item If there are no negative cycles in $G$, the re-weighted graph
+  has no negative weights.
+\end{itemize}
 
 \subsubsection{The Algorithm}
 
