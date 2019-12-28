@@ -76,6 +76,8 @@ a matching problem if we simply create $k - 1$ copies of each
 vertex in $X$ and find a maximum matching. We can then delete the
 copies and add their edges to the original vertex.
 
+\newpage
+
 \subsection{Hall's Marriage Theorem}
 
 For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: \begin{gather*}
@@ -83,3 +85,38 @@ For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: \begin{gather*}
   \Longleftrightarrow \\
   \text{For all } S \subseteq X, |N(S)| \geq |S|.
 \end{gather*}
+\begin{proof}
+  Suppose $G$ has a perfect matching from $X$ to $Y$, we have that
+  for each set of vertices in $X$, they each match to a
+  vertex in $Y$ under our matching. Thus, for each $S \subseteq X$,
+  $|N(S)| \geq |S|$. Suppose for all $S \subseteq X$, 
+  $|N(S)| \geq |S|$. If $|X| = 1$, $S = X = \{x\}$ meaning
+  $|N(x)| \geq 1$, so there is some edge from $x$ to an
+  element in $y$. This edge is our matching.
+  Suppose now that $|X| > 1$ and for all sizes of $X$ in
+  $\{1, \ldots, |X| - 1\}$, the statement holds.
+  \paragraph{Case 1}
+  Suppose for all $S \subseteq X$ we actually have that 
+  $|N(S)| > |S|$ (a stronger condition). Choose some
+  $x$ in $X$ and some $y$ in $Y$ connected to $X$. We
+  form $G'$ by removing $x$, $y$ and, all their incident
+  edges from $G$. The vertex class of $X$ in $G'$
+  is strictly smaller than that of $X$ in $G$. For
+  each vertex in $X$ in $G'$, we have that at most
+  one edge was removed (the one connected to $y$).
+  Thus, we have that $|N_{G'}(S)| \geq |S|$ so by the
+  inductive hypothesis, $G'$ has a matching. By adding
+  $\{x, y\}$ to this matching, we get a matching for $G$.
+  \paragraph{Case 2}
+  Suppose there is some $S \subseteq X$ such that $|N(S)| = |S|$.
+  Consider the graph $G_S = (S \cup N_G(S), E_S)$ the induced
+  subgraph on $S \cup N_G(S)$. By the inductive hypothesis,
+  we have a matching in $G_S$. Consider 
+  $G_S' = (V \setminus V(G_S), E_S')$ the induced subgraph on
+  $V \setminus V(G_S)$. Observe for each $T \subseteq V(G_S')$,
+  $|N_G(T \cup S)| \geq |T| + |S|$, thus: \begin{gather*}
+      |N_{G_S'}(T)| = |N_G(T \cup S) \setminus N_G(S)| \geq |T|.
+  \end{gather*} Thus, by the inductive hypothesis, we have a matching
+  from $S$ to $N_G(S)$ and from $X \setminus S$ to $Y \setminus N_G(S)$.
+  Combining these gives a perfect matching in $G$. 
+\end{proof}

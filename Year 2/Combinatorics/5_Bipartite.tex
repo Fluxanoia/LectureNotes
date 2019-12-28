@@ -67,8 +67,8 @@ For $G = (V, E)$ a bipartite graph with bipartition $X, Y$: \begin{gather*}
 \end{gather*}
 \begin{proof}
     Suppose $G$ has a matching from $X$ to $Y$, we have that
-    for each $x$ in $X$, there must be an edge $\{x, y\}$
-    for some $y$ in $Y$. Thus, for each $S \subseteq X$,
+    for each set of vertices in $X$, they each match to a
+    vertex in $Y$ under our matching. Thus, for each $S \subseteq X$,
     $|N(S)| \geq |S|$. Suppose for all $S \subseteq X$, 
     $|N(S)| \geq |S|$. If $|X| = 1$, $S = X = \{x\}$ meaning
     $|N(x)| \geq 1$, so there is some edge from $x$ to an
