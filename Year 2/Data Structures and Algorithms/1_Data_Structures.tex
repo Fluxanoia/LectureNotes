@@ -118,8 +118,8 @@ that $p^t \leq N$ ($t = \lfloor \log_p(N) \rfloor$) and choose
 $a_0, \ldots, a_t$ in $[p - 1]$ independently and uniformly at random.
 Then, for some $k$ in $\{0, \ldots, N - 1\}$, we define: \begin{gather*}
   h_p(k) := \left[ 
-    \sum_{i = 0}^t \left[ (a_i \cdot x_i) \text{ mod } p \right] 
-  \right] \text{mod } N,
+    \sum_{i = 0}^t (a_i \cdot x_i) 
+  \right] \text{mod } p,
 \end{gather*} where $k = x_0 + x_1p + \cdots + x_tp^t$.
 
 \newpage
@@ -130,7 +130,7 @@ Binary heaps are rooted binary trees where each level is full except
 possibly the last (which is filled from left to right). The
 elements of the tree are ordered according to a 
 \textbf{heap property}. These have the following properties: \begin{itemize}
-  \item For a heap of size $n$, the height of the heap is $\log_2(n)$
+  \item For a heap of size $n$, the height of the heap is $\log_2(n)$,
   \item For an index $i$: \begin{itemize}
     \item The parent has index $\left\lfloor \dfrac{i}{2} \right\rfloor$,
     \item The left child has index $2i$,

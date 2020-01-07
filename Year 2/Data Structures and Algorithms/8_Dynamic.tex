@@ -19,7 +19,7 @@ following algorithm: \begin{lstlisting}
 size LargestSquare(x, y) {
   if ((x, y) is black) return 0;
   if ((x == 1) or (y == 1)) return 1;
-  return min(
+  return 1 + min(
     LargestSquare(x - 1, y - 1),
     LargestSquare(x - 1, y),
     LargestSquare(x, y - 1));
@@ -42,7 +42,7 @@ where each cell is undefined as first: \begin{lstlisting}
   size LargestSquareStored(x, y) {
     if ((x, y) is black) A[x, y] = 0;
     if ((x == 1) or (y == 1)) A[x, y] = 1;
-    if (A[x, y] is undefined) A[x, y] = min(
+    if (A[x, y] is undefined) A[x, y] = 1 + min(
       LargestSquareStored(x - 1, y - 1),
       LargestSquareStored(x - 1, y),
       LargestSquareStored(x, y - 1));
@@ -97,7 +97,7 @@ We can find the schedule using our
 stored $S$ from the previous section: \begin{lstlisting}
 schedule FindSchedule(i) {
   if (i == 0) return [];
-  if (S(i - 1) <= S(p(i)) + w_i) {
+  if (S[i - 1] <= S[p(i)] + w_i) {
     return FindSchedule(p(i)) ++ [i]; 
   }
   return FindSchedule(i - 1);
