@@ -2,7 +2,7 @@
 
 \subsection{Direct Sums}
 
-For $V, W$ vector spaces, we define the external direct sum of $V$ and
+For $V, W$ vector spaces where, we define the external direct sum of $V$ and
 $W$ as: \begin{gather*}
     V \oplus W := \{(v, w) : v \in V, w \in W\},
 \end{gather*} with zero vector $(0_V, 0_W)$. We define addition and scalar multiplication
@@ -11,7 +11,7 @@ coordinate-wise.
 For $S, T$ subspaces of $V$, $V$ is the internal direct sum of $S$ and $T$
 if $S + T = V$ and $S \cap T = \{0_V\}$. 
 
-\subsubsection{Bases of Direct Sums}
+\subsubsection{Bases of External Direct Sums}
 
 We have that for $B_V = \{v_1, \ldots, v_k\}$, $B_W = \{w_1, \ldots, w_l\}$ 
 bases for $V$ and $W$ respectively: \begin{gather*}
@@ -24,8 +24,8 @@ For $V, W$ subspaces of a vector space $U$ over $K$, and $f : V \oplus W \to U$
 defined by: \begin{gather*}
   f((v, w)) = v + w,
 \end{gather*} we have that: \begin{enumerate}
-  \item $f$ is linear
-  \item $f$ is injective if and only if $V \cap W = \{0_U\}$
+  \item $f$ is linear,
+  \item $f$ is injective if and only if $V \cap W = \{0_U\}$,
   \item $f$ is surjective if and only if $V \cup W$ spans $U$.
 \end{enumerate}
 \begin{proof}
