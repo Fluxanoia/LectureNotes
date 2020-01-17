@@ -1,0 +1,122 @@
+\section{Runtime List}
+
+We bring together the running times of many algorithms for ease of use.
+
+\begin{center}
+    \begin{tabular}{| c | c | c | c |}
+        \hline
+        \multicolumn{2}{|c|}{}          & \multicolumn{2}{c|}{Time Complexity} \\
+        \cline{3-4}
+        \multicolumn{2}{|c|}{Operation} & Average & Worst                      \\
+        \hline \hline
+        \multicolumn{4}{|c|}{\textbf{Data Structures}} \\
+        \hline \hline
+        \multirow{3}{*}{Stacks} 
+        & Search    & $O(n)$ & $O(n)$ \\
+        & Insertion & $O(1)$ & $O(1)$ \\
+        & Deletion  & $O(1)$ & $O(1)$ \\
+        \hline \hline
+        \multirow{3}{*}{Queues} 
+        & Search    & $O(n)$ & $O(n)$ \\
+        & Insertion & $O(1)$ & $O(1)$ \\
+        & Deletion  & $O(1)$ & $O(1)$ \\
+        \hline \hline
+        \multirow{3}{*}{Linked Lists} 
+        & Search    & $O(n)$ & $O(n)$ \\
+        & Insertion & $O(1)$ & $O(1)$ \\
+        & Deletion  & $O(1)$ & $O(1)$ \\
+        \hline \hline
+        \multirow{3}{*}{Arrays} 
+        & Search    & $O(n)$ & $O(n)$ \\
+        & Insertion & $O(1)$ & $O(1)$ \\
+        & Deletion  & $O(1)$ & $O(1)$ \\
+        \hline \hline
+        \multirow{3}{*}{Hash Tables} 
+        & Search    & $O(1)$ & $O(n)$ \\
+        & Insertion & $O(1)$ & $O(n)$ \\
+        & Deletion  & $O(1)$ & $O(n)$ \\
+        \hline \hline
+        Priority Queues  & Search    & - & $O(n)$ \\
+        (Unsorted Linked & Insertion & - & $O(1)$ \\
+        List)            & Deletion  & - & $O(n)$ \\
+        \hline \hline
+        \multirow{2}{*}{Priority Queues} 
+                      & Search    & - & $O(\log_2(n))$ \\
+                      & Insertion & - & $O(\log_2(n))$ \\
+        (Binary Heap) & Deletion  & - & $O(\log_2(n))$ \\
+        \hline \hline
+        \multirow{2}{*}{Disjoint Sets} 
+        & Search & - & $O(\log_2(n))$ \\
+        & Union  & - & $O(\log_2(n))$ \\
+        \hline \hline
+        \multirow{5}{*}{2-3-4 Trees} 
+        & Search        & - & $O(\log_2(n))$ \\
+        & Insertion     & - & $O(\log_2(n))$ \\
+        & Deletion      & - & $O(\log_2(n))$ \\
+        & Predecessor   & - & $O(\log_2(n))$ \\
+        & Range Finding & - & $O(\log_2(n))$ \\
+        \hline \hline 
+        Graphs             & Edge Search          & - & $O(1)$ \\
+        (Adjacency Matrix) & Neighbourhood Search & - & $O(n)$ \\
+        \hline \hline 
+        Graphs        & Edge Search          & - & $O(1)$ \\
+        (Linked List) & Neighbourhood Search & - & $O(n)$ \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\begin{center}
+    \begin{tabular}{| c | c | c | c |}
+        \hline
+        \multicolumn{2}{|c|}{}          & \multicolumn{2}{c|}{Time Complexity} \\
+        \cline{3-4}
+        \multicolumn{2}{|c|}{Operation} & Average & Worst                      \\
+        \hline \hline
+        \multicolumn{4}{|c|}{\textbf{Data Structures}} \\
+        \hline \hline
+        \multirow{3}{*}{Skip Lists} 
+        & Search        & $O(\log_2(n))$ & - \\
+        & Insertion     & $O(\log_2(n))$ & - \\
+        & Deletion      & $O(\log_2(n))$ & - \\
+        \hline \hline
+        \multicolumn{4}{|c|}{\textbf{Algorithms}} \\
+        \hline \hline
+        \multicolumn{2}{|c|}{Breadth First Search} & - & $O(|V| + |E|)$ \\
+        \multicolumn{2}{|c|}{Depth First Search}   & - & $O(|V| + |E|)$ \\
+        \hline \hline
+        \multirow{2}{*}{Djikstra's} 
+        & Linked List                      & - & $O(|V|^2 + |V||E|)$ \\
+        & Binary Heap                      & - & $O((|V| + |E|)\log_2(|V|))$ \\
+        \hline
+        \multicolumn{2}{|c|}{Bellman-Ford's} & - & $O(|V||E|)$ \\
+        \hline
+        \multicolumn{2}{|c|}{Johnson's} & - & $O(|V||E|\log_2(|V|))$ \\
+        \hline \hline
+        \multicolumn{2}{|c|}{Kruskal's} & - & $O(|E|\log_2(|V|))$ \\
+        \hline \hline
+        \multicolumn{2}{|c|}{Horner's} & - & $O(n)$ \\
+        \hline
+        Polynomial     & Coefficient & - & $O(n^2)$ \\
+        Multiplication & Point-value & - & $O(n)$ \\
+        \hline
+        \multicolumn{2}{|c|}{Fast Fourier Transform} & - & $O(n\log_2(n))$ \\
+        \hline \hline
+        Largest Empty & Recursive & - & Exponential \\
+        Square        & Dynamic   & - & $O(n^2)$ \\
+        \hline \hline
+        Weighted Interval & Recursive & - & $O(n^2)$ \\
+        Scheduling        & Dynamic   & - & $O(n)$ \\
+        \hline \hline
+        Line          & Simple           & - & $O(n^2)$ \\
+        Intersections & Output Sensitive & - & $O((n + k)\log_2(n))$ \\
+        \hline\hline
+        \multicolumn{2}{|c|}{Simplex}        & Polynomial & - \\ 
+        \hline
+        \multicolumn{2}{|c|}{Interior Point} & -          & Polynomial \\ 
+        \hline \hline 
+        \multicolumn{2}{|c|}{Ford-Fulkerson's} & - & $O(v|E|)$ \\
+        \hline
+        \multicolumn{2}{|c|}{Edmonds-Karp's} & - & $O(|V||E|^2)$ \\
+        \hline
+    \end{tabular}
+\end{center}

@@ -5,9 +5,9 @@
 A graph $G$ is a set system $(V, E)$ where the elements of $E$ have
 size $2$. Some definitions and facts follow from the definition:
 \begin{itemize}
-  \item The elements of $V$ are \textbf{vertices},
-  \item The elements of $E$ are called \textbf{edges},
-  \item The size of $V$ is often called the \textbf{order} of $G$,
+  \item The elements of $V$ are vertices,
+  \item The elements of $E$ are called edges,
+  \item The size of $V$ is often called the order of $G$,
   \item $G$ is a $2$-uniform set with ground set $V$,
   \item $u, v$ in $V$ are adjacent if $\{u, v\}$ is in $E$.
 \end{itemize}  
@@ -220,7 +220,7 @@ For a graph $G = (V, E)$ where $n = |V| \geq 3$: \begin{gather*}
     It follows that: \begin{gather*}
         N_G(x_1) = \{x \in V : \{x_1, x\} \in E\} \qquad
         \text{and} \qquad
-        N_G(x_i)^+ = \{x_i : x_{i - 1} \in N_G(x_k)\},
+        N_G(x_k)^+ = \{x_i : x_{i - 1} \in N_G(x_k)\},
     \end{gather*} are disjoint subsets of $\{x_2, \ldots, x_k\}$
     by the statement describing (\ref{consecneighbours}).
     But, $\{x_2, \ldots, x_k\}$ is of size $k - 1$ and; 

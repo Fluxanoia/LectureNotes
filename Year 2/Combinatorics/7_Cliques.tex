@@ -25,9 +25,9 @@ For $G = (V, E)$ a graph of order $n$ that contains no triangles, we have that: 
     non-empty giving us a triangle in $G$. Let $G' = (V \setminus \{x, y\}, E')$ 
     be the induced subgraph on $V \setminus \{x, y\}$. We can see that 
     $G'$ must not contain a triangle otherwise $G$ would contain said triangle.
-    So, we apply the inductive hypothesis to see that: \begin{gather}
+    So, we apply the inductive hypothesis to see that: \begin{gather*}
         |E'| \leq \frac{(n - 2)^2}{4} = \frac{n^2}{4} - n + 1
-    \end{gather} 
+    \end{gather*} 
     By applying (\ref{manteldeg}) and the above we see that: \begin{align*}
         |E| &\leq |E'| +
         \overbrace{\Deg(x) + \Deg(y) - 1}^\text{edges removed by $G'$} \\
@@ -66,8 +66,8 @@ For $G = (V, E)$ a graph of order $n$ that contains no triangles, we have that:
     $G'$ to have bipartition $(X, Y)$, we try adding $x$ and $y$ back to $G'$ to 
     get $G$. We see that because: \begin{gather*}
         \Deg(x) + \Deg(y) = n,
-    \end{gather*} and any edges from $x$ or $y$ can't connected two vertices
-    in $X$ or $Y$ (or that would form a triangle), the only possibility is 
+    \end{gather*} and any edges from $x$ or $y$ can't connect to vertices
+    in $X$ and $Y$ (or that would form a triangle), the only possibility is 
     that $x$ is connected to all of $Y$ and $y$ is connected to all of $X$ 
     (or vice versa) as required.
 \end{proof}

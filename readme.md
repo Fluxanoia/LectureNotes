@@ -9,3 +9,4 @@ These notes are absolutely NOT guaranteed to be correct, representative of the c
 The following notes are unsupported and are likely to be out of date:
 
 * Year 1 / *
+* Year 2 / Linear Algebra 2
