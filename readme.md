@@ -10,3 +10,5 @@ The following notes are unsupported and are likely to be out of date:
 
 * Year 1 / *
 * Year 2 / Linear Algebra 2
+* Year 2 / Combinatorics
+* Year 2 / Data Structures and Algorithms
