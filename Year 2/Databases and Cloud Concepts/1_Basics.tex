@@ -1,0 +1,69 @@
+\section{The Internet}
+
+The internet is a world-wide computer network, connecting computing devices
+also known as hosts or end systems. These connections can take many forms,
+such as cables and radio waves. Intermediate switching devices inbetween
+hosts are known as routers.
+
+\subsection{Clients and Servers}
+
+A program or machine that responds to requests from others is called a server.
+A program or machine that sends requests to a server is a client.
+
+\subsection{Internet Layers}
+
+There are four internet layers: \begin{center}
+    \begin{tabular}{ | c | c | p{6cm} | }
+        \hline
+        Layer & Common Protocol & Description \\     
+        \hline \hline
+        Application & HTTP & 
+        Web browsers making requests and parsing responses \\
+        \hline
+        Transport   & TCP  & 
+        Breaks requests down into numbered packets and
+        can reassemble messages \\
+        \hline
+        Network     & IP   & 
+        Attaches addresses to packets and groups
+        packets based on their incoming addresses \\
+        \hline
+        Physical    &      & 
+        Sends bits to the local router and assembles bits 
+        into packets \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Protocols}
+
+Protocols are an agreement on how to communicate.
+
+\subsubsection{HTTP - HyperText Transfer Protocol}
+
+There are four main operations that can be carried out on HTTP resources:
+\begin{center}
+    \begin{tabular}{ | c | c |}
+        \hline
+        Operation & Performed by... \\
+        \hline \hline
+        Creation & \texttt{HTTP POST} \\
+        \hline
+        Reading  & \texttt{HTTP GET} \\
+        \hline
+        Updating & \texttt{HTTP PUT} \\
+        \hline
+        Deletion & \texttt{HTTP DELETE} \\
+        \hline
+    \end{tabular}
+\end{center} Requests are formed by an operation as well as
+a \texttt{host} and \texttt{content-type} parameter to describe 
+the format of information.
+
+\subsubsection{URL - Uniform Resource Locator}
+
+Each URL is formed by a scheme (like \texttt{http} or \texttt{https}),
+a host (like \texttt{www.bristol.ac}), a path (like \texttt{.uk/home/maths}).
+Paths can have queries attached, preceded by \texttt{?} as parameters.
+
+
