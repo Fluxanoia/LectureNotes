@@ -1,0 +1,245 @@
+\section{Operational Semantics}
+
+An operational explanation of the meaning of a construct will explain
+how to execute said construct. For example, in C, the semicolons provide
+chronology and the $=$ symbol demonstrates assignment. The semantics
+are not merely interested in the results of a program.
+\\[\baselineskip]
+More specifically, this means we are interested in how the state of the
+program changes. To this end, there are two approaches we shall consider:
+\begin{itemize}
+  \item \textbf{Natural Semantics}: to describe how the overall
+  results of executions are obtained,
+  \item \textbf{Structural Operational Semantics}: to describe how
+  the individual steps of computation take place.
+\end{itemize}
+
+\subsection{Rules and Derivation Trees}
+
+\subsubsection{Transitions}
+
+A transition is a construct representing the transition of
+a state $s$ to a state $s'$ via some statement $S$, denoted
+by $\langle S, s \rangle \to s'$.
+
+\subsubsection{Rules}
+
+We can define 'rules' which are of the form: \begin{gather*}
+  \frac{
+    \langle S_1, s_1 \rangle \to s_2, \ldots, \langle S_n, s_n \rangle \to s'
+  }{
+    \langle S, s \rangle \to s'
+  } \qquad \text{if } \cdots.
+\end{gather*} Where the premises consisting of immediate constituents 
+of a statement $S$ or compositions of said immediate constituents, 
+are written above the conclusion. Conditions may be written to the right
+of the rule which are necessary for when the rule is applied.
+
+\subsubsection{Axioms}
+
+For a rule where the set of premises is empty, we call 
+such a rule an \textit{axiom}. Axioms with meta-variables
+are called \textit{axiom schema} where we can obtain an
+\textit{instance} of an axiom by defining particular
+variables.
+
+\subsubsection{Derivation Trees}
+
+A program's execution can be modelled by a 'derivation tree'
+formed from rules.
+For example, the program $x=y;y=z;z=x;$ can be written as:
+\begin{gather*}
+  \frac{\dfrac{
+    \langle z=x, s_{570} \rangle \to s_{575} 
+    \qquad \langle x=y, s_{575} \rangle \to s_{775}
+  }{\langle z=x;x=y, s_{570} \rangle \to s_{775}}
+  \qquad \langle y=z, s_{775} \rangle \to s_{755}}
+  {\langle x=y;y=z;z=x, s_{570} \rangle \to s_{755}}.
+\end{gather*} Where $s_{abc}$ represents the state where 
+$\{x \mapsto a, y \mapsto b, z \mapsto c\}$.
+\\[\baselineskip]
+This tree repesents the decomposition of the composite statement
+at the bottom of the tree $x=y;y=z;z=x;$. As $z=x$ transforms
+the state $s_{570}$ to $s_{575}$ and $x=y$ transforms the state
+$s_{575}$ to $s_{775}$, we know that the composite statement
+$z=x;x=y$ transforms $s_{570}$ to $s_{775}$.
+
+\subsection{Natural Semantics}
+
+During this section, we will use $\langle S, s\rangle$
+representing the statement $S$ being executed from the state $s$ and
+simply $s$ to represent a terminal state.
+\\[\baselineskip]
+We can define some natural semantics for the While language as follows:
+\begin{align*}
+  [\text{assignment}]& \qquad \langle x=a, s \rangle \to s[x\mapsto \mathcal{A}(a)(s)] \\ \\
+  [\text{skip}]& \qquad \langle \texttt{skip}, s \rangle \to s \\ \\
+  [\text{composition}]& \qquad \frac{
+    \langle S_1, s \rangle \to s' \qquad \langle S_2, s' \rangle \to s''
+  }{\langle S_1;S_2, s \rangle \to s''} \\ \\
+  [\text{if}]& \qquad \begin{cases}
+    \dfrac{
+      \langle S_1, s \rangle \to s'
+    }{
+      \langle \texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2, s \rangle \to s'
+    } & \text{if } \mathcal{B}(b)(s) = \text{tt} \\ \\
+    \dfrac{
+      \langle S_2, s \rangle \to s'
+    }{
+      \langle \texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2, s \rangle \to s'
+    } & \text{if } \mathcal{B}(b)(s) = \text{ff}
+  \end{cases} \\ \\
+  [\text{while}]& \qquad \begin{cases}
+    \dfrac{
+      \langle S, s \rangle \to s' \qquad \langle 
+      \texttt{while } b \texttt{ do } S, s' \rangle \to s''
+    }{
+      \langle \texttt{while } b \texttt{ do } S, s \rangle \to s''
+    } & \text{if } \mathcal{B}(b)(s) = \text{tt} \\ \\
+    \langle \texttt{while } b \texttt{ do } S, s \rangle \to s
+    & \text{if } \mathcal{B}(b)(s) = \text{ff}
+  \end{cases}
+\end{align*} We have that the semantics detailed above are deterministic, that is,
+for identical inputs, we get identical outputs.
+\\[\baselineskip]
+As there is more than one definition of these semantics
+we will subscript these defintions with $ns$ where appropriate.
+
+\subsubsection{The Semantic Function}
+
+We can now condense the meaning of statements into a partial
+function from \textbf{State} to \textbf{State}. We define the semantic
+function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to (\textbf{State} \hookrightarrow \textbf{State}).
+\end{gather*} Thus for a given statement $S$, we have that: \begin{align*}
+  &\mathcal{S}(S) : \textbf{State} \hookrightarrow \textbf{State} \\
+  s &\mapsto \begin{cases}
+    s' & \text{if } \langle S, s \rangle \to s' \\
+    \text{undefined} & \text{otherwise}.
+  \end{cases}
+\end{align*} We that this function is partial because some statements
+may never terminate. Thus giving an indeterminate answer.
+\\[\baselineskip]
+As there will be more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{ns}$.
+
+\subsection{Structural Operational Semantics}
+
+In structural operation semantics, there is a particular emphasis
+on the individual steps of execution. The transition relation in
+these semantics is of the form: \begin{gather*}
+  \langle S, s \rangle \Rightarrow \gamma,
+\end{gather*} where $\gamma$ is of the form:
+\begin{center}
+\renewcommand{\arraystretch}{1.5}
+\begin{tabular}{ | c || p{8.5cm} | }
+  \hline
+  $\langle S', s' \rangle$ & denoting that $S$ and $s$
+  have transformed in some way and that the execution is not
+  yet complete, \\
+  $s'$ & denoting that the execution has completed with some 
+  terminal state $s'$. \\
+  \hline
+\end{tabular}
+\end{center}
+
+\noindent
+We shall say that $\langle S, s \rangle$ is \textbf{stuck} if there
+does not exist a $\gamma$ such that $\langle S, s \rangle
+\Rightarrow \gamma$ and \textbf{unstuck} otherwise. 
+
+\newpage
+
+\noindent
+We can define some structural operational semantics for the While 
+language as follows:
+\begin{align*}
+  [\text{assignment}]& \qquad \langle x=a, s \rangle \Rightarrow s[x\mapsto \mathcal{A}(a)(s)], \\ \\
+  [\text{skip}]& \qquad \langle \texttt{skip}, s \rangle \Rightarrow s, \\ \\
+  [\text{composition}]& \qquad \frac{
+    \langle S_1, s \rangle \Rightarrow \langle S'_1, s' \rangle
+  }{\langle S_1;S_2, s \rangle \Rightarrow \langle S'_1;S_2, s' \rangle} 
+  \qquad \text{or} \qquad \frac{
+    \langle S_1, s \rangle \Rightarrow s'
+  }{\langle S_1;S_2, s \rangle \Rightarrow \langle S_2, s' \rangle}, \\ \\
+  [\text{if}]& \qquad \begin{cases}
+    \langle \texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2, s \rangle \Rightarrow 
+    \langle S_1, s \rangle
+    & \text{if } \mathcal{B}(b)(s) = \text{tt} \\ \\
+    \langle \texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2, s \rangle \Rightarrow
+    \langle S_2, s \rangle
+    & \text{if } \mathcal{B}(b)(s) = \text{ff},
+  \end{cases} \\ \\
+  [\text{while}]& \qquad \langle \texttt{while } b \texttt{ do } S, s \rangle \Rightarrow
+    \langle \texttt{if } b \texttt{ then } (S; \texttt{ while } b \texttt{ do } S)
+    \texttt{ else skip}, s \rangle.
+\end{align*} We can see by the definition of composition that with these 
+semantics we have to fully decompose and execution $S_1$ before
+we can begin execution of $S_2$.
+\\[\baselineskip]
+As there is more than one definition of these semantics
+we will subscript these defintions with $sos$ where appropriate.
+
+\subsubsection{Derivation Sequences}
+
+For a statement $S$ and state $s$, we can consider the sequence of
+configurations of $S$ in $s$. The length of such a sequence is either:
+\begin{itemize}
+  \item \textbf{Finite}: $\gamma_0, \gamma_1, \gamma_2, \ldots, \gamma_k$
+  for some $k$ in $\mathbb{Z}_{\geq 0}$ where each $i$ in $\{0, 1, \ldots, k - 1\}$ satisfies
+  $\gamma_0 = \langle S, s \rangle$, $\gamma_i \Rightarrow \gamma_{i + 1}$ where
+  $\gamma_k$ is terminal or stuck,
+  \item \textbf{Infinite}: $(\gamma_k)_{k \geq 0}$ where 
+  for each $i$ in $\mathbb{Z}_{\geq 0}$ satisfies 
+  $\gamma_0 = \langle S, s \rangle$, $\gamma_i \Rightarrow \gamma_{i + 1}$.
+\end{itemize} For two configurations $\gamma_i, \gamma_k$, we write
+$\gamma_i \Rightarrow^k \gamma_j$ to denote that there are $k$ steps 
+in execution between the configurations or $\gamma_i \Rightarrow^* \gamma_j$
+to denote that there's some finite number of steps between the two
+configurations.
+
+\newpage
+
+\noindent
+We say for a statement $S$ and state $s$, the execution of $S$ on $s$:
+\begin{itemize}
+  \item \textbf{Terminates}: if and only if there's a finite derivation
+  sequence starting with $\langle S, s, \rangle$
+  \item \textbf{Loops}: if and only if there's a infinite derivation
+  sequence starting with $\langle S, s \rangle$.
+\end{itemize} Thus, statements can loop on some states and terminate on
+others. Similarly, some states always terminate and always loop.
+
+\subsubsection{Partial Execution}
+
+If for some statement $S$, $k$ in $\mathbb{Z}_{\geq 0}$, and states 
+$s, s''$, we have that $\langle S, s\rangle \Rightarrow^k s''$,
+then there exists $k_1, k_2$ in $\mathbb{Z}_{\geq 0}$ such that 
+$k_1 + k_2 = k$, $\langle S, s \rangle \Rightarrow^{k_1} s'$,
+and $\langle S, s' \rangle \Rightarrow^{k_2} s''$ for some
+intermediate state $s'$.
+
+\subsubsection{The Semantic Function}
+
+We can now condense the meaning of statements into a partial
+function from \textbf{State} to \textbf{State}. We define the semantic
+function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to (\textbf{State} \hookrightarrow \textbf{State}).
+\end{gather*} Thus for a given statement $S$, we have that: \begin{align*}
+  &\mathcal{S}(S) : \textbf{State} \hookrightarrow \textbf{State} \\
+  s &\mapsto \begin{cases}
+    s' & \text{if } \langle S, s \rangle \Rightarrow^* s' \\
+    \text{undefined} & \text{otherwise}.
+  \end{cases}
+\end{align*} We that this function is partial because some statements
+may never terminate. Thus giving an indeterminate answer.
+\\[\baselineskip]
+As there is more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{sos}$.
+
+\subsection{Semantic Equivalence}
+
+For every statement $S$ of \textbf{While}, we have that: \begin{gather*}
+  \mathcal{S}_{ns}(S) = \mathcal{S}_{sos}(S).
+\end{gather*} Similarly, we have that if a statement terminates to a state
+for one type of semantics, it will terminate in the same state for the other.

@@ -1,0 +1,84 @@
+\section{Axiomatics Semantics}
+
+These semantics revolve around formalising properties of a program
+into \textbf{assertions} which are triples of the form: \begin{center}
+  Precondition $\qquad$ Program $\qquad$ Postcondition.
+\end{center} We will consider partial and total correctness semantics:
+
+\paragraph{Partial Correctness} The assertion (\textbf{\{P\} S \{R\}})
+means that if \textbf{S} terminates with precondition \textbf{P}
+then \textbf{R} holds immediately afterwards.
+
+\paragraph{Total Correctness} The assertion (\textbf{[P] S [R]})
+means that \textbf{S} always terminates with precondition \textbf{P}
+and \textbf{R} holds immediately afterwards.
+
+\subsection{Axioms and Rules}
+
+We define a rule which is an assertion $a$ (the conclusion)
+and a set of assertions $a_1, \ldots, a_n$ (the premises)
+written like so: \begin{gather*}
+  \frac{a_1 \cdots a_n}{a}.
+\end{gather*} This means, to show $a$, it is sufficient to show
+$a_1, \ldots, a_n$. A rule with no premises is an axiom.
+
+\vfill
+
+\subsection{Partial Correctness Schemata}
+
+\begin{align*}
+  [\text{skip}]& \qquad \textbf{\{P\}} \text{ skip } \textbf{\{P\}}, \\ \\
+  [\text{assignment}]& \qquad \textbf{\{P(a)\} } x = a \textbf{ \{P(x)\}}, \\ \\
+  [\text{composition}]& \qquad \frac{
+    \textbf{\{P\} } S_1 \textbf{ \{R\}} \qquad
+    \textbf{\{R\} } S_2 \textbf{ \{Q\}}
+  }{
+    \textbf{\{P\} } S_1; S_2 \textbf{ \{Q\}}
+  }, \\ \\
+  [\text{conditional}]& \qquad \frac{
+    \textbf{\{P$\, \land \, b$\} } S_1 \textbf{ \{Q\}} \qquad
+    \textbf{\{P$\, \land \neg b$\} } S_2 \textbf{ \{Q\}}
+  }{
+    \textbf{\{P\} } \text{if } b \text{ then } S_1 \text{ else } S_2 \textbf{ \{Q\}}
+  }, \\ \\
+  [\text{while}]& \qquad \frac{
+    \textbf{\{P$\, \land \, b$\} } S \textbf{ \{P\}}
+  }{
+    \textbf{\{P\} } \text{while } b \text{ do } S \textbf{ \{P$\, \land \, \neg b$\}}
+  }, \\ \\
+  [\text{consequence}]& \qquad \frac{
+    \textbf{\{P'\} } S \textbf{ \{Q'\}}
+  }{
+    \textbf{\{P\} } S \textbf{ \{Q\}}
+  } \qquad \text{if \textbf{P} entails \textbf{P'} and \textbf{Q'} entails \textbf{Q}}.
+\end{align*}
+
+\subsection{Total Correctness Schemata}
+
+\begin{align*}
+  [\text{skip}]& \qquad \textbf{[P]} \text{ skip } \textbf{[P]}, \\ \\
+  [\text{assignment}]& \qquad \textbf{[P(a)] } x = a \textbf{ [P(x)]}, \\ \\
+  [\text{composition}]& \qquad \frac{
+    \textbf{[P] } S_1 \textbf{ [R]} \qquad
+    \textbf{[R] } S_2 \textbf{ [Q]}
+  }{
+    \textbf{[P] } S_1; S_2 \textbf{ [Q]}
+  }, \\ \\
+  [\text{conditional}]& \qquad \frac{
+    \textbf{[P$\, \land \, b$] } S_1 \textbf{ [Q]} \qquad
+    \textbf{[P$\, \land \neg b$] } S_2 \textbf{ [Q]}
+  }{
+    \textbf{[P] } \text{if } b \text{ then } S_1 \text{ else } S_2 \textbf{ [Q]}
+  }, \\ \\
+  [\text{while}]& \qquad \frac{
+    \textbf{[P($z + 1$)] } S \textbf{ [P($z$)]}
+  }{
+    \textbf{[$z \in \mathbb{N}, \, $P($z$)] } \text{while } b \text{ do } S \textbf{ [P($0$)]}
+  } \qquad \bfrac{\text{if \textbf{P($z + 1$)} entails $b$}}{
+    \text{and \textbf{P($0$)} entails $\neg b$},} \\ \\
+  [\text{consequence}]& \qquad \frac{
+    \textbf{[P'] } S \textbf{ [Q']}
+  }{
+    \textbf{[P] } S \textbf{ [Q]}
+  } \qquad \text{if \textbf{P} entails \textbf{P'} and \textbf{Q'} entails \textbf{Q}}.
+\end{align*}

@@ -1,0 +1,240 @@
+\section{Denotational Semantics}
+
+\subsection{Partial Order}
+
+\subsubsection{Weak Partial order}
+
+A weak partial order on $X$ with $a, b, c$ in $X$ 
+has the following properties: \begin{itemize}
+  \item reflexive ($a \leq a$),
+  \item transitive ($a \leq b$, $b \leq c \Rightarrow a \leq c$),
+  \item antisymmetric ($a \leq b, b \leq a \Rightarrow a = b$).
+\end{itemize}
+
+\subsubsection{Strong Partial order}
+
+A strong partial order on $X$ with $a, b, c$ in $X$ 
+has the following properties: \begin{itemize}
+  \item irreflexive ($a \leq a$ for no $a$),
+  \item transitive ($a \leq b$, $b \leq c \Rightarrow a \leq c$),
+  \item antisymmetric ($a \leq b, b \leq a \Rightarrow a = b$).
+\end{itemize}
+
+\subsubsection{Total Partial order}
+
+A total partial order on $X$ with $a, b, c$ in $X$ 
+has the following properties: \begin{itemize}
+  \item connex ($a \leq b$ or $b \leq a$),
+  \item reflexive ($a \leq a$),
+  \item transitive ($a \leq b$, $b \leq c \Rightarrow a \leq c$),
+  \item antisymmetric ($a \leq b, b \leq a \Rightarrow a = b$).
+\end{itemize}
+
+\subsection{Partial Order Sets}
+
+For a partial order $\sqsubseteq$ on a set $D$, we have that
+$(\sqsubseteq, D)$ is a partial order set (PO-set).
+
+\subsubsection{Chains}
+
+For a PO-set $(\sqsubseteq, D)$, for $X \subseteq D$, we say that
+$X$ is a chain if and only if for all $x_1, x_2$ in $X$: \begin{gather*}
+  x_1 \sqsubseteq x_2 \text{ or } x_2 \sqsubseteq x_1,
+\end{gather*} meaning $X$ is totally ordered. 
+
+\subsubsection{Least Upper Bounds}
+
+For a PO-set $(\sqsubseteq, D)$, the least upper bound 
+$x$ of $X \subseteq D$ is denoted by $x = \sqcup \, X$. 
+\\[\baselineskip]
+If such a bound exists for all subsets $X$ that are chains, 
+$(\sqsubseteq, D)$ is a \textit{chain complete} PO-set.
+\\[\baselineskip]
+If such a bound exists for all subsets $X$, $(\sqsubseteq, D)$ 
+is a \textit{complete lattice}.
+
+\subsubsection{Lifted Partial-Order Sets}
+
+A PO-set is 'lifted' if an artificial bottom element $\bot$
+is added to the set.
+
+\subsubsection{A Partial Order on State Transformers}
+
+We have the following PO-set $(\sqsubseteq, T)$ where: \begin{gather*}
+  T = \{f \text{ where } f : \textbf{State} \hookrightarrow \textbf{State}\},
+\end{gather*} and for $f, g$ in $T$, $f \sqsubseteq g$
+is equivalent to saying: \begin{gather*}
+  f s = s' \Rightarrow g s = s' \text{ for all states } s. 
+\end{gather*} This is a \textbf{weak} partial order on $T$, with
+the least element being $0$ in $T$ undefined for all inputs.
+
+\subsubsection{Fixed Point Theorem}
+
+For $f : X \to X$ a continuous function on a chain-complete partial order
+$(\sqsubseteq, X)$ with a least element $\bot$, we have that: \begin{gather*}
+  \texttt{FIX } f = \sqcup \, \{f^n(\bot) : n \in \mathbb{Z}_{\geq 0}\},
+\end{gather*} exists and is the least fixed point of $f$. For clarity: 
+\begin{gather*}
+  f^0 = \texttt{id} \qquad f^n = f \circ f^{n - 1},
+\end{gather*} where $n$ is in $\mathbb{Z}_{\geq 0}$.
+
+\subsubsection{The Conditional Function}
+
+We define the type of \texttt{cond} as follows: \begin{gather*}
+  \texttt{cond} : 
+  (\textbf{State} \to \textbf{T}) \times
+  (\textbf{State} \hookrightarrow \textbf{State}) \times
+  (\textbf{State} \hookrightarrow \textbf{State}) \to
+  (\textbf{State} \hookrightarrow \textbf{State}),
+\end{gather*} with definition: \begin{gather*}
+  \texttt{cond}(p, f_1, f_2)s = \begin{cases}
+    f_1(s) & \text{if } p(s) == \textbf{tt} \\
+    f_2(s) & \text{otherwise.} \\
+  \end{cases}
+\end{gather*}
+
+\subsubsection{The Fixed Point Function}
+
+We define the type of \texttt{FIX} as follows: \begin{gather*}
+  \texttt{FIX} : 
+  (\textbf{State} \hookrightarrow \textbf{State}) \to
+  (\textbf{State} \hookrightarrow \textbf{State}) \to
+  (\textbf{State} \hookrightarrow \textbf{State}),
+\end{gather*} where \texttt{FIX}$(F)$ returns the least fixed 'point'
+(or rather function) of $F$ ($f$ in Im($F$) such that $F(f) = f$). 
+Smallest in this case is the 'most undefined' function.
+
+\subsubsection{A Fibonacci Definition using \texttt{FIX}}
+
+Consider the following definition:
+
+\begin{lstlisting}
+fib :: Int -> Int
+fib = fix F where
+  F :: (Int -> Int) -> (Int -> Int)
+  F f n
+    | (n == 0) || (n == 1) = 1
+    | otherwise            = (f (n - 1)) + (f (n - 2))
+\end{lstlisting}
+
+So, if we want to calculate \texttt{fib 4} we get: \begin{center}
+  \begin{tabular}{ l l }
+    \begin{lstlisting}
+      fib 4    = fix F 4
+               = F (fix F) 4
+               = (fix F 3) + (fix F 2)
+      
+      fix F 3 = F (fix F) 3
+               = (fix F 2) + (fix F 1)
+      
+      fix F 2 = F (fix F) 2
+               = (fix F 1) + (fix F 0)
+      
+      fix F 1 = F (fix F) 1
+               = 1
+      
+      fix F 0 = F (fix F) 0
+               = 1
+      \end{lstlisting}
+      &
+      \begin{lstlisting}
+        fix F 2 = F (fix F) 2
+                 = (fix F 1) + (fix F 0)
+                 = 1 + 1
+                 = 2
+        
+        fix F 3 = F (fix F) 3
+                 = (fix F 2) + (fix F 1)
+                 = 2 + 1
+                 = 3
+        
+        fib 4    = fix F 4
+                 = F (fix F) 4
+                 = (fix F 3) + (fix F 2)
+                 = 3 + 2
+                 = 5
+      \end{lstlisting}
+  \end{tabular}
+\end{center}
+
+\newpage
+
+\subsection{Direct Style}
+
+\subsubsection{The Semantic Function} 
+
+We define the semantic function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to (\textbf{State} \hookrightarrow \textbf{State}).
+\end{gather*} We that this function is partial because some statements
+may never terminate. We have the following: \begin{align*}
+  \mathcal{S}(x = a)(s) &= s[x \mapsto \mathcal{A}(a)(s)], \\
+  \mathcal{S}(\texttt{skip}) &= \texttt{id}, \\
+  \mathcal{S}(S_1 ; S_2) &= \mathcal{S}(S_2) \circ \mathcal{S}(S_1), \\
+  \mathcal{S}(\texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2)
+  &= \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S_1), \mathcal{S}(S_2)), \\
+  \mathcal{S}(\texttt{while } b \texttt{ do } S)
+  &= \texttt{FIX } F \text{ (where } F(g) 
+  := \texttt{cond}(\mathcal{B}(b), g \circ \mathcal{S}(S), \texttt{id})).
+\end{align*} 
+As there is more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{ds}$.
+
+\subsection{Continuation Style}
+
+A continuation describes the effect of executing the remainder of the
+program denoted as \textbf{Cont} and typed as follows: \begin{gather*}
+  \textbf{Cont} = \textbf{State} \hookrightarrow \textbf{State}.
+\end{gather*} For a sequence of statements
+$\{S_1, S_2, \ldots, S_k, \ldots, S_{n - 1}, S_n\}$
+we have that the continuation $c$ from $n$ to $k$ can be extended
+to $c'$ the continuation from $n$ to $k - 1$ illustrated here: \begin{gather*}
+  S_1, S_2, \ldots, 
+  \underbrace{S_{k - 1}, \overbrace{S_k, \ldots, S_{n - 1}, S_n}^c}_{c'}.
+\end{gather*}
+
+\newpage
+
+\subsubsection{The Semantic Function on \textbf{While}} 
+
+We define the semantic function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to (\textbf{Cont} \hookrightarrow \textbf{Cont}).
+\end{gather*} We that this function is partial because some statements
+may never terminate. We have the following: \begin{align*}
+  \mathcal{S}(x = a)(c)(s) &= c(s[x \mapsto \mathcal{A}(a)(s)]), \\
+  \mathcal{S}(\texttt{skip})(c)(s) &= c(s), \\
+  \mathcal{S}(S_1 ; S_2) &= \mathcal{S}(S_1) \circ \mathcal{S}(S_2), \\
+  \mathcal{S}(\texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2)(c)
+  &= \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S_1)(c), \mathcal{S}(S_2)(c)), \\
+  \mathcal{S}(\texttt{while } b \texttt{ do } S)
+  &= \texttt{FIX } F \text{ (where } F(g)(c) 
+  := \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S)(g(c)), c)).
+\end{align*} 
+As there is more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{cs}^{\textbf{While}}$.
+
+\subsubsection{The Semantic Function on \textbf{Exc}} 
+
+\paragraph{Exception environments} we define exeception environments
+$env_E$ of type \newline 
+$\textbf{Env}_E : \textbf{Exception} \to \textbf{Cont}$.
+\\[\baselineskip]
+We define the semantic function as follows: \begin{gather*}
+  \mathcal{S}: \textbf{Stm} \to \textbf{Env}_E 
+  \to (\textbf{Cont} \hookrightarrow \textbf{Cont}).
+\end{gather*} We that this function is partial because some statements
+may never terminate. We have the following: \begin{align*}
+  \mathcal{S}(x = a)(env_E)(c)(s) &= c(s[x \mapsto \mathcal{A}(a)(s)]), \\
+  \mathcal{S}(\texttt{skip})(env_E)(c)(s) &= c(s), \\
+  \mathcal{S}(S_1 ; S_2)(env_E) &= \mathcal{S}(S_1)(env_E) \circ \mathcal{S}(S_2)(env_E), \\
+  \mathcal{S}(\texttt{if } b \texttt{ then } S_1 \texttt{ else } S_2)(env_E)(c)
+  &= \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S_1)(env_E)(c), \mathcal{S}(S_2)(env_E)(c)), \\
+  \mathcal{S}(\texttt{while } b \texttt{ do } S)(env_E)
+  &= \texttt{FIX } F \\
+  \text{ (where } F(g)(c) &
+  := \texttt{cond}(\mathcal{B}(b), \mathcal{S}(S)(env_E)(g(c)), c)), \\
+  \mathcal{S}(\texttt{begin } S_1 \texttt{ handle } e: S_2 \texttt{ end}) \\
+  (env_E)(c) &= \mathcal{S}(S_1)(env_E[e \mapsto \mathcal{S}(S_2)(env_E)(c)]) c, \\
+  \mathcal{S}(\texttt{raise } e)(env_E)(c) &= env_E e.
+\end{align*} 
+As there is more than one semantic function (for our different types
+of semantics) we denote this function as $\mathcal{S}_{cs}^{\textbf{Exc}}$.

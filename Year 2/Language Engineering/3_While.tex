@@ -1,0 +1,205 @@
+\section{The While Language}
+
+\subsection{Syntactic Categories}
+
+For this language, we have five syntactic categories: \begin{itemize}
+  \item \textbf{Numerals} (Num), denoted by $n$,
+  \item \textbf{Variables} (Var), denoted by $x$,
+  \item \textbf{Arithmetic Expressions} (Aexp), denoted by $a$,
+  \item \textbf{Boolean Expressions} (Bexp), denoted by $b$,
+  \item \textbf{Statements} (Stm), denoted by $S$.
+\end{itemize} We assume that the numerals and variables are defined
+elsewhere (for example, the numerals could be strings of digits
+and the variables could be strings of letters). The other
+structures are detailed below: \begin{align*}
+  a &:= n \, | \, x \, | \, a_1 + a_2 \, | \, a_1 \star a_2 \, | \, a_1 - a_2, \\
+  b &:= \texttt{true} \, | \, \texttt{false} \, | \, a_1 == a_2 \, 
+  | \, a_1 \leq a_2 \, | \, \neg b \, | \, b_1 \land b_2, \\
+  S &:= x = a \, | \, \texttt{skip} \, | \, S_1 ; S_2 \, | \, \texttt{if }
+  b \texttt{ then } S_1 \texttt{ else } S_2 \, | \, \texttt{while } 
+  b \texttt{ do } S.
+\end{align*} We define representations of each structure in terms of itself
+as composite elements and the rest are basis elements.
+
+\subsubsection{Extensions of the Categories}
+
+We define a language \textbf{Exc} identical to \textbf{While} except we
+extend the \textbf{Statements} to: \begin{align*}
+  S &:= x = a \, | \, \texttt{skip} \, | \, S_1 ; S_2 \, | \, \texttt{if }
+  b \texttt{ then } S_1 \texttt{ else } S_2 \, | \, \texttt{while } 
+  b \texttt{ do } S \\
+  & \qquad \texttt{begin } S_1 \texttt{ handle } e : S_2 \texttt{ end} \, |
+  \, \texttt{raise } e,
+\end{align*} and we define the \textbf{Exception} of which $e$ is a member of.
+\\[\baselineskip]
+The \texttt{raise} instruction, when called, breaks the execution of
+the current statement and gives control to the handling statement.
+
+\subsection{State}
+
+When considering a statement, it is almost always important to consider the
+state of the program as the role of statements is to change the state
+of the program. For example, when evaluating $x + 1$, we must consider
+what $x$ is. This requires us to develop the notion of state.
+\\[\baselineskip]
+We define state as a set of mappings from variables to values: \begin{gather*}
+  \textbf{State} = \{f : \textbf{Var} \to \mathbb{Z}\}.
+\end{gather*} This is commonly listed out. For example, if $x$ maps to $4$ and 
+$y$ maps to $5$, we have our state equal to $\{x \mapsto 4, y \mapsto 5\}$. 
+
+\subsection{Semantic Functions}
+
+The use of semantic functions is to convert syntactic elements into its meaning.
+Each of the semantic styles will be used to define said semantic functions
+for variable and statements. However, for numerals, arithmetic and boolean
+expressions, they are defined as follows. 
+
+\subsubsection{Numerals}
+
+If we assume our numerals are in base-2 (binary), we can define a numeral
+as follows: \begin{gather*}
+  n := 0 \, | \, 1 \, | \, n \doubleplus 0 \, | \, n \doubleplus 1 \, |.
+\end{gather*} In order to determine the value represented by a numeral, we
+define a \textit{semantic function} $\mathcal{N} : \textbf{Num} \to \mathbb{Z}$:
+\begin{align*}
+  \mathcal{N}(0) &= 0, \\
+  \mathcal{N}(1) &= 1, \\
+  \mathcal{N}(n \doubleplus 0) &= 2 \cdot \mathcal{N}(n), \\
+  \mathcal{N}(n \doubleplus 1) &= 2 \cdot \mathcal{N}(n) + 1,
+\end{align*} This definition is called \textit{compositional} as it simply
+defines an output for each way of constructing a numeral.
+Much like in Linear Algebra, it is important to differentiate
+the numeral '1' and the integer $1$ and similarly for zero.
+
+\newpage
+
+\subsubsection{Arithmetic Expressions}
+
+For a given arithmetic expression, it may be necessary to analyse the state
+to determine the result. Thus, the semantic expression for arithmetic
+expressions is a function $\mathcal{A} : \textbf{Aexp} \to (\textbf{State} 
+\to \mathbb{Z})$. 
+\\[\baselineskip]
+This means providing $\mathcal{A}$ with an arithmetic
+expression gives us a function from a state to a value. So, for a state $s$,
+we can define $\mathcal{A}$ as follows: \begin{align*}
+  \mathcal{A}(n)(s) &= \mathcal{N}(n), \\
+  \mathcal{A}(x)(s) &= s(x), \\
+  \mathcal{A}(a_1 + a_2)(s) &= \mathcal{A}(a_1)(s) + \mathcal{A}(a_2)(s), \\
+  \mathcal{A}(a_1 \star a_2)(s) &= \mathcal{A}(a_1)(s) \star \mathcal{A}(a_2)(s), \\
+  \mathcal{A}(a_1 - a_2)(s) &= \mathcal{A}(a_1)(s) - \mathcal{A}(a_2)(s).
+\end{align*} Similarly to the numerical semantic function, it's important
+to differentiate between the syntactic $+, \star, -$ in the arithmetic
+expressions like $a_1 + a_2$ and the usual arithmetic operations $+, \star, -$
+between integers.
+
+\subsubsection{Boolean Expressions}
+
+We define the set $T$ to be $T = \{\text{tt}, \text{ff}\}$ where tt represents
+truth and ff represents falsity.
+\\[\baselineskip]
+Similarly to arithmetic expressions we can define $\mathcal{B} : \textbf{Bexp}
+\to (\textbf{State} \to \mathbb{Z})$ for a state $s$: \begin{align*}
+  \mathcal{B}(\texttt{true})(s) &= \text{tt}, \\
+  \mathcal{B}(\texttt{false})(s) &= \text{ff}, \\
+  \mathcal{B}(a_1 == a_2)(s) &= \begin{cases}
+      \text{tt} & \text{if } \mathcal{A}(a_1)(s) = \mathcal{A}(a_2)(s) \\
+      \text{ff} & \text{otherwise,}
+  \end{cases} \\
+  \mathcal{B}(a_1 \leq a_2)(s) &= \begin{cases}
+    \text{tt} & \text{if } \mathcal{A}(a_1)(s) \leq \mathcal{A}(a_2)(s) \\
+    \text{ff} & \text{if } \mathcal{A}(a_1)(s) > \mathcal{A}(a_2)(s),
+  \end{cases} \\
+  \mathcal{B}(\neg b)(s) &= \begin{cases}
+    \text{tt} & \text{if } \mathcal{B}(b)(s) = \text{ff} \\
+    \text{ff} & \text{if } \mathcal{B}(b)(s) = \text{tt},
+  \end{cases} \\
+  \mathcal{B}(b_1 \land b_2)(s) &= \begin{cases}
+    \text{tt} & \text{if } \mathcal{B}(b_1)(s) = \text{tt} \text{ and } \mathcal{B}(b_2)(s) = \text{tt} \\
+    \text{ff} & \text{if } \mathcal{B}(b_1)(s) = \text{ff} \text{ or } \mathcal{B}(b_2)(s) = \text{ff},
+  \end{cases}
+\end{align*}
+
+\subsection{Free Variables}
+
+The free variables of an expression is the set of variables 
+occuring within it.
+
+\subsubsection{Arithmetic Expressions}
+
+We define $F_V : \textbf{Aexp} \to \{\textbf{Var}\}$ by: \begin{align*}
+  F_V(n) &:= \emptyset, \\
+  F_V(x) &:= \{x\}, \\
+  F_V(a_1 + a_2) &:= F_V(a_1) \cup F_V(a_2), \\
+  F_V(a_1 \star a_2) &:= F_V(a_1) \cup F_V(a_2), \\
+  F_V(a_1 - a_2) &:= F_V(a_1) \cup F_V(a_2).
+\end{align*} Thus, we have developed a way to decompose expressions
+and generate all the variables said expression depends on. This
+is formalised for states $s_1, s_2$ and an arithmetic expression 
+$a$: \begin{gather*}
+  \big[\forall x \in F_V(a)\big]\big[s_1(x) = s_2(x)\big] 
+  \Longrightarrow 
+  \big[\mathcal{A}(a)(s_1) = \mathcal{A}(a)(s_2)\big].
+\end{gather*}
+
+\subsubsection{Boolean Expressions}
+
+We define $F_V : \textbf{Bexp} \to \{\textbf{Var}\}$ by: \begin{align*}
+  F_V(\texttt{true}) &:= \emptyset, \\
+  F_V(\texttt{false}) &:= \emptyset, \\
+  F_V(a_1 == a_2) &:= F_V(a_1) \cup F_V(a_2), \\
+  F_V(a_1 \leq a_2) &:= F_V(a_1) \cup F_V(a_2), \\
+  F_V(\neg b) &:= F_V(b), \\
+  F_V(b_1 \land b_2) &:= F_V(b_1) \cup F_V(b_2).
+\end{align*} Similarly, for states $s_1, s_2$ and an boolean expression 
+$b$: \begin{gather*}
+    \big[\forall x \in F_V(b)\big]\big[s_1(x) = s_2(x)\big] 
+    \Longrightarrow 
+    \big[\mathcal{B}(b)(s_1) = \mathcal{B}(b)(s_2)\big].
+\end{gather*}
+
+\newpage
+
+\subsection{Substitutions}
+
+Within expressions, we will be interested in swapping the occurances
+of a variable with another expression. For an expression $e$ with
+$x$ in $F_V(e)$ and another expression $e_0$, we write
+$e[x\mapsto e_0]$ for the expression $e$ where $x$ is substituted
+for $e_0$.
+
+\subsubsection{Arithmetic Expressions}
+
+For an arithmetic expression $a_0$, we can define substitution on
+arithmetic expressions: \begin{align*}
+  n[y \mapsto a_0] &:= n, \\
+  x[y \mapsto a_0] &:= \begin{cases}
+    a_0 & \text{if } x = y \\
+    x & \text{otherwise,}
+  \end{cases} \\
+  (a_1 + a_2)[y \mapsto a_0] &:= (a_1[y \mapsto a_0]) + (a_2[y \mapsto a_0]), \\
+  (a_1 \star a_2)[y \mapsto a_0] &:= (a_1[y \mapsto a_0]) \star (a_2[y \mapsto a_0]), \\
+  (a_1 - a_2)[y \mapsto a_0] &:= (a_1[y \mapsto a_0]) - (a_2[y \mapsto a_0]).
+\end{align*}
+
+\subsubsection{Boolean Expressions}
+
+For an arithmetic expression $a_0$, we can define substitution on 
+boolean expressions: \begin{align*}
+  (\texttt{true})[x \mapsto a_0] &:= \texttt{true}, \\
+  (\texttt{false})[x \mapsto a_0] &:=  \texttt{false}, \\
+  (a_1 == a_2)[x \mapsto a_0] &:= (a_1[x \mapsto a_0]) == (a_2[x \mapsto a_0]), \\
+  (a_1 \leq a_2)[x \mapsto a_0] &:= (a_1[x \mapsto a_0]) \leq (a_2[x \mapsto a_0]), \\
+  (\neg b)[x \mapsto a_0] &:= \neg (b)[x \mapsto a_0], \\
+  (b_1 \land b_2)[x \mapsto a_0] &:= (b_1)[x \mapsto a_0] \land (b_2)[x \mapsto a_0].
+\end{align*}
+
+\subsubsection{States}
+
+A similar process applies to states, for a state $s$ and the variables
+$x, v$: \begin{gather*}
+  (s[y\mapsto v])(x) = \begin{cases}
+    v & \text{if } x = y \\
+    s(x) & \text{otherwise}.
+  \end{cases}
+\end{gather*}

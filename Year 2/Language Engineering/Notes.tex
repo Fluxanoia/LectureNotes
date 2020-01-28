@@ -1,0 +1,71 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{arydshln}
+
+\pgfplotsset{compat=1.5.1}
+
+\lstset{frame=none,
+  language=Haskell,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2
+}
+
+\newcommand\doubleplus{+\kern-1.3ex+\kern0.8ex}
+\newcommand\mdoubleplus{\ensuremath{\mathbin{+\mkern-10mu+}}}
+
+\newcommand*{\bfrac}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+
+\begin{document}
+
+\title{Language Engineering Notes}
+\date{}
+\author{\textit{paraphrased by} Tyler Wright}
+\maketitle
+
+\vfill
+
+\textit{An important note, these notes are absolutely \textbf{NOT}
+  guaranteed to be correct, representative of the course, or rigorous.
+  Any result of this is not the author's fault.}
+
+% \addtocounter{section}{-1}
+% \input{0_Notation}
+
+\newpage
+
+\tableofcontents
+
+\include{1_Syntax}
+\include{2_Maths}
+\include{3_While}
+\include{4_OS}
+\include{5_AM}
+\include{6_DS}
+\include{7_AS}
+
+\end{document}
