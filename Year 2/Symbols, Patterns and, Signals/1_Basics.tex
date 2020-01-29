@@ -1,0 +1,116 @@
+\section{Data Acquisition}
+
+\subsection{Analogue to Digital Conversion}
+
+There are two steps to this conversion, sampling and quantisation.
+They can be done in any order.
+
+\subsubsection{Nyquist-Shannon Sampling Theorem}
+If a function $f$ contains no frequencies higher than some
+$h_{\text{max}}$ hertz, it is completely determined by
+sampling at points spaced $\frac{1}{2 \cdot h_{\text{max}}}$
+apart.
+
+\section{Data Characteristics}
+
+\subsection{Measures of Distance}
+
+A valid distance measure $D : A \times A \to \mathbb{R}$
+for some data set $A$ has the following properties, it is: \begin{itemize}
+    \item non-negative,
+    \item reflexive ($D(a, b) = 0 \Longleftrightarrow a = b$),
+    \item symmetric,
+    \item satisfies the triangle inequality
+    ($D(a, b) + D(b, c) \geq D(a, c)$).
+\end{itemize}
+
+\subsubsection{Euclidean Distance in $\mathbb{R}^n$ ($p$-norm distance)}
+
+For two vectors $x$ and $y$ in $\mathbb{R}^n$, we have the Euclidean
+distance $D$ is: \begin{gather*}
+    D(x, y) := \sqrt[\uproot{2}p]{\sum_{i = 1}^n |x_i - y_i|^p}.
+\end{gather*}
+
+\subsubsection{Chebyshev Distance in $\mathbb{R}^n$ ($\infty$-norm distance)}
+
+For two vectors $x$ and $y$ in $\mathbb{R}^n$, we have the Chebyshev
+distance $D$ is: \begin{gather*}
+    D(x, y) := \lim_{n \to \infty} \left(
+        \sqrt[\uproot{2}p]{\sum_{i = 1}^n |x_i - y_i|^p}
+    \, \right) = \max_{i \in [n]}(|x_i - y_i|).
+\end{gather*}
+
+\subsubsection{Time Series Distance}
+
+Finding the distance between two time series $x$ and $y$
+of length $n$ and $m$ (resp.) can be found using Dynamic Time 
+Warping: \begin{gather*}
+    D_{tw}(x, y) := D(x_1, y_1) + 
+    \min\{
+        D_{tw}(x, y'),
+        D_{tw}(x', y),
+        D_{tw}(x', y')
+    \},
+\end{gather*} where $D$ is some numerical distance measure and
+$x'$ and $y'$ are the time series length $n - 1$ and $m - 1$
+(resp.) corresponding to $x$ and $y$ with the first element
+removed.
+
+\subsubsection{Hamming Distance}
+
+When given two strings of the same length, the Hamming distance
+between them is how many characters differ in the strings at each
+index.
+
+\subsubsection{Edit Distance}
+
+When given two strings of any length, the edit distance between
+them is the smallest number of insertions, substitutions and,
+deletions that can transform one string into the other (or vice versa).
+
+\subsubsection{Wu and Palmer Distance}
+
+This measure is based on a hierarchy of word semantics, a
+graph of relationships between words based on meaning.
+Using the shortest distance between the words $d_1$ and the 
+shortest distance from a most specific ancestor to the path
+$d_2$ we have the distance measure: \begin{gather*}
+    D(w_1, w_2) := \frac{2 \cdot d_2}{d_1 + 2 \cdot d_2} - 1.
+\end{gather*}
+
+\subsection{Summary Statistics}
+
+\subsubsection{Mean}
+
+We take $X = \{x_1, \ldots, x_n\}$ to be a data set.
+The mean $\bar{X}$ is defined as follows: \begin{gather*}
+    \bar{X} := \frac{1}{n}\sum_{i = 1}^n x_i.
+\end{gather*}
+
+\subsubsection{Standard Deviation and Variance}
+
+We take $X = \{x_1, \ldots, x_n\}$ to be a data set.
+We have that for $\sigma_X$, the standard deviation of $X$,
+the variance of $X$ is $\sigma_X^2$. We define the variance
+(and thus the standard deviation) as follows: \begin{gather*}
+    \sigma_X^2 = \frac{1}{n - 1}\sum_{i = 1}^n(x_i - \bar{X})^2.
+\end{gather*} 
+
+\subsubsection{Covariance}
+
+We take $X = \{x_1, \ldots, x_n\}$ to be a data set consisting
+of $m$-dimensional row vectors. We define the covariance matrix: 
+\begin{gather*}
+    \Sigma = \frac{1}{n - 1}\sum_{i = 1}^n (x_i - \mu)^T(x_i - \mu),
+\end{gather*} where $\mu$ is the $m$-dimensional row vector
+where the $j^{\text{th}}$ entry corresponds to the mean of the
+$j^{\text{th}}$ entry of each $x_i$. This yields a $m \times m$
+matrix that is square and symmetric with the variance of the
+$j^{\text{th}}$ entry of each $x_i$ on the $j^{\text{th}}$ value
+on the diagonal.
+
+\paragraph{Eigenvalues and Eigenvectors} As the matrix is symmetric
+we can diagonalise it and find the eigenvalues and eigenvectors.
+The major axis is the eigenvector corresponding to the largest
+eigenvalue and the minor axis is the eigenvector corresponding
+to the smallest value.
