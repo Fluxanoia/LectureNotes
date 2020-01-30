@@ -114,3 +114,29 @@ we can diagonalise it and find the eigenvalues and eigenvectors.
 The major axis is the eigenvector corresponding to the largest
 eigenvalue and the minor axis is the eigenvector corresponding
 to the smallest value.
+
+\subsubsection{Data Normalisation}
+
+Data may need to be normalised before we use our distance measures
+on it. We consider a data set $X = \{x_1, \ldots, x_n\}$
+with mean $\mu$ and standard deviation $\sigma$.
+
+\paragraph{Scaling} We map each $x_i$ for $i \in [n]$ as follows:
+\begin{gather*}
+    x_i \mapsto \frac{x_i - \min(X)}{\max(X) - \min(X)}.
+\end{gather*}
+
+\paragraph{Standardisation} We map each $x_i$ for $i \in [n]$ as follows:
+\begin{gather*}
+    x_i \mapsto \frac{x_i - \mu}{\sigma}.
+\end{gather*}
+
+\paragraph{Scaling to Unit Length} We map each $x_i$ for $i \in [n]$ as follows:
+\begin{gather*}
+    x_i \mapsto \frac{x_i}{|x_i|}.
+\end{gather*} where $|x_i|$ denotes the magnitude of $x_i$.
+
+\subsubsection{Outliers}
+
+A small amount of values significantly different to the remainder
+of the data set.
