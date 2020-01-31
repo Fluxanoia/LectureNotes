@@ -1,0 +1,31 @@
+\section{CSS - Cascading Stylesheets}
+
+CSS describes how HTML elements should be drawn to the
+screen. It can be used: \begin{itemize}
+    \item Inline with the \texttt{style} attribute,
+    \item Internally with the \texttt{style} tag in
+    the \texttt{head} section,
+    \item Externally via linking to a \texttt{.css} file. 
+\end{itemize}
+
+\subsection{Stylesheet Linking}
+
+We can link to external stylesheets as follows: \begin{lstlisting}
+    <link rel="stylesheet" href="styles.css"> 
+\end{lstlisting}
+
+\subsection{CSS File Structure}
+
+The parts of CSS files are formed as follows: \begin{lstlisting}
+    selector {
+        key: value;
+    }
+\end{lstlisting}
+
+\subsubsection{Selectors}
+
+Selectors can be a: \begin{itemize}
+    \item tag, written simply as \texttt{div},
+    \item class, written as \texttt{.class},
+    \item id, written as \texttt{\#id}.
+\end{itemize}

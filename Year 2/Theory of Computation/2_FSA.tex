@@ -1,0 +1,48 @@
+\section{Finite State Automaton}
+
+A deterministic finite state automaton (DFA) in a 5-tuple 
+$M = \langle Q, \Sigma, \delta, q_0, F \rangle$
+where: \begin{align*}
+    Q      &= \text{ any finite set, called the states,} \\
+    \Sigma &= \text{ any alphabet,} \\ 
+    \delta &\in \{ Q \times \delta \to Q \} \text{ is the the transition function,} \\
+    q_0    &\in Q \text{ is the initial state,} \\
+    F      &\subseteq Q \text{ is the set of accept states.}
+\end{align*} We say that $M$ accepts a word $w$ in $\Sigma$
+if there is a sequence of states $r_0, \ldots, r_n$ in $Q$
+satisfying: \begin{itemize}
+    \item $r_0 = q_0$,
+    \item $\delta(r_i, w_{i + 1}) = r_{i + 1}$,
+    \item $r_n$ is in $F$.
+\end{itemize}
+
+\subsubsection{Product Automaton}
+
+For the two DFA: \begin{align*}
+    M_1 = \langle Q_1, \Sigma, \delta_1, q_1, F_1 \rangle,
+    M_2 = \langle Q_2, \Sigma, \delta_2, q_2, F_2 \rangle,
+\end{align*} the product automaton $M$ is: \begin{gather*}
+    M = M_1 \times M_2 = \langle Q, \Sigma, \delta, q_0, F \rangle,
+\end{gather*} where: \begin{align*}
+    Q &= Q_1 \times Q_2 \\
+    \delta((p_1, p_2), a) &= (\delta_1(p_1, a), \delta_2(p_2, a)), \\
+    q_0 &= (q_1, q_2),
+    F = F_1 \times F_2.
+\end{align*}
+
+\subsection{Languages}
+
+For a DFA $M$, the language set of $M$ denoted by $L(M)$
+is the maximal set of words in the alphabet of $M$ such that
+for each $w$ in $L(M)$, $M$ accepts $w$. We say $M$ recognises
+a language $A$ if $L(M) = A$.
+
+\subsubsection{Regular Languages}
+
+A language is regular if it is recognised by some DFA.
+
+\subsubsection{The Intersection of Regular Languages}
+
+For the two DFA $M_1$ and $M_2$ with languages
+$A$ and $B$ (resp.), we have that $A \cap B$ is
+recognised by $M_1 \times M_2$ the product automaton.

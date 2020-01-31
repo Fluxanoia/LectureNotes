@@ -1,0 +1,140 @@
+\section{HTML - HyperText Markup Language}
+
+\subsection{Tags, Attributes and, Values}
+
+Tags form the structure of HTML, with \texttt{html},
+\texttt{head} and, \texttt{body} usually forming the top
+levels: \begin{lstlisting}
+    <html>
+        <head>
+            <title>Title<\title>
+        <\head>
+        <body>
+            <p>Paragraph<\p>
+        <\body>
+    <\html>
+\end{lstlisting} Attributes form parts of tags and, as expected,
+assign attributes to tags. This can describe the width of elements
+(\texttt{width}), the hyperlink attached to text (\texttt{href}) and,
+more: \begin{lstlisting}
+    <a href="www.bristol.ac.uk">Bristol<\a>
+\end{lstlisting}
+
+\subsubsection{Common Tags}
+
+Below is a table containing common HTML tags: \begin{center}
+    \begin{tabular}{| c | c |}
+        \hline
+        Tag & Description \\
+        \hline \hline
+        \texttt{h1}, $\ldots$ \texttt{h6} & Headings \\
+        \hline
+        \texttt{p} & Paragraph \\
+        \hline
+        \texttt{br} & New line \\
+        \hline
+        \texttt{ul} & Unordered list \\
+        \hline
+        \texttt{ol} & Ordered list \\
+        \hline
+        \texttt{li} & List item \\
+        \hline
+        \texttt{em} & Emphasis \\
+        \hline
+        \texttt{strong} & Importance \\
+        \hline
+        \texttt{q} & Quote \\
+        \hline
+        \texttt{cite} & Citation \\
+        \hline
+        \texttt{var} & Variable \\
+        \hline
+        \texttt{code} & Source code \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Block and Inline Elements}
+
+Block level elements take up the full width of the container
+and start on new lines, so stack vertically. \newline
+Inline elements don't start on new lines and only take
+up as much width as is necessary, so stack horizontally.
+
+\subsubsection{Block Tags}
+
+Below is a table containing some of the block HTML tags: 
+\begin{center}
+    \begin{tabular}{| c | p{5cm} |}
+        \hline
+        Tag & Description \\
+        \hline \hline
+        \texttt{header} & This is the very top of the page \\
+        \hline
+        \texttt{main} & This fills the space inbetween the 
+        header and footer \\
+        \hline
+        \texttt{section} & This forms subsections of blocks \\
+        \hline
+        \texttt{div} & No meaning, for layout purposes \\
+        \hline
+        \texttt{p} & This forms paragraphs of text \\
+        \hline
+        \texttt{figure} & This forms images \\
+        \hline
+        \texttt{nav} & This fills the space left of the main block \\
+        \hline
+        \texttt{aside} & This fills the space right of the main block \\
+        \hline
+        \texttt{footer} & This is the very bottom of the page \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection{Common Attributes}
+
+Below is a table containing some of the common HTML attributes: 
+\begin{center}
+    \begin{tabular}{| c | p{5cm} |}
+        \hline
+        Attribute & Description \\
+        \hline \hline
+        \texttt{id} & Uniquely identifies the tag with the value \\
+        \hline
+        \texttt{class} & Marks tags you want to operate as a group \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\newpage
+
+\subsection{Forms}
+
+The form tag, shown in the example: \begin{lstlisting}
+    <form method="post" action="/comment/comment.php">
+        <p>
+            <label for="name">Name:</label>
+            <input type="text" id="name" />
+        </p>
+        <p>
+            <button type="submit">OK</button>
+        </p>
+    </form>
+\end{lstlisting} The \texttt{method} attribute takes two values
+\texttt{GET} and \texttt{POST}. The former places the
+information in the URL parameters and the latter utilises
+a HTTP request. \newline
+The \texttt{action} attribute defines an action to be
+performed when the form is submitted. In this case,
+it's sent to a PHP script. \newline
+The \texttt{label for} attribute should link to a \texttt{input 
+id}. Additionally, the \texttt{input name} attribute is the key
+which accompanies the input value in the request. \newline
+The \texttt{button} tag has three types, a \texttt{submit} button
+that makes the request, a \texttt{reset} button that resets all fields and,
+a \texttt{button} type that does nothing by default but can
+be configured using Javascript.
+\\[\baselineskip]
+Types can be used to make field use a specific format or be
+required. Additionally, they can be given placeholder text
+and autocompletion properties.
