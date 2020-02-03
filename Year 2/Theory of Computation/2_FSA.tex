@@ -1,11 +1,13 @@
 \section{Finite State Automaton}
 
-A deterministic finite state automaton (DFA) in a 5-tuple 
+\subsubsection{Deterministic Finite State Automaton}
+
+A deterministic finite state automaton (DFA) is a 5-tuple 
 $M = \langle Q, \Sigma, \delta, q_0, F \rangle$
 where: \begin{align*}
     Q      &= \text{ any finite set, called the states,} \\
     \Sigma &= \text{ any alphabet,} \\ 
-    \delta &\in \{ Q \times \delta \to Q \} \text{ is the the transition function,} \\
+    \delta &\in \{ Q \times \Sigma \to Q \} \text{ is the the transition function,} \\
     q_0    &\in Q \text{ is the initial state,} \\
     F      &\subseteq Q \text{ is the set of accept states.}
 \end{align*} We say that $M$ accepts a word $w$ in $\Sigma$
@@ -29,6 +31,37 @@ For the two DFA: \begin{align*}
     q_0 &= (q_1, q_2),
     F = F_1 \times F_2.
 \end{align*}
+
+\subsection{Non-deterministic Finite State Automaton}
+
+A non-deterministic finite state automaton (NFA) is identical
+to a DFA except our transition function is from 
+$Q \times \Sigma_\epsilon \to \mathcal{P}(Q)$ where
+$\Sigma_\epsilon$ is an alphabet $\Sigma$ with the empty word
+added.
+\\[\baselineskip]
+Transitioning on the empty word doesn't consume a letter of our
+input word and arbitrary choices are made by the automaton when
+choices present themselves. However, we have that each NFA is
+arbitrarily lucky and each word that could be accepted, is.
+
+\subsubsection{NFA Simulated by DFA}
+
+We can simulate an arbitrary NFA: \begin{gather*}
+    M =  \langle Q, \Sigma, \delta, q_0, F \rangle
+\end{gather*}
+with a DFA: \begin{gather*}
+    M' = \langle Q', \Sigma_\epsilon, \delta', q_0', F' \rangle
+\end{gather*} where: \begin{align*}
+    Q'   &= \mathcal{P}(Q), \\
+    q_0' &= \{q_0\}, \\
+    F'   &= \{q' \in Q' : \text{ for some } q \in q', q \in F\}.
+\end{align*} and we have that for some letter $a$ in $\Sigma$
+and $q \in Q$: \begin{gather*}
+    \delta(q, a) = \delta'(q, a),
+\end{gather*} and the empty word is dealt with by the union of
+the states reachable through each $\epsilon$ transition.
+    
 
 \subsection{Languages}
 
