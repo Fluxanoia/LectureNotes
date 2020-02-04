@@ -1,0 +1,42 @@
+\section{Encoding}
+
+Encoding is about mapping symbols to bytes. There are many
+standards, of which we will see a few.
+
+\subsection{ASCII - American Standard Code for Information 
+\newline Interchange}
+
+ASCII contains the digits 0 to 9, the lowercase and uppercase
+English alphabet, some punctuation and, special characters.
+Each of these is represented by a seven bits.
+
+\subsection{UTF - Unicode Transformation Format}
+
+The first 128 characters of UTF-8 correspond to the
+characters of ASCII making UTF-8 backwards compatible 
+with ASCII. The unicode character set contains around 
+136,000 characters. The individual formats (UTF-8, UTF-16, etc.) 
+encode these differently and have different memory
+requirements. We can choose to use UTF-8 in HTML as follows:
+\begin{lstlisting}
+    <meta charset="UTF8" />
+\end{lstlisting}
+
+\subsection{CSV - Comma Separated Values}
+
+CSV use commas to separate field and \texttt{CR LF} to
+separate records. The record at the top is reserved (usually)
+for the titles of the columns.
+
+\subsubsection{Streams}
+
+We can read CSV files in as streams. Thinking about stream
+operations is important when considering web programming as data
+is usually a stream. We cannot perform operations on streams
+that require more than one pass (like standard deviation).
+\\[\baselineskip]
+A few operations we can do are: \begin{itemize}
+    \item filter - omitting as we go,
+    \item map - mapping as we go,
+    \item sum - summing as we go. 
+\end{itemize}
