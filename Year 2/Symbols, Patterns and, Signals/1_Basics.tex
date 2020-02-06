@@ -115,50 +115,7 @@ The major axis is the eigenvector corresponding to the largest
 eigenvalue and the minor axis is the eigenvector corresponding
 to the smallest value.
 
-\subsubsection{Linear Regression}
-
-For a two dimensional set of data: \begin{gather*}
-    D = \{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}.
-\end{gather*} We calculate a gradient $r$ and an intercept $c$ to 
-uniquely define the regression line $(y = rx + c)$ on $D$: \begin{align*}
-    r &= \frac{
-        \sum_{i = 1}^n (x_i \cdot y_i) - n\bar{x}\bar{y}
-    }{
-        \sum_{i = 1}^n (x_i^2) - n\bar{x}^2
-    }, \\
-    c &= \bar{y} - r \cdot \bar{x}.
-\end{align*} Outliers have disproportionate effects due to the
-squares used by the measure. 
-
 \newpage
-
-\noindent
-For a two dimensional set of data: 
-\begin{gather*}
-    D = \{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}.
-\end{gather*} where each $x_i$ is $k$-dimensional,
-we can use matrices to calculate our coefficients: \begin{gather*}
-    R = (X^{\text{T}}X)^{-1}X^{\text{T}}Y,
-\end{gather*} where: \begin{gather*}
-    R = \begin{pmatrix}
-        r_0 \\ r_1 \\ \vdots \\ r_k
-    \end{pmatrix} 
-    \qquad
-    Y = \begin{pmatrix}
-        y_1 \\ y_2 \\ \vdots \\ y_n
-    \end{pmatrix}
-    \qquad
-    X = \begin{pmatrix}
-        1      & \leftarrow & x_1    & \rightarrow \\
-        1      & \leftarrow & x_2    & \rightarrow \\
-        \vdots &            & \vdots &             \\
-        1      & \leftarrow & x_n    & \rightarrow
-    \end{pmatrix}.
-\end{gather*} We have a least squares linear regression line
-$y = r_0 + r_1x^1 + \cdots + r_nx^n$.
-\\[\baselineskip]
-Instead of using $k$-dimensional data, we can instead use
-powers of each $x^i$ to form fitted polynomials.
 
 \subsubsection{Data Normalisation}
 

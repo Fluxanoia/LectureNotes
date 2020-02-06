@@ -20,3 +20,96 @@ data set but does not generalise well.
 
 Deterministic models produce an output without a measure of
 confidence in that output.
+
+\subsubsection{Regression}
+
+For a two dimensional set of data: \begin{gather*}
+    D = \{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}.
+\end{gather*} We calculate a gradient $r$ and an intercept $c$ to 
+uniquely define the regression line $(y = rx + c)$ on $D$: \begin{align*}
+    r &= \frac{
+        \sum_{i = 1}^n (x_i \cdot y_i) - n\bar{x}\bar{y}
+    }{
+        \sum_{i = 1}^n (x_i^2) - n\bar{x}^2
+    }, \\
+    c &= \bar{y} - r \cdot \bar{x}.
+\end{align*} Outliers have disproportionate effects due to the
+squares used by the measure. 
+
+\newpage
+
+\noindent
+For a two dimensional set of data: 
+\begin{gather*}
+    D = \{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}.
+\end{gather*} where each $x_i$ is $k$-dimensional,
+we can use matrices to calculate our coefficients: \begin{gather*}
+    R = (X^{\text{T}}X)^{-1}X^{\text{T}}Y,
+\end{gather*} where: \begin{gather*}
+    R = \begin{pmatrix}
+        r_0 \\ r_1 \\ \vdots \\ r_k
+    \end{pmatrix} 
+    \qquad
+    Y = \begin{pmatrix}
+        y_1 \\ y_2 \\ \vdots \\ y_n
+    \end{pmatrix}
+    \qquad
+    X = \begin{pmatrix}
+        1      & \leftarrow & x_1    & \rightarrow \\
+        1      & \leftarrow & x_2    & \rightarrow \\
+        \vdots &            & \vdots &             \\
+        1      & \leftarrow & x_n    & \rightarrow
+    \end{pmatrix}.
+\end{gather*} We have a least squares linear regression line
+$y = r_0 + r_1x^1 + \cdots + r_nx^n$.
+\\[\baselineskip]
+Instead of using $k$-dimensional data, we can instead use
+powers of each $x^i$ to form fitted polynomials.
+
+\subsection{Probabilistic Models}
+
+Probabilistic models pair outputs with measures of confidence,
+probability.
+
+\subsubsection{Maximum Likelihood Estimation}
+
+We first define the argmax function:
+\begin{gather*}
+    \text{argmax}_\theta(f(\theta)),
+\end{gather*} for some objective function $f$, is the $\theta$
+such that $f(\theta)$ is maximised - denoted by $\hat\theta$.
+We define argmin similarly, and can see that:
+\begin{align*}
+    \text{argmax}_\theta(f(\theta)) 
+    &= \text{argmax}_\theta(\ln(f(\theta))) \\
+    &= \text{argmin}_\theta(-\ln(f(\theta))),
+\end{align*} as $\ln$ is monotone increasing.
+\\[\baselineskip]
+When considering some data set $D$ with parameters
+encapsulated by $\theta$, we take $\mathbb{P}(D \, | \, \theta)$ 
+to be the function returning the probability of $D$ occuring based 
+on the parameters of $\theta$. Thus: \begin{gather*}
+    \text{argmax}_\theta(\mathbb{P}(D \, | \, \theta)),
+\end{gather*} represents the parameter values that
+are most likely to produce this data set. Practically,
+this can be carried out by taking the derivative of
+$\ln(\mathbb{P}(D \, | \, \theta))$ and taking derivatives 
+of it with respect to the parameters. We set the derivatives
+to zero and solve for $\theta$.
+
+\subsubsection{Maximum a Posteriori}
+
+If we have some prior information about the distribution of
+$\theta$, we can consider assimilating that into our estimation.
+We take the posterior to be: \begin{gather*}
+    \mathbb{P}(\theta \, | \, D) 
+    = \frac{
+        \mathbb{P}(D \, | \, \theta)\mathbb{P}(\theta)
+        }{Z},
+\end{gather*} for some normalising term $Z$. Note that,
+$\mathbb{P}(D \, | \, \theta)$ is our likelihood and 
+$\mathbb{P}(\theta)$ is our prior. Thus, we extend
+our Maximum Likelihood Estimator to use the posterior instead,
+giving us the Maximum a Posteriori estimator: \begin{gather*}
+    \hat\theta = \text{argmax}_\theta(\mathbb{P}(\theta \, | \, D)).
+\end{gather*}
