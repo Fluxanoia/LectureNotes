@@ -1,6 +1,6 @@
 \section{Finite State Automaton}
 
-\subsubsection{Deterministic Finite State Automaton}
+\subsection{Deterministic Finite State Automaton}
 
 A deterministic finite state automaton (DFA) is a 5-tuple 
 $M = \langle Q, \Sigma, \delta, q_0, F \rangle$
@@ -28,8 +28,8 @@ For the two DFA: \begin{align*}
 \end{gather*} where: \begin{align*}
     Q &= Q_1 \times Q_2 \\
     \delta((p_1, p_2), a) &= (\delta_1(p_1, a), \delta_2(p_2, a)), \\
-    q_0 &= (q_1, q_2),
-    F = F_1 \times F_2.
+    q_0 &= (q_1, q_2), \\
+    F &= F_1 \times F_2.
 \end{align*}
 
 \subsection{Non-deterministic Finite State Automaton}
@@ -44,25 +44,7 @@ Transitioning on the empty word doesn't consume a letter of our
 input word and arbitrary choices are made by the automaton when
 choices present themselves. However, we have that each NFA is
 arbitrarily lucky and each word that could be accepted, is.
-
-\subsubsection{NFA Simulated by DFA}
-
-We can simulate an arbitrary NFA: \begin{gather*}
-    M =  \langle Q, \Sigma, \delta, q_0, F \rangle
-\end{gather*}
-with a DFA: \begin{gather*}
-    M' = \langle Q', \Sigma_\epsilon, \delta', q_0', F' \rangle
-\end{gather*} where: \begin{align*}
-    Q'   &= \mathcal{P}(Q), \\
-    q_0' &= \{q_0\}, \\
-    F'   &= \{q' \in Q' : \text{ for some } q \in q', q \in F\}.
-\end{align*} and we have that for some letter $a$ in $\Sigma$
-and $q \in Q$: \begin{gather*}
-    \delta(q, a) = \delta'(q, a),
-\end{gather*} and the empty word is dealt with by the union of
-the states reachable through each $\epsilon$ transition.
     
-
 \subsection{Languages}
 
 For a DFA $M$, the language set of $M$ denoted by $L(M)$
@@ -79,3 +61,34 @@ A language is regular if it is recognised by some DFA.
 For the two DFA $M_1$ and $M_2$ with languages
 $A$ and $B$ (resp.), we have that $A \cap B$ is
 recognised by $M_1 \times M_2$ the product automaton.
+
+\subsection{Epsilon Closure}
+
+For the NFA $M =  \langle Q, \Sigma, \delta, q_0, F \rangle$, 
+and $R \subseteq Q$, we define the epsilon closure
+of $R$ to be: \begin{gather*}
+    E(R) := \left\{
+        q \in Q : \bfrac{
+        \text{ where there is a series of 
+        transitions solely over }
+    }{
+        \epsilon \text{ from some } r \text{ in } 
+        R \text{ to } q
+    }\right\}
+\end{gather*}
+
+\subsubsection{Simulating NFA with DFA}
+
+We can simulate an arbitrary NFA: \begin{gather*}
+    M =  \langle Q, \Sigma, \delta, q_0, F \rangle
+\end{gather*}
+with a DFA: \begin{gather*}
+    M' = \langle Q', \Sigma_\epsilon, \delta', q_0', F' \rangle
+\end{gather*} where: \begin{align*}
+    Q'   &= \mathcal{P}(Q), \\
+    \delta'(q, a) &= \{q : \text{for some }
+        r \in R, q \in E(\delta(r, a))
+    \} \\
+    q_0' &= E(\{q_0\}), \\
+    F'   &= \{q' \in Q' : \text{for some } q \in q', q \in F\}.
+\end{align*}
