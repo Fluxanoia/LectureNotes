@@ -138,3 +138,24 @@ be configured using Javascript.
 Types can be used to make field use a specific format or be
 required. Additionally, they can be given placeholder text
 and autocompletion properties.
+
+\subsection{Escape Characters}
+
+We list these below, note that they also work in XML:
+\begin{center}
+    \begin{tabular}{| c | p{5cm} |}
+        \hline
+        Character & HTML Representation \\
+        \hline \hline
+        $<$                & \texttt{\&lt;} \\
+        \hline
+        $>$                & \texttt{\&gt;} \\
+        \hline
+        \&                 & \texttt{\&amp;} \\
+        \hline
+        "                  & \texttt{\&quot;} \\
+        \hline
+        Non-breaking Space & \texttt{\&nbsp;} \\
+        \hline
+    \end{tabular}
+\end{center}
