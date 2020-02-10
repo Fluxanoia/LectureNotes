@@ -57,11 +57,45 @@ a language $A$ if $L(M) = A$.
 
 A language is regular if it is recognised by some DFA.
 
-\subsubsection{The Intersection of Regular Languages}
+\subsubsection{Operations on Regular Languages}
 
-For the two DFA $M_1$ and $M_2$ with languages
+We can calculate the union and intersection of regular languages
+as expected and for two DFA $M_1$ and $M_2$ with languages
 $A$ and $B$ (resp.), we have that $A \cap B$ is
 recognised by $M_1 \times M_2$ the product automaton.
+\\[\baselineskip]
+Additionally, we can concatenate two regular languages $A$ and
+$B$: \begin{gather*}
+    A \circ B = \{xy : x \in A \text{ and } y \in B\},
+\end{gather*} and form the Kleene Star: \begin{gather*}
+    A^* = \{x_0 \cdots x_k : k \in \mathbb{Z}_{\geq 0}
+        \text{ and for each } i \in \{0, 1, \ldots, k\}, 
+        x_i \in A\}.
+\end{gather*} We have that each of these operations are closed
+in the set of regular languages.
+
+\subsection{Regular Expressions}
+
+We have that $R$ is a regular expression over an alphabet
+$\Sigma$ if it has one of the following shapes:
+\begin{center}
+    \begin{tabular}{ c l }
+        $\emptyset$ & \\
+        $\epsilon$ & \\
+        $a$ & for some $a$ in $\Sigma$ \\
+        $R_1 \cup R_2$ & for some regular expressions $R_1$ and $R_2$ \\
+        $R_1 \circ R_2$ & for some regular expressions $R_1$ and $R_2$ \\
+        $R^*$ & for some regular expression $R$ \\
+    \end{tabular}
+\end{center} The language of regular expressions $R_1$ and $R_2$
+can be formed as follows: \begin{align*}
+    L(\emptyset) &= \emptyset \\
+    L(\epsilon) &= \{\epsilon\} \\
+    L(a) &= \{a\} \\
+    L(R_1 \cup R_2) &= L(R_1) \cup L(R_2) \\
+    L(R_1 \circ R_2) &= L(R_1) \circ L(R_2) \\
+    L(R_1^*) &= L(R_1)^*
+\end{align*}
 
 \subsection{Epsilon Closure}
 
@@ -92,4 +126,6 @@ with a DFA: \begin{gather*}
     \} \\
     q_0' &= E(\{q_0\}), \\
     F'   &= \{q' \in Q' : \text{for some } q \in q', q \in F\}.
-\end{align*}
+\end{align*} Now that we have this, we know that languages are
+regular if and only if they are accepted by some NFA as
+all DFA are NFA and each NFA can be expressed by a DFA.
