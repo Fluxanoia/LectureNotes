@@ -2,9 +2,101 @@
 
 \subsection{Web Architecture}
 
-A multitier architecture or $n$-tier architecture is a client-server
+A multitier architecture or $n$-tier architecture is a 
+client-server
 architecture which physically separates presentation,
 application processing and data management functions.
 \\[\baselineskip]
 A common example is the 3-tier architecture which is formed
 by presentation, application and, database layers.
+
+\subsection{SQL}
+
+SQL tables are formed by these main components: \begin{itemize}
+    \item Columns / Fields / Attributes,
+    \item Rows / Records / Tuples.
+\end{itemize}
+
+\subsubsection{Super Keys}
+
+A super key is a combination of the fields of a table such that
+using just those columns, we can uniquely identify each record.
+
+\subsubsection{Candidate Keys}
+
+A candidate key is a minimal super key.
+
+\subsubsection{The Primary Key}
+
+The primary key is a chosen, 'most important', candidate key.
+
+\newpage
+
+\subsubsection{Useful Commands}
+
+There are many useful (MariaDB) SQL commands:
+\begin{center}
+    \begin{tabular}{| c | p{5cm} | p{5cm} |}
+        \hline
+        Command & Description & More information \\
+        \hline \hline
+        \texttt{CREATE} 
+        & Creates a table 
+        & \\
+        \hline
+        \texttt{DROP} 
+        & Deletes a table 
+        & \\
+        \hline 
+        \texttt{TRUNCATE} 
+        & Deletes all records in a table 
+        & \\
+        \hline
+        \texttt{SELECT}
+        & Picks values from a table 
+        & Use * to select all \\
+        \hline
+        \texttt{INSERT} 
+        & Inserts a record into a table 
+        & \\
+        \hline
+        \texttt{DELETE} 
+        & Deletes all records in a table 
+        & Usually used with a \texttt{WHERE} clause \\
+        \hline
+        \texttt{UPDATE} 
+        & Updates values in a table 
+        & \\
+        \hline
+        \texttt{AUTO\_INCREMENT} 
+        & Automatically increments and assigns a field
+        & \\
+        \hline
+        \texttt{--} 
+        & Initiates a comment 
+        & \\
+        \hline
+        \texttt{''} 
+        & Used for strings & \\
+        \hline
+        \texttt{``} 
+        & Used for database values & \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsubsection{Exporting and Importing}
+
+Using mysqldump we can export a database using the following
+command in the MySQL client command line (with a following 
+example): 
+\begin{lstlisting}
+    mysqldump -u student [options]
+        dbname > filename.sql
+
+    mysqldump --skip-lock-tables
+        --add-drop-table dbname > filename.sql
+\end{lstlisting} We can similarly use the client to import
+a database: \begin{lstlisting}
+    mysql -u student dbname < filename.sql
+\end{lstlisting}
