@@ -1,0 +1,49 @@
+\section{Generalised NFA}
+
+A generalised non-deterministic finite state automaton is a 5-tuple
+$M = \langle Q, \Sigma, \delta, p, p' \rangle$ where:
+\begin{align*}
+    Q      &= \text{ the set of states} \\
+    \Sigma &= \text{ any alphabet,} \\ 
+    \delta &\in \big\{ 
+        (Q \setminus \{p'\})
+        \times 
+        (Q \setminus \{p\})
+        \to \mathcal{R} 
+        \big\} \text{ is the the transition function,} \\
+    p      &\in Q \text{ is the initial state,} \\
+    p'     &\in Q \text{ is the accept state,}
+\end{align*} where $\mathcal{R}$ is the set of all regular
+expressions. We say that that for a word $w = w_1 \cdots w_n$,
+$M$ accepts $w$ if for a corresponding series of states
+$q_0, \ldots, q_n$: \begin{itemize}
+    \item $q_0 = p$,
+    \item $q_n = p'$,
+    \item for each $i$ in $[n]$, $w_i$ is in 
+        $L(\delta(q_{i - 1}, q_i))$.
+\end{itemize}
+
+\subsection{Conversion to a Regular Expression}
+
+We can distill a GNFA into a regular expression by iteratively
+removing states from it until there is only the start and accept
+state, joined by the sole transition which describes the GNFA
+as a regular expression.
+\\[\baselineskip]
+Taking $M = \langle Q, \Sigma, \delta, p, p' \rangle$ to be a
+GNFA, we can choose $q$ in $Q \setminus \{p, p'\}$ and form
+$M' = \langle Q \setminus \{q\}, \Sigma, \delta', p, p' \rangle$
+where: \begin{align*}
+    \delta'& : \big\{ 
+        (Q \setminus \{q, p'\})
+        \times 
+        (Q \setminus \{q, p\})
+        \to \mathcal{R} 
+    \big\} \\
+    \delta'&(q_1, q_2) = R_1R_2^*R_3 \cup R_4,
+\end{align*} and $R_1, R_2, R_3, R_4$ are defined as: \begin{align*}
+    R_1 &= \delta(q_1, q), \\
+    R_2 &= \delta(q, q), \\
+    R_3 &= \delta(q, q_2), \\
+    R_4 &= \delta(q_1, q_2).
+\end{align*}

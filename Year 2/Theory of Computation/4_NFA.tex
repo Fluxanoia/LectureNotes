@@ -1,0 +1,46 @@
+\section{Non-deterministic Finite State Automaton}
+
+A non-deterministic finite state automaton (NFA) is identical
+to a DFA except our transition function is from 
+$Q \times \Sigma_\epsilon \to \mathcal{P}(Q)$ where
+$\Sigma_\epsilon$ is an alphabet $\Sigma$ with the empty word
+added.
+\\[\baselineskip]
+Transitioning on the empty word doesn't consume a letter of our
+input word and arbitrary choices are made by the automaton when
+choices present themselves. We have that a word is accepted
+in an NFA if and only if there is at least one computation where 
+the word is accepted.
+
+\subsection{Epsilon Closure}
+
+For the NFA $M =  \langle Q, \Sigma, \delta, q_0, F \rangle$, 
+and $R \subseteq Q$, we define the epsilon closure
+of $R$ to be: \begin{gather*}
+    E(R) := \left\{
+        q \in Q : \bfrac{
+        \text{ where there is a series of 
+        transitions solely over }
+    }{
+        \epsilon \text{ from some } r \text{ in } 
+        R \text{ to } q
+    }\right\}
+\end{gather*}
+
+\subsection{Simulation via a DFA}
+
+We can simulate an arbitrary NFA: \begin{gather*}
+    M =  \langle Q, \Sigma, \delta, q_0, F \rangle
+\end{gather*}
+with a DFA: \begin{gather*}
+    M' = \langle Q', \Sigma_\epsilon, \delta', q_0', F' \rangle
+\end{gather*} where: \begin{align*}
+    Q'   &= \mathcal{P}(Q), \\
+    \delta'(q, a) &= \{q : \text{for some }
+        r \in R, q \in E(\delta(r, a))
+    \} \\
+    q_0' &= E(\{q_0\}), \\
+    F'   &= \{q' \in Q' : \text{for some } q \in q', q \in F\}.
+\end{align*} Now that we have this, we know that languages are
+regular if and only if they are accepted by some NFA as
+all DFA are NFA and each NFA can be expressed by a DFA.
