@@ -1,0 +1,25 @@
+\section{Interpretation}
+
+Interpretation is one-stage execution, the code is evaluated
+at runtime.
+\\[\baselineskip]
+Most code interpretation is done as expected (refering to the
+earlier chapters) but there are some key concepts to consider.
+
+\subsection{Let Expressions}
+
+Let expressions have the form: \begin{lstlisting}
+    let x xexpr expr
+\end{lstlisting} where \texttt{x} is the variable we are
+setting the value of, \texttt{xexpr} is the expression of
+which we are setting \texttt{x} to, and \texttt{expr} is the
+expression in which \texttt{x} takes on the value described
+by \texttt{xexpr}.
+\\[\baselineskip]
+Variables defined in let expressions take precedence over
+variables in the environment. However, there is potential 
+(when substituting free variables) for variables to be
+captured by our let expressions when they shouldn't.
+So, when we substitute variables, we should use some
+method (like a counter) to make sure substituted variables
+are unique and thus, are not captured.
