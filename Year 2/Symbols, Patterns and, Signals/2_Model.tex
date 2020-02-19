@@ -15,6 +15,23 @@ training the model).
 Training a model too hard on a specific data set can cause it
 to 'overfit'. This means it performs very well on the trained
 data set but does not generalise well.
+\\[\baselineskip]
+This can happen in a variety of cases, some including: \begin{itemize}
+    \item There is too little data,
+    \item There is too little data representing some
+        key part of the data distribution,
+    \item The function class is too complex.
+\end{itemize}
+
+\subsubsection{Cross-validation}
+
+We can decide to train our data on only a fraction of our data set
+and then use the remainder to test whether our data is overfitted.
+This can be repeated multiple times with different subsets of the
+original data set. However, this can fail on smaller data sets or
+ones with many parameters.
+
+\newpage
 
 \subsection{Deterministic Models}
 
@@ -36,9 +53,6 @@ uniquely define the regression line $(y = rx + c)$ on $D$: \begin{align*}
 \end{align*} Outliers have disproportionate effects due to the
 squares used by the measure. 
 
-\newpage
-
-\noindent
 For a two dimensional set of data: 
 \begin{gather*}
     D = \{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}.
@@ -65,6 +79,8 @@ $y = r_0 + r_1x^1 + \cdots + r_nx^n$.
 \\[\baselineskip]
 Instead of using $k$-dimensional data, we can instead use
 powers of each $x^i$ to form fitted polynomials.
+
+\newpage
 
 \subsection{Probabilistic Models}
 
@@ -96,6 +112,16 @@ this can be carried out by taking the derivative of
 $\ln(\mathbb{P}(D \, | \, \theta))$ and taking derivatives 
 of it with respect to the parameters. We set the derivatives
 to zero and solve for $\theta$.
+
+\subsubsection{Approximate Bayesian Computation}
+
+If we have a very small amount of data, we can take simulations
+of the (suspected) underlying distributions varying across its
+parameters and identify the simulations which contain our small
+data set. We can plot the histogram of these supersets to see
+which parameters are most likely to produce our small data set.
+\\[\baselineskip]
+However, in practice - this doesn't work very well.
 
 \subsubsection{Maximum a Posteriori}
 
