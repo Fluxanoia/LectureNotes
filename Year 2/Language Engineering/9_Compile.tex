@@ -9,3 +9,31 @@ Variable's symbolic names are lost on compilation and
 replaced by indices refering to the distance to the variable
 binding. In this case, our environment becomes a list of values
 which we use our variable indices to index.
+
+\subsection{Stack Instructions}
+
+We form a set of stack instructions:
+\begin{center}
+    \begin{tabular}{| c | c | c | c |}
+        \hline
+        Instruction & Stack before & Stack after & Description \\
+        \hline \hline
+        \texttt{SCSTI} $n$ & \ldots               & $n$, \ldots             & Pushes \\
+        \hline
+        \texttt{SVAR} $n$  & \ldots               & $s[n]$, \ldots          & Indexes the stack \\
+        \hline
+        \texttt{SADD}      & $n_2$, $n_1$, \ldots & $n_1 + n_2$, \ldots     & Adds \\
+        \hline
+        \texttt{SSUB}      & $n_2$, $n_1$, \ldots & $n_1 - n_2$, \ldots     & Subtracts \\
+        \hline
+        \texttt{SMUL}      & $n_2$, $n_1$, \ldots & $n_1 \cdot n_2$, \ldots & Multiplies \\
+        \hline
+        \texttt{SDUP}      & $v$, \ldots          & $v$, $v$, \ldots        & Duplicates \\
+        \hline
+        \texttt{SPOP}      & $v$, \ldots          & \ldots                  & Pops \\
+        \hline
+        \texttt{SSWAP}     & $v_2$, $v_1$, \ldots & $v_1$, $v_2$, \ldots    & Swaps \\
+        \hline
+    \end{tabular}
+\end{center} The element remaining at the top of the stack at
+the end of computation is the result of the computation.
