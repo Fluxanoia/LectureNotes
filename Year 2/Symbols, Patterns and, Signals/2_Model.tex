@@ -10,7 +10,7 @@ Models are defined in terms of parameters which could be obtained
 through trial and error or training data (through tuning or
 training the model).
 
-\subsubsection{Overfitting}
+\subsection{Overfitting}
 
 Training a model too hard on a specific data set can cause it
 to 'overfit'. This means it performs very well on the trained
@@ -30,15 +30,47 @@ and then use the remainder to test whether our data is overfitted.
 This can be repeated multiple times with different subsets of the
 original data set. However, this can fail on smaller data sets or
 ones with many parameters.
+\\[\baselineskip]
+We can combine cross-validation with regularisation to produce
+regularising matrices to penalise overfitted parameters.
 
-\newpage
+\subsection{Bayesian Fitting}
+
+Suppose we are interested in some weighting vector $\mathbf{w}$ of 
+a distribution. We consider the prior $\mathbb{P}(\mathbf{w})$
+and posterior $\mathbb{P}(\mathbf{w} \, | \, \textbf{X})$ probability
+of our vector given some sample data $\mathbf{X}, \mathbf{y}$ and 
+relate them using Bayes' theorem: \begin{gather*}
+    \mathbb{P}(\mathbf{w} \, | \, \mathbf{X})
+    = \frac{
+        \mathbb{P}(\mathbf{X} \, | \, \mathbf{w})\mathbb{P}(\mathbf{w})
+    }{\mathbb{P}(\mathbf{X})}.
+\end{gather*} By taking the natural logarithm, we see that:
+\begin{gather*}
+    \ln(\mathbb{P}(\mathbf{w} \, | \, \mathbf{X}))
+    = \ln(\mathbb{P}(\mathbf{X} \, | \, \mathbf{w}))
+    + \ln(\mathbb{P}(\mathbf{w}))
+    + \ln\left(\frac{1}{\mathbb{P}(\mathbf{X})}\right).
+\end{gather*} We consider a fixed data set, so $\mathbf{X}$ is not
+a variable. Assuming we are sampling from the multivariate normal,
+we can calculate 
+$\ln(\mathbb{P}(\mathbf{w} \, | \, \mathbf{X}))$ in terms of
+the equation above and in terms of the multivariate normal
+distribution. Equating these allows us to identify equations
+for the regularised, linear regression mean and variance parameters:
+\begin{align*}
+    \hat\mu &= ((\mathbf{X}^{\text{T}}\mathbf{X})^{-1}
+    + \sigma^2 \text{Var}(\mathbf{w})^{-1})^{-1}\mathbf{X}\mathbf{y}, \\
+    \hat\Sigma &= \sigma^2 ((\mathbf{X}^{\text{T}}\mathbf{X})^{-1}
+    + \sigma^2 \text{Var}(\mathbf{w})^{-1})^{-1}.
+\end{align*} 
 
 \subsection{Deterministic Models}
 
 Deterministic models produce an output without a measure of
 confidence in that output.
 
-\subsubsection{Regression}
+\subsubsection{Simple Linear Regression}
 
 For a two dimensional set of data: \begin{gather*}
     D = \{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}.
@@ -52,7 +84,7 @@ uniquely define the regression line $(y = rx + c)$ on $D$: \begin{align*}
     c &= \bar{y} - r \cdot \bar{x}.
 \end{align*} Outliers have disproportionate effects due to the
 squares used by the measure. 
-
+\\[\baselineskip]
 For a two dimensional set of data: 
 \begin{gather*}
     D = \{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}.
@@ -74,13 +106,79 @@ we can use matrices to calculate our coefficients: \begin{gather*}
         \vdots &            & \vdots &             \\
         1      & \leftarrow & x_n    & \rightarrow
     \end{pmatrix}.
-\end{gather*} We have a least squares linear regression line
-$y = r_0 + r_1x^1 + \cdots + r_nx^n$.
-\\[\baselineskip]
+\end{gather*} 
 Instead of using $k$-dimensional data, we can instead use
 powers of each $x^i$ to form fitted polynomials.
+In this case, we have a least squares linear regression line
+$y = r_0 + r_1x^1 + \cdots + r_nx^n$.
 
 \newpage
+
+\subsubsection{Multivariate Linear Regression}
+
+We consider a set of data with $k$ data points, with
+the $i^{\text{th}}$ data point corresponding to 
+$(\mathbf{x}_i,\mathbf{y}_i)$ the $n$ and $m$-dimensional,
+input and output vectors (resp.). We assume each $\mathbf{y}_i$
+is multivariate normal, conditional on its corresponding 
+$\mathbf{x}_i$ with some $n$-dimensional weight vector 
+$\mathbf{w}$: \begin{gather*}
+    \mathbb{P}(\mathbf{y}_i \, | \, \mathbf{x}_i, \mathbf{w})
+    = f(\mathbf{y}_i),
+\end{gather*} where $f$ is the multivariate normal probability
+density function with mean $\mathbf{x}_i \cdot \mathbf{w}$ and
+variance $\sigma^2$. We can expand this to the full data set 
+with: \begin{gather*}
+    \mathbf{y} = \begin{pmatrix}
+        \leftarrow & \mathbf{y}_1 & \rightarrow \\
+        \leftarrow & \mathbf{y}_2 & \rightarrow \\
+                   & \vdots &          \\
+        \leftarrow & \mathbf{y}_n & \rightarrow
+    \end{pmatrix}
+    \qquad
+    \mathbf{X} = \begin{pmatrix}
+        \leftarrow & \mathbf{x}_1 & \rightarrow \\
+        \leftarrow & \mathbf{x}_2 & \rightarrow \\
+                   & \vdots &                   \\
+        \leftarrow & \mathbf{x}_n & \rightarrow
+    \end{pmatrix}.
+\end{gather*} 
+giving us: \begin{gather} \label{multivarlinreg}
+    \mathbb{P}(\mathbf{y} \, | \, \mathbf{X}, \mathbf{w}) 
+    = f(\mathbf{y}),
+\end{gather} where $f$ is the multivariate normal probability
+density function with mean $\mathbf{X} \cdot \mathbf{w}$ and
+variance $\sigma^2 I$. By using maximum likelihood estimation,
+we can see that our optimal weight vector $\mathbf{\hat{w}}$
+is equal to $(\mathbf{X}^{\text{T}}\mathbf{X})^{-1}
+\mathbf{X}^{\text{T}}\mathbf{y}$.
+
+\subsubsection{Regularisation and Multivariate Linear Regression}
+
+In an effort to penalise exceptionally large and potentially
+overfitted regression weights, we use regularisation.
+We modify the prediction of the distribution of $\mathbf{y}$
+seen in (\ref{multivarlinreg}): \begin{gather*}
+    \mathbb{P}(\mathbf{y} \, | \, \mathbf{X}, \mathbf{w}) 
+    = f(\mathbf{y})
+    \left[
+        e^{-\frac{1}{2}\mathbf{w}^\text{T} \Lambda \mathbf{w}}
+    \right],
+\end{gather*} with diagonal regularisation matrix $\Lambda$ 
+so when we take the natural logarithm: \begin{gather*}
+    \ln(\mathbb{P}(\mathbf{y} \, | \, \mathbf{X}, \mathbf{w})) 
+    = \ln(f(\mathbf{y}))
+        - \frac{1}{2}\mathbf{w}^\text{T} \Lambda \mathbf{w}.
+\end{gather*} Note that where $\Lambda = \text{diag}(\lambda_1,
+\ldots, \lambda_n)$ and $\mathbf{w} = (w_1, \ldots, w_n)$: 
+\begin{gather*}
+    \mathbf{w}^\text{T} \Lambda \mathbf{w} 
+    = \sum_{i = 1}^n \lambda_i \cdot w_i^2.
+\end{gather*} We have the maximum likelihood estimate in this case
+is: \begin{gather*}
+    \mathbf{\hat{w}} = ((\mathbf{X}^{\text{T}}\mathbf{X})^{-1}
+    + \sigma^2 \Lambda)^{-1}\mathbf{X}\mathbf{y}.
+\end{gather*}
 
 \subsection{Probabilistic Models}
 
