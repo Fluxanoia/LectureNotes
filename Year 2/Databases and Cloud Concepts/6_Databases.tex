@@ -168,3 +168,67 @@ projecting, we can perform operations on our columns where
 it makes sense (concatenating first and last names, adding
 one, etc.). While selecting, we can provide constraints on
 what records are selected.
+
+\subsection{Products and Joining}
+
+\subsubsection{Inner Joining}
+
+To get the cartesian product of two tables we can use the following
+command: \begin{lstlisting}
+    SELECT * FROM TABLE1, TABLE2 WHERE TABLE1.id = TABLE2.id;
+\end{lstlisting} This pairs each record in \texttt{TABLE1} with
+a record in \texttt{TABLE2}. We can write this using the 
+\texttt{INNER JOIN}: \begin{lstlisting}
+    SELECT * FROM TABLE1 INNER JOIN TABLE2 ON TABLE1.id = TABLE2.id;
+\end{lstlisting} and can stack this calls too: \begin{lstlisting}
+    SELECT * FROM TABLE1
+        INNER JOIN TABLE2 ON TABLE1.id = TABLE2.id
+        INNER JOIN TABLE3 ON TABLE2.id = TABLE3.id
+        ...
+    WHERE ...;
+\end{lstlisting} 
+
+\newpage
+\noindent
+If the two tables have a field with the same
+name, we can use \texttt{JOIN USING}: \begin{lstlisting}
+    SELECT * FROM TABLE1 
+        INNER JOIN TABLE2
+    USING (id);
+\end{lstlisting} In fact, using \texttt{NATURAL JOIN} SQL will
+search for an identical column automatically: \begin{lstlisting}
+    SELECT * FROM TABLE1 
+        NATURAL JOIN TABLE2;
+\end{lstlisting}
+
+\subsubsection{Outer Joining}
+
+We may potentially join while referencing rows with \texttt{NULL}
+content. This is where we use the \texttt{LEFT}, \texttt{RIGHT}
+and, \texttt{FULL OUTER JOIN}s. The \texttt{LEFT} outer join
+ensures that each record from the left table appears in the
+result and similarly for the \texttt{RIGHT} outer join.
+The \texttt{FULL} outer join ensure each record from both tables
+appears at least once.
+
+\subsubsection{Self Joining}
+
+We can join a table to itself, for example - we may want to
+find all pairs of field subject to a constraint on one
+of their attributes. This can be done using the \texttt{INNER JOIN}:
+\begin{lstlisting}
+    SELECT * FROM TABLE1 T1
+        INNER JOIN TABLE2 T2
+        ON ...
+        WHERE ...;
+\end{lstlisting}
+
+\subsection{Set Operations}
+
+The set operation commands have the form: \begin{lstlisting}
+    SELECT ...
+        [UNION [ALL], INTERSECT, EXCEPT]
+    SELECT ...;
+\end{lstlisting} They all behave as expected, the extra \texttt{ALL}
+condition on the \texttt{UNION} command ensures that duplicates
+are not removed.
