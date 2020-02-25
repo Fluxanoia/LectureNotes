@@ -232,3 +232,67 @@ The set operation commands have the form: \begin{lstlisting}
 \end{lstlisting} They all behave as expected, the extra \texttt{ALL}
 condition on the \texttt{UNION} command ensures that duplicates
 are not removed.
+
+\subsection{Summarising}
+
+\subsubsection{Unique Records}
+
+When selecting data, we can specify that we want the result
+to be \texttt{DISTINCT}: \begin{lstlisting}
+    SELECT DISTINCT ... FROM ...;
+\end{lstlisting}
+
+\subsubsection{Summing Records}
+
+When selecting data, we can return the number of rows
+in the resulting table with \texttt{COUNT}: \begin{lstlisting}
+    SELECT COUNT(...) FROM ...;
+\end{lstlisting} By using \texttt{COUNT} in conjunction
+with \texttt{DISTINCT} can be more informative.
+Additionally, we can use * to count all the rows in a table.
+\\[\baselineskip]
+\texttt{COUNT} always returns a single value (in a row) and
+ignores \texttt{NULL} values.
+
+\subsubsection{Grouping}
+
+We can use \texttt{GROUP BY} to associate \texttt{COUNT}s
+with other values in our table: \begin{lstlisting}
+    SELECT key, COUNT(*) FROM ... GROUP BY key;
+\end{lstlisting} In fact, \texttt{COUNT} is what we would
+call a 'aggregate' function - taking in a list of values
+and returning a single value - and we can replace \texttt{COUNT}
+with other aggregate functions like the average, maximum, minimum
+and, median.
+\\[\baselineskip]
+We have that \texttt{WHERE} clauses must appear before
+aggregation, so cannot refer to aggregates. However,
+we can use \texttt{HAVING} which is capable of refering to
+aggregates and column aliases exclusively.
+
+\subsubsection{Subqueries}
+
+We can utilise subqueries by putting queries in
+parentheses in place of values in queries. We can
+use: \begin{lstlisting}
+    WHERE ...
+        [
+            [NOT] IN,
+            [NOT] EXISTS,
+            ANY,
+            ALL,
+        ];
+\end{lstlisting} with subqueries to filter quickly.
+
+\subsection{Execution Order}
+
+The execution order of SQL queries is detailed below:
+\begin{lstlisting}
+    SELECT ...
+    FROM ...
+    ... JOIN ... 
+    WHERE ...
+    GROUP BY ...
+    HAVING ...
+    ORDER BY ...;
+\end{lstlisting}

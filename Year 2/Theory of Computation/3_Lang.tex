@@ -1,15 +1,13 @@
-\section{Languages}
+\section{Regular Languages}
 
 For a DFA $M$, the language set of $M$ denoted by $L(M)$
 is the maximal set of words in the alphabet of $M$ such that
 for each $w$ in $L(M)$, $M$ accepts $w$. We say $M$ recognises
 a language $A$ if $L(M) = A$.
-
-\subsection{Regular Languages}
-
+\\[\baselineskip]
 A language is regular if it is recognised by some DFA.
 
-\subsubsection{Operations}
+\subsection{Operations}
 
 We can calculate the union and intersection of regular languages
 as expected and for two DFA $M_1$ and $M_2$ with languages
@@ -26,7 +24,7 @@ $B$: \begin{gather*}
 \end{gather*} We have that each of these operations are closed
 in the set of regular languages.
 
-\subsubsection{Regular Expressions}
+\subsection{Regular Expressions}
 
 We have that $R$ is a regular expression over an alphabet
 $\Sigma$ if it has one of the following shapes:
@@ -49,3 +47,19 @@ can be formed as follows: \begin{align*}
     L(R_1^*) &= L(R_1)^*
 \end{align*} We have that a language $L$ is regular
 if and only if $L = L(R)$ for some regular expression $R$.
+
+\subsection{Limitations of Regular Languages}
+
+We can see, for example, that $\{0^k1^k : k \in \mathbb{Z}_{>0}\}$
+over the alphabet $\{0, 1\}$ is not a regular language. By
+using the following Pumping Lemma, we can generate a contradiction.
+
+\subsubsection{The Pumping Lemma}
+
+Supposing $A$ is regular, then there is some $p$ in $\mathbb{Z}_{>0}$
+such that for any word $w$ longer than $p$, we can write $w = xyz$ 
+such that: \begin{itemize}
+    \item For each $k$ in $\mathbb{Z}_{\geq 0}$, $xy^kz$ is in $A$,
+    \item $y$ is non-empty,
+    \item $xy$ is shorter than $p$.   
+\end{itemize}

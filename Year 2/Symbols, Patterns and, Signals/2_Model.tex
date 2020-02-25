@@ -70,7 +70,7 @@ for the regularised, linear regression mean and variance parameters:
 Deterministic models produce an output without a measure of
 confidence in that output.
 
-\subsubsection{Simple Linear Regression}
+\subsubsection{Single Variable Linear Regression}
 
 For a two dimensional set of data: \begin{gather*}
     D = \{(x_1, y_1), (x_2, y_2), \ldots, (x_n, y_n)\}.
@@ -112,8 +112,6 @@ powers of each $x^i$ to form fitted polynomials.
 In this case, we have a least squares linear regression line
 $y = r_0 + r_1x^1 + \cdots + r_nx^n$.
 
-\newpage
-
 \subsubsection{Multivariate Linear Regression}
 
 We consider a set of data with $k$ data points, with
@@ -152,6 +150,8 @@ variance $\sigma^2 I$. By using maximum likelihood estimation,
 we can see that our optimal weight vector $\mathbf{\hat{w}}$
 is equal to $(\mathbf{X}^{\text{T}}\mathbf{X})^{-1}
 \mathbf{X}^{\text{T}}\mathbf{y}$.
+
+\newpage
 
 \subsubsection{Regularisation and Multivariate Linear Regression}
 
