@@ -46,3 +46,39 @@ with identifiers and number literals formed compositionally.
 \\[\baselineskip]
 Lexers are generated using a specification which describes the format of
 tokens.
+
+\subsection{Parsers}
+
+Parsers check that grammar (syntax) is respected, arranging tokens into a syntax tree
+with the leaves as tokens and other nodes as operators.
+\\[\baselineskip]
+Like with lexers, parsers are generated using a specification which describes well-formed 
+streams of tokens.
+
+\subsubsection{Ambiguity}
+
+We say that a grammar is ambigious if it has multiple derivation trees. To circumvent this,
+we assign precedence and associativity to operators. Higher precedence operators appear
+closer to the leaves.
+
+\subsubsection{LR and LL Parsing}
+
+LR parsing parses from left to right, making derivations from the right-most non-terminal
+symbol. This corresponds to bottom-up parsing, which is difficult to hand-write but requires
+no grammar transformations.
+\\[\baselineskip]
+LL parsing parses from left to right, making derivations from the left-most non-terminal
+symbol. This corresponds to top-down parsing, which is easy to hand-write but requires
+grammar transformations.
+
+\subsubsection{Parser State}
+
+The parser state is a stack of values consisting of parser state numbers and grammar symbols,
+terminal and non-terminal. The parser can perform the following actions on the state:
+\begin{itemize}
+    \item Shift, read a symbol in and put it on the stack,
+    \item Reduce, take grammar rule symbols off the stack and 
+        replace with the corresponding non-terminal, then evaluate
+        the semantic action.
+\end{itemize} There can be ambiguity in the decision to shift or reduce, this can be solved by
+altering precedence and associativity.
