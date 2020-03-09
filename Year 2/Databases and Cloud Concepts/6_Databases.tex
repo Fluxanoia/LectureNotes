@@ -270,7 +270,9 @@ aggregation, so cannot refer to aggregates. However,
 we can use \texttt{HAVING} which is capable of refering to
 aggregates and column aliases exclusively.
 
-\subsubsection{Subqueries}
+\newpage
+
+\subsection{Subqueries}
 
 We can utilise subqueries by putting queries in
 parentheses in place of values in queries. We can
@@ -283,6 +285,14 @@ use: \begin{lstlisting}
             ALL,
         ];
 \end{lstlisting} with subqueries to filter quickly.
+
+\subsubsection{Views}
+
+We can use \texttt{CREATE VIEW} to create a reference to a select statement
+which will act like a table: \begin{lstlisting}
+    CREATE VIEW name AS
+        SELECT ... FROM ...;
+\end{lstlisting}
 
 \subsection{Execution Order}
 

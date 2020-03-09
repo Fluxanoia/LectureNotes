@@ -1,0 +1,16 @@
+\section{Context-free Grammars}
+
+We use context-free grammars to generate langauages. A context-free grammar
+is a 4-tuple $G = \langle V, \Sigma, R, S \rangle$ where: \begin{align*}
+    V      &= \text{ the set of variables (non-terminals),}\\
+    \Sigma &= \text{ the set of terminals, disjoint from } V, \\
+    R      &= \text{ the set of rules},\\
+    S      &\in V \text{ is the start variable}.
+\end{align*} We have that each rule is a pair of a variable $A$ and a string $w$
+which it maps to.
+\\[\baselineskip]
+By using the rules of the context-free grammar on the start variable, we can
+generate a language from it: \begin{gather*}
+    L(G) := \{w \in \Sigma^* : S \Rightarrow^* w \},
+\end{gather*} where $\Rightarrow^*$ denotes some amount of applications
+of the rules of $G$ onto $S$.
