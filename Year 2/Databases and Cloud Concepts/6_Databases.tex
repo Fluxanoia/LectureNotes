@@ -306,3 +306,59 @@ The execution order of SQL queries is detailed below:
     HAVING ...
     ORDER BY ...;
 \end{lstlisting}
+
+\subsection{Normalisation}
+
+This eliminates redundancy and dependency which causes anomalies when inserting
+and deleting data. This causes the database to become more complicated but
+allows operations on it to be performed more easily.
+\\[\baselineskip]
+The normal forms are numbered and cumulative.
+
+\subsubsection{1NF - The First Normal Form}
+
+A schema is in 1NF if there are no: \begin{itemize}
+    \item Collection-valued attributes,
+    \item Repeated attribute groups, as in duplicate
+    information in different tables,
+    \item Duplicate rows.
+\end{itemize}
+
+\subsubsection{2NF - The Second Normal Form}
+
+A scheme is in 2NF if it is in 1NF and there are no partial functional
+dependencies from a candidate key to a non-key attribute. This means
+an attribute should not be uniquely defined by a subset of the candidate key.
+
+\subsubsection{3NF - The Third Normal Form}
+
+A schema is in 3NF if it is in 2NF and has no transitive functional dependencies.
+This means there are no set of three attributes $\{A, B, C\}$ where $B$ and $C$
+are non-key and: \begin{gather*}
+    A \rightarrow B \rightarrow C,
+\end{gather*} meaning $A$ is functionally dependent on $B$ which is functionally 
+dependent on $C$. As it doesn't matter if $A$ is key, we can just consider functional
+dependencies between two non-key attributes and just use our candidate key as $A$.
+We can see that the consequence of this is that all non-key attributes depend only on
+the candidate keys.
+\\[\baselineskip]
+When there is such a transitive functional dependency, we can decompose the table
+into two tables without losing any information (lossless decomposition).
+
+\subsubsection{BCNF - Boyce-Codd Normal Form}
+
+A scheme is in BCNF if it is in 3NF and the left side of each non-trivial
+functional dependency is a superkey.
+
+\subsubsection{4NF - The Fourth Normal Form}
+
+A schema is in 4NF if it is in BCNF and for every multi-valued dependency, 
+the dependency is trivial or the left side is a superkey. A multi-valued dependency
+is where when we insert a new record, insert multiple to satisfy the structure of the
+table.
+
+\subsubsection{5NF - The Fifth Normal Form}
+
+A scheme is in 5NF if it is in 4NF and all decompositions of it are not lossless.
+
+
