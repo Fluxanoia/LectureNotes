@@ -14,3 +14,13 @@ generate a language from it: \begin{gather*}
     L(G) := \{w \in \Sigma^* : S \Rightarrow^* w \},
 \end{gather*} where $\Rightarrow^*$ denotes some amount of applications
 of the rules of $G$ onto $S$.
+
+\subsection{Ambiguity}
+
+A derivation of a string $w$ in a grammar $G$ is a
+left-most derivation if, at every step in the derivation,
+the left-most remaining variable is evaluated.
+\\[\baselineskip]
+A string $w$ is generated ambiguously if it has more than
+one unique left-most derivation under $G$. $G$ is ambiguous
+if it generates some string ambiguously.
