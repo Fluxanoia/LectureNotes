@@ -1,6 +1,7 @@
 \section{Context-free Grammars}
 
-We use context-free grammars to generate langauages. A context-free grammar
+We use context-free grammars to generate context-free langauages. 
+A context-free grammar
 is a 4-tuple $G = \langle V, \Sigma, R, S \rangle$ where: \begin{align*}
     V      &= \text{ the set of variables (non-terminals),}\\
     \Sigma &= \text{ the set of terminals, disjoint from } V, \\
@@ -24,3 +25,41 @@ the left-most remaining variable is evaluated.
 A string $w$ is generated ambiguously if it has more than
 one unique left-most derivation under $G$. $G$ is ambiguous
 if it generates some string ambiguously.
+
+\subsection{Push-down Automata}
+
+A push-down automaton is a 6-tuple
+$M = \langle Q, \Sigma, \Gamma, \delta, q_0, F \rangle$ where:
+\begin{align*}
+    Q      &= \text{ the set of states,} \\
+    \Sigma &= \text{ any alphabet,} \\ 
+    \Gamma &= \text{ any alphabet, called the stack alphabet,} \\ 
+    \delta &\in \big\{ 
+        (Q \times (\Sigma \cup \epsilon) \times (\Gamma \cup \epsilon))
+        \to \mathcal{P}(Q \times (\Gamma \cup \epsilon))
+        \big\} \text{ is the the transition function,} \\
+    q_0    &\in Q \text{ is the initial state,} \\
+    F      &\subset Q \text{ is the set of accept states,}
+\end{align*} 
+
+\newpage
+\noindent
+We say that that for a word $w = w_1 \cdots w_n$,
+$M$ accepts $w$ if for a corresponding series of states
+$p_0, \ldots, p_n$ and strings $s_0, \ldots, s_n$ in $\Gamma^*$: 
+\begin{itemize}
+    \item $p_0 = q_0$,
+    \item $s_0 = \epsilon$,
+    \item $p_n \in F$,
+    \item for each $i$ in $[n - 1]$ and for some $x, y$ in $(\Gamma \cup \epsilon)$: 
+    \begin{itemize}
+        \item $(p_{i + 1}, x) \in \delta(p_{i}, w_{i + 1}, y)$,
+        \item $s_i$ is of the form $ys$ and 
+        $s_{i + 1}$ is of the form $xs$ for some $s$ in $\Gamma^*$.
+    \end{itemize} 
+\end{itemize} The language recognised by $M$ is the set of words accepted by it.
+
+\subsubsection{Equivalence of PDA to CFG}
+
+Each PDA has a corresponding CFG which generates its language.
+Similarly, each CFG has a PDA which recognises its generated language.
