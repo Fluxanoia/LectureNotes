@@ -1,0 +1,55 @@
+\section{The Cloud}
+
+Cloud computing is the on-demand delivery of IT resources and applications via the
+Internet. This allows quick deployment of services, optimisation of resources and,
+increased efficiency.
+
+\subsection{Server Scaling}
+
+Servers can scale up or down (vertically); or out or in (horizontally).
+Vertical scaling is about the size of the individual server, this allows code to be
+portable but cannot be done indefinitely. Horizontal scaling is about the number of
+servers which has an incremental cost but comes with the issues of a distributed system.
+\\[\baselineskip]
+This can be performed in tandem with multiple web instances, load handlers, caches and, 
+content distribution networks to increase performance for concurrent users.
+
+\subsection{Services}
+
+Infrastructure, platforms and, software can be provided as a service:
+\begin{center}
+    \begin{tabular}{ c | c | c | c | }
+        \cline{2-4}
+                         & Infrastructure            & Platform                  & Software \\
+        \cline{2-4}
+        \hline
+        \multicolumn{1}{|c|}{Data}             & \multirow{3}{*}{provided} & \multirow{2}{*}{provided} & provided \\
+        \cline{1-1} \cline{4-4}
+        \multicolumn{1}{|c|}{Applications}     &                           &                           & \multirow{3}{*}{rented} \\
+        \cline{1-1} \cline{3-3}
+        \multicolumn{1}{|c|}{OS and Libraries} &                           & \multirow{2}{*}{rented}   & \\
+        \cline{1-1} \cline{2-2}
+        \multicolumn{1}{|c|}{Hardware}         & rented                    &                           & \\
+        \hline
+    \end{tabular}
+\end{center} The advantages of these services are reliability, lower overhead and,
+scalability.
+
+\subsection{Imaging and Configuration Management}
+
+One issue when scaling out is needing to configure new servers with the same
+applications as your current server(s). This can be performed with: \begin{itemize}
+    \item System images which are snapshots of a system that can be applied
+    to another,
+    \item Scripts that perform all the required tasks - this can be somewhat
+    automated by using a configuration manager,
+\end{itemize} these scripts often use package managers like \texttt{apt} and 
+\texttt{maven}.
+
+\subsection{Virtualisation}
+
+Library hell is when two applications that you need to run concurrently require
+different versions of the same library. To solve this problem, we can separate
+problematic applications by putting them in their own virtual machine using
+a hypervisor.
+

@@ -1,0 +1,90 @@
+\section{Data Representation}
+
+Data representation is about extracting
+features from data.
+
+\subsection{Preprocessing}
+
+We perfom preprocessing to remove
+noise, rectify missing values and, remove
+redundancies and inconsistencies.
+We do this by: \begin{itemize}
+    \item Data cleaning, removing noise and
+    inconsistent data,
+    \item Data integration, combining data
+    from multiple sources,
+    \item Data selection, filtering and
+    extracting the desired data,
+\end{itemize} allowing us to transform
+the data so it is ready for analysis.
+
+\subsection{Digital Signal Processing}
+
+Digital signal processing is about processing
+and manipulating signals using digital
+techniques.
+
+\subsubsection{Shannon's Sampling Theorem}
+
+An analogue signal of frequency at most 
+$f_{\text{max}}$ should be sampled at 
+$2 \cdot f_{\text{max}}$ to stop aliasing
+of the reconstructed signal.
+
+\subsubsection{Quantisation}
+
+Quantisation levels are the values you
+are assigning your input signal to in
+order to represent it digitally.
+
+\subsection{Fourier Series}
+
+For some periodic function $f : \mathbb{R} \to \mathbb{R}$ with period $T$,
+we can write $f$ as an infinite sum: \begin{gather*}
+    f(x) = \sum_{n = 0}^\infty 
+        a_n \cos{\left( \frac{2\pi n}{T} x \right)} +
+        b_n \sin{\left( \frac{2\pi n}{T} x \right)},
+\end{gather*} where $(a_n)_{n \in \mathbb{Z}_{\geq 0}}$ and 
+$(b_n)_{n \in \mathbb{Z}_{\geq 0}}$ are sequences in $\mathbb{R}$.
+Also, with some consideration of the properties of sin and cos, we can write
+this as: \begin{gather*}
+    f(x) = a_0 + \sum_{n = 1}^\infty 
+        a_n \cos{\left( \frac{2\pi n}{T} x \right)} +
+        b_n \sin{\left( \frac{2\pi n}{T} x \right)}.
+\end{gather*} The solution for these coefficients is as follows: \begin{align*}
+    a_k &= \frac{2}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} 
+        f(x) \cdot \cos{\left( \frac{2\pi n}{T} x \right)} \, dx \\
+    b_k &= \frac{2}{T} \int_{-\frac{T}{2}}^{\frac{T}{2}} 
+        f(x) \cdot \sin{\left( \frac{2\pi n}{T} x \right)} \, dx,
+\end{align*} or taking $\lambda$ to be our frequency ($\lambda = \frac{1}{T}$): 
+\begin{align*}
+    a_k &= 2\lambda \int_{-\frac{T}{2}}^{\frac{T}{2}} 
+        f(x) \cdot \cos{(2\pi n\lambda x)} \, dx \\
+    b_k &= 2\lambda \int_{-\frac{T}{2}}^{\frac{T}{2}} 
+        f(x) \cdot \sin{(2\pi n\lambda x)} \, dx.
+\end{align*} 
+
+\subsubsection{Fourier Transform}
+
+We can apply the Fourier series process to non-periodic functions too, in that
+case yielding a Fourier transform. In the case of some $f : \mathbb{R} \to
+\mathbb{R}$ (not necessarily periodic): \begin{gather*}
+    F(\lambda) = \int_{-\infty}^\infty f(x) e^{-2\pi\lambda ix} \, dx,
+\end{gather*} is the Fourier transform of $f$, where $i = \sqrt{-1}$.
+We can also inverse this process: \begin{gather*}
+    f(x) = \int_{-\infty}^\infty F(\lambda) e^{2\pi\lambda ix} \, du.
+\end{gather*} For $f : [n] \to [n]$ (discrete), we have the corresponding
+pair: \begin{gather*}
+    F(\lambda) = \frac{1}{n + 1} \sum_{x = 0}^{n} f(x) e^{-\frac{2\pi\lambda i}{n + 1}x}
+    , \qquad
+    f(x) = \sum_{\lambda = 0}^{n} F(\lambda) e^{\frac{2\pi\lambda i}{n + 1}x}.
+\end{gather*} By using Euler's identity, we can expand our expressions using
+$e$ into the sum of sin and cos. Furthermore, we can consider taking the real
+$R$ and imaginary $I$ parts of $F$ to derive quantities: \begin{center}
+    \begin{tabular}{ r c l }
+        $F(\lambda)$                     & = & $R(\lambda) + i \cdot I(\lambda)$ \\
+        Magnitude, $|F(\lambda)|$        & = & $\sqrt{R^2(\lambda) + I^2(\lambda)}$ \\
+        Phase angle, $\phi(\lambda)$  & = & $\tan^{-1}\left( \frac{I(\lambda)}{R(\lambda)} \right)$\\
+        Polar coordinate of $F(\lambda)$ & = & $|F(\lambda)|e^{i\phi(\lambda)}$
+    \end{tabular}
+\end{center}
