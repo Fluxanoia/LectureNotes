@@ -2,13 +2,38 @@
 
 ## Disclaimer
 
-These notes are absolutely NOT guaranteed to be correct, representative of the course, or rigorous. Any result of this is not the author's fault.
+These notes are not necessarily:
 
-## Unsupported Notes
+* correct,
+* consistent,
+* representative of the course as it stands today,
+* rigorous.
+
+Any result of the above is not the author's fault.
+
+## Status of Notes
+
+### In Progress
+
+The following notes are works in progress:
+
+* Year 2 / Symbols, Patterns and, Signals
+
+### Unsupported
 
 The following notes are unsupported and are likely to be out of date:
 
 * Year 1 / *
-* Year 2 / Linear Algebra 2
 * Year 2 / Combinatorics
 * Year 2 / Data Structures and Algorithms
+* Year 2 / Linear Algebra 2
+
+### Incomplete
+
+The following notes are incomplete and will remain so for the foreseeable future (due to
+the impact of CoViD-19 on my second year examinations).
+They are even more likely to contain errors and inconsistencies than the other notes.
+
+* Year 2 / Databases and Cloud Concepts
+* Year 2 / Language Engineering
+* Year 2 / Theory of Computation
