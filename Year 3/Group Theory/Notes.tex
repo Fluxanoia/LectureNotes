@@ -1,0 +1,55 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+
+
+\DeclareMathOperator{\ID}{id}
+\DeclareMathOperator{\Max}{max}
+\DeclareMathOperator{\Min}{min}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Deg}{deg}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Dim}{dim}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Rank}{rank}
+\DeclareMathOperator{\Null}{nullity}
+\DeclareMathOperator{\End}{End}
+
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+\begin{document}
+
+\title{Group Theory Notes}
+\date{}
+\author{by Tyler Wright \\
+  \\
+  github.com/Fluxanoia $\qquad$ fluxanoia.co.uk
+}
+\maketitle
+
+\vfill
+
+\textit{These notes are not necessarily correct,
+consistent, representative of the course as it stands today or, 
+rigorous. Any result of the above is not the author's fault.}
+
+\addtocounter{section}{-1}
+
+\input{0_Notation}
+
+\newpage
+
+\tableofcontents
+
+\include{1_Fundamentals}
+
+\end{document}

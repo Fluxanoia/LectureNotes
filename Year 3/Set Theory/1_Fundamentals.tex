@@ -1,0 +1,47 @@
+\section{Fundamentals}
+
+\subsection{The Set $\omega$}
+
+We have the set of natural numbers, $\mathbb{N} = \{0, 1, 2, \ldots\}$,
+and from this, we define $\omega$: \begin{align*}
+    \omega = \{0, 1, 2, \ldots\},
+\end{align*} where for some $n$ in $\omega$, \begin{align*}
+    n = \{0, 1, 2, \ldots, n - 1\},
+\end{align*} with $0_\omega$ being the empty set. We can go beyond this
+definition, defining: \begin{align*}
+    \omega + 1 &= \{0, 1, 2, \ldots, \omega\}, \\
+    \omega + 2 &= \{0, 1, 2, \ldots, \omega, \omega + 1\}, \\
+    &\ldots \\
+    \omega + n &= \{0, 1, 2, \ldots, \omega, \omega + 1, \ldots \omega + n - 1\}.
+\end{align*}
+
+\subsection{Axiom of Extensionality}
+
+For two sets $a$ and $b$, we have that $a = b$ if and only if for all
+$x$ we have that: \begin{align*}
+    x \in a \Longleftrightarrow x \in b.
+\end{align*} 
+For two classes $A$ and $B$, we have that $A = B$ if and only if for all
+$x$ we have that: \begin{align*}
+    x \in a \Longleftrightarrow x \in b.
+\end{align*}
+
+\subsection{Axiom of Pair Sets}
+
+For any sets $x$ and $y$, there is a set $z = \{x, y\}$. This is the
+(unordered) pair set of $x$ and $y$.
+
+\subsection{Axiom of the Powerset}
+
+For each set $x$, there exists a set which is the collection of the
+subsets of $x$, the powerset $\mathcal{P}(x)$.
+\\[\baselineskip]
+For some set $x$, we have the powerset defined as follows 
+$\mathcal{P}(x) = \{z \text{ such that } z \subseteq x\}$.
+
+\subsection{Axiom of the Empty Set}
+
+There exists a set with no members, the empty set $\emptyset$.
+\\[\baselineskip]
+We have the empty set defined as follows 
+$\emptyset = \{x \text{ such that } x \neq x\}$.
