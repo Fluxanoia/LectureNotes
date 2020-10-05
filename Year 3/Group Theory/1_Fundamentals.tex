@@ -1,2 +1,60 @@
-\section{Fundamentals}
+\section{The Fundamentals}
 
+\subsection{Binary Operations}
+
+A binary operation on a set $X$ is a map $X \times X \to X$.
+\\[\baselineskip]
+Take a binary operation $\ast$ on a set $X$, we say that $\ast$ is 
+associative if for all $x, y, z$ in $X$: \begin{align*}
+    x \ast (y \ast z) = (x \ast y) \ast z.
+\end{align*} Furthermore, we say $e$ in $X$ is an identity element of $\ast$ if
+for all $x$ in $X$: \begin{align*}
+    e \ast x = x \ast e,
+\end{align*} and we say that $y$ in $X$ is the inverse to $x$ if
+$x \ast y$ and $y \ast x$ are both identities of $\ast$.
+
+\subsection{Groups}
+
+A group $(G, \ast)$ is a non-empty set $G$ combined with a binary operation
+$\ast$ such that: \begin{itemize}
+    \item $\ast$ is associative,
+    \item $G$ contains an identity for $\ast$,
+    \item for each element in $G$, there exists some inverse in $G$ 
+        with respect to $\ast$.
+\end{itemize}
+
+\subsubsection{Symmetric Groups}
+
+For a set $X$, the set of bijections $X \to X$ is a group under function
+composition denoted by $\Sym(X)$. We typically write 
+$\Sym(\{1, 2, \ldots, n\})$ as $S_n$.
+
+\subsubsection{Cyclic Groups}
+
+If we consider a regular $n$-gon $P_n$, we take rotations of
+$\frac{2\pi}{n}$ radians about the centre to be $r$ and can define: \begin{align*}
+    C_n = \{e, r, r^2, \ldots, r^{n - 1}\},
+\end{align*} to be the group of rotational symmetries of $P_n$, the cyclic
+group on $P_n$.
+
+\subsubsection{Dihedral Groups}
+
+If we consider again, a regular $n$-gon $P_n$ and take: \begin{align*}
+    r &= \text{a rotation of } \frac{2\pi}{n} \text{ radians about the centre}, \\
+    s &= \text{reflection in some fixed line of symmetry},
+\end{align*} then we have that: \begin{align*}
+    \Sym(P_n) = \{e, r, r^2, \ldots, r^{n - 1}, s, rs, r^2s, \ldots, r^{n - 1}s\},
+\end{align*} called the dihedral group, denoted by $D_{2n}$.
+
+\subsubsection{The Infinite Cyclic/Dihedral Group}
+
+A map $\varphi$ from $\mathbb{Z} \to \mathbb{Z}$ is a symmetry if for some
+$n$ and $m$ in $\mathbb{Z}$: \begin{align*}
+    |\varphi(m) - \varphi(n)| = |m - n|.
+\end{align*} Taking $r$ to be the symmetry $n \mapsto n + 1$, we can define the
+infinite cyclic group: \begin{align*}
+    C_\infty = \{\ldots, r^{-2}, r^{-1}, e, r, r^2, \ldots\}.
+\end{align*} Taking $s$ to be the symmetry $n \mapsto -n$, we can define the
+infinite dihedral group: \begin{align*}
+    D_\infty = \{\ldots, r^{-2}, r^{-1}, e, r, r^2, \ldots, r^{-2}s, r^{-1}s, s, rs, r^2s\}.
+\end{align*}
