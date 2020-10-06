@@ -1,0 +1,48 @@
+\section{The Axioms of Lambda Calculus}
+
+We suppose that we have a countably infinite set of variables $\mathbb{V}$
+(we usually refer to elements of this set as $x$, $y$, $z$, etc.),
+from this we define the alphabet of lambda calculus 
+$\mathbb{V} + \{\lambda, ., (, )\}$. 
+\\[\baselineskip]
+The set of terms of lambda calculus $\Lambda$ is defined inductively 
+by the axioms. A string is a term if and only if there is a proof tree using 
+the following axioms that concludes it is a term.
+
+\subsection{Axiom of Variables}
+
+For some $x$ in $\mathbb{V}$, we have the axiom: \begin{align*}
+    \dfrac{}{x \in \Lambda},
+\end{align*} which says that each variable is a term.
+
+\subsection{Axiom of Application}
+
+We have the axiom: \begin{align*}
+    \dfrac{M \in \Lambda \qquad N \in \Lambda}{(MN) \in \Lambda},
+\end{align*} which says that for some terms $M$ and $N$, $(MN)$ is also
+a term.
+
+\subsection{Axiom of Abstraction}
+
+For some $x$ in $\mathbb{V}$, we have the axiom: \begin{align*}
+    \dfrac{M \in \Lambda}{(\lambda x.M) \in \Lambda},
+\end{align*} which says that for some term $M$, $(\lambda x.M)$ is also
+a term.
+
+\subsection{Subterms}
+
+Subterms of a term $M$ are substrings of $M$ that are themselves terms and
+not captured by a $\lambda$ (directly preceeded by).
+
+\subsection{Syntactical Conventions}
+
+Parentheses allow our lambda calculus to be unambigious, but for the sake
+of simplicity, we will construct conventions that will allow us to retain
+unique meaning with less parentheses: \begin{itemize}
+    \item Omit outermost parentheses,
+    \item Terms associate to the left, $(MNP)$ parses as $((MN)P)$,
+    \item Bodies of abstractions end at parentheses, $(\lambda x.MN)$
+        parses as $(\lambda x.(MN))$,
+    \item Group repeated abstractions, $(\lambda xy.M)$ 
+        parses as $(\lambda x.(\lambda y.M))$.
+\end{itemize}

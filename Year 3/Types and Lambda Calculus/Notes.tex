@@ -1,0 +1,88 @@
+\documentclass[a4paper, 12pt, twoside]{article}
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{arydshln}
+\usepackage{pifont}
+
+\makeatletter
+\newcommand\Pimathsymbol[3][\mathord]{%
+  #1{\@Pimathsymbol{#2}{#3}}}
+\def\@Pimathsymbol#1#2{\mathchoice
+  {\@Pim@thsymbol{#1}{#2}\tf@size}
+  {\@Pim@thsymbol{#1}{#2}\tf@size}
+  {\@Pim@thsymbol{#1}{#2}\sf@size}
+  {\@Pim@thsymbol{#1}{#2}\ssf@size}}
+\def\@Pim@thsymbol#1#2#3{%
+  \mbox{\fontsize{#3}{#3}\Pisymbol{#1}{#2}}}
+\makeatother
+\input{utxmia.fd}
+\DeclareFontShape{U}{txmia}{m}{n}{<->ssub * txmia/m/it}{}
+\DeclareFontShape{U}{txmia}{bx}{n}{<->ssub * txmia/bx/it}{}
+\newcommand{\pilambdaup}{\Pimathsymbol[\mathord]{txmia}{21}}
+\let\oldlambda\lambda
+\let\lambda\pilambdaup
+
+
+\pgfplotsset{compat=1.5.1}
+
+\lstset{frame=none,
+  language=Haskell,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{orange},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=2
+}
+
+\newcommand\doubleplus{+\kern-1.3ex+\kern0.8ex}
+\newcommand\mdoubleplus{\ensuremath{\mathbin{+\mkern-10mu+}}}
+
+\newcommand*{\bfrac}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+
+\begin{document}
+
+\title{Types and Lambda Calculus Notes}
+\date{}
+\author{by Tyler Wright \\
+  \\
+  github.com/Fluxanoia $\qquad$ fluxanoia.co.uk
+}
+\maketitle
+
+\vfill
+
+\textit{These notes are not necessarily correct,
+consistent, representative of the course as it stands today or, 
+rigorous. Any result of the above is not the author's fault.}
+
+% \addtocounter{section}{-1}
+% \input{0_Notation}
+
+\newpage
+
+\tableofcontents
+
+\include{1_Rules}
+
+\end{document}
