@@ -59,6 +59,47 @@ infinite dihedral group: \begin{align*}
     D_\infty = \{\ldots, r^{-2}, r^{-1}, e, r, r^2, \ldots, r^{-2}s, r^{-1}s, s, rs, r^2s\}.
 \end{align*}
 
+\subsubsection{Torsion Groups}
+
+A group is a torsion group if every element has finite order and torsion-free
+if every non-identity element has infinite order.
+
+\subsection{$p$-groups}
+
+For $p$ in $\mathbb{P}$, we say that a group $G$ is a $p$-group if the order
+of each element of $G$ is a power of $p$.
+
+\newpage
+
+\subsection{Subsets of Groups}
+
+\subsubsection{Set Multiplication}
+
+For $X$, $Y$ subsets of a group $(G, \ast)$, we define: \begin{align*}
+    X \ast Y = \{x \ast y : x \in X, y \in Y\},
+\end{align*} the product set of $X$ and $Y$ (which is a subset of $G$).
+We have that $\ast$ is an associative binary operation on 
+$\mathcal{P}(G)$. Additionally, we define: \begin{align*}
+    X^{-1} = \{x^{-1} : x \in X\}.
+\end{align*} However, these definitions do not define a group on
+$\mathcal{P}(G)$ as an inverse does not necessarily exist for each
+element, despite the existence of an identity $\{e_G\}$.
+
+\subsubsection{Centre}
+
+For a group $G$, the centre of $G$ is the set of elements that commute with all
+elements of $G$, denoted by $Z(G)$: \begin{align*}
+    Z(G) = \{z \in G : gz = zg, \forall \, g \in G\}.
+\end{align*} We have that $Z(G)$ is a subgroup.
+
+\subsubsection{Properties of Sets}
+
+For a group $(G, \ast)$ with $X \subseteq G$, we have some defined properties:
+\begin{itemize}
+    \item $X$ is symmetric if for each $x$ in $X$, $x^{-1}$ is also in $X$,
+    \item $X$ is closed under $\ast$ if for all $x$, $y$ in $X$, $x \ast y$ is in $X$.
+\end{itemize}
+
 \subsection{Order}
 
 For a group $G = (X, \ast)$, $G$ has order $|X|$. The order of an element $x$ of
@@ -73,6 +114,8 @@ $X$ is defined as follows: \begin{center}
 \end{enumerate} and if $x$ has infinite order: \begin{enumerate}
     \item[3.] $x^n = x^m$ if and only if $n = m$.
 \end{enumerate}
+
+\newpage
 
 \begin{proof}
     For (1), we take $n = q|x| + r$ for some $q$ in $\mathbb{Z}$, 
@@ -91,16 +134,6 @@ $X$ is defined as follows: \begin{center}
     if $|x| = \infty$ then $m - n = 0$ by the definition of order.
 \end{proof}
 
-\subsubsection{Torsion Groups}
-
-A group is a torsion group if every element has finite order and torsion-free
-if every non-identity element has infinite order.
-
-\subsection{$p$-groups}
-
-For $p$ in $\mathbb{P}$, we say that a group $G$ is a $p$-group if the order
-of each element of $G$ is a power of $p$.
-
 \subsection{Isomorphisms}
 
 For $(G, \ast)$, $(H, \circ)$ groups, an isomorphism $\varphi : G \to H$ is a
@@ -114,14 +147,48 @@ we have that: \begin{itemize}
     \item $(\psi \circ \varphi)$ is an isomorphism,
 \end{itemize} which means $\cong$ is an equivalence relation on any set of groups.
 
-\subsection{Set Multiplication}
+\subsection{Subgroups}
 
-For $X$, $Y$ subsets of a group $(G, \ast)$, we define: \begin{align*}
-    X \ast Y = \{x \ast y : x \in X, y \in Y\},
-\end{align*} the product set of $X$ and $Y$ (which is a subset of $G$).
-We have that $\ast$ is an associative binary operation on 
-$\mathcal{P}(G)$. Additionally, we define: \begin{align*}
-    X^{-1} = \{x^{-1} : x \in X\}.
-\end{align*} However, these definitions do not define a group on
-$\mathcal{P}(G)$ as an inverse does not necessarily exist for each
-element, despite the existence of an identity $\{e_G\}$.
+A subset $X$ of a group $(G, \ast)$ is a subgroup if and only if $(X, \ast)$
+(with $\ast$ restricted to $X$, for which $X$ must be closed under $\ast$) 
+is a group, denoted by $X \leq G$ (or if $X \neq G$, $X < G$).
+\\[\baselineskip]
+Alternatively, we have that $X$ is a subgroup if and only if: \begin{itemize}
+    \item $e_G$ is in $X$,
+    \item $X$ is closed under $\ast$,
+    \item $X$ is symmetric under $\ast$.
+\end{itemize}
+
+\subsubsection{The Product of Subgroups}
+
+For $H$, $K \leq G$, $HK$ is a subgroup of $G$ if and only if $HK = KH$.
+
+\begin{proof}
+    By the alternate definition of a subgroup above, we know that for a subgroup
+    $X$ of $G$, $X$ contains $e_G$, and $X$ is closed and symmetric under $\ast$.
+    \\[\baselineskip]
+    Suppose $HK \leq G$, thus: \begin{align*}
+        HK &= (HK)^{-1} \\
+        &= K^{-1}H^{-1} \\
+        &= KH
+    \end{align*} Now, suppose $HK = KH$: \begin{itemize}
+        \item $e_G$ = $e_Ge_G$ is in $HK$,
+        \item $(HK)(HK) = H(KH)K = H(HK)K = (HH)(KK) = HK$,
+        \item $(HK)^{-1} = K^{-1}H^{-1} = KH = HK$,
+    \end{itemize} so $HK$ is a subgroup.
+\end{proof}
+
+\subsubsection{The Subgroup Test}
+
+For $X$ a subset of a group $G$, $X$ is a subgroup if and only if $X \neq \varnothing$
+and $x^{-1}y$ is in $X$ for each $x$, $y$ in $X$.
+
+\begin{proof}
+    Suppose $X \leq G$, then $e_G$ is in $X$ so $X \neq \varnothing$. For $x$, $y$ in $X$,
+    $x^{-1}$ is also in $X$ by the inverse rule of subgroups, so $x^{-1}y$ is also
+    in $X$ by the closure of subgroups.
+    \\[\baselineskip]
+    Suppose $X \neq \varnothing$ and for each $x$, $y$ in $X$, $x^{-1}y$ is also in $X$.
+    Taking $x$, $y$ in $X$, we have that $x^{-1}x = e_G$ is also in $X$. 
+    Also, $x^{-1}e_G = x^{-1}$ is in $X$. Finally, $xy = (x^{-1})^{-1}y$.
+\end{proof}
