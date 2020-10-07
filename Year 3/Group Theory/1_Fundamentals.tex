@@ -58,3 +58,70 @@ infinite cyclic group: \begin{align*}
 infinite dihedral group: \begin{align*}
     D_\infty = \{\ldots, r^{-2}, r^{-1}, e, r, r^2, \ldots, r^{-2}s, r^{-1}s, s, rs, r^2s\}.
 \end{align*}
+
+\subsection{Order}
+
+For a group $G = (X, \ast)$, $G$ has order $|X|$. The order of an element $x$ of
+$X$ is defined as follows: \begin{center}
+    \begin{tabular}{ r c l l }
+        $|x|$ & $=$ & $\infty$ & if $x^n \neq e_G$ for any $n$ in $\mathbb{N}$, \\
+        $|x|$ & $=$ & $\min\{n \in \mathbb{N} \, | \, x^n = e_G\}$ & otherwise. 
+    \end{tabular}
+\end{center} Taking $x$ in $X$, if $x$ has finite order, then: \begin{enumerate}
+    \item $x^n = e_G$ if and only if $|x|$ divides $n$,
+    \item $x^n = x^m$ if and only if $|x|$ divides $m - n$,
+\end{enumerate} and if $x$ has infinite order: \begin{enumerate}
+    \item[3.] $x^n = x^m$ if and only if $n = m$.
+\end{enumerate}
+
+\begin{proof}
+    For (1), we take $n = q|x| + r$ for some $q$ in $\mathbb{Z}$, 
+    $r$ in $\{0, 1, \ldots, |x| - 1\}$. Thus: \begin{align*}
+        x^n &= x^{q|x|}x^r, \\
+        &= e_G^qx^r, \\
+        &= x^r,
+    \end{align*} and we can see that $x^r = e_G$ if and only if $r = 0$ as $r < |x|$
+    and $|x|$ is minimal. Thus, $x^n = e_G$ if and only if $r = 0$ which occurs
+    if and only if $|x|$ divides $n$.
+    \\[\baselineskip]
+    For (2) and (3), we take $x$ to have any order and consider: \begin{align*}
+        x^n = x^m, \\
+        x^{m - n} = e_G.
+    \end{align*} Thus, if $|x| < \infty$ then $|x|$ divides $m - n$ by (1) and
+    if $|x| = \infty$ then $m - n = 0$ by the definition of order.
+\end{proof}
+
+\subsubsection{Torsion Groups}
+
+A group is a torsion group if every element has finite order and torsion-free
+if every non-identity element has infinite order.
+
+\subsection{$p$-groups}
+
+For $p$ in $\mathbb{P}$, we say that a group $G$ is a $p$-group if the order
+of each element of $G$ is a power of $p$.
+
+\subsection{Isomorphisms}
+
+For $(G, \ast)$, $(H, \circ)$ groups, an isomorphism $\varphi : G \to H$ is a
+bijection such that $\varphi(x \ast y) = \varphi(x) \circ \varphi(y)$ for all
+$x$, $y$ in $G$. If such a map exists, we say $G$ is isomorphic to $H$, denoted
+by $G \cong H$.
+\\[\baselineskip]
+For $G$, $H$, and $K$ groups, $\varphi : G \to H$ and $\psi : H \to K$ isomorphisms,
+we have that: \begin{itemize}
+    \item $\varphi^{-1}$ is an isomorphism,
+    \item $(\psi \circ \varphi)$ is an isomorphism,
+\end{itemize} which means $\cong$ is an equivalence relation on any set of groups.
+
+\subsection{Set Multiplication}
+
+For $X$, $Y$ subsets of a group $(G, \ast)$, we define: \begin{align*}
+    X \ast Y = \{x \ast y : x \in X, y \in Y\},
+\end{align*} the product set of $X$ and $Y$ (which is a subset of $G$).
+We have that $\ast$ is an associative binary operation on 
+$\mathcal{P}(G)$. Additionally, we define: \begin{align*}
+    X^{-1} = \{x^{-1} : x \in X\}.
+\end{align*} However, these definitions do not define a group on
+$\mathcal{P}(G)$ as an inverse does not necessarily exist for each
+element, despite the existence of an identity $\{e_G\}$.
