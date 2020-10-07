@@ -1,0 +1,46 @@
+\section{Alpha Equivalence}
+
+\subsection{Free Variables}
+
+We define the function $FV : \Lambda \to \mathcal{P}(\mathbb{V})$,
+which returns the set of variables contained within a term $M$ that
+are not bound. We define it recursively on the structure of terms: 
+\begin{align*}
+    FV(x) &= \{x\}, \\
+    FV(MN) &= FV(M) \cup FV(N), \\
+    FV(\lambda x.M) &= FV(M) \backslash \{x\}.
+\end{align*} If a term has no free variables we say it is closed,
+and if a term has at least one free variable then we say it is open.
+The set of all closed terms is denoted by $\Lambda^0$.
+
+\subsection{Substitution}
+
+We define 'capture-avoiding' substitution of a term $M$ for a variable $x$
+recursively on the structure of terms: \begin{center}
+    \begin{tabular}{ r c l l }
+        $y[M/x]$             & $=$ & $y$                        & if $y \neq x$, \\
+        $y[M/x]$             & $=$ & $M$                        & if $y = x$, \\
+        $(PQ)[M/x]$          & $=$ & $P[M/x] \, \cup \, Q[M/x]$, & \\
+        $(\lambda y.P)[M/x]$ & $=$ & $\lambda y.P$              & if $y = x$, \\
+        $(\lambda y.P)[M/x]$ & $=$ & $\lambda y.P[M/x]$         & if $y \neq x$ and $y \notin FV(M)$.
+    \end{tabular} 
+\end{center} On the final case, we stipulate that $y$ cannot be a free variable of
+$M$ because otherwise free variables in the substitution could be captured by
+the lambda.
+
+\subsection{Alpha Equivalence}
+
+Suppose we have a term $\lambda x.M$ and $y$ in $\mathbb{V} \, \backslash \, FV(M)$,
+then substituting $y$ for $x$ is a change of bound variable name. If two terms
+can be made identical through changes of bound variable name, they are
+$\alpha$-equivalent. The set of $\lambda$-terms is the set $\Lambda$ under
+$\alpha$-equivalence.
+\\[\baselineskip]
+This equivalence is much more useful to us than string comparision, so for the
+remainder of the notes we will always be referring to $\lambda$-terms as terms.
+
+\subsection{The Variable Convention}
+
+For $M_1, \ldots, M_k$ terms occuring in the same scope, we assume each term
+has distinct bound variables. We can make this assumption as otherwise, we
+can use changes of bound variable names to make it so.
