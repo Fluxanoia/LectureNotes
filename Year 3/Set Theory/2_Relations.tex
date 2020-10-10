@@ -1,0 +1,97 @@
+\section{Relations}
+
+We will first state the significant properties relations
+can have. Taking a relation $R$ on $X$ with $x$, $y$, $z$
+arbitrary in $X$: \begin{center}
+    \begin{tabular}{ c l }
+        \textbf{Name} & \textbf{Property} \\
+        \hline
+        Reflexive & $xRx$ \\
+        Irreflexive & $\neg(xRx)$ \\
+        \\
+        Symmetric & $xRy \Rightarrow yRx$ \\
+        Antisymmetric & $[xRy$ and $yRx] \Rightarrow [x = y]$ \\
+        \\
+        Connected & $[x = y]$ or $[xRy]$ or $[yRx]$ \\
+        \\
+        Transitive & $[xRy$ and $yRz] \Rightarrow [xRz]$ \\
+    \end{tabular}
+\end{center} For example, equivalence relations must satisfy 
+reflexivity, symmetry, and transitivity.
+
+\subsection{Partial Orderings}
+
+We say that a relation $\prec$ on a set $X$ is a (strict) partial
+ordering if it is irreflexive and transitive.
+\\[\baselineskip]
+Similarly, we say that a relation $\preceq$ on a set $X$ is a non-strict
+partial ordering if it is reflexive, antisymmetric, and transitive.
+\\[\baselineskip]
+A partial ordering $(X, \prec)$ is wellfounded if for any non-empty subset
+$Y$ of $X$, $Y$ has a least element under $\prec$.
+
+\vfill
+
+\subsection{Bounding}
+
+For a partially ordered set $(X, \prec)$: \begin{itemize}
+    \item $x_0$ in $X$ is the minimum of $X$ if for all $x$ in $X$,
+        $x_0 \preceq x$,
+    \item $x'$ in $X$ is minimal in $X$ if for all $x$ in $X$,
+        $\neg(x \prec x')$,
+    \item $x_1$ in $X$ is the maximum of $X$ if for all $x$ in $X$,
+        $x \preceq x_1$,
+    \item $x'$ in $X$ is maximal in $X$ if for all $x$ in $X$,
+        $\neg(x' \prec x)$.
+\end{itemize} Taking a non-empty subset $Y$ of $X$, we consider
+the subordering $(Y, \prec)$ and for some $\alpha$ in $X$ we say:
+\begin{itemize}
+    \item $\alpha$ is a lower bound for $Y$ if for all $y$ in $Y$,
+        $\alpha \prec y$,
+    \item $\alpha$ is the infimum of $Y$ if it's a lower bound and
+        for all lower bounds $\lambda$ of $Y$, $\alpha \preceq \lambda$,
+    \item $\alpha$ is an upper bound for $Y$ if for all $y$ in $Y$,
+        $y \prec \alpha$,
+    \item $\alpha$ is the supremum of $Y$ if it's an upper bound and
+        for all upper bounds $\tau$ of $Y$, $\tau \preceq \alpha$.
+\end{itemize}
+
+\subsection{Order Preserving Maps}
+
+We say that $f : (X, \prec_1) \to (Y, \prec_2)$ is an order
+preserving map if for each $x_1$, $x_2$ in $X$: \begin{align*}
+    x_1 \prec_1 x_2 \Longrightarrow f(x_1) \prec_2 f(x_2).
+\end{align*} Two orderings are (order) isomorphic if there is
+a bijective order preserving map between them.
+
+\subsection{Representation Theorem for Partially Ordered Sets}
+
+For a partially ordered set $(X, \prec)$, there is a set 
+$Y \subseteq \mathcal{P}(X)$ which is such that $(X, \preceq)$
+is order isomorphic to $(Y, \subseteq)$.
+
+\begin{proof}
+   For some $x$ in $X$, we set $X^x = \{x' \in X : x' \preceq x\}$,
+   the set of elements preceding or equal to $x$. For $x$, $y$
+   in $X$, $x \neq y$ implies that $X^x \neq X^y$ as these sets
+   contain $x$ and $y$ (resp.) so $x \mapsto X^x$ is bijective.
+   We have that: \begin{align*}
+       x \preceq y \Longleftrightarrow X^x \subseteq X^y,
+   \end{align*} by our definition. Thus, $x \mapsto X^x$ is
+   an order isomorphism.
+\end{proof}
+
+\subsection{Total Orderings}
+
+A relation $\prec$ on a set $X$ is a (strict) total ordering if it
+is a connected strict partial ordering.
+\\[\baselineskip]
+Similarly, we say that a relation $\preceq$ on a set $X$ is a non-strict
+total ordering if it is a connected non-strict partial ordering.
+
+\subsection{Well-orderings}
+
+A relation $\prec$ on a set $X$ is a well-ordering if it is a
+strict total ordering and for any non-empty subset $Y$ of $X$,
+$Y$ has a least element under $\prec$. We denote this with 
+$(X, \prec) \in WO$.
