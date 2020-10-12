@@ -1,0 +1,172 @@
+\usepackage[left = 3cm, right = 3cm]{geometry}
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{ragged2e}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{graphicx}
+\usepackage{arydshln}
+\usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{hhline}
+\usepackage{ifthen}
+
+% Title Page
+%%% title, notation?, inprogress?, unsupported?, unsupported_date, incomplete?
+\newcommand{\fluxtitle}[6]{
+
+    \title{#1 Notes}
+    \date{}
+    \author{by Tyler Wright \\
+      \\
+      github.com/Fluxanoia $\qquad$ fluxanoia.co.uk
+    }
+    \maketitle
+
+    \vfill
+
+    \begin{center}
+
+    \noindent
+    \textit{These notes are not necessarily correct,
+    consistent, representative of the course as it stands today, or 
+    rigorous. Any result of the above is not the author's fault.}
+
+    \ifthenelse{
+        \boolean{#3}
+    }{
+        \vspace{\baselineskip}
+        \noindent
+        \textbf{These notes are in progress.}
+    }{}
+    
+    \ifthenelse{
+        \boolean{#4}
+    }{
+        \vspace{\baselineskip}
+        \noindent
+        \textbf{These notes are marked as unsupported, they were supported
+        up until #5.}
+    }{}
+
+    \ifthenelse{
+        \boolean{#6}
+    }{
+        \vspace{\baselineskip}
+        \noindent
+        \textbf{These notes are incomplete and will remain so for the 
+        foreseeable future.}
+    }{}
+
+    \end{center}
+
+    \ifthenelse{
+        \boolean{#2}
+    }{
+        \addtocounter{section}{-1}
+        \input{0_Notation}
+    }{}
+
+    \newpage
+
+    \tableofcontents
+}
+
+% lstlistings config
+% language
+\newcommand{\lstconfig}[1]{
+    \lstset{frame=none,
+      language=#1,
+      aboveskip=3mm,
+      belowskip=3mm,
+      showstringspaces=false,
+      columns=flexible,
+      basicstyle={\small\ttfamily},
+      numbers=none,
+      numberstyle=\tiny\color{gray},
+      keywordstyle=\color{blue},
+      commentstyle=\color{gray},
+      stringstyle=\color{orange},
+      breaklines=true,
+      breakatwhitespace=true,
+      tabsize=2
+    }
+}
+
+% Math operators
+
+\DeclareMathOperator{\ID}{id}
+
+\DeclareMathOperator{\Max}{max}
+\DeclareMathOperator{\Min}{min}
+
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Sym}{Sym}
+\DeclareMathOperator{\Ord}{ord}
+\DeclareMathOperator{\Mod}{mod}
+\DeclareMathOperator{\Gcd}{gcd}
+\DeclareMathOperator{\Lcm}{lcm}
+
+\DeclareMathOperator{\Deg}{deg}
+
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Dim}{dim}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Rank}{rank}
+\DeclareMathOperator{\Null}{nullity}
+\DeclareMathOperator{\End}{End}
+
+\DeclareMathOperator{\Dom}{dom}
+\DeclareMathOperator{\Ran}{ran}
+\DeclareMathOperator{\Field}{Field}
+
+% Quick Math Fonts
+
+\newcommand{\mb}[1]{\mathbb{#1}}
+\newcommand{\mc}[1]{\mathcal{#1}}
+
+% Nicer symbols
+
+%%% Empty Set
+
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+%%% Lambda
+
+\makeatletter
+\newcommand\Pimathsymbol[3][\mathord]{%
+  #1{\@Pimathsymbol{#2}{#3}}}
+\def\@Pimathsymbol#1#2{\mathchoice
+  {\@Pim@thsymbol{#1}{#2}\tf@size}
+  {\@Pim@thsymbol{#1}{#2}\tf@size}
+  {\@Pim@thsymbol{#1}{#2}\sf@size}
+  {\@Pim@thsymbol{#1}{#2}\ssf@size}}
+\def\@Pim@thsymbol#1#2#3{%
+  \mbox{\fontsize{#3}{#3}\Pisymbol{#1}{#2}}}
+\makeatother
+\input{utxmia.fd}
+\DeclareFontShape{U}{txmia}{m}{n}{<->ssub * txmia/m/it}{}
+\DeclareFontShape{U}{txmia}{bx}{n}{<->ssub * txmia/bx/it}{}
+\newcommand{\pilambdaup}{\Pimathsymbol[\mathord]{txmia}{21}}
+\let\oldlambda\lambda
+\let\lambda\pilambdaup
+
+%%% Double Plus
+
+\newcommand\doubleplus{+\kern-1.3ex+\kern0.8ex}
+\newcommand\mdoubleplus{\ensuremath{\mathbin{+\mkern-10mu+}}}
+
+%%% Fraction without line
+
+\newcommand*{\bfrac}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}

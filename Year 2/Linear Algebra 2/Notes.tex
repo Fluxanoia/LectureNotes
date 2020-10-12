@@ -1,54 +1,9 @@
 \documentclass[a4paper, 12pt, twoside]{article}
-\usepackage[left = 3cm, right = 3cm]{geometry}
-\usepackage[english]{babel}
-\usepackage[utf8]{inputenc}
-\usepackage{mathtools}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{multicol}
-
-
-\DeclareMathOperator{\ID}{id}
-\DeclareMathOperator{\Max}{max}
-\DeclareMathOperator{\Min}{min}
-\DeclareMathOperator{\sgn}{sgn}
-\DeclareMathOperator{\Deg}{deg}
-\DeclareMathOperator{\Char}{char}
-\DeclareMathOperator{\Span}{span}
-\DeclareMathOperator{\Dim}{dim}
-\DeclareMathOperator{\Ker}{Ker}
-\DeclareMathOperator{\Ima}{Im}
-\DeclareMathOperator{\Rank}{rank}
-\DeclareMathOperator{\Null}{nullity}
-\DeclareMathOperator{\End}{End}
+\input{../../Packages.tex}
 
 \begin{document}
 
-\title{Linear Algebra 2 Notes}
-\date{}
-\author{by Tyler Wright \\
-  \\
-  github.com/Fluxanoia $\qquad$ fluxanoia.co.uk
-}
-\maketitle
-
-\vfill
-
-\textit{These notes are not necessarily correct,
-consistent, representative of the course as it stands today or, 
-rigorous. Any result of the above is not the author's fault.}
-\\[\baselineskip]
-\textbf{These notes are marked as unsupported, they were supported
-up until January 2020.}
-
-\addtocounter{section}{-1}
-
-\input{0_Notation}
-
-\newpage
-
-\tableofcontents
+\fluxtitle{Linear Algebra 2}{true}{}{true}{January 2020}{false}
 
 \include{1_Groups_Rings_Fields}
 \include{2_Vector_Spaces}
