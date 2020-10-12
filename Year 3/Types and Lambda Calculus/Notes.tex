@@ -2,20 +2,46 @@
 \usepackage[left = 3cm, right = 3cm]{geometry}
 \usepackage[english]{babel}
 \usepackage[utf8]{inputenc}
+\usepackage{ragged2e}
 \usepackage{mathtools}
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsthm}
 \usepackage{multicol}
 \usepackage{multirow}
-\usepackage{pgfplots}
-\usepackage{pgfplotstable}
+\usepackage{array}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{color}
 \usepackage{graphicx}
 \usepackage{arydshln}
 \usepackage{pifont}
+\usepackage{fancyhdr}
+\usepackage{hhline}
+
+% Math operators
+
+\DeclareMathOperator{\ID}{id}
+\DeclareMathOperator{\Max}{max}
+\DeclareMathOperator{\Min}{min}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\Deg}{deg}
+\DeclareMathOperator{\Char}{char}
+\DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Dim}{dim}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Rank}{rank}
+\DeclareMathOperator{\Null}{nullity}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Sym}{Sym}
+
+% Empty Set Symbol
+
+\let\oldemptyset\emptyset
+\let\emptyset\varnothing
+
+% Nicer Lambda
 
 \makeatletter
 \newcommand\Pimathsymbol[3][\mathord]{%
@@ -35,7 +61,7 @@
 \let\oldlambda\lambda
 \let\lambda\pilambdaup
 
-\pgfplotsset{compat=1.5.1}
+% lstlisting config
 
 \lstset{frame=none,
   language=Haskell,
@@ -54,8 +80,12 @@
   tabsize=2
 }
 
+% Double plus symbol
+
 \newcommand\doubleplus{+\kern-1.3ex+\kern0.8ex}
 \newcommand\mdoubleplus{\ensuremath{\mathbin{+\mkern-10mu+}}}
+
+% Fraction without line
 
 \newcommand*{\bfrac}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
 
