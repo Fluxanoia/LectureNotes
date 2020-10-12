@@ -22,18 +22,18 @@ For each set $x$, there exists a set which is the collection of the
 subsets of $x$, the powerset $\mathcal{P}(x)$.
 \\[\baselineskip]
 For some set $x$, we have the powerset defined as follows 
-$\mathcal{P}(x) = \{z \, | \, z \subseteq x\}$.
+$\mathcal{P}(x) = \{z \, : \, z \subseteq x\}$.
 
 \subsection{Axiom of the Empty Set}
 
 There exists a set with no members, the empty set $\emptyset$.
 \\[\baselineskip]
 We have the empty set defined as follows 
-$\emptyset = \{x \, | \, x \neq x\}$.
+$\emptyset = \{x \, : \, x \neq x\}$.
 
 \subsection{Axiom of Subsets}
 
-For some set $x$, we have that $\{y \in x \, | \, \Phi(y)\}$ is a set
+For some set $x$, we have that $\{y \in x \, : \, \Phi(y)\}$ is a set
 for some well-defined property of sets $\Phi$.
 
 \newpage
@@ -41,10 +41,10 @@ for some well-defined property of sets $\Phi$.
 \subsection{Axiom of Unions}
 
 We have the basic union of two sets $x_1$ and $x_2$: \begin{align*}
-    x_1 \cup x_2 = \{y \, | \, y \in x_1 \text{ or } y \in x_2\},
+    x_1 \cup x_2 = \{y \, : \, y \in x_1 \text{ or } y \in x_2\},
 \end{align*} but for cases where we want to unify the members of the sets in
 a set $X$, we define: \begin{align*}
-    \bigcup X = \{y \, | \, \exists \, x \in X, y \in x\}.
+    \bigcup X = \{y \, : \, \exists \, x \in X, y \in x\}.
 \end{align*} This axiom states that for a set $X$, $\bigcup X$ is a set. 
 
 \subsection{Classes}
@@ -69,7 +69,7 @@ definition, defining: \begin{align*}
 
 \subsection{Russell's Theorem}
 
-We have that $R = \{x \, | \, x \notin x\}$ is not a set.
+We have that $R = \{x \, : \, x \notin x\}$ is not a set.
 \begin{proof}
     Suppose we have a set $z$ such that $z = R$, is $z$ in $R$?
     If we suppose $z$ is in $R$, we have that $z$ is not in $z$ by the definition
@@ -80,7 +80,7 @@ We have that $R = \{x \, | \, x \notin x\}$ is not a set.
 
 \subsection{The Universe of Sets}
 
-We define the universe of sets as $V = \{x \, | \, x = x\}$.
+We define the universe of sets as $V = \{x \, : \, x = x\}$.
 We have that $V$ is a proper class.
 \begin{proof}
     If we suppose $V$ is a set, we apply the axiom of subsets with
