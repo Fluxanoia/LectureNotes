@@ -74,7 +74,9 @@ is order isomorphic to $(Y, \subseteq)$.
    For some $x$ in $X$, we set $X^x = \{x' \in X : x' \preceq x\}$,
    the set of elements preceding or equal to $x$. For $x$, $y$
    in $X$, $x \neq y$ implies that $X^x \neq X^y$ as these sets
-   contain $x$ and $y$ (resp.) so $x \mapsto X^x$ is bijective.
+   contain $x$ and $y$ (resp.) so $x \mapsto X^x$ is injective.
+   This map is surjective trivially (mapping from $X$ to
+   $\{X^x : x \in X\}$).
    We have that: \begin{align*}
        x \preceq y \Longleftrightarrow X^x \subseteq X^y,
    \end{align*} by our definition. Thus, $x \mapsto X^x$ is
@@ -95,3 +97,79 @@ A relation $\prec$ on a set $X$ is a well-ordering if it is a
 strict total ordering and for any non-empty subset $Y$ of $X$,
 $Y$ has a least element under $\prec$. We denote this with 
 $(X, \prec) \in WO$.
+
+\subsection{Ordered Pairs}
+
+For $x$, $y$ sets, the ordered pair of $x$ and $y$ is the set: \begin{align*}
+    \langle x, y \rangle = \{\{x\}, \{x, y\}\}.
+\end{align*}
+
+\subsubsection{Uniqueness of Ordered Pairs}
+
+For $x$, $y$, $u$, $v$ sets, we have that: \begin{align*}
+    \langle x, y \rangle = \langle u, v \rangle 
+    \Longleftrightarrow
+    (x = u) \text{ and } (y = v).
+\end{align*}
+
+\begin{proof}
+    Suppose the former, if $x = y$ then 
+    $\langle x, y \rangle = \{\{x\}, \{x, x\}\} = \{\{x\}\}$.
+    Thus, $\langle u, v \rangle = \{\{u\}\}$ as it is equal to
+    $\langle x, y \rangle$ which has one element, hence $u = v$. 
+    By the Axiom of Extensionality, we have that $x = u$ and so
+    $y = x = u = v$.
+    \\[\baselineskip]
+    If $x \neq y$, then $\langle x, y \rangle$ and $\langle u, v \rangle$
+    both have the same two elements by our assumption (so $u \neq v$).
+    We cannot have $\{x\} = \{u, v\}$ so $\{x\} = \{u\}$ which means
+    $x = u$ by the Axiom of Extensionality. Thus, 
+    $\{u, v\} = \{x, y\} = \{u, y\}$ so $y = v$.
+    \\[\baselineskip]
+    Suppose the latter, then the former holds trivially.
+\end{proof}
+
+\subsubsection{The Ordered $k$-tuple}
+
+We define the $k$-tuple inductively. The $2$-tuple is already defined.
+We define the $3$-tuple: \begin{align*}
+    \langle x_1, x_2, x_3 \rangle &= \langle \langle x_1, x_2 \rangle, x_3 \rangle,
+\end{align*} and for $k$ in $\{3, 4, \ldots\}$: \begin{align*}
+    \langle x_1, x_2, \ldots, x_k \rangle &= \langle \langle x_1, x_2, \ldots, x_{k - 1} \rangle, x_k \rangle.
+\end{align*}
+
+\subsubsection{The Product of Sets}
+
+For $A$, $B$ sets, we define: \begin{align*}
+    A \times B = \{\langle a, b \rangle : a \in A, b \in B\}.
+\end{align*} Similarly to $k$-tuples, for $A_1, A_2, \ldots, A_k$ sets,
+we have $A_1 \times A_2$ defined, so we define: \begin{align*}
+    A_1 \times A_2 \times \cdots \times A_k 
+    &= (A_1 \times A_2 \times \cdots \times A_{k - 1}) \times A_k,
+\end{align*} defining the $k$-product for $k$ in $\{2, 3, \ldots\}$.
+This is not associative.
+
+\subsection{Binary Relations}
+
+A binary relation $R$ is a class of ordered pairs.
+We write $R^{-1} = \{\langle y, x \rangle : \langle x, y \rangle \in R\}$.
+
+\subsubsection{Domain and Range}
+
+For a relation $R$, we define: \begin{align*}
+    \Dom(R) &= \{x : \exists \, y \text{ where } \langle x, y \rangle \in R\}, \\
+    \Ran(R) &= \{y : \exists \, x \text{ where } \langle x, y \rangle \in R\}, \\
+    \Field(R) &= \Dom(R) \cup \Ran(R).
+\end{align*}
+
+\subsection{Functions}
+
+A relation $F$ is a function if for all $x$ in $\Dom(F)$, there is a unique
+$y$ in $\Ran(F)$ with $\langle x, y \rangle$ in $F$.
+\\[\baselineskip]
+If $F$ is a function, it is injective if and only if for all $x$, $x'$:
+\begin{align*}
+    (\langle x, y \rangle \in F \text{ and } \langle x', y \rangle \in F) 
+    \Rightarrow
+    (x = x').
+\end{align*} 
