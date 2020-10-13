@@ -1,0 +1,31 @@
+\section{Transitive Sets}
+
+A set $x$ is transitive if and only if
+for all $y$ in $x$, $y \subseteq x$.
+This can be abbreviated to $\cup x \subseteq x$.
+
+\subsection{The Successor Function}
+
+For a set $x$, $S(x) = x \cup \{x\}$ is the successor of $x$.
+$S(x) = x$ is equivalent to saying $x$ is transitive.
+
+\subsection{Transitive Closure}
+
+For a set $x$, to find a superset of $x$ which is transitive,
+the transitive closure $TC$ of $x$, we recurse: \begin{align*}
+    {\bigcup}^0 x &= x, \\
+    {\bigcup}^{n + 1} x &= \bigcup\left({\bigcup}^n x\right),
+\end{align*} which we can write as: \begin{align*}
+    TC(x) = \bigcup\left\{{\bigcup}^n x : n \in \mb{N}\right\}.
+\end{align*} The transitive closure is always transitive.
+
+\subsubsection{Properties of Transitive Closure}
+
+For a set $x$: \begin{itemize}
+    \item $x \subseteq TC(x)$,
+    \item If $t$ is transitive and $x \subseteq t$ then
+        $TC(x) \subseteq t$. $TC(x)$ is the smallest
+        transitive set containing $x$,
+    \item By the above, $TC(x) = x$ if and only if $x$ is
+        transitive.
+\end{itemize}

@@ -173,3 +173,24 @@ If $F$ is a function, it is injective if and only if for all $x$, $x'$:
     \Rightarrow
     (x = x').
 \end{align*} 
+
+\subsubsection{Ranges and Restrictions}
+
+For $F : X \to Y$: \begin{itemize}
+    \item $F''A = \{y \in Y : \exists \, x \in A \text{ such that } F(x) = y\}$
+        the range of $F$ on $A$,
+    \item $F \upharpoonright A = \{\ang{x, y} \in F : x \in A\}$
+        the restriction of $F$ to $A$.
+\end{itemize} We can see that $F''A = \Ran(F \upharpoonright A)$.
+
+\subsubsection{The Set of Functions}
+
+For $X$, $Y$ sets, we have that ${}^XY = \{F : F : X \to Y\}$.
+
+\subsubsection{Indexed Cartesian Products}
+
+For a set $I$ with each $i$ in $I$ corresponding to a
+non-empty set $A_i$: \begin{align*}
+    \prod_{i \in I} A_i = 
+    \{\text{functions } f : \Dom(f) = I \text{ and } f(i) \in A_i \text{ for all } i \in I\}.
+\end{align*}
