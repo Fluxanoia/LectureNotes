@@ -1,0 +1,69 @@
+\section{Beta}
+
+A term of the form $(\lambda x.M)N$ is called a $\beta$-redex
+and $M[N/x]$ is the contraction of the redex.
+
+\subsection{Beta Reductions}
+
+The one-step $\beta$-reduction relation, denoted by 
+$\to_\beta$, is inductively defined by the redex rule: 
+\begin{align*}
+    \dfrac{}{
+        (\lambda x.M)N \to_\beta M[N/x]
+    },
+\end{align*} the left and right application rules: \begin{align*}
+    \dfrac{M \to_\beta M'}{MN \to_\beta M'N}
+    \qquad
+    \dfrac{N \to_\beta N'}{MN \to_\beta MN'},
+\end{align*} and the abstraction rule:
+\begin{align*}
+    \dfrac{M \to_\beta N}{\lambda x.M \to_\beta \lambda x.N}.
+\end{align*} A term $M$ is said to be in $\beta$-normal form 
+if there is no term $N$ such that $M \to_\beta N$.
+\\[\baselineskip]
+In general, $\beta$-reductions are sequences of consecutive
+one-step $\beta$-reductions: \begin{align*}
+    M_0 \to_\beta M_1 \to_\beta \cdots \to_\beta M_k,
+\end{align*} for some $k$ in $\mb{N}_0$. We say that
+$M_0$ $\beta$-reduces to $M_k$, denoted by 
+$M_0 \bred M_k$.
+\\[\baselineskip]
+If $M \bred N$, we say that $N$ is a
+reduct of $M$, and is a proper reduct if $N \neq M$.
+If we can choose some $\beta$-normal $N$ such that
+$M \bred N$ then $M$ is normalisable.
+If a term admits no infinite $\beta$-reductions then we say
+that it is strongly normalisable. 
+
+\subsection{Standard Combinators}
+
+We have some interesting programs described below:
+\begin{center}
+    \begin{tabular}{ c c l p{1cm} c }
+        $\mathbf{I}$ & $=$ & $\lambda x.x$ 
+        && $\mathbf{I} M \bred M$ \\
+        $\mathbf{K}$ & $=$ & $\lambda xy.x$ 
+        && $\mathbf{K} MN \bred M$ \\
+        $\mathbf{S}$ & $=$ & $\lambda xyz.xz(yz)$ 
+        && $\mathbf{S} MNP \bred MP(NP)$ \\
+        $\omega$ & $=$ & $\lambda x.xx$ 
+        && $\omega M \bred MM$ \\
+        $\Omega$ & $=$ & $\omega\omega$ 
+        && $\Omega \to_\beta \Omega$ \\
+        $\Theta$ & $=$ & $(\lambda xy.y(xxy))(\lambda xy.y(xxy))$ 
+        && $\Theta M \bred M(\Theta M)$
+    \end{tabular}
+\end{center}
+
+\subsection{Confluence of Beta}
+
+For a term $M$, if $M \bred P$ and
+$M \bred Q$ then there exists some
+term $N$ such that $P \bred N$ and
+$Q \bred N$.   
+
+\subsection{Beta Convertibility}
+
+For $M$, $N$ terms, if $M$ and $N$ have a common reduct then
+we say that $M$ and $N$ are $\beta$-convertible, denoted by
+$M =_\beta N$.
