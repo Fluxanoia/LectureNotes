@@ -7,19 +7,17 @@ We say $H$ is a characteristic subgroup if for every $\varphi$ in $\Aut(G)$,
 $\varphi(H) = H$ (denoted by $H \csub G$). We know characteristic subgroups
 are normal as $\Aut(G)$ contains inner automorphisms.
 
-\subsection{Normal Subgroups of Index $2$}
+\subsection{Properties of Normal Subgroups}
 
-For a group $G$ with $H \leq G$ and $[G : H] = 2$, $H \nsub G$.
+We have that for a group $G$, the set of normal subgroups on $G$
+is closed under set multiplication and intersection. For $G$, $H$.
+groups with $\varphi : G \to H$ a homomorphism, we have that: \begin{enumerate}
+    \item If $K \leq G$ then $\varphi(K) \leq H$,
+    \item If $K \nsub G$ then $\varphi(K) \nsub \varphi(G)$,
+    \item If $K \leq H$ then $\varphi^{-1}(K) \leq G$,
+    \item If $K \nsub H$ then $\varphi^{-1}(K) \nsub G$.
+\end{enumerate} Using $K = \{e_H\}$ in (4), we can see that $\Ker(\varphi) \nsub G$.
 
-\begin{proof}
-    Taking $x$ in $G$, suppose $x$ is in $H$, then $xH = H = Hx$.
-    \\[\baselineskip]
-    Suppose $x$ is not in $H$, then $xH \neq H$ as $x$ is in $xH$.
-    Thus, $xH$ and $H$ are disjoint cosets of $H$ and as $[G : H] = 2$, 
-    $G = H \cup xH$ the disjoint union of these cosets. So, 
-    $xH = G \backslash H$. We can apply this reasoning to the right coset
-    and deduce that $xH = Hx$ as required.
-\end{proof}
 
 \subsection{A Test for Normal and Characteristic Subgroups}
 
@@ -41,10 +39,19 @@ Let $G$ be a group with $H \leq G$: \begin{enumerate}
     inverse of an inner automorphism is also an inner automorphism.
 \end{proof}
 
-\subsection{Simple Groups}
+\subsection{Normal Subgroups of Index $2$}
 
-A non-trivial group is simple if its only normal subgroups are itself 
-and the trivial subgroup.
+For a group $G$ with $H \leq G$ and $[G : H] = 2$, $H \nsub G$.
+
+\begin{proof}
+    Taking $x$ in $G$, suppose $x$ is in $H$, then $xH = H = Hx$.
+    \\[\baselineskip]
+    Suppose $x$ is not in $H$, then $xH \neq H$ as $x$ is in $xH$.
+    Thus, $xH$ and $H$ are disjoint cosets of $H$ and as $[G : H] = 2$, 
+    $G = H \cup xH$ the disjoint union of these cosets. So, 
+    $xH = G \backslash H$. We can apply this reasoning to the right coset
+    and deduce that $xH = Hx$ as required.
+\end{proof}
 
 \subsection{Properties of the Centre}
 
@@ -62,3 +69,8 @@ subgroup of $Z(G)$ is normal.
     Taking $H \leq Z(G)$, we know that for all $g$ in $G$, $h$ in $H$,
     $gh = hg$ as $h$ is in $Z(G)$. Thus, $gH = Hg$ for all $g$ in $G$.
 \end{proof}
+
+\subsection{Simple Groups}
+
+A non-trivial group is simple if its only normal subgroups are itself 
+and the trivial subgroup.

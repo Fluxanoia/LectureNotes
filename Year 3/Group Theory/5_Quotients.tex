@@ -1,0 +1,28 @@
+\section{Quotient Groups}
+
+For a group $G$ with $H \nsub G$, $G / H$ is a group under
+set multiplication and for every $a$, $b$ in $G$ satisfies:
+\begin{align*}
+    (aH)(bH) = (ab)H.
+\end{align*} Furthermore, we have $\pi : G \to G/H$ the
+mapping $g \mapsto gH$ is a surjective homomorphism with
+kernel $H$.
+
+\begin{proof}
+    We know set multiplication is associative so, we take 
+    $a$, $b$ in $G$, and see that: \begin{align*}
+        (aH)(bH) &= aHbH \\
+        &= (ab)(HH) \tag{$H$ is normal} \\
+        &= (ab)H. \tag{$H$ is a subgroup} 
+    \end{align*} Thus, $G / H$ is closed under the operation.
+    We take the identity to be $e_GH$ and for $g$ in $G$,
+    the inverse of $gH$ is $g^{-1}H$. So, $G/H$ is a group
+    under set multiplication.
+    \\[\baselineskip]
+    $\pi$ is trivially surjective, for $g$ in $\Ker(\pi)$,
+    $gH = H$ which means $g$ is in $H$. The converse is
+    true as $H$ is a subgroup. Thus, $\pi$ is a homomorphism.
+\end{proof} The group $G / H$ with the operation of set
+multiplication is called the quotient group of $G$ by $H$.
+We call $\pi$ on this quotient group the quotient homomorphism
+from $G$ to $G / H$.
