@@ -1,0 +1,26 @@
+\section{The Homomorphism Theorem}
+
+For $G$, $H$ groups with $\varphi : G \to H$ a homomorphism, we let 
+$\pi : G \to G / \Ker(\varphi)$ be the quotient homomorphism.
+There exists an isomorphism $\psi : G / \Ker(\varphi) \to \Ima(\varphi)$
+such that $\varphi = \psi \circ \pi$.
+\\[\baselineskip]
+If $\varphi$ is injective, this shows that $G \cong \Ima(\varphi)$.
+
+\begin{proof}
+    We set $I = \Ima(\varphi)$ and $K = \Ker(\varphi)$, and define 
+    $\psi : G / K \to I$ by $gK \mapsto \varphi(g)$. We then consider:
+    \begin{align*}
+        (gK = hK) &\Longleftrightarrow (g^{-1}h \in K) \\
+        &\Longleftrightarrow (\varphi(g^{-1}h) = e_H) \\
+        &\Longleftrightarrow (\varphi(g)^{-1}\varphi(h) = e_H) \\
+        &\Longleftrightarrow (\varphi(g) = \varphi(h)).
+    \end{align*} So, the map is well-defined and injective.
+    Furthermore, $\psi(\pi(g)) = \psi(gK) = \varphi(g)$.
+    Consider: \begin{align*}
+        \psi(ghK) &= \varphi(gh) \\
+        &= \varphi(g)\varphi(h) \\
+        &= \psi(gK)\psi(hK),
+    \end{align*} so $\psi$ is a homomorphism and is 
+    trivially surjective as required.
+\end{proof}
