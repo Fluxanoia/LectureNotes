@@ -1,0 +1,65 @@
+\section{Definability}
+
+\subsection{Church Numerals}
+
+The Church numeral for the number $n$ in $\mb{N}_0$, denoted by 
+$\church{n}$, is: \begin{align*}
+    \lambda fx. \underbrace{f(\cdots (f}_{n \text{ times}}  x) \cdots).
+\end{align*} Each Church numeral is already in normal form.
+
+\subsection{Lambda Definability}
+
+A function $f : \mb{N} \times \cdots \times \mb{N} \to \mb{N}$
+is $\lambda$-definable if there exists a $\lambda$-term $F$ that
+satifies: \begin{align*}
+    F \church{n_1} \cdots \church{n_k} =_\beta \church{f(n_1, \ldots, n_k)}.
+\end{align*}
+
+\subsection{Basic Functions}
+
+We have addition, predecessor, subtraction, and the zero 
+conditional defined here:
+\begin{center}
+    \begin{tabular}{ c c l l l }
+        $\mbf{Add}$ & $=$ 
+        & $\lambda yz.\lambda fx.yf(zfx)$ 
+        & $\mbf{Add} \, \church{m} \church{n} =_\beta \church{m + n}$ & \\
+        \\
+        \multirow{2}{*}{$\mbf{Pred}$} & \multirow{2}{*}{$=$}
+        & \multirow{2}{*}{
+            $\lambda z.\lambda fx.z(\lambda gh.h(gf))(\lambda u.x)(\lambda u.u)$
+        }
+        & $\mbf{Pred} \, \church{0} =_\beta \church{0}$ & \\
+        &&
+        & $\mbf{Pred} \, \church{n + 1} =_\beta \church{n}$ & \\ 
+        \\
+        \multirow{2}{*}{$\mbf{Sub}$} & \multirow{2}{*}{$=$}
+        & \multirow{2}{*}{
+            $\lambda mn.n \, \mbf{Pred} \, m$
+        }
+        & $\mbf{Sub} \, \church{m} \church{n} =_\beta \church{0}$ 
+        & if $m - n < 0$\\
+        &&
+        & $\mbf{Sub} \, \church{m} \church{n} =_\beta \church{m - n}$ 
+        & otherwise \\
+        \\
+        \multirow{2}{*}{$\mbf{IfZero}$} & \multirow{2}{*}{$=$}
+        & \multirow{2}{*}{
+            $\lambda \lambda xyz.x(\mbf{K} \, z)y$
+        }
+        & $\mbf{IfZero} \, \church{0} \church{p} \church{q} =_\beta \church{p}$ & \\
+        &&
+        & $\mbf{IfZero} \, \church{n + 1} \church{p} \church{q} =_\beta \church{q}$ & \\
+        \\
+    \end{tabular}
+\end{center}
+
+\subsection{Church Lists}
+
+The Church encoding of a list $xs$ is the term $\church{xs}$ defined
+recursively by: \begin{align*}
+    \church{\mbf{Nil}} &= \lambda cn.n, \\
+    \church{x:xs} &= \lambda cn.c \, \church{x} (\church{xs} \, cn).
+\end{align*} This gives us the definition of $\mbf{Cons}$: \begin{align*}
+    \mbf{Cons} &= \lambda xy.\lambda cn.cx(ycn).
+\end{align*} 
