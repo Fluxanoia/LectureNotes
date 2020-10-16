@@ -1,0 +1,123 @@
+\section{Number Systems}
+
+\subsection{Von Neumann Numerals}
+
+We have the von Neumann numerals defined as: \begin{align*}
+    0 &= \emptyset, \\
+    1 &= \{\emptyset\} = \{0\}, \\
+    2 &= \{\emptyset, \{\emptyset\}\} = \{1, 2\}, \\
+    & \cdots \\
+    n + 1 &= \{0, 1, \ldots, n\}.
+\end{align*}
+
+\subsection{Inductive Sets}
+
+A set $X$ is called inductive if $\emptyset$ is in $X$ and
+for all $x$ in $X$, $S(x)$ is in $X$.
+
+\subsection{Axiom of Infinity}
+
+There exists an inductive set.
+
+\subsection{Natural Numbers}
+
+We say that $x$ is a natural number if for all $X$: \begin{align*}
+    X \text{ is an inductive set} \Rightarrow x \in X.
+\end{align*} We define $\omega$ as the class of natural numbers,
+$\omega = \cap\{X : X \text{ is an inductive set}\}$. We have that
+$\omega$ is the smallest inductive set.
+
+\begin{proof}
+    Let $z$ be an inductive set (by the Axiom of Infinity it 
+    exists). By the Axiom of Subsets, we define a set $N$: 
+    \begin{align*}
+        N = \{x \in z : \forall \, Y, Y \text{ is inductive} \Rightarrow x \in Y \},
+    \end{align*} the elements of $z$ in every inductive set.
+    But $N = \omega$, so $\omega$ is a set.
+    \\[\baselineskip]
+    We know that $\emptyset$ is in every inductive set by definition,
+    so $\emptyset$ is in $\omega$ as it is the intersection of all
+    inductive sets. For any $x$ in $\omega$, we know that for any
+    inductive set $Y$ that $x$ is in $Y$ (by the definition of $\omega$)
+    and thus $S(x)$ is also in $Y$ (by the definiton of an
+    inductive set). Thus, $S(x)$ is also in $\omega$ as $Y$ was chosen
+    arbitrarily. Hence, $\omega$ is an inductive set and the smallest
+    such set by its definition.
+\end{proof}
+
+\newpage
+
+\subsection{Principle of Mathematical Induction}
+
+We suppose $\Phi$ is a well-defined property of sets, then we have that:
+\begin{align*}
+    \Bigl[
+        \Phi(0) \text{ and } 
+        \forall \, x \in \omega \text{ we have that }
+        \Phi(x) \Rightarrow \Phi(S(x)) 
+    \Bigr] 
+    \Rightarrow 
+    \Bigl[
+        \forall \, x \in \omega \text{ we have that } \Phi(x)
+    \Bigr].
+\end{align*}
+
+\begin{proof}
+    We assume the antecedent, it suffices to show that the collection
+    of $x$ in $\omega$ where $\Phi(x)$ holds is inductive (as we
+    assume $\Phi(0)$ holds).
+    \\[\baselineskip]
+    Let $Y = \{x \in \omega : \Phi(x)\}$. As we assumed $\Phi(0)$, we
+    know that $0$ is in $Y$. Then, by the second half of our assumption,
+    we can see that $Y$ is closed under the successor function.
+    Thus, $Y$ is inductive and as $\omega$ is the smallest inductive set,
+    $\omega \subseteq Y$ as required.
+\end{proof}
+
+\subsection{Representation of Natural Numbers}
+
+We have that every natural number is either $0$ or $S(x)$ for some
+natural number $x$.
+
+\begin{proof}
+    Let $Z = \{y \in \omega : y = 0 \text{ or } 
+    \exists \, x \in \omega \text{ such that } S(x) = y\}$. It 
+    suffices to show that $Z$ is inductive. Clearly, $0$ is in $Z$.
+    Suppose we have some $u$ in $Z$, then $u$ is in $\omega$.
+    As $\omega$ is inductive, $S(u)$ is also in $\omega$ so
+    $S(u)$ is in $Z$. Thus, $Z$ is inductive as required.
+\end{proof}
+
+\subsection{Transitivity of $\omega$}
+
+We have that $\omega$ is transitive.
+
+\begin{proof}
+    Let $X = \{n \in \omega : n \subseteq \omega\}$. If $X = \omega$
+    then by definition $\omega$ is transitive. It suffices to show that
+    $X$ is inductive. We know that $\emptyset$ is in $X$ as $0$ is in
+    $\omega$. Taking $n$ in $X$, then clearly $\{n\} \subseteq \omega$
+    as $n$ is in $\omega$. Furthermore, $n \subseteq \omega$ as $n$
+    is in $X$. Thus, $n \cup \{n\} \subseteq \omega$ so $S(n) \in X$
+    which means $X$ is inductive as required.
+\end{proof}
+
+\subsection{Ordering on the Naturals}
+
+For $m$, $n$ in $\omega$, we define: \begin{align*}
+    m < n &\Longleftrightarrow m \in n, \\
+    m \leq n &\Longleftrightarrow m = n \text{ or } m \in n. \\
+\end{align*} By definition, $n < S(n)$.
+
+\newpage
+\noindent
+We have that: \begin{enumerate}
+    \item This ordering is transitive,
+    \item For all $n$ in $\omega$ and for all $m$ we have that
+        $m < n$ if and only if $S(m) < S(n)$,
+    \item For all $n$ in $\omega$, $n \nless n$.
+\end{enumerate}
+
+\begin{proof}
+    (1) This follows from the transitivity of set inclusion.
+\end{proof}
