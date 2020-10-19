@@ -24,3 +24,80 @@ If $\varphi$ is injective, this shows that $G \cong \Ima(\varphi)$.
     \end{align*} so $\psi$ is a homomorphism and is 
     trivially surjective as required.
 \end{proof}
+
+\section{The First Isomorphism Theorem}
+
+For a group $G$ with $N \nsub G$, $\pi : G \to G/N$ the
+quotient homomorphism, and $H \leq G$: \begin{enumerate}
+    \item $H \cap N \nsub H$,
+    \item $\pi(H) \cong H/(H \cap N)$.
+\end{enumerate}
+
+\begin{proof}
+    We write $\pi|_H$ for the restriction of $\pi$ to $H$.
+    Note that $\pi|_H : H \to G/N$ is a homomorphism.
+    Furthermore: \begin{align*}
+        \Ima(\pi|_H) &= \pi(H), \\
+        \Ker(\pi|_H) &= H \cap \Ker(\pi) = H \cap N.
+    \end{align*} As the kernel of a homomorphism
+    is a normal subgroup in the domain, $H \cap N \nsub H$.
+    The homomorphism says that $\pi(H) \cong H / H \cap N$.
+\end{proof}
+
+\newpage
+\noindent
+Additionally, we have that $HN \leq G$ and $\pi(H) = HN/N$.
+\begin{proof}
+    We know that $HN \leq G$ if and only if $HN = NH$
+    which is implied by the normality of $N$.
+    We consider the group: \begin{align*}
+        HN / N &=\Bigl(\{hnN : h \in H, n \in N\}, \times \Bigr), \\
+        &=\Bigl(\{hN : h \in H\}, \times \Bigr), \tag{$N$ is a subgroup} \\
+        &= \pi(H).
+    \end{align*} As required.
+\end{proof} 
+
+\subsection{The Order of the Product}
+
+Let $G$ be a group with $N \nsub G$, and $H \leq G$.
+If $HN$ is finite, then: \begin{align*}
+    |HN| = \frac{|H||N|}{|H \cap N|}.
+\end{align*}
+
+\begin{proof}
+    We can see that: \begin{align*}
+        \frac{|HN|}{|N|} 
+        &= [HN : N] \tag{By Lagrange's Theorem} \\
+        &= |\pi(H)| \tag{By the above} \\
+        &= [H : H \cap N] \tag{By the First Isomorphism Theorem} \\
+        &= \frac{|H|}{|H \cap N|}, \tag{By Lagrange's Theorem}
+    \end{align*} as required.
+\end{proof}
+
+\newpage
+
+\section{The Second Isomorphism Theorem}
+
+For a group $G$ with $N \leq H \leq G$, and $N, H \nsub G$, we have
+that $H/N \nsub G/N$ and $(G / N)/(H / N) \cong G/H$.
+
+\begin{proof}
+    We let $\varphi : G/N \to G/H$ be defined by $gN \mapsto gH$.
+    We have that: \begin{align*}
+        aN = bN \Rightarrow ab^{-1} \in N \subseteq H \Rightarrow aH = bH,
+    \end{align*} so $\varphi$ is well-defined. It is a homomorphism
+    because: \begin{align*}
+        \varphi(aNbN) &= \varphi(abN) \\
+        &= abH \\
+        &= aHbH \\
+        &= \varphi(aN)\varphi(bN),
+    \end{align*} and is trivially surjective. Considering: \begin{align*}
+        \Ker(\varphi) 
+        &= \{gN : gH = eH\} \\
+        &= \{gN : g \in H\} \\
+        &= H/N,
+    \end{align*} we have that $H / N \nsub G / N$ as it is the kernel
+    of a homomorphism and that \linebreak 
+    $(G / N)/(H / N) \cong G / H$ by the
+    homomorphism theorem.
+\end{proof}
