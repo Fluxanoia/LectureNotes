@@ -21,11 +21,26 @@ the transitive closure $TC$ of $x$, we recurse: \begin{align*}
 
 \subsubsection{Properties of Transitive Closure}
 
-For a set $x$: \begin{itemize}
+For a set $x$: \begin{enumerate}
     \item $x \subseteq TC(x)$,
     \item If $t$ is transitive and $x \subseteq t$ then
         $TC(x) \subseteq t$. $TC(x)$ is the smallest
         transitive set containing $x$,
     \item By the above, $TC(x) = x$ if and only if $x$ is
         transitive.
-\end{itemize}
+\end{enumerate}
+
+\begin{proof}
+    (1) This is true as ${\bigcup}^0 = x$.
+    \\[\baselineskip]
+    (2) If $x \subseteq t$ then clearly ${\bigcup}^0 x \subseteq t$.
+    We assume ${\bigcup}^k x \subseteq t$ and use the fact that: \begin{align*}
+        \Bigl[A \subseteq B \text{ with } B \text{ transitive} \Bigr]
+        \Rightarrow
+        \bigcup A \subseteq B,
+    \end{align*} to deduce that ${\bigcup}^{k + 1} x \subseteq t$. By
+    induction we have that $TC(x) \subseteq t$ as required.
+    \\[\baselineskip]
+    (3) By (1), $x \subseteq TC(x)$. If $x$ is transitive, we substitute
+    it for $t$ in (2) and get that $TC(x) \subseteq x$ as required.
+\end{proof}

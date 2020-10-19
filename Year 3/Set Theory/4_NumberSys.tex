@@ -120,4 +120,54 @@ We have that: \begin{enumerate}
 
 \begin{proof}
     (1) This follows from the transitivity of set inclusion.
+    \\[\baselineskip]
+    (2) We take $\Phi(k) = [(m < k) \Rightarrow (S(m) < S(k))]$.
+    We see $\Phi(0)$ holds. Supposing $\Phi(k)$ holds for some
+    $k$, let $m < S(k)$ then $m$ is in $k \cup \{k\}$. If $m$ 
+    is in $k$ then by $\Phi(k)$ we have that $S(m) < S(k) < S(S(k))$.
+    If $m = k$ then $S(m) = S(k) < S(S(k))$. Thus, by induction, 
+    we have our result.
+    \\[\baselineskip]
+    Assume $S(m) < S(n)$, $m$ is in $S(m) = m \cup \{m\}$ which
+    is in $S(n) = n \cup \{n\}$. If $S(m) = n$, then $m$ is in $n$
+    so $m < n$. If $S(m)$ is in $n$ then $m$ is in $n$ as $n$ is
+    transitive.
+    \\[\baselineskip]
+    (3) We know that $0 \nless 0$ as $0 \notin 0$. If $k \notin k$
+    then $S(k) \notin S(k)$ by Part (ii). Thus, 
+    $X = \{k \in \omega : k \notin k\}$ is inductive which makes
+    it equal to $\omega$ as required.
 \end{proof}
+
+\subsection{Total Ordering on the Naturals}
+
+We have that $<$ is a (strict) total ordering on the naturals.
+
+\subsection{Well-ordering Theorem for $\omega$}
+
+Let $X \subseteq \omega$, then either $X = \emptyset$ or there is some
+$n_0$ in $X$ such that for any $m$ in $X$ either $n_0 = m$ or $n_0 < m$.
+
+\begin{proof}
+    Suppose $X \subseteq \omega$ but has no least element.
+    Let $Z = \{k \in \omega : \forall \, n < k, n \notin X\}$.
+    We want to show $Z$ is inductive, meaning $Z = \omega$ and
+    so $X = \emptyset$. 
+    \\[\baselineskip]
+    Vacuously, $0$ is in $Z$. Suppose we have $k$ in 
+    $Z$, we let $n < S(k) = k \cup \{k\}$ and consider: \begin{itemize}
+        \item If $n \in k$ then $n \notin X$ as $n < k \in Z$,
+        \item If $n = k$ then $n \notin X$ because if $n$ was in $X$
+            then it would be the least element of $X$, a contradiction.
+    \end{itemize} Thus, $S(k)$ is in $Z$ so $Z$ is inductive.
+\end{proof}
+
+\subsection{Recursion Theorem on $\omega$}
+
+Let $A$ be any set with $a$ in $A$ and $f : A \to A$ any function.
+There exists a unique function $h : \omega \to A$ such that
+for any $n$ in $\omega$:
+\begin{align*}
+    h(0) &= a, \\
+    h(S(n)) &= f(h(n)).
+\end{align*}
