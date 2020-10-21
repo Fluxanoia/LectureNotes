@@ -1,0 +1,49 @@
+\section{Recursion}
+
+\subsection{The Factorial}
+
+We have that fact is the unique function on the natural
+numbers that satistfies the equation: \begin{align*}
+    F(n) = \begin{cases}
+        1 & \text{if } n = 0 \\
+        n \cdot F(n - 1) & \text{otherwise}.
+    \end{cases}
+\end{align*}
+
+\subsection{Fixed Points}
+
+We say that a term $N$ is a fixed point of another term $M$ if
+$MN =_\beta N$.
+
+\subsection{The First Recursion Theorem}
+
+Every term posesses a fixed point.
+
+\begin{proof}
+    Let $M$ be a term. We define: \begin{align*}
+        \mbf{Y} = \lambda f.(\lambda x.f(xx))(\lambda x.f(xx)),
+    \end{align*} called Curry's Paradoxical Combinator.
+    We will show that $M(\mbf{Y}M) =_\beta \mbf{Y}M$ (so
+    $\mbf{Y}M$ is a fixed point of $M$): \begin{align*}
+        \mbf{Y}M &\to_\beta (\lambda x.M(xx))(\lambda x.M(xx)) \\
+        &\to_\beta M((\lambda x.M(xx))(\lambda x.M(xx))) \\
+        \\
+        M(\mbf{Y}M) &\to_\beta M((\lambda x.M(xx))(\lambda x.M(xx))) \\
+        \\
+        M(\mbf{Y}M) &=_\beta \mbf{Y}M,
+    \end{align*} as required.
+\end{proof}
+
+\subsubsection{Solving Recursive Definitions}
+
+We want to solve for some term $M$: \begin{align*}
+    M x_1 \cdots x_n &=_\beta N[M / y] \\
+    \Longleftrightarrow M &=_\beta \lambda x_1 \cdots x_n.N[M / y] \\
+    \Longleftrightarrow M &=_\beta (\lambda y.
+        \lambda x_1 \cdots x_n.N)M
+\end{align*} so if we find a fixed point of $(\lambda y.
+\lambda x_1 \cdots x_n.N)$ then we have an $M$ which satisfies
+the equation. But, by the first recursion theorem, we can always
+find such $M$.
+Thus, we can just set $M = \mbf{Y}(\lambda y. \lambda x_1 
+\cdots x_n.N)$.

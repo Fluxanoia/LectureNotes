@@ -1,0 +1,26 @@
+\section{Induction}
+
+We let $\Phi$ be some property of terms. We have that
+if the following conditions are met then it follows that
+$\Phi$ holds for all terms: \begin{enumerate}
+    \item For all variables $x$, $\Phi(x)$ holds,
+    \item For all terms $P$, $Q$, if $\Phi(P)$ and
+        $\Phi(Q)$ hold then $\Phi(PQ)$ holds,
+    \item For all terms $P$ and variables $x$, if
+        $\Phi(P)$ holds then $\Phi(\lambda x.P)$ holds.
+\end{enumerate}
+
+\subsection{The Induction Metaprinciple}
+
+For some set $S$ with an inductive definition defined by
+rules $R_1, \ldots, R_k$. The induction principle for proving
+that for all $s$ in $S$, $\Phi(s)$ holds has $k$ clauses
+corresponding to the rules of $S$.
+\\[\baselineskip]
+If a rule $R_i$ has $m$ premises and a side condition $\psi$:
+\begin{align*}
+    \psi \, \dfrac{s_1 \in S \cdots s_m \in S}{s \in S}, \, (R_i)
+\end{align*} then the corresponding clause in the induction
+principle requires that if 
+\linebreak $\Phi(s_1), \ldots, \Phi(s_m), \Phi(\psi)$
+hold then $\Phi(s)$ holds.
