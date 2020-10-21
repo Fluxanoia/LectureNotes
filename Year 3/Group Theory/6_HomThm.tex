@@ -101,3 +101,45 @@ that $H/N \nsub G/N$ and $(G / N)/(H / N) \cong G/H$.
     $(G / N)/(H / N) \cong G / H$ by the
     homomorphism theorem.
 \end{proof}
+
+\section{The Correspondence Theorem}
+
+For a group $G$ with $N \nsub G$ and $\pi : G \to G/N$ the quotient 
+homomorphism. We have that: \begin{enumerate}
+    \item If $K \subseteq G/N$ then: \begin{enumerate}
+        \item $K \leq G/N$ if and only if $K = H/N$ for some
+            $H \leq G$ containing $N$,
+        \item $K \nsub G/N$ if and only if $K = H/N$ for some
+            $H \nsub G$ containing $N$,
+    \end{enumerate}
+    \item If $N \subseteq H \subseteq G$ then: \begin{enumerate}
+        \item $H \leq G$ if and only if $H = \pi^{-1}(K)$
+            for some $K \leq G/N$,
+        \item $H \nsub G$ if and only if $H = \pi^{-1}(K)$
+            for some $K \nsub G/N$.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{proof}
+    We have already proved the ($\Leftarrow$) direction in 
+    (\ref{normal_prop}).
+    \\[\baselineskip]
+    (1)(a)
+    Note that $K = \pi(\pi^{-1}(K))$. By the
+    ($\Rightarrow$) direction of (2)(a), we know that
+    $\pi^{-1}(K)$ is a subgroup of $G$ and contains
+    $N$ as it's a subgroup. So, \linebreak
+    $\pi(\pi^{-1}(K)) = \pi^{-1}(K) / N$.
+    Taking $H = \pi^{-1}(K)$ proves the ($\Rightarrow$) direction of (1)(a).
+    \\[\baselineskip]
+    (1)(b) 
+    To prove the ($\Rightarrow$) direction of (1)(b), we just need to
+    prove that $K \nsub G/N$ implies that $\pi^{-1}(K) \nsub G$ which
+    we proved in the ($\Leftarrow$) direction of (2)(b).
+    \\[\baselineskip]
+    (2)
+    We know that $H$ is a union of left cosets of $N$ as it's a subgroup, 
+    this means that $H = \pi^{-1}(\pi(H))$. We apply (\ref{normal_prop}) 
+    again with $\phi = \pi$ and get the $(\Rightarrow)$ direction of
+    (2).
+\end{proof}
