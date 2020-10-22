@@ -1,0 +1,93 @@
+\section{Direct Products}
+
+We have already seen the outer direct product as: \begin{align*}
+    G_1 \times \cdots \times G_n = \{(g_1, \ldots, g_n) : g_i \in G_i\},
+\end{align*} for groups $G_1, \ldots, G_n$ which forms a group with
+component-wise group operations.
+\\[\baselineskip]
+For a group $G$ with $H_1, \ldots, H_n \nsub G$. We say $G$ is the
+inner direct product of $H_1, \ldots, H_n$ if: \begin{itemize}
+    \item $G = H_1 \times \cdots \times H_n$,
+    \item $H_i \cap (H_1 \times \cdots \times H_{i - 1} 
+        \times H_{i + 1} \times \cdots \times H_n) = \{e_G\}$ 
+        for all $i$ in $[n]$.  
+\end{itemize}
+
+\subsection{Component Groups}
+
+We let $G = G_1 \times \cdots \times G_n$, for each $i$ in $[n]$, we
+set: \begin{align*}
+    \widehat{G_i} = \{(e, \ldots, e, g_i, e, \ldots, e) : g_i \in G_i\}.
+\end{align*} We have that: \begin{enumerate}
+    \item For each $i$ in $[n]$, $\widehat{G_i} \nsub G$,
+    \item For each $i$ in $[n]$, $\widehat{G_i} \cong G_i$,
+    \item $G$ is the inner direct product of 
+        $\widehat{G_1}, \ldots, \widehat{G_n}$.
+\end{enumerate}
+
+\begin{proof}
+    (1) We can see that: \begin{align*}
+        \psi((g_1, \ldots, g_n)) = (g_1, \ldots, g_{i - 1}, e, g_{i + 1}, \ldots g_n),
+    \end{align*} is a homomorphism with kernel $\widehat{G_i}$. Thus,
+    $\widehat{G_i} \nsub G$.
+    \\[\baselineskip]
+    (2) We can see that: \begin{align*}
+        \varphi_i((e, \ldots, e, g_i, e, \ldots, e)) = g_i,
+    \end{align*} is an isomorphism. Thus, $\widehat{G_i} \cong G_i$.
+    \\[\baselineskip]
+    (3) We have that $G = \widehat{G_1} \cdots \widehat{G_n}$ as:
+    \begin{align*}
+        (g_1, \ldots, g_n)
+        &= (g_1, e, \ldots)(e, g_2, e, \ldots)
+        \cdots (e, \ldots, e, g_n).
+    \end{align*} Furthermore, $\widehat{G_i} \cap G'_i = \{e\}$ where
+    $G' = \widehat{G_1}, \ldots, \widehat{G_{i - 1}}, \widehat{G_{i + 1}}, 
+    \ldots G_n$ as the elements of $G'_i$ are of the form
+    $(g_1, \ldots, g_{i - 1}, e, g_{i + 1}, \ldots, g_n)$ whereas elements
+    of $\widehat{G_i}$ are of the form $(e, \ldots, e, g_i, e, \ldots, e)$.
+    Thus, the only element in common is $e_G$.
+\end{proof}
+
+\subsection{The Commutator of Normal Subgroups}
+
+For a group $G$ with $H, K \nsub G$, $[H, K] \subseteq H \cap K$.
+
+\begin{proof}
+    For $h$ in $H$ and $k$ in $K$, $[h, k] = h^{-1}k^{-1}hk$.
+    But: \begin{itemize}
+        \item $h^{-1}k^{-1}h$ is in $h^{-1}Kh = K$,
+        \item $k^{-1}hk$ is in $k^{-1}Hk = H$,
+    \end{itemize} so $[h, k]$ is in $H \cap K$.
+\end{proof} 
+
+\noindent
+Furthermore, if $G = H_1 \times \cdots \times H_n$
+is an inner direct product, then for $i \neq j$ both in $[n]$,
+we have that the elements of $H_i$ commute with the elements of
+$H_j$.
+
+\begin{proof}
+    The definition of the inner direct product means that
+    $H_i \cap H_j = \{e\}$. This means that $[H_i, H_j] = \{e\}$
+    as required.
+\end{proof}
+
+\subsection{Isomorphism between Products}
+
+For a group $G$ the inner direct product of subgroups $H_1, \ldots, H_n$,
+$G \cong H_1 \times \cdots \times H_n$.
+
+\begin{proof}
+    We define $\varphi : H_1 \times \cdots \times H_n \to G$ by: \begin{align*}
+        \varphi((h_1, \ldots, h_n)) = h_1 \cdots h_n,
+    \end{align*} which is a homomorphism by the commutativity of
+    $H_i$ and $H_j$ (where $i \neq j$). The definition of the
+    inner direct product implies that it is surjective. We
+    take $(h_1, \ldots, h_n) \in \Ker(\varphi)$: \begin{align*}
+        &h_1 \cdots h_n = e \\
+        \Longrightarrow \qquad& h_i^{-1} = h_1 \cdots h_{i - 1}h_{i + 1} \cdots h_n \\
+        \Longrightarrow \qquad& h_i^{-1} \in H_i \cap (H_1 \cdots H_{i - 1} H_{i + 1} \cdots H_n) \\
+        \Longrightarrow \qquad& h_i^{-1} = e.
+    \end{align*} Thus, as $i$ was chosen arbitrarily, $(h_1, \ldots, h_n) = (e, \ldots, e)$.
+    Thus, $\varphi$ is an isomorphism.
+\end{proof}
