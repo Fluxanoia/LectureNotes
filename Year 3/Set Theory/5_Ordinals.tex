@@ -1,0 +1,74 @@
+\section{Well-orderings and Ordinals}
+
+\subsection{The Principle of Transfinite Induction}
+
+Let $\ang{X, \prec}$ be a well-ordering. We have that: \begin{align*}
+    [\forall \, x \in X, 
+        (\forall \, y \prec x, \Phi(y)) \Rightarrow \Phi(x)
+    ] \Rightarrow \forall \, x \in X, \Phi(x).
+\end{align*}
+
+\begin{proof}
+    We appeal to the contrary and assume the antecedent
+    but suppose that $\emptyset \neq Z = \{x \in X : \neg \Phi(x)\}$.
+    As $\ang{Z, \prec}$, there is $\prec$-least element $z_0$.
+    But then for all $x \prec z_0$, $\Phi(x)$ holds. But, by the
+    antecedent, this means $\Phi(z_0)$ holds, a contradiction.
+\end{proof}
+
+\subsection{Initial Segments}
+
+For a well-ordering $\ang{X, \prec}$, the $\prec$-initial
+segment of some element $z$ in $X$ is the set of predecessors of $z$,
+denoted by $X_z$. Note that $X_z$ does not contain $z$.
+
+\subsection{Order Preserving Maps on Well-orderings}
+
+For a well-ordering $\ang{X, \prec}$ with $f : \ang{X, \prec} 
+\to \ang{X, \prec}$ an order preserving map, we have that
+for all $x$ in $X$, $x \prec f(x)$.
+
+\begin{proof}
+    We appeal to the contrary, that for some $x$ in $X$, 
+    we have $f(x) \prec x$.
+    As $\ang{X, \prec}$ is a well-ordering, there's a
+    $\prec$-least $x_0$ in $X$ with the property that 
+    $f(x_0) \prec x_0$. But $f(f(x_0)) \prec f(x_0)$
+    as $f$ is order preserving. Thus, a contradiction
+    to the minimality of $x_0$.
+\end{proof}
+
+\subsubsection{Uniqueness of Order Isomorphisms}
+
+For well-orderings $\ang{X, \prec_x}$, $\ang{Y, \prec_y}$
+with $f : \ang{X, \prec_x} \to \ang{Y, \prec_y}$ an
+order isomorphism. We have that $f$ is unique.
+
+\begin{proof}
+    Suppose we have two such isomorphisms $f$ and $g$.
+    We have that $(f^{-1} \circ g)$ is also an order
+    isomorphism. Taking $x$ arbitrary in $X$: \begin{align*}
+        &x \preceq_x (f^{-1} \circ g)(x) \\
+        \Longrightarrow \qquad & f(x) \preceq_y f(f^{-1} \circ g)(x) \\
+        \Longrightarrow \qquad & f(x) \preceq_y g(x).
+    \end{align*} By applying this argument again with the roles
+    of $f$ and $g$ swapped, we can also see that $g(x) \preceq_y f(x)$.
+    Thus, $f(x) = g(x)$.
+    \\[\baselineskip]
+    In particular, if $\ang{X, \prec_x} = \ang{Y, \prec_y}$
+    then this isomorphism is the identity map.
+\end{proof}
+
+\subsection{Non-existence of Order Isomorphisms to Segments}
+
+A well-ordered set is not order isomorphic to any segment of itself.
+
+\begin{proof}
+    We appeal to the contrary and suppose there is such
+    an order isomorphism on a well-ordering $\ang{X, \prec}$
+    to $\ang{X_z, \prec}$ for some $z$ in $X$.
+    But, we have that $x \preceq f(x)$ for any $x$ in $X$
+    and $f(z) \prec z$ as $f(z)$ is in $X_z$.
+    Thus, we have that $z \preceq f(z)$ and $z \succ f(z)$,
+    a contradiction.
+\end{proof}
