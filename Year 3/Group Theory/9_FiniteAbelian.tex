@@ -1,0 +1,34 @@
+\section{Finitely Generated Abelian Groups}
+
+We will write $\mb{Z}^n = \{(m_1, \ldots, m_n) : m_1, \ldots, m_n \in \mb{Z}\}$
+and $e_i = (0, \ldots, 1, \ldots, 0) \in \mb{Z}^n$ with $1$ in the 
+$i^{\text{th}}$ entry. These are the standard generators for $\mb{Z}^n$.
+\\[\baselineskip]
+For some $n$ in $\mb{N}$, we write $\mb{Z}_n$ to be the integers
+modulo $n$ which is a group under addition. Additionally, $n\mb{Z}$
+is a subgroup of $\mb{Z}$ and $\mb{Z}_n \cong \mb{Z}/n\mb{Z}$.
+
+\subsection{Classification of Cyclic Groups}
+
+For a cyclic group $G$, if $|G| = n$ finite, we have that $G \cong \mb{Z}_n$.
+Otherwise, $G \cong \mb{Z}$.
+
+\begin{proof}
+    We choose $x$ as a generator of $G$. We take $\varphi : \mb{Z} \to G$
+    to be defined as $\varphi(m) = x^m$. We can see that $\varphi$ is a
+    surjective homomorphism. If $|x| = \infty$ then $\Ker(\varphi) = \{0\}$,
+    otherwise, $\Ker(\varphi) = |x|\mb{Z}$. By the homomorphism theorem:
+    \begin{align*}
+        G = \Ima(\varphi) \cong \mb{Z}/\Ker(\varphi).
+    \end{align*} The result follows as $\mb{Z}/\Ker(\varphi) = \mb{Z}$
+    if $|x| = \infty$ and $\mb{Z}_{|x|}$ otherwise.
+\end{proof}
+
+\subsection{Fundamental Theorem of Finitely Generated Abelian Groups}
+
+Suppose $G$ is a finitely generated abelian group, there exists
+non-negative integers $n$ and $k$, primes $p_1, \ldots, p_k$, and
+natural numbers $n_1, \ldots, n_k$ such that: \begin{align*}
+    G \cong \mb{Z}_{p_1^{m_1}} \oplus \cdots 
+    \oplus \mb{Z}_{p_k^{m_k}} \oplus \mb{Z}^n
+\end{align*}

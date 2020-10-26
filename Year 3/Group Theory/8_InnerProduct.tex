@@ -11,7 +11,7 @@ inner direct product of $H_1, \ldots, H_n$ if: \begin{itemize}
     \item $H_i \cap (H_1 \times \cdots \times H_{i - 1} 
         \times H_{i + 1} \times \cdots \times H_n) = \{e_G\}$ 
         for all $i$ in $[n]$.  
-\end{itemize}
+\end{itemize} We have that $|G| = \prod_i H_i$.
 
 \subsection{Component Groups}
 
@@ -90,4 +90,64 @@ $G \cong H_1 \times \cdots \times H_n$.
         \Longrightarrow \qquad& h_i^{-1} = e.
     \end{align*} Thus, as $i$ was chosen arbitrarily, $(h_1, \ldots, h_n) = (e, \ldots, e)$.
     Thus, $\varphi$ is an isomorphism.
+\end{proof}
+
+\subsection{Criteria for Inner Direct Products}
+
+\subsubsection{By Unique Compositions}
+
+For a group $G$ with $H_1, \ldots, H_n$ normal subgroups of $G$,
+$G$ is an inner direct product of $H_1, \ldots, H_n$ if and
+only if for all $g$ in $G$, there exists a unique $h_i$ in each 
+$H_i$ such that $g = \prod_ih_i$.
+
+\begin{proof}
+    ($\Rightarrow$)
+    By the definition, we have $g = \prod_ih_i$ for some $h_i$
+    in each $H_i$ so it suffices to show this product is unique. 
+    We suppose that: \begin{align*}
+        \prod_i k_i = g = \prod_i h_i,
+    \end{align*} for some $k_i$, $h_i$ in each $H_i$.
+    We fix $i$ and see that: \begin{align*}
+        e &= g^{-1}g \\
+        &= h_n^{-1} \cdots h_1^{-1} k_1 \cdots k_n \\
+        &= h_1^{-1}k_1 \cdots h_n^{-1}k_n \\
+        &= h_i^{-1}k_i h_1^{-1}k_1 \cdots 
+            h_{i - 1}^{-1}k_{i - 1} h_{i + 1}^{-1}k_{i + 1} \cdots
+            h_n^{-1}k_n \\
+        k_i^{-1}h_i &= h_1^{-1}k_1 \cdots 
+            h_{i - 1}^{-1}k_{i - 1} h_{i + 1}^{-1}k_{i + 1} \cdots
+            h_n^{-1}k_n \\
+        &\in H_i \cap (H_1 \cdots H_{i - 1}H_{i + 1} \cdots H_n) \\
+        &= \{e\}.
+    \end{align*} as $G$ is the direct product of $H_1, \ldots, H_n$
+    which means elements from differing subgroups commute. Thus,
+    for each $i$, $h_i = k_i$.
+    \\[\baselineskip]
+    ($\Leftarrow$) Clearly $G = H_1 \cdots H_n$ so it suffices to
+    show that: \begin{align*}
+        H_i \cap (H_1 \cdots H_{i - 1}H_{i + 1} \cdots H_n) = \{e\}
+    \end{align*} for each $i$. We take $x$ in this intersection: \begin{align*}
+        x = h_i 
+        &= h_1 \cdots h_{i - 1} h_{i + 1} \cdots h_n \\
+        e \cdots e h_i e \cdots e 
+        &= h_1 \cdots h_{i - 1} e h_{i + 1} \cdots h_n,
+    \end{align*} which, by the uniqueness of the composition 
+    of $x$, means that $x = e$ as required.
+\end{proof} 
+
+\newpage
+
+\subsubsection{By the Size}
+
+For $G$ a finite group with $H_1, \ldots, H_n \nsub G$ such that
+$G = H_1 \cdots H_n$. $G$ is an inner direct product if and only if
+$|G| = \prod_i |H_i|$.
+
+\begin{proof}
+    ($\Rightarrow$) As $G$ is an inner direct product we have the result.
+    \\[\baselineskip]
+    ($\Leftarrow$) As $|G| = \prod_i |H_i|$, each $h_1 \cdots h_n$
+    product of elements in $H_1 \cdots H_n$ are distinct. By the above,
+    this means $G$ is an inner direct product.
 \end{proof}
