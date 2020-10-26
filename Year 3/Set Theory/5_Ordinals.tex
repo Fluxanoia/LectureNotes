@@ -59,7 +59,7 @@ order isomorphism. We have that $f$ is unique.
     then this isomorphism is the identity map.
 \end{proof}
 
-\subsection{Non-existence of Order Isomorphisms to Segments}
+\subsubsection{Non-existence of Order Isomorphisms to Segments}
 
 A well-ordered set is not order isomorphic to any segment of itself.
 
@@ -71,4 +71,106 @@ A well-ordered set is not order isomorphic to any segment of itself.
     and $f(z) \prec z$ as $f(z)$ is in $X_z$.
     Thus, we have that $z \preceq f(z)$ and $z \succ f(z)$,
     a contradiction.
+\end{proof}
+
+\subsubsection{Order Isomorphism to Set of Segments}
+
+A well-ordered set $\ang{X, \prec}$ is order isomorphic to the set
+of its initial segments ordered by $\subset$.
+
+\begin{proof}
+    We let $Y = \{X_a : a \in X\}$, we have that $\varphi$
+    characterised by $a \mapsto X_a$ is an injective map
+    as segments do not contain the element which determines it.
+    As $a \prec b \Leftrightarrow X_a \subset X_b$, the mapping
+    is order preserving.
+\end{proof}
+
+\subsection{Ordinal Numbers}
+
+We say that $\ang{X, \in}$ is an ordinal if and only it
+$X$ is transitive, and where $\prec = \in$, 
+$\ang{X, \prec}$ is a well-ordering. We have that
+$\ang{\omega, \in}$ is an ordinal.
+
+\subsubsection{Elements and Segments}
+
+For an ordinal $\ang{X, \in}$, then every element $z$ in $X$
+is identical to $X_z$.
+
+\begin{proof}
+    Suppose $X$ is transitive and $\in$ well-orders $X$.
+    Taking $z$ in $X$: \begin{align*}
+        w \in X_z \qquad
+        \Longleftrightarrow \qquad&
+        w \in X \text{ and } w \in z \\
+        \Longleftrightarrow \qquad&
+        w \in z \tag{as $z \subseteq X$},
+    \end{align*} thus, $X_z = z$ as required.
+\end{proof} 
+\noindent
+So, for any elements $a$, $b$ of an ordinal: \begin{align*}
+    a \in b \Longleftrightarrow a \subset b 
+    \Longleftrightarrow X_a \subset X_b.
+\end{align*}
+
+\subsubsection{Subsets and Segments}
+
+For an ordinal $\ang{X, \in}$ with $Y \subset X$, if $\ang{Y, \in}$
+is also an ordinal, then $Y$ is an $\in$-initial segment of $X$.
+
+\begin{proof}
+    Taking $a$ in $Y$ as supposed, as $Y$ is an ordinal so $Y_a = a$.
+    As $Y \subset X$, $a$ is in $X$ so $X_a = a$. Thus, $X_a = Y_a$.
+    Furthermore, as $Y \neq X$, we consider 
+    $c = \inf\{z \in X : z \notin Y\}$ which exists as the set is
+    non-empty and $\ang{X, \in}$ is a well-ordering. Hence, $Y = X_c$.
+\end{proof}
+
+\subsubsection{Segments}
+
+For an ordinal $\ang{X, \in}$ any $\in$-initial segment of 
+$\ang{X, \in}$ is an ordinal.
+
+\begin{proof}
+    We take some $u$ in $X$ and $w$ in $X_u$. 
+    As $\in$ well-orders $X$, it well-orders
+    any subset of $X$ so $\ang{X_u, \in}$ is a well-ordering. 
+    We have that: \begin{align*}
+        t \in w \in u \Longrightarrow t \in u = X_u,
+    \end{align*} thus $X_u$ is transitive as required.
+\end{proof}
+
+\subsubsection{The Intersection of Ordinals}
+
+For ordinals $X$, $Y$, $X \cap Y$ is also an ordinal.
+
+\begin{proof}
+    We take $\in$ to be the ordering on $X$.
+    We know that $X \cap Y$ is transitive as $X$ and $Y$
+    are transitive. Any subset of $X$ is a well-ordering
+    under $\in$, in particular $X \cap Y$
+    is well-ordered by $\in$. 
+\end{proof}
+
+\subsection{Classification Theorem for Ordinals}
+
+For two ordinals $X$, $Y$, either $X = Y$ or one is an initial
+segment of the other (or equivalently a member).
+
+\begin{proof}
+    Suppose that $X \neq Y$. We know that $X \cap Y$ is an ordinal
+    also. We have two cases.
+    \\[\baselineskip]
+    If $X = X \cap Y$ or $Y = X \cap Y$, one must
+    be an initial segment of the other as it must
+    be a proper subset under our assumption $X \neq Y$.
+    \\[\baselineskip]
+    If $X \cap Y$ is a proper subset of $X$ and $Y$,
+    it is an initial segment of $X$ and $Y$ simultaneously
+    we set $X \cap Y = X_a = Y_b$ for some $a$ in $X$ and
+    $b$ in $Y$. But, we know that as $X$ and $Y$ are ordinals,
+    $a = X_a = Y_b = b$. However, this means: \begin{align*}
+        a = b \in X \cap Y = X_a,
+    \end{align*} but $a \notin X_a$, a contradiction.
 \end{proof}
