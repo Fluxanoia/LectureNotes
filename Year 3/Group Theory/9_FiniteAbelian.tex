@@ -24,6 +24,88 @@ Otherwise, $G \cong \mb{Z}$.
     if $|x| = \infty$ and $\mb{Z}_{|x|}$ otherwise.
 \end{proof}
 
+\subsection{The Torsion Subgroup}
+
+For an abelian group $G$ with $T \subseteq G$ the set of
+elements in $G$ of finite order and a prime $p$ with
+$G_p \subseteq T$ the set of elements in $T$ of with order
+equal to a power of $p$. We have that $G_p \leq T \leq G$
+and $G/T$ is torsion-free
+with $T$ called the torsion subgroup of $G$ and $G_p$ called
+the $p$-primary component of $G$.
+
+\begin{proof}
+    We suppose $x$ and $y$ are in $T$ with $|x| = k$, $|y| = m$.
+    We know that \linebreak $km(x - y) = 0$ so $|x - y| \leq km < \infty$,
+    thus $(x - y)$ is in $T$ so $T$ is a subgroup of $G$ by the subgroup test. 
+    \\[\baselineskip]
+    Furthermore,
+    $|x - y|$ must divide $km$ so if $x$ and $y$ are in $G_p$
+    then $km$ is a power of $p$. Thus, $|x - y|$ is a
+    power of $p$ so $(x - y)$ is in $G_p$. Again, by the subgroup test,
+    $G_p$ is a subgroup of $T$.
+    \\[\baselineskip]
+    Suppose $z + T$ has finite order for some $z$ in $G$. If so,
+    there exists some $m$ in $\mb{N}$ with $mx + T = T$, in particular 
+    $mx$ is in $T$. By the definition of $T$, there exists some $n$
+    in $\mb{N}$ with $nmx = 0$. But, this would mean $x$ has finite order
+    so $x$ is in $T$. Thus, $G / T$ is torsion-free.
+\end{proof}
+
+\subsection{The Primary Decomposition Theorem}
+
+For a finite abelian group $G$, we take $p_1, \ldots, p_k$ to be the
+prime factors of $|G|$. We have that $G = G_{p_1} \oplus \cdots \oplus
+G_{p_k}$.
+
+\begin{proof}
+    We take $x$ in $G$, by Lagrange's Theorem, we have that
+    $x = p_1^{l_1} \cdots p_k^{l_k}$ for some $l_1, \ldots, l_k$ in $\mb{N}_0$.
+    For each $i$ in $[k]$, we set: \begin{align*}
+        n_i = \prod_{j \in [k]\backslash\{i\}} p_j^{l_j},
+    \end{align*} and note that $|n_ix| = p_i^{l_i}$ so $n_ix$ is in $G_{p_i}$.
+    Clearly $\gcd(n_1, \ldots, n_k) = 1$, so by the Euclidean algorithm there
+    exists $m_1, \ldots, m_k$ such that $m_1n_1 + \cdots + m_kn_k = 1$. Thus:
+    \begin{align*}
+        x 
+        &= \left(\sum_{i = 1}^k m_in_i\right) \cdot x \\
+        &= \sum_{i = 1}^k m_i(n_ix) \\
+        &\in \sum_{i = 1}^k G_{p_i}. 
+    \end{align*} Thus, $G = G_{p_1} + \cdots + G_{p_k}$.
+    \\[\baselineskip]
+    We now consider $x_i$, $x_i'$ in $G_{p_i}$ for each $i$ in $[k]$ such
+    that $\sum_{i \in [k]} x_i = \sum_{i \in [k]} x_i'$. We write
+    $y_i = x_i - x_i'$ so that $\sum_{i \in [k]} y_i = 0$. Furthermore,
+    we say $|y_i| = p_i^{d_i}$ and set: \begin{align*}
+        r_i 
+        = \prod_{j \in [k] \backslash \{i\}} |y_i|
+        = \prod_{j \in [k] \backslash \{i\}} p_j^{d_j}.
+    \end{align*} As $|y_i|$ divides $|r_j|$ for all 
+    $j \in [k] \backslash \{i\}$, we know that $r_iy_j = 0$.
+    This implies that $r_iy_i = 0$ as $\sum_{i = 1}^k y_i = 0$.
+    \\[\baselineskip]
+    Moreover, as $r_i$ and $p_i$ are coprime by definition, the
+    Euclidean algorithm implies that there exists $a$, $b$ in $\mb{Z}$
+    such that: \begin{align*}
+        &ar_i + bp_i^{d_i} = 1, \\
+        \Longrightarrow \qquad & y_i = (ar_i + bp_i^{d_i})y_i,  \\
+        \Longrightarrow \qquad & y_i = ar_iy_i + bp_i^{d_i}y_i,  \\
+        \Longrightarrow \qquad & y_i = 0 + 0 = 0, 
+    \end{align*} so $x_i = x_i'$ for each $i$ in $[k]$. Thus, our
+    compositions are unique as required.
+\end{proof}
+
+\subsection{Finitely Generated Abelian Torsion Groups}
+
+A finitely generated torsion group is finite.
+
+\begin{proof}
+    We take $x_1, \ldots, x_n$ to be the finite generating set for
+    an abelian torsion group $G$ so: \begin{align*}
+        G = \{l_1x_1 + \cdots + l_nx_n : 0 \leq l_i < |x_i|\},
+    \end{align*} which is finite since $|x_i| < \infty$ for all $i$ in $[n]$.
+\end{proof}
+
 \subsection{Fundamental Theorem of Finitely Generated Abelian Groups}
 
 Suppose $G$ is a finitely generated abelian group, there exists
