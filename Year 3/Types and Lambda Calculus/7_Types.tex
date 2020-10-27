@@ -1,0 +1,47 @@
+\section{Types}
+
+\subsection{Monotypes}
+
+We assume a countable set of type variables $\mb{A}$ (usually
+denoted by $a$, $b$, $c$, etc.). The monotypes $\mb{T}$ are a
+set of strings defined inductively by the type variable rule:
+\begin{align*}
+    \frac{}{a \in \mb{T}},
+\end{align*} for some $a \in \mb{A}$ and the arrow rule: \begin{align*}
+    \frac{A \in T \qquad B \in T}{(A \to B) \in \mb{T}}.
+\end{align*}
+
+\subsection{Type Schemes}
+
+Types schemes are pairs consisting of a finite set of type
+variables $a_1, \ldots, a_m$ and a monotype $A$ which we
+write as $\forall \, a_1 \cdots a_m.A$.
+
+\subsection{Free Type Variables}
+
+We define the set of free type variables for a type scheme
+$\forall \, \bar{a}.A$, denoted by
+\linebreak $FTV(\forall \, \bar{a}.A)$,
+recursively by the following rules: \begin{align*}
+    FTV(a) &= \{a\}, \\
+    FTV(A \to B) &= FTV(A) \cup FTV(B), \\
+    FTV(\forall \, a_1 \cdots a_m.A) &= FTV(A) \backslash \{a_1, \ldots, a_m\}.
+\end{align*} We consider type schemes that only differ by choice
+of bound variable names to be equivalent.
+
+\subsection{Type Substitution}
+
+A type substitution is a total map $\sigma, \tau, \theta$ 
+from $\mb{A}$ to 
+$\mb{T}$ with the property that $\sigma(a) \neq a$ for only
+finitely many $a \in \mb{A}$. We define the map as follows:
+\begin{align*}
+    a\sigma &= \sigma(a) \\
+    (A \to B)\sigma &= A\sigma \to B\sigma.
+\end{align*}
+
+\subsubsection{Composition of Substitutions}
+
+We write $\sigma_1\sigma_2$ for the substitution obtained by
+composing $\sigma_2$ after $\sigma_1$, defined as by
+$(\sigma_1\sigma_2)(a) = (\sigma_1(a))\sigma_2$.
