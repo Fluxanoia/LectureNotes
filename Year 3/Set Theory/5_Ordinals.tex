@@ -174,3 +174,87 @@ segment of the other (or equivalently a member).
         a = b \in X \cap Y = X_a,
     \end{align*} but $a \notin X_a$, a contradiction.
 \end{proof}
+
+\subsection{Equality under Isomorphisms}
+
+For two ordinals $X$ and $Y$, if $X$ is order isomorphic to
+$Y$ then $X = Y$.
+
+\begin{proof}
+    Suppose $X \neq Y$, then without loss of generality we take
+    $X$ to be an initial segment of $Y$. But, this would
+    mean $Y$ is order isomorphic to a segment of itself
+    which is a contradiction.
+\end{proof}
+
+\subsection{Bound on Isomorphisms}
+
+A well-ordering is order isomorphic to at most one
+ordinal set.
+
+\begin{proof}
+    If a well-ordering is isomorphic to more than one
+    ordinals, then these ordinals are isomorphic to each other
+    and thus, equal.
+\end{proof}
+
+\subsection{Criterion for Ordinals}
+
+If every segment of a well-ordered set $\ang{A, \prec}$ is 
+order isomorphic to some ordinal, $\ang{A, \prec}$ itself
+is order isomorphic to an ordinal.
+
+\begin{proof}
+    Each segment must be order isomorphic to at most one
+    ordinal (thus exactly one). We define a function $F$ from
+    the segments of $A$ to the ordinal $F(A_b)$ such
+    that $\ang{A_b, \prec} \cong \ang{F(b), \in}$.
+    We know that this ordinal is unique as non-identical
+    segments have differing sizes.
+    We let $Z = \Ran(F)$: \begin{align*}
+        Z = \{F(b) : \exists \, b \in A, 
+        \exists \text{ an isomorphism } g_b 
+        \text{ from } \ang{A_b, \prec} 
+        \text{ to } \ang{F(b), \in}\},
+    \end{align*} noting that the isomorphism between
+    $A_b$ and $F(b)$ is unique. If $c$, $b$ are in $A$ with
+    $c \prec b$ then $A_c = (A_b)_c$ implying that
+    $F(c) \neq F(b)$ so $F$ is injective and thus bijective
+    between $A$ and $Z$.
+    Continuing with $c \prec b$: \begin{align*}
+        g_b \upharpoonright A_c :
+        \ang{A_c, \prec} \cong 
+        \ang{(F(b))_{g_b(c)}, \in},
+    \end{align*} by the uniqueness of order isomorphisms
+    $(g_b \upharpoonright A_c) = g_c$ and $F(c) = (F(b))_{g_b(c)}$.
+    Thus, $F(c) \in F(b)$.
+    \\[\baselineskip]
+    We know that $Z$ is well-ordered by $\in$ as 
+    $A$ is well-ordered by $\prec$ and $F$ is an
+    order isomorphism. For $u \in F(b) \in Z$,
+    as $g_b$ is surjective, $u = g_b(c)$ for some $c \prec b$.
+    Then, $u = F(b)_u = F(b)_{g_b(c)} = F(c)$. Hence, $u$ is
+    in $Z$, so $Z$ is transitive. Thus, $Z$ is an ordinal.
+\end{proof}
+
+\newpage
+
+\subsection{Representation Theorem for Well-orderings}
+
+Every well-ordering is order isomorphic to 
+exactly one ordinal.
+
+\begin{proof}
+    For a well-ordering $\ang{X, \prec}$, we know that if it
+    is isomorphic to an ordinal, this is the only such ordinal.
+    We take: \begin{align*}
+        Z = \{v \in X : X_v \text{ is not isomorphic to an ordinal}\},
+    \end{align*} and want to show it's empty as this will suffice
+    combined with our criterion. Supposing the
+    contrary, we take $v_0$ to be the $\prec$-least element
+    of $Z$. We have that $\ang{X_{v_0}, \prec}$ is a well-ordering
+    with each element preceding $v_0$, as such $(X_{v_0})_w = X_w$
+    for each $w$ in $X_{v_0}$ is order isomorphic to an ordinal.
+    Which means $X_{v_0}$ must also be order isomorphic to an ordinal
+    via our criterion, a contradiction. Thus, $Z$ is empty, as required.
+\end{proof}
