@@ -45,3 +45,64 @@ finitely many $a \in \mb{A}$. We define the map as follows:
 We write $\sigma_1\sigma_2$ for the substitution obtained by
 composing $\sigma_2$ after $\sigma_1$, defined as by
 $(\sigma_1\sigma_2)(a) = (\sigma_1(a))\sigma_2$.
+
+\subsection{Type Assignment}
+
+A type assignment is a pair of a term $M$ and a type scheme $A$
+written $M:A$. The term part is called the subject and the type
+part the predicate.
+
+\subsection{Type Environments}
+
+A type environment written $\Gamma$ is a finite set of
+type assignments of the form $x : \forall \, \bar{a}.A$
+which are consistent in the sense that multiple 
+type assignments of the same subject will agree.
+\\[\baselineskip]
+The subjects of $\Gamma$ is the set $\Dom(\Gamma)$.
+
+\subsection{Type Judgement}
+
+A type judgement is a triple consisting of a type environment $\Gamma$,
+a term $M$ and a monotype $A$ written as $\Gamma \vdash M : A$.
+
+\subsection{The Type System}
+
+The type system is defined by the following rules.
+For $x : \forall \, \bar{a}.A$ in $\Gamma$ we have the type variable
+rule: \begin{align*}
+    \frac{}{\Gamma \vdash x : A[\bar{B}/\bar{a}]},
+\end{align*} the rule of type application: \begin{align*}
+    \frac{
+        \Gamma \vdash M : B \to A \qquad \Gamma \vdash N : B
+    }{
+        \Gamma \vdash MN : A
+    },
+\end{align*} and for $x$ not in $\Dom(\Gamma)$, we have the rule
+of type abstraction: \begin{align*}
+    \frac{
+        \Gamma \cup \{x : B\} \vdash M : A
+    }{
+        \Gamma \vdash \lambda x.M : B \to A
+    }.
+\end{align*} A proof tree justifying a type judgement is called a type
+derivation.
+
+\subsection{Typability}
+
+We say a closed term $M$ is typable if there is some type $A$ such that
+$\{\} \vdash M : A$. We have that $\lambda x.xx$ is untypable.
+
+\subsection{The Inversion Theorem}
+
+Suppose $\Gamma \vdash M : A$ is derivable, we have that: \begin{itemize}
+    \item if $M$ is a variable $x$ then there is a type scheme
+        $\forall \, \bar{a}.B$ in $\Gamma$ with $A = B[\bar{C}/\bar{a}]$ 
+        for some monotypes $\bar{C}$,
+    \item if $M$ is an application $PQ$ then there is a type $B$ such
+        that $\Gamma \vdash P : B \to A$ and $\Gamma \vdash Q : B$,
+    \item if $M$ is an abstraction $\lambda x.P$ then there are types
+        $B$ and $C$ such that $A = B \to C$ and 
+        $\Gamma \cup \{x : B\} \vdash P : C$.
+\end{itemize}
+
