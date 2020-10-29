@@ -190,7 +190,7 @@ $Y$ then $X = Y$.
 \subsection{Bound on Isomorphisms}
 
 A well-ordering is order isomorphic to at most one
-ordinal set.
+ordinal.
 
 \begin{proof}
     If a well-ordering is isomorphic to more than one
@@ -257,4 +257,40 @@ exactly one ordinal.
     for each $w$ in $X_{v_0}$ is order isomorphic to an ordinal.
     Which means $X_{v_0}$ must also be order isomorphic to an ordinal
     via our criterion, a contradiction. Thus, $Z$ is empty, as required.
+\end{proof}
+
+\subsection{Order Type of Well-orderings}
+
+For a well-ordering $\ang{X, \prec}$, the order type of $\ang{X, \prec}$
+is the unique ordinal isomorphic to $\ang{X, \prec}$, written as
+$\ot(\ang{X, \prec})$.
+
+\subsection{Classification Theorem for Well-orderings}
+
+For two well-orderings $\ang{A, \prec_A}$ and $\ang{B, \prec_B}$
+we have that exactly one of the following holds: \begin{itemize}
+    \item $\ang{A, \prec_A} \cong \ang{B, \prec_B}$,
+    \item There exists $b$ in $B$ such that 
+        $\ang{A, \prec_A} \cong \ang{B_b, \prec_B}$,
+    \item There exists $a$ in $A$ such that 
+        $\ang{A_a, \prec_A} \cong \ang{B, \prec_B}$.
+\end{itemize}
+
+\begin{proof}
+    We take $\ang{X, \in}$ and $\ang{Y, \in}$ to be the unique ordinals
+    isomorphic to $\ang{A, \prec_A}$ and $\ang{B, \prec_B}$ (resp.)
+    via maps: \begin{align*}
+        f &: \ang{X, \in} \to \ang{A, \prec_A}, \\
+        g &: \ang{Y, \in} \to \ang{B, \prec_B}. \\
+    \end{align*} We know that either these ordinals are order isomorphic
+    or order isomorphic to an initial segment of the other. If the
+    former is true, then we have that our well-orderings are isomorphic
+    via $f$ and $g$ and their inverses. If the latter is true,
+    we know that (without loss of generality) 
+    $\ang{X, \in} \cong \ang{Y_y, \in}$ for some $y$ in $Y$.
+    Thus: \begin{align*}
+        f(\ang{X, \in}) \cong g(\ang{Y_y, \in})
+        \Longrightarrow
+        \ang{A, \prec_A} \cong \ang{B_{g(y)}, \prec_B}),
+    \end{align*} as required.
 \end{proof}

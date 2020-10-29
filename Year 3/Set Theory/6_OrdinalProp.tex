@@ -1,0 +1,86 @@
+\section{Properties of Ordinals}
+
+We collate the properties of ordinals covered so far
+for some ordinals $\alpha$, $\beta$, and $\gamma$:
+\begin{itemize}
+    \item Ordinals are transitive,
+    \item Ordinals are well-ordered by $\in$,
+    \item $\alpha \in \beta \in \gamma$ implies that $\alpha \in \gamma$,
+    \item If $X \in \alpha$ then $X$ is an ordinal with $X = \alpha_X$,
+    \item If $\alpha \cong \beta$ then $\alpha = \beta$,
+    \item Exactly one of the following holds: \begin{itemize}
+        \item $\alpha = \beta$,
+        \item $\alpha \in \beta$,
+        \item $\beta \in \alpha$.
+    \end{itemize}
+\end{itemize}
+
+\subsection{Principle of Transfinite Induction}
+
+For $\Phi$ a well-defined and definite property of ordinals, we have
+that for all ordinals $\alpha$: \begin{align*}
+    \bigl[
+        \forall \, \beta < \alpha, \Phi(\beta) 
+        \Rightarrow \Phi(\alpha)
+    \bigr] \Rightarrow
+    \bigl[
+        \Phi(\alpha)
+    \bigr].
+\end{align*} Hence, the class of ordinals is well-ordered.
+
+\begin{proof}
+    We consider $C = \{\alpha \text{ an ordinal} \, : \neg \Phi(\alpha)\}$
+    and suppose it's non-empty. We take $\alpha_0$ in $C$, if it is not
+    the least element we have that $\alpha_0 \cap C$ is non-empty
+    as there is some $\beta$ in $C$ with $\beta < \alpha$ which
+    is equivalent to saying that $\beta \in \alpha$.
+    As $\alpha_0$ is an ordinal, we have that $\alpha_0$ is well-ordered
+    by $\in$, hence $C \cap \alpha_0 \subseteq \alpha_0$ has an
+    $\in$-least element $\alpha_1$ which is the least element of $C$.
+    \\[\baselineskip]
+    Thus, we have that $\neg \Phi(\alpha_1)$ holds, but as this is
+    the least element of $C$, for all ordinals $\beta$ less than $\alpha_1$
+    we have that $\Phi(\beta)$ holds. However, by our antecedent, this
+    means $\Phi(\alpha_1)$ holds, a contradiction. Thus, $C$ is empty
+    as required.
+    \\[\baselineskip]
+    Note that our argument showed than any non-empty class on
+    the ordinals has a least element. Thus, the class of ordinals
+    is well-ordered by $\in$.
+\end{proof}
+
+\subsection{The Class of Ordinals}
+
+The class of ordinals is a proper class.
+
+\begin{proof}
+    Suppose the class of ordinals is a set $z$.
+    We have that $\ang{z, \in}$ is transitive and
+    well-ordered by $\in$. Thus, $z$ is an ordinal,
+    as such $z$ is in $z$. But, this contradicts the
+    strict ordering of $\in$.
+\end{proof}
+
+\subsection{Sum of Orderings}
+
+For $\ang{A, R}$ and $\ang{B, S}$ strict total orderings
+with $A \cap B$ empty, we
+define the sum ordering $\ang{C, T}$ as: \begin{align*}
+    C &= A \cup B, \\
+    x T y &\Leftrightarrow \begin{cases}
+        x R y & \text{for } x, y \in A \\
+        x S y & \text{for } x, y \in B \\
+        x \in A \text{ and } y \in B & \text{otherwise}.
+    \end{cases}
+\end{align*} We can avoid the disjoint constraint by taking
+the sum of $\ang{A \times \{0\}, R}$ and \linebreak
+$\ang{B \times \{1\}, S}$. We can built this functionality into
+our operation. We name this operation $+'$ and for $\alpha$, 
+$\beta$ ordinals: \begin{align*}
+    \alpha +' \beta &= \ot(\ang{
+        \alpha \times \{0\} \cup \beta \times \{1\}
+    }, T), \\
+    \ang{\gamma, i}T\ang{\delta, j} 
+    &\Leftrightarrow (i = j \text{ and } \gamma < \delta)
+    \text{ or } (i < j).
+\end{align*}
