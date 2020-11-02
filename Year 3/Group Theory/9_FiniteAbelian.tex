@@ -106,6 +106,87 @@ A finitely generated torsion group is finite.
     \end{align*} which is finite since $|x_i| < \infty$ for all $i$ in $[n]$.
 \end{proof}
 
+\subsection{Order of Elements in $p$-groups}
+
+For a prime $p$ and a $p$-group $G$, we take $g$ in $G$. We set $k$
+in $\mb{N}$ to $np^r$ with $n$, $p$ coprime and $r$ in $\mb{N}_0$.
+If $p^r \leq |g|$ then $|g^k| = \frac{|g|}{p^r}$.
+
+\begin{proof}
+    We know that $|g| = p^m$ for some $m$ as $G$ is a $p$-group.
+    For $d$ in $\mb{N}$: \begin{align*}
+        & (g^k)^d = e \\
+        \Longleftrightarrow \qquad& g^{dnp^r} = e \\
+        \Longleftrightarrow \qquad& p^m \text{ divides } dnp^r \\
+        \Longleftrightarrow \qquad& p^m \text{ divides } dp^r \\
+        \Longleftrightarrow \qquad& p^{m - r} \text{ divides } d,
+    \end{align*} thus, $|g^k| = p^{m - r} = \frac{|g|}{p^r}$ as required.
+\end{proof}
+
+\subsection{Elements with Coset Order}
+
+For $G$ a finite abelian $p$-group for some prime $p$. We take $g$ in $G$
+to have maximum order. For every $x$ in $G$, there exists $y$ in $x + \ang{g}$
+sich that the order of $y$ in $G$ is equal to the order of $x + \ang{g}$ in
+$G / \ang{g}$.
+
+\begin{proof}
+    We write $x + \ang{g} = p^m$ for some $m$, noting that $p^m \cdot x$ 
+    is in $\ang{g}$ so $p^m \cdot x = l \cdot g$ for some $l$ in $\mb{N}_0$ 
+    (if $l = 0$ we are done). We write $l = np^r$ with $n$, $p$ coprime.
+    If $p^r \geq |g|$ then $l \cdot g = 0$ and $|x| = p^m$ and we are done.
+    Otherwise, we use the result above to see that 
+    $|l \cdot g| = \frac{|g|}{p^r}$ and $|p^mx| = \frac{|x|}{p^m}$
+    so $\frac{|g|}{p^r} = \frac{|x|}{p^m}$. The maximality of $g$ 
+    implies that $|g| \geq |x|$ so $r \geq m$ and thus $p^m$ divides $l$.
+    We define: \begin{align*}
+        y = x - \frac{l}{p^m} \cdot g,
+    \end{align*} thus $p^my=p^m(x - np^{r-m}g) = 0$ so $|y| \leq p^m$.
+    But, as $y$ is in $x + \ang{g}$, $|y| \geq p^m$ so $|y| = p^m$ as
+    required.
+\end{proof}
+
+\subsection{Decomposition of Finite Abelian $p$-groups}
+
+For a finite abelian $p$-group $G$ with $p$ prime, there exists a $k$
+in $\mb{N}_0$ and $m_1, \ldots, m_k$ in $\mb{N}$ such that 
+$G \cong \mb{Z}_{p^{m_1}} \oplus \cdots \oplus \mb{Z}_{p^{m_k}}$.
+
+\begin{proof}
+    It is sufficient to show that for $x_1, \ldots, x_k$ in $G$, $G$
+    is an inner direct sum: \begin{align*}
+        G = \ang{x_1} \oplus \cdots \oplus \ang{x_k} \tag{$\ast$}.
+    \end{align*} If $G = \{0\}$ then this is trivial so we assume $|G| > 1$.
+    By strong induction, we assume every group of order lesser to that of
+    $G$ is of the form shown in ($\ast$).
+    \\[\baselineskip]
+    We take $g$ in $G$ to have maximum order, $g \neq e$ as our group is
+    non-trivial so $|G / \ang{g}| < |G|$ so by induction, there exists
+    $x_1, \ldots, x_k$ in $G$ such that: \begin{align*}
+        G / \ang{g} = \ang{x_1 + \ang{g}} \oplus \cdots \oplus
+        \ang{x_k + \ang{g}}.
+    \end{align*} The previous result implies that we can assume that 
+    $|x_i| = |x_i + \ang{g}|$, so: \begin{align*}
+        |G/\ang{g}| 
+        &= |\ang{x_1 + \ang{g}}| \cdots |\ang{x_k + \ang{g}}| \\
+        &= |x_1| \cdots |x_k|,
+    \end{align*} which combined with Lagrange's theorem means that: \begin{align*}
+        |G| &= [G : \ang{g}] \\
+        &= |G / \ang{g}| \cdot |g| \\
+        &= |x_1| \cdots |x_k| \cdot |g|.
+    \end{align*} We want to show that $G = \ang{x_1} + \cdots + \ang{x_k} + \ang{g}$
+    so for all $h$ in $G$, $h = ng + \sum_{i = 1}^k l_ix_i$ for some
+    $l_1, \ldots, l_k, n$ in $\mb{N}_0$. By ($\ast$) we know that: \begin{align*}
+        &h + \ang{g} = (l_1x_1 + \cdots + l_kx_k) + \ang{g} \\
+        \Longrightarrow \qquad&
+        h \in (l_1x_1 + \cdots + l_kx_k) + \ang{g} \\
+        \Longrightarrow \qquad&
+        h = l_1x_1 + \cdots + l_kx_k + ng \text{ for some } n.
+    \end{align*} As we have that $G$ is a sum of $\ang{x_1}, \ldots, \ang{x_k},
+    \ang{g}$ and its size is a product of the size of these groups, $G$
+    is an inner direct product of said elements as required.
+\end{proof}
+
 \subsection{Fundamental Theorem of Finitely Generated Abelian Groups}
 
 Suppose $G$ is a finitely generated abelian group, there exists
