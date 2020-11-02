@@ -84,3 +84,25 @@ $\beta$ ordinals: \begin{align*}
     &\Leftrightarrow (i = j \text{ and } \gamma < \delta)
     \text{ or } (i < j).
 \end{align*}
+
+\subsection{Product of Orderings}
+
+For $\ang{A, R}$ and $\ang{B, S}$ strict total orderings.
+We define the product of these orderings $\ang{A, R} \times \ang{B, S}$
+to be the ordering $\ang{C, U}$: \begin{align*}
+    C &= A \times B \\
+    \ang{x, y}U\ang{x', y'} 
+    &\Leftrightarrow 
+    (ySy') \text{ or } (y = y' \text{ and } xRx'),
+\end{align*} taking the latter and replacing each member by the former.
+We can again construct an operation for ordinals $\alpha$
+and $\beta$: \begin{align*}
+    \alpha \cdot' \beta &= \ot(\ang{A \times B, U}),
+\end{align*} with $U$ defined as above.
+
+\subsection{Supremum of Ordinals}
+
+For a set of ordinals $A$, $\sup(A)$ is the least ordinal $\gamma$ 
+such that for all $\delta$ in $A$, $\delta \leq \gamma$. Furthermore,
+we have the strict supremum $\sup^+(A)$ as the least ordinal $\gamma^+$
+such that for all $\delta$ in $A$, $\delta < \gamma^+$.
