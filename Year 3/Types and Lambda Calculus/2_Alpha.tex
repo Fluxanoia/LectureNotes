@@ -20,7 +20,7 @@ recursively on the structure of terms: \begin{center}
     \begin{tabular}{ r c l l }
         $y[M/x]$             & $=$ & $y$                        & if $y \neq x$, \\
         $y[M/x]$             & $=$ & $M$                        & if $y = x$, \\
-        $(PQ)[M/x]$          & $=$ & $P[M/x] \, \cup \, Q[M/x]$, & \\
+        $(PQ)[M/x]$          & $=$ & $P[M/x] Q[M/x]$, & \\
         $(\lambda y.P)[M/x]$ & $=$ & $\lambda y.P$              & if $y = x$, \\
         $(\lambda y.P)[M/x]$ & $=$ & $\lambda y.P[M/x]$         & if $y \neq x$ and $y \notin FV(M)$.
     \end{tabular} 
