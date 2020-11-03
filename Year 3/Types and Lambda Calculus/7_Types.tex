@@ -106,3 +106,46 @@ Suppose $\Gamma \vdash M : A$ is derivable, we have that: \begin{itemize}
         $\Gamma \cup \{x : B\} \vdash P : C$.
 \end{itemize}
 
+\subsection{Properties of the System}
+
+For a term $M$, environment $\Gamma$ and type $S$, we
+have the following properties.
+
+\paragraph{Subterm Closure}
+\leavevmode\newline
+If $\Gamma \vdash M : S$ is derivable and $N$ is a subterm
+of $M$, there is some $\Gamma'$ containing $\Gamma$ and
+some $S'$ such that $\Gamma' \vdash N : S'$. 
+
+\paragraph{Relevance ($1^{\text{st}}$)}
+\leavevmode\newline
+If $\Gamma \vdash M : S$ then $FV(M) \subseteq \Dom(\Gamma)$.
+
+\paragraph{Relevance ($2^{\text{nd}}$)}
+\leavevmode\newline
+If $\Gamma \vdash M : S$ then $\{x : A \text{ where }
+x : A \in \Gamma \text{ and } x \in FV(M) \} \vdash M : S$.
+
+\paragraph{Weakening}
+\leavevmode\newline
+If $\Gamma \vdash M : S$ and $\Gamma \subseteq \Gamma'$ then
+$\Gamma' \vdash M : S$.
+
+\paragraph{Subject Reduction}
+\leavevmode\newline
+If $\Gamma \vdash M : A$ and 
+$M \to_\beta N$ then $\Gamma \vdash N : A$.
+
+\paragraph{Preservation under Substitution}
+\leavevmode\newline
+If $\Gamma, x : B \vdash M : A$ and $\Gamma \vdash N : B$
+then $\Gamma \vdash M[N / x] : A$.
+
+\paragraph{Subformula}
+\leavevmode\newline
+We suppose $\Gamma$ has predicates solely consisting of monotypes,
+for some term $M$ in $\beta$-normal form with $\Gamma \vdash M : A$
+we have that the derivation of this judgement is unique and all
+of the types mentioned in the derivation are substrings of types 
+mentioned in the conclusion.
+
