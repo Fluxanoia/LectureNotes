@@ -106,3 +106,61 @@ For a set of ordinals $A$, $\sup(A)$ is the least ordinal $\gamma$
 such that for all $\delta$ in $A$, $\delta \leq \gamma$. Furthermore,
 we have the strict supremum $\sup^+(A)$ as the least ordinal $\gamma^+$
 such that for all $\delta$ in $A$, $\delta < \gamma^+$.
+\\[\baselineskip]
+We can also write $\sup(A) = \bigcup A$.
+\begin{proof}
+    If we suppose there isn't an ordinal which is an upper bound
+    for $A$, there's some $\delta$ in $A$ such that $\delta > \gamma$
+    for each ordinal $\gamma$. But, $\bigcup A$ must be a set and equal to
+    the set of ordinals, a contradiction.
+    \\[\baselineskip]
+    Take $S = \sup(A)$ and take $u$ in $\bigcup A$. For some $a$ in $A$,
+    $u < a < A$, so $u < S$ and so $u$ is in $S$, $\bigcup A \subseteq S$.
+    Conversely, we consider $s$ in $S$, then $s < S = \sup(A)$ so there
+    is some $a$ in $A$ with $s < a \leq S$. Thus, $s$ is in $A$ so
+    $s$ is in $\bigcup A$, $S \subseteq \bigcup A$. Thus $S = \bigcup A$.
+\end{proof}
+
+\subsection{Types of Ordinals}
+
+We can consider three types of ordinals: \begin{itemize}
+    \item The zero ordinal, $0$,
+    \item Successor ordinals, ordinals with immediate predecessors,
+    \item Limit ordinals, ordinals that are not of the other types.
+\end{itemize}
+
+\subsection{Transfinite Recursion Theorem on Ordinals}
+
+For $F : V \to V$ a function, there exists a unique function
+$H$ from the ordinals to $V$ such that for all $\alpha$: \begin{align*}
+    H(\alpha) = F(H \upharpoonright \alpha).
+\end{align*}
+
+\subsection{Alternative Transfinite Recursion on Ordinals}
+
+For $a$ in $V$ and $F_0, F_1 : V \to V$ functions, there's a unique
+function $H$ from the set of ordinals to $V$ such that: \begin{align*}
+    H(0) &= a, \\
+    \suc(\alpha) &\Longrightarrow H(\alpha) = F_0(H(\beta)) \text{ where } \alpha = \beta + 1, \\
+    \lim(\alpha) &\Longrightarrow H(\alpha) = F_1(H \upharpoonright \alpha).
+\end{align*}
+
+\begin{proof}
+    We define $F : V \to V$ by: \begin{align*}
+        F(u) = \begin{cases}
+            a & \text{for } u = \emptyset \\
+            F_0(u) & \text{if } u \text{ is a function with a successor domain} \\
+            F_1(u) & \text{if } u \text{ is a function with a limit domain} \\
+            \emptyset & \text{otherwise},
+        \end{cases}
+    \end{align*} and apply the previous recursion theorem.
+\end{proof}
+
+\subsection{Ordinal Addition}
+
+We define ordinal addition $A_\alpha$ for some successor ordinal
+$\beta + 1$ and limit ordinal $\lambda$ as: \begin{align*}
+    A_\alpha(0) &= \alpha + 0 = \alpha, \\
+    A_\alpha(\beta + 1) &= S(A_\alpha(\beta)) = A_\alpha(\beta) + 1, \\
+    A_\alpha(\lambda) &= \sup(\{A_\alpha(x) : x < \lambda\}).
+\end{align*}
