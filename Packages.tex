@@ -161,6 +161,20 @@
   \urcorner
 }
 
+% Quick proof trees
+
+\newcommand{\ptree}[3]{
+    \frac{
+      #2 \qquad #3
+    }{#1}
+}
+
+% Quick type constraint
+
+\newcommand\teq{\stackrel{
+  \mathclap{\text{\scriptsize\mbox{?}}}
+}{=}}
+
 % Nicer symbols
 
 %%% Empty Set
@@ -200,3 +214,4 @@
 %%% Fraction without line
 
 \newcommand*{\bfrac}[2]{\genfrac{}{}{0pt}{}{#1}{#2}}
+

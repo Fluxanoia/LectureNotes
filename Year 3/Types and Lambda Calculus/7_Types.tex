@@ -149,3 +149,31 @@ we have that the derivation of this judgement is unique and all
 of the types mentioned in the derivation are substrings of types 
 mentioned in the conclusion.
 
+\subsection{Type Constraints}
+
+A type constraint is a pair of monotypes $(A, B)$ written
+suggestively as $A \teq B$.
+
+\subsection{Constraint Generation}
+
+We create a constraint generating function, which takes in an
+environment and a term and returns a pair consisting of a type
+variable and a set of constraints: \begin{align*}
+    &\text{CGen}(\Gamma, x) = \\
+    &\qquad \text{let } a \text{ be fresh} \\
+    &\qquad \text{let } \forall \, a_1, \ldots, a_k.A = \Gamma(x) \\
+    &\qquad \text{let } b_1, \ldots, b_k \text{ be fresh} \\
+    &\qquad (a, \{a \teq A[b_1/a_1, \ldots, b_k/a_k]\}) \\
+    \\
+    &\text{CGen}(\Gamma, MN) = \\
+    &\qquad \text{let } a \text{ be fresh} \\
+    &\qquad \text{let } (b, \mc{C}_1) = \text{CGen}(\Gamma, M) \\
+    &\qquad \text{let } (c, \mc{C}_2) = \text{CGen}(\Gamma, N) \\
+    &\qquad (a, \mc{C}_1 \cup \mc{C}_2 \cup \{b \teq c \to a\}) \\
+    \\
+    &\text{CGen}(\Gamma, \lambda x.M) = \\
+    &\qquad \text{let } a \text{ be fresh} \\
+    &\qquad \text{let } b \text{ be fresh} \\
+    &\qquad \text{let } (c, \mc{C}) = \text{CGen}(\Gamma \cup \{x : b\}, M) \\
+    &\qquad (a, \mc{C} \cup \{a \teq b \to c\})
+\end{align*}
