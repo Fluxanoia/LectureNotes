@@ -136,6 +136,74 @@ $H$ from the ordinals to $V$ such that for all $\alpha$: \begin{align*}
     H(\alpha) = F(H \upharpoonright \alpha).
 \end{align*}
 
+\begin{proof}
+    We define a function $u$ to be a $\delta$-approximation if 
+    $\Dom(u) = \delta$ and for all $\alpha < \delta$, 
+    $u(\alpha) = F(u \upharpoonright \alpha)$. 
+    \\[\baselineskip]
+    \textbf{Observations} \newline
+    We consider $u$ to be a $\delta$-approximation.
+    For $\delta > 0$, we see that $u(0) = F(u \upharpoonright 0) = F(\emptyset)$
+    so a $1$-approximation is equal to $\{\ang{0, F(\emptyset)}\}$
+    with domain $\{0\} = 1$. Additionally, for some $\gamma < \delta$, 
+    $u \upharpoonright \gamma$ is a $\gamma$-approximation.
+    Furthermore, $u \cup \{\ang{\delta, F(u)}\}$ is a 
+    $(\delta + 1)$-approximation. We take $B = \{u : \exists \, \delta
+    \text{ such that } u \text{ is a $\delta$-approximation}\}$.
+    \\[\baselineskip]
+    \textbf{Agreement on Domain} \newline
+    For $u$ a $\delta$-approximation and $v$ any $\gamma$-approximation
+    with $\delta < \gamma$, $u = v \upharpoonright \delta$.
+    \begin{proof}
+        We appeal to the contrary and take $\tau$ be the least value such that
+        \linebreak $u(\tau) \neq \gamma(\tau)$. Thus, $(u \upharpoonright \tau
+        = v \upharpoonright \tau)$ but then: \begin{align*}
+            u(\tau) 
+            = F(u \upharpoonright \tau)
+            = F(v \upharpoonright \tau)
+            = v(\tau),
+        \end{align*} which is a contradiction.
+    \end{proof}
+    \vspace{3mm}\noindent
+    \textbf{Uniqueness} \newline
+    If such $H$ exists, it is unique.
+    \begin{proof}
+        We appeal to the contrary, taking $H'$ to be some differing
+        derivation of $H$. We consider the least $\tau$ such that
+        $H(\tau) \neq H'(\tau)$ and apply the same reasoning
+        to the above.
+    \end{proof}
+    \vspace{3mm}\noindent
+    \textbf{Limits} \newline
+    For some limit ordinal $\lambda$, if for all $\alpha < \lambda$
+    we have that $u_\alpha$ is an $\alpha$-approximation, 
+    $\bigcup_{\alpha < \lambda} u_\alpha$ is a $\lambda$-approximation.
+    \begin{proof}
+        This union is a union of an increasing sequence of sets
+        (so \linebreak 
+        $\alpha < \beta < \lambda \Rightarrow u_\alpha \subseteq u_\beta$).
+        As each element is a function, the union is also a function with
+        domain $\lambda$. Thus, this union is a $\lambda$-approximation.
+    \end{proof}
+    \vspace{3mm}\noindent
+    \textbf{Existence} \newline
+    We define $H = \bigcup B$ which is a function with $\Dom(H)$ being the set
+    of ordinals.
+    \begin{proof}
+        We know that $H$ is a function by \textbf{Agreement on Domain}.
+        We take $C = \{\delta : \text{There's no $\delta$-approximation}\}$
+        and suppose $C$ is non-empty. By the principle of transfinite induction
+        on the ordinals, $C$ has a least elememt $\psi$. We know that
+        $\psi > 1$ as we defined a $1$-approximation and by \textbf{Limits}
+        it cannot be a limit ordinal. If $\psi = \mu + 1$ then there's
+        a $\mu$-approximation $v$ by the minimality of $\psi$. However,
+        we can extend $v$ to a $\psi$-approximation $u$ by setting
+        $u(\mu) = F(v)$. This is a contradiction.
+    \end{proof}
+    \noindent
+    Thus, we have that $H$ exists and is a unique function as required.
+\end{proof}
+
 \subsection{Alternative Transfinite Recursion on Ordinals}
 
 For $a$ in $V$ and $F_0, F_1 : V \to V$ functions, there's a unique
@@ -164,3 +232,55 @@ $\beta + 1$ and limit ordinal $\lambda$ as: \begin{align*}
     A_\alpha(\beta + 1) &= S(A_\alpha(\beta)) = A_\alpha(\beta) + 1, \\
     A_\alpha(\lambda) &= \sup(\{A_\alpha(x) : x < \lambda\}).
 \end{align*}
+
+\subsection{Ordinal Multiplication}
+
+We define ordinal multiplication $A_\alpha$ for some successor ordinal
+$\beta + 1$ and limit ordinal $\lambda$ as: \begin{align*}
+    M_\alpha(0) &= 0, \\
+    M_\alpha(\beta + 1) &= M_\alpha(\beta) + \alpha, \\
+    M_\alpha(\lambda) &= \sup(\{M_\alpha(x) : x < \lambda\}).
+\end{align*}
+
+\subsection{Ordinal Exponentiation}
+
+We define ordinal exponentiation $A_\alpha$ for some successor ordinal
+$\beta + 1$ and limit ordinal $\lambda$ as: \begin{align*}
+    E_\alpha(0) &= 1, \\
+    E_\alpha(\beta + 1) &= E_\alpha(\beta) \cdot \alpha, \\
+    E_\alpha(\lambda) &= \sup(\{E_\alpha(x) : x < \lambda\}).
+\end{align*}
+
+\subsection{Monotonicity of $A_\alpha$}
+
+The functions $A_\alpha$ are strictly increasing and thus injective.
+
+\begin{proof}
+    We consider $\beta$, $\gamma$, $\delta$ ordinals with: \begin{align*}
+        [\beta < \gamma] \Longrightarrow [A_\alpha(\beta) < A_\alpha(\gamma)], \tag{1}
+    \end{align*} for all $\gamma \leq \delta$. 
+    The base case is trivial, we consider $\delta + 1$. For $\beta < \delta + 1$,
+    if $\beta = \delta$, then: \begin{align*}
+        A_\alpha(\delta) &= A_\alpha(\beta) \\ 
+        &< A_\alpha(\beta + 1) \\
+        &= S(A_\alpha(\beta)) \\
+        &= S(A_\alpha(\delta)).
+    \end{align*} Otherwise, $\beta < \delta$ so by our hypothesis: \begin{align*}
+        A_\alpha(\beta) &< A_\alpha(\delta) \\
+        &< S(A_\alpha(\delta)) \\
+        &= A_\alpha(\delta + 1). 
+    \end{align*} Now, we suppose (1) holds for all 
+    $\gamma < \lambda$ for some limit ordinal $\lambda$. For $\beta < \lambda$,
+    clearly $\beta < \beta + 1 < \lambda$ as $\lambda$ has no immediate predecessor.
+    By the hypothesis: \begin{align*}
+        A_\alpha(\beta) &< A_\alpha(\beta + 1) \\
+        &\leq \sup(\{A_\alpha(\gamma) : \gamma < \lambda\}) \\
+        &= A_\alpha(\lambda),
+    \end{align*} as required.
+\end{proof} \noindent
+Similarly, both $M_\alpha$ and $E_\alpha$ are strictly
+increasing, for ordinals $\alpha, \beta, \gamma$ with $\beta > \gamma$: 
+\begin{itemize}
+    \item If $\alpha > 0$ then $M_\alpha(\beta) < M_\alpha(\gamma)$,
+    \item If $\alpha > 1$ then $E_\alpha(\beta) < E_\alpha(\gamma)$.
+\end{itemize}
