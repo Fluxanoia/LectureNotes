@@ -18,6 +18,7 @@
 \usepackage{fancyhdr}
 \usepackage{hhline}
 \usepackage{ifthen}
+\usepackage{bussproofs}
 
 % Title Page
 %%% title, notation?, inprogress?, unsupported?, unsupported_date, incomplete?
@@ -159,22 +160,6 @@
   \ulcorner
   #1
   \urcorner
-}
-
-% Quick proof trees
-
-\newcommand{\ptree}[3]{
-    \frac{
-      #2 \qquad #3
-    }{#1}
-}
-\newcommand{\pnode}[2]{
-    \frac{
-      #2
-    }{#1}
-}
-\newcommand{\pleaf}[3]{
-    \frac{}{#1}
 }
 
 % Quick type constraint
