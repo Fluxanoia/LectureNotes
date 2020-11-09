@@ -284,3 +284,41 @@ increasing, for ordinals $\alpha, \beta, \gamma$ with $\beta > \gamma$:
     \item If $\alpha > 0$ then $M_\alpha(\beta) < M_\alpha(\gamma)$,
     \item If $\alpha > 1$ then $E_\alpha(\beta) < E_\alpha(\gamma)$.
 \end{itemize}
+
+\subsection{Remainders}
+
+For $\alpha$, $\beta$ ordinals with $0 < \alpha \leq \beta$: \begin{enumerate}
+    \item There's a unique ordinal $\gamma$ such that $\alpha + \gamma = \beta$,
+    \item There's a unique pair of ordinals $\zeta$, $\kappa$ such that
+        $\alpha \cdot \zeta + \kappa = \beta$ and $\kappa < \alpha$.
+\end{enumerate} 
+
+\begin{proof}
+    (i) As $A_\alpha$ is strictly increasing, we consider 
+    $Z = \{x : \alpha + x \geq \beta\}$ which must be non-empty as
+    $A_\alpha$ is strictly increasing.
+    We take $\gamma = \min(Z)$ and see that $\alpha + \gamma = \beta$
+    since if $\alpha + \gamma > \beta$ either: \begin{itemize}
+        \item $\gamma = \delta + 1$ so $\alpha + \delta < \beta$ as
+            $\delta$ is not in $Z$. But then,
+            $(\alpha + \delta) + 1 = \alpha + \gamma \leq \beta$,
+            a contradiction,
+        \item $\gamma$ is a limit ordinal, $\alpha + \gamma =
+            \sup(\{\alpha + \delta : \delta < \gamma\})$. But,
+            if $\alpha + \gamma > \beta$ then there's some $\delta < \gamma$
+            so that $\delta \geq \beta$. This contradicts $\gamma = \min(Z)$.
+    \end{itemize} 
+    (ii) As $M_\alpha$ is strictly increasing, we again choose the least
+    $\zeta$ such that \linebreak
+     $\alpha \cdot \zeta \leq \beta < \alpha \cdot (\zeta + 1)$. We apply
+     part (i) to find $\kappa$ such that $\alpha \cdot \zeta + \kappa = \beta$.
+     We suppose $\zeta'$ and $\kappa'$ also satisfy (ii), if $\zeta = \zeta'$
+     then by the uniqueness of part (i), $\kappa = \kappa'$. We suppose
+     $\zeta < \zeta'$ so $\zeta + 1 \leq \zeta'$: \begin{align*}
+         \beta = \alpha \cdot \zeta + \kappa &< \alpha \cdot \zeta + \alpha \\
+         &= \alpha \cdot (\zeta + 1) \\
+         &\leq \alpha \cdot \zeta' \\
+         &\leq \alpha \cdot \zeta' + \kappa' \\
+         &= \beta,
+     \end{align*} a contradiction. Hence, $\zeta = \zeta'$.
+\end{proof}
