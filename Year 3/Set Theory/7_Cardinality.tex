@@ -1,0 +1,77 @@
+\section{Cardinality}
+
+\subsection{Equinumerosity}
+
+We say that two sets, $A$ and $B$, are equinumerous if there is a bijection 
+between them, written as $A \approx B$.
+\\[\baselineskip]
+We have that $\approx$ is an equivalence relation with equivalence classes
+as collections of all equinumerous sets of a size.
+
+\subsection{Finite Sets}
+
+A set is finite if it is equinumerous with a natural number. Sets that are
+not finite are infinite.
+
+\subsection{Pidgeon-hole Principle}
+
+No natural number is equinumerous to a proper subset of itself and thus: \begin{itemize}
+    \item No finite set is equinumerous to a proper subset of itself,
+    \item Any set equinumerous to a proper subset of itself is infinite,
+    \item Any finite set is equinumerous to a unique natural number,
+    \item $\omega$ is infinite.
+\end{itemize}
+
+\begin{proof}
+    We take $Z = \{n \in \omega : \forall \, f, 
+    (f : n \to n \text{ and injective}) \Rightarrow (\Ran(f) = n)\}$. Trivially,
+    $Z$ contains $0$. For $n$ in $Z$, we consider $f : (n + 1) \to (n + 1)$
+    an injective function.
+
+    \paragraph{Case 1} We suppose that $f \upharpoonright n : n \to n$
+    is an injective function and by our inductive hypothesis,
+    $\Ran(f \upharpoonright n) = n$. Thus, $\Ran(f) = n + 1$.
+
+    \paragraph{Case 2} We suppose that $f(m) = n$ for some $m < n$.
+    As $f$ is injective, for some $k < n$, $f(n) = k$. We
+    define $g$ identically to $f$ except $g(m) = k$ and $g(n) = n$
+    so that $g : (n + 1) \to (n + 1)$ and injective so \textbf{Case 1}
+    applies to $g$. Hence, \linebreak $\Ran(g) = n + 1 = \Ran(f)$.
+\end{proof}
+
+\subsection{Cantor's Diagonal Argument}
+
+The natural numbers are not equinumerous with the real numbers.
+
+\begin{proof}
+    We appeal to the contrary and suppose we have some injective map
+    $f : \omega \to \mb{R}$: \begin{align*}
+        f(0) &= 2.72938 \ldots \\
+        f(1) &= 3.47000 \ldots \\
+        f(2) &= 9.32789 \ldots \\
+        &\vdots 
+    \end{align*} We can generate some $x$ not in $\Ran(f)$ by
+    setting the $i^{\text{th}}$ decimal place to the $i^{\text{th}}$
+    decimal place of $f(i)$ mapped by: \begin{align*}
+        k \mapsto \begin{cases}
+            1 & k \text{ even} \\
+            2 & k \text{ odd.} \\
+        \end{cases}
+    \end{align*} Thus, $x$ would differ from every element of $\Ran(f)$.
+    A contradiction.
+\end{proof}
+
+\subsection{Infinite Infinities}
+
+No set is equinumerous to its powerset.
+
+\begin{proof}
+    We appeal to the contrary and suppose $f : X \to \mc{P}(X)$ is a bijection
+    for some set $X$. We set $Z = \{u \in X : u \notin f(u)\}$ and see that
+    $Z \subseteq X$ so $Z$ is in $\mc{P}(X)$. As such, $Z = f(u)$ for some
+    $u$, but:
+    \begin{align*}
+        u \in Z &\Longrightarrow u \notin f(u), \\
+        u \notin Z &\Longrightarrow u \in f(u),
+    \end{align*} which is a contradiction.
+\end{proof}

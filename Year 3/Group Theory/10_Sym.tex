@@ -57,3 +57,149 @@ to $n$, we take $l_1, \ldots, l_k$ be the lengths of these cycles in
 descending order. The $k$-tuple $(l_1, \ldots, l_k)$ is the cycle type of $f$.
 \\[\baselineskip]
 From this, we can see that $|f| = \Lcm(l_1, \ldots, l_k)$.
+
+\subsection{Conjugacy in $S_n$}
+
+For all $g$ in $S_n$ with $i_1, \ldots, i_k$ distinct elements of $[n]$: 
+\begin{align*}
+    g(i_1, \ldots, i_k)g^{-1} = (g(i_1), \ldots, g(i_k)).
+\end{align*}
+
+\begin{proof}
+    For $k = 1$, $(i_1) = e$ so $g(i_1)g^{-1} = gg^{-1} = e = (g(i_1))$.
+    For $k = 2$ and $x$ in $S_n \backslash \{g(i_1), g(i_2)\}$: \begin{align*}
+        g(i_1, i_2)g^{-1}(g(i_1)) 
+        &= g(i_2), \\
+        g(i_1, i_2)g^{-1}(g(i_2)) 
+        &= g(i_1), \\
+        g(i_1, i_2)g^{-1}(x) 
+        &= gg^{-1}(x) \\
+        &= x,
+    \end{align*} so $g(i_1, i_2)g^{-1} = (g(i_1), g(i_2))$. For $k > 2$,
+    $(i_1, \ldots, i_k) = (i_1, i_2)\cdots(i_{k - 1}, i_k)$ so: \begin{align*}
+        g(i_1, \ldots, i_k)g^{-1} 
+        &= g(i_1, i_2)\cdots(i_{k - 1}, i_k)g^{-1}\\
+        &= g(i_1, i_2)g^{-1}g \cdots g^{-1}g(i_{k - 1}, i_k)g^{-1}\\
+        &= (g(i_1), g(i_2)) \cdots (g(i_{k - 1}), g(i_k)) \\
+        &= (g(i_1), \ldots, g(i_k)),
+    \end{align*} as required.
+\end{proof}
+
+\subsection{Conjugacy and Cycle Type}
+
+For $x$, $y$ in $S_n$, $x$ and $y$ are conjugate if and only if
+they have the same cycle type.
+
+\begin{proof}
+    We take the cycle type of $x$ be $(l_1, \ldots, l_k)$ so: \begin{align*}
+        x = (a_1^{(1)}, \ldots, a_{l_1}^{(1)}) \cdots (a_1^{(k)}, \ldots, a_{l_k}^{(k)}),
+    \end{align*} with each value in $[n]$ corresponding to some $a_j^{(r)}$.
+    For $g$ in $S_n$: \begin{align*}
+        gxg^{-1} 
+        &= g(a_1^{(1)}, \ldots, a_{l_1}^{(1)})g^{-1}g \cdots g^{-1}g(a_1^{(k)}, \ldots, a_{l_k}^{(k)})g^{-1} \\
+        &= (g(a_1^{(1)}), \ldots, g(a_{l_1}^{(1)})) \cdots (g(a_1^{(k)}), \ldots, g(a_{l_k}^{(k)})),
+    \end{align*} with the disjoint property of the cycles preserved as the
+    contrary would contradict the disjoint property of the cycles of $x$.
+    Thus, all conjugates of $x$ have the same cycle type as $x$.
+    \\[\baselineskip]
+    For $y$ in $S_n$ with cycle type equal to $(l_1, \ldots, l_k)$: \begin{align*}
+        y = (b_1^{(1)}, \ldots, b_{l_1}^{(1)}) \cdots (b_1^{(k)}, \ldots, b_{l_k}^{(k)}),
+    \end{align*} with each value in $[n]$ corresponding to some $b_j^{(r)}$.
+    We define $g$ in $S_n$ by $g(a_i^{(j)}) = b_i^{(j)}$ and see that: \begin{align*}
+        gxg^{-1} = y,
+    \end{align*} using the previous result.
+\end{proof}
+
+\subsection{Parity of Transposition Representations}
+
+For $x$ in $S_n$ with $x = t_1 \cdots t_r = s_1 \cdots s_k$ and
+each $t_i$, $s_i$ a transposition, $r \equiv k \bmod 2$.
+
+\subsection{Signature}
+
+For $x$ in $S_n$ with $x = t_1 \cdots t_r$ and each $t_i$ a transposition,
+the signature of $x$ is defined as: \begin{align*}
+    \varepsilon(x) &= \begin{cases}
+        1 & r \equiv 0 \bmod 2 \\
+        -1 & \text{otherwise}.
+    \end{cases}
+\end{align*}
+
+\subsection{The Signature Homomorphism}
+
+For $n$ in $\mb{N}$, $\varepsilon : S_n \to (\{-1, 1\}, \times)$ is a
+homomorphism.
+
+\begin{proof}
+    For $x$, $y$ in $S_n$ with $x = x_1 \cdots x_r$ and $y = y_1 \cdots y_s$
+    where each $x_i$ and $y_j$ is a transposition: \begin{align*}
+        \varepsilon(xy) 
+        &= \varepsilon(x_1 \cdots x_ry_1 \cdots y_s) \\
+        &= (-1)^{r + s} \\
+        &= (-1)^r(-1)^s \\
+        &= \varepsilon(x)\varepsilon(y).
+    \end{align*}
+\end{proof}
+
+\subsection{Alternating Groups}
+
+We define the alternating group $A_n$ to be the set of even permutations
+in $S_n$. Thus, $A_n \nsub S_n$.
+
+\begin{proof}
+    $A_n = \Ker(\varepsilon)$.
+\end{proof}
+
+\subsection{Subgroups of Index 2 in $S_n$}
+
+For $n > 1$, $H \leq S_n$ has index 2 if and only if $H = A_n$.
+
+\begin{proof}
+    ($\Rightarrow$) We know that $H \nsub S_n$ so we consider $S_n / H$ 
+    which must have order 2 as $H$ has index 2.
+    Thus, $S_n / H \cong C_2 \cong (\{-1, 1\}, \times)$ so there's a 
+    surjective homomorphism $\pi$ from $S_n$ to $(\{-1, 1\}, \times)$
+    with kernel $H$. For $t_1$, $t_2$ transpositions, 
+    there exists $g$ such that $t_1 = g^{-1}t_2g$ so: \begin{align*}
+        \pi(t_1) 
+        &= \pi(g)^{-1}\pi(t_2)\pi(g) \\
+        &= \pi(t_2)\pi(g)^{-1}\pi(g) \tag{$(\{-1, 1\}, \times)$ is abelian}\\
+        &= \pi(t_2),
+    \end{align*} meaning $\pi$ takes the same value $k$ on all transpositions.
+    The set of transpositions $T$ generates $S_n$ so $\pi(T)$ generates
+    $(\{-1, 1\}, \times)$ but $\pi(T) = \{k\}$ so $k = -1$. Thus,
+    for $x = x_1 \cdots x_r$ a product of transpositions, 
+    $\pi(x) = (-1)^r = \varepsilon(x)$ so $\pi = \varepsilon$.
+    As such, $H = \Ker(\pi) = \Ker(\varepsilon) = A_n$.
+    \\[\baselineskip]
+    ($\Leftarrow$) By the homomorphism theorem, 
+    $\Ima(\varepsilon) \cong S_n / \Ker(\varepsilon) = S_n / A_n$.
+    So, \linebreak $[S_n : A_n] = |\{-1, 1\}| = 2$.
+\end{proof}
+
+\subsection{Alternating Groups generated by $3$-Cycles}
+
+For $n$ in $\mb{N}$, $A_n$ is generated by its subset of $3$-cycles.
+
+\begin{proof}
+    Each element of $A_n$ is a product of an even number of transpositions,
+    so a product of permutations of the form $(i, j)(k, l)$. It suffices
+    to show that these permutations must be $3$-cycles.
+
+    \paragraph{Case 1} If $\{i, j\} = \{k, l\}$, as $(i, j) = (j, i)$, 
+    $(i, j)(k, l) = e$, a product of zero $3$-cycles.
+
+    \paragraph{Case 2} If $|\{i, j\} \cap \{k, l\}| = 1$, we take $j = k$
+    without loss of generality so: \begin{align*}
+        (i, j)(k, l)
+        &= (i, j)(j, l) \\
+        &= (i, j, l),
+    \end{align*} a $3$-cycle.
+
+    \paragraph{Case 3} If $i$, $j$, $k$, and $l$ are all distinct then: \begin{align*}
+        (i, j)(k, l)
+        &= (i, j)(j, k)(j, k)(k, l) \\
+        &= (i, j, k)(j, k, l),
+    \end{align*} a product of two $3$-cycles.
+
+\end{proof}
