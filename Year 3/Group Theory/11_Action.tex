@@ -1,0 +1,15 @@
+\section{Group Actions}
+
+For a group $G$ and a non-empty set $X$, an action of $G$ on $X$ is
+a homomorphism $\varphi : G \to \Sym(X)$. We say that: \begin{itemize}
+    \item the action is faithful if $\varphi$ is injective,
+    \item the action is transitive if for all $x$, $y$ in $X$,
+        there exists $g$ in $G$ such that $\varphi(g)(x) = y$.
+\end{itemize} We will abbreviate $\varphi(g)(x)$ to $g \cdot x$.
+
+\subsection{The Orbit and Stabiliser}
+
+For a group $G$ acting on a set $X$, for each $x$ in $X$: \begin{align*}
+    \Orb_G(x)  &= G \cdot x = \{g \cdot x : g \in G\}, \\
+    \Stab_G(x) &= G_x = \{g \in G : g \cdot x = x\},
+\end{align*} are the orbit and stabiliser of $x$, respectively.
