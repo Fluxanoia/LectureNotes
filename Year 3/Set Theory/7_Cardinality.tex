@@ -143,4 +143,36 @@ countably infinite subset.
 
 \subsection{Well-ordering Principle}
 
-For a set $X$, there is a well-ordering $\ang{X, R}$. 
+For a set $X$, there is a well-ordering $\ang{X, R}$.
+This implies that the union of countably infinite sets
+is countably infinite.
+
+\subsection{Cardinality}
+
+For a set $X$, the cardinality of $X$, $|X|$ is the
+least ordinal $\alpha$ such that $X \approx \alpha$.
+We have that for $X$, $Y$ sets: \begin{align*}
+    X \approx Y &\Longleftrightarrow |X| = |Y|, \\
+    X \preceq Y &\Longleftrightarrow |X| \leq |Y|, \\
+    X \prec Y &\Longleftrightarrow |X| < |Y|.
+\end{align*}
+
+\subsection{Cardinal Numbers}
+
+An ordinal $\alpha$ is a cardinal if $\alpha = |\alpha|$.
+
+\subsection{Cardinality Capture}
+
+For $\alpha$, $\gamma$ ordinals,
+$|\alpha| \leq \gamma < \alpha$ then $|\alpha| = |\gamma|$.
+
+\begin{proof}
+    By definition, there's a bijection $f$ from $\alpha$
+    to $|\alpha|$, so $||a|| = |a|$. We know that $\gamma
+    \subseteq \alpha$, so we know that
+    $f \upharpoonright \gamma$ is an injection from $\gamma$ to 
+    $|\alpha|$ so $\gamma \preceq |\alpha|$. But, 
+    $|\alpha| \preceq \gamma$ by our assumption,
+    so $|\alpha| \approx \gamma$ which implies that
+    $|\gamma| \approx ||\alpha|| = |\alpha|$.
+\end{proof}

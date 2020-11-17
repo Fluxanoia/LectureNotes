@@ -1,0 +1,43 @@
+\section{Sylow's Theorems}
+
+\subsection{Cauchy's Theorem}
+
+For a finite group $G$ and a prime $p$ such that $p$ divides $|G|$,
+$G$ contains an element of order $p$.
+
+\begin{proof}
+    We first prove the theorem for abelian groups, then for all groups.
+    \\[\baselineskip]
+    \textbf{Abelian Case} 
+    Suppose $G$ is abelian.
+    If $|G| = p$, then $G$ is cyclic with a generator of order $p$.
+    So, we consider $|G| > p$ and proceed by induction on $|G|$. 
+    We take $g$ in $G \setminus \{e\}$, if $p$ divides $|g|$, 
+    we take $g^{\frac{|g|}{p}}$.
+    Otherwise, by Lagrange's theorem, $|G| = |g| \cdot [G : \ang{g}]$
+    so $p$ divides $[G : \ang{g}]$. Thus, $G / \ang{g}$ is an abelian
+    group of order strictly less than $|G|$, so by induction, it
+    contains an element of order $p$, $h\ang{g}$.
+    We write $n = |h|$, we have that: \begin{align*}
+        (h\ang{g})^n = h^n\ang{g} = e\ang{g} = \ang{g},
+    \end{align*} so $p$ divides $n$. Thus, $h^{\frac{n}{p}}$ has order
+    $p$ in $G$ as required. \qed
+    \\[\baselineskip]
+    \noindent
+    We remove our supposition that $G$ is abelian.
+    As before, if $|G| = p$, then $G$ is cyclic with a generator of 
+    order $p$. So, we consider $|G| > p$ and proceed by induction on $|G|$.
+    If $p$ divides $|Z(G)|$, as $Z(G)$ is abelian, we are done. Otherwise,
+    we consider the class equation: \begin{align*}
+        |G| = |Z(G)| + \sum_{C \in \mc{C}(G), \, |C| > 1} [G : C_G(g_C)].
+    \end{align*} As $p$ divides $|G|$ but not $|Z(G)|$, there is some
+    term of the summation that is not divisible by $p$. Thus, there exists
+    $g$ in $G$ such that $g \in C$ where $C$ is a conjugacy class
+    of size at least $2$ and $[G : C_G(g)]$ is not divisible by $p$.
+    But, Lagrange's theorem implies that $|C_G(g)|$ is divisible
+    by $p$ as: \begin{align*}
+        |G| = |C_G(g)|[G : C_G(g)].
+    \end{align*} Since $|C| \geq 2$, $g$ is not central in $G$, so
+    $C_G(g) \neq G$. By induction, $C_G(g)$ contains an element of
+    order $p$. Hence, $G$ does.
+\end{proof}

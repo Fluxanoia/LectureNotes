@@ -13,3 +13,116 @@ For a group $G$ acting on a set $X$, for each $x$ in $X$: \begin{align*}
     \Orb_G(x)  &= G \cdot x = \{g \cdot x : g \in G\}, \\
     \Stab_G(x) &= G_x = \{g \in G : g \cdot x = x\},
 \end{align*} are the orbit and stabiliser of $x$, respectively.
+
+\subsection{The Orbit-Stabiliser Theorem}
+
+For a group $G$ acting on a set $X$ with $x$ in $X$, 
+$\Stab_G(x)$ is a subgroup of $G$ and there is a
+well-defined bijection $\varphi$ from $\Orb_G(x)$ to $G / \Stab_G(x)$
+defined by: \begin{align*}
+    \varphi(g \cdot x) = g\Stab_G(x).
+\end{align*} If $G$ is finite, $|G| = |\!\Orb_G(x)| \cdot |\!\Stab_G(x)|$.
+
+\begin{proof}
+    We want to show that $\Stab_G(x) \leq G$.
+    As the action is a homomorphism, $e \cdot x = x$, so $e$ is
+    in $\Stab_G(x)$. For $g$, $h$ in $\Stab_G(x)$, then: \begin{align*}
+        (gh) \cdot x 
+        &= g \cdot (h \cdot x) \tag{action is homomorphic} \\
+        &= g \cdot (x) \\
+        &= x.
+    \end{align*} For $g$ in $\Stab_G(x)$: \begin{align*}
+        g^{-1} \cdot (g \cdot x) = x
+        & \Longleftrightarrow g^{-1} \cdot x = x \\
+        & \Longleftrightarrow g^{-1} \in \Stab_G(x),
+    \end{align*} so $\Stab_G(x) \leq G$. We know that
+    $\varphi$ is well-defined and injective as: \begin{align*}
+        \bigl[ g \cdot x = h \cdot x \bigr]
+        & \Longleftrightarrow h^{-1}g \cdot x = x \\
+        & \Longleftrightarrow h^{-1}g \in \Stab_G(x) \\
+        & \Longleftrightarrow g \in h\Stab_G(x) \\
+        & \Longleftrightarrow g\Stab_G(x) = h\Stab_G(x).
+    \end{align*} As $\varphi$ is trivially surjective, it is a
+    well-defined bijection as required.
+\end{proof}
+
+\subsection{Relation via the Orbit}
+
+For a group $G$ acting on a set $X$, we define an equivalence relation
+on $X$ by $x \sim y$ if $y$ is in $\Orb_G(x)$. The orbits of elements
+$x$ in $G$ are the equivalence classes of this relation, so they 
+partition $X$.
+
+\begin{proof}
+    \textbf{Reflexivity} For all $x$ in $X$, we have that
+    $e \cdot x = x$ so $x \sim x$.
+    \\[\baselineskip]
+    \textbf{Symmetry} If $g \cdot x = y$ then $g^{-1} \cdot y = x$.
+    \\[\baselineskip]
+    \textbf{Transitivity} If $x \sim y \sim z$ then there exists
+    $g$ such that $y = g \cdot x$ and $h$ such that $z = h \cdot y$
+    so $z = (hg) \cdot x$ so $x \sim z$.
+\end{proof}
+
+\subsection{Fixed Points}
+
+For a group $G$ acting on a set $X$, $x$ in $X$ is a fixed point
+for this action if $\Orb_G(x) = \{x\}$.
+We write $\Fix_G(X)$ for the set of fixed points of this action. 
+\\[\baselineskip]
+For $X$ finite, we write $\mc{O}_G(X)$
+for the set of orbits of $X$ under this action. For each orbit
+$O$ in $\mc{O}_G(X)$, we pick can arbitrary element $x_O \in O$
+and see that: \begin{align*}
+    |X| = |\!\Fix_G(X)| + \sum_{O \in \mc{O}_G(X), \, |O| > 1} [G : \Stab_G(x_O)].
+\end{align*}
+
+\begin{proof}
+    We have that: \begin{align*}
+        |X| &= \sum_{O \in \mc{O}_G(X)} |O| \tag{Relation via the Orbit} \\
+        &= |\!\Fix_G(X)| + \sum_{O \in \mc{O}_G(X), \, |O| > 1} |O| \\
+        &= |\!\Fix_G(X)| + \sum_{O \in \mc{O}_G(X), \, |O| > 1} [G : \Stab_G(x_O)]. \tag{Orbit-Stabiliser}
+    \end{align*}
+\end{proof}
+
+\subsection{The Conjugation Action}
+
+For a group $G$, acting on itself via the conjugacy action 
+($g \cdot x = gxg^{-1}$), we take $x$ in $G$. The conjugacy class 
+of $x$, denoted by $x^G$, is defined by: \begin{align*}
+    x^G = \{gxg^{-1} : g \in G\} = \Orb_G(x).
+\end{align*} The centraliser of $x$, denoted by $C_G(x)$, 
+is defined by: \begin{align*}
+    C_G(x) = \{g \in G : gxg^{-1} = x\} = \Stab_G(x).
+\end{align*} For $H \leq G$, the normaliser of $H$ in $G$,
+denoted by $N_G(H)$, is defined by: \begin{align*}
+    N_G(H) = \{g \in G : gHg^{-1} = H\}.
+\end{align*} We note that this is the stabiliser of $H$ under the
+conjugation action of $G$ onto the set of subgroups of $G$.
+
+\subsection{Partitioning on Conjugacy Classes}
+
+For a group $G$, the conjugacy classes of $G$ partition $G$.
+
+\subsection{The Orbit-Stabiliser Theorem for Conjugation}
+
+For a group $G$ with $x$ in $G$, $C_G(x) \leq G$ and there exists
+a well-defined bijection $\varphi$ from $x^G$ to $G / C_G(x)$ 
+defined by: \begin{align*}
+    \varphi(gxg^{-1}) = gC_G(x).
+\end{align*} If $G$ is finite, $|G| = |x^G||C_G(x)|$. If we apply
+this to the conjugation action of $G$ onto the set of its subgroups,
+we get that: \begin{align*}
+    |\{K \leq G : K \text{ is conjugate to } H\}|
+    = [G : N_G(H)].
+\end{align*}
+
+\subsection{The Class Equation}
+
+For a finite group $G$, we write $\mc{C}$ for the set of conjugacy classes
+of $G$, for each conjugacy class $C$, we can pick an arbitrary element
+$g_C$ and see that: \begin{align*}
+    |G| = |Z(G)| + \sum_{C \in \mc{C}(G), \, |C| > 1} [G : C_G(g_C)].
+\end{align*}
+
+
