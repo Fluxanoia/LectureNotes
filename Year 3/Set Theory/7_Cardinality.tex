@@ -176,3 +176,55 @@ $|\alpha| \leq \gamma < \alpha$ then $|\alpha| = |\gamma|$.
     so $|\alpha| \approx \gamma$ which implies that
     $|\gamma| \approx ||\alpha|| = |\alpha|$.
 \end{proof}
+
+\subsection{Cardinal Arithmetic}
+
+For cardinals $\kappa$ and $\lambda$, and sets $K$ and $L$ with cardinality
+$\kappa$ and $\lambda$ respectively, we define: \begin{align*}
+    \kappa \oplus \lambda &= |K \cup L|, \tag{for $K$, $L$ disjoint} \\
+    \kappa \otimes \lambda &= |K \times L|.
+\end{align*} We note that these operations are commutative and associative.
+\\[\baselineskip]
+Furthermore, for $n$, $m$ in $\omega$: \begin{align*}
+    n + m &= n \oplus m < \omega, \\
+    n \cdot m &= n \otimes m < \omega.
+\end{align*}
+
+\subsection{Hessenberg's Theorem}
+
+For an infinite cardinal $\kappa$, there is a bijection from $\kappa \times \kappa$
+to $\kappa$. Thus, $\kappa \otimes \kappa = \kappa$.
+
+\begin{proof}
+    We already know that $\omega \times \omega \approx \omega$ so we proceed by
+    induction on $\lambda \geq \omega$. We assume $\lambda < \kappa$ so
+    $\lambda \times \lambda \approx \lambda$. We consider Gödel's ordering: \begin{align*}
+        \bigl[
+            \ang{\alpha, \beta} \triangleleft \ang{\lambda, \delta}
+        \bigr]
+        \Longleftrightarrow&
+        \bigl[
+            (\max(\{\alpha, \beta\}) < \max(\{\gamma, \delta\})) \\
+            & \text{ or } \bigl[
+            (\max(\{\alpha, \beta\}) = \max(\{\gamma, \delta\})) \\
+            & \text{ and }
+            (\alpha < \gamma \text{ or } (\alpha = \gamma \text{ and } \beta < \delta))
+        \bigr]\bigr].
+    \end{align*} We know that $\ang{\kappa \times \kappa, \triangleleft}$ is a
+    well-ordering and each $\ang{\alpha, \beta}$ in $\kappa \times \kappa$ has
+    no more than 
+    $|(\max(\{\alpha, \beta\}) + 1) \times (\max(\{\alpha + \beta\}) + 1)| < \kappa$
+    $\triangleleft$-predecessors as shown here:
+    \begin{proof}
+        We can see that: \begin{align*}
+            (\kappa \times \kappa)_{\ang{\alpha, \beta}} \subset \gamma \times \gamma,
+        \end{align*} where $\gamma = \max(\{\alpha, \beta\}) + 1$. But, we know that
+        $|\gamma \times \gamma| = |\gamma| \otimes |\gamma|$ and as $\gamma < \kappa$,
+        $|\gamma|$ is an infinite cardinal less than $\kappa$, $|\gamma| \otimes |\gamma|
+        = \gamma$ by the inductive hypothesis.
+    \end{proof} 
+    \noindent
+    All initial segments $\ang{(\kappa \times \kappa)_{\ang{\alpha, \beta}}, \triangleleft}$
+    have order type less than $\kappa$ so $\ot(\kappa \times \kappa, \triangleleft) \leq \kappa$.
+    But $\kappa \times \kappa \geq \kappa$ so $\ot(\kappa \times \kappa, \triangleleft) = \kappa$.
+\end{proof}
