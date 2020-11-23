@@ -41,3 +41,151 @@ $G$ contains an element of order $p$.
     $C_G(g) \neq G$. By induction, $C_G(g)$ contains an element of
     order $p$. Hence, $G$ does.
 \end{proof}
+
+\subsection{Order of $p$-groups}
+
+For a prime $p$ and a finite group $G$, $G$ is a $p$-group if
+and only if $|G| = p^m$ for some $m$ in $\mb{N}$.
+
+\begin{proof}
+    If $|G| = p^m$ for some $m$ in $\mb{N}$ then every element has
+    order dividing $p^m$ by Lagrange's theorem. As such, $G$ is a
+    $p$-group. Conversely, if $|G|$ is divisible by some prime
+    $q \neq p$, then Cauchy's theorem imples that $G$ has
+    an element of order $q$, which is not a power of $p$.
+\end{proof}
+
+\subsection{Sylow's First Theorem}
+
+We consider a prime $p$ and a finite group $G$ with $|G| = p^rm$ 
+for some $r$ in $\mb{N}_0$ and some $m$ in $\mb{N}$ such that $p$ 
+does not divide $m$. We have that for every $k$ in $\mb{N}_0$,
+there exists a subgroup of $G$ of order $p^k$ if and only if
+$k \leq r$.
+
+\begin{proof}
+    We note that when $k > r$, $p^k$ cannot divide $p^rm$ as
+    we've defined it so by Lagrange's theorem, there's no subgroup
+    of size $p^k$. Thus, we consider $k$ in $[r]_0$.
+    The theorem is trivial when $G = \{e\}$, so we assume $|G| > 1$
+    and proceed by induction on $|G|$.
+    \\[\baselineskip]
+    \textbf{Case 1} We suppose that $p$ divides $|Z(G)|$.
+    Cauchy's theorem implies that there is a central element
+    $x$ of order $p$, thus $\ang{x} \nsub G$. We consider
+    $G / \ang{x}$ which has size $p^{r - 1}m$ so by induction
+    has subgroups of order $p^k$ for $k$ in $[r - 1]_0$
+    denoted by $H_0, \ldots, H_{r - 1}$ with each $i$
+    in $[r - 1]_0$ yielding $|H_i| = p^i$.
+    \\[\baselineskip]
+    We take $\pi$ from $G$ to $G / \ang{x}$ to be the
+    quotient homomorphism and note that by the correspondence 
+    theorem, for all $i$ in $[r - 1]_0$, $\pi^{-1}(H_i) \leq G$ and so:
+    \begin{align*}
+        |\pi^{-1}(H_i)| = |\ang{x}| \cdot |H_i| = p|H_i| = p^{i + 1}.
+    \end{align*} Thus, since we have the trivial subgroup of order
+    $1$, we have subgroups of order $1, p, \ldots, p^r$ as
+    required.
+    \\[\baselineskip]
+    \textbf{Case 2} We suppose that $p$ does not divide $|Z(G)|$.
+    We take $\mc{C}$ to be the set of conjugacy classes in $G$
+    and for each $c$ in $\mc{C}$, we pick an element $g_C$ in $C$
+    and use the class equation: \begin{align*}
+        |G| = |Z(G)| + \sum_{C \in \mc{C}, |C| \geq 2} [G : C_G(g_C)].
+    \end{align*}
+    Thus, there must be some $g$ not in $Z(G)$ such that
+    $[G : C_G(g)]$ is not divisible by $p$ so: \begin{align*}
+        \frac{|G|}{|C_G(g)|},
+    \end{align*} is not divisible by $p$. However, since
+    $|G|$ is divisible by $p^r$, $|C_G(g)|$ must be also.
+    As $g$ is not in $Z(G)$, $C_G(g) \neq G$ so 
+    $|C_G(g)| < |G|$. By induction, $C_G(g)$ contains
+    subgroups of order $1, p, \ldots, p^r$ which are
+    also subgroups of $G$.
+\end{proof}
+
+\subsection{Sylow Subgroups}
+
+For a prime $p$ and a group $G$, a $p$-subgroup $H \leq G$
+is a Sylow $p$-subgroup if it is not a subgroup of any other
+$p$-subgroup of $G$. We write $\Syl_p(G)$ for the set of
+these subgroups and $n_p(G)$ for the quantity of them.
+
+\subsection{Closure of $p$-groups under Conjugacy}
+
+For a prime $p$ and a group $G$ with $H \leq G$ a $p$-group,
+for every $g$ in $G$, $H^g$ is also a $p$-group.
+If $H$ is a Sylow $p$-group, so is $H^g$. 
+
+\begin{proof}
+    As conjugacy is an automorphism, $H^g$ is another $p$-group.
+    If $H$ is a Sylow $p$-subgroup and $H^g$ is not, then $H^g$ 
+    must be a proper subgroup of some other $p$-group $K \leq G$.
+    But, $K^g$ is another $p$-subgroup and: \begin{align*}
+        H = g^{-1}(gHg^{-1})g < g^{-1}Kg,
+    \end{align*} which contradicts the fact that $H$ is a
+    Sylow $p$-group.
+\end{proof}
+
+\subsection{Sylow's Second Theorem}
+
+For a prime $p$ and a finite group $G$, the Sylow $p$-groups
+of $G$ are all conjugate to each other.
+
+\begin{proof}
+    We write $|G| = p^rm$ with $p$ not dividing $m$.
+    By Sylow's first theorem, we have that there exists
+    a Sylow $p$-subgroup $P \leq G$ with $|P| = p^r$.
+    We will show $P$ is conjugate to an arbitrary Sylow
+    $p$-subgroup $H$.
+    We take $H$ to act on $G / P$ via $h \cdot gP = (hg)P$
+    and $\mc{O}$ to be the set of orbits of this action.
+    The orbits partition $G / P$ so 
+    $m = [G : P] = \sum_{O \in \mc{O}} |O|$. But, $m$
+    is not divisible by $p$ so there must be some orbit
+    $O$ with $|O|$ not divisible by $p$.
+    The orbit-stabiliser theorem gives us that: \begin{align*}
+        |H| = |O| \cdot |\!\Stab_H(x)|,
+    \end{align*} for some $x$ in $G / P$, so $|O|$ divides
+    $|H|$. Since $H$ is a $p$-group, $|O|$ must be a power
+    of $p$. Thus, $|O| = 1$ and as such, the action of $H$ on 
+    $G / P$ has a fixed point, for some $g$ in $G$ and for 
+    all $h$ in $H$: \begin{align*}
+        HgP = gP
+        & \Longleftrightarrow g^{-1}HgP = P \\
+        & \Longleftrightarrow g^{-1}Hg \subseteq P.
+    \end{align*} By the closure of Sylow $p$-subgroups under
+    conjugacy and the definition of Sylow $p$-subgroups, 
+    $g^{-1}Hg$ must be equal to $P$.
+\end{proof}
+
+\subsection{Order of Sylow Subgroups}
+
+For a prime $p$ and a finite group $G$ with $|G| = p^rm$
+where $r$ is in $\mb{N}_0$, $m$ is in $\mb{N}$, and 
+$p$ doesn't divide $m$, every Sylow $p$-subgroup of $G$
+has order $p^r$. 
+\begin{proof}
+    This is a consequence of Sylow's first and second theorems.
+\end{proof}
+
+\subsection{The Quantity of Sylow Subgroups}
+
+For a finite group $G$ and $P \leq G$ a Sylow $p$-subgroup,
+$n_p(G) = [G : N_G(P)]$. In particular, $P \nsub G$ if and
+only if $P$ is the unique Sylow $p$-subgroup of $G$.
+
+\begin{proof}
+    By Sylow's second theorem: \begin{align*}
+        n_p(G) &= |\{H \leq G : H \text{ is conjugate to } P\}| \\
+        &= [G : N_G(P)],
+    \end{align*} as required.
+\end{proof}
+
+\subsection{Sylow Subgroups of Abelian Groups}
+
+For a finite abelian group $G$, $n_p(G) = 1$ for all primes $p$.
+
+\begin{proof}
+    We have that $n_p(G) = [G : N_G(P)] = 1$ as $N_G(P) = G$.
+\end{proof}
