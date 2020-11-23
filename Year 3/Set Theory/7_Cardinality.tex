@@ -177,7 +177,7 @@ $|\alpha| \leq \gamma < \alpha$ then $|\alpha| = |\gamma|$.
     $|\gamma| \approx ||\alpha|| = |\alpha|$.
 \end{proof}
 
-\subsection{Cardinal Arithmetic}
+\subsection{Cardinal Addition and Multiplication}
 
 For cardinals $\kappa$ and $\lambda$, and sets $K$ and $L$ with cardinality
 $\kappa$ and $\lambda$ respectively, we define: \begin{align*}
@@ -228,3 +228,41 @@ to $\kappa$. Thus, $\kappa \otimes \kappa = \kappa$.
     have order type less than $\kappa$ so $\ot(\kappa \times \kappa, \triangleleft) \leq \kappa$.
     But $\kappa \times \kappa \geq \kappa$ so $\ot(\kappa \times \kappa, \triangleleft) = \kappa$.
 \end{proof}
+
+\subsection{Confluence of Addition and Multiplication}
+
+For infinite cardinals $\kappa$, $\lambda$,
+$\kappa \oplus \lambda = \kappa \otimes \lambda = \max(\{\kappa, \lambda\})$.
+
+\begin{proof}
+    Without loss of generality, we assume $\lambda \leq \kappa$ so
+    $\max{\{\kappa, \lambda\}} = \kappa$. For $X$ and $Y$ disjoint with
+    cardinality $\kappa$ and $\lambda$ (resp.): \begin{align*}
+        X \preceq X \cup Y \preceq (X \times \{0\}) \cup (X \times \{1\})
+        = X \times 2 \preceq X \times X.
+    \end{align*} So, in terms of cardinals we have: \begin{align*}
+         \kappa \leq \kappa \oplus \lambda \leq \kappa \oplus \kappa
+         = \kappa \otimes 2 \leq \kappa \otimes \kappa.
+    \end{align*} But, by Hessenberg's Theroem, $\kappa = \kappa \otimes \kappa$
+    which induces equality on all the above statements. 
+    As such, $\kappa = \kappa \oplus \lambda$ and similarly: \begin{align*}
+        \kappa \leq \kappa \otimes \lambda \leq \kappa \otimes \kappa = \kappa,
+    \end{align*} we have that $\kappa = \kappa \otimes \lambda$, as required.
+\end{proof}
+
+\subsection{Cardinality of a Countable Union of Infinite Cardinals}
+
+For a set $A$, $\ps{<\omega}A = \bigcup_{n \in \omega} \ps{n}A$.
+For an infinite cardinal $\kappa$, $|\ps{<\omega}\kappa| = \kappa$.
+
+\subsection{Cardinal Exponentiation}
+
+For cardinals $\kappa$ and $\lambda$, $\kappa^{\lambda} = |\ps{L}K|$ where $K$ and $L$
+are sets of cardinality $\kappa$ and $\lambda$ respectively. 
+
+\subsection{Equinumerosity with Characteristic Functions}
+
+For cardinals $\kappa$ and $\lambda$ with $\lambda \geq \omega$ and 
+$2 \leq \kappa \leq \lambda$, then
+$\ps{\lambda}\lambda \approx \ps{\lambda}\kappa 
+\approx \ps{\lambda}2 \approx \mc{P}(\lambda)$.
