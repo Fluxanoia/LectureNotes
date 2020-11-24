@@ -1,0 +1,98 @@
+\section{Finite Simple Groups}
+
+\subsection{Classification of Abelian Simple Groups} \label{7.2}
+
+For an abelian group $G$, $G$ is simple if and only if 
+$G \cong \mb{Z}_p$ for some prime $p$.
+
+\begin{proof}
+    ($\Rightarrow$) Supposing the antecedent, for some
+    non-identity element $x$ in $G$, $\ang{x} \nsub G$
+    so $\ang{x} = G$ as $G$ is simple. As such, $G$ is cyclic.
+    If $G$ is infinite, $\ang{x^2}$ is a 
+    non-trivial proper normal subgroup of
+    $G$, a contradiction of the simplicity of $G$. If $|G|$
+    is not prime, $|G| = mn$ for some $m$ and $n$ in $\mb{N}_{>1}$.
+    Then $\ang{x^m}$ is, again, a non-trivial proper normal
+    subgroup of $G$. As such, $G$ is a finite cyclic group
+    of prime order, so $G \cong \mb{Z}_p$ for some prime $p$.
+    \\[\baselineskip]
+    ($\Leftarrow$) By Lagrange's theorem, $\mb{Z}_p$ has no
+    non-trivial proper subgroups.
+\end{proof}
+
+\subsection{Bound on the Order of Centres of Finite $p$-groups} \label{7.3}
+
+For a prime $p$ and $G$ a non-trivial finite $p$-group,
+$|Z(G)| \geq p$.
+
+\begin{proof}
+    By (\ref{6.3}), $|G| = p^m$ for some $m$ in $\mb{Z}$.
+    For some $g$ in $G$, if the conjugacy class of $g$ contains
+    more than one element, then $C_G(g) \neq g$ so 
+    $[G : C_G(g)] > 1$. By Lagrange's theorem, 
+    $[G : C_G(g)]$ must be a multiple of $p$.
+    Since $|G|$ is also a multiple of $p$, 
+    $|Z(G)|$ must be too. As $Z(G)$ contains the
+    identity, $|Z(G)| \geq p$.
+\end{proof}
+
+\subsection{Existence of Non-abelian Finite Simple $p$-groups} \label{7.4}
+
+There are no non-abelian finite simple $p$-groups.
+
+\begin{proof}
+    The centre of a finite simple $p$-group $G$ has
+    size at least $p$, so for $G$ to be simple, $Z(G) = G$
+    so $G$ is abelian.
+\end{proof}
+
+\subsection{Classification of Simple $p$-groups} \label{7.5}
+
+For a prime $p$ and a finite simple $p$-group, $G$ is simple
+if and only if $G \cong \mb{Z}_p$.
+
+\begin{proof}
+    By (\ref{7.4}), $G$ is abelian. We apply (\ref{7.2}) and
+    we are done.
+\end{proof}
+
+\subsection{Bound on the Quantity of Sylow $p$-subgroups 
+in Non-abelian Finite Simple Groups} \label{7.6}
+
+For a non-abelian finite simple group $G$ and a prime
+$p$ dividing $|G|$, $n_p(G) > 1$.
+
+\begin{proof}
+    Sylow's first theorem implies that $G$ has at least one
+    non-trivial \Syls $P$. By (\ref{7.5}), there are no
+    non-abelian finite simple $p$-groups so $P$ is a
+    non-trivial proper subgroup of $G$.
+    As $G$ is simple, $P \not\nsub G$ so there exists
+    some conjugation of $P$ not equal to $P$ which would
+    also be a Sylow $p$-subgroup.
+    Thus, $n_p(G) > 1$. 
+\end{proof}
+
+\subsection{Simple Groups of Order 56} \label{7.7}
+
+There are no simple groups of order 56.
+
+\begin{proof}
+    We appeal to the contrary and take $G$ to be a simple
+    group of order $56 = 7 \cdot 2^3$. We know that $G$
+    is not abelian by (\ref{7.2}). We know that $n_7(G) > 1$
+    by (\ref{7.6}) and by Sylow's third theorem, 
+    $n_7(G) \equiv 1 \bmod 7$ and $n_7(G)$ divides 8.
+    Thus, $n_7(G)$ must be 8.
+    \\[\baselineskip]
+    By Cauchy's theorem, every Sylow 7-subgroup has size 7,
+    so must be isomorphic to $C_7$. As these subgroups
+    are distinct, their intersection must be $\{e\}$.
+    This gives us $48 = 7 \cdot 6$ distinct elements of
+    order 7 in $G$. This leaves 8 elements not of order $7$,
+    which must form a Sylow 2-subgroup of order $8$ by Sylow's
+    first theorem. This accounts for all 56 elements of $G$,
+    there can be no other Sylow 2-subgroups, contradicting
+    (\ref{7.6}).
+\end{proof}

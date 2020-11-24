@@ -61,7 +61,7 @@ The natural numbers are not equinumerous with the real numbers.
     A contradiction.
 \end{proof}
 
-\subsection{Infinite Infinities}
+\subsection{Cantor's Theorem}
 
 No set is equinumerous to its powerset.
 
@@ -184,8 +184,7 @@ $\kappa$ and $\lambda$ respectively, we define: \begin{align*}
     \kappa \oplus \lambda &= |K \cup L|, \tag{for $K$, $L$ disjoint} \\
     \kappa \otimes \lambda &= |K \times L|.
 \end{align*} We note that these operations are commutative and associative.
-\\[\baselineskip]
-Furthermore, for $n$, $m$ in $\omega$: \begin{align*}
+Furthermore, for $n$ and $m$ in $\omega$: \begin{align*}
     n + m &= n \oplus m < \omega, \\
     n \cdot m &= n \otimes m < \omega.
 \end{align*}
@@ -259,6 +258,11 @@ For an infinite cardinal $\kappa$, $|\ps{<\omega}\kappa| = \kappa$.
 
 For cardinals $\kappa$ and $\lambda$, $\kappa^{\lambda} = |\ps{L}K|$ where $K$ and $L$
 are sets of cardinality $\kappa$ and $\lambda$ respectively. 
+For cardinals $\kappa$, $\lambda$, and $\mu$, we have that:
+\begin{align*}
+    \kappa^{\lambda \oplus \mu} &= \kappa^{\lambda} \otimes \kappa^{\mu}, \\
+    (\kappa^{\lambda})^{\mu} &= \kappa^{\lambda \otimes \mu}.
+\end{align*}
 
 \subsection{Equinumerosity with Characteristic Functions}
 
@@ -266,3 +270,36 @@ For cardinals $\kappa$ and $\lambda$ with $\lambda \geq \omega$ and
 $2 \leq \kappa \leq \lambda$, then
 $\ps{\lambda}\lambda \approx \ps{\lambda}\kappa 
 \approx \ps{\lambda}2 \approx \mc{P}(\lambda)$.
+
+\subsection{Class of Cardinals}
+
+The class of cardinals is a proper class.
+
+\begin{proof}
+    We suppose the class of cardinals is a set, as it's the
+    union of ordinals, it's an ordinal $\tau$. 
+    By Cantor's theorem, $|\mc{P}(\tau)| > \tau$
+    which is a cardinal not in our set of cardinals,
+    a contradiction.
+\end{proof}
+
+\subsection{Unbounded Ordinals}
+
+For any set $x$, there's an ordinal $\alpha$ with $\alpha \npreceq x$.
+
+\begin{proof}
+    We take $\alpha = |\mc{P}(x)|$ and we are done by Cantor's theorem.
+\end{proof}
+
+\subsection{The Infinite Cardinals}
+
+For some ordinal $\alpha$, and $\lambda$ a limit ordinal, we have the infinite
+cardinals: \begin{align*}
+    \aleph_0 = \omega_0 &= \omega, \\
+    \aleph_{\alpha + 1} = \omega_{\alpha + 1} = \omega_{\alpha}^+ 
+    &= \text{the least ordinal containing } \omega_{\alpha} \\
+    \aleph_{\lambda}  = \omega_{\lambda} = \sup(\{\omega_{\tau} : \tau < \beta\}).
+\end{align*} We have a function $F_\aleph$ from the ordinals to
+the infinite cardinals defined by: \begin{align*}
+    F_\aleph(\alpha) = \omega_\alpha.
+\end{align*}

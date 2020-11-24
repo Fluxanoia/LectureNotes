@@ -1,6 +1,6 @@
 \section{Sylow's Theorems}
 
-\subsection{Cauchy's Theorem}
+\subsection{Cauchy's Theorem} \label{6.1}
 
 For a finite group $G$ and a prime $p$ such that $p$ divides $|G|$,
 $G$ contains an element of order $p$.
@@ -42,7 +42,7 @@ $G$ contains an element of order $p$.
     order $p$. Hence, $G$ does.
 \end{proof}
 
-\subsection{Order of $p$-groups}
+\subsection{Order of $p$-groups} \label{6.3}
 
 For a prime $p$ and a finite group $G$, $G$ is a $p$-group if
 and only if $|G| = p^m$ for some $m$ in $\mb{N}$.
@@ -55,7 +55,7 @@ and only if $|G| = p^m$ for some $m$ in $\mb{N}$.
     an element of order $q$, which is not a power of $p$.
 \end{proof}
 
-\subsection{Sylow's First Theorem}
+\subsection{Sylow's First Theorem} \label{6.4}
 
 We consider a prime $p$ and a finite group $G$ with $|G| = p^rm$ 
 for some $r$ in $\mb{N}_0$ and some $m$ in $\mb{N}$ such that $p$ 
@@ -111,7 +111,7 @@ is a Sylow $p$-subgroup if it is not a subgroup of any other
 $p$-subgroup of $G$. We write $\Syl_p(G)$ for the set of
 these subgroups and $n_p(G)$ for the quantity of them.
 
-\subsection{Closure of $p$-groups under Conjugacy}
+\subsection{Closure of $p$-groups under Conjugacy}  \label{6.5}
 
 For a prime $p$ and a group $G$ with $H \leq G$ a $p$-group,
 for every $g$ in $G$, $H^g$ is also a $p$-group.
@@ -127,7 +127,7 @@ If $H$ is a Sylow $p$-group, so is $H^g$.
     Sylow $p$-group.
 \end{proof}
 
-\subsection{Sylow's Second Theorem}
+\subsection{Sylow's Second Theorem}  \label{6.6}
 
 For a prime $p$ and a finite group $G$, the Sylow $p$-groups
 of $G$ are all conjugate to each other.
@@ -159,7 +159,7 @@ of $G$ are all conjugate to each other.
     $g^{-1}Hg$ must be equal to $P$.
 \end{proof}
 
-\subsection{Order of Sylow Subgroups}
+\subsection{Order of Sylow Subgroups}  \label{6.7}
 
 For a prime $p$ and a finite group $G$ with $|G| = p^rm$
 where $r$ is in $\mb{N}_0$, $m$ is in $\mb{N}$, and 
@@ -169,7 +169,7 @@ has order $p^r$.
     This is a consequence of Sylow's first and second theorems.
 \end{proof}
 
-\subsection{The Quantity of Sylow Subgroups}
+\subsection{The Quantity of Sylow Subgroups} \label{6.8}
 
 For a finite group $G$ and $P \leq G$ a Sylow $p$-subgroup,
 $n_p(G) = [G : N_G(P)]$. In particular, $P \nsub G$ if and
@@ -182,10 +182,58 @@ only if $P$ is the unique Sylow $p$-subgroup of $G$.
     \end{align*} as required.
 \end{proof}
 
-\subsection{Sylow Subgroups of Abelian Groups}
+\subsection{Sylow Subgroups of Abelian Groups} \label{6.9}
 
 For a finite abelian group $G$, $n_p(G) = 1$ for all primes $p$.
 
 \begin{proof}
     We have that $n_p(G) = [G : N_G(P)] = 1$ as $N_G(P) = G$.
+\end{proof}
+
+\subsection{Fixed Point of Conjugation on Sylow Subgroups} \label{6.11}
+
+We consider a finite group $G$ and $P \leq G$ a Sylow $p$-subgroup
+with $P$ acting on $\Syl_p(G)$ by conjugation,
+$g \cdot Q = gQg^{-1}$. We have that $\Fix_p(\Syl_p(G)) = \{P\}$.
+
+\begin{proof}
+    We know that $P$ is in $\Fix_p(\Syl_p(G))$ as $gPg^{-1} = P$
+    for some $g$ in $P$. For $Q$ in $\Fix_p(\Syl_p(G))$,
+    by definition, $gQg^{-1} = Q$ for all $g$ in $P$. Thus,
+    $P \leq N_G(Q)$, $Q \nsub N_G(Q)$, and $PQ = QP$ so
+    $PQ \leq G$. By (\ref{2.24}), $|PQ|$ divides $|P||Q|$,
+    but as $P$ and $Q$ are $p$-groups, they must have an order
+    that is a power of $p$. Thus, $|PQ|$ is also a power of $p$
+    so $PQ$ is a $p$-group. However, $P, Q \leq PQ$ are both
+    Sylow $p$-subgroups, so $P = PQ = Q$, as required.
+\end{proof}
+
+\subsection{Sylow's Third Theorem} \label{6.10}
+
+For a prime $p$ and a finite group $G$ with
+$|G| = p^rm$ for some where $p$ doesn't divide $m$, 
+$n_p(G)$ divides $m$ and $n_p(G) \equiv 1 \bmod p$.
+
+\begin{proof}
+    We take $P$ to be a \Syls with $P$ acting on $\Syl_p(G)$
+    by conjugation. By (\ref{5.3}), we have that
+    for $\mc{O}$ the set of orbits and
+    $Q_O$ in $O$ for each $O$ in $\mc{O}$: \begin{align*}
+        |\!\Syl_p(G)| = 
+        |\!\Fix_P(\Syl_p(G))| 
+        + \sum_{O \in \mc{O}_G(X), \, |O| > 1} 
+            [P : \Stab_P(Q_O)].
+    \end{align*} If an ordbit has size greater than one,
+    its elements are not fixed. So, none of the stabilisers
+    are equal to $P$, so each index is greater than $1$
+    and divides $|P|$ (so is a power of $p$). As such: 
+    \begin{align*}
+        n_p(G) = |\!\Syl_p(G)| 
+        &\equiv |\!\Fix_P(\Syl_p(G))| \bmod p \\
+        &\equiv 1 \bmod p, \tag{\ref{6.11}}
+    \end{align*} Thus, by (\ref{6.8}), for a
+    \Syls $P$: \begin{align*}
+        n_p(G) = [G : N_G(P)],
+    \end{align*} so $n_p(G)$ divides $|G|$ and by the above,
+    does not divide $p^r$. Thus, $n_p(G)$ divides $m$.
 \end{proof}
