@@ -15,7 +15,8 @@ not finite are infinite.
 
 \subsection{Pidgeon-hole Principle}
 
-No natural number is equinumerous to a proper subset of itself and thus: \begin{itemize}
+No natural number is equinumerous to a proper subset of itself and thus: 
+\begin{itemize}
     \item No finite set is equinumerous to a proper subset of itself,
     \item Any set equinumerous to a proper subset of itself is infinite,
     \item Any finite set is equinumerous to a unique natural number,
@@ -295,11 +296,23 @@ For any set $x$, there's an ordinal $\alpha$ with $\alpha \npreceq x$.
 
 For some ordinal $\alpha$, and $\lambda$ a limit ordinal, we have the infinite
 cardinals: \begin{align*}
-    \aleph_0 = \omega_0 &= \omega, \\
+    \aleph_0 = \omega_0 
+    &= \omega, \\
     \aleph_{\alpha + 1} = \omega_{\alpha + 1} = \omega_{\alpha}^+ 
     &= \text{the least ordinal containing } \omega_{\alpha} \\
-    \aleph_{\lambda}  = \omega_{\lambda} = \sup(\{\omega_{\tau} : \tau < \beta\}).
+    \aleph_{\lambda}  = \omega_{\lambda} 
+    &= \sup(\{\omega_{\tau} : \tau < \beta\}).
 \end{align*} We have a function $F_\aleph$ from the ordinals to
 the infinite cardinals defined by: \begin{align*}
     F_\aleph(\alpha) = \omega_\alpha.
-\end{align*}
+\end{align*} With for $\alpha > 1$, $F_\aleph(\alpha)$ is an
+uncountable cardinal.
+
+\subsection{The Continuum Hypothesis}
+
+The hypothesis states that $2^{\omega_0} = \omega_1$ and
+for the general hypothesis, for all ordinals $\alpha$, 
+$2^{\omega_\alpha} = \omega_{\alpha + 1}$.
+\\[\baselineskip]
+With our axioms, we can't prove the specific hypothesis is true or false.
+They are insufficient to decide this hypothesis.
