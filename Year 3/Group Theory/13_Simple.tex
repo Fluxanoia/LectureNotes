@@ -96,3 +96,168 @@ There are no simple groups of order 56.
     there can be no other Sylow 2-subgroups, contradicting
     (\ref{7.6}).
 \end{proof}
+
+\subsection{Simple Groups of Order consisting of 2 or 3 Factors} \label{7.8}
+
+For $p$, $q$, $r$ primes, there are no finite simple groups
+of order $pq$ or $pqr$.
+
+\begin{proof}
+    We suppose that $G$ is a finite simple group, we note that
+    $|G|$ is $pq$ or $pqr$, $G$ cannot be abelian by (\ref{7.2})
+    \\[\baselineskip]
+    \textbf{Case 1} We suppose that $|G| = pq$. By (\ref{7.5}),
+    $p \neq q$. Sylow's third theorem implies that $n_p(G)$ 
+    divides $q$ and $n_q(G)$ divides $p$ but this means: \begin{align*}
+        n_p(G) &\in \{1, q\}, \\
+        n_q(G) &\in \{1, p\}.
+    \end{align*} But, by $(\ref{7.6})$, $n_p(G)$ and $n_q(G)$ must
+    be greater than 1, so $n_p(G) = q$ and $n_q(G) = p$.
+    Again, by Sylow's third theorem, we have that: \begin{align*}
+        p \equiv 1 \bmod q, \\ 
+        q \equiv 1 \bmod p.
+    \end{align*} But, if we suppose that $q < p$, then $q \equiv q
+    \bmod p$ and similarly for $q > p$. This is a contradiction.
+    \\[\baselineskip]
+    \textbf{Case 2} We suppose that $|G| = pqr$. By (\ref{7.5}),
+    we have that either $pqr = p^2q$ with $p$ and $q$ distinct 
+    (\textbf{2a})
+    or $p$, $q$, and $r$ are all distinct (\textbf{2b}).
+    \\[\baselineskip]
+    \textbf{Case 2a} Sylow's third theorem implies that: \begin{align*}
+        n_p(G) &\in \{1, q\}, \\
+        n_q(G) &\in \{1, p, p^2\},
+    \end{align*} and with (\ref{7.6}), they both must be greater than
+    1. If $n_q(G) = p$, we have a contradiction by the reasoning
+    in \textbf{Case 1}. Otherwise, $n_q(G) = p^2$. So, we have 
+    $p^2$ distinct subgroups of order $q$ which admit $q - 1$
+    unique elements of order $q$. Thus, there are 
+    $p^2(q - 1) = p^2q - p^2 = |G| - p^2$ elements of order $q$ in $G$.
+    This leaves $p^2$ elements not of order $q$, which must form
+    a unique Sylow $p$-subgroup. But, we know that $n_p(G) > 1$,
+    so this is a contradiction.
+    \\[\baselineskip]
+    \textbf{Case 2b} We suppose that $p < q < r$ without loss of
+    generality. Sylow's third theorem implies that
+    $n_r(G)$ divides $pq$ and is congruent to $1 \bmod r$
+    combined with (\ref{7.6}) again, $n_r(G)$ is in
+    $\{p, q, pq\}$. But, as $r > q > p$, $n_r(G)$ must be
+    equal to $pq$ as otherwise: \begin{align*}
+        n_r(G) = p \not\equiv 1 \bmod r, \\ 
+        n_r(G) = q \not\equiv 1 \bmod r.
+    \end{align*} By a similar argument, $n_q(G)$ is in $\{r, pr\}$
+    and $n_p(G)$ is in $\{q, r, qr\}$. Thus, in $G$,
+    there are: \begin{align*}
+        pq(r - 1) &\text{ elements of order } r, \\
+        \text{at least } r(q - 1) &\text{ elements of order } q, \\
+        \text{at least } q(p - 1) &\text{ elements of order } p.
+    \end{align*} This accounts for: \begin{align*}
+        pq(r - 1) + r(q - 1) + q(p - 1)
+        &= pqr - pq + rq - r + qp - q \\
+        &= pqr + (rq - r - q),
+    \end{align*} elements in $G$, but this is greater than $pqr = |G|$,
+    a contradiction.
+\end{proof}
+
+\subsection{Simplicity of the First Alternating Groups} \label{7.10}
+
+We have that $A_1 = A_2 = \{e\}$, $A_3 \cong C_3$ is simple, and
+$A_4$ is not simple.
+
+\begin{proof}
+    We can see that $S_1 = \{e\}$ and $S_2 = \{e, (1, 2)\}$,
+    so $A_1 = A_2 = \{e\}$. Also, $A_3 = \{e, (1, 2, 3), (1, 3, 2)\}
+    \cong C_3$, and $A_4$ has a normal subgroup: \begin{align*}
+        \{e, (1, 2)(3, 4), (1, 3)(2, 4), (1, 4)(2, 3)\}.
+    \end{align*}
+\end{proof}
+
+\subsection{Conjugacy of 3-cycles in Alternating Groups} \label{7.11}
+
+For $n \geq 5$, all the 3-cycles in $A_n$ are conjugate.
+
+\begin{proof}
+    By (\ref{4.4}), we know that for $i_1, \ldots, i_k$
+    distinct in $[n]$ and $g$ in $S_n$: \begin{align*}
+        g(i_1, \ldots, i_k)g^{-1} 
+        = (g(i_1), \ldots, g(i_k)).
+    \end{align*} For $i$, $j$, $k$ arbitrary in
+    $[n]$, we have that if there's some $g$ in
+    $A_n$ such that: \begin{align*}
+        g(1) = i, 
+        \qquad g(2) = j, 
+        \qquad g(3) = k, \tag{$\ast$}
+    \end{align*} then $g(1, 2, 3)g^{-1} = (i, j, k)$.
+    Thus, it's sufficient to show such $g$ exists in $A_n$.
+    We take $g_0$ to be the element of $S_n$ with property
+    ($\ast$). We suppose that $g_0$ is not in $A_n$,
+    so is a composition of an odd number of transpositions.
+    As such, $(4, 5)g_0$ is in $A_n$ and adheres to the
+    property ($\ast$) as required.
+\end{proof}
+
+\subsection{Simple Alternating Groups} \label{7.9}
+
+The alternating group $A_n$ is simple for $n = 3$ and $n \geq 5$.
+
+\begin{proof}
+    For $n < 5$, we have (\ref{7.10}). We suppose $n \geq 5$
+    and take $N \nsub A_n$ with $N \neq \{e\}$ and $a \neq e$ in $N$.
+    We note that it is sufficient to show that $N$ contains a
+    3-cycle as by (\ref{7.11}) and the properties of normal subgroups,
+    $N$ would then equal $A_n$, showing there are no proper normal 
+    subgroups. We write $a$ as a product of disjoint cycles $a_1, \ldots, a_t$,
+    assuming each $a_i$ is not a 1-cycle: \begin{align*}
+        a = a_1 \cdots a_t. \tag{$\ast$}
+    \end{align*} For all $b$ in $A_n$, as $a^{-1}$ is also in
+    $N$ and $N$ is normal, we see that $aba^{-1}b^{-1}$ is in $N$.
+    \\[\baselineskip]
+    \textbf{Case 1} We suppose $(\ast)$ contains an $r$-cycle
+    with $r \geq 4$, without loss of generality, we set
+    $a_1 = (i_1, \ldots, i_r)$ and then take $b = (i_1, i_2, i_3)$
+    in $A_n$. We know that: \begin{align*}
+        aba^{-1}b^{-1} 
+        &= (a(i_1), a(i_2), a(i_3))(i_3, i_2, i_1) \\
+        &= (i_2, i_3, i_4)(i_3, i_2, i_1) \\
+        &= (i_2, i_4, i_2),
+    \end{align*} is a 3-cycle.
+    \\[\baselineskip]
+    \textbf{Case 2}
+    We suppose $(\ast)$ contains at least two 3-cycles,
+    $(i_1, i_2, i_3)$ and $(i_4, i_5, i_6)$, we take
+    $b = (i_1, i_2, i_4)$ in $A_n$. We know that: \begin{align*}
+        aba^{-1}b^{-1}
+        &= (a(i_1), a(i_2), a(i_4))(i_4, i_2, i_1) \\
+        &= (i_2, i_3, i_5)(i_4, i_2, i_1) \\
+        &= (i_1, i_4, i_3, i_5, i_2),
+    \end{align*} is a 5-cycle. This induces a 3-cycle in $N$ by
+    \textbf{Case 1}.
+    \\[\baselineskip]
+    \textbf{Case 3}
+    We suppose $(\ast)$ contains exactly one 3-cycle $(i_1, i_2, i_3)$
+    and at least one transposition $(i_4, i_5)$. We take 
+    $b = (i_1, i_2, i_4)$ in $A_n$. We know that: \begin{align*}
+        aba^{-1}b^{-1}
+        &= (a(i_1), a(i_2), a(i_4))(i_4, i_2, i_1) \\
+        &= (i_1, i_4, i_3, i_5, i_2),
+    \end{align*} inducing a 3-cycle in $N$ by \textbf{Case 2}.
+    \\[\baselineskip]
+    \textbf{Case 4}
+    We suppose that $(\ast)$ contains only transpositions.
+    As such, $t$ must be even as at least 2, we take $(i_1, i_2)$
+    and $(i_3, i_4)$ to be two of these transpositions. As $n \geq 5$,
+    there's some $i_5$ in $[n] \setminus \{i_1, \ldots, i_4\}$. We
+    take $b = (i_1, i_3, i_5)$. We know that: \begin{align*}
+        aba^{-1}b^{-1}
+        &= (a(i_1), a(i_3), a(i_5))(i_5, i_3, i_1) \\
+        &= (i_2, i_4, a(i_5))(i_5, i_3, i_1) \\
+        &= \begin{cases}
+            (i_1, i_2, i_4, i_5, i_3) & a(i_5) = i_5 \\
+            (i_1, i_2, i_6)(i_5, i_3, i_1) & \text{otherwise}.
+        \end{cases}
+    \end{align*} In the former case, we use \textbf{Case 2}.
+    In the latter case, $i_6$ is in $[n] \setminus 
+    \{i_1, \ldots, i_5\}$ (as $a$ is formed by disjoint cycles)
+    so we have two disjoint 3-cycles, which we use \textbf{Case 2}
+    on.
+\end{proof}
