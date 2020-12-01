@@ -261,3 +261,104 @@ The alternating group $A_n$ is simple for $n = 3$ and $n \geq 5$.
     so we have two disjoint 3-cycles, which we use \textbf{Case 2}
     on.
 \end{proof}
+
+\subsection{Faithful Non-trivial Actions on Simple Groups} \label{7.13}
+
+For a simple group $G$ and a non-empty set $X$ with $\varphi$
+from $G$ to $\Sym(X)$ a non-trivial action, $\varphi$ is
+faithful and $G$ is isomorphic to a subgroup of $\Sym(X)$.
+
+\begin{proof}
+    We have that $\ker(\varphi) \neq G$ as the action is non-trivial,
+    and as $\ker(\varphi) \nsub G$ and $G$ is simple, $\ker(\varphi)
+    = \{e\}$. Thus, $\varphi$ is faithful. The homomorphism theorem
+    implies that $\varphi(G)$ is isomorphic to some subgroup of 
+    $\Sym(X)$.
+\end{proof}
+
+\subsection{Alternating Subgroups of Index $n$} \label{7.12}
+
+For $n \geq 5$, if $H \leq A_n$ has index $n$, then $H \cong A_{n - 1}$.
+
+\begin{proof}
+    We take $\varphi$ from $A_n$ to $\Sym(A_n / H)$ to be the left
+    multiplication action. This action is transitive, so non-trivial
+    and we know that $A_n$ is simple by (\ref{7.9}) so it must be
+    a faithful action by $(\ref{7.13})$. We take $\psi$ from
+    $H$ to $\Sym(A_n / H)$ to be the restriction of $\varphi$, noting
+    that $H$ is a fixed point for $\psi$. We define an action
+    on $X = (A_n / H) \setminus \{H\}$ as $\psi'$ from $H$ to
+    $\Sym(X)$ as the restriction of $\psi$.
+    \\[\baselineskip]
+    We want to show that $\psi'$ is faithful, we take $h$ in $H$
+    with $h \neq e$ so $\psi(h)(xH) \neq xH$ for some $x$ in
+    $A_n$ (as $\psi$ is faithful). But, since $\psi(h)(H) = H$
+    for all $h$ in $H$, $xH \neq H$. As such, $\psi'(h)(xH) \neq xH$
+    so $\psi'$ is faithful. But, $\psi'$ acts on $X$ of size $n - 1$,
+    so with the homomorphism theorem, we have that 
+    $H \cong \psi'(H)  \leq \Sym(X) \cong S_{n - 1}$. By Lagrange's 
+    theorem: \begin{align*}
+        |A_n| = |H| \cdot [A_n : H]
+        & \Longleftrightarrow
+        \frac{n!}{2} = n|H| \\
+        & \Longleftrightarrow
+        |H| = \frac{(n - 1)!}{2},
+    \end{align*} and the only subgroup of $S_{n - 1}$ of index 2 is
+    $A_{n - 1}$ by ($\ref{4.8}$).
+\end{proof}
+
+\subsection{Simple Groups of Order 60} \label{7.14}
+
+All simple groups of order 60 are isomorphic to $A_5$.
+
+\begin{proof}
+    We take $G$ to be a simple group of order 60. We know that 
+    $G$ is not abelian as 60 is not prime (by (\ref{7.2})). 
+    We then use (\ref{7.6}) to show that $n_p(G) > 1$ for all primes 
+    dividing 60. Sylow's third theorem implies that 
+    $n_5(G) \equiv 1 \bmod 5$ and divides $12$ so $n_5(G) = 6$. 
+    Sylow's second theorem implies that $G$ acts transitively by 
+    conjugation on $\Syl_5(G)$ and by (\ref{7.13}), this action is faithful and $G$ is isomorphic
+    to a subgroup of $\Sym(\Syl_5(G))$. As $n_5(G) = 6$,
+    $\Sym(\Syl_5(G)) \cong S_6$ so $G$ is isomorphic to some
+    subgroup $G' \leq S_6$.
+    \\[\baselineskip]
+    We want to show that $G' \cap A_6 = G'$, we let $\pi$ from
+    $S_6$ to $S_6 / A_6$ be the quotient homomorphism. The first
+    isomorphism theorem implies that $\pi(G') \cong G'/(A_6 \cap G')$
+    but as $G'$ is simple, $G' / (A_6 \cap G')$ must have order 1 or
+    60. However, $S_6 / A_6$ has order 2, so $|G' / A_6 \cap G'| = 1$.
+    As such, $A_6 \cap G' = G'$. In particular, $G' \leq A_6$.
+    As $|A_6| = 360$ and $|G'| = 60$, it must be that 
+    $G' \cong A_5$ by (\ref{7.12}).
+\end{proof}
+
+\subsection{The Smallest Non-abelian Finite Simple Group}
+
+The smallest non-abelian finite simple group has order 60.
+
+\begin{proof}
+    We take the smallest non-abelian finite simple group to be $G$.
+    By (\ref{7.14}), $|G| \leq 60$ as $A_5$ is a non-abelian finite
+    simple group.
+    By (\ref{7.5}), $|G|$ can't be a prime power, by (\ref{7.7}),
+    $|G| \neq 56$, and by (\ref{7.8}), $|G|$ can't be the product
+    of two or three primes. Thus: \begin{align*}
+        |G| \in \{24, 36, 40, 48, 54, 60\}.
+    \end{align*} We reason on a case-by-case basis: \begin{itemize}
+        \item By Sylow's third theorem and (\ref{7.6}),
+            if $|G| = 24$ or $48$ then $n_2(G) = 3$. However,
+            Sylow's second theorem and (\ref{7.13}) implies that
+            $G$ is isomorphic to a subgroup of $S_3$ which is
+            impossible as $|S_3| = 6$,
+        \item By Sylow's third theorem and (\ref{7.6}),
+            if $|G| = 36$ then $n_3(G) = 4$. However,
+            Sylow's second theorem and (\ref{7.13}) implies that
+            $G$ is isomorphic to a subgroup of $S_4$ which is
+            impossible as $|S_4| = 24$,
+        \item By Sylow's third theorem, if $|G| = 40$ then 
+            $n_5(G) = 1$, contradicting (\ref{7.13}),
+        \item By Sylow's third theorem, if $|G| = 54$ then 
+            $n_3(G) = 1$, contradicting (\ref{7.13}).
+    \end{itemize} Thus, $|G| = 60$.
+\end{proof}
