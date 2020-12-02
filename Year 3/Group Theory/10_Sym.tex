@@ -12,8 +12,8 @@ Note that $|\Sym(X)| = |X|!$.
         m 
         &= \sum_{y \in Y} |\{\text{bijections from } X \text{ to } Y 
             : x \mapsto y\}| \\
-        &= \sum_{y \in Y} |\{\text{bijections from } X \backslash \{x\} 
-            \text{ to } Y \backslash \{y\}\}| \\
+        &= \sum_{y \in Y} |\{\text{bijections from } X \setminus \{x\} 
+            \text{ to } Y \setminus \{y\}\}| \\
         &= \sum_{y \in Y} (n - 1)! \\
         &= n \cdot (n - 1)! \\
         &= n!,
@@ -67,7 +67,7 @@ For all $g$ in $S_n$ with $i_1, \ldots, i_k$ distinct elements of $[n]$:
 
 \begin{proof}
     For $k = 1$, $(i_1) = e$ so $g(i_1)g^{-1} = gg^{-1} = e = (g(i_1))$.
-    For $k = 2$ and $x$ in $S_n \backslash \{g(i_1), g(i_2)\}$: \begin{align*}
+    For $k = 2$ and $x$ in $S_n \setminus \{g(i_1), g(i_2)\}$: \begin{align*}
         g(i_1, i_2)g^{-1}(g(i_1)) 
         &= g(i_2), \\
         g(i_1, i_2)g^{-1}(g(i_2)) 

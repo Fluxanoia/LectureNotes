@@ -91,7 +91,7 @@ We write $A \propto B$ if $A \preceq B$ but $B \npreceq A$.
 \begin{proof}
     ($\Rightarrow$) We have $f : X \to Y$ and $g : Y \to X$ both
     injective and want to form some $h : X \to Y$ bijective.
-    We consider $C_0 = X \backslash \Ran(g)$, the values suppressing
+    We consider $C_0 = X \setminus \Ran(g)$, the values suppressing
     the surjectivity of $g$. For $n$ in $\mb{N}$, we define: \begin{align*}
         D_{n}     &= f''C_n \\
         C_{n + 1} &= g''D_n = g''(f''C_n), \\
@@ -111,7 +111,7 @@ We write $A \propto B$ if $A \preceq B$ but $B \npreceq A$.
     a contradiction to how we selected $v$. So, $u \neq v$ implies that
     $h(u) \neq h(v)$ and as such, $h$ is injective. To see that $h$ is
     surjective, we first note that $U = \bigcup_{m \in \mb{N}} D_m \subseteq \Ran(h)$.
-    We consider $u$ in $Y \backslash U$, $g(u)$ is not in $C_0 = X \backslash \Ran(g)$
+    We consider $u$ in $Y \setminus U$, $g(u)$ is not in $C_0 = X \setminus \Ran(g)$
     and not in any $C_{n + 1}$ either as $u$ is not in any $D_n$ and as $g$ is
     injective, there's no $v$ in $D_n$ such that $g(v) = g(u)$. As such,
     $h(g(u)) = g^{-1}(g(u)) = u$. So, $h$ is surjective and as such, bijective.
@@ -125,7 +125,7 @@ For a set $X$, we define the the characteristic function of any $Y \subseteq X$
 to be $\varchi_Y : X \to 2$ defined by: \begin{align*}
     \varchi_Y(a) = \begin{cases}
         1 & \text{if $a$ is in $Y$} \\
-        0 & \text{if $a$ is in $X \backslash Y$}.
+        0 & \text{if $a$ is in $X \setminus Y$}.
     \end{cases}
 \end{align*}
 

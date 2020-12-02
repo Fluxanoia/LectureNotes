@@ -25,7 +25,7 @@ $\forall \, \bar{a}.A$, denoted by
 recursively by the following rules: \begin{align*}
     FTV(a) &= \{a\}, \\
     FTV(A \to B) &= FTV(A) \cup FTV(B), \\
-    FTV(\forall \, a_1 \cdots a_m.A) &= FTV(A) \backslash \{a_1, \ldots, a_m\}.
+    FTV(\forall \, a_1 \cdots a_m.A) &= FTV(A) \setminus \{a_1, \ldots, a_m\}.
 \end{align*} We consider type schemes that only differ by choice
 of bound variable names to be equivalent.
 

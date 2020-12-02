@@ -62,7 +62,7 @@ G_{p_k}$.
     We take $x$ in $G$, by Lagrange's Theorem, we have that
     $x = p_1^{l_1} \cdots p_k^{l_k}$ for some $l_1, \ldots, l_k$ in $\mb{N}_0$.
     For each $i$ in $[k]$, we set: \begin{align*}
-        n_i = \prod_{j \in [k]\backslash\{i\}} p_j^{l_j},
+        n_i = \prod_{j \in [k]\setminus\{i\}} p_j^{l_j},
     \end{align*} and note that $|n_ix| = p_i^{l_i}$ so $n_ix$ is in $G_{p_i}$.
     Clearly $\gcd(n_1, \ldots, n_k) = 1$, so by the Euclidean algorithm there
     exists $m_1, \ldots, m_k$ such that $m_1n_1 + \cdots + m_kn_k = 1$. Thus:
@@ -78,10 +78,10 @@ G_{p_k}$.
     $y_i = x_i - x_i'$ so that $\sum_{i \in [k]} y_i = 0$. Furthermore,
     we say $|y_i| = p_i^{d_i}$ and set: \begin{align*}
         r_i 
-        = \prod_{j \in [k] \backslash \{i\}} |y_i|
-        = \prod_{j \in [k] \backslash \{i\}} p_j^{d_j}.
+        = \prod_{j \in [k] \setminus \{i\}} |y_i|
+        = \prod_{j \in [k] \setminus \{i\}} p_j^{d_j}.
     \end{align*} As $|y_i|$ divides $|r_j|$ for all 
-    $j \in [k] \backslash \{i\}$, we know that $r_iy_j = 0$.
+    $j \in [k] \setminus \{i\}$, we know that $r_iy_j = 0$.
     This implies that $r_iy_i = 0$ as $\sum_{i = 1}^k y_i = 0$.
     \\[\baselineskip]
     Moreover, as $r_i$ and $p_i$ are coprime by definition, the

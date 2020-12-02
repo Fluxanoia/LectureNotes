@@ -1,3 +1,117 @@
-\section{Axiom of Replacement}
+\section{Axioms}
+
+\subsection{Axiom of Replacement}
 
 For a function $F$ from $V$ to itself and a set $x$, $F''x$ is a set.
+
+\subsection{Axiom of Choice}
+
+For a set of non-empty sets $\mc{G}$, there is a choice function
+$F$ from $\mc{G}$ to $\bigcup \mc{G}$ such that for all $X$ in $\mc{G}$,
+$F(X)$ is in $X$.
+\\[\baselineskip]
+We have that the Axiom of Choice is equivalent to the Well-ordering
+Principle.
+
+\begin{proof}
+    ($\Longrightarrow$) For an arbitrary set $Y$, it is sufficient to
+    show $Y$ has a well-ordering. 
+    We take $Y \neq \emptyset$ as otherwise $Y$
+    is trivially well-ordered. We take 
+    $\mc{G} = \{X \subseteq Y : X \neq \emptyset\}$. By the Axiom
+    of Choice, we have a choice function $F_0$ for $\mc{G}$.
+    We take $u$ to be any set not in $Y$ ($Y \neq V$) and
+    define $F$ from $V$ to $V$: \begin{align*}
+        F(t) &= \begin{cases}
+            F_0(t) & \text{if } t \in \mc{G} \\
+            u      & \text{otherwise}.
+        \end{cases}
+    \end{align*} By the recursion theorem, we define $H_0$ from
+    the ordinals to $Y \cup \{u\}$: \begin{align*}
+        H_0(\xi) &= F(Y \setminus \{H_0(\zeta) : \zeta < \xi\}).
+    \end{align*} We can see that: \begin{align*}
+        H_0(0) &= F_0(Y) \in Y, \\
+        H_0(1) &= F_0(Y \setminus \{F_0(Y)\}) \in Y \setminus \{F_0(Y)\}, \\
+        H_0(n) &= F_0(Y \setminus \{F_k(Y) : k \in [n - 1]_0\})
+            \in Y \setminus \{F_k(Y) : k \in [n - 1]_0\}.
+    \end{align*} So, we can select distinct elements from $Y$
+    recursively via our choice function on the subsets of $Y$.
+    We want to show that there's some ordinal $\beta$ such that
+    $H_0(\beta) = u$. If we suppose there isn't, then $H_0$
+    is injective from the ordinals to $Y$, but we know
+    that $\Ran(H_0) \subseteq Y$ is a set. Thus, $H_0^{-1}$ is a 
+    surjection from $\Ran(H_0)$ to the ordinals, which is a 
+    contradiction as the ordinals form a proper class. So,
+    we take $\alpha$ to be the least ordinal such that $H_0(\alpha) = u$.
+    We let $H = H_0 \upharpoonright \alpha$, $H$ is a bijection
+    from $\alpha$ to $Y$, which gives us a well-ordering on $Y$ via the
+    well-ordering on $\alpha$.
+    \\[\baselineskip]
+    ($\Longleftarrow$) For $\mc{G}$ any set of non-empty sets, we take
+    $A = \bigcup \mc{G}$. By the well-ordering principle, there's a
+    well-ordering $\ang{A, R}$. We can define a choice function as: \begin{align*}
+        F(X) = R-\text{least element of } \ang{X, R},
+    \end{align*} as required.
+\end{proof}
+
+\subsection{Chains}
+
+Any collection $\mc{G}$ of sets is called a chain if for all $X$
+and $Y$ in $\mc{G}$, $X \subseteq Y$ or $Y \subseteq X$.
+
+\subsection{Zorn's Lemma}
+
+For a set $\mc{F}$ such that for every chain $\mc{G} \subseteq \mc{F}$,
+$\bigcup \mc{G}$ is in $\mc{F}$, we have that $\mc{F}$ contains a
+maximal element $Y$ where for all $Z$ in $\mc{F}$: \begin{align*}
+    Y \subseteq Z \Longrightarrow Y = Z.
+\end{align*} We have that this lemma is equivalent to the Axiom
+of Choice and the Well-ordering principle.
+
+\begin{proof}
+    (ZL $\Longrightarrow$ AC) For a collection of non-empty sets $\mc{G}$,
+    we want a choice function for $\mc{G}$. We define $\mc{F}$ to be
+    the set of all choice function that exist for subsets of $\mc{G}$,
+    that is, for $f$ in $\mc{F}$: \begin{align*}
+        \Dom(f) \subseteq \mc{G} \text{ and } 
+        \forall \, x \in \Dom(f), f(x) \in x.
+    \end{align*} We know that $\mc{F}$ is non-empty as for some
+    $x$ in $\mc{G}$, $x$ is non-empty so we choose any $u$ in $x$
+    and thus $\{\ang{x, u}\}$ is in $\mc{F}$. For any chain $\mc{H}$ in
+    $\mc{F}$, $\mc{H}$ is a chain of partial choice functions on subsets
+    of $\mc{G}$. We take $h = \bigcup \mc{H}$, so $h$ is a function
+    with $\Dom(h) = \bigcup \{\Dom(f) : f \in \mc{H}\} \subseteq \mc{G}$.
+    Thus, $f$ is a choice function so is in $\mc{F}$.
+    \\[\baselineskip]
+    By Zorn's Lemma, there's a maximal $m$ in $\mc{F}$ and we want
+    to show that $m$ is a choice function for $\mc{G}$. We know
+    $m$ must be a partial choice function so it's sufficient to
+    show that $\Dom(m) = \mc{G}$. We suppose that $\Dom(m) \neq \mc{G}$,
+    and take $x$ in $\mc{G} \setminus \Dom(m)$ which must be non-empty
+    as it is in $\mc{G}$. For $u$ in $x$, $m \cup \{\ang{u, x}\}$
+    is a partial choice function in $\mc{F}$ with domain
+    $\Dom(m) \cup \{u\}$ so $m \subset m \cup \{\ang{u, x}\}$.
+    This is a contradiction of the maximality of $m$, 
+    so $m$ is a choice function for $\mc{G}$.
+    \\[\baselineskip]
+    (WP $\Longrightarrow$ ZL) We take $\mc{F}$ to be a set such that
+    for every chain $\mc{G} \subseteq \mc{F}$ we have that 
+    $\bigcup \mc{G}$ is in $\mc{F}$. By the Well-ordering Principle,
+    $\mc{F}$ can be well-ordered by some relation $R$, we take
+    an ordinal $\alpha$ such that $\ang{\alpha, \in} \cong \ang{\mc{F}, R}$
+    for some order isomorphism $k$. By recursion on the ordinals 
+    $\beta < \alpha$, we define a maximal chain $\mc{H}$ of $\mc{F}$.
+    We start by putting $k(0)$ into $\mc{H}$, if $k(0) \subset k(1)$
+    then we add $k(1)$ too, if not, we move on, adding $k(\beta)$
+    if it contains the current maximal element of $\mc{H}$. This
+    clearly forms a chain, and we will show that $Y = \bigcup \mc{H}$ is
+    a maximal element of $\mc{F}$. By the definition of $\mc{F}$, 
+    as $\mc{H}$ is a chain, $Y$ is in $\mc{F}$. If we suppose that
+    is some $Z$ in $\mc{F}$ with $Y \subseteq Z$, then $k(\gamma)
+    \subseteq Z$ for any $\gamma$ such that $k(\gamma)$ is in $\mc{H}$.
+    As $Y$ is in $\mc{F}$, for some $\delta < \alpha$, $Z = k(\delta)$.
+    But, by the definition of our recursion, at the stage $\gamma$, we
+    decided that $Z$ should be added to $\mc{H}$ so 
+    $Z \subseteq \bigcup \mc{H} = Y$ and as such, $Z = Y$
+    as required.
+\end{proof}

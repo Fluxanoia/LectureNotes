@@ -8,7 +8,7 @@ are not bound. We define it recursively on the structure of terms:
 \begin{align*}
     FV(x) &= \{x\}, \\
     FV(MN) &= FV(M) \cup FV(N), \\
-    FV(\lambda x.M) &= FV(M) \backslash \{x\}.
+    FV(\lambda x.M) &= FV(M) \setminus \{x\}.
 \end{align*} If a term has no free variables we say it is closed,
 and if a term has at least one free variable then we say it is open.
 The set of all closed terms is denoted by $\Lambda^0$.
@@ -30,7 +30,7 @@ the lambda.
 
 \subsection{Alpha Equivalence}
 
-Suppose we have a term $\lambda x.M$ and $y$ in $\mathbb{V} \, \backslash \, FV(M)$,
+Suppose we have a term $\lambda x.M$ and $y$ in $\mathbb{V} \, \setminus \, FV(M)$,
 then substituting $y$ for $x$ is a change of bound variable name. If two terms
 can be made identical through changes of bound variable name, they are
 $\alpha$-equivalent. The set of $\lambda$-terms is the set $\Lambda$ under
