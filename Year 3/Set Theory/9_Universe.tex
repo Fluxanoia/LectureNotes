@@ -1,0 +1,38 @@
+\section{The Universe of Sets}
+
+\subsection{The Well-founded Hierarchy of Sets}
+
+For a limit ordinal $\lambda$, we define the function $V_\alpha$ by 
+transfinite recursion: \begin{align*}
+    V_0 &= \emptyset, \\
+    V_{\alpha + 1} &= \mc{P}(V_\alpha), \\
+    V_{\lambda} &= \bigcup_{\alpha < \lambda} \mc{P}(V_\alpha), \\
+    V &= \bigcup_{\alpha \in \text{On}} \mc{P}(V_\alpha).
+\end{align*}
+
+\subsection{Transitivity of $V_\alpha$}
+
+For any $\alpha$, we have that $V_\alpha$ is transitive and for all
+$\beta < \alpha$, $V_\beta$ is in $V_\alpha$.
+
+\begin{proof}
+    We proceed by induction, for $\alpha = 0$, $V_0 = \emptyset$
+    which trivially satisfies both statements. For $\alpha = \beta + 1$,
+    we use the fact that if $\beta$ is transitive, then $\mc{P}(\beta)$
+    is also. By the inductive hypothesis, $V_\alpha = \mc{P}(\beta)$
+    is transitive. As $V_\beta$ is in $\mc{P}(V_\beta)$, we have that
+    $V_\beta$ is in $V_\alpha$ and if $\beta' < \beta$ then
+    by the inductive hypothesis, $V_{\beta'}$ is in $V_{\beta}$ and
+    hence $V_{\beta'}$ is in $V_\alpha$ by transitivity. 
+    For $\alpha$ a limit ordinal,
+    $V_\alpha = \bigcup_{\beta < \alpha} V_\beta$ is transitive by
+    the inductive hypothesis. For $\beta < \alpha$, it must be that
+    $V_\beta$ is in $V_\alpha$ by the definition and transitivity 
+    of $V_\alpha$.
+\end{proof}
+
+\subsection{The Rank Function}
+
+For any $x$ in $V$, $\rho(x)$ is the least 
+$\tau$ such that $x \subseteq V_\tau$. So, for $y$ in $x$, we have that
+$\rho(y) < \rho(x)$.
