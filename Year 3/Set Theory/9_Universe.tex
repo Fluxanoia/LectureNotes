@@ -31,8 +31,47 @@ $\beta < \alpha$, $V_\beta$ is in $V_\alpha$.
     of $V_\alpha$.
 \end{proof}
 
+\newpage
+
 \subsection{The Rank Function}
 
 For any $x$ in $V$, $\rho(x)$ is the least 
-$\tau$ such that $x \subseteq V_\tau$. So, for $y$ in $x$, we have that
-$\rho(y) < \rho(x)$.
+$\tau$ such that $x \subseteq V_\tau$ (or rather, $x$ is in $V_{\tau + 1}$). 
+So, for $y$ in $x$, we have that $\rho(y) < \rho(x)$.
+\\[\baselineskip]
+We have that: \begin{enumerate}
+    \item $\rho(\{x\}) = \rho(x) + 1$,
+    \item $\rho(\{x, y\}) = \max(\{\rho(x), \rho(y)\}) + 1$,
+    \item $\rho(\ang{x, y}) = \max(\{\rho(x), \rho(y)\}) + 2$.
+\end{enumerate}
+
+\begin{proof}
+    
+\end{proof}
+
+\subsection{Axiom of Foundation}
+
+Every set $x$ is well-founded, so if $x$ is non-empty, there exists
+some $y$ in $x$ such that $x \cap y = \emptyset$.
+\\[\baselineskip]
+This is equivalent to saying there exists some $\alpha$ such that
+$x$ is in $V_\alpha$.
+
+\begin{proof}
+    For a set $x$, we set $T = TC(X)$. 
+    If $T \subseteq V$ then for some ordinal $\alpha$,
+    $T \subseteq V_\alpha$ as $\rho''T$ is a set of ordinals by
+    the Axiom of Replacement. So, for some $\alpha$, $\rho''T \subseteq \alpha$
+    so $TC(x) \subseteq V_\alpha$. So, we are done for this case as
+    $x \in T \subseteq V_\alpha$.
+    \\[\baselineskip]
+    If suppose that $T \setminus V \neq \emptyset$ and take $y$ in
+    $T \setminus V$ such that $(T \setminus V) \cap y = \emptyset$
+    by the Axiom of Foundation, then for any $z$ in $y$, 
+    as $z$ must be in $T$ by the properties of $TC$.
+    Also, $z$ must be in $V$ as $(T \setminus V) \cap y = \emptyset$.
+    Hence, $y \subseteq V$. But, as in the first case, $\rho''y$ is a set
+    of ordinals, with some strict upper bound $\beta$. As such, 
+    $y \subseteq V_\beta$ which implies $y$ is in $V_{\beta + 1}$
+    which is a contradiction of the definition of $y$.
+\end{proof}
