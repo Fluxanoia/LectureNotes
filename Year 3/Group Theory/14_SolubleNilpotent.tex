@@ -30,8 +30,8 @@ For a non-abelian simple group $G$, $G$ is not soluble.
 \subsection{Derived Series}
 
 For a group $G$, the derived series of $G$ is: \begin{align*}
-    G \geq G^{(0)} \geq G^{(1)} \geq \cdots
-\end{align*} where for each $i$ in $[n]$, we define:
+    G \geq G^{(0)} \geq G^{(1)} \geq \cdots,
+\end{align*} where for each $i$ in $\mb{N}$, we define:
 \begin{align*}
     G^{(0)} &= G, \\
     G^{(i)} &= [G^{(i - 1)}, G^{(i - 1)}].
@@ -91,13 +91,110 @@ subgroup and quotient of $G$ is soluble of derived length at
 most $n$.
 
 \begin{proof}
-    By (\ref{8.3}), $G^(n) = \{e\}$ so for $H \leq G$ then
-    $H^(n) \leq G^(n) = \{e\}$ so $H$ is soluble of derived
+    By (\ref{8.3}), $G^{(n)} = \{e\}$ so for $H \leq G$ then
+    $H^{(n)} \leq G^{(n)} = \{e\}$ so $H$ is soluble of derived
     length at most $n$ by (\ref{8.3}). For $N \nsub G$
     with $\pi$ from $G$ to $G / N$ the quotient homomorphism,
     (\ref{8.4}) implies that: \begin{align*}
-        (G / N)^{(n)} = \varphi(G)^{(n)} = \pi(G^(n)) 
+        (G / N)^{(n)} = \varphi(G)^{(n)} = \pi(G^{(n)}) 
         = \pi(\{e\}) = N. \tag{8.4}
     \end{align*} Thus, by (\ref{8.3}), $G / N$ is soluble 
     of derived length at most $n$.
+\end{proof}
+
+\subsection{Commutator of Symmetric Groups} \label{8.7}
+
+For $n$ in $\mb{N}$, $[S_n, S_n] = A_n$.
+
+\begin{proof}
+    The cases for $n < 3$ are trivial as $A_n = \{e\}$, 
+    so we consider $n \geq 3$.
+    We know that $[S_n, S_n] \leq A_n$ as $S_n / A_n \cong C_2$
+    which is abelian so we can invoke (\ref{2.28}). Thus, it is
+    sufficient to show that $A_n \leq [S_n, S_n]$. For
+    a 3-cycle $(x, y, z)$, we know that: \begin{align*}
+        (x, y, z) = [(x, y), (y, z)] \in [S_n, S_n],
+    \end{align*} and as the 3-cycles generate $A_n$ and
+    $(x, y, z)$ was arbitrary, we are done.
+\end{proof}
+
+\subsection{Insolubility of Symmetric Groups} \label{8.6}
+
+For $n$ in $\mb{N}$, $S_n$ is soluble if and only if $n \leq 4$.
+
+\begin{proof}
+    As $S_1 \leq S_2 \leq S_3 \leq S_4$, (\ref{8.5}) shows that the
+    cases for $n \leq 4$ all follow from the case $n = 4$ where:
+    \begin{align*}
+        \{e\} \nsub \{e, (1, 2)(3, 4), (1, 3)(2, 4), (1, 4)(2, 3)\}
+        \nsub A_4 \nsub S_4,
+    \end{align*} has abelian factors so $S_4$ is soluble.
+    For $n > 4$, $A_n$ is a non-abelian simple group
+    so by (\ref{8.1}), it is not soluble. So, by (\ref{8.5}),
+    $S_n$ is not soluble.
+\end{proof}
+
+\subsection{Central Series}
+
+For a group $G$, we define a finite series 
+$G = Z_k \geq \cdots \geq Z_0 = \{e\}$ of subgroups of $G$ to be 
+central if for every $i$ in $[k]$, we have that 
+$[G, Z_i] \leq Z_{i - 1}$. The length of the series is $k$.
+
+\subsection{Nilpotent Groups}
+
+A group that admits a central series is nilpotent. The
+length of the shortest such series is called the step of $G$.
+
+\subsection{Lower Central Series}
+
+For a group $G$, the lower central series of $G$ is: \begin{align*}
+    G_1 \geq G_2 \geq \cdots,
+\end{align*} where for each $i$ in $\mb{N}$, we define:
+\begin{align*}
+    G_1 &= G, \\
+    G_{i + 1} &= [G, G_i].
+\end{align*}
+
+\subsection{Lower Central and Central Series} \label{8.8}
+
+For a group $G$ with a lower central series 
+$G = G_1 \geq G_2 \geq \cdots$, $G$ is nilpotent of step at most
+$s$ if and only if $G_{s + 1} = \{e\}$.
+
+\begin{proof}
+    ($\Longrightarrow$) As $G$ is nilpotent of step at most $s$,
+    it has a central series: \begin{align*}
+        G = Z_s \geq \cdots \geq Z_0 = \{e\}.
+    \end{align*} We want to show that $G_i \leq Z_{s + 1 - i}$
+    for all $i$ in $[s]$. This shows that $G_{s + 1} = \{e\}$
+    as required. If $i = 1$, then this is true by definition.
+    We proceed by induction with $i > 0$: \begin{align*}
+        G_i 
+        &= [G, G_{i - 1}] \\
+        &\leq [G, Z_{s + 2 - i}] \tag{IH} \\
+        &\leq Z_{s + 1 - i}.
+    \end{align*}
+    ($\Longleftarrow$) We have that: \begin{align*}
+        G = G_1 \geq G_2 \geq \cdots \geq G_{s + 1} = \{e\},
+    \end{align*} is a central series of length $s$ as
+    for all $k$ in $[s]$, $[G, G_k] = [G, G_{k + 1}]$
+    by definition. 
+\end{proof}
+
+\subsection{The Normaliser Condition} \label{8.9}
+
+For a nilpotent group $G$ with $H < G$, we have that $H \neq N_G(H)$.
+
+\begin{proof}
+    We take $G = Z_k \geq \cdots \geq Z_0 = \{e\}$ to be a central
+    series for $G$ and set $n = \max(\{m \in [k]_0 : Z_m \leq H\})$.
+    It must be that $n < k$ as $H \neq G$, so we consider some
+    $z$ in $Z_{n + 1}$ and $h$ in $H$. By definition, 
+    $h^{-1}z^{-1}hz = [h, z]$ is in $Z_n$ so 
+    $z^{-1}hz$ is in $hZ_n$. But, as $Z_n \leq H$, $hZ_n \subseteq H$.
+    Since $h$ was arbitrary, $z^{-1}Hz = H$ so $z$ is in $N_G(H)$
+    and thus, as $z$ was arbitrary, $Z_{n + 1} \leq N_G(H)$. 
+    By the maximality of $n$, $H \nleq Z_{n + 1} \leq N_G(H)$
+    so $N_G(H) \neq H$.
 \end{proof}
