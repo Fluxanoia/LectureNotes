@@ -31,24 +31,6 @@ $\beta < \alpha$, $V_\beta$ is in $V_\alpha$.
     of $V_\alpha$.
 \end{proof}
 
-\newpage
-
-\subsection{The Rank Function}
-
-For any $x$ in $V$, $\rho(x)$ is the least 
-$\tau$ such that $x \subseteq V_\tau$ (or rather, $x$ is in $V_{\tau + 1}$). 
-So, for $y$ in $x$, we have that $\rho(y) < \rho(x)$.
-\\[\baselineskip]
-We have that: \begin{enumerate}
-    \item $\rho(\{x\}) = \rho(x) + 1$,
-    \item $\rho(\{x, y\}) = \max(\{\rho(x), \rho(y)\}) + 1$,
-    \item $\rho(\ang{x, y}) = \max(\{\rho(x), \rho(y)\}) + 2$.
-\end{enumerate}
-
-\begin{proof}
-    
-\end{proof}
-
 \subsection{Axiom of Foundation}
 
 Every set $x$ is well-founded, so if $x$ is non-empty, there exists
@@ -62,10 +44,10 @@ $x$ is in $V_\alpha$.
     If $T \subseteq V$ then for some ordinal $\alpha$,
     $T \subseteq V_\alpha$ as $\rho''T$ is a set of ordinals by
     the Axiom of Replacement. So, for some $\alpha$, $\rho''T \subseteq \alpha$
-    so $TC(x) \subseteq V_\alpha$. So, we are done for this case as
-    $x \in T \subseteq V_\alpha$.
+    so $T \subseteq V_\alpha$. So, we are done for this case as
+    $x \subseteq T \subseteq V_\alpha$ so $x \in V_{\alpha + 1}$.
     \\[\baselineskip]
-    If suppose that $T \setminus V \neq \emptyset$ and take $y$ in
+    If we suppose that $T \setminus V \neq \emptyset$ and take $y$ in
     $T \setminus V$ such that $(T \setminus V) \cap y = \emptyset$
     by the Axiom of Foundation, then for any $z$ in $y$, 
     as $z$ must be in $T$ by the properties of $TC$.
@@ -74,4 +56,106 @@ $x$ is in $V_\alpha$.
     of ordinals, with some strict upper bound $\beta$. As such, 
     $y \subseteq V_\beta$ which implies $y$ is in $V_{\beta + 1}$
     which is a contradiction of the definition of $y$.
+\end{proof}
+
+\subsection{The Rank Function} \label{6.5}
+
+For any $x$ in $V$, $\rho(x)$ is the least 
+$\tau$ such that $x \subseteq V_\tau$ (or rather, $x$ is in $V_{\tau + 1}$). 
+We have that: \begin{enumerate}
+    \item $\rho(\{x\}) = \rho(x) + 1$,
+    \item $\rho(\{x, y\}) = \max(\{\rho(x), \rho(y)\}) + 1$,
+    \item $\rho(\ang{x, y}) = \max(\{\rho(x), \rho(y)\}) + 2$,
+    \item $V_\alpha = \{x \in V : \rho(x) < \alpha\}$,
+    \item For $x$ in $V$, and all $y$ in $x$, $y$ is in $V$ and
+        $\rho(y) < \rho(x)$,
+    \item For $x$ in $V$, $\rho(x) 
+        = \sup(\{\rho(y) + 1 : y \in x\})
+        = \sup^+(\{\rho(y) : y \in x\})$.
+\end{enumerate} So, the relation on sets: \begin{align*}
+    xRy \Longleftrightarrow \rho(x) < \rho(y),
+\end{align*} is a strict partial order that is well-founded, meaning
+there is a $R$-least element of every non-empty $X \subseteq V$.
+
+\begin{proof}
+    (1) We take $\rho(x) = \alpha$, so $x \in V_{\alpha + 1}$
+    and as such, $\{x\} \subseteq V_{\alpha + 1}$. So, 
+    $\rho(\{x\}) \leq \alpha + 1$. But, $\rho(\{x\}) \nless \alpha + 1$
+    since this would imply that $\rho(x) < \rho(\{x\}) < \alpha + 1$
+    which is a contradiction.
+    \\[\baselineskip]
+    (2) We take $\max(\{\rho(x), \rho(y)\}) = \alpha$, so we have that
+    $\alpha$ is minimal such that $x \subseteq V_\alpha$ and
+    $y \subseteq V_\alpha$. As such, by the working in (1), we have
+    that $\rho(\{x, y\}) = \alpha + 1$.
+    \\[\baselineskip]
+    (3) As $\ang{x, y} = \{x, \{x, y\}\}$, we apply (1) and (2) to get
+    the result.
+    \\[\baselineskip]
+    (4) For $x$ in $V$, then $\rho(x) < \alpha$ is equivalent to
+    saying that there is some $\beta < \alpha$ such that $x \subseteq V_\beta$
+    or rather $x$ is in $V_{\beta + 1}$. This is then equivalent to
+    saying $x$ is in $V_\alpha$ as $V_{\beta + 1} \subseteq V_\alpha$
+    by the transitivity of $V$.
+    \\[\baselineskip]
+    (5) We take $\rho(x) = \alpha$ so $x \subseteq V_\alpha$ and as such
+    $y$ in $x$ must be in $V_\alpha$ so $\rho(y) < \alpha$.
+    \\[\baselineskip]
+    (6) We take $\alpha = \sup^+(\{\rho(y) : y \in x\})$ and $y$ in $x$.
+    By (5), $\rho(y) < \rho(y) + 1 \leq \rho(x)$ so, $\alpha \leq \rho(x)$. 
+    By (4), $\rho(y) < \rho(y) + 1 \leq \alpha$ so, $y$ is in $V_\alpha$.
+    Thus, $x \subseteq V_\alpha$ so $\rho(x) \leq \alpha$.
+\end{proof}
+
+\subsection{Rank and Ordinals} \label{6.6}
+
+For an ordinal $\alpha$, $\rho(\alpha) = \alpha$ and 
+$(\text{On} \cap V_\alpha) = \alpha$.
+
+\begin{proof}
+    The result is trivial for $\alpha = 0$, so we proceed by
+    induction with $\alpha > 0$. By (\ref{6.5}(6)): \begin{align*}
+        \rho(\alpha) 
+        &= {\sup}^+(\{\rho(\beta) : \beta < \alpha\}) \\
+        &= {\sup}^+(\{\beta : \beta < \alpha\}) \tag{IH} \\
+        &= \alpha.
+    \end{align*} From this, we know that 
+    $\alpha \subseteq (\text{On} \cap V_\alpha)$. We take
+    $\beta$ in $(\text{On} \cap V_\alpha)$ so 
+    $\beta = \rho(\beta) < \alpha$. 
+    Thus, $(\text{On} \cap V_\alpha) \subseteq \alpha$ and as such,
+    $\alpha = (\text{On} \cap V_\alpha)$.
+\end{proof}
+
+\subsection{Principle of $\in$-induction} \label{6.7}
+
+For a well-defined and definite property of sets $\Phi$: \begin{align*}
+    \bigl[ \forall \, z \in y, \Phi(z) \Longrightarrow \Phi(y) \bigr] 
+    \Longrightarrow 
+    \Phi(y), \tag{$\ast$}
+\end{align*} and if $x$ is a transitive set, we have ($\ast$)
+for all $y$ in $x$.
+
+\begin{proof}
+    For a transitive set $x$, we take $Z = \{y \in x : \neg \Phi(y)\}$,
+    supposing $Z \neq \emptyset$. By the Axiom of Foundation, we 
+    have $y_0$ in $Z$ such that $y_0$ is $\in$-minimal
+    (meaning $(y_0 \cap Z) = \emptyset$). For any $u$ in $y_0$,
+    $u$ must be in $x$ as $x$ is transitive. By the minimality
+    of $y_0$, it must be that $\Phi(u)$ holds as otherwise $(y_0 \cap Z)$
+    would contain $u$. As such, assuming the antecedent, we get
+    $\Phi(y_0)$ which is a contradiction of the membership of $y_0$
+    in $Z$. For the case on classes, we just take $Z = \{y : \neg \Phi(y)\}$
+    and use the same argument.
+\end{proof}
+
+\subsection{Theorem of $\in$-recursion} \label{6.8}
+
+For a function $G$ from $V$ to $V$, there is exactly one function
+$H$ from $V$ to $V$ such that for all $x$: \begin{align*}
+    H(x) = G(H \upharpoonright x) = G(\{\ang{y, H(y)} : y \in x\}).
+\end{align*}
+
+\begin{proof}
+    The proof operates similarly to that on ordinals, but is omitted.
 \end{proof}
