@@ -1,5 +1,34 @@
 \section{Direct Products}
 
+\subsection{Outer Direct Product}
+
+For $G_1, \ldots, G_n$ groups, we set: \begin{align*}
+    G_1 \times \cdots \times G_n = \{(a_1, \ldots, a_n) : a_i \in G_i, i \in [n] \},
+\end{align*} and define a binary operation on 
+$G = G_1 \times \cdots \times G_n$ by: \begin{align*}
+    (a_1, \ldots, a_n)(b_1, \ldots, b_n) = (a_1b_1, \ldots, a_nb_n).
+\end{align*} $G$ is a group under this operation.
+
+\subsection{Properties of the Outer Direct Product}
+
+For $G_1, \ldots, G_n$ groups, with $G = \prod_{i \in [n]} G_i$: \begin{itemize}
+    \item $|G| = \prod_{i \in [n]}|G_i|$,
+    \item $Z(G) = \prod_{i \in [n]}Z(G_i)$,
+    \item if $G$ is cyclic, for each $i$ in $[n]$, $G_i$ is cyclic,
+    \item for all $\sigma$ in $S_n$, $G \cong \prod_{i \in [n]} G_{\sigma(i)}$,
+    \item for the integers $1 \leq n_1 < n_1 < \cdots < n_r < n$, 
+        \begin{gather*}
+            G \cong 
+            (G_1 \times \cdots \times G_{n_1}) \times 
+            (G_{n_1 + 1} \times \cdots \times G_{n_2}) \times \cdots \times
+            (G_{n_r + 1} \times \cdots \times G_n),
+        \end{gather*}
+    \item for $H_1, \ldots, H_n$ groups with $G_i \cong H_i$ for each $i$ in $[n]$
+        $G \cong \prod_{i \in [n]} H_i$.
+\end{itemize}
+
+\subsection{}
+
 We have already seen the outer direct product as: \begin{align*}
     G_1 \times \cdots \times G_n = \{(g_1, \ldots, g_n) : g_i \in G_i\},
 \end{align*} for groups $G_1, \ldots, G_n$ which forms a group with
@@ -9,7 +38,7 @@ For a group $G$ with $H_1, \ldots, H_n \nsub G$. We say $G$ is the
 inner direct product of $H_1, \ldots, H_n$ if: \begin{itemize}
     \item $G = H_1 \times \cdots \times H_n$,
     \item $H_i \cap (H_1 \times \cdots \times H_{i - 1} 
-        \times H_{i + 1} \times \cdots \times H_n) = \{e_G\}$ 
+        \times H_{i + 1} \times \cdots \times H_n) = \{e\}$ 
         for all $i$ in $[n]$.  
 \end{itemize} We have that $|G| = \prod_i H_i$.
 
@@ -45,7 +74,7 @@ set: \begin{align*}
     \ldots G_n$ as the elements of $G'_i$ are of the form
     $(g_1, \ldots, g_{i - 1}, e, g_{i + 1}, \ldots, g_n)$ whereas elements
     of $\widehat{G_i}$ are of the form $(e, \ldots, e, g_i, e, \ldots, e)$.
-    Thus, the only element in common is $e_G$.
+    Thus, the only element in common is $e$.
 \end{proof}
 
 \subsection{The Commutator of Normal Subgroups}

@@ -19,6 +19,7 @@
 \usepackage{hhline}
 \usepackage{ifthen}
 \usepackage{bussproofs}
+\usepackage{tcolorbox}
 
 % Title Page
 %%% title, notation?, inprogress?, unsupported?, unsupported_date, incomplete?
@@ -100,6 +101,14 @@
       breakatwhitespace=true,
       tabsize=2
     }
+}
+
+% Key insights
+
+\newcommand{\keyin}[1]{
+    \begin{tcolorbox}
+        \textbf{Key Insights} \newline {#1}
+    \end{tcolorbox}
 }
 
 % Math operators

@@ -1,0 +1,117 @@
+\section{Normal, Characteristic, and Quotient Groups}
+
+For a group $G$, a subgroup $H$ of $G$ is normal if for each $g$ in $G$,
+$gH = Hg$. This is denoted by $H \nsub G$.
+\\[\baselineskip]
+We say $H$ is a characteristic subgroup if for every $\varphi$ in $\Aut(G)$,
+$\varphi(H) = H$ (denoted by $H \csub G$). We know characteristic subgroups
+are normal as $\Aut(G)$ contains inner automorphisms.
+
+\subsection{Properties of Normal Subgroups} \label{2.14} \label{2.15} \label{2.16} \label{2.17}
+
+For a group $G$, the set of normal subgroups on $G$
+is closed under set multiplication and intersection. For $G$ and $H$
+groups with $\varphi$ from $G$ to $H$ a homomorphism, we have that: \begin{enumerate}
+    \item if $K \leq G$ then $\varphi(K) \leq H$,
+    \item if $K \nsub G$ then $\varphi(K) \nsub \varphi(G)$,
+    \item if $K \leq H$ then $\varphi^{-1}(K) \leq G$,
+    \item if $K \nsub H$ then $\varphi^{-1}(K) \nsub G$.
+\end{enumerate} Using $K = \{e\}$ in (4), we can see that $\Ker(\varphi) \nsub G$.
+
+\begin{proof}
+    For $P$ and $Q$ normal subgroups of $G$, $PQ = QP$ by normality so
+    $PQ \leq G$ by (\ref{1.9}). We know that $PQ$ is normal as for all $g$ in $G$,
+    $g^{-1}PQg = g^{-1}Pgg^{-1}Qg = HK$ by the normality of $P$ and $Q$.
+    Then, we know that the intersection of subgroups is a subgroup by (\ref{1.11}),
+    for a set of normal subgroups of $\mc{A} \subseteq \mc{P}(G)$ and $g$ in $G$: \begin{align*}
+        \left( \bigcap_{A \in \mc{A}}A \right)^g
+        = \bigcap_{A \in \mc{A}} A^g
+        = \bigcap_{A \in \mc{A}} A,
+    \end{align*} so this intersection is normal.
+    \\[\baselineskip]
+    (1) For $\varphi(x)$ and $\varphi(y)$ in $\varphi(K)$, 
+    $\varphi(x)^{-1}\varphi(y) = \varphi(x^{-1}y)$ which is in $\varphi(K)$ as $K$ is
+    a subgroup. The result follows from the subgroup test.
+    \\[\baselineskip]
+    (2) For every $g$ in $G$, we have that 
+    $\varphi(g)^{-1}\varphi(K)\varphi(g) = \varphi(K^g) = \varphi(K)$.
+    \\[\baselineskip]
+    (3) For $x$ and $y$ in $\varphi^{-1}(K)$, $\varphi(x^{-1}y) = \varphi(x)^{-1}\varphi(y)$
+    is in $K$ so $x^{-1}y$ is in $\varphi^{-1}(K)$. The result follows from the subgroup test.
+    \\[\baselineskip]
+    (4) For $g$ in $G$, $\varphi(g^{-1}\varphi^{-1}(K)g) = \varphi(g)^{-1}K\varphi(g) = K$
+    so $g^{-1}\varphi^{-1}(K)g \subseteq \varphi^{-1}(K)$. The result follows from (\ref{2.12}).
+\end{proof}
+
+\subsection{A Test for Normal and Characteristic Subgroups} \label{2.12}
+
+Let $G$ be a group with $H \leq G$: \begin{enumerate}
+    \item if for every $g$ in $G$, $H^g \subseteq H$ then $H \nsub G$,
+    \item if for every $\varphi$ in $\Aut(G)$, $\varphi(H) \subseteq H$ 
+        then $H \csub G$.
+\end{enumerate}
+
+\begin{proof}
+    (2) We suppose that $\varphi(H) \subseteq H$ for each $\varphi$ in $\Aut(G)$.
+    For $\varphi$ in $\Aut(G)$, $\varphi^{-1}$ is also in $\Aut(G)$. 
+    We have that $\varphi^{-1}(H) \subseteq H$ by our assumption, 
+    applying $\varphi$ to both sides, we see that
+    $H \subseteq \varphi(H)$ so $H = \varphi(H)$ as required.
+    \\[\baselineskip]
+    (1) We can perform the same argument as (2) as conjugation is an inner
+    automorphism.
+\end{proof}
+
+\subsection{Normal Subgroups of Index 2} \label{2.11}
+
+For a group $G$ with $H \leq G$ such that $[G : H] = 2$, $H \nsub G$.
+
+\begin{proof}
+    For $x$ in $H$, $xH = H = Hx$.
+    For $x$ in $G \setminus H$, $xH \neq H$ by (\ref{1.18}).
+    Thus, $xH$ and $H$ are disjoint cosets of $H$ and as $[G : H] = 2$, 
+    $G = H \cup xH$ is a disjoint union. We can apply the same argument 
+    to the right coset and deduce that $xH = Hx$ as required.
+\end{proof}
+
+\subsection{Properties of the Centre} \label{2.13}
+
+For a group $G$, $Z(G)$ is a characteristic subgroup of $G$ and every
+subgroup of $Z(G)$ is normal.
+
+\keyin{We have that $\varphi(Z(G))$ commutes with $\Ima(\varphi)$ but this is just $G$
+as $\varphi$ is an isomorphism. Then, we just use (\ref{2.12}).}
+
+\begin{proof}
+    We note that $Z(G) \leq G$ by (\ref{1.8}). For $\varphi$ in $\Aut(G)$ and $z$
+    in $Z(G)$, we take some $g$ in $G$, so $zg = gz$ and thus 
+    $\varphi(z)\varphi(g) = \varphi(g)\varphi(z)$ as 
+    $\varphi$ is a homomorphism. Thus, as $g$ was arbitrary and $\varphi$ is surjective, 
+    $\varphi(z)$ must be in $Z(G)$. Since $z$ was arbitrary, $Z(G)$
+    is a characteristic subgroup by (\ref{2.12}).
+    \\[\baselineskip]
+    Every subgroup of $Z(G)$ contains only elements that commute with
+    all elements of $G$, so must be normal.
+\end{proof}
+
+\subsection{Quotient Groups} \label{2.18}
+
+For a group $G$ with $H \nsub G$, the quotient of $G$ by $H$, 
+$G / H$, is a group under
+set multiplication and for every $a$ and $b$ in $G$ satisfies
+$(aH)(bH) = (ab)H$. Furthermore, the map $\pi$ from $G$ to $G / H$
+defined by $g \mapsto gH$ is a surjective homomorphism with
+kernel $H$, called the quotient homomorphism.
+
+\begin{proof}
+    We know set multiplication is associative so for 
+    $a$ and $b$ in $G$, we see that: \begin{align*}
+        (aH)(bH) &= aHbH \\
+        &= (ab)(HH) \tag{$H \nsub G$} \\
+        &= (ab)H.
+    \end{align*} Thus, $\pi$ is a homomorphism, $G / H$ is closed under this operation,
+    $eH$ is the identity, and for $g$ in $G$, the inverse of $gH$ is $g^{-1}H$. 
+    So, $G/H$ is a group under set multiplication.
+    We have that $\pi$ is trivially surjective and for $g$ in $\Ker(\pi)$,
+    $\varphi(g) = gH = H$ which means that $g$ is in $H$ by (\ref{1.18}).
+\end{proof} 

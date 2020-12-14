@@ -1,0 +1,153 @@
+\section{The Morphism Theorems}
+
+\subsection{The Homomorphism Theorem} \label{2.19} \label{2.20}
+
+For $G$ and $H$ groups with $\varphi$ from $G$ to $H$ a homomorphism, we take 
+$\pi$ from $G$ to $G / \Ker(\varphi)$ to be the quotient homomorphism.
+There exists an isomorphism $\psi$ from $G / \Ker(\varphi)$ to $\Ima(\varphi)$
+such that $\varphi = \psi \circ \pi$.
+This shows that: \begin{itemize}
+    \item every subset of a group is a normal subgroup if and only if
+    it is the kernel of some homomorphism,
+    \item if $\varphi$ is injective, $G \cong \Ima(\varphi)$.
+\end{itemize}
+
+\begin{proof}
+    We set $I = \Ima(\varphi)$ and $K = \Ker(\varphi)$, and define 
+    $\psi$ from $G / K$ to $I$ by $gK \mapsto \varphi(g)$. 
+    We take $g$ and $h$ in $G$. We consider:
+    \begin{align*}
+        gK = hK 
+        &\Longleftrightarrow g^{-1}h \in K \\
+        &\Longleftrightarrow \varphi(g^{-1}h) = e \\
+        &\Longleftrightarrow \varphi(g)^{-1}\varphi(h) = e \\
+        &\Longleftrightarrow \varphi(g) = \varphi(h).
+    \end{align*} So, $\psi$ is well-defined and injective.
+    We also have that $\psi$ is trivially surjective and
+    $(\psi \circ \pi)(g) = \psi(gK) = \varphi(g)$.
+    Now, we consider: \begin{align*}
+        \psi(gKhK)
+        &= \psi(ghK) \\
+        &= \psi(\pi(gh)) \\
+        &= \varphi(gh) \\
+        &= \varphi(g)\varphi(h) \\
+        &= \psi(gK)\psi(hK),
+    \end{align*} so $\psi$ is a homomorphism.
+\end{proof}
+
+\newpage
+
+\subsection{The First Isomorphism Theorem} \label{2.22} 
+
+For a group $G$ with $H \leq G$, $N \nsub G$, and $\pi$ from $G$ to 
+$G / N$ the quotient homomorphism: \begin{enumerate}
+    \item $H \cap N \nsub H$,
+    \item $H/(H \cap N) \cong \pi(H)$.
+\end{enumerate}
+
+\keyin{This theorem essentially states that normal subgroups are
+normal in other subgroups.}
+
+\begin{proof}
+    We write $\pi|_H$ for the restriction of $\pi$ to $H$
+    and note that: \begin{align*}
+        \Ima(\pi|_H) &= \pi(H), \\
+        \Ker(\pi|_H) &= (H \cap \Ker(\pi)) = (H \cap N).
+    \end{align*} As the kernel of a homomorphism
+    is a normal subgroup in the domain group (\ref{2.17}), \linebreak $(H \cap N) \nsub H$.
+    The Homomorphism Theorem implies that $H / (H \cap N) \cong \pi(H)$.
+\end{proof}
+
+\subsection{Normal Subgroup Products} \label{2.23}
+
+For a group $G$ with $H \leq G$, $N \nsub G$, and $\pi$ from $G$ to 
+$G / N$ the quotient homomorphism, we have that 
+$HN \leq G$ and $\pi(H) = HN/N$.
+\begin{proof}
+    We know that $HN \leq G$ if and only if $HN = NH$ by (\ref{1.9})
+    which is implied by the normality of $N$.
+    We consider the group: \begin{align*}
+        HN / N 
+        &= \{hnN : h \in H, n \in N\} \\
+        &= \{hN : h \in H\} \\
+        &= \pi(H),
+    \end{align*} as required.
+\end{proof} 
+
+\subsection{The Order of Normal Subgroup Products} \label{2.24}
+
+Let $G$ be a group with $N \nsub G$, and $H \leq G$.
+If $HN$ is finite, then: \begin{align*}
+    |HN| = \frac{|H||N|}{|H \cap N|}.
+\end{align*}
+
+\begin{proof}
+    We can see that: \begin{align*}
+        \frac{|HN|}{|N|} 
+        &= [HN : N] \tag{Lagrange's Theorem} \\
+        &= |\pi(H)| \tag{\ref{2.23}} \\
+        &= [H : H \cap N] \tag{First Isomorphism Theorem} \\
+        &= \frac{|H|}{|H \cap N|}, \tag{Lagrange's Theorem}
+    \end{align*} as required.
+\end{proof}
+
+\subsection{The Second Isomorphism Theorem}
+
+For a group $G$ with $N \leq H \leq G$, and $N$ and $H \nsub G$, we have
+that $H / N \nsub G / N$ and $(G / N) / (H / N) \cong G / H$.
+
+\begin{proof}
+    We take $\varphi$ from $G / N$ to $G / H$ to be defined by $gN \mapsto gH$.
+    We have that: \begin{align*}
+        aN = bN \Longrightarrow ab^{-1} \in N \subseteq H \Longrightarrow aH = bH,
+    \end{align*} so $\varphi$ is well-defined. We have that $\varphi$ is a homomorphism
+    because: \begin{align*}
+        \varphi(aNbN)
+        = \varphi(abN)
+        = abH
+        = aHbH
+        = \varphi(aN)\varphi(bN),
+    \end{align*} and is trivially surjective as: \begin{align*}
+        \Ker(\varphi) 
+        = \{gN : gH = eH\}
+        = \{gN : g \in H\}
+        = H/N.
+    \end{align*} Thus, $H / N \nsub G / N$ by (\ref{2.17}) and
+    $(G / N)/(H / N) \cong G / H$ by the Homomorphism Theorem.
+\end{proof}
+
+\newpage
+
+\subsection{The Correspondence Theorem}
+
+For a group $G$ with $N \nsub G$, and $\pi$ from $G$ to $G / N$ the quotient 
+homomorphism, we have that: \begin{enumerate}
+    \item If $K \subseteq G/N$ then: \begin{enumerate}
+        \item $K \leq G/N$ if and only if $K = H/N$ for some
+            $H \leq G$ containing $N$,
+        \item $K \nsub G/N$ if and only if $K = H/N$ for some
+            $H \nsub G$ containing $N$,
+    \end{enumerate}
+    \item If $N \subseteq H \subseteq G$ then: \begin{enumerate}
+        \item $H \leq G$ if and only if $H = \pi^{-1}(K)$
+            for some $K \leq G/N$,
+        \item $H \nsub G$ if and only if $H = \pi^{-1}(K)$
+            for some $K \nsub G/N$.
+    \end{enumerate}
+\end{enumerate}
+
+\begin{proof}
+    We can show the ($\Longleftarrow$) directions by (\ref{2.16}) applied
+    with $\pi$.
+    \\[\baselineskip]
+    (1)(a) We take $H = \pi^{-1}(K)$ and thus by the ($\Longleftarrow$) direction 
+    of (2) we have that $H \leq G$ and thus $K = \pi(H) = H / N$.
+    \\[\baselineskip]
+    (1)(b) For this case, it is sufficient to show that given $K \nsub G / N$,
+    $\pi^{-1}(K) \nsub G$. But, this is already shown in the ($\Longleftarrow$)
+    direction of (2)(b).
+    \\[\baselineskip]
+    (2) We have that $N \leq H \leq G$ so $H$ is a union of cosets of $N$
+    so $H = \pi^{-1}(\pi(H))$. We apply (\ref{2.16}) again with $\pi$ to
+    get the result.
+\end{proof}

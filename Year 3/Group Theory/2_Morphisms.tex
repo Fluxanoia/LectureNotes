@@ -1,0 +1,102 @@
+\section{Morphisms}
+
+\subsection{Homomorphisms}
+
+For $G$ and $H$ groups, a homomorphism $\varphi$ from $G$ to $H$ is a map that 
+for all $x$ and $y$ in $G$ satisfies:
+\begin{align*}
+    \varphi(xy) = \varphi(x)\varphi(y).
+\end{align*} The image and kernel are defined as: \begin{align*}
+    \Ima(\varphi) &= \{\varphi(g) : g \in G\}, \\
+    \Ker(\varphi) &= \{g \in G : \varphi(g) = e\}.
+\end{align*} 
+
+\subsubsection{Properties of Homomorphisms} 
+\label{2.2} \label{2.3} \label{2.4} \label{2.5} \label{2.6}
+
+For $G$ and $H$ groups, and $\varphi$ from $G$ to $H$ a homomorphism, we have that:
+\begin{enumerate}
+    \item $\varphi(e) = e$,
+    \item $\Ker(\varphi)$ is a subgroup of $G$,
+    \item $\Ima(\varphi)$ is a subgroup of $H$,
+    \item $\varphi$ is injective if and only if $\Ker(\varphi) = \{e\}$,
+    \item $\varphi(x^{-1}) = \varphi(x)^{-1}$ for every $x$ in $G$,
+    \item for $x_1, \ldots, x_n$ in $G$,
+        $\varphi(x_1 \cdots x_n) = \varphi(x_1) \cdots \varphi(x_n)$.
+\end{enumerate} These properties lead us to the following: \begin{itemize}
+    \item for a finitely ordered element $g$ in $G$, $|\varphi(g)|$
+        divides $|g|$ by (6),
+    \item if $G$ is a $p$-group, the image of every
+        homomorphism on $G$ is a $p$-group also.
+\end{itemize} We can restrict homomorphisms to subgroups or compose them
+and the result will be a homomorphism.
+
+\subsection{Homomorphisms and Generating Sets} \label{2.7} \label{2.8}
+
+For $G$ and $H$ groups, a homomorphism $\varphi$ from $G$ to $H$, and $X \subseteq G$,
+we have that \linebreak $\varphi(\ang{X}) = \ang{\varphi(X)}$.
+Furthermore, for another homomorphism $\psi$ from $G$ to $H$ with $X$
+a generating set for $G$, if $\varphi(x) = \psi(x)$ for each $x$ in $X$,
+then $\varphi = \psi$.
+
+\begin{proof}
+    We have that: \begin{align*}
+        \varphi(\ang{X})
+        &= \{\varphi(x_1 \cdots x_n) 
+            : x_1, \cdots, x_n \in (X \cup X^{-1}), n \in \mb{N}\} \\
+        &= \{\varphi(x_1) \cdots \varphi(x_n) 
+            : x_1, \cdots, x_n \in (X \cup X^{-1}), n \in \mb{N}\} \tag{\ref{2.2}} \\
+        &= \{x_1 \cdots x_n
+            : x_1, \cdots, x_n \in (\varphi(X) \cup \varphi(X^{-1})), n \in \mb{N}\} \\
+        &= \{x_1 \cdots x_n
+            : x_1, \cdots, x_n \in (\varphi(X) \cup \varphi(X)^{-1}), n \in \mb{N}\} 
+            \tag{\ref{2.2}} \\
+        &= \ang{\varphi(X)}.
+    \end{align*} By (\ref{2.2}), $\varphi(x^{-1}) = \psi(x^{-1})$ for every $x$ in $X$
+    so $\varphi = \psi$ on all members of $X \cup X^{-1}$. But, as every element of
+    $G$ can be written as a finite product of elements in $X$, $\varphi = \psi$
+    in general by (\ref{2.2}).
+\end{proof}
+
+\subsection{Isomorphisms}
+
+An isomorphism is a bijective homomorphism. Groups admitting an isomorphism are
+isomorphic.
+
+\subsection{Conjugation}
+
+For a group $G$ containing some $x$, $y$, and $g$,
+$x^g = g^{-1}xg$ is the conjugation of $x$ by $g$, similarly defined
+for sets. Also, $x$ and $y$ are said to be conjugate if there exists some $h$ in
+$G$ such that $x = y^h$.
+
+\subsubsection{Conjugations on Subgroups} \label{2.10}
+
+For a group $G$ with $H \leq G$ and $g$ in $G$, $H^g$ is a subgroup of
+$G$ and $H^g \cong H$.
+
+\begin{proof}
+    By (\ref{2.9}), conjugation is an isomorphism.
+\end{proof}
+
+\subsection{Automorphisms}
+
+An automorphism is an isomorphism from a group to itself. The set of
+all automorphisms on a group $G$ is denoted by $\Aut(G)$ which
+is a group under composition.
+
+\subsubsection{Inner Automorphisms} \label{2.9}
+
+For a group $G$, we have that $\varphi$ from $G$ to $G$ defined for some $g$ in $G$ 
+as $x \mapsto g^{-1}xg$ is an automorphism. Any automorphism of this
+form is called an inner automorphism.
+
+\begin{proof}
+    For any $x$ and $y$ in $G$, 
+    $\varphi(xy) = g^{-1}xyg = g^{-1}xgg^{-1}g = \varphi(x)\varphi(y)$
+    so $\varphi$ is a homomorphism. We have that 
+    $g^{-1}xg = e$ implies that $x = gg^{-1} = e$ so 
+    $\Ker(\varphi) = \{e\}$. Finally, we see that $x = g^{-1}(gxg^{-1})g$
+    so $\varphi$ is surjective as $x$ is arbitrary in $G$. 
+    Thus, $\varphi$ is an automorphism.
+\end{proof}

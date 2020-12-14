@@ -19,7 +19,7 @@ For a group $G$ with $H, K \leq G$, we define a subgroup $[H, K]$ by:
 \begin{align*}
     [H, K] = \ang{[h, k] : h \in H, k \in K}.
 \end{align*} The subgroup $[G, G]$ is called the commutator subgroup.
-Furthermore, if $G$ is abelian, $[G, G] = \{e_G\}$.
+Furthermore, if $G$ is abelian, $[G, G] = \{e\}$.
 
 \subsection{Commutator Subgroup of Characteristic Subgroups} \label{2.27}
 
@@ -49,7 +49,7 @@ is abelian if and only if it is isomorphic to a quotient of $G/[G, G]$
     \\[\baselineskip]
     ($\Rightarrow$) 
     If $G/H$ is abelian then we take $x$, $y$ arbitrary in $G$. 
-    We have that $\pi([x, y]) = [\pi(x), \pi(y)] = e_GH$. 
+    We have that $\pi([x, y]) = [\pi(x), \pi(y)] = eH$. 
     Thus, $[x, y]$ is in $H$. 
     Thus, as $x$, $y$ are arbitary, $[G, G] \subseteq H$.
     \\[\baselineskip]
@@ -67,7 +67,7 @@ is abelian if and only if it is isomorphic to a quotient of $G/[G, G]$
 Every quotient of an abelian group is abelian.
 
 \begin{proof}
-    If $G$ is abelian then $[G, G] = \{e_G\}$. So, for each $H \csub G$
+    If $G$ is abelian then $[G, G] = \{e\}$. So, for each $H \csub G$
     we have $[G, G] \subseteq H$ and so $G/H$ is abelian by the above.
 \end{proof}
 
@@ -77,5 +77,5 @@ For a group $G$, the abelianisation of $G$ is the quotient group
 $G/[G, G]$. This group is always abelian and is the largest possible
 abelian quotient of $G$.
 \\[\baselineskip]
-It can be that $G/[G, G] = \{e_G\}$ ($[G, G] = G$). These groups are
+It can be that $G/[G, G] = \{e\}$ ($[G, G] = G$). These groups are
 called perfect. An example is non-abelian simple groups as $[G, G] \csub G$.
