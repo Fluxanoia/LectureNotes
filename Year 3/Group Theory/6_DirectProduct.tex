@@ -1,0 +1,150 @@
+\section{Direct Products}
+
+\subsection{Outer Direct Product}
+
+For groups $G_1, \ldots, G_n$, we set: \begin{align*}
+    G_1 \times \cdots \times G_n = \{(a_1, \ldots, a_n) : a_i \in G_i, i \in [n] \},
+\end{align*} this is a group under component-wise group operations.
+
+\subsubsection{Properties of the Outer Direct Product (1.23)} \label{1.23}
+
+For groups $G_1, \ldots, G_n$, with $G = \prod_{i \in [n]} G_i$: \begin{itemize}
+    \item $|G| = \prod_{i \in [n]}|G_i|$,
+    \item $Z(G) = \prod_{i \in [n]}Z(G_i)$,
+    \item if $G$ is cyclic, for each $i$ in $[n]$, $G_i$ is cyclic,
+    \item for all $\sigma$ in $S_n$, $G \cong \prod_{i \in [n]} G_{\sigma(i)}$,
+    \item for the integers $1 \leq n_1 < n_1 < \cdots < n_r < n$:
+        \begin{gather*}
+            G \cong 
+            (G_1 \times \cdots \times G_{n_1}) \times 
+            (G_{n_1 + 1} \times \cdots \times G_{n_2}) \times \cdots \times
+            (G_{n_r + 1} \times \cdots \times G_n),
+        \end{gather*}
+    \item for $H_1, \ldots, H_n$ groups with $G_i \cong H_i$ for each $i$ in $[n]$
+        $G \cong \prod_{i \in [n]} H_i$.
+\end{itemize}
+
+\subsection{Inner Direct Product}
+
+For a group $G$ with $H_1, \ldots, H_n \nsub G$. We say $G$ is the
+inner direct product of $H_1, \ldots, H_n$ if: \begin{itemize}
+    \item $G = H_1 \times \cdots \times H_n$,
+    \item $H_i \cap (H_1 \cdots H_{i - 1} H_{i + 1} \cdots H_n) = \{e\}$ 
+        for all $i$ in $[n]$.  
+\end{itemize}
+
+\newpage
+
+\subsection{Component Groups (2.30)} \label{2.30}
+
+For $G = G_1 \times \cdots \times G_n$ an outer direct product, 
+for each $i$ in $[n]$, we set: \begin{align*}
+    \widehat{G_i} = \{(e, \ldots, e, g_i, e, \ldots, e) : g_i \in G_i\}.
+\end{align*} We have that: \begin{enumerate}
+    \item for each $i$ in $[n]$, $\widehat{G_i} \nsub G$,
+    \item for each $i$ in $[n]$, $\widehat{G_i} \cong G_i$,
+    \item $G$ is the inner direct product of $\widehat{G_1}, \ldots, \widehat{G_n}$.
+\end{enumerate}
+
+\begin{proof}
+    (1) We can see that: \begin{align*}
+        \psi((g_1, \ldots, g_n)) = (g_1, \ldots, g_{i - 1}, e, g_{i + 1}, \ldots g_n),
+    \end{align*} is a homomorphism with kernel $\widehat{G_i}$ so, $\widehat{G_i} \nsub G$
+    by (\ref{2.14}).
+    \\[\baselineskip]
+    (2) We can see that: \begin{align*}
+        \varphi_i((e, \ldots, e, g_i, e, \ldots, e)) = g_i,
+    \end{align*} is an isomorphism so, $\widehat{G_i} \cong G_i$.
+    \\[\baselineskip]
+    (3) We have that $G = \widehat{G_1} \cdots \widehat{G_n}$ as:
+    \begin{align*}
+        (g_1, \ldots, g_n)
+        &= (g_1, e, \ldots, e)(e, g_2, e, \ldots, e)
+        \cdots (e, \ldots, e, g_n).
+    \end{align*} Furthermore, taking $i$ in $[n]$ and $G' = \widehat{G_1} \cdots 
+    \widehat{G_{i - 1}} \widehat{G_{i + 1}} \cdots G_n$, we have that \linebreak 
+    $(\widehat{G_i} \cap G') = \{e\}$ as the elements of $G'$ are of the form
+    $(g_1, \ldots, g_{i - 1}, e, g_{i + 1}, \ldots, g_n)$ whereas elements
+    of $\widehat{G_i}$ are of the form $(e, \ldots, e, g_i, e, \ldots, e)$.
+    Thus, the only element in common is $e$. This is sufficient to prove the result
+    as $i$ was chosen arbitrarily.
+\end{proof}
+
+\subsection{Commuting Normal Elements of Inner Direct Products (2.33)} \label{2.33}
+
+For a group $G$ with $H_1, \ldots, H_k \nsub G$ such that
+$G = H_1 \cdots H_k$ is an inner direct product, and $i$ and $j$ in $[k]$ 
+whenever $i \neq j$, the elements of $H_i$ commute with the elements of $H_j$.
+
+\begin{proof}
+    As $G$ is an inner direct product,
+    $(H_i \cap H_j) = \{e\}$. Thus, $[H_i, H_j] = \{e\}$ by (\ref{2.32}).
+\end{proof}
+
+\subsection{Isomorphism between Products (2.31)} \label{2.31}
+
+For a group $G$ such that it is the inner direct product of subgroups 
+$H_1, \ldots, H_n$ of $G$, $G \cong H_1 \times \cdots \times H_n = H$.
+
+\begin{proof}
+    We define $\varphi$ from $H$ to $G$ by: \begin{align*}
+        \varphi((h_1, \ldots, h_n)) = h_1 \cdots h_n,
+    \end{align*} which is a homomorphism by (\ref{2.33}) and is
+    surjective as $G = H_1 \cdots H_n$. Taking $(h_1, \ldots, h_n)$ in $\Ker(\varphi)$
+    and some $i$ in $[n]$: \begin{align*}
+        h_1 \cdots h_n = e
+        &\Longrightarrow h_i^{-1} = h_1 \cdots h_{i - 1}h_{i + 1} \cdots h_n \\
+        &\Longrightarrow h_i^{-1} \in H_i \cap (H_1 \cdots H_{i - 1} H_{i + 1} \cdots H_n) \\
+        &\Longrightarrow h_i^{-1} = e.
+    \end{align*} Thus, as $i$ was chosen arbitrarily, $(h_1, \ldots, h_n) = (e, \ldots, e)$.
+    So, $\varphi$ is an isomorphism.
+\end{proof}
+
+\subsection{Criteria for Inner Direct Products}
+
+\subsubsection{By Unique Compositions (2.34)} \label{2.34}
+
+For a group $G$ with $H_1, \ldots, H_n$ normal subgroups of $G$,
+$G$ is an inner direct product of $H_1, \ldots, H_n$ if and
+only if for all $g$ in $G$, there exists unique $h_i$ in each 
+$H_i$ such that $g = \prod_ih_i$.
+
+\begin{proof}
+    ($\Longrightarrow$)
+    We have $g = \prod_{i \in [n]} h_i$ for some $h_i$ in each $H_i$ by the definition of the inner
+    direct product, so it suffices to show this product is unique. We suppose that: \begin{align*}
+        g = \prod_{i \in [n]} k_i = \prod_{i \in [n]} h_i,
+    \end{align*} for some $k_i$ and $h_i$ in each $H_i$. For $i$ in $[n]$, it must be
+    that $k_i = h_i$ as: \begin{align*}
+        e &= g^{-1}g \\
+        &= h_n^{-1} \cdots h_1^{-1} k_1 \cdots k_n \\
+        &= h_1^{-1}k_1 \cdots h_n^{-1}k_n \tag{\ref{2.33}} \\
+        &= h_i^{-1}k_i h_1^{-1}k_1 \cdots 
+            h_{i - 1}^{-1}k_{i - 1} h_{i + 1}^{-1}k_{i + 1} \cdots
+            h_n^{-1}k_n, \tag{\ref{2.33}} \\
+        k_i^{-1}h_i &= h_1^{-1}k_1 \cdots 
+            h_{i - 1}^{-1}k_{i - 1} h_{i + 1}^{-1}k_{i + 1} \cdots
+            h_n^{-1}k_n \\
+        &\in H_i \cap (H_1 \cdots H_{i - 1}H_{i + 1} \cdots H_n) = \{e\}.
+    \end{align*}
+    ($\Longleftarrow$) We trivially have $G = H_1 \cdots H_n$, so it suffices to
+    show that for each $i$ in $[n]$: \begin{align*}
+        \mc{H}_i = H_i \cap (H_1 \cdots H_{i - 1}H_{i + 1} \cdots H_n) = \{e\}.
+    \end{align*} Taking $i$ in $[n]$ and $x$ in $\mc{H}_i$, we have that: \begin{align*}
+        h_i = x = h_1 \cdots h_{i - 1} h_{i + 1} \cdots h_n,
+    \end{align*} for some $h_i$ in each $H_i$. But by the uniqueness of the composition 
+    of $x$, this means that $x = e$ as required.
+\end{proof} 
+
+\subsubsection{By the Size (2.35)} \label{2.35}
+
+For a finite group $G$ with $H_1, \ldots, H_n \nsub G$ such that
+$G = H_1 \cdots H_n$. $G$ is an inner direct product if and only if
+$|G| = \prod_{i \in [n]} |H_i|$.
+
+\begin{proof}
+    ($\Longrightarrow$) Follows trivially from the definitions.
+    \\[\baselineskip]
+    ($\Longleftarrow$) As $|G| = \prod_i |H_i|$, each product of elements $h_1 \cdots h_n$ 
+    in $H_1 \cdots H_n$ is distinct. By (\ref{2.34}), $G$ is an inner direct product.
+\end{proof}

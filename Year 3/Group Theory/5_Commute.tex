@@ -1,0 +1,92 @@
+\section{Commutators} 
+
+For $x$ and $y$ in a group $G$, we define the commutator
+of $x$ and $y$ as $[x, y] = x^{-1}y^{-1}xy$.
+This can be interpreted as the 'cost' of commuting
+$x$ and $y$ as $xy = yx[x, y]$.
+
+\subsection{Commutators under Homomorphisms} \label{eq2.3}
+
+For $x$ and $y$ in a group $G$ with a homomorphism $\varphi$ from $G$ to $H$, 
+we have that: \begin{align*}
+    \varphi([x, y]) = [\varphi(x), \varphi(y)].
+\end{align*}
+
+\begin{proof}
+    Trivial from the definitions.
+\end{proof}
+
+\subsection{Commutator Subgroups}
+
+For a group $G$ with $H$ and $K \leq G$, we define the subgroup $[H, K]$ by:
+\begin{align*}
+    [H, K] = \ang{[h, k] : h \in H, k \in K}.
+\end{align*} The subgroup $[G, G]$ is the commutator subgroup of $G$.
+If $G$ is abelian, $[G, G] = \{e\}$.
+
+\subsection{Commutator of Normal Subgroups (2.32)} \label{2.32}
+
+For a group $G$ with $H$ and $K \nsub G$, $[H, K] \subseteq (H \cap K)$.
+
+\begin{proof}
+    For $h$ in $H$ and $k$ in $K$, $[h, k] = h^{-1}k^{-1}hk$ so: \begin{itemize}
+        \item $h^{-1}k^{-1}h$ is in $h^{-1}Kh = K$,
+        \item $k^{-1}hk$ is in $k^{-1}Hk = H$.
+    \end{itemize} Hence, $[h, k]$ is in $(H \cap K)$.
+\end{proof} 
+
+\subsection{Commutators of Characteristic Subgroups (2.27)} \label{2.27}
+
+For a group $G$ with $H$ and $K \csub G$, $[H, K] \csub G$. Thus, $[G, G] \csub G$.
+
+\begin{proof}
+    For $\varphi$ in $\Aut(G)$: \begin{align*}
+        \varphi([H, K]) 
+        &= \varphi(\ang{[h, k] : h \in H, k \in K}) \\
+        &= \ang{\varphi([h, k]) : h \in H, k \in K} \tag{\ref{2.7}} \\
+        &= \ang{[\varphi(h), \varphi(k)] : h \in H, k \in K} \tag{\ref{eq2.3}} \\
+        &= \ang{[h, k] : h \in H, k \in K} \tag{$H$ and $K \csub G$} \\
+        &= [H, K],
+    \end{align*} as required.
+\end{proof}
+
+\subsection{Abelian Quotients (2.28)} \label{2.28}
+
+For a group $G$ with $H \nsub G$, $G / H$ is abelian if and only if 
+$[G, G] \leq H$. Furthermore, a quotient of $G$
+is abelian if and only if it is isomorphic to $G / [G, G]$.
+
+\begin{proof}
+    We take $\pi$ from $G$ to $G / H$ to be the quotient homomorphism.
+    \\[\baselineskip]
+    ($\Longrightarrow$) 
+    We take $x$ and $y$ in $G$, we have that $\pi([x, y]) = [\pi(x), \pi(y)] = eH$,
+    thus $[x, y]$ is in $H$. Thus, as $x$ and $y$ are arbitary, $[G, G] \subseteq H$.
+    \\[\baselineskip]
+    ($\Longleftarrow$)
+    For every $xH$ and $yH$ in $G / H$, we have that: \begin{align*}
+        [xH, yH] 
+        &= (x^{-1}H)(y^{-1}H)(xH)(yH) \\
+        &= [x, y]H \\
+        &= H.
+    \end{align*} Thus, $G / H$ is abelian. So, $G / H$ is abelian if
+    and only if $[G, G] \leq H$ which is true if and only if $G / H$ is isomorphic
+    to a quotient to $G / [G, G]$ as this implies: \begin{align*}
+        (G / [G, G]) / (H / [G, G]) \cong G / H,
+    \end{align*} by the Second Isomorphism Theorem.
+\end{proof}
+
+\subsubsection{Quotients of Abelian Groups (2.29)} \label{2.29}
+
+Every quotient of an abelian group is abelian.
+
+\begin{proof}
+    If $G$ is abelian then $[G, G] = \{e\}$. So, for each $H \csub G$
+    we have $[G, G] \leq H$ and so $G / H$ is abelian by (\ref{2.28}).
+\end{proof}
+
+\subsection{The Abelianisation}
+
+For a group $G$, the abelianisation of $G$ is the quotient group 
+$G/[G, G]$. This group is always abelian and is the largest possible
+abelian quotient of $G$.

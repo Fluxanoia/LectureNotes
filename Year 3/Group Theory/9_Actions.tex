@@ -1,0 +1,142 @@
+\section{Group Actions}
+
+For a group $G$ and a non-empty set $X$, an action of $G$ on $X$ is
+a homomorphism $\varphi$ from $G$ to $\Sym(X)$. We say that: \begin{itemize}
+    \item the action is faithful if $\varphi$ is injective,
+    \item the action is transitive if for all $x$, $y$ in $X$,
+        there exists $g$ in $G$ such that $\varphi(g)(x) = y$.
+\end{itemize}
+
+\subsection{The Orbit and Stabiliser}
+
+For an action $\varphi$ on a group $G$ and a set $X$, for each $x$ in $X$: 
+\begin{align*}
+    \Orb_G(x)  &= \{\varphi(g)(x) : g \in G\}, \\
+    \Stab_G(x) &= \{g \in G : \varphi(g)(x) = x\},
+\end{align*} are the orbit and stabiliser of $x$, respectively.
+
+\subsection{The Orbit-Stabiliser Theorem (5.1)} \label{5.1}
+
+For an action $\varphi$ on a group $G$ and a set $X$ with $x$ in $X$, 
+$\Stab_G(x)$ is a subgroup of $G$ and there is a
+well-defined bijection $\psi$ from $\Orb_G(x)$ to $G / \Stab_G(x)$
+defined by: \begin{align*}
+    \psi(\varphi(g)(x)) = g\Stab_G(x).
+\end{align*} If $G$ is finite, $|G| = |\!\Orb_G(x)| \cdot |\!\Stab_G(x)|$.
+
+\begin{proof}
+    We want to show that $\Stab_G(x) \leq G$.
+    As $\varphi$ is a homomorphism, $\varphi(e) = e$, so $e$ is
+    in $\Stab_G(x)$. For $g$ and $h$ in $\Stab_G(x)$: \begin{align*}
+        \varphi(gh)(x) 
+        &= (\varphi(g) \circ \varphi(h))(x) \\
+        &= \varphi(g)(x) \\
+        &= x,
+    \end{align*} so $\Stab_G(x)$ is closed. For inverses, we see that: \begin{align*}
+        (\varphi(g^{-1}) \circ \varphi(g))(x) = x
+        & \Longleftrightarrow \varphi(g^{-1})(x) = x \\
+        & \Longleftrightarrow g^{-1} \in \Stab_G(x).
+    \end{align*} So, $\Stab_G(x) \leq G$. We know that
+    $\psi$ is well-defined and injective as: \begin{align*}
+        \varphi(g)(x) = \varphi(h)(x)
+        & \Longleftrightarrow \varphi(h^{-1}g)(x) = x \\
+        & \Longleftrightarrow h^{-1}g \in \Stab_G(x) \\
+        & \Longleftrightarrow g \in h\Stab_G(x) \\
+        & \Longleftrightarrow g\Stab_G(x) = h\Stab_G(x).
+    \end{align*} As $\psi$ is trivially surjective, it is a bijection as required.
+\end{proof}
+
+\subsection{Relation via the Orbit (5.2)} \label{5.2}
+
+For an action $\varphi$ on a group $G$ and a set $X$, we define an equivalence relation
+on $X$ by $x \sim y$ if $y$ is in $\Orb_G(x)$. The orbits of elements
+$x$ in $G$ are the equivalence classes of this relation, so they partition $X$.
+
+\begin{proof} We consider the conditions for equivalence relations: 
+    \\[\baselineskip]
+    \textbf{Reflexivity} For all $x$ in $X$, we have that $\varphi(e)(x) = x$ so $x \sim x$. 
+    \\[\baselineskip]
+    \textbf{Symmetry} If $\varphi(g)(x) = y$ then $\varphi(g^{-1})(y) = x$. 
+    \\[\baselineskip]
+    \textbf{Transitivity} If $x \sim y \sim z$ then there exists
+    $g$ such that $y = \varphi(g)(x)$ and $h$ such that $z = \varphi(h)(y)$.
+    Thus, $z = \varphi(hg)(x)$ so $x \sim z$.
+\end{proof}
+
+\subsection{Fixed Points (5.3)} \label{5.3}
+
+For an action $\varphi$ on a group $G$ and a set $X$, $x$ in $X$ is a fixed point
+for $\varphi$ if $\Orb_G(x) = \{x\}$. We write $\Fix_G(X)$ for the set of fixed points 
+of $\varphi$. We write $\mc{O}_G(X)$ for the set of orbits of $X$ under $\varphi$. 
+For each orbit $O$ in $\mc{O}_G(X)$, we pick can arbitrary element $x_O \in O$
+and see that for $X$ finite: \begin{align*}
+    |X| = |\!\Fix_G(X)| + \sum_{O \in \mc{O}_G(X), \, |O| > 1} [G : \Stab_G(x_O)].
+\end{align*}
+
+\begin{proof}
+    We first note that the fixed points of $\varphi$ are just the singleton orbits
+    in $\mc{O}_G(X)$. Thus: \begin{align*}
+        \mc{O}_G(X) 
+        &= \Fix_G(X) \cup \{O \in \mc{O}_G(X) : |O| > 1\} \\
+        &= \Fix_G(X) \cup \mc{O}_G^{(1)}(X),
+    \end{align*} is a disjoint union. We have that: \begin{align*}
+        |X| &= \sum_{O \in \mc{O}_G(X)} |O| \tag{\ref{5.2}} \\
+        &= |\!\Fix_G(X)| + \sum_{O \in \mc{O}_G^{(1)}(X)} |O| \\
+        &= |\!\Fix_G(X)| + \sum_{O \in \mc{O}_G^{(1)}(X)} |G /\Stab_G(x_O)| \tag{\ref{5.1}} \\
+        &= |\!\Fix_G(X)| + \sum_{O \in \mc{O}_G^{(1)}(X)} [G : \Stab_G(x_O)]. 
+    \end{align*}
+\end{proof}
+
+\subsection{The Conjugation Action}
+
+For a group $G$ acting on itself via conjugacy ($\varphi(g)(x) = gxg^{-1}$), where
+$\varphi$ is this action and
+$x$ in $G$, the conjugacy class of $x$, denoted by $x^G$, is defined by: \begin{align*}
+    \Orb_G(x) = x^G = \{gxg^{-1} : g \in G\}.
+\end{align*} The centraliser of $x$ is defined by: \begin{align*}
+    \Stab_G(x) = C_G(x) = \{g \in G : gxg^{-1} = x\}.
+\end{align*} For $H \leq G$, the normaliser of $H$ in $G$ is defined by: \begin{align*}
+    N_G(H) = \{g \in G : gHg^{-1} = H\}.
+\end{align*} We note that this is also the stabiliser of $H$ under the
+conjugation action of $G$ onto the set of subgroups of $G$.
+
+\subsection{Partitioning on Conjugacy Classes (5.4)} \label{5.4}
+
+For a group $G$, the conjugacy classes of $G$ partition $G$.
+
+\begin{proof}
+    The conjugacy classes are the orbits of this action leading to the result by (\ref{5.2}).
+\end{proof}
+
+\subsection{The Orbit-Stabiliser Theorem for Conjugation (5.5)} \label{5.5}
+
+For a group $G$ with $x$ in $G$ where we take $\varphi$ to be the conjugacy action on $G$, 
+we have that 
+$\Stab_G(x) = C_G(x) \leq G$ and there exists a well-defined bijection 
+$\psi$ from $\Orb_G(x) = x^G$ to $G / C_G(x)$  defined by: \begin{align*}
+    \psi(\varphi(g)(x)) = \psi(gxg^{-1}) = gC_G(x).
+\end{align*} If $G$ is finite, $|G| = |x^G| \cdot |C_G(x)|$. If we apply
+this to the conjugation action of $G$ onto the set of its subgroups,
+we get that: \begin{align*}
+    |\{K \leq G : K \text{ is conjugate to } H\}|
+    = |G / N_G(H)|
+    = [G : N_G(H)].
+\end{align*}
+
+\begin{proof}
+    This follows directly from (\ref{5.1}).
+\end{proof}
+
+\subsection{The Class Equation (5.6)} \label{5.6}
+
+For a finite group $G$, we write $\mc{C}$ for the set of conjugacy classes
+of $G$, for each conjugacy class $C$, we can pick an arbitrary element
+$g_C$ and see that: \begin{align*}
+    |G| = |Z(G)| + \sum_{C \in \mc{C}(G), \, |C| > 1} [G : C_G(g_C)].
+\end{align*}
+
+\begin{proof}
+    This follows directly from (\ref{5.3}) as for $g$ in $G$ and $z$ in $Z(G)$, $g^{-1}zg = z$.
+\end{proof}
+
+

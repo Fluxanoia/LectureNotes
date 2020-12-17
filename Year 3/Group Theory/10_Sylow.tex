@@ -1,6 +1,6 @@
 \section{Sylow's Theorems}
 
-\subsection{Cauchy's Theorem} \label{6.1}
+\subsection{Cauchy's Theorem (6.1-2)} \label{6.1} \label{6.2}
 
 For a finite group $G$ and a prime $p$ such that $p$ divides $|G|$,
 $G$ contains an element of order $p$.
@@ -13,28 +13,27 @@ $G$ contains an element of order $p$.
     If $|G| = p$, then $G$ is cyclic with a generator of order $p$.
     So, we consider $|G| > p$ and proceed by induction on $|G|$. 
     We take $g$ in $G \setminus \{e\}$, if $p$ divides $|g|$, 
-    we take $g^{\frac{|g|}{p}}$.
+    we take $g^{\frac{|g|}{p}}$ and we are done.
     Otherwise, by Lagrange's theorem, $|G| = |g| \cdot [G : \ang{g}]$
-    so $p$ divides $[G : \ang{g}]$. Thus, $G / \ang{g}$ is an abelian
-    group of order strictly less than $|G|$, so by induction, it
-    contains an element of order $p$, $h\ang{g}$.
+    so $p$ divides $[G : \ang{g}]$. We have that $G / \ang{g}$ is an abelian
+    group by (\ref{2.29}) and has order strictly less than $|G|$, so by induction, 
+    it contains an element of order $p$, $h\ang{g}$.
     We write $n = |h|$, we have that: \begin{align*}
         (h\ang{g})^n = h^n\ang{g} = e\ang{g} = \ang{g},
     \end{align*} so $p$ divides $n$. Thus, $h^{\frac{n}{p}}$ has order
-    $p$ in $G$ as required. \qed
+    $p$ in $G$ as required.
     \\[\baselineskip]
-    \noindent
-    We remove our supposition that $G$ is abelian.
+    \textbf{General Case} We remove our supposition that $G$ is abelian.
     As before, if $|G| = p$, then $G$ is cyclic with a generator of 
     order $p$. So, we consider $|G| > p$ and proceed by induction on $|G|$.
-    If $p$ divides $|Z(G)|$, as $Z(G)$ is abelian, we are done. Otherwise,
-    we consider the class equation: \begin{align*}
+    If $p$ divides $|Z(G)|$, as $Z(G)$ is abelian, we are done by the first case. 
+    Otherwise, we consider the class equation: \begin{align*}
         |G| = |Z(G)| + \sum_{C \in \mc{C}(G), \, |C| > 1} [G : C_G(g_C)].
     \end{align*} As $p$ divides $|G|$ but not $|Z(G)|$, there is some
     term of the summation that is not divisible by $p$. Thus, there exists
     $g$ in $G$ such that $g \in C$ where $C$ is a conjugacy class
     of size at least $2$ and $[G : C_G(g)]$ is not divisible by $p$.
-    But, Lagrange's theorem implies that $|C_G(g)|$ is divisible
+    We have that Lagrange's Theorem implies that $|C_G(g)|$ is divisible
     by $p$ as: \begin{align*}
         |G| = |C_G(g)|[G : C_G(g)].
     \end{align*} Since $|C| \geq 2$, $g$ is not central in $G$, so
@@ -42,20 +41,20 @@ $G$ contains an element of order $p$.
     order $p$. Hence, $G$ does.
 \end{proof}
 
-\subsection{Order of $p$-groups} \label{6.3}
+\subsection{Order of $p$-groups (6.3)} \label{6.3}
 
 For a prime $p$ and a finite group $G$, $G$ is a $p$-group if
 and only if $|G| = p^m$ for some $m$ in $\mb{N}$.
 
 \begin{proof}
     If $|G| = p^m$ for some $m$ in $\mb{N}$ then every element has
-    order dividing $p^m$ by Lagrange's theorem. As such, $G$ is a
+    order dividing $p^m$ by Lagrange's Theorem. As such, $G$ is a
     $p$-group. Conversely, if $|G|$ is divisible by some prime
-    $q \neq p$, then Cauchy's theorem imples that $G$ has
+    $q \neq p$, then Cauchy's Theorem implies that $G$ has
     an element of order $q$, which is not a power of $p$.
 \end{proof}
 
-\subsection{Sylow's First Theorem} \label{6.4}
+\subsection{Sylow's First Theorem (6.4)} \label{6.4}
 
 We consider a prime $p$ and a finite group $G$ with $|G| = p^rm$ 
 for some $r$ in $\mb{N}_0$ and some $m$ in $\mb{N}$ such that $p$ 
@@ -64,23 +63,23 @@ there exists a subgroup of $G$ of order $p^k$ if and only if
 $k \leq r$.
 
 \begin{proof}
-    We note that when $k > r$, $p^k$ cannot divide $p^rm$ as
-    we've defined it so by Lagrange's theorem, there's no subgroup
+    We note that when $k > r$, $p^k$ cannot divide $p^rm$
+    so, by Lagrange's Theorem, there's no subgroup
     of size $p^k$. Thus, we consider $k$ in $[r]_0$.
     The theorem is trivial when $G = \{e\}$, so we assume $|G| > 1$
     and proceed by induction on $|G|$.
     \\[\baselineskip]
     \textbf{Case 1} We suppose that $p$ divides $|Z(G)|$.
-    Cauchy's theorem implies that there is a central element
-    $x$ of order $p$, thus $\ang{x} \nsub G$. We consider
+    Cauchy's Theorem implies that there is a central element
+    $x$ of order $p$, so $\ang{x} \nsub Z(G) \csub G$ (by (\ref{2.13})). We consider
     $G / \ang{x}$ which has size $p^{r - 1}m$ so by induction
     has subgroups of order $p^k$ for $k$ in $[r - 1]_0$
     denoted by $H_0, \ldots, H_{r - 1}$ with each $i$
     in $[r - 1]_0$ yielding $|H_i| = p^i$.
     \\[\baselineskip]
     We take $\pi$ from $G$ to $G / \ang{x}$ to be the
-    quotient homomorphism and note that by the correspondence 
-    theorem, for all $i$ in $[r - 1]_0$, $\pi^{-1}(H_i) \leq G$ and so:
+    quotient homomorphism and note that by the Correspondence 
+    Theorem, for all $i$ in $[r - 1]_0$, $\pi^{-1}(H_i) \leq G$ and so:
     \begin{align*}
         |\pi^{-1}(H_i)| = |\ang{x}| \cdot |H_i| = p|H_i| = p^{i + 1}.
     \end{align*} Thus, since we have the trivial subgroup of order
@@ -111,7 +110,7 @@ is a Sylow $p$-subgroup if it is not a subgroup of any other
 $p$-subgroup of $G$. We write $\Syl_p(G)$ for the set of
 these subgroups and $n_p(G)$ for the quantity of them.
 
-\subsection{Closure of $p$-groups under Conjugacy}  \label{6.5}
+\subsection{Closure of $p$-groups under Conjugacy (6.5)}  \label{6.5}
 
 For a prime $p$ and a group $G$ with $H \leq G$ a $p$-group,
 for every $g$ in $G$, $H^g$ is also a $p$-group.
@@ -121,30 +120,35 @@ If $H$ is a Sylow $p$-group, so is $H^g$.
     As conjugacy is an automorphism, $H^g$ is another $p$-group.
     If $H$ is a Sylow $p$-subgroup and $H^g$ is not, then $H^g$ 
     must be a proper subgroup of some other $p$-group $K \leq G$.
-    But, $K^g$ is another $p$-subgroup and: \begin{align*}
-        H = g^{-1}(gHg^{-1})g < g^{-1}Kg,
+    However, $K^g$ should be another $p$-subgroup but: \begin{align*}
+        H = g^{-1}(gHg^{-1})g < g^{-1}Kg, \tag{\ref{2.9}}
     \end{align*} which contradicts the fact that $H$ is a
     Sylow $p$-group.
 \end{proof}
 
-\subsection{Sylow's Second Theorem}  \label{6.6}
+\subsection{Sylow's Second Theorem (6.6)}  \label{6.6}
 
 For a prime $p$ and a finite group $G$, the Sylow $p$-groups
-of $G$ are all conjugate to each other.
+of $G$ are all conjugate to each other.  Thus, 
+the conjugation action of $G$ on the Sylow $p$-subgroups 
+gives us that $|\!\Orb_G(P)| = n_p(G)$. So, by the Orbit-Stabiliser
+Theorem: \begin{align*}
+    |\!\Stab_G(P)| = \frac{|G|}{n_p(G)}.
+\end{align*}
 
 \begin{proof}
     We write $|G| = p^rm$ with $p$ not dividing $m$.
-    By Sylow's first theorem, we have that there exists
+    By Sylow's First Theorem, we have that there exists
     a Sylow $p$-subgroup $P \leq G$ with $|P| = p^r$.
     We will show $P$ is conjugate to an arbitrary Sylow
     $p$-subgroup $H$.
-    We take $H$ to act on $G / P$ via $h \cdot gP = (hg)P$
+    We take $H$ to act on $G / P$ by $\varphi(h)(gP) = (hg)P$
     and $\mc{O}$ to be the set of orbits of this action.
-    The orbits partition $G / P$ so 
-    $m = [G : P] = \sum_{O \in \mc{O}} |O|$. But, $m$
-    is not divisible by $p$ so there must be some orbit
+    By (\ref{5.2}), the orbits partition $G / P$ so 
+    $m = |G / P| = [G : P] = \sum_{O \in \mc{O}} |O|$. But, $m$
+    cannot be divisible by $p$ so there must be some orbit
     $O$ with $|O|$ not divisible by $p$.
-    The orbit-stabiliser theorem gives us that: \begin{align*}
+    The Orbit-Stabiliser Theorem gives us that: \begin{align*}
         |H| = |O| \cdot |\!\Stab_H(x)|,
     \end{align*} for some $x$ in $G / P$, so $|O|$ divides
     $|H|$. Since $H$ is a $p$-group, $|O|$ must be a power
@@ -154,93 +158,73 @@ of $G$ are all conjugate to each other.
         HgP = gP
         & \Longleftrightarrow g^{-1}HgP = P \\
         & \Longleftrightarrow g^{-1}Hg \subseteq P.
-    \end{align*} By the closure of Sylow $p$-subgroups under
-    conjugacy and the definition of Sylow $p$-subgroups, 
-    $g^{-1}Hg$ must be equal to $P$.
+    \end{align*} By (\ref{6.5}), $g^{-1}Hg = P$.
 \end{proof}
-\noindent
-A consequence of this is that the conjugation action of $G$
-on the Sylow $p$-subgroups gives us that
-$|\Orb_G(P)| = n_p(G)$. So, by the orbit-stabiliser
-theorem: \begin{align*}
-    |\! \Stab_G(P)| = N_G(P) = \frac{|G|}{n_p(G)}.
-\end{align*}
 
-\subsection{Order of Sylow Subgroups}  \label{6.7}
+\subsection{Order of Sylow Subgroups (6.7)}  \label{6.7}
 
 For a prime $p$ and a finite group $G$ with $|G| = p^rm$
 where $r$ is in $\mb{N}_0$, $m$ is in $\mb{N}$, and 
 $p$ doesn't divide $m$, every Sylow $p$-subgroup of $G$
 has order $p^r$. 
 \begin{proof}
-    This is a consequence of Sylow's first and second theorems.
+    This is direct from Sylow's First and Second Theorem.
 \end{proof}
 
-\subsection{The Quantity of Sylow Subgroups} \label{6.8}
+\subsection{The Quantity of Sylow Subgroups (6.8)} \label{6.8}
 
 For a finite group $G$ and $P \leq G$ a Sylow $p$-subgroup,
 $n_p(G) = [G : N_G(P)]$. In particular, $P \nsub G$ if and
 only if $P$ is the unique Sylow $p$-subgroup of $G$.
 
 \begin{proof}
-    By Sylow's second theorem: \begin{align*}
+    By Sylow's Second Theorem: \begin{align*}
         n_p(G) &= |\{H \leq G : H \text{ is conjugate to } P\}| \\
-        &= [G : N_G(P)],
-    \end{align*} as required.
+        &= [G : N_G(P)]. \tag{\ref{5.5}}
+    \end{align*} If $n_p(G) = 1$, then $P^g = P$ for all $g$ in $G$
+    by Sylow's Second Theorem.
 \end{proof}
 
-\subsection{Sylow Subgroups of Abelian Groups} \label{6.9}
+\subsection{Sylow Subgroups of Abelian Groups (6.9)} \label{6.9}
 
 For a finite abelian group $G$, $n_p(G) = 1$ for all primes $p$.
 
 \begin{proof}
-    We have that $n_p(G) = [G : N_G(P)] = 1$ as $N_G(P) = G$.
+    As $G$ is abelian, $N_G(P) = G$ so we have that $n_p(G) = [G : N_G(P)] = 1$.
 \end{proof}
 
-\subsection{Fixed Point of Conjugation on Sylow Subgroups} \label{6.11}
+\subsection{Fixed Point of Conjugation on Sylow Subgroups (6.11)} \label{6.11}
 
-We consider a finite group $G$ and $P \leq G$ a Sylow $p$-subgroup
-with $P$ acting on $\Syl_p(G)$ by conjugation,
-$g \cdot Q = gQg^{-1}$. We have that $\Fix_p(\Syl_p(G)) = \{P\}$.
+For a finite group $G$ and a Sylow $p$-subgroup $P$
+where $P$ acts on $\Syl_p(G)$ by conjugation via $\varphi$,
+we have that $\Fix_P(\Syl_p(G)) = \{P\}$.
 
 \begin{proof}
-    We know that $P$ is in $\Fix_p(\Syl_p(G))$ as $gPg^{-1} = P$
-    for some $g$ in $P$. For $Q$ in $\Fix_p(\Syl_p(G))$,
-    by definition, $gQg^{-1} = Q$ for all $g$ in $P$. Thus,
-    $P \leq N_G(Q)$, $Q \nsub N_G(Q)$, and $PQ = QP$ so
-    $PQ \leq G$. By (\ref{2.24}), $|PQ|$ divides $|P||Q|$,
-    but as $P$ and $Q$ are $p$-groups, they must have an order
+    We know that $P$ is in $\Fix_P(\Syl_p(G))$ as $gPg^{-1} = P$
+    for any $g$ in $P$. For $Q$ in $\Fix_P(\Syl_p(G))$,
+    by definition, $gQg^{-1} = Q$ for all $g$ in $P$ so,
+    $P \subseteq N_G(Q)$. As we know $Q \nsub N_G(Q)$, (\ref{2.23})
+    shows that $PQ \leq G$, and by (\ref{2.24}), $|PQ|$ divides $|P||Q|$.
+    But, as $P$ and $Q$ are $p$-groups, they must have an order
     that is a power of $p$. Thus, $|PQ|$ is also a power of $p$
-    so $PQ$ is a $p$-group. However, $P, Q \leq PQ$ are both
-    Sylow $p$-subgroups, so $P = PQ = Q$, as required.
+    so $PQ$ is a $p$-group. However, since $P$ and $Q$ are both
+    Sylow $p$-subgroups in $PQ$, $P = PQ = Q$, as required.
 \end{proof}
 
-\subsection{Sylow's Third Theorem} \label{6.10}
+\subsection{Sylow's Third Theorem (6.10)} \label{6.10}
 
 For a prime $p$ and a finite group $G$ with
-$|G| = p^rm$ for some where $p$ doesn't divide $m$, 
+$|G| = p^rm$ for some prime $p$ that doesn't divide $m$, 
 $n_p(G)$ divides $m$ and $n_p(G) \equiv 1 \bmod p$.
 
 \begin{proof}
     We take $P$ to be a \Syls with $P$ acting on $\Syl_p(G)$
-    by conjugation. By (\ref{5.3}), we have that
-    for $\mc{O}$ the set of orbits and
-    $Q_O$ in $O$ for each $O$ in $\mc{O}$: \begin{align*}
-        |\!\Syl_p(G)| = 
-        |\!\Fix_P(\Syl_p(G))| 
-        + \sum_{O \in \mc{O}_G(X), \, |O| > 1} 
-            [P : \Stab_P(Q_O)].
-    \end{align*} If an ordbit has size greater than one,
-    its elements are not fixed. So, none of the stabilisers
-    are equal to $P$, so each index is greater than $1$
-    and divides $|P|$ (so is a power of $p$). As such: 
-    \begin{align*}
-        n_p(G) = |\!\Syl_p(G)| 
-        &\equiv |\!\Fix_P(\Syl_p(G))| \bmod p \\
-        &\equiv 1 \bmod p, \tag{\ref{6.11}}
-    \end{align*} Thus, by (\ref{6.8}), for a
-    \Syls $P$: \begin{align*}
-        n_p(G) = [G : N_G(P)],
-    \end{align*} so $n_p(G)$ divides $|G|$ and by the above,
-    does not divide $p^r$. Thus, $n_p(G)$ divides $m$.
+    by conjugation. By Lagrange's Theorem, $p$ divides $[P : \Stab_P(Q)]$
+    for every $Q$ in $\Syl_p(G)$ that is not in $\Fix_P(G)$. So, we have that: \begin{align*}
+        n_p(G) 
+        &\equiv |\!\Fix_P(\Syl_p(G))| \bmod p \tag{\ref{5.3}} \\
+        &\equiv 1. \tag{\ref{6.11}}
+    \end{align*} By (\ref{6.8}) and Lagrange's Theorem, $n_p(G)$ must divide $|G|$
+    and as $n_p(G) \equiv 1 \bmod p$, $n_p(G)$ is not divisible by $p$. Thus, 
+    $n_p(G)$ divides $m$.
 \end{proof}

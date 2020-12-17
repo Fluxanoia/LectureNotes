@@ -1,0 +1,323 @@
+\section{Finitely Generated Abelian Groups}
+
+We will write $\mb{Z}^n = \{(m_1, \ldots, m_n) : m_1, \ldots, m_n \in \mb{Z}\}$
+and $e_i = (0, \ldots, 1, \ldots, 0)$ in $\mb{Z}^n$ with $1$ in the 
+$i^{\text{th}}$ entry. These are the standard generators for $\mb{Z}^n$.
+\\[\baselineskip]
+For some $n$ in $\mb{N}$, we write $\mb{Z}_n$ to be the integers
+modulo $n$ which is a group under addition. Additionally, $n\mb{Z}$
+is a subgroup of $\mb{Z}$ and $\mb{Z}_n \cong \mb{Z}/n\mb{Z}$.
+
+\subsection{Classification of Cyclic Groups (3.1)} \label{3.1}
+
+For a cyclic group $G$, if $|G| = n$ finite, we have that $G \cong \mb{Z}_n$.
+Otherwise, $G \cong \mb{Z}$.
+
+\begin{proof}
+    For a generator of $G$, $x$, We take $\varphi$ from $\mb{Z}$ to $G$
+    to be defined by $\varphi(m) = x^m$. Trivially, $\varphi$ is a
+    surjective homomorphism. If $|x| = \infty$ then $\Ker(\varphi) = \{0\}$,
+    otherwise, $\Ker(\varphi) = |x|\mb{Z}$. By the homomorphism theorem:
+    \begin{align*}
+        G = \Ima(\varphi) \cong \mb{Z}/\Ker(\varphi).
+    \end{align*} The result follows as $\mb{Z}/\Ker(\varphi) = \mb{Z}$
+    if $|x| = \infty$ and $\mb{Z}_{|x|}$ otherwise.
+\end{proof}
+
+\subsection{Torsion Subgroup and $p$-components (3.3)} \label{3.3}
+
+For an abelian group $G$ with $T \subseteq G$ the set of
+elements in $G$ of finite order and a prime $p$ with
+$G_p \subseteq T$ the set of elements in $T$ of with order
+equal to a power of $p$. We have that $G_p \leq T \leq G$
+and $G/T$ is torsion-free.
+We have that $T$ called the torsion subgroup of $G$ and $G_p$ called
+the $p$-primary component of $G$.
+
+\begin{proof}
+    We suppose $x$ and $y$ are in $T$ with $|x| = k$, $|y| = m$.
+    We know that \linebreak $km(x - y) = 0$ so $|x - y| \leq km < \infty$,
+    thus $(x - y)$ is in $T$ so $T$ is a subgroup of $G$ by the subgroup test. 
+    \\[\baselineskip]
+    Furthermore,
+    $|x - y|$ must divide $km$ so if $x$ and $y$ are in $G_p$
+    then $km$ is a power of $p$. Thus, $|x - y|$ is also a
+    power of $p$ so $(x - y)$ is in $G_p$. Again, by the subgroup test,
+    $G_p$ is a subgroup of $T$.
+    \\[\baselineskip]
+    If we suppose that for some $z$ in $G$, $z + T$ has finite order,
+    there must exist some $m$ in $\mb{N}$ with $mx + T = T$, so 
+    $mx$ is in $T$. By the definition of $T$, there exists some $n$
+    in $\mb{N}$ with $nmx = 0$. This means $x$ has finite order
+    so is in $T$. Thus, $G / T$ is torsion-free.
+\end{proof}
+
+\subsection{The Primary Decomposition Theorem (3.4)} \label{3.4}
+
+For a finite abelian group $G$, we take $p_1, \ldots, p_k$ to be the
+prime factors of $|G|$. We have that $G = G_{p_1} \oplus \cdots \oplus
+G_{p_k}$.
+
+\begin{proof}
+    We take $x$ in $G$, by Lagrange's Theorem, $|x|$ divides $|G|$ so
+    $|x| = p_1^{l_1} \cdots p_k^{l_k}$ for some $l_1, \ldots, l_k$ in $\mb{N}_0$.
+    For each $i$ in $[k]$, we set: \begin{align*}
+        n_i = \prod_{j \in [k]\setminus\{i\}} p_j^{l_j},
+    \end{align*} and note that $|n_ix| = p_i^{l_i}$ so $n_ix$ is in $G_{p_i}$.
+    It must be that $\gcd(n_1, \ldots, n_k) = 1$ as they are powers of distinct
+    primes, so by the Euclidean Algorithm there exists $m_1, \ldots, m_k$ such that 
+    $m_1n_1 + \cdots + m_kn_k = 1$. Thus:
+    \begin{align*}
+        x 
+        &= \left(\sum_{i = 1}^k m_in_i\right) \cdot x \\
+        &= \sum_{i = 1}^k m_i(n_ix) \in \sum_{i = 1}^k G_{p_i}. 
+    \end{align*} Thus, $G = G_{p_1} + \cdots + G_{p_k}$.
+    Now, for each $i$ in $[k]$, we consider $x_i$ and $x_i'$ in $G_{p_i}$ such
+    that $\sum_{i \in [k]} x_i = \sum_{i \in [k]} x_i'$. We write
+    $y_i = x_i - x_i'$ so that $\sum_{i \in [k]} y_i = 0$,
+    take $d_i$ such that $|y_i| = p_i^{d_i}$, and set: \begin{align*}
+        r_i 
+        = \prod_{j \in [k] \setminus \{i\}} |y_i|
+        = \prod_{j \in [k] \setminus \{i\}} p_j^{d_j}.
+    \end{align*} As $|y_i|$ divides $|r_j|$ for all 
+    $j \in [k] \setminus \{i\}$, we know that $r_iy_j = 0$.
+    This implies that $r_iy_i = 0$ as $\sum_{i = 1}^k y_i = 0$.
+    \\[\baselineskip]
+    Moreover, as $r_i$ and $p_i$ are coprime by definition, the
+    Euclidean Algorithm implies that there exists $a$ and $b$ in $\mb{Z}$
+    such that: \begin{align*}
+        ar_i + bp_i^{d_i} = 1
+        & \Longrightarrow y_i = (ar_i + bp_i^{d_i})y_i  \\
+        & \Longrightarrow y_i = ar_iy_i + bp_i^{d_i}y_i  \\
+        & \Longrightarrow y_i = 0 + 0 = 0, 
+    \end{align*} so $x_i = x_i'$ for each $i$ in $[k]$. Thus, the
+    composition of each element of $G$ in our sum is unique, implying 
+    $G$ is the direct sum of $G_{p_1}, \ldots, G_{p_k}$ by (\ref{2.34}).
+\end{proof}
+
+\subsection{Order of Finitely Generated Abelian Torsion Groups (3.5)} \label{3.5}
+
+A finitely generated torsion group is finite.
+
+\begin{proof}
+    For $x_1, \ldots, x_n$ the finite generating set of an abelian torsion group $G$: 
+    \begin{align*}
+        G = \{k_1x_1 + \cdots + k_nx_n : 0 \leq k_i < |x_i|\},
+    \end{align*} which is finite since $|x_i| < \infty$ for all $i$ in $[n]$.
+\end{proof}
+
+\subsection{Order of Powers of Elements in $p$-groups (3.6)} \label{3.6}
+
+For a prime $p$ and a $p$-group $G$, we take $g$ in $G$ and set $k$
+in $\mb{N}$ to $np^r$ with $n$ and $p$ coprime, and $r$ in $\mb{N}_0$.
+If $p^r \leq |g|$ then $|g^k| = \frac{|g|}{p^r}$.
+
+\begin{proof}
+    We know that $|g| = p^m$ for some $m$ as $G$ is a $p$-group.
+    For $d$ in $\mb{N}$: \begin{align*}
+        (g^k)^d = e
+        &\Longleftrightarrow g^{dnp^r} = e \\
+        &\Longleftrightarrow p^m \text{ divides } dnp^r \\
+        &\Longleftrightarrow p^m \text{ divides } dp^r \tag{$n$ and $p$ coprime} \\
+        &\Longleftrightarrow p^{m - r} \text{ divides } d.
+    \end{align*} Thus, $|g^k| = p^{m - r} = \frac{|g|}{p^r}$ as required.
+\end{proof}
+
+\subsection{Elements with Coset of Maximal Cyclic Subgroup Order (3.7)} \label{3.7}
+
+For some prime $p$ and a finite abelian $p$-group $G$, we take $g$ in $G$
+to have maximum order. For every $x$ in $G$, there exists $y$ in $x + \ang{g}$
+such that the order of $y$ in $G$ is equal to the order of $x + \ang{g}$ in
+$G / \ang{g}$.
+
+\begin{proof}
+    We write $|x + \ang{g}| = p^m$ for some $m$, noting that $p^mx$ 
+    is in $\ang{g}$ so $p^mx = kg$ for some $k$ in $\mb{N}_0$. 
+    We write $k = np^r$ with $n$ and $p$ coprime.
+    If $p^r = 0$ or $p^r > |g|$ then $kg = 0$ so $|x| = p^m = |x + \ang{g}|$.
+    Otherwise, by (\ref{3.6}), $|kg| = \frac{|g|}{p^r}$ and $|p^mx| = \frac{|x|}{p^m}$
+    as $p^m$ is minimal so $p^m \leq |x|$.
+    Thus, $\frac{|g|}{p^r} = \frac{|x|}{p^m}$ as $p^mx = kg$. The maximality of $g$ 
+    implies that $|g| \geq |x|$ so $r \geq m$ and thus $p^m$ divides $k$.
+    We define: \begin{align*}
+        y = x - \frac{k}{p^m}g.
+    \end{align*} Hence, $p^my = p^mx - kg = 0$ so $|y|$ divides $p^m$.
+    But, as $y$ is in $x + \ang{g}$, (\ref{2.3}) applied to the quotient homomorphism
+    from $G$ to $G / \ang{g}$ implies that $p^m$ divides $|y|$ so $|y| = p^m$ as required.
+\end{proof}
+
+\subsection{Decomposition of Finite Abelian $p$-groups (3.8)} \label{3.8}
+
+For a finite abelian $p$-group $G$ with $p$ prime, there exists a $k$
+in $\mb{N}_0$ and $m_1, \ldots, m_k$ in $\mb{N}$ such that 
+$G \cong \mb{Z}_{p^{m_1}} \oplus \cdots \oplus \mb{Z}_{p^{m_k}}$.
+
+\begin{proof}
+    It is sufficient to show that for $x_1, \ldots, x_k$ in $G$, $G$
+    is the inner direct sum: \begin{align*}
+        G = \ang{x_1} \oplus \cdots \oplus \ang{x_k} \tag{$\ast$}.
+    \end{align*} If $G = \{0\}$ then this is trivial so we assume $|G| > 1$.
+    By strong induction, we assume every group of order lesser to that of
+    $G$ can be written in the form shown in ($\ast$).
+    \\[\baselineskip]
+    We take $g$ in $G$ to have maximum order, $g \neq e$ as our group is
+    non-trivial so $|G / \ang{g}| < |G|$ so by induction, there exists
+    $x_1, \ldots, x_k$ in $G$ such that: \begin{align*}
+        G / \ang{g} = \ang{x_1 + \ang{g}} \oplus \cdots \oplus
+        \ang{x_k + \ang{g}}. \tag{$\bullet$}
+    \end{align*} By (\ref{3.7}), we can assume that $|x_i| = |x_i + \ang{g}|$, 
+    so: \begin{align*}
+        |G/\ang{g}| 
+        &= |\ang{x_1 + \ang{g}}| \cdots |\ang{x_k + \ang{g}}| \\
+        &= |x_1| \cdots |x_k|,
+    \end{align*} which combined with Lagrange's Theorem means that: \begin{align*}
+        |G| 
+        &= [G : \ang{g}] \cdot |g| \\
+        &= |G / \ang{g}| \cdot |g| \\
+        &= |x_1| \cdots |x_k| \cdot |g|.
+    \end{align*} We want to show that $G = \ang{x_1} + \cdots + \ang{x_k} + \ang{g}$
+    and for all $h$ in $G$, $h = ng + \sum_{i = 1}^k l_ix_i$ for some
+    $l_1, \ldots, l_k, n$ in $\mb{N}_0$. By ($\bullet$) we know that: \begin{align*}
+        h + \ang{g} = (l_1x_1 + \cdots + l_kx_k) + \ang{g}
+        &\Longrightarrow
+        h \in (l_1x_1 + \cdots + l_kx_k) + \ang{g} \tag{\ref{1.18}} \\
+        &\Longrightarrow
+        h = l_1x_1 + \cdots + l_kx_k + ng.
+    \end{align*} As we have that $G$ is a sum of $\ang{x_1}, \ldots, \ang{x_k},
+    \ang{g}$ and its size is a product of the size of these groups, $G$
+    is an inner direct product of said elements by (\ref{2.35}).
+\end{proof}
+
+\subsection{Homomorphism from $\mb{Z}^n$ to Group Subsets (3.10)} \label{3.10}
+
+For $n$ in $\mb{N}$ and an abelian group $G$, for every $g_1, \ldots, g_n$
+in $G$, there exists a unique homomorphism $\varphi : \mb{Z}^n \to G$
+satisfying $\varphi(e_i) = g_i$ for all $i$. In particular,
+$\varphi((m_1, \ldots, m_1)) = m_1g_1 + \cdots + m_ng_n$.
+
+\begin{proof}
+    This is trivially a homomorphism and is unique by (\ref{2.8}).
+\end{proof}
+
+\subsection{One-way Inverses on Homomorphisms to $\mb{Z}^n$ (3.11)} \label{3.11}
+
+For an abelian group $G$ and $\alpha : G \to \mb{Z}^n$ is a surjective
+homomorphism, there exists an injective homomorphism $\beta : \mb{Z}^n \to G$
+such that $\alpha \circ \beta = \iota_{\mb{Z}^n}$ (the identity on $\mb{Z}^n$).
+
+\begin{proof}
+    If $n = 0$, this is trivial. Otherwise, there exists $g_1, \ldots, g_n$
+    in $G$ such that $\alpha(g_i) = e_i$ for all $i$ as $\alpha$ is surjective.
+    By (\ref{3.10}), we know that there exists a homomorphism $\beta$
+    from $\mb{Z}^n$ to $G$ such that $\beta(e_i) = g_i$ for all $i$.
+    This gives us that $(\alpha \circ \beta)(e_i) = e_i$ which completely defines
+    $(\alpha \circ \beta)$ by (\ref{2.8}). Thus, $(\alpha \circ \beta) = \iota_{\mb{Z}^n}$.
+    We can see that: \begin{align*}
+        \Ker(\beta) &\subseteq \Ker(\alpha \circ \beta) \tag{\ref{2.2}} \\
+        &= \Ker(\iota_{\mb{Z}^n}) \\
+        &= \{0\}.
+    \end{align*} Thus, $\Ker(\beta) = \{0\}$ so $\beta$ is injective as
+    required.
+\end{proof}
+
+\subsection{Abelian Groups with $\mb{Z}^n$ Quotients (3.9)} \label{3.9}
+
+For an abelian group $G$ with $H \leq G$ satisfying $G/H \cong \mb{Z}^n$
+for some $n$ in $\mb{N}_0$, we have that $G = H \oplus K$ for some $K \leq G$
+satisfying $K \cong \mb{Z}^n$.
+
+\begin{proof}
+    We take $\pi$ from $G$ to $G/H$ to be the quotient homomorphism and
+    $\psi$ from $G / H$ to $\mb{Z}^n$ to be an isomorphism. We set 
+    $\alpha = (\psi \circ \pi)$ which is a surjective homomorphism from
+    $G$ to $\mb{Z}^n$.
+    By (\ref{3.11}), we have $\beta$ from $\mb{Z}^n$ to $G$ an injective
+    homomorphism with $(\alpha \circ \beta) = \iota_{\mb{Z}^n}$. We note
+    that $H = \Ker(\alpha) \leq G$ and set $K = \beta(\mb{Z}^n) \leq G$.
+    As $\beta$ is injective, $K \cong \mb{Z}^n$.
+    For some $g$ in $G$: \begin{align*}
+        \alpha(g - (\beta \circ \alpha)(g)) 
+        &= \alpha(g) - \alpha((\beta \circ \alpha)(g)) \\
+        &= \alpha(g) - ((\alpha \circ \beta) \circ \alpha)(g) \\
+        &= \alpha(g) - \alpha(g) \\
+        &= 0.
+    \end{align*} Therefore, $(g - (\beta \circ \alpha)(g))$ is in 
+    $\Ker(\alpha) = H$ so $g$ is in $(\beta \circ \alpha)(g) + H$.
+    In particular, $g$ is in $K + H = H + K$. As 
+    $(\alpha \circ \beta) = \iota_{\mb{Z}^n}$, 
+    $(\Ker(\alpha) \cap \beta(\mb{Z}^n)) = \{0\}$ which means $(H \cap K) = \{0\}$.
+    Thus, $G = H \oplus K$ as required.
+\end{proof}
+
+\subsection{$\mb{Z}^n$ Subgroups of Finitely Generated Groups (3.12)} \label{3.12}
+
+For a finitely generated abelian group $G$ with $H \leq G$ satisfying
+$G / H \cong \mb{Z}^n$ for some $n$ in $\mb{N}_0$, $H$ is finitely generated.
+
+\begin{proof}
+    We know that $G \cong H \oplus \mb{Z}^n$ by (\ref{3.9}).
+    The projection $\pi$ from $H \oplus \mb{Z}^n$ onto $H$ defined by
+    $(h, z) \mapsto h$ is a homomorphism. Since $H \oplus \mb{Z}^n$
+    is finitely generated, $H$ is finitely generated by these generators
+    under $\pi$.
+\end{proof}
+
+\subsection{Fundamental Theorem of Finitely Generated Torsion-free Abelian Groups (3.13)}
+\label{3.13}
+
+For $n$ in $\mb{N}$ and $G$ a finitely generated torsion-free abelian group
+generated by at most $n$ elements, $G \cong \mb{Z}^k$ for some $k \leq n$.
+
+\begin{proof}
+    We take $\{g_1, \ldots, g_n\}$ to be a generating set of $G$. If
+    $n = 1$, $G$ is cyclic and has infinite order so $G \cong \mb{Z}$.
+    Otherwise, we proceed by induction, set: \begin{align*}
+        H = \{x \in G : \exists \, m \in \mb{N} \text{ such that } mx \in \ang{g_n} \},     
+    \end{align*} and observe that $H$ is a subgroup via the subgroup test. We 
+    consider the quotient $G / H$ and the quotient homomorphism $\pi$ from $G$ to $G / H$.
+    We know that $G / H$ is torsion-free as: \begin{align*}
+        k\pi(x) = 0 
+        &\Longrightarrow \pi(kx) = 0 \\
+        &\Longrightarrow kx \in H \\
+        &\Longrightarrow lkx \in \ang{g_n} \text{ for some } l \in \mb{N} \\
+        &\Longrightarrow x \in H \\
+        &\Longrightarrow \pi(x) = 0.
+    \end{align*} Thus, $0$ is the only element of finite order in $G / H$
+    as $\pi$ is surjective. Clearly $g_n$ is in $H$, so $G / H$
+    is generated by $\{\pi(g_1), \ldots, \pi(g_{n - 1})\}$.
+    By induction, $G / H \cong \mb{Z}^k$ for some $k < n$.
+    By (\ref{3.9}), $G \cong H \oplus \mb{Z}^k$ so it's sufficient
+    to show that $H \cong \{0\} \text{ or } \mb{Z}$. 
+    \\[\baselineskip]
+    We consider $H / \ang{g_n}$ which is finitely generated by (\ref{2.7}) 
+    and a torsion group as for all $h$ in $H$, there's some $l$ such that 
+    $lh + \ang{g_n} = \ang{g_n}$.
+    By (\ref{3.5}), $H / \ang{g_n}$ is finite, we write $m$ for its order.
+    Thus, for all $h$ in $H$, $mh + \ang{g_n} = \ang{g_n}$ as $|h|$ must divide $m$
+    by Lagrange's Theorem so $mh$ is in $\ang{g_n}$. We define $\varphi$ from $H$ to 
+    $\ang{g_n}$ by $\varphi(h) = mh$ which is an injective homomorphism as 
+    $H \leq G$ is torsion-free so $mh = 0$ implies that $h = 0$.
+    Hence, $H \cong \varphi(H) \leq \ang{g_n}$, so $H$ is cyclic.
+    Thus, $H \cong \mb{Z}$ because $H$ has infinite order and is cyclic.
+\end{proof}
+
+\subsection{Fundamental Theorem of Finitely Generated Abelian Groups (3.2)} \label{3.2}
+
+For a finitely generated abelian group $G$, there exists
+non-negative integers $n$ and $k$, primes $p_1, \ldots, p_k$, and
+natural numbers $n_1, \ldots, n_k$ such that: \begin{align*}
+    G \cong \mb{Z}_{p_1^{m_1}} \oplus \cdots 
+    \oplus \mb{Z}_{p_k^{m_k}} \oplus \mb{Z}^n
+\end{align*}
+
+\begin{proof}
+    We take $T \leq G$ to be the torsion subgroup. As $G$ is finitely generated,
+    $G / T$ is by (\ref{2.7}), and $G / T \cong \mb{Z}^n$ for some
+    $n$ by (\ref{3.13}). Then, \ref{3.9} gives us that $G \cong T \oplus \mb{Z}^n$
+    and (\ref{3.5} and \ref{3.12}) imply that $T$ is finite. 
+    By (\ref{3.4}), there are finitely many primes $p_1, \ldots, p_m$ such that
+    $G_{p_i} \neq \{0\}$, each $G_{p_i}$ is finite, and 
+    $T = G_{p_1} \oplus \cdots \oplus G_{p_m}$. Then, (\ref{3.8}) and $G \cong T \oplus \mb{Z}^n$
+    gives us that $G_{p_i} = \mb{Z}_{p_i^{m_1}} \oplus \cdots \oplus \mb{Z}_{p_i^{m_d}}$
+    for each $i$ in $[m]$, leading to the result.
+\end{proof}

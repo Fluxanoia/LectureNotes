@@ -15,30 +15,30 @@ A group is soluble if it has a subnormal series in which every
 factor is abelian. The length of the shortest such series is the
 derived length.
 
-\subsection{Insolubility of Non-abelian Simple Groups} \label{8.1}
+\subsection{Insolubility of Non-abelian Simple Groups (8.1)} \label{8.1}
 
 For a non-abelian simple group $G$, $G$ is not soluble.
 
 \begin{proof}
-    If we have a subnormal series $G_0, G_1, \ldots, G_n$ for $G$,
-    we take $m$ to be maximal such that $G_m \neq G$ and see that
-    $G_m \nsub G_{m + 1} = G$ so $G_m = \{e\}$ as $G$ is simple.
-    As such, $G / \{e\} \cong G$ is a non-abelian factor of $G$,
-    contradicting the solubility of $G$.
+    If we suppose $G$ is soluble and take a subnormal series 
+    $G_0, G_1, \ldots, G_n$ for $G$ and $m$ to be maximal such that 
+    $G_m \neq G$, we see that $G_m \nsub G_{m + 1} = G$ so $G_m = \{e\}$ 
+    as $G$ is simple. As such, $G / \{e\} \cong G$ is a non-abelian factor 
+    of $G$, contradicting the solubility of $G$.
 \end{proof}
 
 \subsection{Derived Series}
 
 For a group $G$, the derived series of $G$ is: \begin{align*}
-    G \geq G^{(0)} \geq G^{(1)} \geq \cdots,
+    \cdots \leq G^{(1)} \leq G^{(0)} = G,
 \end{align*} where for each $i$ in $\mb{N}$, we define:
 \begin{align*}
     G^{(0)} &= G, \\
-    G^{(i)} &= [G^{(i - 1)}, G^{(i - 1)}].
-\end{align*} We say that $G^{(m)}$ is the $m^{\text{th}}$ derived
+    G^{(i + 1)} &= [G^{(i)}, G^{(i)}].
+\end{align*} We say that $G^{(n)}$ is the $n^{\text{th}}$ derived
 subgroup of $G$.
 
-\subsection{Derived and Subnormal Series} \label{8.3}
+\subsection{Derived and Subnormal Series (8.3)} \label{8.3}
 
 For a group $G$, $G$ is soluble of derived length at most $n$ if
 and only if $G^{(n)} = \{e\}$.
@@ -58,13 +58,13 @@ and only if $G^{(n)} = \{e\}$.
     $G^{(i)} = [G^{(i - 1)}, G^{(i - 1)}] \leq G_{n - i}$.
     \\[\baselineskip]
     ($\Longleftarrow$) We know that 
-    $G^{(n)} \nsub G^{(n - 1)} \nsub \cdots \nsub G^{(0)} = G$
+    $\{e\} = G^{(n)} \nsub G^{(n - 1)} \nsub \cdots \nsub G^{(0)} = G$
     is a subnormal series for $G$ by (\ref{2.27}) and the factors
     are abelian by (\ref{2.28}). Thus, $G$ is soluble of derived length
     at most $n$.
 \end{proof}
 
-\subsection{Derived Groups under Homomorphisms} \label{8.4}
+\subsection{Derived Groups under Homomorphisms (8.4)} \label{8.4}
 
 For $G$ and $H$ groups with a homomorphism $\varphi$ from $G$ to $H$,
 we have that $\varphi(G^{(k)}) = \varphi(G)^{(k)}$ for all $k$ in
@@ -78,13 +78,13 @@ $\mb{Z}_{\geq 0}$.
         &= \ang{[x, y] : x, y \in \varphi(G)^{(k - 1)}} \\
         &= \ang{[x, y] : x, y \in \varphi(G^{(k - 1)})} \tag{IH} \\
         &= \ang{[\varphi(g), \varphi(h)] : g, h \in G^{(k - 1)}} \\
-        &= \ang{\varphi([g, h]) : g, h \in G^{(k - 1)}} \tag{\ref{2.3}} \\
+        &= \ang{\varphi([g, h]) : g, h \in G^{(k - 1)}} \tag{\ref{eq2.3}} \\
         &= \varphi(\ang{[g, h] : g, h \in G^{(k - 1)}}) \tag{\ref{2.7}} \\
         &= \varphi(G^{(k)}),
     \end{align*} as required.
 \end{proof}
 
-\subsection{Solubility of Subgroups and Quotients} \label{8.5}
+\subsection{Solubility of Subgroups and Quotients (8.5)} \label{8.5}
 
 For a soluble group $G$ of derived length at most $n$, every
 subgroup and quotient of $G$ is soluble of derived length at
@@ -102,23 +102,22 @@ most $n$.
     of derived length at most $n$.
 \end{proof}
 
-\subsection{Commutator of Symmetric Groups} \label{8.7}
+\subsection{Commutator of Symmetric Groups (8.7)} \label{8.7}
 
 For $n$ in $\mb{N}$, $[S_n, S_n] = A_n$.
 
 \begin{proof}
     The cases for $n < 3$ are trivial as $A_n = \{e\}$, 
     so we consider $n \geq 3$.
-    We know that $[S_n, S_n] \leq A_n$ as $S_n / A_n \cong C_2$
-    which is abelian so we can invoke (\ref{2.28}). Thus, it is
-    sufficient to show that $A_n \leq [S_n, S_n]$. For
+    As $S_n / A_n \cong C_2$ we have $[S_n, S_n] \leq A_n$ by (\ref{2.28}). 
+    Thus, it is sufficient to show that $A_n \leq [S_n, S_n]$. For
     a 3-cycle $(x, y, z)$, we know that: \begin{align*}
         (x, y, z) = [(x, y), (y, z)] \in [S_n, S_n],
     \end{align*} and as the 3-cycles generate $A_n$ and
     $(x, y, z)$ was arbitrary, we are done.
 \end{proof}
 
-\subsection{Insolubility of Symmetric Groups} \label{8.6}
+\subsection{Insolubility of Symmetric Groups (8.6)} \label{8.6}
 
 For $n$ in $\mb{N}$, $S_n$ is soluble if and only if $n \leq 4$.
 
@@ -137,9 +136,9 @@ For $n$ in $\mb{N}$, $S_n$ is soluble if and only if $n \leq 4$.
 \subsection{Central Series}
 
 For a group $G$, we define a finite series 
-$G = Z_k \geq \cdots \geq Z_0 = \{e\}$ of subgroups of $G$ to be 
+$\{e\} = Z_0 \leq \cdots \leq Z_k = G$ of subgroups of $G$ to be 
 central if for every $i$ in $[k]$, we have that 
-$[G, Z_i] \leq Z_{i - 1}$. The length of the series is $k$.
+$[G, Z_{i + 1}] \leq Z_{i}$. The length of the series is $k$.
 
 \subsection{Nilpotent Groups}
 
@@ -149,26 +148,26 @@ length of the shortest such series is called the step of $G$.
 \subsection{Lower Central Series}
 
 For a group $G$, the lower central series of $G$ is: \begin{align*}
-    G_1 \geq G_2 \geq \cdots,
+     \cdots \leq G_2 \leq G_1 = G,
 \end{align*} where for each $i$ in $\mb{N}$, we define:
 \begin{align*}
     G_1 &= G, \\
     G_{i + 1} &= [G, G_i].
 \end{align*}
 
-\subsection{Lower Central and Central Series} \label{8.8}
+\subsection{Lower Central and Central Series (8.8)} \label{8.8}
 
 For a group $G$ with a lower central series 
-$G = G_1 \geq G_2 \geq \cdots$, $G$ is nilpotent of step at most
+$\cdots \leq G_2 \leq G_1 = G$, $G$ is nilpotent of step at most
 $s$ if and only if $G_{s + 1} = \{e\}$.
 
 \begin{proof}
     ($\Longrightarrow$) As $G$ is nilpotent of step at most $s$,
     it has a central series: \begin{align*}
-        G = Z_s \geq \cdots \geq Z_0 = \{e\}.
+        \{e\} = Z_0 \leq \cdots \leq Z_s = G.
     \end{align*} We want to show that $G_i \leq Z_{s + 1 - i}$
-    for all $i$ in $[s]$. This shows that $G_{s + 1} = \{e\}$
-    as required. If $i = 1$, then this is true by definition.
+    for all $i$ in $[s]$ as this shows that $G_{s + 1} = \{e\}$. 
+    If $i = 1$, then this is true by definition.
     We proceed by induction with $i > 0$: \begin{align*}
         G_i 
         &= [G, G_{i - 1}] \\
@@ -176,18 +175,18 @@ $s$ if and only if $G_{s + 1} = \{e\}$.
         &\leq Z_{s + 1 - i}.
     \end{align*}
     ($\Longleftarrow$) We have that: \begin{align*}
-        G = G_1 \geq G_2 \geq \cdots \geq G_{s + 1} = \{e\},
+        \{e\} = G_{s + 1} \leq \cdots \leq G_2 \leq G_1 = G,
     \end{align*} is a central series of length $s$ as
     for all $k$ in $[s]$, $[G, G_k] = [G, G_{k + 1}]$
     by definition. 
 \end{proof}
 
-\subsection{The Normaliser Condition} \label{8.9}
+\subsection{The Normaliser Condition (8.9)} \label{8.9}
 
 For a nilpotent group $G$ with $H < G$, we have that $H \neq N_G(H)$.
 
 \begin{proof}
-    We take $G = Z_k \geq \cdots \geq Z_0 = \{e\}$ to be a central
+    We take $\{e\} = Z_0 \leq \cdots \leq Z_k = G$ to be a central
     series for $G$ and set $n = \max(\{m \in [k]_0 : Z_m \leq H\})$.
     It must be that $n < k$ as $H \neq G$, so we consider some
     $z$ in $Z_{n + 1}$ and $h$ in $H$. By definition, 
