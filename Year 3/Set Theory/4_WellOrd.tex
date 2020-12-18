@@ -1,0 +1,267 @@
+\section{Well-orderings and Ordinals}
+
+\subsection{The Principle of Transfinite Induction (3.3)} \label{3.3}
+
+For a well-ordering $\ang{X, \prec}$, we have that: \begin{align*}
+    \bigl[
+        \forall \, x \in X, (\forall \, y \prec x, \Phi(y)) \Longrightarrow \Phi(x)
+    \bigr] \Longrightarrow 
+    \bigl[ \forall \, x \in X, \Phi(x) \bigr].
+\end{align*}
+
+\begin{proof}
+    We appeal to the contrary and suppose that 
+    $\emptyset \neq Z = \{x \in X : \neg \Phi(x)\}$.
+    As $\ang{Z, \prec}$, there is $\prec$-least element $z_0$.
+    But then for all $x \prec z_0$, $\Phi(x)$ holds so $\Phi(z_0)$ holds, 
+    a contradiction.
+\end{proof}
+
+\subsection{Initial Segments (3.4)} \label{3.4}
+
+For a well-ordering $\ang{X, \prec}$, the $\prec$-initial
+segment of some element $z$ in $X$ is the set of predecessors of $z$,
+denoted by $X_z$. We note that $X_z$ does not contain $z$.
+
+\subsection{Order Preserving Maps on Well-orderings (3.5)} \label{3.5}
+
+For a well-ordering $\ang{X, \prec}$ with a function $f$ from $\ang{X, \prec}$ 
+to itself an order preserving map, we have that for all $x$ in $X$, $x \preceq f(x)$.
+
+\begin{proof}
+    We appeal to the contrary, that for some $x$ in $X$, 
+    we have $f(x) \prec x$. As $\ang{X, \prec}$ is a well-ordering, there's a
+    $\prec$-least $x_0$ in $X$ with the property that $f(x_0) \prec x_0$. 
+    But, $f(f(x_0)) \prec f(x_0)$ as $f$ is order preserving. Thus, a 
+    contradiction to the minimality of $x_0$.
+\end{proof}
+
+\subsubsection{Uniqueness of Order Isomorphisms (3.6-7)} \label{3.6} \label{3.7}
+
+For well-orderings $\ang{X, \prec_x}$ and $\ang{Y, \prec_y}$
+with an order isomorphism $f$ from $\ang{X, \prec_x}$ to $\ang{Y, \prec_y}$. 
+We have that $f$ is unique.
+
+\begin{proof}
+    If we suppose we have two such isomorphisms $f$ and $g$,
+    we have that $(f^{-1} \circ g)$ is also an order
+    isomorphism. Taking $x$ arbitrary in $X$ by (\ref{3.5}): \begin{align*}
+        x \preceq_x (f^{-1} \circ g)(x)
+        &\Longrightarrow f(x) \preceq_y f(f^{-1} \circ g)(x) \\
+        &\Longrightarrow f(x) \preceq_y g(x).
+    \end{align*} By applying this argument with $f$ and $g$ swapped, we 
+    can also see that $g(x) \preceq_y f(x)$. Thus, $f(x) = g(x)$.
+    \\[\baselineskip]
+    In particular, if $\ang{X, \prec_x} = \ang{Y, \prec_y}$
+    then this isomorphism is the identity map.
+\end{proof}
+
+\subsubsection{Non-existence of Order Isomorphisms to Segments (3.8)} \label{3.8}
+
+A well-ordered set is not order isomorphic to any segment of itself.
+
+\begin{proof}
+    We appeal to the contrary and suppose there is such
+    an order isomorphism on a well-ordering $\ang{X, \prec}$
+    to $\ang{X_z, \prec}$ for some $z$ in $X$.
+    But, we have that $x \preceq f(x)$ for any $x$ in $X$ by (\ref{3.5})
+    and $f(z) \prec z$ as $f(z)$ is in $X_z$.
+    Thus, we have that $z \preceq f(z) \prec z$, a contradiction.
+\end{proof}
+
+\subsubsection{Order Isomorphism to Set of Segments (3.9)} \label{3.9}
+
+A well-ordered set $\ang{X, \prec}$ is order isomorphic to the set
+of its initial segments ordered by $\subset$.
+
+\begin{proof}
+    We take $Y = \{X_a : a \in X\}$ and a function $\varphi$ defined by 
+    $\varphi(a) = X_a$. For $a$ and $b$ in $X$: \begin{align*}
+        \varphi(a) = \varphi(b) 
+        &\Longleftrightarrow X_a = X_b \\
+        &\Longleftrightarrow \{x \in X : x \prec a\} = \{x \in X : x \prec b\} \\
+        &\Longleftrightarrow a = b,
+    \end{align*} so we have that $\varphi$ is injective and trivially
+    surjective onto the set of initial segments of $X$.
+    As $a \prec b \Longleftrightarrow X_a \subset X_b$, the mapping is order preserving.
+\end{proof}
+
+\subsection{Ordinal Numbers (3.10-11)} \label{3.10} \label{3.11}
+
+We say that $\ang{X, \in}$ is an ordinal if and only if $X$ is transitive and where
+$\ang{X, \in}$ is a well-ordering. We have that $\ang{\omega, \in}$ is an ordinal.
+
+\subsubsection{Segment and Element Equality (3.12)} \label{3.12}
+
+For an ordinal $\ang{X, \in}$, every element $z$ in $X$ is identical to $X_z$.
+So, for any elements $a$, $b$ of an ordinal: \begin{align*}
+    a \in b \Longleftrightarrow a \subset b 
+    \Longleftrightarrow X_a \subset X_b.
+\end{align*}
+
+\begin{proof}
+    We know that $X$ is transitive and $\in$ well-orders $X$, we take $z$ in $X$ 
+    and see that: \begin{align*}
+        w \in X_z
+        &\Longleftrightarrow w \in X \text{ and } w \in z \\
+        &\Longleftrightarrow w \in z \tag{as $z \subseteq X$},
+    \end{align*} thus, $X_z = z$ by the Axiom of Extensionality.
+\end{proof} 
+
+\subsubsection{Ordinal Initial Segments (3.13)} \label{3.13}
+
+For an ordinal $\ang{X, \in}$, any $\in$-initial segment of $X$ is an ordinal.
+
+\begin{proof}
+    We take some $u$ in $X$ and $w$ in $X_u$. 
+    As $\in$ well-orders $X$, it well-orders
+    any subset of $X$ so $\ang{X_u, \in}$ is a well-ordering. 
+    We have that: \begin{align*}
+        t \in w \in u \Longrightarrow t \in u = X_u,
+    \end{align*} thus $X_u$ is transitive as required.
+\end{proof}
+
+\subsubsection{Proper Subset Segments (3.14)} \label{3.14}
+
+For an ordinal $\ang{X, \in}$ with $Y \subset X$, if $\ang{Y, \in}$
+is also an ordinal, then $Y$ is an $\in$-initial segment of $X$.
+
+\begin{proof}
+    For $a$ in $Y$, $Y_a = a$ as $Y$ is an ordinal.
+    As $Y \subset X$, $a$ is in $X$ so $X_a = a$. Thus, $X_a = Y_a$.
+    As $Y \neq X$, we consider $c = \inf(\{z \in X : z \notin Y\})$ which 
+    exists as the set is non-empty and $\ang{X, \in}$ is a well-ordering. 
+    Hence, $Y = X_c$.
+\end{proof}
+
+\subsubsection{The Intersection of Ordinals (3.15)} \label{3.15}
+
+For ordinals $X$ and $Y$, $(X \cap Y)$ is also an ordinal.
+
+\begin{proof}
+    We know that $(X \cap Y)$ is transitive as $X$ and $Y$
+    are transitive. Any subset of $X$ is a well-ordering
+    under $\in$, in particular $(X \cap Y)$
+    is well-ordered by $\in$. 
+\end{proof}
+
+\subsection{Classification Theorem for Ordinals (3.16)} \label{3.16}
+
+For ordinals $X$ and $Y$, either $X = Y$ or one is an initial
+segment of the other (or equivalently a member).
+
+\begin{proof}
+    We suppose that $X \neq Y$. We know that $(X \cap Y)$ is an ordinal
+    by (\ref{3.15}), so have two cases.
+    If $X = (X \cap Y)$ or $Y = (X \cap Y)$, one must
+    be an initial segment of the other by (\ref{3.13}).
+    If $(X \cap Y)$ is a proper subset of $X$ and $Y$,
+    it is an initial segment of $X$ and $Y$ simultaneously by (\ref{3.13}).
+    We set $(X \cap Y) = X_a = Y_b$ for some $a$ in $X$ and
+    $b$ in $Y$. But, we know that by (\ref{3.12}),
+    $a = X_a = Y_b = b$. However, this means 
+    $a = b \in (X \cap Y) = X_a$, but $a$ is not in $X_a$, a contradiction.
+\end{proof}
+
+\subsection{Equality under Isomorphisms (3.17)} \label{3.17}
+
+For ordinals $X$ and $Y$, if $X$ is order isomorphic to $Y$ then $X = Y$.
+
+\begin{proof}
+    Suppose $X \neq Y$, then without loss of generality we take
+    $X$ to be an initial segment of $Y$. But, this would
+    mean $Y$ is order isomorphic to an initial segment of itself
+    which is a contradiction by (\ref{3.8}).
+\end{proof}
+
+\subsection{Bound on Isomorphisms (3.18)} \label{3.18}
+
+A well-ordering is order isomorphic to at most one ordinal.
+
+\begin{proof}
+    If a well-ordering is isomorphic to more than one
+    ordinal, then these ordinals are isomorphic to each other
+    and thus, equal by (\ref{3.17}).
+\end{proof}
+
+\subsection{Criterion for Ordinals (3.19)} \label{3.19}
+
+If every initial segment of a well-ordered set $\ang{A, \prec}$ is 
+order isomorphic to some ordinal, $\ang{A, \prec}$ itself
+is order isomorphic to an ordinal.
+
+\begin{proof}
+    Each initial segment must be order isomorphic to at most one
+    ordinal (thus exactly one) by (\ref{3.18}). We define a 
+    function $F$ that assigns elements of $A$ to unique ordinals
+    such that $\ang{F(b), \in} \cong \ang{A_b, \prec}$.
+    We take $Z = \Ran(F)$ by the Axiom of Replacement and
+    $g_b$ to be the isomorphism from $A_b$ to $F(b)$ noting that 
+    the isomorphism is unique by (\ref{3.6}). If $c$ and $b$ are 
+    in $A$ with $c \prec b$ then $A_c = (A_b)_c$ implying that
+    $F(c) \neq F(b)$ by (\ref{3.8}).
+    Thus, $F$ is injective and so bijective between $A$ and $Z$.
+    Continuing with $c \prec b$, we see that $(g_b \upharpoonright A_c)$
+    is an isomorphism from $A_c$ to $(F(b))_{g_b(c)}$ and by (\ref{3.18}),
+    $(g_b \upharpoonright A_c) = g_c$ and $F(c) = (F(b))_{g_b(c)}$.
+    Thus, $F(c)$ is in $F(b)$.
+    \\[\baselineskip]
+    We know that $Z$ is well-ordered by $\in$ as 
+    $A$ is well-ordered by $\prec$ and $F$ is an
+    order isomorphism. So, for $u$ in $F(b)$,
+    as $g_b$ is surjective, $u = g_b(c)$ for some $c \prec b$.
+    As such, $u = F(b)_u = F(b)_{g_b(c)} = F(c)$ so $u$ is
+    in $Z$. Thus, $Z$ is transitive so, $Z$ is an ordinal.
+\end{proof}
+
+\subsection{Representation Theorem for Well-orderings (3.20)} \label{3.20}
+
+Every well-ordering is order isomorphic to exactly one ordinal.
+
+\begin{proof}
+    We take $Z = \{v \in X : X_v \text{ is not isomorphic to an ordinal}\}$,
+    and want to show it's empty as this will suffice by (\ref{3.6} and \ref{3.19}). 
+    We suppose the contrary, we take $v_0$ to be the $\prec$-least element
+    of $Z$. We have that $\ang{X_{v_0}, \prec}$ is a well-ordering
+    with $(X_{v_0})_w = X_w$ for each $w$ in $X_{v_0}$.
+    But, for each $w$ in $X_{v_0}$, $X_w$ is isomorphic to some ordinal
+    by the minimality of $v_0$, as such $X_{v_0}$ must be isomorphic
+    to an ordinal by (\ref{3.19}), a contradiction. 
+    Thus, $Z$ is empty, as required.
+\end{proof}
+
+\subsection{Order Type of Well-orderings (3.21)} \label{3.21}
+
+For a well-ordering $\ang{X, \prec}$, the order type of $\ang{X, \prec}$
+is the unique ordinal isomorphic to $\ang{X, \prec}$, written as
+$\ot(\ang{X, \prec})$.
+
+\subsection{Classification Theorem for Well-orderings (3.22)} \label{3.22}
+
+For well-orderings $\ang{A, \prec_A}$ and $\ang{B, \prec_B}$
+we have that exactly one of the following holds: \begin{itemize}
+    \item $\ang{A, \prec_A} \cong \ang{B, \prec_B}$,
+    \item there exists $b$ in $B$ such that 
+        $\ang{A, \prec_A} \cong \ang{B_b, \prec_B}$,
+    \item there exists $a$ in $A$ such that 
+        $\ang{A_a, \prec_A} \cong \ang{B, \prec_B}$.
+\end{itemize}
+
+\begin{proof}
+    We take $\ang{X, \in}$ and $\ang{Y, \in}$ to be the unique ordinals
+    isomorphic to $\ang{A, \prec_A}$ and $\ang{B, \prec_B}$ respectively
+    via the maps: \begin{align*}
+        f &: \ang{X, \in} \to \ang{A, \prec_A}, \\
+        g &: \ang{Y, \in} \to \ang{B, \prec_B}.
+    \end{align*} We know that either these ordinals are order isomorphic
+    or order isomorphic to an initial segment of the other. If the
+    former is true, then we have that our well-orderings are isomorphic
+    via $f$ and $g$ and their inverses. If the latter is true,
+    we know that (without loss of generality) 
+    $\ang{X, \in} \cong \ang{Y_y, \in}$ for some $y$ in $Y$.
+    Thus: \begin{align*}
+        f(\ang{X, \in}) \cong g(\ang{Y_y, \in})
+        \Longrightarrow
+        \ang{A, \prec_A} \cong \ang{B_{g(y)}, \prec_B},
+    \end{align*} as required.
+\end{proof}

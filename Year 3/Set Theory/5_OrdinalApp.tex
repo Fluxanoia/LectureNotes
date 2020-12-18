@@ -1,0 +1,299 @@
+\section{Ordinal Applications}
+
+We collate the properties of ordinals covered so far
+for some ordinals $\alpha$, $\beta$, and $\gamma$:
+\begin{itemize}
+    \item ordinals are transitive and well-ordered by $\in$ by definition,
+    \item for $x$ in $\alpha$, $x$ is an ordinal with $x = \alpha_x$,
+    \item $\alpha \cong \beta$ implies that $\alpha = \beta$,
+    \item we have exactly one of the following $\alpha = \beta$, 
+        $\alpha$ in $\beta$, or $\beta$ in $\alpha$.
+\end{itemize}
+
+\subsection{Principle of Transfinite Induction on Ordinals (3.24)} \label{3.24}
+
+For a well-defined property of ordinals $\Phi$, we have
+that for all ordinals $\alpha$: \begin{align*}
+    \bigl[
+        \forall \, \beta < \alpha, \Phi(\beta) 
+        \Longrightarrow \Phi(\alpha)
+    \bigr] \Longrightarrow \Phi(\alpha). \tag{$\ast$}
+\end{align*} Hence, the class of ordinals is well-ordered.
+
+\begin{proof}
+    We take $C = \{\alpha \in \text{On} : \neg \Phi(\alpha)\}$ and $\alpha_0$
+    in $C$. If $\alpha_0$ is not the least element of $C$, we have that
+    $\emptyset \neq (\alpha_0 \cap C) \subseteq \alpha_0$ has an $\in$-least 
+    element $\alpha_1$ as $\alpha_0$ is an ordinal, which is well-ordered by $\in$.
+    Thus, $\alpha_1$ is the $\in$ least element of $C$.
+    As we have a least element $\gamma$ of $C$, we see that for all $\beta$ in $C$ with
+    $\beta < \gamma$, we have $\Phi(\beta)$. But, our assumption implies that
+    we have $\Phi(\gamma)$, a contradiction. Thus, $C = \emptyset$ as required.
+\end{proof}
+
+\subsection{The Class of Ordinals (3.25)} \label{3.25}
+
+The class of ordinals is a proper class.
+
+\begin{proof}
+    Suppose the class of ordinals is a set $z$.
+    We have that $\ang{z, \in}$ is transitive and
+    well-ordered by (\ref{3.24}). Thus, $z$ is an ordinal,
+    as such $z$ is in $z$. But, this contradicts the
+    strict ordering of $\in$.
+\end{proof}
+
+\subsection{Sum of Orderings (3.26)} \label{3.26}
+
+For strict total orderings $\ang{A, R}$ and $\ang{B, S}$ 
+with $A \cap B$ empty, we define the sum ordering $\ang{C, T}$ as: \begin{align*}
+    C &= A \cup B, \\
+    x T y &\Longleftrightarrow \begin{cases}
+        x R y & \text{for } x \text{ and } y \in A \\
+        x S y & \text{for } x \text{ and } y \in B \\
+        x \in A \text{ and } y \in B & \text{otherwise}.
+    \end{cases}
+\end{align*} We can avoid the disjoint constraint by taking
+the sum of $\ang{A \times \{0\}, R}$ and \linebreak
+$\ang{B \times \{1\}, S}$. We name this operation $+'$ so 
+for ordinals $\alpha$ and $\beta$: \begin{align*}
+    \alpha +' \beta &= \ang{\ot(
+        (\alpha \times \{0\}) \cup (\beta \times \{1\})
+    ), T}, \\
+    \ang{\gamma, i} T \ang{\delta, j} 
+    &\Longleftrightarrow (i = j \text{ and } \gamma < \delta)
+    \text{ or } (i < j).
+\end{align*}
+
+\subsection{Product of Orderings (3.28)} \label{3.28}
+
+For strict total orderings $\ang{A, R}$ and $\ang{B, S}$,
+we define the product of these orderings $\ang{A, R} \times \ang{B, S}$
+to be the ordering $\ang{C, U}$: \begin{align*}
+    C &= A \times B \\
+    \ang{x, y}U\ang{x', y'} 
+    &\Longleftrightarrow 
+    (ySy') \text{ or } (y = y' \text{ and } xRx'),
+\end{align*} defining an operation for ordinals, denoted by $\cdot'$.
+
+\subsection{Supremum of Ordinals (3.30, 3.32)} \label{3.30} \label{3.32}
+
+For a set of ordinals $A$, $\sup(A)$ is the least ordinal $\gamma$ 
+such that for all $\delta$ in $A$, $\delta \leq \gamma$.
+We also have the strict supremum $\sup^+(A)$ as the least ordinal $\gamma^+$
+such that for all $\delta$ in $A$, $\delta < \gamma^+$.
+We have that $\sup(A) = \bigcup A$.
+\begin{proof}
+    We know the supremum is well-defined as if we suppose there isn't an 
+    ordinal which is an upper bound for $A$, there's some $\delta$ in 
+    $A$ such that $\delta > \gamma$ for each ordinal $\gamma$. 
+    However, this means $\bigcup A$ must be equal to $\text{On}$, 
+    which is a contradiction as $\bigcup A$ is a set by the Axiom of Unions.
+    \\[\baselineskip]
+    We take $S = \sup(A)$ and $u$ in $\bigcup A$, we know that there must be 
+    some $a$ in $A$, such that $u < a < S$. Thus, $u$ is in $S$ as $S$ is transitive, 
+    hence $\bigcup A \subseteq S$.
+    Conversely, for $s$ in $S$, $s < S$ so there
+    is some $a$ in $A$ with $s < a \leq S$. Thus, $s$ is in $\bigcup A$, 
+    so $S \subseteq \bigcup A$. Thus $S = \bigcup A$.
+\end{proof}
+
+\subsection{Types of Ordinals (3.33)} \label{3.33}
+
+We can consider three types of ordinals: \begin{itemize}
+    \item the zero ordinal,
+    \item successor ordinals, ordinals with immediate predecessors,
+    \item limit ordinals, ordinals that are not of the other types.
+\end{itemize}
+
+\subsection{Recursion Theorem on Ordinals (3.35)} \label{3.35}
+
+For a function $F$ from $V$ to $V$, there exists a unique function
+$H$ from the class of ordinals to $V$ such that for all $\alpha$: \begin{align*}
+    H(\alpha) = F(H \upharpoonright \alpha).
+\end{align*}
+
+\begin{proof}
+    We define a function $u$ to be a $\delta$-approximation if 
+    $\Dom(u) = \delta$ and for all $\alpha < \delta$, 
+    $u(\alpha) = F(u \upharpoonright \alpha)$. 
+    For a $\delta$-approximation $u$ and $\delta > 0$, we see that 
+    $u(0) = F(u \upharpoonright 0) = F(\emptyset)$ so a $1$-approximation is 
+    equal to $\{\ang{0, F(\emptyset)}\}$ with domain $\{0\} = 1$. Additionally, 
+    for some $\gamma < \delta$, $u \upharpoonright \gamma$ is a $\gamma$-approximation.
+    Furthermore, $u \cup \{\ang{\delta, F(u)}\}$ is a 
+    $(\delta + 1)$-approximation.
+    \\[\baselineskip]
+    \textbf{Agreement on Domain}
+    For a $\delta$-approximation $u$ and any $\gamma$-approximation $v$
+    with $\delta < \gamma$, $u = v \upharpoonright \delta$.
+    \begin{proof}
+        We appeal to the contrary and take $\tau$ be the least ordinal such that
+        \linebreak $u(\tau) \neq \gamma(\tau)$. Thus, $(u \upharpoonright \tau)
+        = (v \upharpoonright \tau)$ but then: \begin{align*}
+            u(\tau) 
+            = F(u \upharpoonright \tau)
+            = F(v \upharpoonright \tau)
+            = v(\tau),
+        \end{align*} which is a contradiction.
+    \end{proof}
+    \noindent
+    \textbf{Uniqueness}
+    If such $H$ exists, it is unique.
+    \begin{proof}
+        We appeal to the contrary, taking $H'$ to be some differing
+        derivation of $H$. We consider the least $\tau$ such that
+        $H(\tau) \neq H'(\tau)$ and apply the same argument as
+        the \textbf{Agreement on Domain} case.
+    \end{proof}
+    \noindent
+    \textbf{Limits}
+    For some limit ordinal $\lambda$, if for all $\alpha < \lambda$
+    we have that $u_\alpha$ is an $\alpha$-approximation, 
+    $\bigcup_{\alpha < \lambda} u_\alpha$ is a $\lambda$-approximation.
+    \begin{proof}
+        This union is of an increasing sequence of sets so:
+        \begin{align*}
+            \alpha < \beta < \lambda \Longrightarrow u_\alpha \subseteq u_\beta.
+        \end{align*}
+        As each element is a function, and the functions agree on domain,
+        the union is also a function and has domain $\lambda$. Thus, this 
+        union is a $\lambda$-approximation.
+    \end{proof}
+    \noindent
+    \textbf{Existence}
+    We define $H = \bigcup B$ which is a function with $\Dom(H)$ being the set
+    of ordinals.
+    \begin{proof}
+        We know that $H$ is a function by the \textbf{Agreement on Domain} case.
+        We take $C = \{\delta : \text{There's no $\delta$-approximation}\}$
+        and suppose $C$ is non-empty. By the Principle of Transfinite Induction
+        on Ordinals, $C$ has a least elememt $\psi$. We know that
+        $\psi > 1$ as we defined a $1$-approximation and by \textbf{Limits}
+        it cannot be a limit ordinal. If $\psi = \mu + 1$ then there's
+        a $\mu$-approximation $v$ by the minimality of $\psi$. However,
+        we can extend $v$ to a $\psi$-approximation $u$ by setting
+        $u(\mu) = F(v)$. This is a contradiction.
+    \end{proof}
+    \noindent 
+    Thus, we have that $H$ exists and is a unique function as required.
+\end{proof}
+
+\subsection{Recursion Theorem on Ordinals, Second Form (3.38)} \label{3.38}
+
+For $a$ in $V$, and functions $F_0$ and $F_1$ from $V$ to $V$, there's a unique
+function $H$ from the class of ordinals to $V$ such that for an ordinal $\alpha$
+and a limit ordinal $\lambda$: \begin{align*}
+    H(0) &= a, \\
+    H(\alpha + 1) &= F_0(H(\alpha)), \\
+    H(\lambda) &= F_1(H \upharpoonright \lambda).
+\end{align*}
+
+\begin{proof}
+    We define a function $F$ from $V$ to $V$ by: \begin{align*}
+        F(u) = \begin{cases}
+            a & \text{for } u = \emptyset \\
+            F_0(u) & \text{if } u \text{ is a function with a successor domain} \\
+            F_1(u) & \text{if } u \text{ is a function with a limit domain} \\
+            \emptyset & \text{otherwise},
+        \end{cases}
+    \end{align*} and apply (\ref{3.35}).
+\end{proof}
+
+\subsection{Ordinal Addition (3.39)} \label{3.39a}
+
+We define ordinal addition $A_\alpha$ for some ordinals
+$\alpha$ and $\beta$, and a limit ordinal $\lambda$ as: \begin{align*}
+    A_\alpha(0) &= \alpha, \\
+    A_\alpha(\beta + 1) &= S(A_\alpha(\beta)), \\
+    A_\alpha(\lambda) &= \sup(\{A_\alpha(x) : x < \lambda\}).
+\end{align*}
+
+\subsection{Ordinal Multiplication (3.39)} \label{3.39m}
+
+We define ordinal multiplication $M_\alpha$ for some ordinals
+$\alpha$ and $\beta$, and a limit ordinal $\lambda$ as: \begin{align*}
+    M_\alpha(0) &= 0, \\
+    M_\alpha(\beta + 1) &= M_\alpha(\beta) + \alpha, \\
+    M_\alpha(\lambda) &= \sup(\{M_\alpha(x) : x < \lambda\}).
+\end{align*}
+
+\subsection{Ordinal Exponentiation (3.39)} \label{3.39e}
+
+We define ordinal exponentiation $A_\alpha$ for some ordinals
+$\alpha$ and $\beta$, and a limit ordinal $\lambda$ as: \begin{align*}
+    E_\alpha(0) &= 1, \\
+    E_\alpha(\beta + 1) &= E_\alpha(\beta) \cdot \alpha, \\
+    E_\alpha(\lambda) &= \sup(\{E_\alpha(x) : x < \lambda\}).
+\end{align*}
+
+\subsection{Monotonicity of Ordinal Arithmetic (3.40-41)} \label{3.40} \label{3.41}
+
+For ordinals $\alpha$, $\beta$, and $\gamma$ with $\beta > 0$ and $\gamma > 1$,
+the functions $A_\alpha$, $M_\beta$, and $E_\gamma$ are strictly increasing 
+and thus injective.
+
+\begin{proof}
+    We take $\beta$, $\gamma$ and $\delta$ to be ordinals and we proceed by induction,
+    supposing that: \begin{align*}
+        [\beta < \gamma] \Longrightarrow [A_\alpha(\beta) < A_\alpha(\gamma)], \tag{$\ast$}
+    \end{align*} for all $\gamma \leq \delta$. The base case is trivial. 
+    For $\beta < \delta + 1$, if $\beta = \delta$, then: \begin{align*}
+        A_\alpha(\delta) < S(A_\alpha(\delta)).
+    \end{align*} Otherwise, $\beta < \delta$ so by our hypothesis: \begin{align*}
+        A_\alpha(\beta) &< A_\alpha(\delta) < S(A_\alpha(\delta)) = A_\alpha(\delta + 1). 
+    \end{align*} Now, we suppose ($\ast$) holds for all $\gamma < \lambda$ for some 
+    limit ordinal $\lambda$. For $\beta < \lambda$, clearly $\beta < \beta + 1 < \lambda$ 
+    as $\lambda$ has no immediate predecessor. By the hypothesis: \begin{align*}
+        A_\alpha(\beta) &< A_\alpha(\beta + 1) 
+        \leq \sup(\{A_\alpha(\gamma) : \gamma < \lambda\}) 
+        = A_\alpha(\lambda),
+    \end{align*} as required. The arguments for $M_\alpha$ and $E_\alpha$ are 
+    similar.
+\end{proof}
+
+\subsection{Remainders (3.43)} \label{3.43}
+
+For $\alpha$ and $\beta$ ordinals with $0 < \alpha \leq \beta$, there's a unique: \begin{enumerate}
+    \item ordinal $\gamma$ such that $\alpha + \gamma = \beta$,
+    \item pair of ordinals $\zeta$ and $\kappa$ such that
+        $\alpha \cdot \zeta + \kappa = \beta$ and $\kappa < \alpha$.
+\end{enumerate} 
+
+\begin{proof}
+    (1) As $A_\alpha$ is strictly increasing, we consider 
+    $Z = \{x : \alpha + x \geq \beta\}$ which must be non-empty as
+    $A_\alpha$ is strictly increasing.
+    We take $\gamma = \min(Z)$ and see that $\alpha + \gamma = \beta$
+    since if $\alpha + \gamma > \beta$ either: \begin{itemize}
+        \item $\gamma = \delta + 1$ so $\alpha + \delta < \beta$ as
+            $\delta$ is not in $Z$. But then,
+            $ \alpha + \gamma = \alpha + (\delta + 1) \leq \beta$,
+            a contradiction,
+        \item $\gamma$ is a limit ordinal, $\alpha + \gamma =
+            \sup(\{\alpha + \delta : \delta < \gamma\})$. But,
+            as $\alpha + \gamma > \beta$ there's some $\delta < \gamma$
+            such that $\alpha + \delta \geq \beta$. 
+            This contradicts the minimality of $\gamma$.
+    \end{itemize} 
+    (2) As $M_\alpha$ is strictly increasing, we choose the least
+    $\zeta$ such that
+     $\alpha \cdot \zeta \leq \beta < \alpha \cdot (\zeta + 1)$. We apply
+     (1) to find some $\kappa$ such that $\alpha \cdot \zeta + \kappa = \beta$.
+     For some $\zeta'$ and $\kappa'$ also satisfying (2), if $\zeta = \zeta'$
+     then by the uniqueness of (1), $\kappa = \kappa'$. We suppose
+     $\zeta < \zeta'$ so $\zeta + 1 \leq \zeta'$: \begin{align*}
+         \beta = \alpha \cdot \zeta + \kappa &< \alpha \cdot \zeta + \alpha \\
+         &= \alpha \cdot (\zeta + 1) \\
+         &\leq \alpha \cdot \zeta' \\
+         &\leq \alpha \cdot \zeta' + \kappa' \\
+         &= \beta,
+     \end{align*} which is a contradiction. Hence, $\zeta = \zeta'$.
+\end{proof}
+
+\subsection{Ordinal Arithmetic (3.44)} \label{3.44}
+
+We have that ordinal addition is associative, ordinal multiplication is distributive 
+over addition and associative, and for ordinals $\alpha$, $\beta$, and $\gamma$: \begin{align*}
+    \alpha^{\beta + \gamma} = \alpha^\beta \cdot \alpha^\gamma.
+\end{align*}

@@ -1,0 +1,269 @@
+\section{Transitive and Inductive Sets}
+
+\subsection{Transitive Sets (1.30)} \label{1.30}
+
+A set $x$ is transitive if and only if
+for all $y$ in $x$, $y \subseteq x$.
+This is equivalent to $\bigcup x \subseteq x$.
+
+\subsection{The Successor Function (1.32-33)} \label{1.32} \label{1.33}
+
+For a set $x$, $S(x) = x \cup \{x\}$ is the successor of $x$.
+$S(x) = x$ is equivalent to saying $x$ is transitive.
+
+\subsection{Transitive Closure (1.34)} \label{1.34}
+
+For a set $x$, the transitive closure $TC$ of $x$, is defined recursively as: 
+\begin{align*}
+    {\bigcup}^0 x &= x, \\
+    {\bigcup}^{n + 1} x &= \bigcup\left({\bigcup}^n x\right),
+\end{align*} which we can write as: \begin{align*}
+    TC(x) = \bigcup\left\{{\bigcup}^n x : n \in \mb{N}\right\}.
+\end{align*} The transitive closure of a set is always transitive.
+
+\subsubsection{Properties of Transitive Closure (1.35)} \label{1.35}
+
+For a set $x$: \begin{enumerate}
+    \item $x \subseteq TC(x)$,
+    \item $TC(x)$ is the smallest transitive set containing $x$,
+    \item $TC(x) = x$ if and only if $x$ is transitive.
+\end{enumerate}
+
+\begin{proof}
+    (1) This follows from ${\bigcup}^0 = x$.
+    \\[\baselineskip]
+    (2) For a transitive set $t$ with $x \subseteq t$, we have 
+    ${\bigcup}^0 x \subseteq t$ by definition.
+    We proceed by induction taking $k > 0$, we see that: \begin{align*}
+        A \subseteq B \text{ with } B \text{ transitive} 
+        \Longrightarrow \bigcup A \subseteq B,
+    \end{align*} so we deduce that ${\bigcup}^k x \subseteq t$. By
+    induction we have that $TC(x) \subseteq t$ as required.
+    \\[\baselineskip]
+    (3) If $TC(x) = x$, $x$ is transitive. If $x$ is transitive, 
+    $TC(x) \subseteq x$ by (2) and $x \subseteq TC(x)$ by (1).
+\end{proof}
+
+\subsection{Von Neumann Numerals}
+
+The von Neumann numerals are defined as: \begin{align*}
+    0 &= \emptyset, \\
+    1 &= \{\emptyset\} = \{0\}, \\
+    2 &= \{\emptyset, \{\emptyset\}\} = \{1, 2\}, \\
+    & \cdots \\
+    n + 1 &= \{0, 1, \ldots, n\}.
+\end{align*}
+
+\subsection{Inductive Sets (2.1)} \label{2.1}
+
+A set $X$ is called inductive if $\emptyset$ is in $X$ and
+for all $x$ in $X$, $S(x)$ is in $X$.
+
+\subsection{Natural Numbers (2.2-4)} \label{2.2} \label{2.3} \label{2.4}
+
+We say that $x$ is a natural number if for all $X$: \begin{align*}
+    X \text{ is an inductive set} \Longrightarrow x \in X.
+\end{align*} We define $\omega$ as the class of natural numbers,
+$\omega = \bigcap\{X : X \text{ is an inductive set}\}$. We have that
+$\omega$ is the smallest inductive set.
+
+\begin{proof}
+    Let $z$ be an inductive set (which exists by the Axiom of Infinity). 
+    We can define $\omega$ by the Axiom of Subsets: 
+    \begin{align*}
+        \omega = \{x \in z : \forall \, Y, Y \text{ is inductive} \Longrightarrow x \in Y \},
+    \end{align*} so $\omega$ is a set.
+    We know that $\emptyset$ is in every inductive set by definition,
+    so $\emptyset$ is in $\omega$. For any $x$ in $\omega$, we know that for any
+    inductive set $Y$ that $x$ is in $Y$ and thus $S(x)$ is also in $Y$ as $Y$ is
+    inductive. Thus, $S(x)$ is also in $\omega$ as $Y$ was chosen
+    arbitrarily. Hence, $\omega$ is an inductive set and the smallest
+    such set by its definition.
+\end{proof}
+
+\subsection{Principle of Mathematical Induction (2.5)} \label{2.5}
+
+For a well-defined property of sets $\Phi$, we have that:
+\begin{align*}
+    \Bigl[
+        \Phi(0) \text{ and } 
+        \forall \, x \in \omega,
+        \Phi(x) \Longrightarrow \Phi(S(x)) 
+    \Bigr] 
+    \Longrightarrow 
+    \Bigl[
+        \forall \, x \in \omega, \Phi(x)
+    \Bigr].
+\end{align*}
+
+\begin{proof}
+    We take $Y = \{x \in \omega : \Phi(x)\}$, it suffices to show that 
+    $Y$ is inductive as then $\omega \subseteq Y \subseteq \omega$ implying $\omega = Y$. 
+    As we assume $\Phi(0)$, we know that $0$ is in $Y$. Then, by our assumption,
+    $Y$ is closed under the successor function. Thus, $Y$ is inductive as required.
+\end{proof}
+
+\subsection{Representation of Natural Numbers (2.6)} \label{2.6}
+
+Every natural number is either $0$ or $S(x)$ for some natural number $x$.
+
+\begin{proof}
+    We take $Z = \{y \in \omega : y = 0 \text{ or } 
+    \exists \, x \in \omega \text{ such that } S(x) = y\}$, it 
+    suffices to show that $Z$ is inductive as then 
+    $\omega \subseteq Z \subseteq \omega$ implying $\omega = Z$. 
+    Clearly, $0$ is in $Z$. Taking $z$ in $Z$, $z$ must be in $\omega$
+    so $S(z)$ is also in $\omega$ as it is inductive. Thus, $S(z)$ is
+    in $Z$, so $Z$ is inductive as required.
+\end{proof}
+
+\subsection{Transitivity of $\omega$ (2.7)} \label{2.7}
+
+We have that $\omega$ is transitive.
+
+\begin{proof}
+    We take $X = \{n \in \omega : n \subseteq \omega\}$, if $X = \omega$
+    then by definition $\omega$ is transitive so it suffices to show that
+    $X$ is inductive. Clearly, $0$ is in $X$. For $n$ in $X$, $\{n\} \subseteq \omega$
+    and $n \subseteq \omega$. Thus, $n \cup \{n\} \subseteq \omega$ so $S(n) \in X$
+    which means $X$ is inductive, as required.
+\end{proof}
+
+\subsection{Ordering on the Naturals (2.10-11)} \label{2.10} \label{2.11}
+
+For $m$ and $n$ in $\omega$, we define: \begin{align*}
+    m < n &\Longleftrightarrow m \in n, \\
+    m \leq n &\Longleftrightarrow m = n \text{ or } m \in n.
+\end{align*} By definition, $n < S(n)$. We have that: \begin{enumerate}
+    \item this ordering is transitive,
+    \item for all $n$ in $\omega$ and for all $m$ we have that
+        $m < n$ if and only if $S(m) < S(n)$,
+    \item for all $n$ in $\omega$, $n \nless n$.
+\end{enumerate}
+
+\begin{proof}
+    (1) This follows from the transitivity of set inclusion.
+    \\[\baselineskip]
+    (2) ($\Longrightarrow$) We take $\Phi(k) = [(m < k) \Longrightarrow (S(m) < S(k))]$ and
+    see that $\Phi(0)$ holds. We suppose $\Phi(k)$ holds for some
+    $k$ in $\omega$. For $m < S(k)$, $m$ is in $k \cup \{k\}$. If $m$ 
+    is in $k$ then by $\Phi(k)$ we have that $S(m) < S(k) < S(S(k))$.
+    If $m = k$ then $S(m) = S(k) < S(S(k))$.
+    \\[\baselineskip]
+    ($\Longleftarrow$) We have that $m$ is in $S(m) = m \cup \{m\}$ which
+    is in $S(n) = n \cup \{n\}$. If $S(m) = n$, then $m$ is in $n$
+    so $m < n$. If $S(m)$ is in $n$ then $m$ is in $n$ as $n$ is
+    transitive.
+    \\[\baselineskip]
+    (3) We know that $0 \nless 0$ as $0 \notin 0$. For $k$ in $\omega$,
+    $k \notin k$ then $S(k) \notin S(k)$ by (2). We have the result 
+    by induction.
+\end{proof}
+
+\subsection{Total Ordering on the Naturals (2.12)} \label{2.12}
+
+We have that $<$ is a (strict) total ordering on the naturals.
+
+\subsection{Well-ordering Theorem for $\omega$ (2.13)} \label{2.13}
+
+For $X \subseteq \omega$, either $X = \emptyset$ or there is some
+$n_0$ in $X$ such that for any $m$ in $X$ either $n_0 = m$ or $n_0 < m$.
+
+\begin{proof}
+    If we suppose $X$ has no least element and take 
+    $Z = \{k \in \omega : \forall \, n < k, n \notin X\}$.
+    We want to show $Z$ is inductive, meaning $Z = \omega$ and thus $X = \emptyset$. 
+    Vacuously, $0$ is in $Z$. If we have $k$ in $Z$, we take $n < S(k) = k \cup \{k\}$ 
+    and consider: \begin{itemize}
+        \item if $n$ is in $k$ then $n$ is not in $X$ as $n < k \in Z$,
+        \item if $n = k$ then $n$ is not in $X$ because if $n$ was in $X$
+            then it would be the least element of $X$, a contradiction.
+    \end{itemize} Thus, $S(k)$ is in $Z$ so $Z$ is inductive, as required.
+\end{proof}
+
+\subsection{Recursion Theorem on $\omega$ (2.14)} \label{2.14} 
+
+For any set $A$ with $a$ in $A$ and $f$ from $A$ to $A$ any function.
+There exists a unique function $h$ from $\omega$ to $A$ such that for any $n$ in $\omega$:
+\begin{align*}
+    h(0) &= a, \\
+    h(S(n)) &= f(h(n)).
+\end{align*}
+
+\begin{proof}
+    We will find $h$ as a union of '$k$-approximations' to $h$ where we define a
+    $k$-approximation $u$ as a function with the following properties:
+    \begin{itemize}
+        \item $\Dom(u) = k$,
+        \item if $k > 0$ then $u(0) = a$,
+        \item if $k > S(n)$ then $u(S(n)) = f(u(n))$.
+    \end{itemize} We see that $\{\ang{0, a}\}$ is a 1-approximation,
+    if $u$ is a $k$-approximation and $l \leq k$ then $u \upharpoonright l$ is an 
+    $l$-approximation, and if $u(k - 1) = c$ for some $c$, then $u' = u \cup \{\ang{k, f(c)}\}$
+    is a $(k + 1)$-approximation.
+    \\[\baselineskip]
+    \textbf{Agreement on Domain}
+    If $u$ is a $k$-approximation and $v$ is a
+    $k'$-approximation for some $k \leq k'$ then $v \upharpoonright k = u$
+    (hence $u \subseteq v$). \begin{proof}
+        We appeal to the contrary with $0 \leq m < k$ being the least
+        natural such that $u(m) \neq v(m)$. We know that $m \neq 0$ as
+        $u(0) = a = v(0)$. So, $m = S(m')$ for some $m'$. As $m$ is chosen
+        minimally, $u(m') = v(m')$. We can then see that
+        $u(m) = f(u(m')) = f(v(m')) = v(m)$, a contradiction.
+    \end{proof}
+    \noindent
+    \textbf{Uniqueness}
+    If $h$ exists, it is unique.
+    \begin{proof}
+        Suppose $h$ and $h'$ are two different functions with domain $\omega$
+        satisfying the theorem. We take $0 \leq m < \omega$ to be the least
+        natural such that $h(m) \neq h'(m)$ and apply the argument from the
+        \textbf{Agreement on Domain} case.
+    \end{proof}
+    \noindent
+    \textbf{Existence} 
+    We take $B$ to be the collection of $u$ such that $u$ is in $B$ 
+    if and only if there exists $k$ in $\omega$ such that
+    $u$ is a $k$-approximation. For any $u$ and $v$ in $B$ either $u \subseteq v$
+    or vice-versa by our previous results. We take $h = \bigcup B$.
+    We have that $h$ is a function: \begin{proof}
+        We appeal to the contrary, if $\ang{n, c}$ and $\ang{n, d}$ are in 
+        $h$ with $c \neq d$, then we have $u$ and $v$ in $B$ with $u(n) = c$ and $v(n) = d$
+        but this a contradiction by \textbf{Agreement on Domain}.
+    \end{proof}
+    \noindent
+    \textbf{Domain} 
+    We have that $\Dom(h) = \omega$: \begin{proof}
+        We appeal to the contrary and
+        suppose $\emptyset \neq X = \{n \in \omega : n \notin \Dom(h)\}$.
+        By the definition of $h$ this means that: \begin{align*}
+            X = \{n \in \omega : \text{There's no } u\text{-approximation with }
+                n \in \Dom(u)\}.
+        \end{align*} We saw that there is a 1-approximation, so 0 is not
+        the least element of $X$. We suppose $n_0 = S(m)$ is the least
+        element of $X$. As $m$ is not in $X$, there must be an $n_0$-approximation
+        $n$ with $n(m) = c$ for some $c$. But, we saw that we can extend
+        $k$-approximations, so we can generate a $(n_0 + 1)$-approximation
+        which is a contradiction.
+        Thus, $X = \emptyset$.
+    \end{proof} 
+    \noindent
+    Thus, we have that $h$ exists and is a unique function as required.
+\end{proof} 
+
+\subsection{Arithmetic (2.17)} \label{2.17}
+
+For $n$ and $k$ in $\omega$, we define the following arithmetic functions: 
+\begin{center}
+    \begin{tabular}{c c}
+        $A_n(0) = n,$ & $A_n(S(k)) = S(A_n(k)),$ \\
+        $M_n(0) = 0,$ & $M_n(S(k)) = M_n(k) + n,$\\
+        $E_n(0) = 1,$ & $E_n(S(k)) = E_n(k) \cdot n.$
+    \end{tabular}
+\end{center} We have that addition is associative and commutative,
+multiplication is associative, distributive over addition, and
+commutative, and for $m$, $n$, and $p$ in $\omega$: \begin{align*}
+    m^{n + p} = m^n \cdot m^p \text{ and }
+    {m^n}^p = m^{n \cdot p}.
+\end{align*}

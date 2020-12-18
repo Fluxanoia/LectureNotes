@@ -20,71 +20,63 @@ For any sets $x$ and $y$, there is a set $z = \{x, y\}$. This is the
 
 For each set $x$, there exists a set which is the collection of the
 subsets of $x$, the powerset $\mathcal{P}(x)$.
-\\[\baselineskip]
-For some set $x$, we have the powerset defined as follows 
-$\mathcal{P}(x) = \{z \, : \, z \subseteq x\}$.
+We have the powerset defined as 
+$\mathcal{P}(x) = \{z : z \subseteq x\}$.
 
 \subsection{Axiom of the Empty Set}
 
 There exists a set with no members, the empty set $\emptyset$.
-\\[\baselineskip]
-We have the empty set defined as follows 
-$\emptyset = \{x \, : \, x \neq x\}$.
+We have the empty set defined as $\emptyset = \{x : x \neq x\}$.
 
 \subsection{Axiom of Subsets}
 
-For some set $x$, we have that $\{y \in x \, : \, \Phi(y)\}$ is a set
+For some set $x$, we have that $\{y \in x : \Phi(y)\}$ is a set
 for some well-defined property of sets $\Phi$.
 
-\newpage
+\subsection{Axiom of Infinity}
 
-\subsection{Axiom of Unions}
+There exists an inductive set.
+
+\subsection{Axiom of Unions (1.6)} \label{1.6}
 
 We have the basic union of two sets $x_1$ and $x_2$: \begin{align*}
-    x_1 \cup x_2 = \{y \, : \, y \in x_1 \text{ or } y \in x_2\},
-\end{align*} but for cases where we want to unify the members of the sets in
-a set $X$, we define: \begin{align*}
-    \bigcup X = \{y \, : \, \exists \, x \in X, y \in x\}.
-\end{align*} This axiom states that for a set $X$, $\bigcup X$ is a set. 
+    x_1 \cup x_2 = \{y : y \in x_1 \text{ or } y \in x_2\},
+\end{align*} but for when we want to unify the members of the sets in
+a set $x$, we define: \begin{align*}
+    \bigcup x = \{y : \exists \, z \in x, y \in z\}.
+\end{align*} This axiom states that for a set $x$, $\bigcup x$ is a set. 
+
+\subsection{Intersections (1.8)} \label{1.8}
+
+We have the basic intersection of two sets $x_1$ and $x_2$: \begin{align*}
+    x_1 \cap x_2 = \{y : y \in x_1 \text{ and } y \in x_2\},
+\end{align*} but for when we want to intersect the members of 
+the sets in a set $x$, we define: \begin{align*}
+    \bigcup x = \{y : \forall \, z \in x, y \in z\}.
+\end{align*} This is a set by the Axiom of Subsets.
 
 \subsection{Classes}
 
 We have that classes are collection of objects, these could also be sets.
 Classes that are not sets are called proper classes.
 
-\subsection{The Set $\omega$}
+\subsection{Russell's Theorem (1.4)} \label{1.4}
 
-We have the set of natural numbers, $\mathbb{N} = \{0, 1, 2, \ldots\}$,
-and from this, we define $\omega$: \begin{align*}
-    \omega = \{0, 1, 2, \ldots\},
-\end{align*} where for some $n$ in $\omega$, \begin{align*}
-    n = \{0, 1, 2, \ldots, n - 1\},
-\end{align*} with $0_\omega$ being the empty set. We can go beyond this
-definition, defining: \begin{align*}
-    \omega + 1 &= \{0, 1, 2, \ldots, \omega\}, \\
-    \omega + 2 &= \{0, 1, 2, \ldots, \omega, \omega + 1\}, \\
-    &\ldots \\
-    \omega + n &= \{0, 1, 2, \ldots, \omega, \omega + 1, \ldots \omega + n - 1\}.
-\end{align*}
-
-\subsection{Russell's Theorem}
-
-We have that $R = \{x \, : \, x \notin x\}$ is not a set.
+We have that $R = \{x : x \notin x\}$ is a proper class.
 \begin{proof}
-    Suppose we have a set $z$ such that $z = R$, is $z$ in $R$?
-    If we suppose $z$ is in $R$, we have that $z$ is not in $z$ by the definition
-    of $R$ (as $z = R$) but $z$ is $R$ so $z$ is not in $R$, a contradiction.
-    Thus, we have that there is no set $z$ equal to $R$, so $R$ is not a set
-    but a proper class.
+    Suppose we have a set $z$ such that $z = R$, we consider the membership of $z$
+    in $R$. If we suppose $z$ is in $R$, by the definition of $R$, $z$ is not in
+    $z = R$, a contradiction. If we suppose $z$ is not in $R$, by the definition 
+    of $R$, $z$ is in $z = R$, a contradiction. Thus, $z$ cannot be a set,
+    so $R$ is a proper class.
 \end{proof}
 
-\subsection{The Universe of Sets}
+\subsection{The Universe of Sets (1.5)} \label{1.5}
 
-We define the universe of sets as $V = \{x \, : \, x = x\}$.
+We define the universe of sets as $V = \{x : x = x\}$.
 We have that $V$ is a proper class.
 \begin{proof}
-    If we suppose $V$ is a set, we apply the axiom of subsets with
-    $\Phi(x) = x \notin x$ and reach a contradiction via Russell's
-    theorem.
+    If we suppose $V$ is a set, we apply the Axiom of Subsets with
+    $\Phi(x) = x \notin x$ and reach a contradiction via (\ref{1.4}).
 \end{proof}
 
