@@ -1,18 +1,44 @@
 \section{The Universe of Sets}
 
-\subsection{The Well-founded Hierarchy of Sets}
+\subsection{Classes}
 
-For a limit ordinal $\lambda$, we define the function $V_\alpha$ by 
-transfinite recursion: \begin{align*}
+We have that classes are collection of objects, these could also be sets.
+Classes that are not sets are called proper classes.
+
+\subsection{Russell's Theorem (1.4)} \label{1.4}
+
+We have that $R = \{x : x \notin x\}$ is a proper class.
+
+\begin{proof}
+    Suppose we have a set $z$ such that $z = R$, we consider the membership of $z$
+    in $R$. If we suppose $z$ is in $R$, by the definition of $R$, $z$ is not in
+    $z = R$, a contradiction. If we suppose $z$ is not in $R$, by the definition 
+    of $R$, $z$ is in $z = R$, a contradiction. Thus, $z$ cannot be a set,
+    so $R$ is a proper class.
+\end{proof}
+
+\subsection{The Universe of Sets (1.5)} \label{1.5}
+
+We define the universe of sets as $V = \{x : x = x\}$.
+We have that $V$ is a proper class.
+\begin{proof}
+    If we suppose $V$ is a set, we apply the Axiom of Subsets with
+    $\Phi(x) = x \notin x$ and reach a contradiction via (\ref{1.4}).
+\end{proof}
+
+\subsection{The Well-founded Hierarchy of Sets (6.1)} \label{6.1}
+
+For an ordinal $\alpha$ and a limit ordinal $\lambda$, we define the function 
+$V_\alpha$ by transfinite recursion: \begin{align*}
     V_0 &= \emptyset, \\
     V_{\alpha + 1} &= \mc{P}(V_\alpha), \\
     V_{\lambda} &= \bigcup_{\alpha < \lambda} \mc{P}(V_\alpha), \\
     V &= \bigcup_{\alpha \in \text{On}} \mc{P}(V_\alpha).
 \end{align*}
 
-\subsection{Transitivity of $V_\alpha$}
+\subsection{Transitivity of $V_\alpha$ (6.2)} \label{6.2}
 
-For any $\alpha$, we have that $V_\alpha$ is transitive and for all
+For any ordinal $\alpha$, we have that $V_\alpha$ is transitive and for all
 $\beta < \alpha$, $V_\beta$ is in $V_\alpha$.
 
 \begin{proof}
@@ -24,48 +50,18 @@ $\beta < \alpha$, $V_\beta$ is in $V_\alpha$.
     $V_\beta$ is in $V_\alpha$ and if $\beta' < \beta$ then
     by the inductive hypothesis, $V_{\beta'}$ is in $V_{\beta}$ and
     hence $V_{\beta'}$ is in $V_\alpha$ by transitivity. 
-    For $\alpha$ a limit ordinal,
+    For a limit ordinal $\alpha$,
     $V_\alpha = \bigcup_{\beta < \alpha} V_\beta$ is transitive by
     the inductive hypothesis. For $\beta < \alpha$, it must be that
     $V_\beta$ is in $V_\alpha$ by the definition and transitivity 
     of $V_\alpha$.
 \end{proof}
 
-\subsection{Axiom of Foundation}
-
-Every set $x$ is well-founded, so if $x$ is non-empty, there exists
-some $y$ in $x$ such that $x \cap y = \emptyset$.
-\\[\baselineskip]
-This is equivalent to saying there exists some $\alpha$ such that
-$x$ is in $V_\alpha$.
-
-\begin{proof}
-    For a set $x$, we set $T = TC(X)$. 
-    If $T \subseteq V$ then for some ordinal $\alpha$,
-    $T \subseteq V_\alpha$ as $\rho''T$ is a set of ordinals by
-    the Axiom of Replacement. So, for some $\alpha$, $\rho''T \subseteq \alpha$
-    so $T \subseteq V_\alpha$. So, we are done for this case as
-    $x \subseteq T \subseteq V_\alpha$ so $x \in V_{\alpha + 1}$.
-    \\[\baselineskip]
-    If we suppose that $T \setminus V \neq \emptyset$ and take $y$ in
-    $T \setminus V$ such that $(T \setminus V) \cap y = \emptyset$
-    by the Axiom of Foundation, then for any $z$ in $y$, 
-    as $z$ must be in $T$ by the properties of $TC$.
-    Also, $z$ must be in $V$ as $(T \setminus V) \cap y = \emptyset$.
-    Hence, $y \subseteq V$. But, as in the first case, $\rho''y$ is a set
-    of ordinals, with some strict upper bound $\beta$. As such, 
-    $y \subseteq V_\beta$ which implies $y$ is in $V_{\beta + 1}$
-    which is a contradiction of the definition of $y$.
-\end{proof}
-
-\subsection{The Rank Function} \label{6.5}
+\subsection{The Rank Function (6.3, 6.5)} \label{6.3} \label{6.5}
 
 For any $x$ in $V$, $\rho(x)$ is the least 
 $\tau$ such that $x \subseteq V_\tau$ (or rather, $x$ is in $V_{\tau + 1}$). 
 We have that: \begin{enumerate}
-    \item $\rho(\{x\}) = \rho(x) + 1$,
-    \item $\rho(\{x, y\}) = \max(\{\rho(x), \rho(y)\}) + 1$,
-    \item $\rho(\ang{x, y}) = \max(\{\rho(x), \rho(y)\}) + 2$,
     \item $V_\alpha = \{x \in V : \rho(x) < \alpha\}$,
     \item For $x$ in $V$, and all $y$ in $x$, $y$ is in $V$ and
         $\rho(y) < \rho(x)$,
@@ -78,43 +74,29 @@ We have that: \begin{enumerate}
 there is a $R$-least element of every non-empty $X \subseteq V$.
 
 \begin{proof}
-    (1) We take $\rho(x) = \alpha$, so $x \in V_{\alpha + 1}$
-    and as such, $\{x\} \subseteq V_{\alpha + 1}$. So, 
-    $\rho(\{x\}) \leq \alpha + 1$. But, $\rho(\{x\}) \nless \alpha + 1$
-    since this would imply that $\rho(x) < \rho(\{x\}) < \alpha + 1$
-    which is a contradiction.
-    \\[\baselineskip]
-    (2) We take $\max(\{\rho(x), \rho(y)\}) = \alpha$, so we have that
-    $\alpha$ is minimal such that $x \subseteq V_\alpha$ and
-    $y \subseteq V_\alpha$. As such, by the working in (1), we have
-    that $\rho(\{x, y\}) = \alpha + 1$.
-    \\[\baselineskip]
-    (3) As $\ang{x, y} = \{x, \{x, y\}\}$, we apply (1) and (2) to get
-    the result.
-    \\[\baselineskip]
-    (4) For $x$ in $V$, then $\rho(x) < \alpha$ is equivalent to
+    (1) For $x$ in $V$, then $\rho(x) < \alpha$ is equivalent to
     saying that there is some $\beta < \alpha$ such that $x \subseteq V_\beta$
     or rather $x$ is in $V_{\beta + 1}$. This is then equivalent to
     saying $x$ is in $V_\alpha$ as $V_{\beta + 1} \subseteq V_\alpha$
     by the transitivity of $V$.
     \\[\baselineskip]
-    (5) We take $\rho(x) = \alpha$ so $x \subseteq V_\alpha$ and as such
+    (2) We take $\rho(x) = \alpha$ so $x \subseteq V_\alpha$ and as such
     $y$ in $x$ must be in $V_\alpha$ so $\rho(y) < \alpha$.
     \\[\baselineskip]
-    (6) We take $\alpha = \sup^+(\{\rho(y) : y \in x\})$ and $y$ in $x$.
-    By (5), $\rho(y) < \rho(y) + 1 \leq \rho(x)$ so, $\alpha \leq \rho(x)$. 
-    By (4), $\rho(y) < \rho(y) + 1 \leq \alpha$ so, $y$ is in $V_\alpha$.
+    (3) We take $\alpha = \sup^+(\{\rho(y) : y \in x\})$ and $y$ in $x$.
+    By (2), $\rho(y) < \rho(y) + 1 \leq \rho(x)$ so, $\alpha \leq \rho(x)$. 
+    By (1), $\rho(y) < \rho(y) + 1 \leq \alpha$ so, $y$ is in $V_\alpha$.
     Thus, $x \subseteq V_\alpha$ so $\rho(x) \leq \alpha$.
 \end{proof}
 
-\subsection{Rank and Ordinals} \label{6.6}
+\subsection{Rank and Ordinals (6.6)} \label{6.6}
 
 For an ordinal $\alpha$, $\rho(\alpha) = \alpha$ and 
 $(\text{On} \cap V_\alpha) = \alpha$.
 
 \begin{proof}
     The result is trivial for $\alpha = 0$, so we proceed by
-    induction with $\alpha > 0$. By (\ref{6.5}(6)): \begin{align*}
+    induction with $\alpha > 0$. By (\ref{6.5}): \begin{align*}
         \rho(\alpha) 
         &= {\sup}^+(\{\rho(\beta) : \beta < \alpha\}) \\
         &= {\sup}^+(\{\beta : \beta < \alpha\}) \tag{IH} \\
@@ -127,7 +109,7 @@ $(\text{On} \cap V_\alpha) = \alpha$.
     $\alpha = (\text{On} \cap V_\alpha)$.
 \end{proof}
 
-\subsection{Principle of $\in$-induction} \label{6.7}
+\subsection{Principle of $\in$-induction (6.7)} \label{6.7}
 
 For a well-defined and definite property of sets $\Phi$: \begin{align*}
     \bigl[ \forall \, z \in y, \Phi(z) \Longrightarrow \Phi(y) \bigr] 
@@ -149,7 +131,7 @@ for all $y$ in $x$.
     and use the same argument.
 \end{proof}
 
-\subsection{Theorem of $\in$-recursion} \label{6.8}
+\subsection{Theorem of $\in$-recursion (6.8)} \label{6.8}
 
 For a function $G$ from $V$ to $V$, there is exactly one function
 $H$ from $V$ to $V$ such that for all $x$: \begin{align*}

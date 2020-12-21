@@ -1,0 +1,170 @@
+\section{Relations}
+
+We will first state the significant properties relations
+can have. Taking a relation $R$ on $X$ with $x$, $y$, and $z$
+arbitrary in $X$: \begin{center}
+    \begin{tabular}{ c l }
+        \textbf{Name} & \textbf{Property} \\
+        \hline
+        Reflexive & $xRx$ \\
+        Irreflexive & $\neg(xRx)$ \\
+        \\
+        Symmetric & $xRy \Rightarrow yRx$ \\
+        Antisymmetric & $[xRy$ and $yRx] \Rightarrow [x = y]$ \\
+        \\
+        Connected & $[x = y]$ or $[xRy]$ or $[yRx]$ \\
+        \\
+        Transitive & $[xRy$ and $yRz] \Rightarrow [xRz]$ \\
+    \end{tabular}
+\end{center} Equivalence relations must satisfy 
+reflexivity, symmetry, and transitivity.
+
+\subsection{Partial Orderings (1.10)} \label{1.10}
+
+We say that a relation $\prec$ on a set $X$ is a (strict) partial
+ordering if it is irreflexive and transitive.
+\\[\baselineskip]
+Similarly, we say that a relation $\preceq$ on a set $X$ is a non-strict
+partial ordering if it is reflexive, antisymmetric, and transitive.
+
+\subsection{Bounding (1.11)} \label{1.11}
+
+For a partially ordered set $(X, \prec)$, we take a non-empty subset $Y$ of $X$: 
+\begin{itemize}
+    \item $x$ is the infimum of $Y$ if it's the $\prec$-greatest lower bound,
+    \item $x$ in $Y$ is the minimum of $Y$ if for all $y$ in $Y$, $x \preceq y$,
+    \item $x$ in $Y$ is minimal in $Y$ if for all $y$ in $Y$, $\neg(y \prec x)$,
+    \item $x$ is the supremum of $Y$ if it's the $\prec$-least upper bound,
+    \item $x$ in $Y$ is the maximum of $Y$ if for all $y$ in $Y$, $y \preceq x$,
+    \item $x$ in $Y$ is maximal in $Y$ if for all $y$ in $Y$, $\neg(x \prec y)$.
+\end{itemize}
+
+\subsection{Well-founded Orderings}
+
+A partial ordering $(X, \prec)$ is wellfounded if for any non-empty subset
+$Y$ of $X$, $Y$ has a $\prec$-least element.
+
+\subsection{Order Preserving Maps (1.12)} \label{1.12}
+
+We say that $f$ from $(X, \prec_1)$ to $(Y, \prec_2)$ is an order
+preserving map if for each $x_1$ and $x_2$ in $X$: \begin{align*}
+    x_1 \prec_1 x_2 \Longrightarrow f(x_1) \prec_2 f(x_2).
+\end{align*} Two orderings are (order) isomorphic if there is
+a bijective order preserving map between them.
+
+\subsection{Representation Theorem for Partially Ordered Sets (1.13)} \label{1.13}
+
+For a partially ordered set $(X, \prec)$, there is a set 
+$Y \subseteq \mathcal{P}(X)$ which is such that $(X, \preceq)$
+is order isomorphic to $(Y, \subseteq)$.
+
+\begin{proof}
+   For some $x$ in $X$, we set $X^x = \{x' \in X : x' \preceq x\}$,
+   and define $\varphi$ from $X$ to $X^x$ by $\varphi(x) = X^x$. For $x$ and $y$
+   in $X$, as $X^x$ contains $x$ and $X^y$ contains $y$, $x \neq y$ implies that 
+   $X^x \neq X^y$ by the Axiom of Extensionality so $\varphi$ is injective. We
+   have that $\varphi$ is trivially surjective and: \begin{align*}
+       x \preceq y \Longleftrightarrow X^x \subseteq X^y,
+   \end{align*} by our definition. Thus, $\varphi$ is an order isomorphism.
+\end{proof}
+
+\subsection{Total Orderings (1.14)} \label{1.14}
+
+A relation $\prec$ on a set $X$ is a (strict) total ordering if it
+is a connected (strict) partial ordering.
+\\[\baselineskip]
+Similarly, we say that a relation $\preceq$ on a set $X$ is a non-strict
+total ordering if it is a connected non-strict partial ordering.
+
+\subsection{Well-orderings (1.15)} \label{1.15}
+
+A relation $\prec$ on a set $X$ is a well-ordering if it is a
+well-founded total ordering.
+
+\subsection{Ordered Pairs (1.17)} \label{1.17}
+
+For $x$ and $y$ sets, the ordered pair of $x$ and $y$ is the set: \begin{align*}
+    \langle x, y \rangle = \{\{x\}, \{x, y\}\}.
+\end{align*}
+
+\subsubsection{Uniqueness of Ordered Pairs (1.18)} \label{1.18}
+
+For $x$, $y$, $u$, and $v$ sets, we have that: \begin{align*}
+    \langle x, y \rangle = \langle u, v \rangle 
+    \Longleftrightarrow
+    (x = u) \text{ and } (y = v).
+\end{align*}
+
+\begin{proof}
+    ($\Longrightarrow$) If $x = y$ then 
+    $\langle x, y \rangle = \{\{x\}, \{x, x\}\} = \{\{x\}\}$ so 
+    $\langle u, v \rangle = \{\{u\}\}$. Hence $u = v$ and
+    by the Axiom of Extensionality, we have that $x = u$ and so $y = x = u = v$.
+    \\[\baselineskip]
+    If $x \neq y$, then $\langle x, y \rangle$ and $\langle u, v \rangle$
+    both have the two identical elements so $u \neq v$.
+    We cannot have $\{x\} = \{u, v\}$ so $\{x\} = \{u\}$ which means
+    $x = u$ by the Axiom of Extensionality. Thus, 
+    $\{u, v\} = \{x, y\} = \{u, y\}$ so $y = v$.
+    \\[\baselineskip]
+    ($\Longleftarrow$) The former holds trivially.
+\end{proof}
+
+\subsubsection{The Ordered $k$-tuple (1.20)} \label{1.20}
+
+We define the $k$-tuple inductively. The 2-tuple is already defined in (\ref{1.17}).
+For $k > 2$, we define the $k$-tuple as: \begin{align*}
+    \langle x_1, x_2, \ldots, x_k \rangle &= \langle \langle x_1, x_2, \ldots, x_{k - 1} \rangle, x_k \rangle.
+\end{align*}
+
+\subsection{Cartesian Products (1.21)} \label{1.21}
+
+For $x$ and $y$ sets, we define: \begin{align*}
+    x \times y = \{\langle a, b \rangle : a \in x, b \in y\}.
+\end{align*} For $x_1, x_2, \ldots, x_k$ sets, we define: \begin{align*}
+    x_1 \times x_2 \times \cdots \times x_k 
+    &= (x_1 \times x_2 \times \cdots \times x_{k - 1}) \times x_k.
+\end{align*}
+
+\subsubsection{Indexed Cartesian Products (1.28)} \label{1.28}
+
+For a set $I$ with each $i$ in $I$ corresponding to a
+non-empty set $A_i$: \begin{align*}
+    A &= \bigcup \{A_i : i \in I\}, \\
+    \prod_{i \in I} A_i &= \{f \in \ps{I}\!A : \forall \, i \in I, f(i) \in A_i \}.
+\end{align*}
+
+\subsection{Binary Relations (1.22)} \label{1.22}
+
+A binary relation $R$ is a class of ordered pairs.
+We write $R^{-1} = \{\langle y, x \rangle : \langle x, y \rangle \in R\}$.
+
+\subsubsection{Domain and Range of Relations (1.24)} \label{1.24}
+
+For a relation $R$, we define: \begin{align*}
+    \Dom(R) &= \{x : \exists \, y \text{ where } \langle x, y \rangle \in R\}, \\
+    \Ran(R) &= \{y : \exists \, x \text{ where } \langle x, y \rangle \in R\}, \\
+    \Field(R) &= \Dom(R) \cup \Ran(R).
+\end{align*}
+
+\subsection{Functions (1.25)} \label{1.25}
+
+A relation $F$ is a function if for all $x$ in $\Dom(F)$, there is a unique
+$y$ in $\Ran(F)$ with $\langle x, y \rangle$ in $F$.
+We say $F$ is injective if and only if for all $x$ and $x'$:
+\begin{align*}
+    (\langle x, y \rangle \in F \text{ and } \langle x', y \rangle \in F) 
+    \Longrightarrow
+    (x = x').
+\end{align*} 
+
+\subsubsection{Range and Restriction of Functions (1.26)} \label{1.26}
+
+For a function $F$ from $X$ to $Y$: \begin{itemize}
+    \item $F \fran A = \{y \in Y : \exists \, x \in A \text{ such that } F(x) = y\}$,
+    \item $F \upharpoonright A = \{\ang{x, y} \in F : x \in A\}$.
+\end{itemize} We can see that $F \fran A = \Ran(F \upharpoonright A)$.
+
+\subsubsection{Sets of Functions (1.27)} \label{1.27}
+
+For $x$ and $y$ sets, we have that $\ps{x}y$ is the set of functions from $x$ to $y$.

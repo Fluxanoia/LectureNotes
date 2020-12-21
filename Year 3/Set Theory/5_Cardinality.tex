@@ -1,0 +1,344 @@
+\section{Cardinality}
+
+\subsection{Equinumerosity (4.1-2)} \label{4.1} \label{4.2}
+
+We say that two sets, $A$ and $B$, are equinumerous if there is a bijection 
+between them, written as $A \approx B$.
+We have that $\approx$ is an equivalence relation with equivalence classes
+the collections of all equinumerous sets of equal cardinality.
+
+\subsection{Finite Sets (4.3)} \label{4.3}
+
+A set is finite if it is equinumerous with a natural number. Sets that are
+not finite are infinite.
+
+\subsection{Pidgeon-hole Principle (4.4-8)}
+\label{4.4} \label{4.5} \label{4.6} \label{4.7} \label{4.8}
+
+No natural number is equinumerous to a proper subset of itself and thus: 
+\begin{itemize}
+    \item no finite set is equinumerous to a proper subset of itself,
+    \item any set equinumerous to a proper subset of itself is infinite,
+    \item any finite set is equinumerous to a unique natural number,
+    \item $\omega$ is infinite.
+\end{itemize}
+
+\begin{proof}
+    We take $Z$ to be the subset of $\omega$ such that for all $z$ in $Z$,
+    all injective functions $f$ from $z$ to $z$ have $\Ran(f) = z$.
+    Trivially, $Z$ contains $0$. For $n$ in $Z$, we consider an injective function
+    $f$ from $(n + 1)$ to $(n + 1)$.
+    \\[\baselineskip]
+    \textbf{Case 1} If $(f \upharpoonright n)$ has domain and range $n$,
+    by our inductive hypothesis, we have that $\Ran(f \upharpoonright n) = n$. 
+    Thus, $\Ran(f) = n + 1$.
+    \\[\baselineskip]
+    \textbf{Case 2} If $f(m) = n$ for some $m < n$,
+    as $f$ is injective, we have that for some $k < n$, $f(n) = k$. 
+    We define $g$ identically to $f$ except $g(m) = k$ and $g(n) = n$
+    so that $g$ is an injective function from $(n + 1)$ to $(n + 1)$. 
+    Thus, \textbf{Case 1} applies to $g$ so $\Ran(g) = n + 1 = \Ran(f)$.
+\end{proof}
+
+\subsection{Cantor's Diagonal Argument (4.9)} \label{4.9}
+
+The natural numbers are not equinumerous with the real numbers.
+
+\begin{proof}
+    We appeal to the contrary and suppose we have some injective map
+    $f$ from $\omega$ to $\mb{R}$. We can generate some $x$ in $\mb{R}$ 
+    that is not in $\Ran(f)$ by setting the $i^{\text{th}}$ decimal place
+    of $x$ to the $i^{\text{th}}$ decimal place of $f(i)$ mapped by: \begin{align*}
+        k \mapsto \begin{cases}
+            1 & k \text{ even} \\
+            2 & k \text{ odd.} \\
+        \end{cases}
+    \end{align*} Thus, $x$ would differ from every element of $\Ran(f)$, a 
+    contradiction.
+\end{proof}
+
+\subsection{Cantor's Theorem (4.10)} \label{4.10}
+
+No set is equinumerous to its powerset.
+
+\begin{proof}
+    We appeal to the contrary and suppose $f$ from $X$ to $\mc{P}(X)$ is a bijection
+    for some set $X$. We set $Z = \{u \in X : u \notin f(u)\}$ and see that
+    $Z \subseteq X$ so $Z$ is in $\mc{P}(X)$. As such, $Z = f(u)$ for some
+    $u$, but:
+    \begin{align*}
+        u \in Z &\Longrightarrow u \notin f(u) = Z, \\
+        u \notin Z &\Longrightarrow u \in f(u) = Z,
+    \end{align*} which is a contradiction.
+\end{proof}
+
+\subsection{Cantor-Schröder-Bernstein Theorem (4.11-12)} 
+\label{4.11} \label{4.12}
+
+For sets $X$ and $Y$, $X \preceq Y$ if there's an injection from $X$ to $Y$
+and $X \prec Y$ if $X \preceq Y$ and $Y \npreceq X$.
+We have that $X \preceq Y$ and $Y \preceq X$ is equivalent
+to $X \approx Y$.
+
+\begin{proof}
+    ($\Longrightarrow$) By our assumptions, there are some 
+    $f$ from $X$ to $Y$ and $g$ from $Y$ to $X$ both
+    injective and want to form some bijection $h$ from $X$ to $Y$.
+    We consider $C_0 = X \setminus \Ran(g)$, the values suppressing
+    the surjectivity of $g$. For $n$ in $\mb{N}$, we define: \begin{align*}
+        D_{n}     &= f \fran C_n \\
+        C_{n + 1} &= g \fran D_n = g \fran (f \fran C_n), \\
+        \\
+        h(v) &= \begin{cases}
+            f(v) & \text{if $v$ is in $C_n$ for some $n$} \\
+            g^{-1}(v) & \text{otherwise.}
+        \end{cases}
+    \end{align*} To see that $h$ is injective, we consider $u$ and $v$ in
+    $X$, as $f$ and $g$ are injective, the only problems arise from
+    $u$ and $v$ invoking differing cases of the definition of $h$.
+    Without loss of generality, we suppose $u$ in $C_n$ for some $n$ in $\mb{N}$
+    and $v$ is not in any $C_k$ for $k$ in $\mb{N}$. Thus, for some
+    $m$ in $\mb{N}$: \begin{align*}
+        h(u) &= f(u) \in D_p, \\
+        h(v) &= g^{-1}(v).
+    \end{align*} We know that for all $p$ in $\mb{N}$, $g^{-1}(v)$ is not in $D_p$ 
+    as otherwise, $g(g^{-1}(v)) = v$ in $C_{p + 1}$ which is a contradiction. 
+    Thus, $u \neq v$ implies that $h(u) \neq h(v)$ and as such, $h$ is injective. 
+    To see that $h$ is
+    surjective, we first note that $U = \bigcup_{m \in \mb{N}} D_m \subseteq \Ran(h)$.
+    We consider $u$ in $Y \setminus U$, $g(u)$ is not in $C_0 = X \setminus \Ran(g)$
+    and for $n$ in $\mb{N}$, $g(u)$ is not in $C_{n + 1}$ because $u$ is not in 
+    $D_n$ and $g$ is injective so there's no $v$ in $D_n$ such that $g(v) = g(u)$ 
+    As such, $h(g(u)) = g^{-1}(g(u)) = u$. So, $h$ is surjective and as such, bijective.
+    \\[\baselineskip]
+    ($\Longleftarrow$) This is direct from the properties of bijections.
+\end{proof}
+
+\subsection{Characteristic Function (4.13)} \label{4.13}
+
+For a set $X$, we define the the characteristic function of any $Y \subseteq X$
+to be $\varchi_Y$ from $X$ to $2$ defined by: \begin{align*}
+    \varchi_Y(a) = \begin{cases}
+        1 & \text{if $a$ is in $Y$} \\
+        0 & \text{if $a$ is in $X \setminus Y$}.
+    \end{cases}
+\end{align*}
+
+\subsection{Countability (4.14-15)} \label{4.14} \label{4.15}
+
+A set $X$ is countably infinite if $X \approx \omega$ and countable if 
+$X \preceq \omega$. Subsets of countable sets are countable.
+
+\subsection{The Union of Countably Infinite Sets(4.16, 4.18)} \label{4.16} \label{4.18}
+
+The union of two countably infinite sets is also countably infinite.
+The countably infinite union of countably infinite sets is countably infinite.
+
+\begin{proof}
+    The case for countably infinitely many sets follows from the Well-ordering
+    Principle.
+\end{proof}
+
+\subsection{Countably Infinite Subsets (4.17)} \label{4.17}
+
+For an infinite set $X$ with $\ang{X, R}$ a well-ordering, $X$ has a
+countably infinite subset.
+
+\begin{proof}
+    We take $x_0$ to be the $R$-least element of $X$ and
+    for $n$ in $\omega$, $x_{n + 1}$ is the $R$-least element of
+    $X \setminus \{x_k : k \leq n\}$. Thus, $\{x_k : k < \omega\}$
+    is a countably infinite subset of $X$.
+\end{proof}
+
+\subsection{Cardinality (4.20-21)} \label{4.20} \label{4.21}
+
+For a set $X$, the cardinality of $X$, $|X|$ is the
+least ordinal $\alpha$ such that $X \approx \alpha$.
+We have that for $X$ and $Y$ sets: \begin{align*}
+    X \approx Y &\Longleftrightarrow |X| = |Y|, \\
+    X \preceq Y &\Longleftrightarrow |X| \leq |Y|, \\
+    X \prec Y &\Longleftrightarrow |X| < |Y|.
+\end{align*} We note that the cardinality operation is a projection onto the ordinals.
+
+\subsection{Cardinal Numbers (4.22)} \label{4.22}
+
+An ordinal $\alpha$ is a cardinal if $\alpha = |\alpha|$.
+
+\subsection{Cardinality Capture (4.23)} \label{4.23}
+
+For $\alpha$ and $\gamma$ ordinals, if
+$|\alpha| \leq \gamma < \alpha$ then $|\alpha| = |\gamma|$.
+
+\begin{proof}
+    By our assumptions, there is a bijection $f$ from $\alpha$
+    to $|\alpha|$, so $|a| = ||a||$. We know that $\gamma
+    \subseteq \alpha$, so $f \upharpoonright \gamma$ is an injection 
+    from $\gamma$ to $|\alpha|$ so $\gamma \preceq |\alpha|$. But, 
+    $|\alpha| \preceq \gamma$ by our assumption,
+    so $|\alpha| \approx \gamma$ which implies that
+    $|\gamma| = ||\alpha|| = |\alpha|$.
+\end{proof}
+
+\subsection{Cardinal Addition and Multiplication (4.24)} \label{4.24}
+
+For cardinals $\kappa$ and $\lambda$, and sets $K$ and $L$ with cardinality
+$\kappa$ and $\lambda$ respectively, we define: \begin{align*}
+    \kappa \oplus \lambda &= |K \cup L|, \tag{for $K$ and $L$ disjoint} \\
+    \kappa \otimes \lambda &= |K \times L|.
+\end{align*} We note that these operations are commutative and associative.
+
+\subsection{Confluence of Ordinal and Cardinal Arithmetic (4.25)} \label{4.25}
+
+For ordinals $m$ and $n$ in $\omega$, $m + n = m \oplus n$ and $m \cdot n = m \otimes n$.
+
+\begin{proof}
+    This follows from induction on $n$.
+\end{proof}
+
+\subsection{Hessenberg's Theorem (4.26)} \label{4.26}
+
+For an infinite cardinal $\kappa$, there is a bijection from $\kappa \times \kappa$
+to $\kappa$. Thus, $\kappa \otimes \kappa = \kappa$.
+
+\begin{proof}
+    We already know that $\omega \times \omega \approx \omega$ and so 
+    $\omega \otimes \omega = |\omega \times \omega| = \omega$. We proceed by
+    induction on $\kappa \geq \omega$. We assume for all infinite cardinals 
+    $\lambda < \kappa$ we have that $\lambda \otimes \lambda = \lambda$. 
+    We consider Gödel's ordering: \begin{align*}
+        \bigl[
+            \ang{\alpha, \beta} \triangleleft \ang{\gamma, \delta}
+        \bigr]
+        \Longleftrightarrow&
+        \bigl[
+            (\max(\{\alpha, \beta\}) < \max(\{\gamma, \delta\})) \\
+            & \text{ or } \bigl[
+            (\max(\{\alpha, \beta\}) = \max(\{\gamma, \delta\})) \\
+            & \text{ and }
+            (\alpha < \gamma \text{ or } (\alpha = \gamma \text{ and } \beta < \delta))
+        \bigr]\bigr],
+    \end{align*} and we note that: \begin{align*}
+        (\kappa \times \kappa)_{\ang{\alpha, \beta}} \subset \gamma \times \gamma,
+    \end{align*} where $\gamma = \max(\{\alpha, \beta\}) + 1$. So, as $\gamma < \kappa$,
+    we have that $|\gamma| < \kappa$ as $\gamma$ is an ordinal. Thus, 
+    $\gamma \otimes \gamma = |\gamma| \otimes |\gamma| = \gamma < \kappa$ by the 
+    inductive hypothesis and the fact that $\alpha$ and $\beta$ must precede $\kappa$. 
+    As such, all initial segments must have order type preceding $\kappa$ which
+    means the order type of $\kappa \times \kappa$ is at most $\kappa$ (Ex. 4.24).
+    However, $\kappa \times \kappa$ must also have order type at least 
+    $\kappa$ as $\ang{\alpha, 0}$ is in the initial segment for $\alpha < \kappa$. Thus, 
+    $\ot(\kappa \times \kappa, \triangleleft) = \kappa$. From this, we deduce that
+    $\kappa \times \kappa \approx \kappa$ so $\kappa \otimes \kappa = \kappa$.
+\end{proof}
+
+\subsection{Confluence of Addition and Multiplication (4.27)} \label{4.27}
+
+For infinite cardinals $\kappa$ and $\lambda$,
+$\kappa \oplus \lambda = \kappa \otimes \lambda = \max(\{\kappa, \lambda\})$.
+
+\begin{proof}
+    Without loss of generality, we assume $\lambda \leq \kappa$ so
+    $\max{\{\kappa, \lambda\}} = \kappa$. For $X$ and $Y$ disjoint with
+    cardinality $\kappa$ and $\lambda$ respectively: \begin{align*}
+        X \preceq X \cup Y \preceq (X \times \{0\}) \cup (X \times \{1\})
+        = X \times 2 \preceq X \times X.
+    \end{align*} So, in terms of cardinals we have: \begin{align*}
+         \kappa \leq \kappa \oplus \lambda \leq \kappa \oplus \kappa
+         = \kappa \otimes 2 \leq \kappa \otimes \kappa.
+    \end{align*} But, by Hessenberg's Theroem, $\kappa = \kappa \otimes \kappa$
+    which induces equality on all the above statements. 
+    As such, $\kappa = \kappa \oplus \lambda$ and similarly: \begin{align*}
+        \kappa \leq \kappa \otimes \lambda \leq \kappa \otimes \kappa = \kappa,
+    \end{align*} we have that $\kappa = \kappa \otimes \lambda$, as required.
+\end{proof}
+
+\subsection{Cardinality of a Countable Union of Infinite Cardinals (4.28-29)} 
+\label{4.28} \label{4.29}
+
+For a set $A$, $\ps{<\omega}A = \bigcup_{n \in \omega} \ps{n}A$.
+For an infinite cardinal $\kappa$, $|\ps{<\omega}\kappa| = \kappa$.
+
+\subsection{Cardinal Exponentiation (4.30, 4.32)} \label{4.30} \label{4.32}
+
+For cardinals $\kappa$ and $\lambda$, $\kappa^{\lambda} = |\ps{L}K|$ where $K$ and $L$
+are sets of cardinality $\kappa$ and $\lambda$ respectively. 
+For cardinals $\kappa$, $\lambda$, and $\mu$, we have that:
+\begin{align*}
+    \kappa^{\lambda \oplus \mu} &= \kappa^{\lambda} \otimes \kappa^{\mu}, \\
+    (\kappa^{\lambda})^{\mu} &= \kappa^{\lambda \otimes \mu}.
+\end{align*}
+
+\subsection{Equinumerosity with Characteristic Functions (4.31)} \label{4.31}
+
+For cardinals $\kappa$ and $\lambda$ with $\lambda \geq \omega$ and 
+$2 \leq \kappa \leq \lambda$, then
+$\ps{\lambda}\lambda \approx \ps{\lambda}\kappa 
+\approx \ps{\lambda}2 \approx \mc{P}(\lambda)$.
+
+\begin{proof}
+    We know that $\ps{\lambda}2 \approx \mc{P}(\lambda)$ as we can assign characteristic
+    functions to the subsets they identify. Then, using Hessenberg's Theorem: \begin{align*}
+        \ps{\lambda}2 \preceq \ps{\lambda}\kappa \preceq \ps{\lambda}\lambda
+        \preceq \mc{P}(\lambda \times \lambda) \approx \mc{P}(\lambda) \approx
+        \ps{\lambda}2,
+    \end{align*} inducing equinumerosity throughout.
+\end{proof}
+
+\subsection{Class of Cardinals (4.34)} \label{4.34}
+
+The class of cardinals is a proper class.
+
+\begin{proof}
+    We suppose the class of cardinals is a set, as it's the
+    union of ordinals, it's an ordinal $\tau$. 
+    By Cantor's Theorem, $|\mc{P}(\tau)| > \tau$
+    which is a cardinal not in our set of cardinals,
+    a contradiction.
+\end{proof}
+
+\subsection{Unbounded Ordinals (4.35)} \label{4.35}
+
+For any set $x$, there's an ordinal $\alpha$ with $\alpha \npreceq x$.
+
+\begin{proof}
+    We take $\alpha = |\mc{P}(x)|$ and we are done by Cantor's Theorem.
+\end{proof}
+
+\subsection{The $\aleph$ Cardinals (4.36-37)} \label{4.36} \label{4.37}
+
+For some ordinal $\alpha$ and a limit ordinal $\lambda$, we have the $\aleph$
+cardinals: \begin{align*}
+    \aleph_0 = \omega_0 
+    &= \omega, \\
+    \aleph_{\alpha + 1} = \omega_{\alpha + 1} = \omega_{\alpha}^+ 
+    &= \text{the least ordinal containing } \omega_{\alpha} \\
+    \aleph_{\lambda}  = \omega_{\lambda} 
+    &= \sup(\{\omega_{\tau} : \tau < \lambda\}).
+\end{align*} We have a function $F_\aleph$ from the ordinals to
+the $\aleph$ cardinals defined by: \begin{align*}
+    F_\aleph(\alpha) = \omega_\alpha.
+\end{align*} For an ordinal $\alpha > 1$, $F_\aleph(\alpha)$ is an
+uncountable cardinal, called a limit or successor cardinal, dependent
+on whether $\alpha$ is a limit or successor cardinal.
+
+\subsection{The $\beth$ Cardinals (4.39)} \label{4.39}
+
+For some ordinal $\alpha$ and a limit ordinal $\lambda$, we have the $\beth$
+cardinals: \begin{align*}
+    \beth
+    &= \omega, \\
+    \beth_{\alpha + 1}
+    &= 2^{\beth_\alpha} \\
+    \beth_{\lambda}
+    &= \sup(\{\beth_\tau : \tau < \lambda\}).
+\end{align*} If the Generalised Continuum Hypothesis holds, then
+we have that $\beth_\alpha = \aleph_\alpha$ for all ordinals $\alpha$.
+
+\subsection{The Continuum Hypothesis (4.38)} \label{4.38}
+
+The hypothesis states that $2^{\omega_0} = \omega_1$ and
+for the general hypothesis, for all ordinals $\alpha$, 
+$2^{\omega_\alpha} = \omega_{\alpha + 1}$.
+With our axioms, we can't prove the specific hypothesis is true or false.
+They are insufficient to this end.

@@ -1,17 +1,73 @@
-\section{Axioms}
+\section{The Axioms}
+
+\subsection{Axiom of Extensionality}
+
+For two sets $a$ and $b$, we have that $a = b$ if and only if for all
+$x$ we have that: \begin{align*}
+    x \in a \Longleftrightarrow x \in b.
+\end{align*} 
+For two classes $A$ and $B$, we have that $A = B$ if and only if for all
+$x$ we have that: \begin{align*}
+    x \in a \Longleftrightarrow x \in b.
+\end{align*}
+
+\subsection{Axiom of Pair Sets}
+
+For any sets $x$ and $y$, there is a set $z = \{x, y\}$. This is the
+(unordered) pair set of $x$ and $y$.
+
+\subsection{Axiom of the Powerset}
+
+For each set $x$, there exists a set which is the collection of the
+subsets of $x$, the powerset $\mathcal{P}(x)$.
+We have the powerset defined as 
+$\mathcal{P}(x) = \{z : z \subseteq x\}$.
+
+\subsection{Axiom of the Empty Set}
+
+There exists a set with no members, the empty set $\emptyset$.
+We have the empty set defined as $\emptyset = \{x : x \neq x\}$.
+
+\subsection{Axiom of Subsets}
+
+For some set $x$, we have that $\{y \in x : \Phi(y)\}$ is a set
+for some well-defined property of sets $\Phi$.
+
+\subsection{Axiom of Infinity}
+
+There exists an inductive set.
+
+\subsection{Axiom of Unions (1.6)} \label{1.6}
+
+We have the basic union of two sets $x_1$ and $x_2$: \begin{align*}
+    x_1 \cup x_2 = \{y : y \in x_1 \text{ or } y \in x_2\},
+\end{align*} but for when we want to unify the members of the sets in
+a set $x$, we define: \begin{align*}
+    \bigcup x = \{y : \exists \, z \in x, y \in z\}.
+\end{align*} This axiom states that for a set $x$, $\bigcup x$ is a set. 
+
+\subsection{Intersections (1.8)} \label{1.8}
+
+We have the basic intersection of two sets $x_1$ and $x_2$: \begin{align*}
+    x_1 \cap x_2 = \{y : y \in x_1 \text{ and } y \in x_2\},
+\end{align*} but for when we want to intersect the members of 
+the sets in a set $x$, we define: \begin{align*}
+    \bigcup x = \{y : \forall \, z \in x, y \in z\}.
+\end{align*} This is a set by the Axiom of Subsets.
 
 \subsection{Axiom of Replacement}
 
 For a function $F$ from $V$ to itself and a set $x$, $F''x$ is a set.
 
-\subsection{Axiom of Choice}
+\subsection{Well-ordering Principle}
+
+For a set $X$, there is a well-ordering $\ang{X, R}$. 
+
+\subsection{Axiom of Choice (5.1)} \label{5.1}
 
 For a set of non-empty sets $\mc{G}$, there is a choice function
 $F$ from $\mc{G}$ to $\bigcup \mc{G}$ such that for all $X$ in $\mc{G}$,
-$F(X)$ is in $X$.
-\\[\baselineskip]
-We have that the Axiom of Choice is equivalent to the Well-ordering
-Principle.
+$F(X)$ is in $X$. This is equivalent to the Well-ordering Principle.
 
 \begin{proof}
     ($\Longrightarrow$) For an arbitrary set $Y$, it is sufficient to
@@ -20,7 +76,7 @@ Principle.
     is trivially well-ordered. We take 
     $\mc{G} = \{X \subseteq Y : X \neq \emptyset\}$. By the Axiom
     of Choice, we have a choice function $F_0$ for $\mc{G}$.
-    We take $u$ to be any set not in $Y$ ($Y \neq V$) and
+    We take $u$ to be any set not in $Y$ and
     define $F$ from $V$ to $V$: \begin{align*}
         F(t) &= \begin{cases}
             F_0(t) & \text{if } t \in \mc{G} \\
@@ -39,8 +95,8 @@ Principle.
     We want to show that there's some ordinal $\beta$ such that
     $H_0(\beta) = u$. If we suppose there isn't, then $H_0$
     is injective from the ordinals to $Y$, but we know
-    that $\Ran(H_0) \subseteq Y$ is a set. Thus, $H_0^{-1}$ is a 
-    surjection from $\Ran(H_0)$ to the ordinals, which is a 
+    that $\Ran(H_0) \subseteq Y$ is a set by the Axiom of Replacement. 
+    Thus, $H_0^{-1}$ is a surjection from $\Ran(H_0)$ to the ordinals, which is a 
     contradiction as the ordinals form a proper class. So,
     we take $\alpha$ to be the least ordinal such that $H_0(\alpha) = u$.
     We let $H = H_0 \upharpoonright \alpha$, $H$ is a bijection
@@ -50,7 +106,7 @@ Principle.
     ($\Longleftarrow$) For $\mc{G}$ any set of non-empty sets, we take
     $A = \bigcup \mc{G}$. By the well-ordering principle, there's a
     well-ordering $\ang{A, R}$. We can define a choice function as: \begin{align*}
-        F(X) = R-\text{least element of } \ang{X, R},
+        F(X) = R\text{-least element of } \ang{X, R},
     \end{align*} as required.
 \end{proof}
 
@@ -59,19 +115,19 @@ Principle.
 Any collection $\mc{G}$ of sets is called a chain if for all $X$
 and $Y$ in $\mc{G}$, $X \subseteq Y$ or $Y \subseteq X$.
 
-\subsection{Zorn's Lemma}
+\subsection{Zorn's Lemma (5.2)} \label{5.2}
 
 For a set $\mc{F}$ such that for every chain $\mc{G} \subseteq \mc{F}$,
 $\bigcup \mc{G}$ is in $\mc{F}$, we have that $\mc{F}$ contains a
 maximal element $Y$ where for all $Z$ in $\mc{F}$: \begin{align*}
     Y \subseteq Z \Longrightarrow Y = Z.
-\end{align*} We have that this lemma is equivalent to the Axiom
-of Choice and the Well-ordering principle.
+\end{align*} This is equivalent to the Axiom of Choice and thus the 
+Well-ordering Principle.
 
 \begin{proof}
     (ZL $\Longrightarrow$ AC) For a collection of non-empty sets $\mc{G}$,
     we want a choice function for $\mc{G}$. We define $\mc{F}$ to be
-    the set of all choice function that exist for subsets of $\mc{G}$,
+    the set of all choice functions that exist for subsets of $\mc{G}$,
     that is, for $f$ in $\mc{F}$: \begin{align*}
         \Dom(f) \subseteq \mc{G} \text{ and } 
         \forall \, x \in \Dom(f), f(x) \in x.
@@ -106,7 +162,7 @@ of Choice and the Well-ordering principle.
     if it contains the current maximal element of $\mc{H}$. This
     clearly forms a chain, and we will show that $Y = \bigcup \mc{H}$ is
     a maximal element of $\mc{F}$. By the definition of $\mc{F}$, 
-    as $\mc{H}$ is a chain, $Y$ is in $\mc{F}$. If we suppose that
+    as $\mc{H}$ is a chain, $Y$ is in $\mc{F}$. If we suppose that there
     is some $Z$ in $\mc{F}$ with $Y \subseteq Z$, then $k(\gamma)
     \subseteq Z$ for any $\gamma$ such that $k(\gamma)$ is in $\mc{H}$.
     As $Y$ is in $\mc{F}$, for some $\delta < \alpha$, $Z = k(\delta)$.
@@ -114,4 +170,28 @@ of Choice and the Well-ordering principle.
     decided that $Z$ should be added to $\mc{H}$ so 
     $Z \subseteq \bigcup \mc{H} = Y$ and as such, $Z = Y$
     as required.
+\end{proof}
+
+\subsection{Axiom of Foundation (6.4)} \label{6.4}
+
+Every set $x$ is well-founded, so if $x$ is non-empty, there exists
+some $y$ in $x$ such that $x \cap y = \emptyset$.
+This is equivalent to saying there exists some $\alpha$ such that
+$x$ is in $V_\alpha$.
+
+\begin{proof}
+    For a set $x$, we set $T = TC(X)$. If $T \subset V$, then for some $\alpha$, 
+    $\rho \fran T \subseteq \alpha$ so $T \subseteq V_\alpha$. 
+    Thus, we are done for this case as $x \subseteq T \subseteq V_\alpha$ 
+    so $x \in V_{\alpha + 1}$.
+    \\[\baselineskip]
+    If we suppose that $T \setminus V \neq \emptyset$ and take $y$ in
+    $T \setminus V$ such that $(T \setminus V) \cap y = \emptyset$
+    by the Axiom of Foundation, then for any $z$ in $y$, 
+    as $z$ must be in $T$ by the properties of $TC$.
+    Also, $z$ must be in $V$ as $(T \setminus V) \cap y = \emptyset$.
+    Hence, $y \subseteq V$. But, as in the first case, $\rho \fran y$ is a set
+    of ordinals, with some strict upper bound $\beta$. As such, 
+    $y \subseteq V_\beta$ which implies $y$ is in $V_{\beta + 1}$
+    which is a contradiction of the definition of $y$.
 \end{proof}
