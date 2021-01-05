@@ -1,0 +1,86 @@
+\section{Camera}
+
+\subsection{Rotation Matrices}
+
+We can perform an anti-clockwise 3D rotation of $\theta$ degrees 
+using the 3D rotation matrices $R_x$, $R_y$, and $R_z$ corresponding 
+to rotations around the $x$, $y$, and $z$ axes respectively: \begin{align*}
+    R_x = \begin{pmatrix}
+        1 & 0 & 0 \\
+        0 & \cos(\theta) & -\sin(\theta) \\
+        0 & \sin(\theta) & \cos(\theta) \\
+    \end{pmatrix}, \\
+    R_y = \begin{pmatrix}
+        \cos(\theta) & 0 & \sin(\theta) \\
+        0 & 1 & 0 \\
+        -\sin(\theta) & 0 & \cos(\theta) \\
+    \end{pmatrix}, \\
+    R_z = \begin{pmatrix}
+        \cos(\theta) & -\sin(\theta) & 0 \\
+        \sin(\theta) & \cos(\theta) & 0 \\
+        0 & 0 & 1 \\
+    \end{pmatrix}.
+\end{align*} The 2D anti-clockwise rotation is represented by the matrix $R$: \begin{align*}
+    R = \begin{pmatrix}
+        \cos(\theta) & -\sin(\theta) \\
+        \sin(\theta) & \cos(\theta) \\
+    \end{pmatrix}.
+\end{align*}
+
+
+\subsection{Camera Position and Orientation}
+
+We can simply represent the position of the camera with a 3D vector,
+which we can translate quite easily.
+The orientation, however, is more complex and is represented with a 3D matrix $C$, 
+consisting of vectors $r$, $u$, and $f$, corresponding to the direction
+'right' from the camera, 'up' from the camera, and 'forward'
+into the camera: \begin{align*}
+    C = \begin{pmatrix}
+        \uparrow & \uparrow & \uparrow \\
+        r & u & f \\
+        \downarrow & \downarrow & \downarrow \\
+    \end{pmatrix}.
+\end{align*} This matrix can be rotated using the standard rotation matrices.
+
+\subsubsection{Look At}
+
+We can set our camera orientation matrix to look at a point by setting the
+vectors inside it appropriately. The 'forward' vector is the vector from the
+desired point to the camera. The 'right' vector is the cross-product of
+$(0, 1, 0)$ and the 'forward' vector. The 'up' vector is the cross-product
+of 'forward' and 'right'.
+
+\subsection{World-space to Camera-space Coordinates}
+
+We can apply the translation of our camera by translating vertices by the
+camera position multiplied by $-1$. The orientation of the camera can
+be applied by taking the vector from camera to the vertex and right-multiplying
+it by $C$.
+
+\subsection{Homogenous Coordinates}
+
+The homogenous coordinate system adds a dimension to the camera orientation
+matrix in order to embed translation information. This allows for all camera
+information to be stored in a single matrix and the composition of translations
+and rotations. We can map to homogenous coordinates as follows: \begin{align*}
+    \begin{pmatrix}
+        x \\ y \\ z \\
+    \end{pmatrix} &\mapsto \begin{pmatrix}
+        x \\ y \\ z \\ 1 \\
+    \end{pmatrix}, \\
+    \begin{pmatrix}
+        \uparrow & \uparrow & \uparrow \\
+        r & u & f \\
+        \downarrow & \downarrow & \downarrow \\
+    \end{pmatrix} &\mapsto \begin{pmatrix}
+        \uparrow & \uparrow & \uparrow & x \\
+        r & u & f & y \\
+        \downarrow & \downarrow & \downarrow & z \\
+        0 & 0 & 0 & 1 \\
+    \end{pmatrix},
+\end{align*} where $x$, $y$, and $z$ store the translation information of the
+matrix, by default, this would be all zeroes (in rotation matrices for example).
+We can still perform in-place rotations by simply translating the matrix to
+the origin before the rotation and then translating it back afterwards. 
+

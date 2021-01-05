@@ -1,0 +1,31 @@
+\section{Data Types}
+
+\subsection{Objects}
+
+Objects are stored in \texttt{.obj} files with texture and colour information
+stored in \texttt{.mtl} files. Object files define sets of points and, from these
+points, elements consisting of triangular faces. Similarly, texture points
+can also be defined and attached to the faces. Elements can also be assigned
+materials defined in an inherited \texttt{.mtl} which should define the material,
+giving it a texture path or a colour.
+
+\subsubsection{Object-space to World-space Coordinates}
+
+We convert object-space coordinates to world-space coordinates by translating,
+scaling, and rotating our object. This can be done with matrices.
+
+\subsection{Colour}
+
+Colours can be represented in multiple ways, in \texttt{.mtl} files they are
+three floats ranging from \texttt{0.0} to \texttt{1.0} to represent red, green,
+and blue. It's also useful to have the same representation but from \texttt{0}
+to \texttt{255} instead with an additional alpha value for transparency.
+
+\subsubsection{Packing}
+
+We can pack a colour represented by four 8-bit values 
+(\texttt{r}, \texttt{g}, \texttt{b}, \texttt{a}) into a 32-bit 
+integer \texttt{c} in \texttt{C++} with: \begin{lstlisting}
+    c = (a << 24) + (r << 16) + (g << 8) + b;
+\end{lstlisting} This representation is used to set the colour of pixels on
+the screen.

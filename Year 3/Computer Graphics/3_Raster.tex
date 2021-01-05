@@ -1,0 +1,93 @@
+\section{Rasterising}
+
+Rasterising is about converting world-space images into screen-space images to draw
+objects to the screen.
+
+\subsection{Interpolation}
+
+We can interpolate in one dimension between two floating point values
+$x$ and $y$ in $s \geq 2$ steps by defining $v_1, \ldots, v_s$: \begin{align*}
+    v_i &= x + (i - 1) \left(\frac{y - z}{s - 1}\right),
+\end{align*} we will write the sequence $(v_i)_{i \in [s]}$ as $I(x, y, s)$ as
+the interpolation from $x$ to $y$ in $s$ steps.
+\\[\baselineskip]
+We can extrapolate this to higher dimensions. For $d > 1$, we have that the interpolation of
+$d$-dimensional vectors $x$ and $y$ in $s$ steps is $v_1, \ldots, v_s$ defined as: \begin{align*}
+    x &= (x_1, \,\cdots, x_d), \\
+    y &= (y_1, \,\cdots, y_d), \\
+    w_{ab} &= \text{the $b^\text{th}$ element of } I(x_a, y_b, s), \\
+    v_i &= (w_{1i}, \,\cdots, w_{di}).
+\end{align*}
+
+\subsection{Lines}
+
+We can draw basic straight lines to the screen by using two one-dimensional
+interpolations. For $(x_1, y_1)$ and $(x_2, y_2)$ the points we want to draw
+between, we interpolate from $x_1$ to $x_2$ and $y_1$ to $y_2$ in $s$ steps
+where: \begin{align*}
+    s = \max(\{ 2, |x_2 - x_1|, |y_2 - y_1| \}),
+\end{align*} and fill in the corresponding pixel for each $i$ in $[s]$.
+
+\subsection{Triangles}
+
+Triangles are important building blocks of computer graphics as we can use them to build
+any polygon. Stroking triangles is simple, but filling them is a more complex task, which
+is where we rasterise the triangle.
+\newpage
+\noindent
+We want to fill the triangle in 'rakes', top to bottom, left to right. We first take
+the vertices and order them ascending based on their $y$ coordinate on the screen
+to get $v_1$, $v_2$, and $v_3$ with $v_i = (x_i, y_i)$ for each $i$ in $[3]$. 
+We calculate the point $v'$ along $(v_1, v_3)$ with $y$ coordinate equal to that 
+of $v_2$ by setting: \begin{align*}
+    v' &= v_1 + \left( \frac{y_2 - y_1}{y_3 - y_1} \right)(v_3 - v_1).
+\end{align*} We can then calculate $I(x_1, x', y_2 - y_1)$ and $I(x_1, x_2, y_2 - y_1)$,
+and draw the horizontal lines between them at each $i$ in $[y_2 - y_1]$. We similarly
+calculate $I(x', x_3, y_3 - y_2)$ and $I(x_2, x_3, y_3 - y_2)$ to fill the bottom
+section of the triangle.
+
+\subsubsection{Texture Mapping}
+
+Instead of filling triangles with solid colour, we can also fill them with texture.
+By having corresponding texture-space coordinates associated with each point on a
+triangle, we can perform the same interpolation as in the solid colour case
+simultaneously to find the texture-space points along the edge of the triangle,
+then instead of drawing each rake normally, we interpolate between the texture
+points on either side to sample colour from our texture.
+\\[\baselineskip]
+It is worth noting that this approach ignores perspective so may give odd results
+when viewing from certain angles with certain textures. The solution to this is
+out of the scope of this unit.
+
+\subsection{Projecting}
+
+We can project the world-space coordinates of an object to screen coordinates
+by considering the screen plane to be some distance $f$ in front of the
+camera so that where $(u, v)$ is our desired screen-space coordinate and $(x, y, z)$ is
+our world-space coordinate, we have similar right-angled triangles formed by: 
+\begin{itemize}
+    \item $(0, 0, f)$, $(u, v, 0)$, and $(0, 0, 0)$,
+    \item $(0, 0, f)$, $(x, y, z)$, and $(0, 0, z)$,
+\end{itemize} not accounting for camera position.
+Using this, we can calculate the desired screen-space coordinate: 
+\begin{align*}
+    (u, v, f) = f \cdot \frac{(x, y, f + |z|)}{f + |z|}.
+\end{align*} We can then convert $(u, v)$ to pixel-space coordinates 
+by inverting the $y$-axis
+and translating by half the dimensions of our screen.
+
+\subsubsection{Depth}
+
+We can calculate the depth of a world-space point $(x, y, z)$ by taking the reciprocal
+of $|z|$. Thus, a smaller depth value means the point is farther away from the 
+camera, with zero representing a point infinitely far from the camera.
+This can be used to allow proper layering when rasterising.
+We note that the positive $z$ direction points into the camera and negative
+$z$ points to where the camera is facing, which is why we take the reciprocal
+of the absolute value.
+
+\subsection{Culling}
+
+Considering how we project our points, things may become strange if we consider
+points behind the camera. Thus, it makes sense to 'cull' points that have negative
+depth, to not consider them.

@@ -1,0 +1,67 @@
+\section{Lighting}
+
+\subsection{Proximity Lighting}
+
+This is simply reducing the intensity of light proportionally to the
+square of the distance of the surface from the light source. This gives
+realistic brightness, as this is in accordance with the laws of physics.
+However, different scales may be used to achieve certain stylistic goals,
+which may or may not agree with the laws, but the effect is similar.
+
+\subsection{Angle of Incidence Lighting}
+
+This is calculating the angle between the surface normal and the vector
+to the light source and varying the light intensity accordingly. If the ray
+to light is parallel with the normal, light intensity should be maximal, but
+if it is perpendicular with the normal, or through the surface, the
+light intensity should be minimal.
+\\[\baselineskip]
+The normal can be calculated via a cross-product of the triangle edges
+(but take care of the order you calculate the product), and
+the cosine of the angle can be calculated with the well-known dot product
+formula: \begin{align*}
+    \cos(\theta) = \frac{a \cdot b}{|a| \cdot |b|}.
+\end{align*}
+
+\subsection{Specular Lighting}
+
+We calculate the angle of reflection of light off of a surface and, similarly
+to angle of incidence lighting, vary the light intensity based on the angle
+between the reflected ray and the vector to the camera. If the light is reflecting
+directly into the camera, the intensity should be maximal, and minimal if the
+reflected ray is pointing away from the camera. We can raise the cosine of the
+angle between these vectors to a power called the 'specular exponent'. The greater
+the value, the shinier the surface appears.
+\\[\baselineskip]
+The reflected ray $r$ can be calculated with the incident ray $i$ and the
+normal $n$ via: \begin{align*}
+    r = i - 2(i \cdot n)n.
+\end{align*}
+
+\newpage
+
+\subsection{Ambient Lighting}
+
+Rays of light in real life reflect multiple times, yet we are only simulating up
+to one reflection at the moment. This causes our scene to appear dimmer in
+areas which light may take multiple reflections to reach. Since this would
+be very computationally expensive to calculate, we emulate the effect with 
+ambient lighting. We either set a minimum threshold for light intensity or
+add a flat amount of brightness when we calculate the brightness of a pixel.
+
+\subsection{Gouraud Shading}
+
+Previously, we would use the vertex normal of the whole face to calculate the 
+lighting effects on the whole face. This can lead to blocky lighting
+as lighting effects do not smoothly transition across the face.
+Gouraud shading is the process of, instead, generating normals for the vertices
+of the face (by taking the mean of the normals of the faces the vertex is
+contained in) and using those to generate the lighting effects at the vertices.
+These lighting effects can then be interpolated to the point being rendered. 
+
+\subsection{Phong Shading}
+
+Phong shading is similar to Gouraud shading, except we instead interpolate the
+vertex normals, so we can calculate the vertex normal at any point on a face.
+We then use this to calculate lighting effects directly, giving a more
+convincing result than Gouraud shading (at the expense of computational cost).

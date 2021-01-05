@@ -1,0 +1,37 @@
+\section{Raytracing}
+
+Fundamental to raytracing is detecting intersections between rays and the
+triangles which form our objects.
+We represent our ray as a start point $s = (x_s, y_s, z_s)$ and a direction vector 
+$d = (x_d, y_d, z_d)$, with every point along the ray representable 
+by $s + kd$ for some $k$. We take the target triangle to be 
+$(p_1, p_2, p_3)$ with $e_1$ the edge $(p_1, p_2)$ and
+$e_2$ the edge $(p_1, p_3)$, we want some $u$ and $v$ such that: \begin{align*}
+    s + kd = p_1 + ue_1 + ve_2
+    & \Longleftrightarrow
+    s - p_1 = u(p_2 - p_1) + v(p_3 - p_1) - kd \\
+    & \Longleftrightarrow
+    s - p_1 = \begin{pmatrix}
+        -x_d & \uparrow & \uparrow \\
+        -y_d & e_1 & e_2 \\
+        -z_d & \downarrow & \downarrow \\
+    \end{pmatrix} \cdot \begin{pmatrix}
+        t \\ u \\ v \\
+    \end{pmatrix} \\
+    & \Longleftrightarrow
+    \begin{pmatrix}
+        t \\ u \\ v \\
+    \end{pmatrix} = \begin{pmatrix}
+        -x_d & \uparrow & \uparrow \\
+        -y_d & e_1 & e_2 \\
+        -z_d & \downarrow & \downarrow \\
+    \end{pmatrix}^{-1} \cdot (s - p_1).
+\end{align*} So, the point of intersection in the plane $(p_1, p_2, p_3)$ lies
+in is $p_1 + ue_1 + ve_2$ whose distance from $s$ is $t$. We add the following
+constraints to $u$ and $v$ to keep them within the triangle: \begin{align*}
+    0 \leq u &\leq 1, \\
+    0 \leq v &\leq 1, \\
+    u + v &\leq 1.
+\end{align*} We can then cast rays from our camera, through each pixel of the
+screen-space, to find the closest intersection with an object and use that object's
+information to correctly colour the pixel.
