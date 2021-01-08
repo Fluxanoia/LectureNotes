@@ -1,0 +1,90 @@
+\section{Type Constraints}
+
+A type constraint is a pair of monotypes $(A, B)$ written
+suggestively as $A \teq B$.
+
+\subsection{Constraint Generation}
+
+We create a constraint generating function, which takes in an
+environment and a term and returns a pair consisting of a type
+variable and a set of constraints: \begin{align*}
+    &\text{CGen}(\Gamma, x) = \\
+    &\qquad \text{let } a \text{ be fresh} \\
+    &\qquad \text{let } \forall \, a_1, \ldots, a_k.A = \Gamma(x) \\
+    &\qquad \text{let } b_1, \ldots, b_k \text{ be fresh} \\
+    &\qquad (a, \{a \teq A[b_1/a_1, \ldots, b_k/a_k]\}) \\
+    \\
+    &\text{CGen}(\Gamma, MN) = \\
+    &\qquad \text{let } a \text{ be fresh} \\
+    &\qquad \text{let } (b, \mc{C}_1) = \text{CGen}(\Gamma, M) \\
+    &\qquad \text{let } (c, \mc{C}_2) = \text{CGen}(\Gamma, N) \\
+    &\qquad (a, \mc{C}_1 \cup \mc{C}_2 \cup \{b \teq c \to a\}) \\
+    \\
+    &\text{CGen}(\Gamma, \lambda x.M) = \\
+    &\qquad \text{let } a \text{ be fresh} \\
+    &\qquad \text{let } b \text{ be fresh} \\
+    &\qquad \text{let } (c, \mc{C}) = \text{CGen}(\Gamma \cup \{x : b\}, M) \\
+    &\qquad (a, \mc{C} \cup \{a \teq b \to c\})
+\end{align*}
+
+\subsection{Unifier}
+
+A unifier to a finite set of type constraints
+$\{A_1 \teq B_1, \ldots, A_n \teq B_n\}$ is a type substitution $\sigma$
+such that for all $i$ in $[n]$, $A_i\sigma = B_i\sigma$.
+\\[\baselineskip]
+If CGen$(\Gamma, M) = (a, \mc{C})$ then 
+$\sigma$ is a unifier for $\mc{C}$ if and only if 
+$\Gamma\sigma \vdash M : \sigma(a)$ is derivable.
+
+\subsubsection{Most General Unifier}
+
+For a set of type constraints $\mc{C}$, a unifier of $\mc{C}$, $\sigma$, 
+is the most general unifier if every unifier $\sigma^*$ of $\mc{C}$ is 
+of the form $\sigma\sigma'$ for some $\sigma'$.
+
+\subsection{Constraint Solved Form}
+
+A set of type constraints $\mc{C} = \{a_1 \teq A_1, \ldots, a_m \teq A_m\}$
+is in solved form if each of the $a_i$ are distinct and do not occur
+in any $A_j$. If $\mc{C}$ is in solved form, we define 
+$[[\mc{C}]] = [A_1/a_1, \ldots, A_m/a_m]$.
+
+\subsection{Robinson's Algorithm}
+
+Robinson'a algorithm is the repeated and exhaustive application of the 
+following rules, returning the most general unifier from
+a set of constraints: \begin{align*}
+    \{A \teq A\} \uplus \mc{C} 
+    &\mapsto \mc{C}, 
+    \\
+    \{A_1 \to A_2 \teq B_1 \to B_2\} \uplus \mc{C} 
+    &\mapsto \{A_1 \teq B_1, A_2 \teq B_2\} \uplus \mc{C}, 
+    \\
+    \{A \teq a\} \uplus \mc{C} 
+    &\mapsto \{a \teq A\} \uplus \mc{C}, \tag{$A \notin \mb{A}$} 
+    \\
+    \{a \teq A\} \uplus \mc{C} 
+    &\mapsto \{a \teq A\} \uplus \mc{C}[A / a], \tag{$a \notin FTV(A)$} 
+\end{align*}
+
+\subsection{Hindley-Milner Type Inference}
+
+For an input, closed term $M$, we perform the following steps: \begin{enumerate}
+    \item Generate the constraints $\mc{C}$ and type variable $a$ using
+        CGen$(\emptyset, M)$,
+    \item Solve $\mc{C}$ using Robinson's algorithm to obtain the most general
+        unifier or deduce insolvability,
+    \item If $\mc{C}$ has no solution, $M$ is untypable. Otherwise, we
+        return $\sigma(a)$.
+\end{enumerate}
+
+\subsection{Principle Type Scheme Theorem}
+
+If a closed term $M$ is typable, then Hindley-Milner type inference
+returns a type $A$ that is principal meaning:
+\begin{itemize}
+    \item $\vdash M : A$ is derivable,
+    \item If $\vdash M : B$ is derivable, there exists monotypes 
+        $C_1, \ldots, C_k$ such that $B = A[C_1/a_1, \ldots, C_k/a_k]$.
+\end{itemize}

@@ -1,13 +1,13 @@
 \section{Definability}
 
-\subsection{Church Numerals}
+\subsection{Church Numerals (4.1)}
 
 The Church numeral for the number $n$ in $\mb{N}_0$, denoted by 
 $\church{n}$, is: \begin{align*}
     \lambda fx. \underbrace{f(\cdots (f}_{n \text{ times}}  x) \cdots).
 \end{align*} Each Church numeral is already in normal form.
 
-\subsection{Lambda Definability}
+\subsection{Lambda Definability (4.2)}
 
 A function $f : \mb{N} \times \cdots \times \mb{N} \to \mb{N}$
 is $\lambda$-definable if there exists a $\lambda$-term $F$ that
@@ -54,7 +54,7 @@ conditional defined here:
     \end{tabular}
 \end{center}
 
-\subsection{Church Lists}
+\subsection{Church Lists (4.3)}
 
 The Church encoding of a list $xs$ is the term $\church{xs}$ defined
 recursively by: \begin{align*}
@@ -62,4 +62,5 @@ recursively by: \begin{align*}
     \church{x:xs} &= \lambda cn.c \, \church{x} (\church{xs} \, cn).
 \end{align*} This gives us the definition of $\mbf{Cons}$: \begin{align*}
     \mbf{Cons} &= \lambda xy.\lambda cn.cx(ycn).
-\end{align*} 
+\end{align*} We can treat this definition like a right fold, defining:
+$\mbf{Sum} = \lambda x.x \, \textbf{Add} \, \church{0}$.

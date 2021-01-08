@@ -1,6 +1,4 @@
-\section{Types}
-
-\subsection{Monotypes}
+\section{Types (7.1)}
 
 We assume a countable set of type variables $\mb{A}$ (usually
 denoted by $a$, $b$, $c$, etc.). The monotypes $\mb{T}$ are a
@@ -8,282 +6,37 @@ set of strings defined inductively by the type variable rule:
 \begin{align*}
     \frac{}{a \in \mb{T}},
 \end{align*} for some $a \in \mb{A}$ and the arrow rule: \begin{align*}
-    \frac{A \in T \qquad B \in T}{(A \to B) \in \mb{T}}.
-\end{align*}
-
-\subsection{Type Schemes}
-
+    \frac{A \in \mb{T} \qquad B \in \mb{T}}{(A \to B) \in \mb{T}}.
+\end{align*} We omit the outermost parentheses when writing these
+types, and they implicitly associate to the right.
+\\[\baselineskip]
 Types schemes are pairs consisting of a finite set of type
 variables $a_1, \ldots, a_m$ and a monotype $A$ which we
 write as $\forall \, a_1 \cdots a_m.A$.
 
-\subsection{Free Type Variables}
+\subsection{Free Type Variables (7.2)}
 
 We define the set of free type variables for a type scheme
-$\forall \, \bar{a}.A$, denoted by
-\linebreak $FTV(\forall \, \bar{a}.A)$,
-recursively by the following rules: \begin{align*}
+inductively with the following rules: \begin{align*}
     FTV(a) &= \{a\}, \\
     FTV(A \to B) &= FTV(A) \cup FTV(B), \\
     FTV(\forall \, a_1 \cdots a_m.A) &= FTV(A) \setminus \{a_1, \ldots, a_m\}.
 \end{align*} We consider type schemes that only differ by choice
 of bound variable names to be equivalent.
 
-\subsection{Type Substitution}
+\subsection{Type Substitution (7.3-4)}
 
-A type substitution is a total map $\sigma, \tau, \theta$ 
+A type substitution is a total map $\sigma$ 
 from $\mb{A}$ to 
 $\mb{T}$ with the property that $\sigma(a) \neq a$ for only
 finitely many $a \in \mb{A}$. We define the map as follows:
 \begin{align*}
-    a\sigma &= \sigma(a) \\
+    a\sigma &= \sigma(a), \\
     (A \to B)\sigma &= A\sigma \to B\sigma.
 \end{align*}
 
-\subsubsection{Composition of Substitutions}
+\subsubsection{Composition of Substitutions (7.5)}
 
 We write $\sigma_1\sigma_2$ for the substitution obtained by
 composing $\sigma_2$ after $\sigma_1$, defined as by
 $(\sigma_1\sigma_2)(a) = (\sigma_1(a))\sigma_2$.
-
-\subsection{Type Assignment}
-
-A type assignment is a pair of a term $M$ and a type scheme $A$
-written $M:A$. The term part is called the subject and the type
-part the predicate.
-
-\subsection{Type Environments}
-
-A type environment written $\Gamma$ is a finite set of
-type assignments of the form $x : \forall \, \bar{a}.A$
-which are consistent in the sense that multiple 
-type assignments of the same subject will agree.
-\\[\baselineskip]
-The subjects of $\Gamma$ is the set $\Dom(\Gamma)$.
-
-\subsection{Type Judgement}
-
-A type judgement is a triple consisting of a type environment $\Gamma$,
-a term $M$ and a monotype $A$ written as $\Gamma \vdash M : A$.
-
-\subsection{The Type System}
-
-The type system is defined by the following rules.
-For $x : \forall \, \bar{a}.A$ in $\Gamma$ we have the type variable
-rule: \begin{align*}
-    \frac{}{\Gamma \vdash x : A[\bar{B}/\bar{a}]},
-\end{align*} the rule of type application: \begin{align*}
-    \frac{
-        \Gamma \vdash M : B \to A \qquad \Gamma \vdash N : B
-    }{
-        \Gamma \vdash MN : A
-    },
-\end{align*} and for $x$ not in $\Dom(\Gamma)$, we have the rule
-of type abstraction: \begin{align*}
-    \frac{
-        \Gamma \cup \{x : B\} \vdash M : A
-    }{
-        \Gamma \vdash \lambda x.M : B \to A
-    }.
-\end{align*} A proof tree justifying a type judgement is called a type
-derivation.
-
-\subsection{Typability}
-
-We say a closed term $M$ is typable if there is some type $A$ such that
-$\{\} \vdash M : A$. We have that $\lambda x.xx$ is untypable.
-
-\subsection{The Inversion Theorem}
-
-Suppose $\Gamma \vdash M : A$ is derivable, we have that: \begin{itemize}
-    \item if $M$ is a variable $x$ then there is a type scheme
-        $\forall \, \bar{a}.B$ in $\Gamma$ with $A = B[\bar{C}/\bar{a}]$ 
-        for some monotypes $\bar{C}$,
-    \item if $M$ is an application $PQ$ then there is a type $B$ such
-        that $\Gamma \vdash P : B \to A$ and $\Gamma \vdash Q : B$,
-    \item if $M$ is an abstraction $\lambda x.P$ then there are types
-        $B$ and $C$ such that $A = B \to C$ and 
-        $\Gamma \cup \{x : B\} \vdash P : C$.
-\end{itemize}
-
-\subsection{Properties of the System}
-
-For a term $M$, environment $\Gamma$ and type $S$, we
-have the following properties.
-
-\paragraph{Subterm Closure}
-\leavevmode\newline
-If $\Gamma \vdash M : S$ is derivable and $N$ is a subterm
-of $M$, there is some $\Gamma'$ containing $\Gamma$ and
-some $S'$ such that $\Gamma' \vdash N : S'$. 
-
-\paragraph{Relevance ($1^{\text{st}}$)}
-\leavevmode\newline
-If $\Gamma \vdash M : S$ then $FV(M) \subseteq \Dom(\Gamma)$.
-
-\paragraph{Relevance ($2^{\text{nd}}$)}
-\leavevmode\newline
-If $\Gamma \vdash M : S$ then $\{x : A \text{ where }
-x : A \in \Gamma \text{ and } x \in FV(M) \} \vdash M : S$.
-
-\paragraph{Weakening}
-\leavevmode\newline
-If $\Gamma \vdash M : S$ and $\Gamma \subseteq \Gamma'$ then
-$\Gamma' \vdash M : S$.
-
-\paragraph{Subject Reduction}
-\leavevmode\newline
-If $\Gamma \vdash M : A$ and 
-$M \to_\beta N$ then $\Gamma \vdash N : A$.
-
-\paragraph{Preservation under Substitution}
-\leavevmode\newline
-If $\Gamma, x : B \vdash M : A$ and $\Gamma \vdash N : B$
-then $\Gamma \vdash M[N / x] : A$.
-
-\paragraph{Subformula}
-\leavevmode\newline
-We suppose $\Gamma$ has predicates solely consisting of monotypes,
-for some term $M$ in $\beta$-normal form with $\Gamma \vdash M : A$
-we have that the derivation of this judgement is unique and all
-of the types mentioned in the derivation are substrings of types 
-mentioned in the conclusion.
-
-\subsection{Type Constraints}
-
-A type constraint is a pair of monotypes $(A, B)$ written
-suggestively as $A \teq B$.
-
-\subsection{Constraint Generation}
-
-We create a constraint generating function, which takes in an
-environment and a term and returns a pair consisting of a type
-variable and a set of constraints: \begin{align*}
-    &\text{CGen}(\Gamma, x) = \\
-    &\qquad \text{let } a \text{ be fresh} \\
-    &\qquad \text{let } \forall \, a_1, \ldots, a_k.A = \Gamma(x) \\
-    &\qquad \text{let } b_1, \ldots, b_k \text{ be fresh} \\
-    &\qquad (a, \{a \teq A[b_1/a_1, \ldots, b_k/a_k]\}) \\
-    \\
-    &\text{CGen}(\Gamma, MN) = \\
-    &\qquad \text{let } a \text{ be fresh} \\
-    &\qquad \text{let } (b, \mc{C}_1) = \text{CGen}(\Gamma, M) \\
-    &\qquad \text{let } (c, \mc{C}_2) = \text{CGen}(\Gamma, N) \\
-    &\qquad (a, \mc{C}_1 \cup \mc{C}_2 \cup \{b \teq c \to a\}) \\
-    \\
-    &\text{CGen}(\Gamma, \lambda x.M) = \\
-    &\qquad \text{let } a \text{ be fresh} \\
-    &\qquad \text{let } b \text{ be fresh} \\
-    &\qquad \text{let } (c, \mc{C}) = \text{CGen}(\Gamma \cup \{x : b\}, M) \\
-    &\qquad (a, \mc{C} \cup \{a \teq b \to c\})
-\end{align*}
-
-\subsection{Unifier}
-
-A unifier to a finite set of type constraints
-$\{A_1 \teq B_1, \ldots, A_n \teq B_n\}$ is a type substitution $\sigma$
-such that for all $i$ in $[n]$, $A_i\sigma = B_i\sigma$.
-\\[\baselineskip]
-If CGen$(\Gamma, M) = (a, \mc{C})$ then 
-$\sigma$ is a unifier for $\mc{C}$ if and only if 
-$\Gamma\sigma \vdash M : \sigma(a)$ is derivable.
-
-\subsubsection{Most General Unifier}
-
-For a set of type constraints $\mc{C}$, a unifier of $\mc{C}$, $\sigma$, 
-is the most general unifier if every unifier $\sigma^*$ of $\mc{C}$ is 
-of the form $\sigma\sigma'$ for some $\sigma'$.
-
-\subsection{Constraint Solved Form}
-
-A set of type constraints $\mc{C} = \{a_1 \teq A_1, \ldots, a_m \teq A_m\}$
-is in solved form if each of the $a_i$ are distinct and do not occur
-in any $A_j$. If $\mc{C}$ is in solved form, we define 
-$[[\mc{C}]] = [A_1/a_1, \ldots, A_m/a_m]$.
-
-\subsection{Robinson's Algorithm}
-
-Robinson'a algorithm is the repeated and exhaustive application of the 
-following rules, returning the most general unifier from
-a set of constraints: \begin{align*}
-    \{A \teq A\} \uplus \mc{C} 
-    &\mapsto \mc{C}, 
-    \\
-    \{A_1 \to A_2 \teq B_1 \to B_2\} \uplus \mc{C} 
-    &\mapsto \{A_1 \teq B_1, A_2 \teq B_2\} \uplus \mc{C}, 
-    \\
-    \{A \teq a\} \uplus \mc{C} 
-    &\mapsto \{a \teq A\} \uplus \mc{C}, \tag{$A \notin \mb{A}$} 
-    \\
-    \{a \teq A\} \uplus \mc{C} 
-    &\mapsto \{a \teq A\} \uplus \mc{C}[A / a], \tag{$a \notin FTV(A)$} 
-\end{align*}
-
-\subsection{Hindley-Milner Type Inference}
-
-For an input, closed term $M$, we perform the following steps: \begin{enumerate}
-    \item Generate the constraints $\mc{C}$ and type variable $a$ using
-        CGen$(\emptyset, M)$,
-    \item Solve $\mc{C}$ using Robinson's algorithm to obtain the most general
-        unifier or deduce insolvability,
-    \item If $\mc{C}$ has no solution, $M$ is untypable. Otherwise, we
-        return $\sigma(a)$.
-\end{enumerate}
-
-\subsection{Principle Type Scheme Theorem}
-
-If a closed term $M$ is typable, then Hindley-Milner type inference
-returns a type $A$ that is principal meaning:
-\begin{itemize}
-    \item $\vdash M : A$ is derivable,
-    \item If $\vdash M : B$ is derivable, there exists monotypes 
-        $C_1, \ldots, C_k$ such that $B = A[C_1/a_1, \ldots, C_k/a_k]$.
-\end{itemize}
-
-\subsection{Strong Normalisation}
-
-If $\Gamma \vdash M : A$ then $M$ is strongly normalising.
-
-\subsection{The Inhabitation Problem}
-
-The inhabitation problem is the problem of, given a type $A$, determining
-whether there is a closed term $M$ such that $\vdash M : A$.
-
-\subsection{Curry-Howard Theorem}
-
-For proofs in the implicational fragment of propositional
-logic, the following is true: \begin{itemize}
-    \item From a constructive proof of $A$ from the initial assumptions
-        $\Gamma$, we can extract a term $M$ such that $\Gamma \vdash M : A$,
-    \item From each term $M$ with $\Gamma \vdash M : A$, we can extract
-        a constructive proof that $A$ follows from the assumptions $\Gamma$.
-\end{itemize}
-
-\subsection{Proof from Truth}
-
-A proof of $A$ from the starting assumptions $\Gamma$ is a certificate
-guaranteeing that $A$ is true if $\Gamma$ is true.
-
-\subsection{Truth from Proof}
-
-A proof of $A$ from the starting assumptions $\Gamma$ is a method
-of constructing evidence of $A$ from evidence of $\Gamma$.
-
-\subsection{The BHK Interpretation of Logic}
-
-The BHK interpretation of logic consists of the following rules:
-\begin{itemize}
-    \item There can be no evidence for the truth from false,
-    \item No evidence is needed for the truth of true,
-    \item Evidence for $A$ and $B$ is a pair consisting of evidence
-        for $A$ and evidence for $B$,
-    \item Evidence for $A$ or $B$ is evidence of $A$ or evidence of $B$,
-    \item Evidence of $A \Rightarrow B$ is a procedure for transforming
-        evidence of $A$ to evidence of $B$,
-    \item Evidence of $\neg A$ is a procedure for transforming evidence
-        of $A$ to false,
-    \item Evidence of $\forall \, x \in X, A$ is a procedure for transforming
-        any $y$ and evidence of $y$ being in $X$ into evidence of $A[y / x]$,
-    \item Evidence of $\exists \, x \in X, A$ is a triple consisting of a
-        $y$, evidence of $y$ being in $X$, and evidence for $A[y / x]$.
-\end{itemize}

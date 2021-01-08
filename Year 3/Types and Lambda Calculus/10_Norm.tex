@@ -1,0 +1,49 @@
+\section{Normalisation}
+
+\subsection{Strong Normalisation}
+
+If $\Gamma \vdash M : A$ then $M$ is strongly normalising.
+
+\subsection{The Inhabitation Problem}
+
+The inhabitation problem is the problem of, given a type $A$, determining
+whether there is a closed term $M$ such that $\vdash M : A$.
+
+\subsection{Curry-Howard Theorem}
+
+For proofs in the implicational fragment of propositional
+logic, the following is true: \begin{itemize}
+    \item From a constructive proof of $A$ from the initial assumptions
+        $\Gamma$, we can extract a term $M$ such that $\Gamma \vdash M : A$,
+    \item From each term $M$ with $\Gamma \vdash M : A$, we can extract
+        a constructive proof that $A$ follows from the assumptions $\Gamma$.
+\end{itemize}
+
+\subsection{Proof from Truth}
+
+A proof of $A$ from the starting assumptions $\Gamma$ is a certificate
+guaranteeing that $A$ is true if $\Gamma$ is true.
+
+\subsection{Truth from Proof}
+
+A proof of $A$ from the starting assumptions $\Gamma$ is a method
+of constructing evidence of $A$ from evidence of $\Gamma$.
+
+\subsection{The BHK Interpretation of Logic}
+
+The BHK interpretation of logic consists of the following rules:
+\begin{itemize}
+    \item There can be no evidence for the truth from false,
+    \item No evidence is needed for the truth of true,
+    \item Evidence for $A$ and $B$ is a pair consisting of evidence
+        for $A$ and evidence for $B$,
+    \item Evidence for $A$ or $B$ is evidence of $A$ or evidence of $B$,
+    \item Evidence of $A \Rightarrow B$ is a procedure for transforming
+        evidence of $A$ to evidence of $B$,
+    \item Evidence of $\neg A$ is a procedure for transforming evidence
+        of $A$ to false,
+    \item Evidence of $\forall \, x \in X, A$ is a procedure for transforming
+        any $y$ and evidence of $y$ being in $X$ into evidence of $A[y / x]$,
+    \item Evidence of $\exists \, x \in X, A$ is a triple consisting of a
+        $y$, evidence of $y$ being in $X$, and evidence for $A[y / x]$.
+\end{itemize}

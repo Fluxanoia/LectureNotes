@@ -4,13 +4,20 @@ We let $\Phi$ be some property of terms. We have that
 if the following conditions are met then it follows that
 $\Phi$ holds for all terms: \begin{enumerate}
     \item For all variables $x$, $\Phi(x)$ holds,
-    \item For all terms $P$, $Q$, if $\Phi(P)$ and
+    \item For all terms $P$ and $Q$, if $\Phi(P)$ and
         $\Phi(Q)$ hold then $\Phi(PQ)$ holds,
     \item For all terms $P$ and variables $x$, if
         $\Phi(P)$ holds then $\Phi(\lambda x.P)$ holds.
 \end{enumerate}
 
-\subsection{The Induction Metaprinciple}
+\subsection{Free Variables of Substitutions of Unbound Variables 
+    (Lemma 6.1)}
+
+For all $\lambda$-terms $M$ and $N$, if $x$ is not in $FV(M)$
+then $FV(M[N / x]) = FV(M)$. This can be proven by induction
+on the structure of $\lambda$-terms.
+
+\subsection{The Induction Metaprinciple (Prin. 6.1)}
 
 For some set $S$ with an inductive definition defined by
 rules $R_1, \ldots, R_k$. The induction principle for proving

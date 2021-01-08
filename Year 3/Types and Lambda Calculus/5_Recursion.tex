@@ -1,21 +1,11 @@
 \section{Recursion}
 
-\subsection{The Factorial}
-
-We have that fact is the unique function on the natural
-numbers that satistfies the equation: \begin{align*}
-    F(n) = \begin{cases}
-        1 & \text{if } n = 0 \\
-        n \cdot F(n - 1) & \text{otherwise}.
-    \end{cases}
-\end{align*}
-
-\subsection{Fixed Points}
+\subsection{Fixed Points (5.2)}
 
 We say that a term $N$ is a fixed point of another term $M$ if
 $MN =_\beta N$.
 
-\subsection{The First Recursion Theorem}
+\subsection{The First Recursion Theorem (Thm. 5.1)}
 
 Every term posesses a fixed point.
 
@@ -43,7 +33,7 @@ We want to solve for some term $M$: \begin{align*}
         \lambda x_1 \cdots x_n.N)M
 \end{align*} so if we find a fixed point of $(\lambda y.
 \lambda x_1 \cdots x_n.N)$ then we have an $M$ which satisfies
-the equation. But, by the first recursion theorem, we can always
+the equation. But, by the First Recursion Theorem, we can always
 find such $M$.
 Thus, we can just set $M = \mbf{Y}(\lambda y. \lambda x_1 
 \cdots x_n.N)$.

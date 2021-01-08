@@ -1,6 +1,6 @@
 \section{Alpha}
 
-\subsection{Free Variables}
+\subsection{Free Variables (2.1)}
 
 We define the function $FV : \Lambda \to \mathcal{P}(\mathbb{V})$,
 which returns the set of variables contained within a term $M$ that
@@ -13,7 +13,7 @@ are not bound. We define it recursively on the structure of terms:
 and if a term has at least one free variable then we say it is open.
 The set of all closed terms is denoted by $\Lambda^0$.
 
-\subsection{Substitution}
+\subsection{Substitution (2.2)}
 
 We define 'capture-avoiding' substitution of a term $M$ for a variable $x$
 recursively on the structure of terms: \begin{center}
@@ -28,7 +28,7 @@ recursively on the structure of terms: \begin{center}
 $M$ because otherwise free variables in the substitution could be captured by
 the lambda.
 
-\subsection{Alpha Equivalence}
+\subsection{Alpha Equivalence (2.3)}
 
 Suppose we have a term $\lambda x.M$ and $y$ in $\mathbb{V} \, \setminus \, FV(M)$,
 then substituting $y$ for $x$ is a change of bound variable name. If two terms

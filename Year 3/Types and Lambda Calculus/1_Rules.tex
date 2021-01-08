@@ -1,33 +1,17 @@
-\section{The Axioms of Lambda Calculus}
+\section{Terms (1.1)}
 
 We suppose that we have a countably infinite set of variables $\mathbb{V}$
 (we usually refer to elements of this set as $x$, $y$, $z$, etc.),
 from this we define the alphabet of lambda calculus 
 $\mathbb{V} + \{\lambda, ., (, )\}$. 
-\\[\baselineskip]
 The set of terms of lambda calculus $\Lambda$ is defined inductively 
-by the axioms. A string is a term if and only if there is a proof tree using 
-the following axioms that concludes it is a term.
-
-\subsection{Axiom of Variables}
-
-For some $x$ in $\mathbb{V}$, we have the axiom: \begin{align*}
+for some $x$ in $\mathbb{V}$ by the variable axiom: \begin{align*}
     \dfrac{}{x \in \Lambda},
-\end{align*} which says that each variable is a term.
-
-\subsection{Axiom of Application}
-
-We have the axiom: \begin{align*}
+\end{align*} the application axiom: \begin{align*}
     \dfrac{M \in \Lambda \qquad N \in \Lambda}{(MN) \in \Lambda},
-\end{align*} which says that for some terms $M$ and $N$, $(MN)$ is also
-a term.
-
-\subsection{Axiom of Abstraction}
-
-For some $x$ in $\mathbb{V}$, we have the axiom: \begin{align*}
-    \dfrac{M \in \Lambda}{(\lambda x.M) \in \Lambda},
-\end{align*} which says that for some term $M$, $(\lambda x.M)$ is also
-a term.
+\end{align*} and the abstraction axiom: \begin{align*}
+    \dfrac{M \in \Lambda}{(\lambda x.M) \in \Lambda}.
+\end{align*}
 
 \subsection{Subterms}
 
