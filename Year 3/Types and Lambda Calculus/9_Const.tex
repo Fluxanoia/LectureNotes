@@ -1,4 +1,4 @@
-\section{Type Constraints}
+\section{Type Constraints (10.1)}
 
 A type constraint is a pair of monotypes $(A, B)$ written
 suggestively as $A \teq B$.
@@ -27,34 +27,33 @@ variable and a set of constraints: \begin{align*}
     &\qquad (a, \mc{C} \cup \{a \teq b \to c\})
 \end{align*}
 
-\subsection{Unifier}
+\subsection{Unifier (11.1, Lemma 11.1)}
 
 A unifier to a finite set of type constraints
 $\{A_1 \teq B_1, \ldots, A_n \teq B_n\}$ is a type substitution $\sigma$
 such that for all $i$ in $[n]$, $A_i\sigma = B_i\sigma$.
-\\[\baselineskip]
 If CGen$(\Gamma, M) = (a, \mc{C})$ then 
 $\sigma$ is a unifier for $\mc{C}$ if and only if 
 $\Gamma\sigma \vdash M : \sigma(a)$ is derivable.
 
-\subsubsection{Most General Unifier}
+\subsubsection{Most General Unifier (11.4)}
 
 For a set of type constraints $\mc{C}$, a unifier of $\mc{C}$, $\sigma$, 
 is the most general unifier if every unifier $\sigma^*$ of $\mc{C}$ is 
 of the form $\sigma\sigma'$ for some $\sigma'$.
 
-\subsection{Constraint Solved Form}
+\subsection{Constraint Solved Form (11.2)}
 
 A set of type constraints $\mc{C} = \{a_1 \teq A_1, \ldots, a_m \teq A_m\}$
 is in solved form if each of the $a_i$ are distinct and do not occur
 in any $A_j$. If $\mc{C}$ is in solved form, we define 
 $[[\mc{C}]] = [A_1/a_1, \ldots, A_m/a_m]$.
 
-\subsection{Robinson's Algorithm}
+\subsection{Robinson's Algorithm (11.3, Thm. 11.2, Cor. 11.1)}
 
 Robinson'a algorithm is the repeated and exhaustive application of the 
 following rules, returning the most general unifier from
-a set of constraints: \begin{align*}
+a set of solvable constraints: \begin{align*}
     \{A \teq A\} \uplus \mc{C} 
     &\mapsto \mc{C}, 
     \\
@@ -66,9 +65,10 @@ a set of constraints: \begin{align*}
     \\
     \{a \teq A\} \uplus \mc{C} 
     &\mapsto \{a \teq A\} \uplus \mc{C}[A / a], \tag{$a \notin FTV(A)$} 
-\end{align*}
+\end{align*} Thus, every solvable set of constraints has a most general solution,
+as this algorithm will return it.
 
-\subsection{Hindley-Milner Type Inference}
+\subsection{Hindley-Milner Type Inference (11.5)}
 
 For an input, closed term $M$, we perform the following steps: \begin{enumerate}
     \item Generate the constraints $\mc{C}$ and type variable $a$ using
@@ -79,7 +79,7 @@ For an input, closed term $M$, we perform the following steps: \begin{enumerate}
         return $\sigma(a)$.
 \end{enumerate}
 
-\subsection{Principle Type Scheme Theorem}
+\subsection{Principle Type Scheme Theorem (Thm. 11.3)}
 
 If a closed term $M$ is typable, then Hindley-Milner type inference
 returns a type $A$ that is principal meaning:
