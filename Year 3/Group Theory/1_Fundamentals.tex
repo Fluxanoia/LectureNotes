@@ -165,6 +165,8 @@ $G$ that generate $G$ are called generators. Cyclic groups are
 abelian, subgroups of cyclic groups are cyclic. For a generator $x$
 of a cyclic group $G$, $|G| = |x|$. 
 
+\newpage
+
 \subsection{Order (1.3)} \label{1.3}
 
 For a group $G = (X, \ast)$, $G$ has order $|X|$. The order of an element $x$ of
@@ -178,8 +180,9 @@ $X$ is defined as follows: \begin{align*}
 \end{itemize} if $x$ has finite order, then: \begin{itemize}
     \item[2.] $x^n = e$ if and only if $|x|$ divides $n$,
     \item[3.] $x^n = x^m$ if and only if $|x|$ divides $m - n$,
+    \item[4.] $|x^k| = \frac{n}{\gcd(n, k)}$,
 \end{itemize} and if $x$ has infinite order, then: \begin{itemize}
-    \item[4.] $x^n = x^m$ if and only if $n = m$.
+    \item[5.] $x^n = x^m$ if and only if $n = m$.
 \end{itemize} 
 
 \begin{proof}
@@ -201,7 +204,9 @@ $X$ is defined as follows: \begin{align*}
     and $|x|$ is minimal. Thus, $x^n = e$ if and only if $r = 0$ which occurs
     if and only if $|x|$ divides $n$.
     \\[\baselineskip]
-    ((3) and (4)), We take $x$ to have any order so: \begin{align*}
+    (4) Assumed from Problem Sheet 1.
+    \\[\baselineskip]
+    ((3) and (5)), We take $x$ to have any order so: \begin{align*}
         x^n = x^m &\Longleftrightarrow x^{m - n} = e.
     \end{align*} Thus, if $|x| < \infty$ then $|x|$ divides $m - n$ by (1) and
     if $|x| = \infty$ then $m - n = 0$ by the definition of order.
@@ -254,12 +259,14 @@ For a group $G$: \begin{enumerate}
     \item for all $x$ in $G$, $|x|$ divides $|G|$,
     \item if $|G|$ is prime, $G$ is cyclic,
     \item for a prime $p$, and $P$ and $Q$ subgroups of $G$ with order $p$,
-        $(P \cap Q) = \emptyset$ or $P = Q$.
+        $(P \cap Q) = \emptyset$ or $P = Q$,
+    \item for $K \leq H \leq G$, $[G : K] = [G : H][H : K]$
 \end{enumerate}
 
 \begin{proof}
     (1) $\ang{x} \leq G$ of order $|x|$, so $|G| = [G : \ang{x}]|x|$. \\[\baselineskip]
     (2) For all $x$ in $G$, $|\ang{x}|$ must be $p$ or $1$. Thus, every non-identity
     element in $G$ has order $p$ so generates $G$. \\[\baselineskip]
-    (3) For $g \neq e$ in $(P \cap Q)$, $|g| = p$ so $P = \ang{g} = Q$.
+    (3) For $g \neq e$ in $(P \cap Q)$, $|g| = p$ so $P = \ang{g} = Q$. \\[\baselineskip]
+    (4) Assumed from Problem Sheet 1.
 \end{proof}
