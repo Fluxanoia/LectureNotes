@@ -32,8 +32,8 @@ For an ordinal $\alpha$ and a limit ordinal $\lambda$, we define the function
 $V_\alpha$ by transfinite recursion: \begin{align*}
     V_0 &= \emptyset, \\
     V_{\alpha + 1} &= \mc{P}(V_\alpha), \\
-    V_{\lambda} &= \bigcup_{\alpha < \lambda} \mc{P}(V_\alpha), \\
-    V &= \bigcup_{\alpha \in \text{On}} \mc{P}(V_\alpha).
+    V_{\lambda} &= \bigcup_{\alpha < \lambda} V_\alpha, \\
+    V &= \bigcup_{\alpha \in \text{On}} V_\alpha.
 \end{align*}
 
 \subsection{Transitivity of $V_\alpha$ (6.2)} \label{6.2}
