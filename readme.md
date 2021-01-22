@@ -17,10 +17,8 @@ Any result of the above is not the author's fault.
 
 The following notes are works in progress:
 
-* Year 3 / Set Theory
-* Year 3 / Group Theory
-* Year 3 / Types and Lambda Calculus
-* Year 3 / Computer Graphics
+* Year 3 / Algebra 2
+* Year 3 / CGI
 
 ### Unsupported
 
@@ -28,6 +26,10 @@ The following notes are unsupported and are likely to be out of date:
 
 * Year 1 / *
 * Year 2 / *
+* Year 3 / Set Theory
+* Year 3 / Group Theory
+* Year 3 / Types and Lambda Calculus
+* Year 3 / Computer Graphics
 
 ### Incomplete
 
