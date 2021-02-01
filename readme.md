@@ -18,7 +18,6 @@ Any result of the above is not the author's fault.
 The following notes are works in progress:
 
 * Year 3 / Algebra 2
-* Year 3 / CGI
 
 ### Unsupported
 

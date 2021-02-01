@@ -1,0 +1,82 @@
+\section{The Fundamentals}
+
+\subsection{Rings (1.1)} \label{1.1}
+
+A ring is a set with two binary operations, addition and multiplication,
+such that they are both commutative, associative, and addition is distributive over
+multiplication, so for $a$, $b$, and $c$ in some ring: \begin{align*}
+    (a + b)c = ac + bc.
+\end{align*} We also have that rings must contain 'zero' and 'one' elements, the additive and
+multiplicative identities, and every element of the ring has an additive inverse.
+
+\subsection{Properties of Rings (1.3)} \label{1.3}
+
+For a ring $R$ with $a$, $b$, and $c$ in $R$: \begin{itemize}
+    \item If $a + b = b$ then $a = 0$, $0$ is unique,
+    \item If $a \cdot x = x$ for all $x$ in $R$, then $a = 1$, $1$ is unique,
+    \item If $a + b = 0 = a + c$ then $b = c$, $-a$ is unique, 
+    \item We have $0 \cdot a = 0$,
+    \item We have $-1 \cdot a = -a$,
+    \item We have $0 = 1$ if and only if $R = \{0\}$.
+\end{itemize}
+
+\subsection{Units (1.6-7)} \label{1.6} \label{1.7}
+
+For a ring $R$, with $r$ in $R$, if there exists some $s$ such that $rs = 1$ then $r$
+is a unit and $s = r^{-1}$ is the multiplicative inverse of $r$. We write $R^\times$ to
+be the set of all units in $R$, which is an abelian group under multiplication.
+
+\subsection{Fields (1.9)} \label{1.9}
+
+A non-zero ring $R$ is a field if $R \setminus \{0\} = R^\times$.
+
+\subsection{Subrings (1.14-15)} \label{1.14} \label{1.15}
+
+For a ring $R$, $S \subseteq R$ is a subring of $R$ if it is a ring and contains zero and one.
+This is equivalent to saying $S$ is closed under addition, multiplication, and additive inverses,
+and contains 1.
+
+\subsection{The Gaussian Integers (1.17, 1.19)} \label{1.17} \label{1.19}
+
+We define the Gaussian integers as: \begin{align*}
+    \mb{Z}[i] = \{a + bi : a, b \in \mb{Z}\},
+\end{align*} which is the smallest subring of $\mb{C}$ containing $i$.
+Generally, for $\alpha$ in $\mb{C}$, $\mb{Z}[\alpha]$ is the smallest subring
+containing $\alpha$ and for a ring $R$ with a subring $S$, for some $\beta$ in
+$R$, we have $S[\beta]$ is the smallest subring of $R$ containing $S$ and $\beta$.
+
+\subsection{Product Rings (1.20)} \label{1.20}
+
+For $R$ and $S$ rings, we have that $R \times S$ is a ring under component-wise
+addition and multiplication.
+
+\subsection{Distributivity of Taking Units (1.22)} \label{1.22}
+
+For rings $R$ and $S$, $(R \times S)^\times = R^\times \times S^\times$.
+
+\begin{proof}
+    We consider: \begin{align*}
+        (r, s) \in (R \times S)^\times
+        &\Longleftrightarrow (r, s)(p, q) = (1, 1) \text{ for some } (p, q) \in R \times S \\
+        &\Longleftrightarrow rp = 1 \text{ and } sq = 1 \text{ for some } 
+            p \in R \text{ and } q \in S \\
+        &\Longleftrightarrow r \in R^\times \text{ and } s \in S^\times,
+    \end{align*} as required.
+\end{proof}
+
+\subsection{Polynomials (1.23)} \label{1.23}
+
+For a ring $R$ and a symbol $x$, we have that the following is a ring: \begin{align*}
+    R[x] = \{a_0 + a_1x + \cdots + a_nx^n : n \in \mb{Z}_{\geq 0}, (a_i)_{i \in [n]} \in R^n\}.
+\end{align*} 
+
+\subsection{Ring Homomorphisms}
+
+For $R$ and $S$ rings, a map $\varphi$ from $R$ to $S$ is a ring
+homomorphism if it preserves addition and multiplication.
+This implies that $0$ and $1$ are fixed points of $\varphi$
+and taking additive inverses is preserved by $\varphi$.
+
+\subsection{Ring Isomorphisms}
+
+A ring isomorphism is a bijective ring homomorphism.
