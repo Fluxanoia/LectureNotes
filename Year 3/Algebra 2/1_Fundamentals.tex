@@ -101,3 +101,31 @@ if the homomorphism is injective.
 For a ring $R$ with $I \subseteq R$, $I$ is an ideal if it is an additive
 subgroup of $R$ and for all $r$ in $R$ and $i$ in $I$, $ri$ is in $I$.
 The kernel of homomorphisms are ideals.
+
+\subsection{Preservation of Satisfaction (2.20)} \label{2.20}
+
+For a ring $R$ with $r$ in $R$, if for some $n$ in $\mb{Z}_{\geq 0}$ we have 
+$(a_i)_{i \in [n]}$ in $\mb{Z}^n$ such that: \begin{align*}
+    a_nr^n + \cdots + a_1r + a_0 = 0,
+\end{align*} then for any homomorphism $\varphi$ on $R$ to some other ring $S$,
+we have that: \begin{align*}
+    \varphi(a_nr^n + \cdots + a_1r + a_0) = 0.
+\end{align*}
+
+\subsection{Cosets (2.22)} \label{2.22}
+
+For a ring $R$ with $r$ in $R$ and an ideal $I$ of $R$, the coset of $r$ modulo $I$ is
+the set: \begin{align*}
+    r + I = \{r + i : i \in I\}.
+\end{align*} For each $r$ and $s$ in $R$, we define a relation by: \begin{align*}
+    r \sim s \Longleftrightarrow r - s \in I,
+\end{align*} which is an equivalence relation, with equivalence classes the cosets of
+$R$ modulo $I$. Thus, cosets are either identical or disjoint.
+
+\subsection{Quotient Rings (2.24-25)} \label{2.24} \label{2.25}
+
+The set of cosets modulo $I$ of a ring $R$ forms a ring, the quotient ring $R / I$ of 
+$R$ by $I$. We define the operations for $a$ and $b$ in $R$: \begin{align*}
+    (a + I) + (b + I) &= (a + b) + I, \\
+    (a + I)(b + I) &= ab + I.
+\end{align*}
