@@ -1,0 +1,139 @@
+\section{Quotients}
+
+\subsection{Quotient Rings (2.24-25)} \label{2.24} \label{2.25}
+
+The set of cosets modulo $I$ of a ring $R$ forms a ring, the quotient ring $R / I$ of 
+$R$ by $I$. We define the operations for $a$ and $b$ in $R$: \begin{align*}
+    (a + I) + (b + I) &= (a + b) + I, \\
+    (a + I)(b + I) &= ab + I.
+\end{align*}
+
+\subsection{The Homomorphism Theorem (3.1)} \label{3.1}
+
+For a homomorphism $\varphi$ from $R$ to $S$, taking $I = \Ker(\varphi)$, we have
+that $R / I \cong \varphi(R)$, via the map $r + I \mapsto \varphi(r)$.
+
+\begin{proof}
+    We consider the proposed map and name it $\psi$.
+    We can see that $\psi$ is well defined as for some $r$ in $R$, for any $r'$ in $r + I$, 
+    $r' = r + i$ for some $i$ in $I$ so: \begin{align*}
+        \varphi(r') = \varphi(r) + \varphi(i) = \varphi(r).
+    \end{align*} Additionally, $\psi$ is trivially a homomorphism, and is surjective
+    by the definition of the image, so we consider injectivity. 
+    If for some $r$ in $R$, we have $\psi(r + I) = 0$ then: \begin{align*}
+        \varphi(r) = 0 \Longrightarrow r \in I \Longrightarrow r + I = I,
+    \end{align*} so $\psi$ is an isomorphism.
+\end{proof}
+
+\subsection{Chinese Remainder Theorem (3.4)} \label{3.4}
+
+For positive, coprime integers $m$ and $n$: \begin{align*}
+    \mb{Z} / (mn\mb{Z}) \cong (\mb{Z} / m\mb{Z}) \times (\mb{Z} / n\mb{Z}).
+\end{align*}
+
+\subsection{Properties of the Integers (3.6)} \label{3.6}
+
+We have the following properties of $\mb{Z}$: \begin{itemize}
+    \item every ideal of $\mb{Z}$ is of the form $n\mb{Z}$ for some
+        non-negative integer $n$,
+    \item every ring $R$ admits a unique homomorphism from $\mb{Z}$
+        to $R$,
+    \item every ring $R$ contains a unique subring which is either
+        isomorphic to $\mb{Z}$ or $\mb{Z} / n\mb{Z}$ for some non-negative
+        integer $n$.
+\end{itemize}
+
+\subsection{Composition of Ideals (3.8)} \label{3.8}
+
+For $I$ and $J$ ideals of a ring $R$: \begin{itemize}
+    \item $I \cap J$ is an ideal,
+    \item $I + J$ is an ideal,
+    \item $IJ = \{\sum_{k = 1}^n i_kj_k : n \in \mb{N},
+        (i_k)_{k \in [n]} \in I^n, (j_k)_{k \in [n]} \in J^n\}$ 
+        is an ideal.
+\end{itemize}
+
+\subsection{Ideals with Units (3.10)} \label{3.10}
+
+For an ideal $I$ of a ring $R$, if $I$ contains $r$ in $R^\times$,
+then $I = R$.
+
+\begin{proof}
+    By definition, we have some $s$ such that $rs = 1$, so $1$ is in
+    $I$ as it is an ideal. But then for any $x$ in $R$, we must have
+    $1 \cdot x$ in $I$, so $I = R$.
+\end{proof}
+
+\subsection{Classification of Fields (3.11)} \label{3.11}
+
+A ring $R \neq \{0\}$ is a field if and only if the only ideals
+of $R$ are $\{0\}$ and $R$.
+
+\begin{proof}
+    ($\Longrightarrow$) We have that $R^\times = R \setminus \{0\}$,
+    so every non-zero ideal contains a unit, so must be $R$ by 
+    $(\ref{3.10})$. \bs
+    ($\Longleftarrow$) For $r \neq 0$ in $R$, we take 
+    $I = \{rx : x \in R\}$ which is a non-zero ideal. By assumption,
+    $I = R$ so $1$ is in $I$, thus $rx = 1$ for some $x$ in $R$.
+    Thus, $r$ is a unit.
+\end{proof}
+
+\subsection{Homomorphisms from Fields (3.13)} \label{3.13}
+
+For a ring homomorphism $\varphi$ from $R$ to $S \neq \{0\}$, if $R$
+is a field, $\varphi$ is injective.
+
+\begin{proof}
+    The kernel of $\varphi$ is either $R$ or $\{0\}$ by (\ref{3.11}),
+    so we consider the cases.
+    If the kernel is $R$, then $S = \{0\}$, a contradiction,
+    so the kernel must be $\{0\}$.
+\end{proof}
+
+\subsection{Induced Ideals (3.15)} \label{3.15}
+
+For a surjective ring homomorphism $\varphi$ from $R$ to $R'$,
+with $I \subseteq R$ and $I' \subseteq R'$ ideals,
+we have that: \begin{enumerate}
+    \item $\varphi(I)$ is an ideal of $R'$,
+    \item $\varphi^{-1}(I')$ is an ideal of $R$ containing
+        $\Ker(\varphi)$,
+    \item there is a bijection from the ideals of $R$ containing
+        $\Ker(\varphi)$ to the ideals of $R'$.
+\end{enumerate}
+
+\begin{proof}[Proof of (3)]
+    We will show that $I = \varphi^{-1}(\varphi(I))$ (the case for
+    $I' = \varphi(\varphi^{-1}(I'))$ is analogous). For $x$ in $I$,
+    we have that $\varphi(x)$ is in $\varphi(I)$ so $x$ is in 
+    $\varphi^{-1}(\varphi(x))$. Thus, 
+    $I \subseteq \varphi^{-1}(\varphi(I))$. For $x$ in 
+    $\varphi^{-1}(\varphi(x))$, we have that $\varphi(x)$ is in
+    $\varphi(I)$, so $\varphi(x) = \varphi(y)$ for some $y$ in $I$.
+    As $\varphi(x - y) = 0$, $x - y$ is in $\Ker(\varphi)$ so we have
+    $x = (x - y) + y$ which is in $I$, as required.  
+\end{proof}
+
+\subsection{The Isomorphism Theorems (3.17)} \label{3.17}
+
+We take $R$ to be a ring.
+
+\subsubsection{The First Isomorphism Theorem}
+
+This is the same as the Homomorphism Theorem.
+
+\subsubsection{The Second Isomorphism Theorem}
+
+For $I \subseteq J \subseteq R$ ideals of $R$, we have that
+$J / I$ is an ideal of $R / I$ and: \begin{align*}
+    \frac{R / I}{J / I} \cong {R / J}.
+\end{align*}
+
+\subsubsection{The Third Isomorphism Theorem}
+
+For a subring $S$ of $R$, and $I$ an ideal of $R$, we have that
+$S + I$ is a subring with $I \subseteq S + I$ and $S \cap I \subseteq S$ 
+ideals and: \begin{align*}
+    \frac{S + I}{I} \cong \frac{S}{S \cap I}.
+\end{align*}
