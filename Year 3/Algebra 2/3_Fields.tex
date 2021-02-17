@@ -5,3 +5,59 @@
 For a ring $R$, $a \neq 0$ in $R$ is a zero divisor if for some 
 $b \neq 0$ in $R$, $ab = 0$. We say $R$ is an integral domain if it has
 no zero divisors.
+
+\subsection{Preservation of Isomorphism}
+
+Ring isomorphisms preserve units and zero divisors, 
+so the domain is a field / integral domain if and only 
+if the codomain is a field / integral domain.
+
+\subsection{Relating Integral Domains and Fields (4.3)} \label{4.3}
+
+We have that: \begin{enumerate}
+    \item all fields are integral domains,
+    \item $R$ is an integral domain if and only if for all
+        $a \neq 0$ in $R$, the map $x \mapsto ax$ is injective,
+    \item every finite integral domain is a field. 
+\end{enumerate}
+
+\begin{proof}
+    (1) Suppose we have $a$ and $b$ in some field, such that
+    $a \neq 0$ and $ab = 0$. Thus, $a^{-1}ab = 0$, so
+    $b = 0$. 
+    \bs
+    (2) ($\Longleftarrow$) We have that $ax = 0$ if and only if
+    $x = 0$ as $R$ has no zero divisors, so the map is 
+    injective by (\ref{2.18}). \newline
+    ($\Longrightarrow$) We appeal to the contrary and suppose
+    $ax = 0$ for some non-zero $a$ and $x$ in $R$. As such,
+    the mapping via $a$ has a non-zero kernel, a contradiction
+    by (\ref{2.18}).
+    \bs
+    (3) If a integral domain $R$ is finite, then the mapping 
+    in (2) is surjective, so for any $a$ in $R$, there is
+    some $x$ in $R$ such that $ax = 1$.
+\end{proof}
+
+\subsection{Subrings of Integral Domains (4.4)} \label{4.4}
+
+Every subring of an integral domain is an integral domain.
+
+\newpage
+
+\subsection{Field of Fractions (4.6)} \label{4.6}
+
+For an integral domain $R$, we can consider fractions: \begin{align*}
+    \left\{\frac{a}{b} : a \in R, b \in R, b \neq 0\right\},
+\end{align*} and define an equivalence relation: \begin{align*}
+    (a, b) \sim (c, d) \Longleftrightarrow ad = bc.
+\end{align*} with the set of equivalence classes $K$, forming
+a field under the ring operations: \begin{align*}
+    \frac{a}{b} + \frac{c}{d} &= \frac{ad + bc}{bd}, \\[2mm]
+    \frac{a}{b} \cdot \frac{c}{d} &= \frac{ac}{bd},
+\end{align*} along with the expected additive and multiplicative
+inverses and identites. This is the field of fractions of $R$,
+denoted $f.f.(R)$. We have that $R$ is isomorphic to a subring
+of $K$, and if there is an injective homomorphism between
+two integral domains, there is an induced injection between
+their respective fields of fractions.
