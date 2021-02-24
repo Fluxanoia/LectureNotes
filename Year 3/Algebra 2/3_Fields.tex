@@ -61,3 +61,48 @@ denoted $f.f.(R)$. We have that $R$ is isomorphic to a subring
 of $K$, and if there is an injective homomorphism between
 two integral domains, there is an induced injection between
 their respective fields of fractions.
+
+\subsection{Maximal Ideals (4.8)} \label{4.8}
+
+For a ring $R$, an ideal $I \subset R$ is maximal if there is no
+ideal $J$ such that $I \subset J \subset R$.
+
+\subsection{Prime Ideals (4.9)} \label{4.9}
+
+For a ring $R$, an ideal $I \subset R$ is prime if for all $ab$
+in $I$, either $a$ or $b$ is in $I$.
+
+\subsection{Maximal and Prime Ideals and their Quotients (4.12-13)}
+\label{4.12} \label{4.13}
+
+For a ring $R$ with $I \subset R$ an ideal: \begin{enumerate}
+    \item $I$ is maxmimal if and only if $R / I$ is a field,
+    \item $I$ is prime if and only if $R / I$ is an integral domain.
+\end{enumerate} Thus, every maximal ideal is prime since all
+fields are integral domains.
+
+\begin{proof}
+    (1) By (\ref{3.15}), there's a bijection from ideals of $R$
+    containing $I$ amd ideals of $R / I$. Thus, the ideals of $R / I$
+    are $0$ and $R / I$ if and only if the ideals of $R$ containing
+    $I$ are $I$ and $R$, which is true if and only if $I$ is maximal.
+    \bs
+    (2) We consider $a$ and $b$ in $R$ and consider $\bar{a} = a + I$
+    and $\bar{b} = b + I$: \begin{align*}
+        a \in I &\Longleftrightarrow \bar{a} = I, \\
+        b \in I &\Longleftrightarrow \bar{b} = I, \\
+        ab \in I &\Longleftrightarrow \bar{a}\bar{b} = I.
+    \end{align*} Thus, if $I$ is prime and $\bar{a}\bar{b} = I$ then
+    either $a$ or $b$ is in $I$. Also, if $R / I$ is an integral domain
+    and we have $ab$ in $I$, then either $\bar{a}$ or $\bar{b}$ is in
+    $I$ so either $a$ or $b$ is in $I$.
+\end{proof}
+
+\subsection{Existence of Maximal Ideals (4.16)} \label{4.16}
+
+Every ring $R \neq \{0\}$ has a maximal ideal.
+
+\subsection{Ideals within Maximal Ideals (4.17)} \label{4.17}
+
+For a ring $R$, every ideal $I \subset R$ is contained in some
+maximal ideal.
