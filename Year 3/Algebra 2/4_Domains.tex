@@ -35,7 +35,7 @@ generated.
     taking $m = \max(m_1, \ldots, m_n)$, $I_m = I$ as required.
 \end{proof}
 
-\subsection{Preservation of Noetherian Rings (5.5)} \label{5.5}
+\subsection{Preservation of Noetherian Rings (5.5-6)} \label{5.5} \label{5.6}
 
 All quotients of, products of, and polynomials with coefficients
 in a Noetherian ring are Noetherian rings.
@@ -47,3 +47,35 @@ in a Noetherian ring are Noetherian rings.
     in $R$ containing $I$ and ideals of $R / I$ via $\varphi$
     which preserves the Noetherian property.
 \end{proof}
+
+\subsection{Divisibility (5.10-12)} \label{5.10} \label{5.11} \label{5.12}
+
+For an integral domain $R$, we say that $b$ in $R$ divides $a$ in $R$
+if there exists $c$ in $R$ such that $a = bc$. Thus, $a$ is in $(b)$
+and similarly $(a) \subseteq (b)$. We note that such a $c$ is unique.
+\bs
+If $a$ and $b$ both divide each other ($(a) = (b)$, or $a = b\varepsilon$
+for some unit $\varepsilon$ in $R$), we say they are associates.
+For some $p \neq 0$ in $R$ where $p$ is not a unit, have that: \begin{align*}
+    p \text{ irreducible} &\Longleftrightarrow 
+    \bigl[p = ab \Longrightarrow a \in R^\times \text{ or } b \in R^\times
+    \bigr], \\
+    p \text{ prime} &\Longleftrightarrow 
+    \bigl[p \, | \, ab \Longrightarrow p \, | \, a \text{ or } p \, | \, b
+    \bigr]
+    \Longleftrightarrow (p) \text{ is a non-zero prime ideal}.
+\end{align*}
+
+\subsection{Irreducible Primes (5.14)} \label{5.14}
+
+For an integral domain $R$, primes of $R$ are irreducible.
+
+\begin{proof}
+    For a prime $p$ in $R$ with $b$ and $c$ in $R$ such that $p = bc$,
+    so $b$ and $c$ both divide $p$. By the definition of primes, we have 
+    that $p$ divides $bc$ so either $p$ divides $b$ or $p$ divides
+    $c$. As such, if $p$ divides $b$ then $p$ and $b$ are associate
+    so $c$ is a unit (and similarly for $p$ dividing $c$).
+\end{proof}
+
+\subsection{ (5.16)} \label{5.16} 
