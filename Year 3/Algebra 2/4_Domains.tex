@@ -173,3 +173,74 @@ For a PID $R$, with $p$ non-zero and not a unit in $R$: \begin{align*}
         &\Longrightarrow I = R \text{ or } (p) = I,
     \end{align*} as required.
 \end{proof}
+
+\subsection{UFDs from PIDs (5.34)} \label{5.34}
+
+Every PID is a UFD.
+
+\begin{proof}
+    For a PID $R$, we know that $R$ is Noetherian by (\ref{5.4}) 
+    so every $a$ can be expressed as a product of irreducible elements 
+    in $R$, say: \begin{align*}
+        a = up_1\cdots p_n,
+    \end{align*} for some unit $u$ and irreducible $p_1$, $\ldots$, $p_n$
+    in $R$. We suppose there is another factorisation of $a$: \begin{align*}
+        a = vq_1\cdots q_m,
+    \end{align*} for some unit $v$ and irreducible $q_1$, $\ldots$, $q_m$
+    in $R$. By (\ref{5.31}), we know that 
+    $p_1$, $\ldots$, $p_n$, $q_1$, $\ldots$, $q_m$ are all prime
+    (in particular, they are not units). Thus, if $n = 0$ then
+    $u = a = v$, the factorisation is unique. If $n > 0$ then
+    as $p_1$ divides $a$, it must divide $q_i$ for some $i$ in $[m]$.
+    Since $q_i$ is irreducible, $p_1 = q_i$ up to units. Through
+    cancellation ($R$ is an integral domain) and iteration, we see
+    that these factorisations are identical up to reordering.
+    So, $R$ is a UFD.
+\end{proof}
+
+\subsection{Euclid's Algorithm (5.36)} \label{5.36}
+
+For a PID $R$ with $a$ and $b$ non-zero in $R$ and $c$ generating the ideal
+$(a, b)$, we have that $c = \hcf(a, b)$ and $c = ax+by$ for some $x$ and
+$y$ in $R$.
+
+\begin{proof}
+    As $c$ generates $(a, b)$, $c$ is in $(a, b)$ so $c = ax + by$ for
+    some $x$ and $y$. As $(a) \subseteq (a, b)$, $(b) \subseteq (a, b)$
+    and, $(c) = (a, b)$, $c$ divides both $a$ and $b$ so divides
+    $\hcf(a, b)$ by definition. However, $\hcf(a, b)$ divides both $a$ and
+    $b$ so must divide $ax + by = c$. As such, $c = u\cdot\hcf(a, b)$
+    for some unit $u$ but since the highest common factor is defined
+    up to units, we can say $c = \hcf(a, b)$.
+\end{proof}
+
+\subsection{Degree (5.39)} \label{5.39}
+
+For a field $K$ and a polynomial $f$ in $K[x]$, we say that the largest
+power of $x$ with a non-zero coefficient is the degree of $f$,
+written as $\deg(f)$. We have that $\deg(0) = -\infty$ and
+for some $g$ in $K[x]$: \begin{align*}
+    \deg(fg) &= \deg(f) + \deg(g), \\
+    \deg(f + g) &= \max(\deg(f), \deg(g)).
+\end{align*}
+
+\subsection{Division with Remainder (5.41)} \label{5.41}
+
+For a field $K$ with $f$ and $g \neq 0$ in $K[x]$, there exists unique
+$q$ and $r$ in $K[x]$ with $\deg(r) < \deg(g)$ and $f = qg + r$.
+
+\begin{proof}
+    For uniqueness, if $f = q_1g + r_1 = q_2g + r_2$ satisfying the
+    conditions in the lemma then $(q_1 - q_2)g = r_1 - r_2$ but
+    $(q_1 - q_2)g$ must have degree at least $\deg(g)$ unless $q_1 = q_2$
+    and $r_1 - r_2$ has degree strictly less than $g$ by definition
+    so $q_1 = q_2$ and $r_1 = r_2$.
+    \bs
+    For existence, if $f = a_nx^n + \cdots + a_0$ and 
+    $g = b_mx^m + \cdots + b_0$ we suppose $m \leq n$
+    as otherwise, we can take $q = 0$ and $r = f$.
+    Then, we repeatedly map $f$ as follows: \begin{align*}
+        f \mapsto f - \frac{a_n}{b_m}x^{n - m}g,
+    \end{align*} until $\deg(f) < \deg(g)$, $r$ is this result from
+    this iteration, and then $f - r$ is clearly a multiple of $g$.
+\end{proof}
