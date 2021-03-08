@@ -1,0 +1,87 @@
+\section{Gauss' Lemma and Field Extensions}
+
+\subsection{Content of Polynomials (6.3)} \label{6.3}
+
+For a UFD $R$ and $f$ a non-zero polynomial in $R[x]$, the highest common factor of
+the coefficients of $f$ is the content of $f$ denoted by $c_f$.
+
+\subsection{Primitive Polynomials (6.2)} \label{6.2}
+
+For a UFD $R$, a polynomial $f$ in $R[x]$ is primitive if $c_f = 1$.
+Any polynomial $f$ in $R[x]$ can be written as $c_f \cdot f^\ast$
+where $f^\ast$ is a primitive polynomial in $R[x]$.
+
+\subsection{Gauss' Lemma (6.6)} \label{6.6}
+
+The product of primitive polynomials is primitive.
+
+\begin{proof}
+    For a UFD $R$, we take $f$ and $g$ primitive in $R$ such that: \begin{align*}
+        f &= a_nx^n + \cdots + a_1x + a_0, \\
+        g &= b_mx^m + \cdots + b_1x + b_0, \\
+        fg &= c_{n + m}x^{n + m} + \cdots + c_1x + c_0,
+    \end{align*} for $n$ and $m$ in $\mb{Z}_{\geq 0}$, $a_i$, $b_j$, and $c_k$ in
+    $R$ for $i$ in $[n]$, $j$ in $[m]$, and $k$ in $[n + m]$. For any irreducible $q$
+    in $R$, $q$ does not divide all of $a_0, \ldots, a_n$ as $f$ is primitive, we take
+    $i$ to be maximal such that $q$ does not divide $a_i$. Similarly, we take $j$
+    maximal such that $q$ does not divided $b_j$. We consider $c_{i + j}$: \begin{align*}
+        c_{i + j} = 
+        \underbrace{a_{i + j}b_0 + \cdots + a_{i + 1}b_{j - 1}}_{\text{all divisible by } q}
+        + a_ib_j
+        + \underbrace{a_{i - 1}b_{j + 1} + \cdots + a_0b_{i + j}}_{\text{all divisible by } q}.
+    \end{align*} Since $R$ is a UFD, as $q$ doesn't divide $a_i$ and $b_j$, $q$ doesn't divide
+    $a_ib_j$ so $c_{i + j}$ is not divisible by $q$.
+\end{proof}
+
+\subsection{Content under Multiplication (6.7)} \label{6.7}
+
+For a field of fractions $F$ of a UFD $R$, with $f$ and $g$ in $F[x]$, we have that
+$c_{fg} = c_fc_g$.
+
+\begin{proof}
+    Application of (\ref{6.2}) and (\ref{6.6}).
+\end{proof}
+
+\subsection{UFDs and their Polynomials in One Variable (6.8)} \label{6.8}
+
+For a UFD $R$: \begin{enumerate}
+    \item for a unit $u$ in $R$, $u$ is a unit in $R[x]$,
+    \item for a prime $p$ in $R$, $p$ is a prime in $R[x]$,
+    \item taking $F$ to be the field of fractions of $R$, for $f$ in $R[x]$
+        with positive degree, $f$ is prime in $R[x]$ if and only if $f$ is
+        primitive in $R[x]$ and irreducible in $F[x]$.
+\end{enumerate}
+
+\begin{proof}
+    (1) If $uv = 1$ for some $v$ in $R$, the same holds in $R[x]$ as $R \subseteq R[x]$.
+    \bs
+    (2) Similar to the proof of (\ref{6.6}), if $p$ doesn't divide $f$ or $g$ in $R[x]$,
+    we show that it doesn't divide $fg$.
+    \bs
+    (3) ($\Longleftarrow$) We suppose that for some $g$ and $h$ in $R[x]$, $f$ divides $gh$.
+    As such, $f$ divides $gh$ in $F[x]$ and since $f$ is irreducible and prime in $F[x]$,
+    we have that $f$ divides $g$ or $h$. We suppose (without loss of generality) that $f$
+    divides $g$ so $g = k \cdot f$ for some $k$ in $F[x]$. We write $f$, $g$, and $k$
+    as: \begin{align*}
+        f = c_f \cdot f^\ast, \qquad
+        g = c_g \cdot g^\ast, \qquad
+        k = c_k \cdot k^\ast,
+    \end{align*} where $c_f$ is in $R^\times$ as $f$ is primitive, $c_g$ is in
+    $R$ as $g$ is in $R[x]$, $c_k$ is in $F^\times$, and $f^\ast$, $g^\ast$, and 
+    $k^\ast$ are primitive polynomials in $R[x]$. Since $g = k \cdot f$,
+    we can deduce that: \begin{align*}
+        \frac{c_g}{c_fc_k} \cdot g^\ast = f^\ast \cdot k^\ast.
+    \end{align*} We know that $u = \frac{c_g}{c_fc_k}$ is in $R^\times$ as
+    $f^\ast \cdot k^\ast$ must be primitive and contents are unique up to units, so we
+    write: \begin{align*}
+        g = \frac{c_g}{uc_f} \cdot k^\ast \cdot f.
+    \end{align*} Since $c_g$ is in $R$ and $uc_f$ is in $R^\times$, $f$ divides $g$ in
+    $R[x]$ as required.
+    \bs
+    ($\Longrightarrow$) By contrapositive, we first consider if $f$ is not primitive,
+    in which case $f = c_f \cdot f^\ast$ where $f^\ast$ is primitive in $R[x]$ is a non-trivial
+    factorisation of $f$ in $R[x]$ so $f$ is not irreducible, and thus, not prime.
+    If $f$ is reducible in $F[x]$, $f = gh$ for some non-constant $g$ and $h$ in $F[x]$.
+    Then, as in the previous direction, $f = c_f g^\ast h^\ast$ is reducible in $R[x]$
+    so $f$ is not prime.
+\end{proof}

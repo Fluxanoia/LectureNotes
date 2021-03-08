@@ -244,3 +244,36 @@ $q$ and $r$ in $K[x]$ with $\deg(r) < \deg(g)$ and $f = qg + r$.
     \end{align*} until $\deg(f) < \deg(g)$, $r$ is this result from
     this iteration, and then $f - r$ is clearly a multiple of $g$.
 \end{proof}
+
+\subsection{Polynomials over Fields (5.43)} \label{5.43}
+
+For a field $K$, $K[x]$ is a PID.
+
+\begin{proof}
+    For an ideal $I$ of $K[x]$, if $I = \{0\}$ then it is principal. Otherwise, we choose
+    $g$ in $I \setminus \{0\}$ of minimal degree. For any $f$ in $I$, we write
+    $f = q \cdot g + r$ as in (\ref{5.41}) and see that $r = f - q \cdot g$ which
+    is in $I$. Since $\deg(r) < \deg(g)$, it must be that $r = 0$ by the minimality
+    of $g$ so $I = (g)$.
+\end{proof}
+
+\subsection{Euclidean Domains (5.44, 5.47)} \label{5.44} \label{5.47}
+
+For an integral domain $R$, $R$ is Euclidean if there is a map $\delta$ from
+$R \setminus \{0\}$ to $\mb{Z}_{\geq 0}$ such that for all $a$ and $b$
+in $R \setminus \{0\}$: \begin{itemize}
+    \item there exists $q$ and $r$ such that $a = q \cdot b + r$ and either
+        $r = 0$ or $\delta(r) < \delta(b)$,
+    \item $\delta(a) < \delta(ab)$.
+\end{itemize} Every Euclidean domain is a PID.
+
+\begin{proof}
+    Similar to that of (\ref{5.43}).
+\end{proof}
+
+\subsection{Ring Hierarchy}
+
+For the ring definitions we have defined, we can say that: \begin{center}
+    fields $\subseteq$ Euclidean domains $\subseteq$ PIDs $\subseteq$ UFDs $\subseteq$
+    integral domains $\subseteq$ rings.
+\end{center}
