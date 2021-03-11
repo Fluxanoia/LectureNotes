@@ -1,4 +1,4 @@
-\section{Gauss' Lemma and Field Extensions}
+\section{Gauss' Lemma, Field Extensions, and Polynomial Reducibility}
 
 \subsection{Content of Polynomials (6.3)} \label{6.3}
 
@@ -42,7 +42,7 @@ $c_{fg} = c_fc_g$.
     Application of (\ref{6.2}) and (\ref{6.6}).
 \end{proof}
 
-\subsection{UFDs and their Polynomials in One Variable (6.8)} \label{6.8}
+\subsection{Properties of UFDs and their Polynomials (6.8)} \label{6.8}
 
 For a UFD $R$: \begin{enumerate}
     \item for a unit $u$ in $R$, $u$ is a unit in $R[x]$,
@@ -85,3 +85,74 @@ For a UFD $R$: \begin{enumerate}
     Then, as in the previous direction, $f = c_f g^\ast h^\ast$ is reducible in $R[x]$
     so $f$ is not prime.
 \end{proof}
+
+\subsection{UFDs and their Polynomials (6.10)} \label{6.10}
+
+For a UFD $R$, $R[x]$ is a UFD. Furthermore, the primes of $R[x]$
+are the primes of $R$ and primitive irreducible polynomials of
+positive degree, and $R[x]^\times = R^\times$. We can recursively apply this,
+so $R[x_1, \ldots, x_n]$ is a UFD for any $n$ in $\mb{Z}_{\geq 0}$.
+
+\begin{proof}
+    (\textbf{Units}) By (\ref{6.8}(1)), $R^\times \subseteq R[x]^\times$, so we consider
+    $f$ in $R[x]^\times$. As such, there's some $g$ in $R[x]$ with $fg = 1$.
+    Thus: \begin{align*}
+        \deg(f) + \deg(g) = \deg(fg) = 1,
+    \end{align*} so $f$ and $g$ must be constant polynomials, meaning
+    they are in $R$. Hence, $f$ is in $R^\times$ so 
+    $R[x]^\times = R^\times$.
+    \bs
+    (\textbf{Primes}) By (\ref{6.8}(2)), we know the primes of $R$ are in $R[x]$. Also,
+    by (\ref{6.8}(3)), we know that primitive irreducible polynomials of positive degree
+    are prime.
+    \bs
+    (\textbf{Factorisation})
+    For $f$ non-zero in $R[x]$, with $F$ the field of fractions of $R$, since $F[x]$ is a UFD
+    (as it is a field) we can write: \begin{align*}
+        f = c \cdot f_1 \cdots f_n,
+    \end{align*} for $c$ in $F^\times$, $n$ in $\mb{Z}_{\geq 0}$, and 
+    $f_1, \ldots, f_n$ irreducible in $F[x]$. We then write: \begin{align*}
+        c^\ast &= c \cdot c_{f_1} \cdots c_{f_n} \in F^\times, \\
+        f &= c^\ast \cdot f_1^\ast \cdots f_n^\ast.
+    \end{align*} But, $c^\ast = c_f$ as $f_1^\ast \cdots f_n^\ast$ is primitive by
+    Gauss' Lemma, so is in $R$. As such, we can write $c^\ast = u \cdot q_1 \cdots q_m$
+    for $u$ in $R^\times$, $m$ in $\mb{Z}_{\geq 0}$, and
+    $q_1, \ldots, q_n$ prime in $F[x]$. Thus, we can write: \begin{align*}
+        f = u \cdot \underbrace{q_1 \cdots q_m \cdot f_1^\ast \cdots f_n^\ast}_{
+            \text{prime in } R[x]}.
+    \end{align*}
+    As in the proof of (\ref{5.34}), since we showed that every $f$ in $R[x]$ can be factored
+    into primes, not just irreducibles, the factorisation is automatically unique.
+\end{proof}
+
+\newpage
+
+\subsection{Eisenstein's Criterion (7.1)} \label{7.1}
+
+For a UFD $R$, $f$ primitive in $R[x]$ with positive degree so $f = a_nx_n + \cdots + a_0$
+for some $n$ in $\mb{Z}_{>0}$ and $a_n, \ldots, a_0$ in $R$. If there is a prime $p$ in
+$R$ such that: \begin{itemize}
+    \item $p$ doesn't divide $a_n$,
+    \item $p$ divides $a_0, \ldots, a_{n - 1}$,
+    \item $p^2$ doesn't divide $a_0$,
+\end{itemize} then $f$ is irreducible in $R[x]$ and also $F[x]$ where $F$ is the field of
+fractions of $R$. Polynomials satisfying this criterion are called Eisenstein polynomials
+(at $p$).
+
+\begin{proof}
+    We suppose $f = gh$ where $g$ and $h$ are in $R[x]$ and have positive degree. We take:
+    \begin{align*}
+        g &= b_mx^m + \cdots + b_0, \\
+        h &= c_{n - m}x^{n - m} + \cdots + c_0,
+    \end{align*} for some $m$ in $\mb{Z}_{> 0}$ and $b_0, \ldots, b_m, c_0, \ldots, c_{n - m}$
+    in $R$. We know that $p$ doesn't divide $a_n = b_mc_{n - m}$, so $p$ doesn't divide
+    $b_m$ or $c_{n - m}$. We take $i$ to be minimal such that $p$ doesn't divide $b_i$,
+    and $j$ to be minimal such that $p$ doesn't divide $c_j$. This implies that $p$ doesn't
+    divide $a_{i + j}$ so $i + j = n$, thus $i = m$ and $j = n - m$. As such,
+    $p$ divides $b_0$ and $c_0$ so $p^2$ divides $a_0$, a contradiction.
+\end{proof}
+
+\subsection{Irreducibility and Linear Substitution (7.5)} \label{7.5}
+
+For a field $K$ with $f$ in $K[x]$, $a$ and $b$ in $K$ with $a \neq 0$ then
+$f(x)$ is irreducible if and only if $f(ax + b)$ is irreducible. 

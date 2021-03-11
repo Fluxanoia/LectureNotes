@@ -33,7 +33,7 @@ The following notes are unsupported and are likely to be out of date:
 ### Incomplete
 
 The following notes are incomplete and will remain so for the foreseeable future (due to
-the impact of CoViD-19 on my second year examinations).
+the impact of coronavirus on my second year examinations).
 They are even more likely to contain errors and inconsistencies than the other notes.
 
 * Year 2 / Symbols, Patterns and, Signals
