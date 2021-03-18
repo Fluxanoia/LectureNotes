@@ -1,0 +1,75 @@
+\section{Field Extensions}
+
+\subsection{Polynomials in Extended Fields (7.24)} \label{7.24}
+
+For rings $R$ and $S$ with $R \subseteq S$ and $f$ in $R[x]$, we refer
+to the image of $f$ in $S[x]$ as '$f$ over $S$'.
+
+\subsection{Finite Fields and Integers Modulo Primes (8.2)} \label{8.2}
+
+For a prime $p$ in $\mb{Z}$, we have that the finite field of
+size $p$, denoted by $\mb{F}_p$, is $\mb{Z}/p\mb{Z}$.
+
+\subsection{The Field of Rational Functions (8.3)} \label{8.3}
+
+We define the field of rational functions over $R$ as the field of
+fractions of $R[x]$.
+
+\subsection{Subfields and Extensions (8.5, 8.19)} \label{8.5} \label{8.19}
+
+For fields $K$ and $L$ with $K \subseteq L$, we say that $K$ is a
+subfield of $L$ and $L$ is an extension of $K$, which may be
+denoted by $L / K$.
+
+\subsection{Conditions for Subfields (8.9)} \label{8.9}
+
+For a field $K$ with $U \subseteq K$, $U$ is a subfield if and only if: 
+\begin{itemize}
+    \item $\{0, 1\} \subseteq U$,
+    \item $U$ is closed under addition and additive inverses,
+    \item $U$ is closed under multiplication and multiplicative inverses. 
+\end{itemize}
+
+\begin{proof}
+    Follows from (\ref{1.14}).
+\end{proof}
+
+\subsection{Prime Subfields (8.11)} \label{8.11}
+
+For a field $K$, $K$ either contains $\mb{F}_p$ for some unique prime $p$ in $\mb{Z}$
+or $\mb{Q}$. This is the prime subfield of $K$.
+
+\begin{proof}
+    By (\ref{3.6}), there is a unique homomorphism from $\mb{Z}$ to $K$ so: \begin{align*}
+        \mb{Z}/\Ker(\varphi) \cong \Ima(\varphi) \subseteq K.
+    \end{align*} As $K$ is a field, $\Ima(\varphi)$ must be an integral domain so
+    $\Ker(\varphi)$ is a prime ideal. As such, $\Ker(\varphi)$ is either $\{0\}$ or
+    $\mb{F}_p$ for some prime $p$ in $\mb{Z}$. In the former case, $\mb{Z}$ is a
+    subring of $K$ so its field of fractions $\mb{Q}$ is a subfield of $K$.
+    In the latter case, $\mb{F}_p$ is a subfield of $K$. By the uniqueness of $\varphi$,
+    such a subfield is unique.
+\end{proof}
+
+\subsection{The Field Characteristic (8.12)} \label{8.12}
+
+We define the characteristic function on fields: \begin{align*}
+    \Char(K) = \begin{cases}
+        0 & \text{if } \mb{Q} \subseteq K \\
+        p & \text{if } \mb{F}_p \subseteq K.
+    \end{cases}
+\end{align*}
+
+\subsection{Vector Spaces (8.15)} \label{8.15}
+
+For fields $K$ and $L$ with $K \subseteq L$, $L$ is a vector space
+over $K$.
+
+\begin{proof}
+    Follows from the field axioms.
+\end{proof}
+
+\subsection{Degree of Field Extensions (8.20)} \label{8.20}
+
+For a field extension $L / K$, the degree of the extension is: \begin{align*}
+    [L : K] = \Dim(L \text{ as a $K$-vector space}).
+\end{align*}

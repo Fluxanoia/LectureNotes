@@ -1,4 +1,4 @@
-\section{Gauss' Lemma, Field Extensions, and Polynomial Reducibility}
+\section{Gauss' Lemma and Polynomial Reducibility}
 
 \subsection{Content of Polynomials (6.3)} \label{6.3}
 
@@ -156,3 +156,100 @@ fractions of $R$. Polynomials satisfying this criterion are called Eisenstein po
 
 For a field $K$ with $f$ in $K[x]$, $a$ and $b$ in $K$ with $a \neq 0$ then
 $f(x)$ is irreducible if and only if $f(ax + b)$ is irreducible. 
+
+\subsection{Roots and Divisibility (7.8)} \label{7.8}
+
+For a field $K$ with $f$ in $K[x]$ and $\alpha$ in $K$: \begin{align*}
+    f(\alpha) = 0 \Longleftrightarrow x - \alpha \text{ divides } f(x).
+\end{align*}
+
+\begin{proof}
+    ($\Longrightarrow$) We divide $f(x)$ with remainder by $(x - \alpha)$
+    so $f(x) = g(x)(x - \alpha) + r$ for some $g$ in $K[x]$ and $r$ in $K$ (since
+    $\deg(r) < \deg(x - \alpha) = 1$). So, we have
+    $f(\alpha) = g(\alpha)(x - \alpha) + r = r = 0$, thus $f(x) = g(x)(x - \alpha)$
+    as required.
+    \bs
+    ($\Longleftarrow$) We have $f(x) = g(x)(x - a)$ for some $g$ in $K[x]$,
+    so $f(\alpha) = 0$.
+\end{proof}
+
+\subsection{The Second Criterion (7.9)} \label{7.9}
+
+For a field $K$ with $f$ in $K[x]$ with degree equal to $2$ or $3$: \begin{align*}
+    f \text{ is irreducible} \Longleftrightarrow f \text{ has no roots in } K.
+\end{align*}
+
+\begin{proof}
+    We consider the following equivalences: \begin{align*}
+        f \text{ reducible}
+        &\Longleftrightarrow f \text{ has a factor of degree } 1 \\
+        &\Longleftrightarrow ax + b \text{ divides $f(x)$ for some $a \neq 0$ and $b$ in $K$} \\
+        &\Longleftrightarrow x + \frac{b}{a} \text{ divides } f(x) \\
+        &\Longleftrightarrow f\left(-\frac{b}{a}\right) = 0, \tag{\ref{7.8}}
+    \end{align*} as required.
+\end{proof}
+
+\subsection{Finding Roots (7.10)} \label{7.10}
+
+For a UFD $R$ with $K$ its field of fractions, we consider $f$ in $R[x]$ with
+degree $n \geq 0$ and coefficients $a_n, \ldots, a_0$ in $R$. For some $\alpha$
+in $K$, written in its simplest form as $\alpha = \frac{r}{s}$ ($\hcf(r, s) = 1$),
+if $f(\alpha) = 0$ then $r$ divides $a_0$ and $s$ divides $a_n$.
+
+\begin{proof}
+    By (\ref{7.8}), we know that $x - \alpha$ divides $f$ in $K[x]$ so $sx - r$ divides
+    $f^\ast$ in $K[x]$ since $f^\ast$ is the same as $f$ up to units in $K$. We note that
+    $sx - r$ is primitive since $\hcf(r, s) = 1$ and irreducible as it has degree $1$.
+    As such, $sx - r$ is prime in $R[x]$. From an \textbf{exercise} (see (\ref{6.10})), 
+    we deduce that $sx - r$ divides $f^\ast$ in $R[x]$ also.
+    \bs
+    So, $f = c_f(sx-r)g$ for some polynomial $g$ in $R[x]$ of degree $n - 1$ with coefficients
+    $b_{n - 1}, \ldots, b_0$ in $R$. This implies that $a_0 = -c_frb_0$ is divisible by $r$
+    and $a_n = c_fsb_{n - 1}$ is divisible by $s$.
+\end{proof}
+
+\subsection{Monic Polynomials (7.14)} \label{7.14}
+
+A polynomial is monic if its leading coefficient is $1$.
+
+\subsection{Reflected Irreducibility from Monic Images on Induced Maps (7.15)} \label{7.15}
+
+For a ring homomorphism on integral domains $\varphi$ from $R$ to $S$ with $\varphi$ also
+acting as the induced map on $R[x]$ to $S[x]$, we have that if $f$ in $R[x]$ is monic
+and $\varphi(f)$ is irreducible then $f$ is irreducible.
+
+\begin{proof}
+    We suppose that $f$ is reducible so $f = gh$ for some $g$ and $h$ in $R[x]$ with
+    degrees $m$ and $k$ and coefficients $b_m, \ldots, b_0$ and $c_k, \ldots, c_0$
+    respectively. As $f$ is monic, we have $b_mc_k = 1$ so we can simply rewrite
+    $g \mapsto \frac{1}{b_m}g$ and $h \mapsto \frac{1}{c_k}$, so we will just assume
+    $g$ and $h$ are monic, $b_m = c_k = 1$, without loss of generality. As such:
+    \begin{align*}
+        f(x) = (x^m + b_{m - 1}x^{m - 1} + \cdots + b_0)
+            (x^k + c_{k - 1}x^{k - 1} + \cdots + c_0).
+    \end{align*} We have $m$ and $k$ strictly greater than zero as otherwise our
+    factorisation $f = gh$ was not proper, so: \begin{align*}
+        \varphi(f) = (x^m + \varphi(b_{m - 1})x^{m - 1} + \cdots + \varphi(b_0))
+            (x^k + \varphi(c_{k - 1})x^{k - 1} + \cdots + \varphi(c_0)),
+    \end{align*} is a proper factorisation of $\varphi(f)$, a contradiction.
+\end{proof}
+
+\subsection{The Third Criterion (7.18)} \label{7.18}
+
+For an integral domain $R$ with $f$ in $R[x]$ monic, if $f \bmod (p)$
+is irreducible for some prime ideal $(p)$ in $R$, $f$ is irreducible.
+
+\begin{proof}
+    By (\ref{7.15}) on the quotient homomorphism.
+\end{proof}
+
+\subsection{Irreducibility in the Rationals (7.21)} \label{7.21}
+
+For $f$ in $\mb{Z}[x]$ with leading coefficient $\alpha$, 
+$p$ prime in $\mb{Z}$, if $\alpha \not\equiv 0 \bmod p$ and
+$f \bmod (p)$ is irreducible then $f$ is irreducible in $\mb{Q}[x]$. 
+
+\begin{proof}
+    Similar to (\ref{7.18}).
+\end{proof}
