@@ -206,3 +206,27 @@ For a field extension $F / K$, for any $\beta$ in $F$ we either have: \begin{ite
 
 For $\alpha$ in $\mb{C}$, $\alpha$ is algebraic if it is algebraic over $\mb{Q}$
 and transcendental otherwise.
+
+\subsection{Algebraicity of Combinations of Algebraic Numbers (8.43)} \label{8.43}
+
+For a field extension $F / K$ with $\alpha$ and $\beta$ in $F$ such that they are algebraic
+over $K$, we have that: $\alpha + \beta$, $\alpha - \beta$, $\alpha\beta$, and
+(for non-zero $\beta$) $\alpha / \beta$ are algebraic over $K$.
+
+\begin{proof}
+    We have that all of these combinations exist in $K(\alpha, \beta)$ and that: \begin{align*}
+        n = [K(\alpha, \beta) : K] = [K(\alpha, \beta) : K(\alpha)][K(\alpha) : K] < \infty. 
+        \tag{\ref{8.24}}
+    \end{align*} Thus, since $[K(\alpha + \beta) : K]$, $[K(\alpha - \beta) : K]$,
+    $[K(\alpha\beta) : K]$, an d (if applicable) $[K(\alpha / \beta) : K]$ are all less than
+    or equal to $n$, they must be finite which implies algebraicity via (\ref{8.35}).
+\end{proof}
+
+\subsection{Algebraic Closure (8.44-45)} \label{8.44} \label{8.45}
+
+We write the set of algebraic numbers in $\mb{C}$ as $\overline{\mb{Q}}$, the algebraic closure
+of $\mb{Q}$. This is a field.
+
+\subsection{Algebraic Field Extensions (8.47)} \label{8.47}
+
+A field extension $F / K$ is algebraic if every element of $F$ is algebraic over $K$.

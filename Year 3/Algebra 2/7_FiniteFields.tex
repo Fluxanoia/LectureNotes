@@ -1,0 +1,99 @@
+\section{Finite Fields}
+
+\subsection{Main Theorem of Finite Fields, Part (a) (9.1, 9.6)} \label{9.1a} \label{9.6}
+
+Every finite field $K$ has $p^n$ elements for some prime $p$ and $n$ in $\mb{Z}_{> 0}$.
+
+\begin{proof}
+    By (\ref{8.11}) and as $K$ is finite, we know that $K$ contains $\mb{F}_p$ for some 
+    prime $p$. Thus, $K$ is a $\mb{F}_p$-vector space with finite dimension $n$ (as $K$ is
+    finite) giving us $|K| = p^n$ and $n = [K : \mb{F}_p]$.
+\end{proof}
+
+\subsection{Upper Bound on Distinct Roots of Polynomials (9.7)} \label{9.7}
+
+For a field $K$ and a polynomial $f$ in $K[x]$ with degree $n > 0$, we have that
+$f$ has at most $n$ distinct roots in $K$.
+
+\begin{proof}
+    If $f$ has no roots, we are done. Otherwise, we take $\alpha_1, \ldots, \alpha_m$ 
+    to be the distinct roots of $f$ (for some $m$ in $\mb{Z}_{>0}$) so
+    $x - \alpha_1, \ldots, x - \alpha_m$ divide $f$ in $K[x]$ by (\ref{7.8}).
+    As these linear polynomials are irreducible in $K[x]$, they are non-associate,
+    prime elements of $K[x]$, which is a UFD, so their product also divides $f$.
+    Thus, $m \leq n$.
+\end{proof}
+
+\subsection{Structure of Finite Abelian Groups (9.8)} \label{9.8}
+
+Every finite abelian group $G$ is isomorphic to a product of cyclic groups: \begin{align*}
+    G \cong C_{m_1} \times \cdots \times C_{m_k},
+\end{align*} with $m_i$ dividing $m_{i - 1}$ for each $i$ in $\{k, \ldots, 1\}$.
+
+\subsection{Cyclic Finite Subgroups of Units (9.9-10)} \label{9.9} \label{9.10} 
+
+For a field $K$ and a finite subgroup $U \subseteq K^\times$, $U$ is cyclic.
+Thus, $K^\times$ is a cyclic subgroup of $K$ if $K$ is finite.
+
+\begin{proof}
+    As $U$ is finite and abelian, by (\ref{9.8}) we have: \begin{align*}
+        U \cong C_{m_1} \times \cdots \times C_{m_k},
+    \end{align*} and $m_i$ dividing $m_{i - 1}$ for each $i$ in $\{k, \ldots, 1\}$.
+    If $U$ is not cyclic, we consider that $k > 1$ and $g^{m_1} = e$ for every $g$ in $U$
+    since $m_k$, $\ldots$, $m_2$ divide $m_1$. Furthermore, $|U| = m_1\cdots m_k > m_1$
+    so $x^{m_1} - 1$ has more than $m_1$ roots in $K$ but this is impossible by (\ref{9.7}).
+    If $K$ is finite, $K^\times$ is a finite group so is cyclic.
+\end{proof}
+
+\subsection{Main Theorem of Finite Fields, Part (b) (9.1)} \label{9.1b}
+
+For a finite field $K$, if $|K| = p^n$ for some prime $p$ and $n$ in $\mb{Z}_{> 0}$ then
+$K^\times$ is cyclic with order $p^n - 1$.
+
+\begin{proof}
+    Follows from (\ref{9.10}).
+\end{proof}
+
+\subsection{Roots of Finite Fields of Prime Power Order (9.15)} \label{9.15}
+
+For a finite field $K$ with $|K| = p^n$: \begin{enumerate}
+    \item every element $\alpha$ of $K$ is a root of $x^{p^n} - x$, so $\alpha^{p^n} = \alpha$,
+    \item we have $x^{p^n} - x = \prod_{\alpha \in K} (x - \alpha)$.
+\end{enumerate}
+
+\begin{proof}
+    (1) We know by (\ref{9.1b}) that $K^\times$ has order $p^n - 1$ so every $\alpha$ in
+    $K^\times$ satisfies $\alpha^{p^n - 1} = 1$ by Lagrange's Theorem. As such,
+    $\alpha^{p^n} = \alpha$ which means $\alpha$ is a root of $x^{p^n} - x$. Since zero
+    is also a root of this, we are done.
+    \bs
+    (2) Since $x^{p^n} - x$ has degree $p^n$ and has at precisely $p^n$ roots by (1) and
+    (\ref{9.7}), it must be $\prod_{\alpha \in K}(x - \alpha)$ by comparing degrees and
+    leading coefficients.
+
+\end{proof}
+
+\subsection{Wilson's Theorem}
+
+We have that $(p - 1)! \equiv -1 \bmod p$ for all primes $p$.
+
+\begin{proof}
+    We consider the following polynomial $x^p - x$ in $\mb{F}_p[x]$ using
+    (\ref{9.15}): \begin{align*}
+        x^p - x = x(x - 1)\cdots(x - (p - 1))
+        &\Longrightarrow x^{p - 1} - 1 = (x - 1)\cdots(x - (p - 1)) \\
+        &\Longrightarrow 0^{p - 1} - 1 = (0 - 1)\cdots(0 - (p - 1)) \\
+        &\Longrightarrow -1 = (-1)\cdots(-(p - 1)) = (-1)^{p - 1}(p - 1)!,
+    \end{align*} which means $-1 = (p - 1)!$ since $p$ is either
+    odd or $2$ (and $-1 = 1 \bmod 2$).
+\end{proof}
+
+\subsection{Main Theorem of Finite Fields, Part (c) (9.1)} \label{9.1c}
+
+For every prime $p$ and $n$ in $\mb{Z}_{> 0}$, there is a unique field up to isomorphism
+with $p^n$ elements. It is denoted by $\mb{F}_{p^n}$ and contains $\mb{F}_p$ with
+$[\mb{F}_{p^n} : \mb{F}_p] = n$.
+
+\begin{proof}
+    
+\end{proof}
