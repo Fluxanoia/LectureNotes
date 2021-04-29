@@ -1,0 +1,129 @@
+\section{Ruler and Compass Constructions}
+
+We define a ruler as an object with no markings, that can be used to draw a line
+between two given points. A compass is defined as an object that can draw a circle
+with a given centre and through a given point.
+
+\subsection{Line Segment Arithmetic (10.7)} \label{10.7}
+
+Given a line segment of unit length, for any line segments of lengths $a$ and $b$, we
+can construct line segments of length $a + b$, $a - b$, $ab$, $a / b$, and $\sqrt{a}$.
+
+\subsection{Constructible Points (10.8)} \label{10.8}
+
+A point $R$ is constructible if there is a finite sequence of points $P_0$ (which is given),
+$P_1$, $\ldots$, $P_m = R$ such that for each $k$ in $\{2, \ldots, m\}$, $P_k$ is obtained
+from $S = \{P_0, \ldots, P_{k-1}\}$ via: \begin{itemize}
+    \item the intersection of two distinct straight lines,
+        each joining two points in $S$,
+    \item the intersection of a straight line joining two points in $S$ and
+        a circle with its centre in $S$ and its radius equal to the distance between
+        two points in $S$,
+    \item the intersection of two distinct circles, each with its centre in $S$ and
+        its radius equal to the distance between two points in $S$.
+\end{itemize} If we declare $P_0P_1$ to have unit length, and say the number $a$
+(and $-a$) in $\mb{R}^{\geq 0}$ is constructible if there exists a line segment of
+length $a$ with constructible end-points. Furthermore, if we take $P_0 = (0, 0)$,
+$P_1 = (1, 0)$, and $R = (a, b)$ in $\mb{R}_{\geq 0}^2$, we can see that
+$R$ being constructible is equivalent to $a$ and $b$ being constructible.
+
+\subsection{The Field of Constructible Numbers (10.9)} \label{10.9}
+
+The set of constructible numbers $\mc{C}$ is a field: $\mb{Q} \subseteq \mc{C} \subseteq \mb{R}$,
+and is closed under taking square roots of positive numbers.
+
+\begin{proof}
+    Follows from (\ref{10.7})
+\end{proof}
+
+\newpage
+
+\subsection{Wantzel's Theorem (10.10)} \label{10.10}
+
+We have that $a$ in $\mb{R}$ is constructible if and only if there is a sequence of fields
+$\mb{Q} = K_0 \subseteq \cdots \subseteq K_m \subseteq \mb{R}$ with $a$ in $K_m$ and
+for all $n$ in $\{1, \ldots, m\}$ we have $[K_n : K_{n - 1}]$ equal to $1$ or $2$.
+
+\begin{proof}
+    ($\Longleftarrow$) All of $\mb{Q}$ is constructible by (\ref{10.7}) and for all
+    $n$ in $\{1, \ldots, m\}$, we have that $K_n$ is constructible if $K_{n - 1}$ is
+    constructible again by (\ref{10.7}) and the fact that $[K_n : K_{n - 1}] \leq 2$
+    (so arithmetic and square roots suffice to form a generator).
+    \bs
+    ($\Longrightarrow$) By (\ref{10.8}), we know that $R = (a, 0)$ is constructible,
+    so we take $P_1$, $\ldots$, $P_m = R$ as described in (\ref{10.8}). For
+    some $i$ in $\{1, \ldots. m\}$, we take $P_i = (a_i, b_i)$ and: \begin{align*}
+        K_i = \begin{cases}
+            \mb{Q}              & i = 0 \\
+            K_{i - 1}(a_i, b_i) & \text{otherwise}. \\
+        \end{cases}
+    \end{align*} Noting that $K_1 = K_0 = \mb{Q}$. We want to show that for each
+    $i$ in $\{1, \ldots, m\}$, we have $[K_i, K_{i - 1}]$ equal to $1$ or $2$.
+    This would prove the result, as then $a$ would be constructible in $K_m$.
+    \bs
+    (\textbf{Case 1}) We suppose that $P_i$ is the intersection of two lines $L_1$
+    and $L_2$, formed by the points $P_j$ and $P_k$, and $P_r$ and $P_s$ respectively
+    with $j$, $k$, $r$, and $s$ in $\{0, \ldots, i - 1\}$. We consider the equations
+    that represent the two lines: \begin{align*}
+        L_1 &: y = \frac{b_j - b_k}{a_j - a_k}(x - a_j) + b_j, \\
+        L_2 &: y = \frac{b_r - b_s}{a_r - a_s}(x - a_r) + b_r,
+    \end{align*} ignoring vertical lines as in that case we can swap $x$ and $y$. We can
+    solve for $x$ to get an expression for $a_i$ in $K_{i - 1}$, which then gives us
+    an expression for $b_i$ in $K_{i - 1}$. As such, $K_i = K_{i - 1}$ so
+    $[K_i, K_{i - 1}] = 1$.
+    \bs
+    (\textbf{Case 2}) We suppose that $P_i$ is the intersection of a line $L$ and
+    a circle $C$, formed by the points $P_j$ and $P_k$, and $P_r$ and $P_s$ respectively
+    (where $C$ is centred at $P_r$ and passes through $P_s$)
+    with $j$, $k$, $r$, and $s$ in $\{0, \ldots, i - 1\}$. We consider the equations
+    that represent the line and the circle: \begin{align*}
+        L &: y = \frac{b_j - b_k}{a_j - a_k}(x - a_j) + b_j, \\
+        C &: (x - a_r)^2 + (y - b_r)^2 = (a_s - a_r)^2 + (b_s - b_r)^2.
+    \end{align*} By substituting the equation for $L$ into the equation for $C$, we
+    get a quadratic equation in $x$ with coefficients in $K_{i - 1}$ and roots in
+    $K_{i - 1}$ adjoined with the discriminant ($K_i$). As such, $a_i$ is in $K_i$
+    so $b_i$ is also, so $[K_i, K_{i - 1}] = 2$.
+    \bs
+    (\textbf{Case 3}) We suppose that $P_i$ is the intersection of two circles $C_1$
+    and $C_2$, formed by the centres $P_j$ and $P_r$, and intersection points
+    $P_k$ and $P_s$ respectively with $j$, $k$, $r$, and $s$ in $\{0, \ldots, i - 1\}$.
+    We consider the equations that represent the two circles: \begin{align*}
+        C_1 &: (x - a_j)^2 + (y - b_j)^2 = (a_k - a_j)^2 + (b_k - b_j)^2, \\
+        C_2 &: (x - a_r)^2 + (y - b_r)^2 = (a_s - a_r)^2 + (b_s - b_r)^2.
+    \end{align*} We can subtract one from the other to cancel the $x^2$ and $y^2$ terms
+    giving us a line equation $L$. This implies $P_i$ lies in the intersection of $L$
+    and $C_1$ which is \textbf{Case 2}.
+\end{proof}
+
+\subsection{Constructible Numbers and Fields with Degrees of Powers of Two (10.13)} \label{10.13}
+
+If $a$ in $\mb{R}$ is constructible, then $[\mb{Q}(a) : \mb{Q}] = 2^n$ for some
+$n$ in $\mb{Z}_{\geq 0}$.
+
+\begin{proof}
+    Using the notation of (\ref{10.10}), we know that $[K_m : K_0]$ is equal to a power
+    of two, and $K_0 \subseteq \mb{Q}(a) \subseteq K_m$ implies that
+    $[\mb{Q}(a) : \mb{Q}][K_m : \mb{Q}(a)] = [K_m : \mb{Q}]$ (by (\ref{8.24})) so
+    $[\mb{Q}(a) : \mb{Q}]$ is a power of two.
+\end{proof}
+
+\subsection{Impossible Constructions (10.14-16)} \label{10.14} \label{10.15} \label{10.16}
+
+Doubling the cube, squaring the circle, and trisecting angles are all impossible with just a
+ruler and compass.
+
+\begin{proof}
+    The degree of $[\mb{Q}(a) : \mb{Q}]$ (as in (\ref{10.13})) for the following values of $a$
+    are not a power of two: $\sqrt[3]{2}$, $\sqrt{\pi}$, and $\cos(\frac{\pi}{9})$ (which
+    is a root of $8x^3 - 6x - 1$). These values are necessary to solving these problems.
+\end{proof}
+
+\subsection{Constructible $n$-gons (10.17)} \label{10.17}
+
+A regular $n$-gon is constructible with a ruler and compass if and only if $n$ is a power
+of two multiplies by the product of distinct Fermat primes (primes of the form
+$2^{2^k} + 1$).
+
+\begin{proof}
+    Omitted.
+\end{proof}

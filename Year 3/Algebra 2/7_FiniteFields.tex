@@ -73,7 +73,7 @@ For a finite field $K$ with $|K| = p^n$: \begin{enumerate}
 
 \end{proof}
 
-\subsection{Wilson's Theorem}
+\subsection{Wilson's Theorem (9.17)} \label{9.17}
 
 We have that $(p - 1)! \equiv -1 \bmod p$ for all primes $p$.
 
@@ -88,12 +88,91 @@ We have that $(p - 1)! \equiv -1 \bmod p$ for all primes $p$.
     odd or $2$ (and $-1 = 1 \bmod 2$).
 \end{proof}
 
-\subsection{Main Theorem of Finite Fields, Part (c) (9.1)} \label{9.1c}
+\newpage
+
+\subsection{Prime Characteristic and Subfields with Prime Power Order (9.18)} \label{9.18}
+
+For a field $F$ with characteristic $p$ (so $\mb{F}_p \subseteq F$), we have that:
+\begin{enumerate}
+    \item if $F$ contains a subfield with $p^n$ elements for some $n$ in $\mb{Z}_{>0}$,
+        then $x^{p^n} - x$ has $p^n$ roots in $F$,
+    \item conversely, if $x^{p^n} - x$ has $p^n$ roots in $F$ for some $n$ in $\mb{Z}_{>0}$,
+        then these roots form a field with $p^n$ elements.
+\end{enumerate}
+
+\begin{proof}
+    (1) This follows directly from the assumption and (\ref{9.15}).
+    \bs
+    (2) We take $K$ to be the roots of $x^{p^n} - x$ in $F$, and note that it contains
+    $-1$, $0$, and $1$. We will show that $K$ is closed under addition and multiplication
+    so that $K$ is a subring of $F$, this means $K$ is a finite integral domain and thus,
+    a field. Firstly, we show that $\varphi$ from $F$ to $F$ defined by $x \mapsto x^p$
+    is a ring homomorphism. We know that $0^p = 0$, $1^p = 1$, and $(-1)^p = -1$, and that
+    for $x$ and $y$ in $F$ we have $(xy)^p = x^py^p$ and:
+    \begin{align*}
+        (x + y)^p = x^p + \binom{p}{1}x^{p - 1}y + \cdots + \binom{p}{p - 1}xy^{p - 1} + y^p.
+    \end{align*} So, as $\binom{p}{k} = \frac{p!}{k!(p-k)!}$, $p! \equiv 0 \bmod p$, and
+    $k!(p-k)! \not\equiv 0 \bmod p$, we have that
+    \linebreak $(x + y)^p = x^p + y^p$. As such,
+    $\varphi$ is a ring homomorphism and by iteration, $\varphi^n$ is also
+    ($\varphi^n(x) = x^{p^n}$). This means that $(a + b)^{p^n} = a^{p^n} + b^{p^n} = a + b$
+    and $(ab)^{p^n} = a^{p^n}b^{p^n} = ab$ for all $a$ and $b$ in $K$ so $K$ is closed
+    under addition and multiplication as required.
+\end{proof}
+
+\subsection{Splitting Fields (9.19)} \label{9.19}
+
+For a field $K$ with a non-constant polynomial $f$ in $K[x]$, there exists a finite extension
+$F / K$ in which $f(x)$ factors into a product of linear factors. The smallest such
+extension is a splitting field of $f$ over $K$.
+
+\begin{proof}
+    We proceed iteratively. Firstly, if $f$ consists of only linear factors, we are done.
+    Otherwise, we choose one of these irreducible factors $g(x)$ of $f(x)$ of degree at
+    least $2$. Then, we replace $K$ with $K[x] / g(x)$, adding the root. We repeat this process
+    until it terminates, as we are dealing with polynomials of finite degree.
+\end{proof}
+
+\newpage
+
+\subsection{Main Theorem of Finite Fields, Part (c) (9.1, 9.21-22)}
+\label{9.1c} \label{9.21} \label{9.22}
 
 For every prime $p$ and $n$ in $\mb{Z}_{> 0}$, there is a unique field up to isomorphism
 with $p^n$ elements. It is denoted by $\mb{F}_{p^n}$ and contains $\mb{F}_p$ with
 $[\mb{F}_{p^n} : \mb{F}_p] = n$.
 
 \begin{proof}
-    
+    (Existence) We take $F$ to be a finite extension of $\mb{F}_p$ which contains
+    all the roots of $x^{p^n} - x$ by (\ref{9.19}). These are distinct
+    (proven as an exercise) so form a field of order $x^{p^n}$ by (\ref{9.18}).
+    \bs
+    (Uniqueness) We take $K$ and $K'$ to be fields of order $p^n$. We know that
+    they both contain $\mb{F}_p$ by (\ref{9.18}). We take a generator $\alpha$ in
+    $K^\times$ so that $\mb{F}_p(\alpha) = K$ (the smallest subfield containing
+    $\mb{F}_p$ and $\alpha$ contains all the powers of $\alpha$, so the entirety of
+    $K^\times$, thus $K$). Furthemore, we know that
+    $K = \mb{F}_p(\alpha) \cong \mb{F}_p[x] / f(x)$
+    where $f$ is the minimal polynomial of $\alpha$ over $\mb{F}_p$.
+    \bs 
+    By Part (a), we have $[K : \mb{F}_p] = n$ so $\deg(f) = n$ meaning $f$ is an
+    irreducible monic polynomial. Since $f$ divides every polynomial which
+    has $\alpha$ as a root, it divides $x^{p^n} - x$, so all of its roots
+    are elements of $K$.
+    We also know that $K'$ contains all the roots of $x^{p^n} - x$ so $f$ has a
+    root $\beta$ in $K'$. As such, $K = \mb{F}_p[x]/f(x)$ is injective into
+    $K'$ via the map $\alpha \mapsto \beta$ as required. 
 \end{proof}
+
+\subsection{Finite Fields of Prime Power Order (9.23)} \label{9.23}
+
+We write $\mb{F}_{p^n}$ for a prime $p$ and $n$ in $\mb{Z}_{>0}$ as the unique
+field of order $p^n$.
+
+\subsection{Monic Irreducible Polynomials of Degree $n$ (9.24)} \label{9.24}
+
+For every prime $p$ and $n$ in $\mb{Z}_{>0}$, there exists monic irreducible polynomials
+of degree $n$ in $\mb{F}_p[x]$. All such polynomial $f$ divides $x^{p^n} - x$ and:
+\begin{align*}
+    \mb{F}_p[x]/f(x) \cong \mb{F}_{p^n}.
+\end{align*}
